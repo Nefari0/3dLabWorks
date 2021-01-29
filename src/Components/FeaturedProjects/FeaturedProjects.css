@@ -1,0 +1,20 @@
+.featured-projects {
+    height: 80vh;
+    width: 100vw;
+    background-color: rgb(216, 214, 214);
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+}
+
+.project -containers {
+
+    height: 100px;
+    width: 125px;
+    background-color: white;
+    border-radius: 5%;
+    box-shadow: 1px 1px#d1d1d1;
+}

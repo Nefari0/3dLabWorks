@@ -1,0 +1,1 @@
+SELECT * FROM d_user WHERE user_name = $1

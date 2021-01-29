@@ -1,0 +1,34 @@
+.home-container {
+    height: 55vh;
+    width: 100vw;
+    /* background-color: blue; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: linear-gradient(rgba(0,0,0,-1),rgba(0,0,0,1)),url(chessboard.png);
+    background-size: cover; 
+    background-position: center;
+}
+
+
+
+
+
+.login-container {
+    height: 100px;
+    width: 300px;
+    background-color: chartreuse;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-content: stretch;
+}
+
+.hero {
+    /* height: 100px; */
+     background-image: linear-gradient(rgba(0,0,0,-1),rgba(0,0,0,1)),url(chessboard.png);
+     background-size: cover; 
+     background-position: center;
+}
