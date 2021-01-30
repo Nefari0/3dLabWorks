@@ -2,22 +2,24 @@ const bcrypt = require('bcrypt')
 
 module.exports = {
     register: async (req,res) => {
-        const {user_name, password, is_admin} = req.body;
+        const {user_name, password, email, first_name} = req.body;
         const db = req.app.get('db')
         const result = await db.get_user([user_name])
         const existingUser = result[0];
         if (existingUser) {
-            return res.status(409).send('this email is already being used');
+            return res.status(409).send('this username is already being used');
         }
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password,salt);
-        const registeredUser= await db.register_site_user([user_name, hash,is_admin ])
+        const is_admin = false
+        const registeredUser= await db.register_site_user([user_name, hash, email, first_name,is_admin])
         const user = registeredUser[0];
         // req.session.user = { isAdmin: user.is_admin, email: user.user_name, id: user.user_id };
         req.session.user = { 
             is_admin: user.is_admin, 
+            user_name: user.user_name,
             user: user.user_name,
-             id: user.user_id
+            id: user.user_id
          };
         console.log(req.session.user)
         return res.status(201).send(req.session.user).catch(err => console.log(err))

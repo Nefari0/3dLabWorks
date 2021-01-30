@@ -45,15 +45,16 @@ class Home extends Component {
         return(
             <div className="home-container">
                 <h2>{password}</h2>
+                <ion-icon src="/path/to/external/file.svg"></ion-icon>
                 
 
                 
-                <div className="login-container">
+                {/* <div className="login-container">
                     <p>user name</p><input value={user_name} onChange={e => this.handleUserName(e.target.value)}/>
                     <p>password</p><input value={password} onChange={e => this.handlePassword(e.target.value)}/>
                     <button onClick={this.handleClick}>execute</button>
                     <button onClick={this.remindWhoUser} >riminder</button>
-                </div>
+                </div> */}
                 
                 {/* <FirebaseTest/>     */}
             </div>

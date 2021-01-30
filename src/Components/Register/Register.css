@@ -1,0 +1,31 @@
+
+.signup-menu {
+    border-radius: 2vw;
+    margin: auto;
+    height: 300px;
+    width: 300px;
+    background-color: rgb(204, 202, 202);
+    box-shadow: rosybrown;
+}
+
+.one-line {
+    margin-left: 10px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-content: stretch;
+}
+
+.text {
+    margin: 0%;
+}
+
+.register-link {
+    margin: auto;
+    height: 50px;
+    width: 100px;
+    background-color: cornflowerblue;
+    border-radius: 10%;
+}

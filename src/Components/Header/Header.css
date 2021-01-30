@@ -33,9 +33,49 @@
 	align-content: center;
 }
 
-.link-item {
+/* .link-item {
+    margin-right: 30px;
+} */
+
+.link-list li {
     margin-right: 30px;
 }
+
+/* -----------reference------------- */
+
+/* Main navi */
+.main-nav {
+    display: flex;
+    list-style: none;
+    margin-top: 55px;
+}
+
+.main-nav li {
+    display: inline-block;
+    margin-left: 40px;
+    
+}
+
+.link-list li a:link,
+.link-list li a:visited {
+    padding: 8px 0;
+    color: #555;
+    /* color: #fff; */
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 90%;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom 0.2s;
+    
+}
+    
+.link-list li a:hover,
+.link-list li a:active {
+border-bottom: 2px solid #e67e22;
+    
+}
+
+/* -------------/\reference */
 
 .login-link {
     height: 50px;
@@ -86,6 +126,8 @@
     color: white;
     padding-right: 50px;
 }
+
+
 
 @media (max-width: 750px) {
     .link-item {

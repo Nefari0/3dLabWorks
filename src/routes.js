@@ -7,6 +7,7 @@ import Header from './Components/Header/Header'
 import Explore from './Components/Explore/Explore'
 import About from './Components/About/About'
 import Sites from './Components/SiteLinks/Sites'
+import Register from './Components/Register/Register'
 
 
 export default (
@@ -17,5 +18,6 @@ export default (
         <Route path="/user" component={UserPage} />
         <Route path="/about" component={About} />
         <Route path="/sites" component={Sites} />
+        <Route path="/register" component={Register} />
     </Switch>
 )

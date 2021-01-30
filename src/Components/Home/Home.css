@@ -14,7 +14,7 @@
 
 
 
-.login-container {
+/* .login-container {
     height: 100px;
     width: 300px;
     background-color: chartreuse;
@@ -23,8 +23,9 @@
 	flex-wrap: wrap;
 	justify-content: flex-start;
 	align-items: flex-start;
-	align-content: stretch;
-}
+    align-content: stretch;
+    position: relative;
+} */
 
 .hero {
     /* height: 100px; */
