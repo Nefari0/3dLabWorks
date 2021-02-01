@@ -1,17 +1,18 @@
 .login-container {
-    margin-top: 5px;
+    /* margin-top: 5px; */
+    /* margin-top: 10px; */
     height: 100px;
     width: 300px;
     border-radius: 1vw;
-    background-color: rgb(228, 228, 228);
+    background-color: #fff;
     display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 	align-items: flex-start;
     align-content: stretch;
-    top: 10vh;
-    right: 10px;
+    top: 11vh;
+    right: 15px;
     position: absolute;
     box-shadow: 1px 1px#d1d1d1;
 }

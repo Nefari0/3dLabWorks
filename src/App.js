@@ -21,7 +21,7 @@ function App() {
         {/* <FirebaseTest/> */}
         {/* <Home/> */}
         {/* <About/> */}
-        <FeaturedProjects/>
+        {/* <FeaturedProjects/> */}
         {/* <UserPage/> */}
         {/* <GroupPage/> */}
 

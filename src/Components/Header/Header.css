@@ -1,19 +1,10 @@
 
-/* h3 {
-    font-weight: 300;
-} */
-
-.header-h3 {
-    margin: 0px;
-    margin-right: 30px;
-    font-weight: 200;
-}
-
 .header-container {
     margin: none;
     height: 10vh;
     width: 100vw;
-    background-color: rgb(223, 217, 217);
+    /* background-color: rgb(223, 217, 217); */
+    background-color: #fff;
     display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
@@ -71,7 +62,7 @@
     
 .link-list li a:hover,
 .link-list li a:active {
-border-bottom: 2px solid #e67e22;
+border-bottom: 2px solid #3c598e;
     
 }
 

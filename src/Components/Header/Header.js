@@ -95,7 +95,8 @@ class Header extends Component{
     return(
         <div className='header-container'>
 
-            <h3 className="header-h3"> <b>{isLoggedIn ? `welcome,${this.props.user.user.data.user}!` :'header'}</b> </h3>
+            {/* <h3 className="header-h3"> <b>{isLoggedIn ? `welcome,${this.props.user.user.data.user}!` :'header'}</b> </h3> */}
+            <h3 className="header-h3">{isLoggedIn ? `welcome,${this.props.user.user.data.user}!` :'header'}</h3>
 
             {/* {username.user ? (
                 <h3>{username.user}, Welcome!</h3>
@@ -105,8 +106,8 @@ class Header extends Component{
 
             <ul className='link-list'>
                 <Link to="/" style={{ textDecoration: 'none' }}><li className='link-item'><a>home</a></li></Link>
-                <Link to="/about"><li className='link-item'><a>about</a></li></Link>
-                <Link to="/explore"><li className='link-item'><a>projects</a></li></Link>
+                <Link to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a>about</a></li></Link>
+                <Link to="/explore" style={{ textDecoration: 'none' }}><li className='link-item'><a>projects</a></li></Link>
                 <Link to="/sites" style={{ textDecoration: 'none' }}><li className='link-item'><a>some great sites</a></li></Link>
             </ul>
 

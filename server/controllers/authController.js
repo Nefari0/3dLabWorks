@@ -15,12 +15,20 @@ module.exports = {
         const registeredUser= await db.register_site_user([user_name, hash, email, first_name,is_admin])
         const user = registeredUser[0];
         // req.session.user = { isAdmin: user.is_admin, email: user.user_name, id: user.user_id };
+
         req.session.user = { 
             is_admin: user.is_admin, 
             user_name: user.user_name,
             user: user.user_name,
             id: user.user_id
          };
+
+        // req.session.user = { 
+        //     isAdmin: user.is_admin, 
+        //     username: user.user_name,
+        //     id: user.user_id
+        //  };
+
         console.log(req.session.user)
         return res.status(201).send(req.session.user).catch(err => console.log(err))
     },
