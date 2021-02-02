@@ -119,7 +119,10 @@ class Header extends Component{
                 {!isLoggedIn ? (<h4 className="login-logout">login</h4>):(<h4 className="login-logout">logout</h4>)}
             </div>
 
-            <img onClick={this.toggleMenu} src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1024px-Hamburger_icon.svg.png"className="hamburger"/>
+            {/* <img onClick={this.toggleMenu} src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1024px-Hamburger_icon.svg.png"className="hamburger"/> */}
+            <svg className="hamburger" onClick={this.toggleMenu} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
 
             <ul className={`mobile-nav ${isMenuOpen ? false : 'mobile-nav-hide'}`} onClick={this.toggleMenu}>
                 <li className='mobile-link-item' onClick={this.toggleLogin}>sign in</li>

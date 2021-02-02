@@ -32,12 +32,11 @@ const MobileLogin = (props) => {
         // <div className={`login-container ${props.openLogin ? true: 'login-container-hide'}`}>
         <div className={`login-container`}>
             {console.log(props)}
-        <p>user name</p><input value={user_name} onChange={e => props.name(e.target.value)}/>
-        <p>password</p><input value={password} onChange={e => props.pass(e.target.value)}/>
-        <button onClick={props.execute}>execute</button>
+        <p>username</p><input value={user_name} onChange={e => props.name(e.target.value)} className="input-element"/>
+        <p>password</p><input value={password} onChange={e => props.pass(e.target.value)} className="input-element"/>
+        <button onClick={props.execute} className="non-link-button">login</button>
         <Link to="/register" style={{ textDecoration: 'none' }}><button onClick={props.exit}>register</button></Link>
-        <button onClick={props.logout}>logout</button>
-        {/* <button onClick={this.remindWhoUser} >riminder</button> */}
+        <button onClick={props.logout} className="non-link-button">logout</button>
     </div>
     )
 }

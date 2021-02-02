@@ -1,6 +1,6 @@
 
 .header-container {
-    position: fixed;
+    /* position: fixed; */
     margin: none;
     height: 10vh;
     width: 100vw;
@@ -75,6 +75,7 @@ border-bottom: 2px solid #3c598e;
 /* -------------/\reference */
 
 .login-link {
+    margin-right: 5vw;
     height: 50px;
     width: 100px;
     /* background-color: cornflowerblue; */
@@ -94,8 +95,8 @@ border-bottom: 2px solid #3c598e;
     list-style-type: none;
     color: white;
     background-color: #6495ed;
-    margin-top: 50px;
-    /* margin-right: 40px; */
+    margin-top: 60px;
+    margin-right: 40px;
     position: absolute;
     top: 5vh;
     right: 0vw;
@@ -127,6 +128,11 @@ border-bottom: 2px solid #3c598e;
     padding-right: 50px;
 }
 
+.hamburger-icon {
+    height: 50%;
+    color: #fff;
+}
+
 
 
 @media (max-width: 750px) {
@@ -142,7 +148,7 @@ border-bottom: 2px solid #3c598e;
 }
 
 
-@media (max-width: 502px) {
+@media (max-width: 640px) {
     .link-item {
         display: none;
     }

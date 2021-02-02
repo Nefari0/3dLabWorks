@@ -32,3 +32,11 @@
 --   description VARCHAR(500),
 --   firebase_url text
 -- );
+
+-- ----------icons -------------- --
+-- CREATE TABLE d_icons (
+--   icon_id SERIAL PRIMARY KEY,
+--   h_statement VARCHAR(250),
+--   p_statement VARCHAR(500),
+--   icon_url VARCHAR(500)
+-- )
