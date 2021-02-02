@@ -1,16 +1,22 @@
 
 .header-container {
+    position: fixed;
     margin: none;
     height: 10vh;
     width: 100vw;
     /* background-color: rgb(223, 217, 217); */
-    background-color: #fff;
+    /* background-color: #fff; */
+    background-color: #6495ed;
     display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: space-around;
 	align-items: center;
 	align-content: center;
+}
+
+.login-logout {
+    color: #fff;
 }
 
 .link-list {
@@ -71,7 +77,8 @@ border-bottom: 2px solid #3c598e;
 .login-link {
     height: 50px;
     width: 100px;
-    background-color: cornflowerblue;
+    /* background-color: cornflowerblue; */
+    background-color: #3c598e;
     border-radius: 10%;
 
     box-shadow: white;
@@ -83,11 +90,12 @@ border-bottom: 2px solid #3c598e;
   }
 
 .mobile-nav {
+    border-radius: 5%;
     list-style-type: none;
     color: white;
-    background-color: blue;
+    background-color: #6495ed;
     margin-top: 50px;
-    margin-right: 40px;
+    /* margin-right: 40px; */
     position: absolute;
     top: 5vh;
     right: 0vw;
@@ -111,6 +119,7 @@ border-bottom: 2px solid #3c598e;
     height: 0;
     padding: 0;
     opacity: 0;
+    margin: 0px;
 }
 
 .mobile-link-item {

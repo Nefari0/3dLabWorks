@@ -27,9 +27,9 @@ class FeaturedProjects extends Component {
         const { data } = this.props.characters.characters
         // console.log(data)
 
-        // const mappedCharacters = data.map(element => {
-        //     return <Project data={element}/>
-        // })
+        const mappedCharacters = data.map(element => {
+            return <Project data={element} id={element.id}/>
+        })
         return(
             <div className="featured-projects">
                 {/* {mappedCharacters} */}

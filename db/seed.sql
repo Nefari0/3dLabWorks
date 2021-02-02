@@ -1,4 +1,9 @@
 
+-- main user for testing
+-- new6
+-- id:12,
+-- pass:pass
+
 -- CREATE TABLE d_user (
 --     user_id SERIAL PRIMARY KEY,
 --     user_name VARCHAR(100) NOT NULL,
@@ -17,3 +22,13 @@
 --   'max',
 --   'machinegun'
 -- )
+
+-- -----------models------------- --
+-- CREATE TABLE models (
+--   model_id SERIAL PRIMARY KEY,
+--   user_id INTEGER,
+--   FOREIGN KEY(user_id) REFERENCES d_user(user_id),
+--   name VARCHAR(250) NOT NULL, 
+--   description VARCHAR(500),
+--   firebase_url text
+-- );

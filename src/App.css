@@ -7,7 +7,9 @@
 
 html {
   background-color: #fff;
-  color: #555;
+  /* color: #555; */
+  color: #fff;
+  /* background-color: #6495ed; */
   /* color: #6495ed; */
   font-family: 'Lato', 'Arial',sans-serif;
   font-weight: 300;

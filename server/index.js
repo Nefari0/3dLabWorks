@@ -6,6 +6,7 @@ const massive = require('massive')
 const authController = require('./controllers/authController')
 // const auth = require('./middleware/authMiddleware');
 const userController = require('./controllers/userController')
+const projectsController = require('./controllers/projectsController')
 // const cors = require('cors');
 
 //--------firedtore-------//
@@ -45,11 +46,15 @@ app.use(
 // // auth end points //
 app.post('/auth/register',authController.register)
 app.post('/auth/login',authController.login)
-// app.get('/auth/logout',authController.logout)
+app.get('/auth/logout',authController.logout)
 
 // // user end points //
 app.get('/api/users/all', userController.getUsers)
 // app.post('api/users/update/:user_id')
+
+// projects endpoints
+
+app.get('/api/projects/all', projectsController.getAllProjects)
 
 // // storage access end points //
 // app.get('/api/assets/getall')

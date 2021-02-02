@@ -10,6 +10,7 @@ const Register = (props) => {
     const [ first_name, setFirstName] = useState('')
     const [ last_name, setLastName ] = useState('')
     const [ photo_url, setPhoto ] = useState('')
+    const [ is_admin ] = useState(false)
 
     useEffect(() => {
         console.log('props from Register',props)
@@ -35,8 +36,8 @@ const Register = (props) => {
         setPhoto(params)
     }
 
-    function executeRegister(user_name, password, email, first_name, last_name, photo_url){
-        registerUser(user_name, password, email, first_name, last_name, photo_url)
+    function executeRegister(user_name, password, email, first_name, is_admin){
+        registerUser(user_name, password, email, first_name, is_admin)
     }
 
     return(
@@ -61,6 +62,7 @@ const Register = (props) => {
             <div className="register-link" onClick={executeRegister}>
                 <h4>signup now</h4>
             </div>
+
             
         </div>
     )

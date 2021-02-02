@@ -1,0 +1,23 @@
+.project-container {
+    border-radius: 5%;
+    margin: 10px;
+    height: 350px;
+    /* width: 350px; */
+    width: 280px;
+    /* background-color: red; */
+    background-color: #fff;
+    /* color: #555; */
+}
+
+.project-text {
+    color: #555;
+}
+
+.project-box-h4 {
+    color: #555;
+}
+
+.img {
+    width: 90%;
+    height: 80%;
+}

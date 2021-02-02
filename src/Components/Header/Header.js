@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { loginUser } from '../../ducks/userReducer'
-import {logoutUser} from '../../ducks/userReducer'
+import { loginUser,logoutUser } from '../../ducks/userReducer'
+// import {} from '../../ducks/userReducer'
 import { connect } from 'react-redux'
 import './Header.css'
 import { Link } from 'react-router-dom'
@@ -116,7 +116,7 @@ class Header extends Component{
             </div> */}
 
             <div className="login-link" onClick={this.toggleLogin}>
-                {!isLoggedIn ? (<h4 >login</h4>):(<h4>logout</h4>)}
+                {!isLoggedIn ? (<h4 className="login-logout">login</h4>):(<h4 className="login-logout">logout</h4>)}
             </div>
 
             <img onClick={this.toggleMenu} src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1024px-Hamburger_icon.svg.png"className="hamburger"/>

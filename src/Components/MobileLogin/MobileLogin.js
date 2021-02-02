@@ -36,7 +36,7 @@ const MobileLogin = (props) => {
         <p>password</p><input value={password} onChange={e => props.pass(e.target.value)}/>
         <button onClick={props.execute}>execute</button>
         <Link to="/register" style={{ textDecoration: 'none' }}><button onClick={props.exit}>register</button></Link>
-        <button onClick={props.execute}>logout</button>
+        <button onClick={props.logout}>logout</button>
         {/* <button onClick={this.remindWhoUser} >riminder</button> */}
     </div>
     )

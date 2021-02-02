@@ -1,7 +1,4 @@
 import axios from 'axios'
-// import { initializeApp } from 'firebase-admin';
-// import { useReducer } from 'react';
-// import reducer from './breakingBadReducer';
 
 const inititialState = {
     user: {},
@@ -42,15 +39,14 @@ export default function userReducer(state = inititialState, action) {
             }
         case LOGOUT_USER + '_FULFILLED':
                 return {
-                    inititialState
+                    ...state, isLoggedIn: false
                 }
         case REGISTER_USER + '_FULFILLED':
-            console.log('PAYLOAD of here',action.payload)
             return {
                 ...state,
                 user: action.payload, isLoggedIn: true
             }
-        case REGISTER_USER + '_REGECTED':
+        case REGISTER_USER + '_REJECTED':
             return { ...state, isLoggedIn: false}
         default:
             return state;
