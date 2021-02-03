@@ -35,7 +35,7 @@ export default function userReducer(state = inititialState, action) {
         case LOGIN_USER + '_FULFILLED':
             return {
                 ...state,
-                user: action.payload, isLoggedIn: true
+                user: action.payload.data, isLoggedIn: true
             }
         case LOGOUT_USER + '_FULFILLED':
                 return {

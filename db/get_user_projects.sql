@@ -1,0 +1,1 @@
+SELECT * FROM models WHERE user_id = $1

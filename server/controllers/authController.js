@@ -52,7 +52,8 @@ module.exports = {
         req.session.user = { 
             is_admin: user.is_admin, 
             user: user.user_name,
-             id: user.user_id
+             id: user.user_id,
+             name: user.first_name
          };
             return res.status(200).send(req.session.user)
     },

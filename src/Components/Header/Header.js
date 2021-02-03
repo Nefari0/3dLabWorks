@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import './Header.css'
 import { Link } from 'react-router-dom'
 import MobileLogin from '../MobileLogin/MobileLogin'
-import Register from '../Register/Register'
+import UserPage from '../UserPage/UserPage'
+// import Register from '../Register/Register'
 
 class Header extends Component{
     constructor(props){
@@ -36,7 +37,8 @@ class Header extends Component{
         const { user } = this.props
 
         if(user.isLoggedIn === true && setPermission===true){
-            this.setState({username:user.user.data.user,setPermission:false})
+            // this.setState({username:user.user.data.user,setPermission:false})
+            this.setState({username:user.user.user.user,setPermission:false})
             // this.handleUserUpdate()
             // console.log('did update',user.user.data.user)
         }
@@ -91,12 +93,10 @@ class Header extends Component{
         const { username, isMenuOpen, user_name, password, openLogin } = this.state
         // this.handleUserUpdate()
         const { isLoggedIn } = this.props.user
-        console.log('header',username)
     return(
         <div className='header-container'>
 
-            {/* <h3 className="header-h3"> <b>{isLoggedIn ? `welcome,${this.props.user.user.data.user}!` :'header'}</b> </h3> */}
-            <h3 className="header-h3">{isLoggedIn ? `welcome,${this.props.user.user.user_name}!` :'header'}</h3>
+            <h3 className="header-h3">{isLoggedIn ? `welcome,${this.props.user.user.user}!` :'header'}</h3>
 
             {/* {username.user ? (
                 <h3>{username.user}, Welcome!</h3>
@@ -109,6 +109,7 @@ class Header extends Component{
                 <Link to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a>about</a></li></Link>
                 <Link to="/explore" style={{ textDecoration: 'none' }}><li className='link-item'><a>projects</a></li></Link>
                 <Link to="/sites" style={{ textDecoration: 'none' }}><li className='link-item'><a>some great sites</a></li></Link>
+                {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='link-item'><a>my page</a></li></Link>)}
             </ul>
 
             {/* <div className="login-link" >
@@ -132,7 +133,7 @@ class Header extends Component{
                 <Link to="/sites"><li className='mobile-link-item'>some great sites</li></Link>
             </ul>
 
-            {!openLogin ? (<MobileLogin login={this.props.loginUser} logout={this.props.logoutUser} execute={this.handleClick} name={this.handleUserName} pass={this.handlePassword} hide={this.state.openLogin} exit={this.toggleLogin}/>):(<div></div>)}
+            {!openLogin ? (<MobileLogin login={this.props.loginUser} logout={this.props.logoutUser} execute={this.handleClick} name={this.handleUserName} pass={this.handlePassword} hide={this.state.openLogin} exit={this.toggleLogin}/>):(<div className="blank-div"></div>)}
         </div>
     )}
 } 

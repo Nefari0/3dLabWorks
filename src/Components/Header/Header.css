@@ -134,6 +134,12 @@ border-bottom: 2px solid #3c598e;
     color: #fff;
 }
 
+.blank-div {
+    height: 0px;
+    width: 0px;
+    margin: 0px;
+}
+
 
 
 @media (max-width: 750px) {
