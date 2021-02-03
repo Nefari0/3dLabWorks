@@ -2,10 +2,10 @@
 .signup-menu {
     border-radius: 2vw;
     margin: auto;
+    margin-top: 20px;
     height: 300px;
     width: 300px;
-    background-color: rgb(204, 202, 202);
-    box-shadow: rosybrown;
+    background-color: rgb(225, 225, 226);
 }
 
 .one-line {
@@ -20,10 +20,13 @@
 
 .text {
     margin: 0%;
+    margin-bottom: 3px;
+    color: #555;
 }
 
 .register-link {
     margin: auto;
+    margin-top: 25px;
     height: 50px;
     width: 100px;
     background-color: cornflowerblue;

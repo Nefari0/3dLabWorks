@@ -1,21 +1,13 @@
-.home-container {
-    height: 55vh;
-    width: 100vw;
-    
-    /* background-color: blue; */
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-    /* justify-content: center; */
-    /* background-image: linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,1)),url(chessboard.png); */
 
-    /* background-image: url(chessboard.png); */
-    background-size: cover; 
-    background-position: center;
-    /* filter: blur(2px); */
-    /* filter: grayscale(100%); */
-    /* filter: hue-rotate(-50deg); */
-    /* background: rgba(0,0,0,.1); */
+.icon-container {
+    min-height: 55vh;
+    width: 60vw;
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-content: flex-end;
 }
 
 
@@ -44,12 +36,12 @@
 }
 
 .icon {
-    margin-top: 100px;
+    margin-top: 50px;
     margin-left: 25px;
     margin-right: 100vw;
-    float: left;
-    height: 10vh;
-    color: #3c598e;
+    /* float: left; */
+    height: 4vh;
+    color:  #6495ed;
 }
 
 .intro-text {
@@ -74,8 +66,76 @@
     margin-left: 45vw;
     /* margin-bottom: 10px; */
     width: 10vw;
-    border-bottom: 2px solid #e67e22;
+    border-bottom: 2px solid #6495ed;
     justify-content: center;
     align-items: center;
     align-content: center;
+}
+
+.icon-h4 {
+    float: left;
+    margin-left: 35px;
+    margin-top: 15px;
+}
+
+.icon-h3 {
+    /* background-color: teal; */
+    margin: auto;
+    text-align: center;
+}
+
+.icon-text {
+    /* float: left; */
+    margin-top: 60px;
+    margin-left: 30px;
+    height: 100px;
+    width: 80vw;
+    font-size: 12px;
+    font-weight: 300;
+    color: #555;
+    text-align: left;
+    /* background-color: yellow; */
+}
+
+@media (max-width: 540px) {
+
+    /* .icon-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: stretch;
+        align-content: flex-end;
+    } */
+
+    .icon {
+        /* background-color: yellowgreen; */
+        height: 3vh;
+        justify-content: center;
+        float: left;
+        margin:auto;
+        margin-top: 20px;
+        margin-left: 10px;
+    }
+
+    .icon-h4 {
+        /* background-color: yellowgreen; */
+        padding-bottom: 10px;
+        width: 80vw;
+        height: 4vh;
+        text-align: center;
+    }
+
+    .icon-text {
+        /* background-color: tomato; */
+        text-align: center;
+        height: 300px;
+        width: 80vw;
+    }
+}
+
+@media (max-width: 370px) {
+    .icon-h3 {
+        font-size: 20px;
+    }
 }

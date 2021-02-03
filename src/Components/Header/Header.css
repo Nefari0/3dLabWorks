@@ -1,6 +1,6 @@
 
 .header-container {
-    /* position: fixed; */
+    /* position: absolute; */
     margin: none;
     height: 10vh;
     width: 100vw;
@@ -12,7 +12,8 @@
 	flex-wrap: nowrap;
 	justify-content: space-around;
 	align-items: center;
-	align-content: center;
+    align-content: center;
+    /* z-index: 1; */
 }
 
 .login-logout {

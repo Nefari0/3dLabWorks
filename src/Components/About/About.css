@@ -85,7 +85,8 @@
     @media (max-width: 700px){
     .about-container {
         flex-direction: column;
-        justify-content: space-between;
+        /* justify-content: flex-start; */
+        /* justify-content: space-between; */
     }
     
     .doc-containers {
@@ -93,6 +94,6 @@
         margin: 0px;
         margin-top: 20px;
         /* margin-left: 5px; */
-        justify-content: center;
+        /* justify-content: center; */
     }
 }

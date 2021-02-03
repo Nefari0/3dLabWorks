@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './Register.css'
 import { registerUser } from '../../ducks/userReducer'
+import {connect} from 'react-redux'
 
 const Register = (props) => {
 
@@ -16,28 +17,12 @@ const Register = (props) => {
         console.log('props from Register',props)
     },[])
 
-    function handleNameInput(params){
-        setUserName(params)
-    }
+    // function handlePhotoInput(params){
+    //     setPhoto(params)
+    // }
 
-    function handlePassInput(params){
-        setPassword(params)
-    }
-
-    function handleEmailInput(params){
-        setEmail(params)
-    }
-
-    function handlefirstNameInput(params){
-        setFirstName(params)
-    }
-
-    function handlePhotoInput(params){
-        setPhoto(params)
-    }
-
-    function executeRegister(user_name, password, email, first_name, is_admin){
-        registerUser(user_name, password, email, first_name, is_admin)
+    function executeRegister(){
+        props.registerUser(user_name, password, email, first_name, is_admin)
     }
 
     return(
@@ -67,5 +52,7 @@ const Register = (props) => {
         </div>
     )
 }
-
-export default Register
+function mapStateToProps(reduxState){
+    return reduxState
+}
+export default connect(mapStateToProps,{registerUser})(Register)

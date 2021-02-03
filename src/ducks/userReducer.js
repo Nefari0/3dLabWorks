@@ -23,10 +23,10 @@ export function logoutUser(){
     }
 }
 
-export function registerUser(user_name, password, email, first_name){
+export function registerUser(user_name, password, email, first_name, is_admin){
     return {
         type: REGISTER_USER,
-        payload: axios.post('/auth/register', { user_name, password, email, first_name})
+        payload: axios.post('/auth/register', { user_name, password, email, first_name, is_admin})
     }
 }
 
@@ -44,7 +44,7 @@ export default function userReducer(state = inititialState, action) {
         case REGISTER_USER + '_FULFILLED':
             return {
                 ...state,
-                user: action.payload, isLoggedIn: true
+                user: action.payload.data, isLoggedIn: true
             }
         case REGISTER_USER + '_REJECTED':
             return { ...state, isLoggedIn: false}
