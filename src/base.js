@@ -14,4 +14,17 @@ const firebaseConfig = {
     measurementId: "G-DSTFFPFHLD"
   };
 
-  export const app = firebase.initializeApp(firebaseConfig);
+export const app = firebase.initializeApp(firebaseConfig);
+
+var database = firebase.database();
+
+var ref = database.ref('name')
+
+// the code below will push object to realitime database-for testing purposes
+
+// var data = {
+//     item1:"stuff",
+//     item2:"morestuff"
+// }
+
+// ref.push(data)

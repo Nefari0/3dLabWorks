@@ -130,7 +130,7 @@ class Header extends Component{
                 <Link to="/"><li className='mobile-link-item'>home</li></Link>
                 <Link to="/about"><li className='mobile-link-item'>about</li></Link>
                 <Link to="/explore"><li className='mobile-link-item'>projects</li></Link>
-                <Link to="/sites"><li className='mobile-link-item'>some great sites</li></Link>
+                {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='mobile-link-item'><a>my page</a></li></Link>)}
             </ul>
 
             {!openLogin ? (<MobileLogin login={this.props.loginUser} logout={this.props.logoutUser} execute={this.handleClick} name={this.handleUserName} pass={this.handlePassword} hide={this.state.openLogin} exit={this.toggleLogin}/>):(<div className="blank-div"></div>)}

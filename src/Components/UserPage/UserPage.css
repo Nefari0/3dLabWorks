@@ -3,13 +3,14 @@
     margin: auto;
     height: 80vh;
     width: 90vw;
-    background-color: rgb(194, 194, 194);
+    /* background-color: rgb(194, 194, 194); */
+    background-color: rgb(238, 238, 238);
     display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: center;
 	/* align-items: baseline; */
-	align-content: center;
+    align-content: center;
 
 }
 
@@ -22,49 +23,286 @@
 .column1 {
     /* margin: auto; */
     margin-top: 20px;
-    background-color: tomato;
+    margin-right: 5vw;
+    /* background-color: tomato; */
+    /* background-color: rgb(194, 194, 194); */
+    /* background-color: rgb(221, 221, 221); */
     width: 225px;
     /* min-height: 90vh; */
     height: 75vh;
     float: left;
+    overflow-y:auto;
 }
 
 .portrait{
     height: 250px;
-    width: 100%;
+    width: 99%;
     background-color: white;
     color: black;
+    border-radius: 5%;
 }
 
 .profile-buttons {
     height:75px;
     /* width: 225px; */
-    width: 100%;
-    background-color: burlywood;
+    width: 99%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    /* background-color: burlywood; */
+    border-radius: 5%;
+    color: #555;
+    text-transform: uppercase;
+    /* border: 2px solid #6495ed; */
+}
+
+.name-container {
+    height: 65px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    font-weight: 300;
+    color: #555;
 }
 /* -------column2----------- */
 
 .column2 {
     /* margin: auto; */
     margin-top: 20px;
-    background-color: blue;
+    /* padding-top: 25px; */
+    /* background-color: blue; */
     width: 550px;
     height: 75vh;
     float: right;
+    border-radius: 5%;
 }
 
 .collections {
-    height: 95%;
+    /* height: 95%;
     width: 95%;
     margin: auto;
     background-color: red;
+    border-radius: 5%; */
+
+        /* height: 200px; */
+    /* width: 200px; */
+    /* margin: auto; */
+    height: 100%;
+    width: 100%;
+    /* background-color: chartreuse; */
+    background-color: rgb(248, 244, 244);
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: stretch;
+    align-content: center;
+    /* text-align: left; */
+    /* text-align: right; */
+    /* padding-top: 10%; */
+    /* padding-bottom: 10%; */
+    border-radius: 2%;
+    overflow-y:auto;
 }
+
+.input {
+    height: 10%;
+    width: 90%;
+    /* background-color: crimson; */
+    background-color: rgb(248, 244, 244);
+    color: #555;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.collections-h2 {
+    color: #555;
+    padding-bottom: 10px;
+}
+
+.items-view {
+    margin-top: 20px;
+    min-height: 90%;
+    /* height: 90%; */
+    width: 90%;
+    /* margin-top: 5px; */
+    /* background-color: darkgreen; */
+    display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+    /* justify-content: space-around; */
+    justify-content: center;
+	align-items: baseline;
+    align-content: stretch;
+    overflow-y:auto;
+}
+
+/* ----props display info---- */
+.props-display {
+    height: 250px;
+    width: 200px;
+    background-color: #fff;
+    color: #555;
+    border-radius: 5%;
+    margin:5px;
+}
+
+.project-text {
+    color: #555;
+}
+
+.project-box-h4 {
+    color: #555;
+}
+
+.model-img {
+    width: 90%;
+    height: 80%;
+    border-radius: 5%;
+}
+
+/* ----------------------------- */
 
 .user-info {
     /* height: 200px; */
     /* width: 200px; */
-    height: 95%;
-    width: 95%;
-    margin: auto;
-    background-color: chartreuse;
+    /* margin: auto; */
+    height: 100%;
+    width: 100%;
+    /* background-color: chartreuse; */
+    background-color: rgb(248, 244, 244);
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: stretch;
+    align-content: center;
+    /* text-align: left; */
+    /* text-align: right; */
+    overflow-y:auto;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    border-radius: 2%;
+    
+}
+.text-element {
+    margin-right: 15px;
+    margin-bottom: 5px;
+    font-weight: 100;
+    text-transform: none;
+}
+
+.user-info-h2 {
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 2px;
+    /* padding-bottom: 40px; */
+    text-align: right;
+    color: #555;
+    /* color: blue; */
+    /* color: #6495ed; */
+    /* background-color: black; */
+    background-color: rgb(253, 249, 249);
+    /* border: 2px solid rgb(243, 242, 242); */
+    /* border: 1px solid #6495ed; */
+    
+    border-radius: 5%;
+}
+
+.user-info-p {
+    /* margin-right: 200px; */
+    text-align: left;
+    /* float: left; */
+    /* color: black; */
+    margin-left: 15px;
+    margin-top: 5px;
+}
+
+.title-h {
+    text-align: center;
+    font-weight: 300;
+    margin-bottom: 100px;
+}
+
+.icon-big {
+    margin-top: 30%;
+    /* margin-left: 25px; */
+    /* margin-right: 100vw; */
+    /* float: left; */
+    height: 10vh;
+    color:  #6495ed;
+}
+
+.icon-medium {
+    /* margin-top: 50%; */
+    padding-right: 100%;
+    height: 5vh;
+    /* width: 3%; */
+}
+
+@media (max-width: 640px) {
+    .user-info-h2 {
+        font-size: 50%;
+        margin-right: auto;
+        
+        margin-top: 2px;
+        width: 80%;
+        /* text-align: center; */
+    }
+
+    .user-info-p {
+        margin-left: 5px;
+    }
+
+    .name-container {
+        margin-bottom: 10px;
+        height: 40px;
+        /* width: 120px; */
+        border-bottom: 1px solid #6495ed;
+        /* background-color: crimson; */
+    }
+
+    .profile-buttons {
+        margin: 1px;
+        height: 40px;
+        /* background-color: chartreuse; */
+    }
+
+    .user-info {
+
+    }
+
+    .collections {
+
+    }
+
+    .column1 {
+        width: 100%;
+        /* padding: 0px; */
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        margin: 20px;
+        /* margin-top: 20px; */
+        /* margin-left: 30px; */
+        /* justify-content: center; */
+        /* align-items: stretch; */
+        /* align-content: stretch; */
+
+    }
+
+    .column2 {
+        width: 100%;
+        align-items: center;
+        align-content: center;
+    }
+
+    .user-page {
+        margin: 0%;
+        width: 100vw;
+    }
+
+    .portrait {
+        height: 200px;
+        width: 134px;
+        margin: auto;
+    }
 }

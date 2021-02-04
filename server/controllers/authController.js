@@ -50,6 +50,7 @@ module.exports = {
         }
         // req.session.user = { isAdmin: user.is_admin, id: user.user_id, email: user.email, username: user.user_name};
         req.session.user = { 
+            email: user.email,
             is_admin: user.is_admin, 
             user: user.user_name,
              id: user.user_id,
