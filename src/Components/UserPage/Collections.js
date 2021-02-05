@@ -14,7 +14,7 @@ class Collections extends Component {
         this.state = {
             items:[],
         }
-        // this.onChange = this.onChange.bind(this)
+        // this.giveInfo = this.giveInfo.bind(this)
         this.sendIntoSpace = this.sendIntoSpace.bind(this)
     }
 
@@ -24,7 +24,7 @@ class Collections extends Component {
     }
 
     giveInfo(){
-        console.log(app.storage().ref())
+        // console.log(app.firebase)
     }
 
     // sendIntoSpace(params){
@@ -40,9 +40,8 @@ class Collections extends Component {
         const file = e.target.files[0];
         console.log('here is the info',file)
         const storageRef = app.storage().ref()
-        // const fileRef = storageRef.child(file.name)
         const fileRef = storageRef.child(file.name)
-        console.log(fileRef)
+        console.log('this is fileref',fileRef)
         fileRef.put(file).then(() => {
             console.log("uploaded a file")
         })
@@ -58,14 +57,14 @@ class Collections extends Component {
 
 
         const mappedItems = items.map(element => {
-            return <ModelItem key={element.model_id} name={element.name} img={element.firebase_url}/>
+            return <ModelItem key={element.model_id} name={element.name} img={element.firebase_url01}/>
         })
 
         return(
             <div className="collections">
                 <section className="input">
-                    <div className="collections-h2"><h2>Collections</h2></div>
-                    <button onClick={this.giveInfo}>click</button>
+                    <div className="collections-h2"><h2 >Collections</h2></div>
+                    {/* <button onClick={this.giveInfo}>click</button> */}
                     <input 
                     type="file"
                     onChange={e => this.sendIntoSpace(e)}

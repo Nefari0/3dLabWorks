@@ -96,7 +96,7 @@ class Header extends Component{
     return(
         <div className='header-container'>
 
-            <h3 className="header-h3">{isLoggedIn ? `welcome,${this.props.user.user.user}!` :'header'}</h3>
+            <h3 className="header-h3">{isLoggedIn ? `welcome,${this.props.user.user.user}!` :'MadModels3d'}</h3>
 
             {/* {username.user ? (
                 <h3>{username.user}, Welcome!</h3>

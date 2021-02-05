@@ -1,6 +1,4 @@
 
-// import { app } from "firebase-admin";
-// import * as firebase from "firebase/app"
 import firebase from 'firebase/app'
 import "firebase/storage"
 
@@ -16,11 +14,13 @@ const firebaseConfig = {
 
 export const app = firebase.initializeApp(firebaseConfig);
 
+// -------the code below controls firebase realtime database -----//
+
 var database = firebase.database();
 
 var ref = database.ref('name')
 
-// the code below will push object to realitime database-for testing purposes
+// the code below will push object to realtime database-for testing purposes
 
 // var data = {
 //     item1:"stuff",

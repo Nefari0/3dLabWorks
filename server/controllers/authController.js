@@ -54,7 +54,8 @@ module.exports = {
             is_admin: user.is_admin, 
             user: user.user_name,
              id: user.user_id,
-             name: user.first_name
+             name: user.first_name,
+             photo: user.photo_url
          };
             return res.status(200).send(req.session.user)
     },

@@ -22,11 +22,16 @@ class Explore extends Component {
     //     })
     // }
 
-    componentDidMount() {
-        axios.get("https://www.breakingbadapi.com/api/characters").then(res => {
-            this.setState({
-                data:res.data})
-        })
+    // componentDidMount() {
+    //     axios.get("https://www.breakingbadapi.com/api/characters").then(res => {
+    //         this.setState({
+    //             data:res.data})
+    //     })
+    // }
+
+    componentDidMount(){
+        axios.get('/api/projects/all').then(res =>
+            this.setState({ ...this.state,data:res.data}))        
     }
     
     render(){
@@ -35,7 +40,7 @@ class Explore extends Component {
         
         console.log('props for explorer',this.props)
         const mappedData = data.map(element => {
-            return <Project data={element} key={element.product_id} />
+            return <Project data={element} key={element.model_id} />
         })
 
         return(

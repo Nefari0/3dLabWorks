@@ -44,7 +44,7 @@ class Home extends Component {
         const { loginUser } = this.props
         // console.log(this.props) 
         return(
-            <div >
+            <div>
                 <div className="hero"></div>
                 <h2 className="light-background-text" >IMAGINE IT - BUILD IT.</h2>
                 <div className="title-border"></div>
@@ -52,6 +52,7 @@ class Home extends Component {
                     <h3 className="icon-h3">Join millions  of 3d makers worldwide. Share your work in a community, and be a part of an innovative future</h3>
                 </section>
 
+                <section className="homw-container">
                 <div classname="icon-container">
                 <svg className="icon"xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
@@ -78,6 +79,7 @@ class Home extends Component {
                 <p className="icon-text" >Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
 
                 </div>
+                </section>
 
                 {/* <FirebaseTest/>     */}
             </div>
