@@ -1,7 +1,4 @@
 .login-container {
-    /* margin-top: 5px; */
-    /* margin-top: 10px; */
-    /* padding-left: 10px; */
     height: 100px;
     width: 300px;
     border-radius: 1vw;
@@ -15,9 +12,6 @@
     top: 11vh;
     right: 15px;
     position: absolute;
-    /* position: fixed; */
-    /* z-index: -1; */
-    /* box-shadow: 1px 1px#d1d1d1; */
 }
 
 .input-element {

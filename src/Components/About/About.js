@@ -25,7 +25,6 @@ It is a long established fact that a reader will be distracted by the readable c
 
 </text>
             </div>
-            {/* <h2>featured projects</h2> */}
         </div>
     )
 }

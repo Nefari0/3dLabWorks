@@ -15,23 +15,9 @@ class Explore extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     axios.get('/api/projects/all').then(res => {
-    //         this.setState({
-    //             data:res.data})
-    //     })
-    // }
-
-    // componentDidMount() {
-    //     axios.get("https://www.breakingbadapi.com/api/characters").then(res => {
-    //         this.setState({
-    //             data:res.data})
-    //     })
-    // }
-
     componentDidMount(){
         axios.get('/api/projects/all').then(res =>
-            this.setState({ ...this.state,data:res.data}))        
+            this.setState({ ...this.state,data:res.data}))   
     }
     
     render(){
@@ -45,8 +31,6 @@ class Explore extends Component {
 
         return(
             <div className="explore-container">
-                {/* <h4 onClick={this.update}className="explore-h4">explore</h4> */}
-
                 {mappedData}
             </div>
         )

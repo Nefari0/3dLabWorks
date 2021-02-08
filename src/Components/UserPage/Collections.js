@@ -5,17 +5,19 @@ import UserProject from './UserProject'
 import {app} from '../../base'
 import ModelItem from './ModelItems'
 
+const db = app.firestore()
+
 class Collections extends Component {
-    // function Collections(){
 
     constructor(){
         super();
 
         this.state = {
             items:[],
+            fileUrl:null
         }
-        // this.giveInfo = this.giveInfo.bind(this)
         this.sendIntoSpace = this.sendIntoSpace.bind(this)
+        this.setFileUrl = this.setFileUrl.bind(this)
     }
 
     componentDidMount(){
@@ -23,28 +25,20 @@ class Collections extends Component {
             this.setState({ ...this.state,items:res.data}))        
     }
 
-    giveInfo(){
-        // console.log(app.firebase)
+    setFileUrl(params){
+        console.log("set function")
+        this.setState({ fileUrl:params})
     }
 
-    // sendIntoSpace(params){
-    //     const file = e.target.file[0];
-    //     const storageRef = app.storage().ref()
-    //     const fileRef = storageRef.child(file.name)
-    //     fileRef.put(file).then(() => {
-    //         console.log("uploaded a file")
-    //     })
-    // }
-
-    sendIntoSpace(e){
+    sendIntoSpace = async (e) => {
         const file = e.target.files[0];
-        console.log('here is the info',file)
         const storageRef = app.storage().ref()
         const fileRef = storageRef.child(file.name)
-        console.log('this is fileref',fileRef)
+            console.log("send to space function")
         fileRef.put(file).then(() => {
-            console.log("uploaded a file")
+            console.log('uploaded file')
         })
+        this.setFileUrl(await fileRef.getDownloadURL())
     }
 
     handleChange(params){
@@ -64,13 +58,11 @@ class Collections extends Component {
             <div className="collections">
                 <section className="input">
                     <div className="collections-h2"><h2 >Collections</h2></div>
-                    {/* <button onClick={this.giveInfo}>click</button> */}
                     <input 
                     type="file"
                     onChange={e => this.sendIntoSpace(e)}
-                    // onChange={this.sendIntoSpace()}
                     />
-                    {/* {mappedItems} */}
+
                 </section>
                 <section className="items-view">
                     {mappedItems}

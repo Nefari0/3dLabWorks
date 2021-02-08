@@ -19,20 +19,15 @@ class FeaturedProjects extends Component {
         this.props.updateCharacters()
     }
 
-    // componentDidUpdate(){
-    //     console.log(this.props)
-    // }
-
     render(){
         const { data } = this.props.characters.characters
-        // console.log(data)
 
         const mappedCharacters = data.map(element => {
             return <Project data={element} id={element.id}/>
         })
         return(
             <div className="featured-projects">
-                {/* {mappedCharacters} */}
+
             </div>
         )
     }

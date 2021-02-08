@@ -8,28 +8,8 @@ const MobileLogin = (props) => {
 
     const { user_name, setUsername } = useState('')
     const { password, setPassword } = useState('')
-    // const { registerMenu, setRegisterMenu } = useState(false)
-
-    // function handleUserName(value){
-    //     setUsername(value)
-    // }
-
-    // function handlePassword(value){
-    //     setPassword(value)
-    // }
-
-    // handleClick() {
-    //     // const { user_name, password } = this.state
-    //     this.props.loginUser(user_name,password)
-    //     this.setState({user_name:'',password:''})
-    // }
-
-    // function openRegister(){
-    //     setRegisterMenu(true)
-    // }
 
     return(
-        // <div className={`login-container ${props.openLogin ? true: 'login-container-hide'}`}>
         <div className={`login-container`}>
             {console.log(props)}
         <p>username</p><input value={user_name} onChange={e => props.name(e.target.value)} className="input-element"/>

@@ -4,20 +4,19 @@ const express = require('express')
 const session = require('express-session')
 const massive = require('massive')
 const authController = require('./controllers/authController')
-// const auth = require('./middleware/authMiddleware');
 const userController = require('./controllers/userController')
 const projectsController = require('./controllers/projectsController')
 // const cors = require('cors');
 
 //--------firedtore-------//
-const admin = require('firebase-admin');
-const firebase = require('firebase/app');
-const serviceAccount = require('./serviceAccounts/depot-7bb3e-6e66a08bdc56.json');
-const { firestore } = require('firebase-admin');
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
-});
-let fireStore = admin.firestore();
+// const admin = require('firebase-admin');
+// const firebase = require('firebase/app');
+// const serviceAccount = require('./serviceAccounts/depot-7bb3e-6e66a08bdc56.json');
+// const { firestore } = require('firebase-admin');
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount)
+// });
+// let fireStore = admin.firestore();
 
 
 // admin.initializeApp({
@@ -55,6 +54,7 @@ app.get('/api/users/all', userController.getUsers)
 // projects endpoints
 
 app.get('/api/projects/all', projectsController.getAllProjects)
+app.get('/api/projects/join', projectsController.getOwnerName)
 
 // // storage access end points //
 // app.get('/api/assets/getall')

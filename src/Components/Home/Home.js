@@ -80,8 +80,6 @@ class Home extends Component {
 
                 </div>
                 </section>
-
-                {/* <FirebaseTest/>     */}
             </div>
         )
     }
@@ -91,5 +89,3 @@ function mapStateToProps(reduxState){
 }
 
 export default connect(mapStateToProps, { loginUser })(Home)
-
-// export default Home

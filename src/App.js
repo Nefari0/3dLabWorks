@@ -1,6 +1,5 @@
-import logo from './logo.svg';
+
 import './App.css';
-// import FirebaseTest from './Components/FirebaseTest'
 import firebase from 'firebase'
 import Home from './Components/Home/Home'
 import Header from './Components/Header/Header'
@@ -18,12 +17,7 @@ function App() {
     <div className="App">
         <Header/>
         {routes}
-        {/* <FirebaseTest/> */}
-        {/* <Home/> */}
-        {/* <About/> */}
-        {/* <FeaturedProjects/> */}
-        {/* <UserPage/> */}
-        {/* <GroupPage/> */}
+
 
     </div>
     </HashRouter>

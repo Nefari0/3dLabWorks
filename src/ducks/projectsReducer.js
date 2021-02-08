@@ -19,8 +19,8 @@ export default function projectsReducer(state = inititialState, action) {
             return { ...state,
                 projects: action.payload
             };
-        // case GET_PROJECTS + '_REJECTED':
-        //     return state;
+        case GET_PROJECTS + '_REJECTED':
+            return state;
         default:
             return state;
     }

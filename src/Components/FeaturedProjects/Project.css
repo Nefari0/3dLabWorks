@@ -2,11 +2,8 @@
     border-radius: 5%;
     margin: 10px;
     height: 350px;
-    /* width: 350px; */
     width: 280px;
-    /* background-color: red; */
     background-color: #fff;
-    /* color: #555; */
 }
 
 .project-text {
@@ -20,4 +17,5 @@
 .img {
     width: 90%;
     height: 60%;
+    border-radius: 5%;
 }

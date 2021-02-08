@@ -8,5 +8,10 @@ module.exports = {
     getUserProject: async (req,res) => {
         const projects = await req.app.get('db').get_user_project([user_id]);
         return res.status(200).send(projects)
+    },
+
+    getOwnerName: async (req,res) => {
+        const name = await req.app.get('db').get_model_owner_name([user_id]);
+        return res.status(200).send(name)
     }
 }

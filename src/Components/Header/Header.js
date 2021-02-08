@@ -39,8 +39,6 @@ class Header extends Component{
         if(user.isLoggedIn === true && setPermission===true){
             // this.setState({username:user.user.data.user,setPermission:false})
             this.setState({username:user.user.user.user,setPermission:false})
-            // this.handleUserUpdate()
-            // console.log('did update',user.user.data.user)
         }
         
     }
@@ -91,45 +89,32 @@ class Header extends Component{
 
     render() {
         const { username, isMenuOpen, user_name, password, openLogin } = this.state
-        // this.handleUserUpdate()
         const { isLoggedIn } = this.props.user
     return(
         <div className='header-container'>
 
             <h3 className="header-h3">{isLoggedIn ? `welcome,${this.props.user.user.user}!` :'MadModels3d'}</h3>
 
-            {/* {username.user ? (
-                <h3>{username.user}, Welcome!</h3>
-                ) : (
-                <h3 className="header-h3">header</h3>
-                )} */}
-
             <ul className='link-list'>
                 <Link to="/" style={{ textDecoration: 'none' }}><li className='link-item'><a>home</a></li></Link>
                 <Link to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a>about</a></li></Link>
                 <Link to="/explore" style={{ textDecoration: 'none' }}><li className='link-item'><a>projects</a></li></Link>
-                <Link to="/sites" style={{ textDecoration: 'none' }}><li className='link-item'><a>some great sites</a></li></Link>
                 {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='link-item'><a>my page</a></li></Link>)}
             </ul>
-
-            {/* <div className="login-link" >
-                <h4>{!isLoggedIn ? 'login':`logout`}</h4>
-            </div> */}
 
             <div className="login-link" onClick={this.toggleLogin}>
                 {!isLoggedIn ? (<h4 className="login-logout">login</h4>):(<h4 className="login-logout">logout</h4>)}
             </div>
 
-            {/* <img onClick={this.toggleMenu} src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Hamburger_icon.svg/1024px-Hamburger_icon.svg.png"className="hamburger"/> */}
             <svg className="hamburger" onClick={this.toggleMenu} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
             </svg>
 
             <ul className={`mobile-nav ${isMenuOpen ? false : 'mobile-nav-hide'}`} onClick={this.toggleMenu}>
                 <li className='mobile-link-item' onClick={this.toggleLogin}>sign in</li>
-                <Link to="/"><li className='mobile-link-item'>home</li></Link>
-                <Link to="/about"><li className='mobile-link-item'>about</li></Link>
-                <Link to="/explore"><li className='mobile-link-item'>projects</li></Link>
+                <Link to="/" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>home</li></Link>
+                <Link to="/about" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>about</li></Link>
+                <Link to="/explore" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>projects</li></Link>
                 {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='mobile-link-item'><a>my page</a></li></Link>)}
             </ul>
 
@@ -143,4 +128,3 @@ function mapStateToProps(reduxState){
 }
 
 export default connect(mapStateToProps, {loginUser, logoutUser})(Header)
-// export default Header
