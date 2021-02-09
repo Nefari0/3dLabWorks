@@ -5,7 +5,9 @@ const session = require('express-session')
 const massive = require('massive')
 const authController = require('./controllers/authController')
 const userController = require('./controllers/userController')
-const projectsController = require('./controllers/projectsController')
+const projectsController = require('./controllers/projectsController');
+const { projectManagement } = require('firebase-admin');
+const { addProject } = require('./controllers/projectsController');
 // const cors = require('cors');
 
 //--------firedtore-------//
@@ -55,6 +57,7 @@ app.get('/api/users/all', userController.getUsers)
 
 app.get('/api/projects/all', projectsController.getAllProjects)
 app.get('/api/projects/join', projectsController.getOwnerName)
+app.post('/api/project/post',projectsController.addProject)
 
 // // storage access end points //
 // app.get('/api/assets/getall')

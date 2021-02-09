@@ -100,7 +100,7 @@ class UserPage extends Component {
                 {/* <li><div className="profile-buttons">stuff</div></li> */}
             </ul>
             <section className="column2">
-                {showCollections && <Collections/>}
+                {showCollections && <Collections username={this.props.user}/>}
                 
                 {showUserInfo && <UserInfo user={this.props.user}/>}
 

@@ -33,6 +33,14 @@
 --   firebase_url text
 -- );
 
+-- INSERT INTO models (user_id,name,description,firebase_url01)
+-- VALUES (
+--   12,
+--   'A model',
+--   'is 3d printable',
+--   'https://s3.us-east-2.amazonaws.com/ari.my.leach.chose.peach.nova/17155399_10155003704484259_8760045685703876866_n.jpg'
+-- )
+
 -- ----------icons -------------- --
 -- CREATE TABLE d_icons (
 --   icon_id SERIAL PRIMARY KEY,

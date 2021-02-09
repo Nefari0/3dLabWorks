@@ -13,5 +13,12 @@ module.exports = {
     getOwnerName: async (req,res) => {
         const name = await req.app.get('db').get_model_owner_name([user_id]);
         return res.status(200).send(name)
+    },
+
+    addProject: async (req,res) => {
+        const { id, name, description, firebase_url, firebase_url01 } = req.body
+        const db = req.app.get('db')
+        const newProject = await db.add_new_project([id,name,description,firebase_url,firebase_url01])
+        return res.status(200).send(newProject)
     }
 }
