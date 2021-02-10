@@ -56,8 +56,10 @@ app.get('/api/users/all', userController.getUsers)
 // projects endpoints
 
 app.get('/api/projects/all', projectsController.getAllProjects)
+app.get('/api/projects/:user_id', projectsController.getUserProject)
 app.get('/api/projects/join', projectsController.getOwnerName)
 app.post('/api/project/post',projectsController.addProject)
+app.delete('/api/project/delete/:model_id', projectsController.deleteProject)
 
 // // storage access end points //
 // app.get('/api/assets/getall')

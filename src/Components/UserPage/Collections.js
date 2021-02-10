@@ -18,14 +18,20 @@ class Collections extends Component {
             fileUrl:null,
             file:null,
             imageFile:null,
-            newItem:{}
+            imageUrl:null,
+            newItem:{},
+            props:null
         }
         this.sendIntoSpace = this.sendIntoSpace.bind(this)
+        this.sendImageIntoSpace = this.sendImageIntoSpace.bind(this)
         this.setFileUrl = this.setFileUrl.bind(this)
         this.handleFile = this.handleFile.bind(this)
         this.addFile = this.addFile.bind(this)
+        this.addPhoto = this.addPhoto.bind(this)
+        this.handlePhoto = this.handlePhoto.bind(this)
         this.fileHandler = this.fileHandler.bind(this)
         this.addToDatabase = this.addToDatabase.bind(this)
+        this.deleteModel = this.deleteModel.bind(this)
     }
 
     componentDidMount(){
@@ -34,13 +40,22 @@ class Collections extends Component {
     }
 
     setFileUrl(params){
+        const { imageFile } = this.state
         console.log("set function")
         this.setState({ fileUrl:params})
-        this.addToDatabase()
+        this.addToDatabase()        
+    }
+
+    setImageUrl(params){
+        this.setState({imageUrl:params})
     }
 
     addFile(params){
         this.setState({file:params})
+    }
+
+    addPhoto(params){
+        this.setState({imageFile:params})
     }
 
     handleFile = async (e) => {
@@ -48,17 +63,50 @@ class Collections extends Component {
         this.addFile(await file)
     }
 
-    fileHandler = (params) => {
-        const { file, imageFile } = this.state
-        this.sendIntoSpace(file,imageFile)
+    handlePhoto = async (e) => {
+        const photo = e.target.files[0]
+        this.addPhoto(await photo)
     }
 
-    sendIntoSpace = async (file,imageFile) => {
+    fileHandler = async (params) => {
+        const { file, fileUrl, imageFile, imageUrl } = this.state
+        const image = true
+        this.sendIntoSpace(file)
+        // if(imageFile != null){
+        //     this.sendImageIntoSpace(imageFile)
+        // } else {alert('please add a photo')}
+
+        // this.addToDatabase(await fileUrl,imageUrl)
+        
+    }
+
+    sendIntoSpace = async (file) => {
         const { id } = this.props.username.user
         const name = 'username'
         const description = 'stuff'
         const firebase_url = 'firebase_url'
         const firebase_url01 = this.state.fileUrl
+        // const file = e.target.files[0];
+        const storageRef = app.storage().ref()
+        const fileRef = storageRef.child(file.name)
+            console.log("send to space function")
+        fileRef.put(file).then(() => {
+            console.log('uploaded file')
+        })
+        this.setFileUrl(await fileRef.getDownloadURL())
+        console.log(this.state.fileUrl)
+        
+        // axios.post('/api/project/post', {id,name,description,firebase_url,firebase_url01}).then(res => {
+        //     this.setState({ ...this.state,newItem:res.data})
+        // })
+    }
+
+    sendImageIntoSpace = async (file) => {
+        // const { id } = this.props.username.user
+        // const name = 'username'
+        // const description = 'stuff'
+        // const firebase_url = 'firebase_url'
+        // const firebase_url01 = this.state.fileUrl
         // const file = e.target.files[0];
         const storageRef = app.storage().ref()
         const fileRef = storageRef.child(file.name)
@@ -75,17 +123,24 @@ class Collections extends Component {
     }
 
     addToDatabase = () => {
+        console.log('this is from addToDatabase function')
+        const { fileUrl, imageUrl } = this.state
         const { id } = this.props.username.user
         const name = 'username'
         const description = 'stuff'
-        const firebase_url = 'firebase_url'
-        const firebase_url01 = this.state.fileUrl
-
+        const firebase_url = imageUrl
+        const firebase_url01 = fileUrl
         axios.post('/api/project/post', {id,name,description,firebase_url,firebase_url01})
+        this.setState({fileUrl:null,file:null})
     }
 
     handleChange(params){
         this.setState({ file:params })
+    }
+
+    deleteModel = (params) => {
+        this.setState({props:params})
+        // axios.delete(`/api/project/delete/${this.props.model_id}`)
     }
 
     render(){
@@ -93,7 +148,7 @@ class Collections extends Component {
         const { items } = this.state
 
         const mappedItems = items.map(element => {
-            return <ModelItem key={element.model_id} name={element.name} img={element.firebase_url01}/>
+            return <ModelItem key={element.model_id} name={element.name} img={element.firebase_url01} id={element.model_id} delete={this.deleteModel}/>
         })
 
         return(
@@ -107,10 +162,11 @@ class Collections extends Component {
                     onChange={e => this.handleFile(e)} 
                     />
 
-                    <input
+                    {/* <input
                     type="file"
                     accept="image/png,image/jpeg"
-                    />
+                    onChange={e => this.handlePhoto(e)}
+                    /> */}
                     
                     <button onClick={this.fileHandler}>submit</button>
 

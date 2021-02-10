@@ -20,5 +20,15 @@ module.exports = {
         const db = req.app.get('db')
         const newProject = await db.add_new_project([id,name,description,firebase_url,firebase_url01])
         return res.status(200).send(newProject)
+    },
+
+    deleteProject: async (req,res) => {
+        const { model_id } = req.body
+        console.log(model_id)
+        
+        const db = req.app.get('db')
+        await db.delete_project([model_id])
+        // await db.delete_project([]) 
+        return res.status(200).send('deleted')
     }
 }
