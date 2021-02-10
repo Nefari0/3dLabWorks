@@ -23,8 +23,8 @@ module.exports = {
     },
 
     deleteProject: async (req,res) => {
-        const { model_id } = req.body
-        console.log(model_id)
+        const { model_id } = req.params
+        console.log('this is from controllor id',req.params)
         
         const db = req.app.get('db')
         await db.delete_project([model_id])

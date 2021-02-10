@@ -31,7 +31,7 @@ class Collections extends Component {
         this.handlePhoto = this.handlePhoto.bind(this)
         this.fileHandler = this.fileHandler.bind(this)
         this.addToDatabase = this.addToDatabase.bind(this)
-        this.deleteModel = this.deleteModel.bind(this)
+        // this.deleteModel = this.deleteModel.bind(this)
     }
 
     componentDidMount(){
@@ -138,10 +138,10 @@ class Collections extends Component {
         this.setState({ file:params })
     }
 
-    deleteModel = (params) => {
-        this.setState({props:params})
-        // axios.delete(`/api/project/delete/${this.props.model_id}`)
-    }
+    // deleteModel = (params) => {
+    //     console.log('this is params from delete model',params)
+    //     axios.delete(`/api/project/delete/${params}`)
+    // }
 
     render(){
 
@@ -169,6 +169,7 @@ class Collections extends Component {
                     /> */}
                     
                     <button onClick={this.fileHandler}>submit</button>
+                    <button onClick={this.deleteModel}>delete randon</button>
 
                 </section>
                 <section className="items-view">
