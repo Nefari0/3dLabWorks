@@ -12,6 +12,7 @@
     top: 11vh;
     right: 15px;
     position: absolute;
+    z-index:100;
 }
 
 .input-element {

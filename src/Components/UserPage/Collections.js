@@ -89,7 +89,7 @@ class Collections extends Component {
         // const file = e.target.files[0];
         const storageRef = app.storage().ref()
         const fileRef = storageRef.child(file.name)
-            console.log("send to space function")
+            console.log("send to space function",fileRef)
         fileRef.put(file).then(() => {
             console.log('uploaded file')
         })
@@ -169,7 +169,6 @@ class Collections extends Component {
                     /> */}
                     
                     <button onClick={this.fileHandler}>submit</button>
-                    <button onClick={this.deleteModel}>delete randon</button>
 
                 </section>
                 <section className="items-view">

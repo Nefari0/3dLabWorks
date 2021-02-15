@@ -57,8 +57,8 @@ app.get('/api/users/all', userController.getUsers)
 
 app.get('/api/projects/all', projectsController.getAllProjects)
 app.get('/api/projects/:user_id', projectsController.getUserProject)
-app.get('/api/projects/join', projectsController.getOwnerName)
 app.post('/api/project/post',projectsController.addProject)
+app.get('/api/orders/join', projectsController.joinProject)
 // app.post('/api/project/edit/', )
 app.delete('/api/project/delete/:model_id', projectsController.deleteProject)
 

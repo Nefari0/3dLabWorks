@@ -6,13 +6,14 @@ module.exports = {
     },
 
     getUserProject: async (req,res) => {
-        const projects = await req.app.get('db').get_user_project([user_id]);
+        const { user_id } = req.body
+        const projects = await req.app.get('db').get_user_projects([user_id]);
         return res.status(200).send(projects)
     },
 
-    getOwnerName: async (req,res) => {
-        const name = await req.app.get('db').get_model_owner_name([user_id]);
-        return res.status(200).send(name)
+    joinProject: async (req,res) => {
+        const orders = await req.app.get('db').join_user_project();
+        return res.status(200).send(orders)
     },
 
     addProject: async (req,res) => {

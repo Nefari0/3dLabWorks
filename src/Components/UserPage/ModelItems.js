@@ -1,10 +1,13 @@
 import react from 'react'
 import axios from 'axios'
+import { app } from './../../base'
 
+const db = app.firestore()
 
 const ModelItem = (props) => {
 
-    // const { id } = props
+    const { img } = props
+    console.log('this is db from ModelItem',db.INTERNAL)
     
     const handleClick = () => {
         const model_id = props.id
@@ -12,11 +15,19 @@ const ModelItem = (props) => {
     }
     
     function deleteModel(){
-        const { id } = props
+        const { id,img } = props
+        deleteDBFile(img)
         axios.delete(`/api/project/delete/${id}`).then(res => {
-            console.log('this shouls be res data',res.data)
+            console.log('this should be res data',res.data)
         })
-    }  
+    } 
+    
+    const deleteDBFile = async (img) => {
+        var { img } = props
+        db.INTERNAL.delete(await img).then(() => {
+            console.log('file deleted')
+        }).catch(('uh oh'))
+    }
 
     return(
         <div className="props-display">

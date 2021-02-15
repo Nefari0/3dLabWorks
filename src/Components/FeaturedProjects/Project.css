@@ -1,21 +1,108 @@
 .project-container {
-    border-radius: 5%;
+    border-radius: 2%;
     margin: 10px;
     height: 350px;
     width: 280px;
     background-color: #fff;
+    text-align: left;
 }
 
 .project-text {
     color: #555;
+    margin: auto;
+    margin-top: 28px;
+    margin-left: 0px;
+    font-size: 15px;
 }
 
 .project-box-h4 {
     color: #555;
+    text-align: left;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 15px;
 }
 
 .img {
-    width: 90%;
+    width: 100%;
     height: 60%;
-    border-radius: 5%;
+    /* border-radius: 5%; */
+    /* opacity: .4; */
+    filter: brightness(200%);
+}
+
+.detail-container {
+    height: 60vh;
+    width: 60vw;
+    background-color: blue;
+}
+
+.big {
+    height: 6vh;
+    margin: auto;
+    margin-right: 10px;
+    margin-top: 25px;
+    color:  #6495ed;
+}
+
+.icon-big {
+    /* margin:auto; */
+    /* margin-top: 0%; */
+    margin-left: 25px;
+    /* margin-right: 100vw; */
+    /* float: left; */
+    height: 6vh;
+}
+
+.download-container {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+    justify-content: center;
+	align-items: center;
+	align-content: stretch;
+}
+.like-share {
+    height: 20%;
+    /* background-color: blue; */
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: flex-end;
+	align-content: stretch;
+    /* margin: 20px; */
+}
+
+.like-share-box {
+    height: 40px;
+    /* border-left:1px solid #555; */
+    /* opacity: 10%; */
+    margin: none;
+    margin-right:30px ;
+    padding-right: 20px;
+    /* background-color: blue */
+}
+
+.like-share-text {
+    /* margin: auto; */
+    color: #555;
+    font-size: 15px;
+    margin-left: 20px;
+    opacity: none;
+}
+
+.devide {
+    height: 0px;
+    border-bottom:1px solid #555;
+    opacity: 10%;
+    margin: 0px;
+}
+
+.horizontal-devide {
+    /* height: 150px;
+    width: 220px; */
+    border-right:10px #555;
+    border-right:10px rgb(11, 12, 11);
 }

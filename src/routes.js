@@ -8,6 +8,7 @@ import Explore from './Components/Explore/Explore'
 import About from './Components/About/About'
 import Sites from './Components/SiteLinks/Sites'
 import Register from './Components/Register/Register'
+import ProjectDetail from './Components/FeaturedProjects/ProjectDetail'
 
 
 export default (
@@ -19,5 +20,6 @@ export default (
         <Route path="/about" component={About} />
         <Route path="/sites" component={Sites} />
         <Route path="/register" component={Register} />
+        <Route path="/projectdetails" component={ProjectDetail} />
     </Switch>
 )

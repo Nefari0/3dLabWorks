@@ -16,7 +16,8 @@ class Explore extends Component {
     }
 
     componentDidMount(){
-        axios.get('/api/projects/all').then(res =>
+        // axios.get('/api/projects/all').then(res =>
+        axios.get('/api/orders/join').then(res =>
             this.setState({ ...this.state,data:res.data}))   
     }
     
