@@ -11,14 +11,32 @@ class Explore extends Component {
 
         this.state = {
             data:[],
-            names:[]  
+            names:[],
+            likes:[]
         }
     }
 
     componentDidMount(){
         // axios.get('/api/projects/all').then(res =>
-        axios.get('/api/orders/join').then(res =>
+        axios.get('/api/project/join').then(res =>
             this.setState({ ...this.state,data:res.data}))   
+    }
+
+    // componentDidMount(){
+    //     // axios.get('/api/projects/all').then(res =>
+    //     axios.get('/api/project/join').then(res => {
+    //         let live = res.data
+    //         axios.get('/api/like/count').then(res => {
+    //             let live2 = res.data
+    //             this.setState({...this.state,data:live,likes:live2})
+    //         })
+    //     })
+    // }
+
+    addlike(){
+        axios.post('/api/project/like').then(res => {
+            this.setState({...this.state,likes:res.data})
+        })
     }
     
     render(){

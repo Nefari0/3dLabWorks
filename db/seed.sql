@@ -41,6 +41,18 @@
 --   'https://s3.us-east-2.amazonaws.com/ari.my.leach.chose.peach.nova/17155399_10155003704484259_8760045685703876866_n.jpg'
 -- )
 
+--------model_likes---------
+-- CREATE TABLE model_likes (
+--   user_id INTEGER,
+--   FOREIGN KEY(user_id) REFERENCES d_user(user_id),
+--   model_id INTEGER,
+--   FOREIGN KEY(model_id) REFERENCES models(model_id)
+-- )
+
+-- INSERT INTO model_likes(user_id,model_id)
+-- VALUES (12,27)
+
+
 -- ----------icons -------------- --
 -- CREATE TABLE d_icons (
 --   icon_id SERIAL PRIMARY KEY,

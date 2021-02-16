@@ -1,0 +1,1 @@
+SELECT user_id FROM model_likes WHERE model_id = $1
