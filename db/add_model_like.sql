@@ -1,1 +1,1 @@
-UPDATE models SET likes = likes + $1 WHERE model_id = $2
+UPDATE models SET likes = $1 WHERE model_id = $2
