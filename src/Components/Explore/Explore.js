@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './Explore.css'
 import Project from '../../Components/FeaturedProjects/Project'
 // import { getProjects } from '../../ducks/projectsReducer'
+import { loginUser } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
 import axios from 'axios'
 
@@ -12,8 +13,10 @@ class Explore extends Component {
         this.state = {
             data:[],
             names:[],
-            likes:[]
+            likes:[],
+            userId:null
         }
+        this.addLike = this.addLike.bind(this)
     }
 
     componentDidMount(){
@@ -33,7 +36,7 @@ class Explore extends Component {
     //     })
     // }
 
-    addlike(){
+    addLike(){
         axios.post('/api/project/like').then(res => {
             this.setState({...this.state,likes:res.data})
         })
@@ -42,10 +45,12 @@ class Explore extends Component {
     render(){
 
         const { data } = this.state
-        
-        console.log('props for explorer',this.props)
+        const { isLoggedIn } = this.props.user
+        if(isLoggedIn === true){ let { id } = this.props.user}
+        // const { id } = this.props.user.user
+    
         const mappedData = data.map(element => {
-            return <Project data={element} key={element.model_id} />
+            return <Project data={element} key={element.model_id}/>
         })
 
         return(
@@ -56,8 +61,8 @@ class Explore extends Component {
     }
 }
 
-// function mapStateToProps(reduxState){
-    // return reduxState
-// }
-export default Explore
-// export default connect(mapStateToProps, { getProjects })(Explore)
+function mapStateToProps(reduxState){
+    return reduxState
+}
+// export default Explore
+export default connect(mapStateToProps, { loginUser })(Explore)

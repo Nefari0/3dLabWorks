@@ -14,9 +14,13 @@ const MobileLogin = (props) => {
             {console.log(props)}
         <p>username</p><input value={user_name} onChange={e => props.name(e.target.value)} className="input-element"/>
         <p>password</p><input value={password} onChange={e => props.pass(e.target.value)} className="input-element"/>
-        <button onClick={props.execute} className="non-link-button">login</button>
-        <Link to="/register" style={{ textDecoration: 'none' }}><button onClick={props.exit}>register</button></Link>
-        <Link to="/" style={{textDecoration: "none"}}><button onClick={props.logout} className="non-link-button">logout</button></Link>
+        <div className="input-element">
+            <button onClick={props.execute} className="non-link-button">login</button>
+            <Link to="/register" style={{ textDecoration: 'none' }}><button onClick={props.exit}>register</button></Link>
+            <Link to="/" style={{textDecoration: "none"}}><button onClick={props.logout} className="non-link-button">logout</button></Link>
+            <button onClick={props.exit}>cancel</button>
+        </div>
+
     </div>
     )
 }

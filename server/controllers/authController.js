@@ -37,7 +37,6 @@ module.exports = {
 
     login: async (req,res) => {
         const { user_name, password } = req.body;
-        console.log('this is user',user_name,'this is pass',password)
         const foundUser = await req.app.get('db').get_user([user_name]);
         const user = foundUser[0];
         if (!user) {
