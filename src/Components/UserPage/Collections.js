@@ -5,6 +5,7 @@ import UserProject from './UserProject'
 import {app} from '../../base'
 import ModelItem from './ModelItems'
 import { projectManagement } from 'firebase-admin'
+import { Link } from 'react-router-dom'
 
 const db = app.firestore()
 
@@ -36,7 +37,8 @@ class Collections extends Component {
 
     componentDidMount(){
         axios.get('/api/projects/all').then(res =>
-            this.setState({ ...this.state,items:res.data}))        
+            this.setState({ ...this.state,items:res.data})) 
+        // axios.get('/api/projects/:')       
     }
 
     setFileUrl(params){
@@ -94,7 +96,8 @@ class Collections extends Component {
             console.log('uploaded file')
         })
         this.setFileUrl(await fileRef.getDownloadURL())
-        console.log(this.state.fileUrl)
+        console.log('this is file storageRef',fileRef)
+        // console.log('this is file storageRef',storageRef.child())
         
         // axios.post('/api/project/post', {id,name,description,firebase_url,firebase_url01}).then(res => {
         //     this.setState({ ...this.state,newItem:res.data})

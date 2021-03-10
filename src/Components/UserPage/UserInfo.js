@@ -3,7 +3,6 @@ import './UserPage.css'
 
 const UserInfo = (props) => {
     const { user,name,email } = props.user.user
-    console.log(name,user)
 
     return(
         <div className="user-info">

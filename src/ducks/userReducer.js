@@ -8,6 +8,7 @@ const inititialState = {
 const LOGIN_USER = 'LOGIN_USER'
 const LOGOUT_USER = 'LOGOUT_USER'
 const REGISTER_USER = 'REGISTER_USER'
+const EDIT_USERINFO = 'EDIT_USERINFO'
 
 export function loginUser(user_name, password) {
     return {
@@ -29,6 +30,14 @@ export function registerUser(user_name, password, email, first_name, is_admin){
         payload: axios.post('/auth/register', { user_name, password, email, first_name, is_admin})
     }
 }
+
+// --- this block adds edit capabilities to user info --- //
+// export function editUserinfo(photo_url){
+//     return {
+//         type: EDIT_USERINFO,
+//         payload: axios.post('./')
+//     }
+// }
 
 export default function userReducer(state = inititialState, action) {
     switch (action.type) {

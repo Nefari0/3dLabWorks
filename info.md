@@ -55,3 +55,33 @@ service firebase.storage {
 ''
 
 yarn add firebase 
+
+<!-- ----non secure firebase rules------- -->
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if
+          request.time < timestamp.date(2021, 2, 24);
+    }
+  }
+}
+
+<!-- users -->
+user1 - madmax
+pass : zoozoo
+email : supercar@yahoo.com
+first name : mike
+user_id : 30
+
+user2 - jadude
+pass : s3cretw0rd
+email : digitalfire@msn.com
+first name : charles
+user_id : 34
+
+user3 - captr0ss
+pass : y3sf4n
+email : fromheck
+first name : benito
+user_id : 35

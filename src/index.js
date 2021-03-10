@@ -5,6 +5,9 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'
 import store from './ducks/store'
+import { HashRouter, BrowserRouter } from 'react-router-dom';
+const Router = process.env.NODE_ENV === 'development' ? HashRouter : BrowserRouter;
+
 // import * as firebase from 'firebase';
 
 // var Config = {
@@ -23,9 +26,11 @@ import store from './ducks/store'
 
 ReactDOM.render(
   <React.StrictMode>
+    <Router>
     <Provider store={store}>
     <App />
     </Provider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 );

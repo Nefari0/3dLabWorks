@@ -1,14 +1,30 @@
-import { useEffect, useState } from "react"
+import { Component } from 'react'
 import axios from 'axios'
 import './Project.css'
+import ProjectPhotos from './ProjectPhotos'
 
-const ProjectDetail = (props) => {
+class ProjectDetail extends Component {
 
-    return(
-        <div className="detail-container">
-            <h2>project detail</h2>
-        </div>
-    )
+    constructor(){
+        super();
+
+        this.state = {
+
+        }
+    }
+
+    render() {
+
+        return(
+            <div className="detail-container">
+                {/* <h2>project detail</h2> */}
+                <ProjectPhotos />
+                <section className="right-col"></section>
+                <section className="bottom-row"></section>
+            </div>
+        )
+    }
+
 }
 
 export default ProjectDetail
