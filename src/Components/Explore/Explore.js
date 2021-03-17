@@ -7,8 +7,8 @@ import { connect } from 'react-redux'
 import axios from 'axios'
 
 class Explore extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
         this.state = {
             data:[],
@@ -17,6 +17,7 @@ class Explore extends Component {
             userId:null
         }
         this.addLike = this.addLike.bind(this)
+        this.handleClick = this.handleClick.bind(this)
     }
 
     componentDidMount(){
@@ -36,21 +37,39 @@ class Explore extends Component {
     //     })
     // }
 
-    addLike(){
-        axios.post('/api/project/like').then(res => {
-            this.setState({...this.state,likes:res.data})
-        })
+    addLike(params){
+        const { id } = this.props.user.user
+        alert(params)
+        if(id != undefined){
+            axios.post('/api/projects/like', { id, params }).then(res => {
+                this.setState({
+                    ...this.state,
+                    likes:res.data
+                })
+            })
+        } else {
+            alert('please sign in')
+        }
+        // axios.post('/api/project/like').then(res => {
+        //     this.setState({...this.state,likes:res.data})
+        // })
+    }
+
+    handleClick(){
+        // alert('click from even handler')
+        this.addLike()
     }
     
     render(){
 
         const { data } = this.state
         const { isLoggedIn } = this.props.user
+        console.log(isLoggedIn)
         if(isLoggedIn === true){ let { id } = this.props.user}
         // const { id } = this.props.user.user
     
         const mappedData = data.map(element => {
-            return <Project data={element} key={element.model_id}/>
+            return <Project data={element} key={element.model_id} addLike={this.addLike} />
         })
 
         return(

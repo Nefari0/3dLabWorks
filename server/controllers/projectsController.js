@@ -6,7 +6,8 @@ module.exports = {
     },
 
     getUserProject: async (req,res) => {
-        const { user_id } = req.body
+        // const { user_id } = req.body
+        const { user_id } = req.params
         const projects = await req.app.get('db').get_user_projects([user_id]);
         return res.status(200).send(projects)
     },
@@ -32,6 +33,7 @@ module.exports = {
     },
 
     addLike: async (req,res) => {
+        console.log(req)
         const { user_id, model_id } = req.body
         const db = req.app.get('db')
         const result = await db.get_likes([model_id])
@@ -56,5 +58,10 @@ module.exports = {
     getLikeCount: async (req,res) => {
         const likes = await req.app.get('db').get_likes_count(); 
         return res.status(200).send(likes)
+    },
+
+    getFeatured: async (req,res) => {
+        const featured = await req.app.get('db').join_featured();
+        return res.status(200).send(featured)
     }
 }

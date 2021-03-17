@@ -60,3 +60,13 @@
 --   p_statement VARCHAR(500),
 --   icon_url VARCHAR(500)
 -- )
+
+-- ----------featured projects---- --
+-- CREATE TABLE featured_projects (
+--   model_id INTEGER,
+--   FOREIGN KEY(model_id) REFERENCES models(model_id)
+
+  -- INSERT INTO featured_projects(model_id)
+-- VALUES (
+  -- 1
+-- )

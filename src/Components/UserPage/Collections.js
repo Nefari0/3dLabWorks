@@ -5,7 +5,8 @@ import UserProject from './UserProject'
 import {app} from '../../base'
 import ModelItem from './ModelItems'
 import { projectManagement } from 'firebase-admin'
-import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { getProjects } from '../../ducks/projectsReducer'
 
 const db = app.firestore()
 
@@ -36,9 +37,11 @@ class Collections extends Component {
     }
 
     componentDidMount(){
-        axios.get('/api/projects/all').then(res =>
+        const { id } = this.props.user.user
+        axios.get(`/api/projects/${id}`).then(res =>
             this.setState({ ...this.state,items:res.data})) 
-        // axios.get('/api/projects/:')       
+        // this.props.getProjects()
+            
     }
 
     setFileUrl(params){
@@ -74,11 +77,11 @@ class Collections extends Component {
         const { file, fileUrl, imageFile, imageUrl } = this.state
         const image = true
         this.sendIntoSpace(file)
-        // if(imageFile != null){
-        //     this.sendImageIntoSpace(imageFile)
-        // } else {alert('please add a photo')}
+        if(imageFile != null){
+            this.sendImageIntoSpace(imageFile)
+        } else {alert('please add a photo')}
 
-        // this.addToDatabase(await fileUrl,imageUrl)
+        this.addToDatabase(await fileUrl,imageUrl)
         
     }
 
@@ -172,6 +175,7 @@ class Collections extends Component {
                     /> */}
                     
                     <button onClick={this.fileHandler}>submit</button>
+                    <button onClick={this.getAllProjects}>get redux</button>
 
                 </section>
                 <section className="items-view">
@@ -183,4 +187,10 @@ class Collections extends Component {
     }
 }
 
-export default Collections
+function mapStateToProps(reduxState){
+    return reduxState
+}
+
+export default connect(mapStateToProps, {getProjects})(Collections)
+
+// export default Collections

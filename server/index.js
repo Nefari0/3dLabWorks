@@ -67,12 +67,13 @@ app.post('api/users/update/:user_id')
 // projects endpoints
 
 app.get('/api/projects/all', projectsController.getAllProjects)
-// app.get('/api/projects/:user_id', projectsController.getUserProject)
+app.get('/api/projects/:user_id', projectsController.getUserProject) //GET request / params / http://localhost:4004/api/projects/12
 app.post('api/projects/user',projectsController.getUserProject)
 app.post('/api/project/post',projectsController.addProject)
 app.get('/api/project/join', projectsController.joinProject)
 app.post('/api/project/like', projectsController.addLike)
-app.get('/api/like/count', projectsController.getLikeCount)
+app.get('/api/like/:count', projectsController.getLikeCount)
+app.get('/api/projects/featured', projectsController.getFeatured)
 // app.post('/api/project/edit/', )
 app.delete('/api/project/delete/:model_id', projectsController.deleteProject)
 

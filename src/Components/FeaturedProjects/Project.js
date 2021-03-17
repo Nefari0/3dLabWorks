@@ -1,9 +1,29 @@
 import './Project.css'
 import React from 'react'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+// import { addLike } from '../../../server/controllers/projectsController'
 
 const Project = (props) => {
     const { category, img, firebase_url01, name, description, user_name, likes, model_id, photo_url } = props.data
+
+    const likeFunc = (params) => {
+        props.addLike(model_id)
+    }
+
+    // const liking = (params) => {
+       // check for existing like from user
+    //    axios.post('/api/project/like')
+       // if like from user === true: unlike{
+            // remove from like database
+            // remove from model database
+        // }
+
+        // else: like
+        // add to model database
+        // add to like database
+    // }
+
     // const { id } = props
     return(
         <div className='project-container'>
@@ -19,7 +39,7 @@ const Project = (props) => {
                 <div className="like-share">
                     <ul>
                     <li className="like-share-box"><p className="like-share-text">
-                    <svg className="small-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+                    <svg className="small-icon" onClick={likeFunc} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
                     

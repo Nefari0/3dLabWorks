@@ -24,7 +24,14 @@
      background-size: cover; 
      background-position: center bottom;
      background-attachment: fixed;
-     margin-bottom: 30px;
+     display: flex;
+     flex-direction: column;
+     flex-wrap: wrap;
+     justify-content: flex-start;
+     align-items: stretch;
+     align-content: flex-start;
+     padding-left: 15vw;
+     padding-top: 30px;
 }
 
 
@@ -61,6 +68,10 @@
 
 .light-background-text {
     color: #555;
+}
+
+.dark-background-text {
+    color: #fff;
 }
 
 .title-border {

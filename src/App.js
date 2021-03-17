@@ -10,6 +10,7 @@ import About from './Components/About/About'
 import routes from './routes'
 import { HashRouter } from 'react-router-dom'
 import Footer from './Components/Footer/Footer'
+import Explore  from './Components/Explore/Explore'
 
 function App() {
   
@@ -18,7 +19,6 @@ function App() {
     <div className="App">
         <Header/>
         {routes}
-        <Footer/>
         {/* <GroupPage/> */}
 
     </div>

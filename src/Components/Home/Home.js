@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import { loginUser } from '../../ducks/userReducer'
 // import FirebaseTest from '.././FirebaseTest'
 import { Icon } from './Icons/Icon'
+import Footer from '../Footer/Footer'
+import FeaturedProjects from '../FeaturedProjects/FeaturedProjects'
 
 class Home extends Component {
     constructor() {
@@ -45,9 +47,13 @@ class Home extends Component {
         // console.log(this.props) 
         return(
             <div>
-                <div className="hero"></div>
-                <h2 className="light-background-text" >IMAGINE IT - BUILD IT.</h2>
-                <div className="title-border"></div>
+                <div className="hero">
+                    <h2>IMAGINE IT - BUILD IT.</h2>
+        
+                </div>
+                <Footer/>
+                <FeaturedProjects/>
+                {/* <div className="title-border"></div>
                 <section className="intro-text">
                     <h3 className="icon-h3">Join millions  of 3d makers worldwide. Share your work in a community, and be a part of an innovative future</h3>
                 </section>
@@ -79,7 +85,7 @@ class Home extends Component {
                 <p className="icon-text" >Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</p>
 
                 </div>
-                </section>
+                </section> */}
             </div>
         )
     }
