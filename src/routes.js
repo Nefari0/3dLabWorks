@@ -9,6 +9,7 @@ import About from './Components/About/About'
 import Sites from './Components/SiteLinks/Sites'
 import Register from './Components/Register/Register'
 import ProjectDetail from './Components/FeaturedProjects/ProjectDetail'
+import SecurityTest from './Components/UserPage/SecurityTest'
 
 
 export default (
@@ -21,5 +22,6 @@ export default (
         <Route path="/sites" component={Sites} />
         <Route path="/register" component={Register} />
         <Route path="/projectdetails" component={ProjectDetail} />
+        <Route path="/securitytest" component={SecurityTest} />
     </Switch>
 )

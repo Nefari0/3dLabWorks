@@ -175,7 +175,6 @@ class Collections extends Component {
                     /> */}
                     
                     <button onClick={this.fileHandler}>submit</button>
-                    <button onClick={this.getAllProjects}>get redux</button>
 
                 </section>
                 <section className="items-view">

@@ -54,7 +54,8 @@ module.exports = {
             user: user.user_name,
              id: user.user_id,
              name: user.first_name,
-             photo: user.photo_url
+             photo: user.photo_url,
+             auth: isAuthenticated
          };
             return res.status(200).send(req.session.user)
     },

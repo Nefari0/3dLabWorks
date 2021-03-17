@@ -71,7 +71,7 @@ app.get('/api/projects/:user_id', projectsController.getUserProject) //GET reque
 app.post('api/projects/user',projectsController.getUserProject)
 app.post('/api/project/post',projectsController.addProject)
 app.get('/api/project/join', projectsController.joinProject)
-app.post('/api/project/like', projectsController.addLike)
+app.post('/api/project/like', projectsController.addLike) //Get request / req.body / http://localhost:4004/api/project/like / {"user_id":"12","model_id":"5"}
 app.get('/api/like/:count', projectsController.getLikeCount)
 app.get('/api/projects/featured', projectsController.getFeatured)
 // app.post('/api/project/edit/', )

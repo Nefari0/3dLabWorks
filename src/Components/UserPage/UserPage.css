@@ -12,6 +12,12 @@
 
 }
 
+.sec-test-container {
+    height: 50vh;
+    width: 50vh;
+    background-color: blue;
+}
+
 .userpage-h3 {
     color: #555;
 }
