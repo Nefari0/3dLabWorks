@@ -33,25 +33,28 @@ module.exports = {
     },
 
     addLike: async (req,res) => {
-        console.log(req)
-        const { user_id, model_id } = req.body
+        const { id, params } = req.body
+        // console.log('this is req.body',req.body,'this is from req.body')
+        console.log('this is from req.body',id,params,'this is from req.body')
         const db = req.app.get('db')
-        const result = await db.get_likes([model_id])
+        const result = await db.get_likes([params])
         const existingLike = result[0];
+        console.log('this is existingLike',existingLike)
         // const like = 1
 
         if (existingLike) {
             return res.status(409).send('Already liked by user')
         }
 
-        const getCount = await db.get_likes_count([model_id]);
+        const getCount = await db.get_likes_count([params]);
         const number = getCount[0].count
         const total = parseInt(number) + 1
+        console.log(typeof(total))
         console.log('these are all your likes',total)
-        await db.add_model_like([total,model_id])
-        await db.add_user_like([user_id,model_id])
+        await db.add_model_like([total,params])
+        await db.add_user_like([user_id,params])
         // return res.status(200).send(`${model_id} is likes by ${user_id}`)
-        return res.status(200).send(`${model_id} is likes by ${user_id}`)
+        return res.status(200).send(`${params} is likes by ${id}`)
 
     },  
 

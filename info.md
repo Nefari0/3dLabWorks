@@ -9,6 +9,10 @@ Users can find other talented users to for discussions with, and even colaborate
 
 Will use:
 
+three
+react-three-renderer
+react-three-renderer-objects
+
 redux to store user information and messages(15 points)
 
 user page, public forum, group page, asset explorer will all use routes
@@ -85,3 +89,5 @@ pass : y3sf4n
 email : fromheck
 first name : benito
 user_id : 35
+
+

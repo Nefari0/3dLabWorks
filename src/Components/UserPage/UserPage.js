@@ -1,4 +1,6 @@
 import axios from 'axios';
+import Home from '../Home/Home'
+import { Switch, Route } from 'react-router-dom'
 import Project from '../FeaturedProjects/Project'
 import { Component } from 'react'
 // import { Link } from 'react-router-dom';
@@ -8,6 +10,8 @@ import { getProjects } from '../../ducks/projectsReducer';
 import Collections from './Collections'
 import UserInfo from './UserInfo'
 import {app} from '../../base'
+import SecurityTest from './SecurityTest'
+import MobileLogin from '../MobileLogin/MobileLogin'
 
 const db = app.firestore()
 
@@ -25,6 +29,7 @@ class UserPage extends Component {
         this.handleCollections = this.handleCollections.bind(this)
         this.hideView = this.hideView.bind(this)
         this.resetView = this.resetView.bind(this)
+        this.pleaseLogin = this.pleaeLogin.bind(this)
     }
 
     componentDidMount(){
@@ -72,18 +77,24 @@ class UserPage extends Component {
         this.setState({isView:'isFriends'})
     }
 
+    pleaeLogin(){
+        alert('please log in')
+    }
+
     render(){
         const { showCollections,showUserInfo,items } = this.state
-        const { photo } = this.props.user.user
+        const { isLoggedIn } = this.props.user
+        const { photo,auth } = this.props.user.user
 
         // const mappedItems = items.map((el,i,all) => {
         //     return <Collections key={el.model_id} />
         // })
 
         // const { first_name } =this.props.user.user.user
-
     return(
         <div>
+            {/* {!isLoggedIn ? (<div className="blue-screen-of-death">{alert("please log i")}</div>) : ( */}
+            {!isLoggedIn ? (<Route path="/" component={Home}/>) : (
         <div className="user-page">
             <ul className="column1">
                 <li><div className="portrait">
@@ -117,7 +128,7 @@ class UserPage extends Component {
                 {showUserInfo && <UserInfo user={this.props.user}/>}
 
             </section>
-        </div>
+        </div>)}
         </div>
         )}
 }

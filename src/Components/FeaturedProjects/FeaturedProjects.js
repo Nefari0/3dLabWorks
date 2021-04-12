@@ -4,47 +4,63 @@ import data from '../../data.js'
 import Project from './Project'
 import { connect } from 'react-redux';
 // import { getProjects } from '../../ducks/projectsReducer'
-// import { updateCharacters } from '../../ducks/breakingBadReducer'
+import { updateCharacters } from '../../ducks/breakingBadReducer'
 import { getModels } from '../../ducks/modelsReducer'
 import axios from 'axios';
 
 class FeaturedProjects extends Component {
     constructor(props){
-        super();
+        super(props);
 
         this.state = {
-            featured: {}
+            featured: []
         }
+        this.getRedux = this.getRedux.bind(this)
     }
 
 
         componentDidMount(){
-            // axios.get('/api/projects/join').then(res => 
-            //     this.setState({...this.state,featured:res.data}))
+            // this.getRedux()
+
+            // this.props.getModels()
+            // const { data } = this.props.models.models
+            // console.log(data)
+            // this.setState({...this.state,featured:data})
+
+            // this code is original---
+            axios.get('api/project/join').then(res => 
+                this.setState({...this.state,featured:res.data}))
+
+            
 
         // this.props.getFeatured()
         // const { data } = this.props.models.models
         // this.setState({
         //     ...this.state,models:data
         // })
+    
+    }
 
-    
-    
+    getRedux = async () => {
+        this.props.getModels()
+        const { data } = this.props.models.models
+        return this.setState({...this.state,featured:data})
     }
 
     render(){
         const { data } = this.props.models.models
-
+        const { featured } = this.state
         // for (var key in data) {
         //     console.log(data[key])
         // }
 
-        // const mappedModels = data.map(element => {
-        //     return <Project data={element} key={element.model_id}/>
-        // })
+        const mappedModels = featured.map(element => {
+            return <Project data={element} key={element.model_id}/>
+        })
         return(
             <div className="featured-projects">
-
+                {/* <button onClick={this.handleReduxClick}>get redux</button> */}
+                {mappedModels}
             {/* <button onClick={this.props.getModels}>click</button> */}
                 
                 {/* {console.log(data[3])} */}
@@ -71,6 +87,6 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps, { getModels })(FeaturedProjects)
+export default connect(mapStateToProps, { getModels,updateCharacters })(FeaturedProjects)
 
 // export default FeaturedProjects

@@ -11,6 +11,7 @@ import routes from './routes'
 import { HashRouter } from 'react-router-dom'
 import Footer from './Components/Footer/Footer'
 import Explore  from './Components/Explore/Explore'
+// import Three from './Components/Three/Three'
 
 function App() {
   
@@ -18,6 +19,7 @@ function App() {
     <HashRouter>
     <div className="App">
         <Header/>
+        {/* <Three /> */}
         {routes}
         {/* <GroupPage/> */}
 

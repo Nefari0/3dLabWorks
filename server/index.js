@@ -8,7 +8,9 @@ const userController = require('./controllers/userController')
 const projectsController = require('./controllers/projectsController');
 const { projectManagement } = require('firebase-admin');
 const { addProject } = require('./controllers/projectsController');
-const path = require('path')
+// const baseBackend = require('./../src/baseBackend')
+const path = require('path');
+// const { default: reducer } = require('../src/ducks/modelsReducer'); // auto added
 // const cors = require('cors');
 
 //--------firedtore-------//
@@ -45,12 +47,6 @@ app.use(
         }),
     )
 
-//  // server endpoints //
-// app.use(express.static(__dirname + '/../build'))
-// app.get('*', (req,res) => {
-//      res.sendFile(path.join(__dirname + '../build/index.html'))
-//  })
-
 // thingiverse endpoints
 app.get('/users')
 
@@ -58,6 +54,7 @@ app.get('/users')
 app.post('/auth/register',authController.register)
 app.post('/auth/login',authController.login)
 app.get('/auth/logout',authController.logout)
+app.post('/auth/update',authController.update)
 
 // // user end points //
 
@@ -71,9 +68,9 @@ app.get('/api/projects/:user_id', projectsController.getUserProject) //GET reque
 app.post('api/projects/user',projectsController.getUserProject)
 app.post('/api/project/post',projectsController.addProject)
 app.get('/api/project/join', projectsController.joinProject)
-app.post('/api/project/like', projectsController.addLike) //Get request / req.body / http://localhost:4004/api/project/like / {"user_id":"12","model_id":"5"}
+app.post('/api/projects/like', projectsController.addLike) //Get request / req.body / http://localhost:4004/api/project/like / {"user_id":"12","model_id":"5"}
 app.get('/api/like/:count', projectsController.getLikeCount)
-app.get('/api/projects/featured', projectsController.getFeatured)
+app.get('/api/featured/join', projectsController.getFeatured)
 // app.post('/api/project/edit/', )
 app.delete('/api/project/delete/:model_id', projectsController.deleteProject)
 
@@ -87,7 +84,13 @@ app.delete('/api/project/delete/:model_id', projectsController.deleteProject)
 // app.post('/api/messages/send')
 // app.delete('/api/messages/delete')
 
-    
+// -----server ------
+// app.use(express.static(__dirname + '/../build'))
+
+// app.get('*', (req,res) => {
+//     res.sendFile(path.join(__dirname, '../build/index.html'))
+// })
+// -------------------
 
 massive({
     connectionString: CONNECTION_STRING,

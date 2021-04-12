@@ -25,7 +25,7 @@ class Collections extends Component {
             props:null
         }
         this.sendIntoSpace = this.sendIntoSpace.bind(this)
-        this.sendImageIntoSpace = this.sendImageIntoSpace.bind(this)
+        // this.sendImageIntoSpace = this.sendImageIntoSpace.bind(this)
         this.setFileUrl = this.setFileUrl.bind(this)
         this.handleFile = this.handleFile.bind(this)
         this.addFile = this.addFile.bind(this)
@@ -33,6 +33,9 @@ class Collections extends Component {
         this.handlePhoto = this.handlePhoto.bind(this)
         this.fileHandler = this.fileHandler.bind(this)
         this.addToDatabase = this.addToDatabase.bind(this)
+        this.fileHandlerRemove = this.fileHandlerRemove.bind(this)
+        this.removeFileFromSpace = this.removeFileFromSpace.bind(this)
+        this.removeFileFromSpace2 = this.removeFileFromSpace2.bind(this)
         // this.deleteModel = this.deleteModel.bind(this)
     }
 
@@ -77,29 +80,39 @@ class Collections extends Component {
         const { file, fileUrl, imageFile, imageUrl } = this.state
         const image = true
         this.sendIntoSpace(file)
-        if(imageFile != null){
-            this.sendImageIntoSpace(imageFile)
-        } else {alert('please add a photo')}
+        // if(imageFile != null){
+        //     this.sendImageIntoSpace(imageFile)
+        // } else {alert('please add a photo')}
 
-        this.addToDatabase(await fileUrl,imageUrl)
+        // this.addToDatabase(await fileUrl,imageUrl)
         
+    }
+
+    fileHandlerRemove = (params) => {
+        this.setState({file:null})
+    }
+
+    handleDelete = (params) => {
+        this.setState({imageFile:null})
     }
 
     sendIntoSpace = async (file) => {
         const { id } = this.props.username.user
-        const name = 'username'
+        // const name = 'username'
         const description = 'stuff'
         const firebase_url = 'firebase_url'
         const firebase_url01 = this.state.fileUrl
         // const file = e.target.files[0];
         const storageRef = app.storage().ref()
         const fileRef = storageRef.child(file.name)
-            console.log("send to space function",fileRef)
+            console.log("send to space function")
+            console.log("storageRef items",storageRef)
+            console.log("fileRef items",fileRef)
         fileRef.put(file).then(() => {
-            console.log('uploaded file')
+            console.log('uploaded file',file)
         })
         this.setFileUrl(await fileRef.getDownloadURL())
-        console.log('this is file storageRef',fileRef)
+        console.log('this is file fileRef',fileRef)
         // console.log('this is file storageRef',storageRef.child())
         
         // axios.post('/api/project/post', {id,name,description,firebase_url,firebase_url01}).then(res => {
@@ -107,26 +120,63 @@ class Collections extends Component {
         // })
     }
 
-    sendImageIntoSpace = async (file) => {
+    removeFileFromSpace = async (url,id) => {
+        // create reference
+        // var storage = db.storage();
+        // var storageRef = storage.ref();
+
+        // delete from firebase
+        if(url != null){
+            const storageRef = app.storage().refFromURL(url)
+            storageRef.delete().then(function deleted(params) {
+                console.log('image deleted')
+            }).catch(function (error) {
+                console.log('there was an error')
+            })
+        }
+        // delete from heroku db
+        axios.delete(`/api/project/delete/${id}`)
+
+
+        // const fileRef = storageRef.child(url)
+        // delete file
+
+        // fileRef.delete(url).then(() => {
+        //     console.log('file has been deleted')
+        // }).catch((error) => {
+        //     console.log(error)
+        // })
+
+    }
+
+    removeFileFromSpace2 = async (url) => {
+        const photoRef = app.storage.getReferenceFromUrl(url);
+
+    }
+
+    // sendImageIntoSpace = async (file) => {
+
+        // ----not used in original----
         // const { id } = this.props.username.user
         // const name = 'username'
         // const description = 'stuff'
         // const firebase_url = 'firebase_url'
         // const firebase_url01 = this.state.fileUrl
         // const file = e.target.files[0];
-        const storageRef = app.storage().ref()
-        const fileRef = storageRef.child(file.name)
-            console.log("send to space function")
-        fileRef.put(file).then(() => {
-            console.log('uploaded file')
-        })
-        this.setFileUrl(await fileRef.getDownloadURL())
-        console.log(this.state.fileUrl)
+        // const storageRef = app.storage().ref()
+        // const fileRef = storageRef.child(file.name)
+            // console.log("send to space function")
+        // fileRef.put(file).then(() => {
+            // console.log('uploaded file')
+        // })
+        // this.setFileUrl(await fileRef.getDownloadURL())
+        // console.log('this state fileUrl',this.state.fileUrl)
+        // console.log(fileRef)
         
         // axios.post('/api/project/post', {id,name,description,firebase_url,firebase_url}).then(res => {
         //     this.setState({ ...this.state,newItem:res.data})
         // })
-    }
+    // }
 
     addToDatabase = () => {
         console.log('this is from addToDatabase function')
@@ -151,10 +201,12 @@ class Collections extends Component {
 
     render(){
 
+        console.log('this is db',db)
+
         const { items } = this.state
 
         const mappedItems = items.map(element => {
-            return <ModelItem key={element.model_id} name={element.name} img={element.firebase_url01} id={element.model_id} delete={this.deleteModel}/>
+            return <ModelItem key={element.model_id} name={element.name} img={element.firebase_url01} id={element.model_id} delete={this.deleteModel} removeFileFromSpace={this.removeFileFromSpace} removeFileFromSpace2={this.removeFileFromSpace2}/>
         })
 
         return(
@@ -175,6 +227,7 @@ class Collections extends Component {
                     /> */}
                     
                     <button onClick={this.fileHandler}>submit</button>
+                    <button onClick={this.fileHandlerRemove}>remove file</button>
 
                 </section>
                 <section className="items-view">

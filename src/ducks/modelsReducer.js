@@ -3,7 +3,7 @@ import axios from "axios";
 const initialState = {
   models: [],
   featured:[],
-  // models: {}
+  models: {},
   isloading: false,
 };
 

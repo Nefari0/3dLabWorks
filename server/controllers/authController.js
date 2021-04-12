@@ -4,6 +4,9 @@ module.exports = {
     register: async (req,res) => {
         console.log(req.body)
         const {user_name, password, email, first_name, is_admin} = req.body;
+        if (is_admin != false){
+            return(alert('this operation cannot be completed because of a security breach'))
+        }
         const db = req.app.get('db')
         const result = await db.get_user([user_name])
         const existingUser = result[0];
@@ -63,5 +66,9 @@ module.exports = {
     logout: async (req,res) => {
         req.session.destroy();
         return res.sendStatus(200);
+    },
+
+    update: async (req,res) => {
+
     }
 };

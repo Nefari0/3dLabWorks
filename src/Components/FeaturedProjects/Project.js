@@ -6,6 +6,7 @@ import axios from 'axios'
 
 const Project = (props) => {
     const { category, img, firebase_url01, name, description, user_name, likes, model_id, photo_url } = props.data
+    const { handleClick } = props
 
     const likeFunc = (params) => {
         props.addLike(model_id)

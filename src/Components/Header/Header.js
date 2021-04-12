@@ -17,7 +17,8 @@ class Header extends Component{
             user_name:'',
             password:'',
             setPermission:true,
-            openLogin:true
+            openLogin:true,
+            isLoggedInState:null
         }
         this.handleLogging = this.handleLogging.bind(this)
         this.resetState = this.resetState.bind(this)
@@ -26,6 +27,7 @@ class Header extends Component{
         this.handlePassword = this.handlePassword.bind(this)
         this.handleUserName = this.handleUserName.bind(this)
         this.toggleLogin = this.toggleLogin.bind(this)
+        this.handleLogout = this.handleLogout.bind(this)
     }
 
     componentDidMount(){
@@ -38,7 +40,7 @@ class Header extends Component{
 
         if(user.isLoggedIn === true && setPermission===true){
             // this.setState({username:user.user.data.user,setPermission:false})
-            this.setState({username:user.user.user.user,setPermission:false})
+            this.setState({username:user.user.user.user,isLoggedInState:user.isLoggedIn,setPermission:false})
         }
         
     }
@@ -57,6 +59,7 @@ class Header extends Component{
     handleLogging(){
         const { user_name, password } = this.state
         const { loginUser,logoutUser } = this.props
+        this.toggleLogin()
         if(this.props.isLoggedIn === false){
             loginUser(user_name,password)
         } else {logoutUser()}
@@ -69,7 +72,13 @@ class Header extends Component{
     handleClick() {
         const { user_name, password } = this.state
         this.props.loginUser(user_name,password)
+        this.toggleLogin()
         this.setState({user_name:'',password:''})
+    }
+
+    handleLogout() {
+        this.toggleLogin()
+        this.props.logoutUser()
     }
 
     handleUserName(value){
@@ -88,7 +97,7 @@ class Header extends Component{
     
 
     render() {
-        const { username, isMenuOpen, user_name, password, openLogin } = this.state
+        const { username, isMenuOpen, user_name, password, openLogin, isLoggedInState } = this.state
         const { isLoggedIn } = this.props.user
     return(
         <div className='header-container'>
@@ -118,7 +127,7 @@ class Header extends Component{
                 {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='mobile-link-item'><a>my page</a></li></Link>)}
             </ul>
 
-            {!openLogin ? (<MobileLogin login={this.props.loginUser} logout={this.props.logoutUser} execute={this.handleClick} name={this.handleUserName} pass={this.handlePassword} hide={this.state.openLogin} exit={this.toggleLogin}/>):(<div className="blank-div"></div>)}
+            {!openLogin ? (<MobileLogin login={this.props.loginUser} logout={this.handleLogout} execute={this.handleClick} name={this.handleUserName} pass={this.handlePassword} hide={this.state.openLogin} exit={this.toggleLogin} isLoggedIn={this.props.user.isLoggedIn}/>):(<div className="blank-div"></div>)}
         </div>
     )}
 } 

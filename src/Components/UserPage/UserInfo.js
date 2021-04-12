@@ -8,7 +8,7 @@ const UserInfo = (props) => {
         <div className="user-info">
             <div className="user-info-h2"><p ></p><h2 className=" title-h">UserInfo</h2></div>
 
-            <div className="user-info-h2"><p className="user-info-p" >name:</p><h2 className="text-element">{name}</h2></div>
+            <div className="user-info-h2"><button>edit</button><p className="user-info-p" >name:</p><h2 className="text-element">{name}</h2></div>
 
             <div className="user-info-h2"><p className="user-info-p">email:</p><h2 className="text-element">{email}</h2></div>
             

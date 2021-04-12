@@ -20,6 +20,16 @@
     margin: 6px;
 }
 
+.buttons {
+    margin-left: 5px;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: flex-end;
+	align-content: stretch;
+}
+
 /* .non-link-button {
     border-radius: 2%;
     margin-top: 8px;

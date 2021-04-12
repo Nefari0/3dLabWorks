@@ -39,7 +39,9 @@ class Explore extends Component {
 
     addLike(params){
         const { id } = this.props.user.user
-        alert(params)
+        console.log('this is model_id params from explore addLike function',params)
+        console.log('this is user_id from explore addLike function',id)
+        // alert(params)
         if(id != undefined){
             axios.post('/api/projects/like', { id, params }).then(res => {
                 this.setState({
@@ -69,7 +71,7 @@ class Explore extends Component {
         // const { id } = this.props.user.user
     
         const mappedData = data.map(element => {
-            return <Project data={element} key={element.model_id} addLike={this.addLike} />
+            return <Project data={element} key={element.model_id} addLike={this.addLike} handleClick={this.handleClick} />
         })
 
         return(

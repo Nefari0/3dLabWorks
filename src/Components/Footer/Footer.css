@@ -2,5 +2,6 @@
 .footer-container {
     height: 40px;
     width: 100vw;
+    margin: auto;
     background-color: #6495ed;
 }

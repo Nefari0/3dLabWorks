@@ -10,8 +10,11 @@ const ModelItem = (props) => {
     console.log('this is db from ModelItem',db.INTERNAL)
     
     const handleClick = () => {
+        const { img,id } = props
         const model_id = props.id
-        props.delete(model_id)
+        // props.delete(model_id)
+        props.removeFileFromSpace(img,id)
+        // deleteDBFile()
     }
     
     // function deleteModel(){
@@ -30,8 +33,8 @@ const ModelItem = (props) => {
     //     })
     // } 
     
-    // const deleteDBFile = async (img) => {
-    //     var { img } = props
+    // const deleteDBFile = async () => {
+    //     const { img } = props
     //     console.log(img)
     //     db.INTERNAL.delete(await img).then(() => {
     //         console.log('file deleted')
@@ -42,6 +45,7 @@ const ModelItem = (props) => {
         <div className="props-display">
             <h2>{props.name}</h2>
             <img className="model-img" src={props.img}/>
+            <button onClick={handleClick}>delete</button>
             {/* <button onClick={deleteModel}>delete</button>  */}
             {/* <button onClick={deleteDBFile}>delete</button> */}
 
