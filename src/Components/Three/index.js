@@ -1,12 +1,13 @@
 import * as THREE from "three";
 
 import React, { Component } from "react";
+// import React3 from "react-three-renderer";
 import React3 from "react-three-renderer";
 import ObjectModel from 'react-three-renderer-objects';
 // import exampleModel from "../../assets/TechnicLEGO_CAR_1.obj";
 // import exampleTexture from "../../assets/TechnicLEGO_CAR_1.mtl";
-import knifeHandle from '../../../assets/models/handle.obj'
-import knifeHandlemtl from '../../../assets/models/handle.mtl'
+import knifeHandlemtl from '../../assets/handle.mtl'
+import knifeHandle from '../../assets/handle.obj'
 // import gear from '../../assets/big gear model.stl'
 
 class Three extends Component {
@@ -215,4 +216,4 @@ class Three extends Component {
   }
 }
 
-export default Three;
+// export default Three;

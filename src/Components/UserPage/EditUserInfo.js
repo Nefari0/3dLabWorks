@@ -16,21 +16,40 @@ class EditUserInfo extends Component {
             staticPhoto:null
 
         }
+        this.handlePhotoChange = this.handlePhotoChange.bind(this)
+        this.addPhoto = this.addPhoto.bind(this)
+        this.cancelAddPhoto = this.cancelAddPhoto.bind(this)
+        this.handleCancelClick = this.handleCancelClick.bind(this)
     }
 
-    handlePhotoChange = async (e) => {
-        const file = e.target
+    handlePhotoChange = (e) => {
+        const file = e.target.files[0];
+        this.addPhoto(file)
+    }
+
+    addPhoto(photoFile){
+        console.log(photoFile)
+        this.setState({staticPhoto:photoFile})
+    }
+
+    cancelAddPhoto(){
+        this.setState({staticPhoto:null})
+    }
+
+    handleCancelClick(){
+        this.cancelAddPhoto()
     }
 
     render(){
 
         const { email,name,user,photo } = this.props.user.user
         const { staticPhoto } = this.state
+        // var file = document.getElementById('fileItem').files[0]
 
         return(
             <div>
-                <section><h2 className="user-info-h2">This is edit user info</h2></section>
-                <section className="user-photo"><img className="photo-properties" src={staticPhoto} /> <input type ="file" className="change-photo" onChange={e => this.handlePhotoChange(e)}/> </section>
+                <section><h2 className="user-info-h2">edit user info</h2></section>
+                <section className="user-photo"><img className="photo-properties" src={staticPhoto} /> <input id="fileItem" type ="file" className="change-photo" onChange={e => this.handlePhotoChange(e)}/> <button onClick={this.handleCancelClick}>cancel</button> </section>
                 <section className="input-section">
                     <ul className="input-list">
                         <li className="list-item"><p className="list-text">username</p><input placeholder={user}/></li>
