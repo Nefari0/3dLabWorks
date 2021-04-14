@@ -11,7 +11,7 @@ import routes from './routes'
 import { HashRouter } from 'react-router-dom'
 import Footer from './Components/Footer/Footer'
 import Explore  from './Components/Explore/Explore'
-// import Three from './Components/Three/Three'
+// import Three from './Components/Three'
 
 function App() {
   

@@ -35,7 +35,7 @@ export function registerUser(user_name, password, email, first_name, is_admin){
 export function editUserinfo(photo_url){
     return {
         type: EDIT_USERINFO,
-        payload: axios.post('./')
+        payload: axios.get('api/users/all')
     }
 }
 

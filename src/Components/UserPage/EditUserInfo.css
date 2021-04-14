@@ -1,0 +1,46 @@
+.user-info-h2 {
+    color: #555;
+}
+
+.input-list {
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+}
+
+.list-item {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: baseline;
+	align-content: stretch;
+}
+
+.list-text {
+    color: #555;
+    margin-right: 10px;
+}
+
+.photo-properties {
+    height: 50px;
+    width: 50px;
+}
+
+.user-photo {
+    margin: 20px;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+}
+
+.change-photo {
+    margin-left: 20px;
+    color: #555;
+}
