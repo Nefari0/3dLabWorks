@@ -13,33 +13,33 @@ class FeaturedProjects extends Component {
         super(props);
 
         this.state = {
-            featured: []
+            featured: [],
+            reduxFeatured:[], //for testing modelsReducer
+            setPermission:true
         }
         this.getRedux = this.getRedux.bind(this)
     }
 
 
-        componentDidMount(){
+    componentDidMount(){
             // this.getRedux()
+        // this.getFromProps()
 
             // this.props.getModels()
             // const { data } = this.props.models.models
-            // console.log(data)
-            // this.setState({...this.state,featured:data})
+            // // console.log(data)
+            // this.setState({...this.state,reduxFeatured:data})
 
-            // this code is original---
+            // this code is the original and functional code to loading featrued projects---
             axios.get('api/project/join').then(res => 
-                this.setState({...this.state,featured:res.data}))
-
-            
-
-        // this.props.getFeatured()
-        // const { data } = this.props.models.models
-        // this.setState({
-        //     ...this.state,models:data
-        // })
-    
+               this.setState({...this.state,featured:res.data}))
     }
+
+    // getFromProps = async () => {
+    //     this.props.getModels()
+    //     const  { data } = this.props.models.models
+    //     this.setState({...this.state, reduxFeatured:data})
+    // }
 
     getRedux = async () => {
         this.props.getModels()
@@ -55,7 +55,7 @@ class FeaturedProjects extends Component {
         // }
 
         const mappedModels = featured.map(element => {
-            return <Project data={element} key={element.model_id}/>
+            return <Project data={element} key={element.user_id}/>
         })
         return(
             <div className="featured-projects">

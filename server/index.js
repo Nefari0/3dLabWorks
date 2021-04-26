@@ -54,17 +54,19 @@ app.get('/users')
 app.post('/auth/register',authController.register)
 app.post('/auth/login',authController.login)
 app.get('/auth/logout',authController.logout)
-app.post('/auth/update',authController.update)
+// app.post('/auth/update/:user_id',authController.update)
 
 // // user end points //
 
 app.get('/api/users/all', userController.getUsers)
-app.post('api/users/update/:user_id')
+app.get('/api/users/:user_id', userController.getUser) //Post request / body / http://localhost:4000/api/users/update/12 / { "photo_url":"new_url" }
+app.post('/api/users/update/:user_id', userController.updateUser)
 
 // projects endpoints
 
 app.get('/api/projects/all', projectsController.getAllProjects)
 app.get('/api/projects/:user_id', projectsController.getUserProject) //GET request / params / http://localhost:4004/api/projects/12
+app.get('/api/projects/id/:model_id', projectsController.getProjectById)
 app.post('api/projects/user',projectsController.getUserProject)
 app.post('/api/project/post',projectsController.addProject)
 app.get('/api/project/join', projectsController.joinProject)

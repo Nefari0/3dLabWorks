@@ -2,14 +2,21 @@ import './Project.css'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { connect, connent } from 'react-redux'
+import { getModels } from '../../ducks/modelsReducer'
 // import { addLike } from '../../../server/controllers/projectsController'
 
 const Project = (props) => {
-    const { category, img, firebase_url01, name, description, user_name, likes, model_id, photo_url } = props.data
+    const { category, img, firebase_url01, name, description, user_name, likes, model_id, photo_url, user_id } = props.data
     const { handleClick } = props
 
     const likeFunc = (params) => {
         props.addLike(model_id)
+    }
+
+    const gotClicked = () => {
+        // console.log('clicked happended in project component')
+        // props.data.getModels()
     }
 
     // const liking = (params) => {
@@ -27,9 +34,9 @@ const Project = (props) => {
 
     // const { id } = props
     return(
-        <div className='project-container'>
+        <div className='project-container' onClick={gotClicked}>
             <div className="photo-title-border"><img src={photo_url} className="user-photo"/><h4 className="project-box-h4">{name}</h4></div>
-            <Link to={"projectdetails"}><img className="img" src={firebase_url01}/></Link>
+            <Link to={`projectdetails/${model_id}`}><img className="img" src={firebase_url01}/></Link>
             <div className="download-container-top"></div>
             <div className="download-container">
                 <svg className="big" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -62,4 +69,10 @@ const Project = (props) => {
     )
 }
 
-export default Project
+function mapStateToProps(reduxState) {
+    return reduxState
+}
+
+export default connect(mapStateToProps, { getModels })(Project)
+
+// export default Project

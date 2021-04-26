@@ -12,6 +12,12 @@ module.exports = {
         return res.status(200).send(projects)
     },
 
+    getProjectById: async (req,res) => {
+        const { model_id } = req.params
+        const project = await req.app.get('db').get_project_by_id([model_id])
+        return res.status(200).send(project)
+    },
+
     joinProject: async (req,res) => {
         const orders = await req.app.get('db').join_user_project();
         return res.status(200).send(orders)

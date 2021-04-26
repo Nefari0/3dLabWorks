@@ -21,7 +21,7 @@ export default (
         <Route path="/about" component={About} />
         <Route path="/sites" component={Sites} />
         <Route path="/register" component={Register} />
-        <Route path="/projectdetails" component={ProjectDetail} />
+        <Route path="/projectdetails/:model_id" component={ProjectDetail} />
         <Route path="/securitytest" component={SecurityTest} />
     </Switch>
 )

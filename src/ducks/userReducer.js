@@ -9,6 +9,7 @@ const LOGIN_USER = 'LOGIN_USER'
 const LOGOUT_USER = 'LOGOUT_USER'
 const REGISTER_USER = 'REGISTER_USER'
 const EDIT_USERINFO = 'EDIT_USERINFO'
+const UPDATE_USER = 'UPDATE_USER'
 
 export function loginUser(user_name, password) {
     return {
@@ -39,6 +40,13 @@ export function editUserinfo(photo_url){
     }
 }
 
+export function updateUser(user_id){
+    return{
+        type: UPDATE_USER,
+        payload: axios.get(`/api/users/:${user_id}`)
+    }
+}
+
 export default function userReducer(state = inititialState, action) {
     switch (action.type) {
         case LOGIN_USER + '_FULFILLED':
@@ -56,7 +64,25 @@ export default function userReducer(state = inititialState, action) {
                 user: action.payload.data, isLoggedIn: true
             }
         case REGISTER_USER + '_REJECTED':
-            return { ...state, isLoggedIn: false}
+            return { 
+                ...state,
+                isLoggedIn: false
+            }
+        case UPDATE_USER + '_FULFILLED':
+            return {
+                ...state,
+                user:action.payload.data, isLoggedIn:true
+            }            
+        case UPDATE_USER + '_REJECTED':
+            return {
+                ...state,
+                isLoggedIn: false
+            }
+
+        // case GET_INFO + '_FULFULLED':
+        //     return {
+        //         cond
+        //     }
         default:
             return state;
     }

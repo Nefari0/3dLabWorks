@@ -48,7 +48,7 @@ class Collections extends Component {
     }
 
     setFileUrl(params){
-        const { imageFile } = this.state
+        // const { imageFile } = this.state
         console.log("set function")
         this.setState({ fileUrl:params})
         this.addToDatabase()        
@@ -98,7 +98,7 @@ class Collections extends Component {
 
     sendIntoSpace = async (file) => {
         const { id } = this.props.username.user
-        // const name = 'username'
+        const name = 'username'
         const description = 'stuff'
         const firebase_url = 'firebase_url'
         const firebase_url01 = this.state.fileUrl

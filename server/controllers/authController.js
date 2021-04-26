@@ -69,6 +69,11 @@ module.exports = {
     },
 
     update: async (req,res) => {
+        const db = req.app.get('db')
+        const { photo_url } = req.body
+        const { user_id } = req.params
+        const user = await db.update_user([photo_url,user_id])
+        return res.status(200).send(user)
 
     }
 };

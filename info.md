@@ -90,4 +90,24 @@ email : fromheck
 first name : benito
 user_id : 35
 
+<!-- sudo users with real profiles -->
 
+username: cr3ality
+password: passw0rd
+email: perterquill@gmail.com
+firstname: Peter
+
+usernam: mod3lmax
+password: s3cur1ty
+email: samual@yahoo.com
+firstname: Samual
+
+username: gm0de
+password: goodpass
+email: cheryl@msn.com
+firstname: Cheryl
+
+username: steammachine
+password: password
+email: fred@aol.com
+firstname: Fred
