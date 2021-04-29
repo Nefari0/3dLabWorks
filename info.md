@@ -73,7 +73,8 @@ service cloud.firestore {
 
 <!-- users -->
 user1 - madmax
-pass : zoozoo
+pass : zoozoo 
+newPass : zoozoo2
 email : supercar@yahoo.com
 first name : mike
 user_id : 30

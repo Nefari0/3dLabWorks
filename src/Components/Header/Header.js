@@ -102,6 +102,11 @@ class Header extends Component{
     return(
         <div className='header-container'>
 
+            <img 
+            src="https://firebasestorage.googleapis.com/v0/b/depot-7bb3e.appspot.com/o/logo.png?alt=media&token=3d889013-f357-4d66-adc2-286bdb367ce6"
+            className="cd-logo"
+            />
+
             <h3 className="header-h3">{isLoggedIn ? `welcome,${this.props.user.user.user}!` :'MadModels3d'}</h3>
 
             <ul className='link-list'>

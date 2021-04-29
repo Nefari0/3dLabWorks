@@ -37,13 +37,14 @@ class Explore extends Component {
     //     })
     // }
 
-    addLike(params){
+    addLike(model_id){
         const { id } = this.props.user.user
-        console.log('this is model_id params from explore addLike function',params)
+        // const { model_id } = this.props.data
+        console.log('this is model_id params from explore addLike function',model_id)
         console.log('this is user_id from explore addLike function',id)
         // alert(params)
         if(id != undefined){
-            axios.post('/api/projects/like', { id, params }).then(res => {
+            axios.post('/api/projects/like', { id, model_id }).then(res => {
                 this.setState({
                     ...this.state,
                     likes:res.data

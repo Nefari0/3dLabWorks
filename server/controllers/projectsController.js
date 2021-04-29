@@ -39,11 +39,14 @@ module.exports = {
     },
 
     addLike: async (req,res) => {
-        const { id, params } = req.body
+        const { user_id, model_id } = req.body
+        // const user_id = id
+        // const model_id = params
+        // console.log('user and model ids',id,params)
         // console.log('this is req.body',req.body,'this is from req.body')
-        console.log('this is from req.body',id,params,'this is from req.body')
+        console.log('this is from req.body',user_id,model_id,'this is from req.body')
         const db = req.app.get('db')
-        const result = await db.get_likes([params])
+        const result = await db.get_likes([user_id])
         const existingLike = result[0];
         console.log('this is existingLike',existingLike)
         // const like = 1
@@ -52,15 +55,17 @@ module.exports = {
             return res.status(409).send('Already liked by user')
         }
 
-        const getCount = await db.get_likes_count([params]);
-        const number = getCount[0].count
-        const total = parseInt(number) + 1
-        console.log(typeof(total))
-        console.log('these are all your likes',total)
-        await db.add_model_like([total,params])
-        await db.add_user_like([user_id,params])
+        // const getCount = await db.get_likes_count([model_id]);
+        // const number = getCount[0].count
+        // const total = parseInt(number) + 1
+        // console.log('type if',typeof(getCount))
+        // console.log('these are all your likes',getCount)
+
+        // await db.add_model_like([total,model_id])
+        await db.add_model_like([1,model_id])
+        await db.add_user_like([user_id,model_id])
         // return res.status(200).send(`${model_id} is likes by ${user_id}`)
-        return res.status(200).send(`${params} is likes by ${id}`)
+        return res.status(200).send(`${model_id} is likes by ${user_id}`)
 
     },  
 

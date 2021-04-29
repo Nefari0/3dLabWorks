@@ -38,6 +38,32 @@ module.exports = {
         return res.status(201).send(req.session.user).catch(err => console.log(err))
     },
 
+    changePassword: async (req,res) => {
+        const { user_name, oldPassword, newPassword1, newPassword2 } = req.body;
+        const db = req.app.get('db')
+        const foundUser = await req.app.get('db').get_user([user_name]);
+        const user = foundUser[0];
+        if (!user) {
+            return res.status(401).send("user not found")
+        }
+        const isAuthenticated = bcrypt.compareSync(oldPassword, user.hash);
+        console.log('isAuthenticated', isAuthenticated)
+        if (!isAuthenticated) {
+            return res.status(401).send('incorrect password')
+        }
+        if (isAuthenticated === true && newPassword1 === newPassword2) {
+            
+            const salt = bcrypt.genSaltSync(10);
+            const hash = bcrypt.hashSync(newPassword1,salt);
+            await db.update_user_password([hash,user_name])
+            console.log('password has been changed')
+            
+        }
+
+        return res.status(202).send(user).catch
+
+    },
+
     login: async (req,res) => {
         const { user_name, password } = req.body;
         const foundUser = await req.app.get('db').get_user([user_name]);

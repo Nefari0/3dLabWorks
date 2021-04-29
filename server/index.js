@@ -52,6 +52,7 @@ app.get('/users')
 
 // // auth end points //
 app.post('/auth/register',authController.register)
+app.post('/auth/password', authController.changePassword)
 app.post('/auth/login',authController.login)
 app.get('/auth/logout',authController.logout)
 // app.post('/auth/update/:user_id',authController.update)
@@ -65,9 +66,9 @@ app.post('/api/users/update/:user_id', userController.updateUser)
 // projects endpoints
 
 app.get('/api/projects/all', projectsController.getAllProjects)
-app.get('/api/projects/:user_id', projectsController.getUserProject) //GET request / params / http://localhost:4004/api/projects/12
-app.get('/api/projects/id/:model_id', projectsController.getProjectById)
-app.post('api/projects/user',projectsController.getUserProject)
+app.get('/api/projects/:user_id', projectsController.getUserProject) //GET request / params / http://localhost:4004/api/projects/12 --- this code works
+app.get('/api/projects/id/:model_id', projectsController.getProjectById) // GET request / params / http://localhost:4000/api/projects/id/4 --- this code works
+// app.post('api/projects/user',projectsController.getUserProject)
 app.post('/api/project/post',projectsController.addProject)
 app.get('/api/project/join', projectsController.joinProject)
 app.post('/api/projects/like', projectsController.addLike) //Get request / req.body / http://localhost:4004/api/project/like / {"user_id":"12","model_id":"5"}
