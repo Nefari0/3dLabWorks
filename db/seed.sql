@@ -43,6 +43,7 @@
 
 --------model_likes---------
 -- CREATE TABLE model_likes (
+--   like_id SERIAL PRIMARY KEY,
 --   user_id INTEGER,
 --   FOREIGN KEY(user_id) REFERENCES d_user(user_id),
 --   model_id INTEGER,
