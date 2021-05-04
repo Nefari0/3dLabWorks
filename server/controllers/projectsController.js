@@ -24,9 +24,9 @@ module.exports = {
     },
 
     addProject: async (req,res) => {
-        const { id, name, description, firebase_url, firebase_url01 } = req.body
+        const { id, name, description, firebase_url, firebase_url01, firebase_url02 } = req.body
         const db = req.app.get('db')
-        const newProject = await db.add_new_project([id,name,description,firebase_url,firebase_url01])
+        const newProject = await db.add_new_project([id,name,description,firebase_url,firebase_url01, firebase_url02, 0])
         return res.status(200).send(newProject)
     },
 
@@ -44,22 +44,25 @@ module.exports = {
         const model_id = params_id
         // console.log('user and model ids',id,params)
         // console.log('this is req.body',req.body,'this is from req.body')
-        console.log('this is from req.body',user_id,model_id,'this is from req.body')
+        console.log('this is from req.body',currentId,model_id)
+
         const db = req.app.get('db')
 
 
         // get likes from current model
         const result = await db.get_likes([model_id])
+        // console.log('this is result',result)
         
 
         // const existingLike = result[0]; //probably not going to use
 
         // find like for current model from current user/check for existing like
         // const index = result.findIndex((element) => element.user_id === +currentId) //pending delete
-        const index = result.find(element => element.user_id === currentId)
-        const { like_id } = index
-        console.log('this is result',result)    // pending delete
-        console.log('this is like_id',like_id)    // pending delete
+        const index = result.find(element => element.user_id === +currentId)
+        
+        console.log('this is index',index)    // pending delete
+        // const { like_id } = index
+        // console.log('this is like_id',like_id)    // pending delete
         // console.log('this is existingLike',existingLike)  // pending delete
 
         // check if current user has already liked current model
@@ -73,9 +76,10 @@ module.exports = {
         // else:
         //  add_model_like
         // if (index) {
-            if (like_id) {
+            if (index != undefined) {
+            const { like_id } = index
             await db.remove_model_like([1,model_id])
-            // await db.remove_user_like([like_id])
+            await db.remove_user_like([like_id])
             // await db.
             return res.status(409).send('Already liked by user')
         } else {

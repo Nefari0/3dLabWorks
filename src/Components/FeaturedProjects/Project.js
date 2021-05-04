@@ -12,9 +12,9 @@ const Project = (props) => {
 
     const [isLiked, setIsLiked] = useState([])
 
-    useEffect(() => {
-        setIsLiked(likes)
-    },[])
+    // useEffect(() => {
+    //     setIsLiked(likes)
+    // },[])
 
     const likeFunc = (params) => {
         props.addLike(model_id)

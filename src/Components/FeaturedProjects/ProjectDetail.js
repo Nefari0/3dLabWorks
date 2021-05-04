@@ -175,6 +175,7 @@ class ProjectDetail extends Component {
 
             
                 {/* <section className="bottom-row"></section> */}
+                {/* <div className="comment-box"></div> */}
             </div>
         )
     }
