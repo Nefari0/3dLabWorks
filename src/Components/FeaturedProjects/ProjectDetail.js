@@ -12,9 +12,11 @@ class ProjectDetail extends Component {
         this.state = {
             info:[],
             userInfo:[],
+            viewFiles:true,
             viewComments:false,
-            viewDetails:true,
+            viewDetails:false,
         }
+        this.changeView = this.changeView.bind(this)
     }
 
     componentDidMount(){
@@ -89,16 +91,52 @@ class ProjectDetail extends Component {
 
     }
 
-    changeView(params) {
+    resetView() {
+        this.setState({
+            viewFiles:true,
+            viewComments:false,
+            
+        })
+    }
 
+    changeView(params) {
+        // this.resetView()
+        switch (params) {
+            case 'viewComments':
+                if( this.state.viewComments === false){
+                this.setState({ 
+                    // viewComments : !this.state.viewComments
+                    viewComments : true,
+                    viewDetails : false,
+                    viewFiles : false
+
+                })
+                }
+                break;
+            case 'viewDetails':
+                if ( this.state.viewDetails === true){
+                    this.setState({ viewDetails : !this.state.viewDetails})
+                }
+                break;
+            case 'viewFiles':
+                if ( this.state.viewFiles === false){
+                    this.setState({
+                        // viewFiles : !this.state.viewFiles
+                        viewFiles : true,
+                        viewComments : false,
+                        viewDetails : false
+                    })
+                }
+            default:
+                break;
+        }
     }
 
 
     render() {
 
         const { firebase_url01 } = this.state.info
-        const { info } = this.state
-        const { userInfo } = this.state
+        const { info, userInfo, viewComments, viewDetails,viewFiles } = this.state
         console.log(userInfo)
 
         const mappedPhoto = info.map(element => {
@@ -113,7 +151,7 @@ class ProjectDetail extends Component {
                     {/* <div> */}
                     {mappedPhoto}
                     <section className="right">
-                        <div className="detail-box small down-load"><p className="dark-text down-load-text">Download All Files</p></div>
+                        <div className={`detail-box small down-load ${viewFiles ? true : 'detail-box small down-load-selected'}`} onClick={() => this.changeView('viewFiles')}><p className={`down-load-text ${viewFiles ? true : 'down-load-text-selected'}`}>Download Files</p></div>
                         <div className="detail-box small">
                         <svg 
                             className="details-icon-big" 
@@ -130,9 +168,11 @@ class ProjectDetail extends Component {
                         </svg>
                             <p className="dark-text">Like</p></div>
 
-                        <div className="detail-box small">
+                            
+
+                            <div className={`detail-box small ${!viewComments ? true : 'detail-box small selected'}`} onClick={() => this.changeView('viewComments')}>
                         <svg 
-                            className="details-icon-big" 
+                            className={`details-icon-big ${!viewComments ? true : 'detail-icons-big selected-icon'}`} 
                             xmlns="http://www.w3.org/2000/svg" 
                             fill="none" viewBox="0 0 24 24"
                             stroke="currentColor" >
@@ -144,7 +184,22 @@ class ProjectDetail extends Component {
                                 d="M19,2H5A3,3,0,0,0,2,5V15a3,3,0,0,0,3,3H16.59l3.7,3.71A1,1,0,0,0,21,22a.84.84,0,0,0,.38-.08A1,1,0,0,0,22,21V5A3,3,0,0,0,19,2Zm1,16.59-2.29-2.3A1,1,0,0,0,17,16H5a1,1,0,0,1-1-1V5A1,1,0,0,1,5,4H19a1,1,0,0,1,1,1Z" 
                             />
                         </svg>
-                            <p className="dark-text">Comment</p></div>
+
+                            <p className={`dark-text ${!viewComments ? true : 'light-text'}`}>Comment</p></div>
+
+                        {/* --- this is my attemt at writing my own icon --- */}
+                        {/* <div className="detail-box small">
+                        <svg className="details-icon-big">
+                            
+                            <g>
+                                <g>
+                                    <path/>
+                                    <path/>
+                                    <circle cx="62.7" cy="36.5" r="6.6"/>
+                                </g>
+                            </g>
+                        </svg>
+                            <p className="dark-text">Comment</p></div> */}
 
                         <div className="detail-box small">
                         <svg 
