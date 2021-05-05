@@ -2,6 +2,7 @@ import { Component } from 'react'
 import axios from 'axios'
 import './Project.css'
 import ProjectPhotos from './ProjectPhotos'
+import Comments from './Comments/Comments'
 // import logo from './../../assets/logo.png'
 
 class ProjectDetail extends Component {
@@ -12,6 +13,7 @@ class ProjectDetail extends Component {
         this.state = {
             info:[],
             userInfo:[],
+            comments:[],
             viewFiles:true,
             viewComments:false,
             viewDetails:false,
@@ -91,6 +93,10 @@ class ProjectDetail extends Component {
 
     }
 
+    getComments() {
+        axios.get('/api/comments/all')
+    }
+
     resetView() {
         this.setState({
             viewFiles:true,
@@ -136,7 +142,7 @@ class ProjectDetail extends Component {
     render() {
 
         const { firebase_url01 } = this.state.info
-        const { info, userInfo, viewComments, viewDetails,viewFiles } = this.state
+        const { info, userInfo, viewComments, viewDetails, viewFiles } = this.state
         console.log(userInfo)
 
         const mappedPhoto = info.map(element => {
@@ -239,7 +245,8 @@ class ProjectDetail extends Component {
                     {/* <section className="bottom-row"></section> */}
                     {/* <div className="comment-box"></div> */}
                 </div>
-                <div className="comment-box"><h3 className="dark-text">comments</h3></div>
+                {viewComments && <Comments comments={this.state.comments}/>}
+                {/* <div className="comment-box"><h3 className="dark-text">comments</h3></div> */}
             </div>
         )
     }

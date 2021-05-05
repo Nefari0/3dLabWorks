@@ -76,6 +76,8 @@ app.get('/api/like/:count', projectsController.getLikeCount)
 app.get('/api/featured/join', projectsController.getFeatured)
 // app.post('/api/project/edit/', )
 app.delete('/api/project/delete/:model_id', projectsController.deleteProject)
+app.get('/api/comments/all', projectsController.getComments)
+app.get('/api/comments/id/:model_id', projectsController.getModelComments)
 
 // // storage access end points //
 // app.get('/api/assets/getall')

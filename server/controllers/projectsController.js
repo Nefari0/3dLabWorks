@@ -107,5 +107,16 @@ module.exports = {
     getFeatured: async (req,res) => {
         const featured = await req.app.get('db').join_featured();
         return res.status(200).send(featured)
+    },
+
+    getComments: async (req,res) => {
+        const comments = await req.app.get('db').get_comments();
+        return res.status(200).send(comments)
+    },
+
+    getModelComments: async (req,res) => {
+        const { model_id } = req.params
+        const comments = await req.app.get('db').get_project_comments([model_id]);
+        return res.status(200).send(comments)
     }
 }

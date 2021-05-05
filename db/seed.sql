@@ -53,6 +53,22 @@
 -- INSERT INTO model_likes(user_id,model_id)
 -- VALUES (12,27)
 
+-- ------ comments ------- --
+-- CREATE TABLE comments (
+--   comment_id SERIAL PRIMARY KEY,
+--   user_id INTEGER,
+--   FOREIGN KEY(user_id) REFERENCES d_user(user_id),
+--   model_id INTEGER,
+--   FOREIGN KEY(model_id) REFERENCES models(model_id),
+--   text VARCHAR(500)
+-- );
+
+-- INSERT INTO comments(user_id,model_id,text)
+-- VALUES (12,
+--     5,
+--     'this is text for testing comments on model_id = 5'
+--     )
+
 
 -- ----------icons -------------- --
 -- CREATE TABLE d_icons (

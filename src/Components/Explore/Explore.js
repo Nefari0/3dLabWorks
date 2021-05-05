@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Explore.css'
-import Project from '../../Components/FeaturedProjects/Project'
+import Project from '../FeaturedProjects/Project'
 // import { getProjects } from '../../ducks/projectsReducer'
 import { loginUser } from '../../ducks/userReducer'
 

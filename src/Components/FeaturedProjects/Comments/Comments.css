@@ -1,0 +1,11 @@
+.comment-box {
+    margin: auto;
+    margin-top: 2px;
+    height: 300px;
+    width: 660px;
+    background-color: #fff;
+    /* box-shadow: .1px .1px#555; */
+    border-radius: .1%;
+    
+    /* background-color: orangered; */
+}
