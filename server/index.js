@@ -1,5 +1,9 @@
 
-require('dotenv').config();
+// --- from hosting video --- //
+require('dotenv').config({ path: __dirname + '/../.env'}); // for production?
+const path = require('path')
+// require('dotenv').config(); // original
+
 const express = require('express')
 const session = require('express-session')
 const massive = require('massive')
@@ -9,7 +13,7 @@ const projectsController = require('./controllers/projectsController');
 const { projectManagement } = require('firebase-admin');
 const { addProject } = require('./controllers/projectsController');
 // const baseBackend = require('./../src/baseBackend')
-const path = require('path');
+// const path = require('path');
 // const { default: reducer } = require('../src/ducks/modelsReducer'); // auto added
 // const cors = require('cors');
 
@@ -90,11 +94,11 @@ app.get('/api/comments/id/:model_id', projectsController.getModelComments)
 // app.delete('/api/messages/delete')
 
 // -----server ------
-// app.use(express.static(__dirname + '/../build'))
+app.use(express.static(__dirname + '/../build'))
 
-// app.get('*', (req,res) => {
-//     res.sendFile(path.join(__dirname, '../build/index.html'))
-// })
+app.get('*', (req,res) => {
+    res.sendFile(path.join(__dirname, '../build/index.html'))
+})
 // -------------------
 
 massive({

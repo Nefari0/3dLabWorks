@@ -26,6 +26,9 @@ class ProjectDetail extends Component {
         // ---get project info by model_id --- //
         this.getDetails().then((val) => console.log(val)) // original/working function
 
+        // ---get project comments by model_id --- //
+        this.getComments()
+
         // ---test code below ---//
 
         // const { model_id } = this.props.match.params
@@ -93,8 +96,13 @@ class ProjectDetail extends Component {
 
     }
 
-    getComments() {
-        axios.get('/api/comments/all')
+    async getComments() {
+        const { model_id } = this.props.match.params
+        axios
+        .get(`/api/comments/id/${model_id}`)
+        .then((res) => {
+            this.setState({ comments : res.data})
+        })
     }
 
     resetView() {

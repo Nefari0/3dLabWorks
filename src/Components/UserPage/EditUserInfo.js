@@ -16,8 +16,8 @@ class EditUserInfo extends Component {
             user_name:'',
             email:'',
             first_name:'',
-            photoUrl:null,
-            staticPhoto:null,
+            photoUrl:null,  // this is the url pulled from database used to access photo
+            staticPhoto:null, //this is the photo in browser pending database entry
             file:null,
             user:{}
 
@@ -31,6 +31,9 @@ class EditUserInfo extends Component {
         this.setFileUrl = this.setFileUrl.bind(this)
         this.handleLaunchPic = this.handleLaunchPic.bind(this)
         this.addToDatabase = this.addToDatabase.bind(this)
+        this.handleFirstName = this.handleFile.bind(this)
+        this.handleLastName = this.handleLastName.bind(this)
+        this.handleEmail = this.handleEmail.bind(this)
 
         // temp functions for testing//
         this.handleInfoClick = this.handleInfoClick.bind(this)
@@ -70,7 +73,12 @@ class EditUserInfo extends Component {
 
     handleLaunchPic(){
         const { staticPhoto } = this.state
-        this.launchPic(staticPhoto)
+        // adds/updates profile photo
+        if ( staticPhoto != null){this.launchPic(staticPhoto)} else {alert('please add photo')}
+        // adds/updates firstname
+
+
+        
     }
 
     setFileUrl(pURL){
@@ -115,6 +123,24 @@ class EditUserInfo extends Component {
         this.setState({file:URL.createObjectURL(event.target.files[0])})
     }
 
+    // ---- edit names and email address ---- //
+    handleFirstName(val){
+        this.setState({first_name : val})
+    }
+
+    handleLastName(val){
+        this.setState({last_name : val})
+    }
+
+    handleEmail(val){
+        this.setState({email : val})
+    }
+
+    handUserName(val){
+        // this.setState({usae})
+    }
+
+
     // ---temp functions for testing--//
     handleInfoClick(){
         this.giveMeInfo()
@@ -138,8 +164,8 @@ class EditUserInfo extends Component {
                 <section className="user-photo"><img className="photo-properties" src={file} /> <input id="fileItem" type ="file" className="change-photo" onChange={e => this.handlePhotoChange(e)}/> <button onClick={this.handleCancelClick}>cancel</button> </section>
                 <section className="input-section">
                     <ul className="input-list">
-                        <li className="list-item"><p className="list-text">username</p><input placeholder={user}/></li>
-                        <li className="list-item"><p className="list-text">first name</p><input placeholder={name}/></li>
+                        <li className="list-item"><p className="list-text">username</p><input placeholder={user} onChange={e => this.handUserName(e.target.value)}/></li>
+                        <li className="list-item"><p className="list-text">first name</p><input placeholder={name} onChange={e => this.handleFirstName(e.target.value)}/></li>
                         <li className="list-item"><p className="list-text">last name</p><input placeholder="last name"/></li>
                         <li className="list-item"><p className="list-text">email address</p><input placeholder={email}/></li>
                         <li className="list-item"><button onClick={this.handleLaunchPic} className="li-button">submit</button><button className="li-button" onClick={this.props.edit}>cancel</button></li>

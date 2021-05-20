@@ -72,6 +72,11 @@
 }
 
 .download-container {
+
+    /* border-top:1px solid #555;
+    opacity: 10%; */
+    /* margin: none; */
+
     display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
@@ -106,6 +111,7 @@
     margin: none;
     margin-right:30px ;
     padding-right: 20px;
+
     /* background-color: blue */
 }
 
@@ -115,6 +121,7 @@
     font-size: 15px;
     margin-left: 20px;
     opacity: none;
+    /* border-bottom: 2px solid yellow; */
 }
 
 .devide {

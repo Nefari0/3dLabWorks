@@ -94,21 +94,25 @@ user_id : 35
 <!-- sudo users with real profiles -->
 
 username: cr3ality
+user_id = 68
 password: passw0rd
 email: perterquill@gmail.com
 firstname: Peter
 
 usernam: mod3lmax
+user_id = 69
 password: s3cur1ty
 email: samual@yahoo.com
 firstname: Samual
 
 username: gm0de
+user_id = 70
 password: goodpass
 email: cheryl@msn.com
 firstname: Cheryl
 
 username: steammachine
+user_id: 71
 password: password
 email: fred@aol.com
 firstname: Fred

@@ -12,6 +12,7 @@ const ModelItem = (props) => {
     const handleClick = () => {
         const { img,id } = props
         const model_id = props.id
+        alert('are you sure you want to delete this file?')
         // props.delete(model_id)
         props.removeFileFromSpace(img,id)
         // deleteDBFile()

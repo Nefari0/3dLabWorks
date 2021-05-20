@@ -55,7 +55,8 @@ class FeaturedProjects extends Component {
         // }
 
         const mappedModels = featured.map(element => {
-            return <Project data={element} key={element.user_id}/>
+            // return <Project data={element} key={element.user_id}/> // original
+            return <Project data={element} key={element.model_id}/>
         })
         return(
             <div className="featured-projects">
