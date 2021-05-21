@@ -34,10 +34,12 @@ class EditUserInfo extends Component {
         this.handleFirstName = this.handleFile.bind(this)
         this.handleLastName = this.handleLastName.bind(this)
         this.handleEmail = this.handleEmail.bind(this)
+        this.deleteFromFirebase = this.deleteFromFirebase.bind(this)
 
         // temp functions for testing//
         this.handleInfoClick = this.handleInfoClick.bind(this)
         this.giveMeInfo = this.giveMeInfo.bind(this)
+        this.addToDeleted = this.addToDeleted.bind(this)
     }
 
     componentDidMount(){
@@ -73,12 +75,23 @@ class EditUserInfo extends Component {
 
     handleLaunchPic(){
         const { staticPhoto } = this.state
+        const { email,name,user,photo,id } = this.props.user.user
         // adds/updates profile photo
         if ( staticPhoto != null){this.launchPic(staticPhoto)} else {alert('please add photo')}
+
+        if ( photo != null ) {
+            this.addToDeleted(photo,id)
+            this.deleteFromFirebase(photo)
+        } // adds current photo to db that tracks deleted items in firebase
         // adds/updates firstname
 
 
         
+    }
+
+    addToDeleted(photo,id){
+        const info = 'this is a profile picture that has been deleted'
+        axios.post(`/api/firedata/`,{ id,photo,info })
     }
 
     setFileUrl(pURL){
@@ -168,6 +181,7 @@ class EditUserInfo extends Component {
                         <li className="list-item"><p className="list-text">first name</p><input placeholder={name} onChange={e => this.handleFirstName(e.target.value)}/></li>
                         <li className="list-item"><p className="list-text">last name</p><input placeholder="last name"/></li>
                         <li className="list-item"><p className="list-text">email address</p><input placeholder={email}/></li>
+                        <li className="user-photo"><img className="photo-properties" src={photo}/><button className="li-button">delete</button></li>
                         <li className="list-item"><button onClick={this.handleLaunchPic} className="li-button">submit</button><button className="li-button" onClick={this.props.edit}>cancel</button></li>
                     </ul>
                 </section>

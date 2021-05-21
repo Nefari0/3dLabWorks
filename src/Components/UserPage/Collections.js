@@ -35,7 +35,7 @@ class Collections extends Component {
         this.addToDatabase = this.addToDatabase.bind(this)
         this.fileHandlerRemove = this.fileHandlerRemove.bind(this)
         this.removeFileFromSpace = this.removeFileFromSpace.bind(this)
-        this.removeFileFromSpace2 = this.removeFileFromSpace2.bind(this)
+        // this.removeFileFromSpace2 = this.removeFileFromSpace2.bind(this)
         // this.deleteModel = this.deleteModel.bind(this)
     }
 
@@ -149,10 +149,10 @@ class Collections extends Component {
 
     }
 
-    removeFileFromSpace2 = async (url) => {
-        const photoRef = app.storage.getReferenceFromUrl(url);
+    // removeFileFromSpace2 = async (url) => {
+    //     const photoRef = app.storage.getReferenceFromUrl(url);
 
-    }
+    // }
 
     // sendImageIntoSpace = async (file) => {
 
@@ -206,7 +206,7 @@ class Collections extends Component {
         const { items } = this.state
 
         const mappedItems = items.map(element => {
-            return <ModelItem key={element.model_id} name={element.name} img={element.firebase_url01} id={element.model_id} delete={this.deleteModel} removeFileFromSpace={this.removeFileFromSpace} removeFileFromSpace2={this.removeFileFromSpace2}/>
+            return <ModelItem key={element.model_id} name={element.name} img={element.firebase_url01} id={element.model_id} delete={this.deleteModel} removeFileFromSpace={this.removeFileFromSpace} />
         })
 
         return(

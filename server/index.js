@@ -10,6 +10,7 @@ const massive = require('massive')
 const authController = require('./controllers/authController')
 const userController = require('./controllers/userController')
 const projectsController = require('./controllers/projectsController');
+const deletedDataController = require('./controllers/deletedDataController')
 const { projectManagement } = require('firebase-admin');
 const { addProject } = require('./controllers/projectsController');
 // const baseBackend = require('./../src/baseBackend')
@@ -50,6 +51,10 @@ app.use(
             secret: SESSION_SECRET
         }),
     )
+
+// track deleted firebase items
+// app.post('/api/firedata/:user_id', deletedDataController.addUrl)
+app.post('/api/firedata', deletedDataController.addUrl) //Post request / body / http://localhost:4000/api/firedata/ / { "user_id":"12","firebase_url":"firebase_url"}
 
 // thingiverse endpoints
 app.get('/users')

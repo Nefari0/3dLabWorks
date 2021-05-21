@@ -87,3 +87,17 @@
 -- VALUES (
   -- 1
 -- )
+
+-- ---------- track deleted firebase items ----------- -- 
+-- CREATE TABLE deleted_fb_items(
+--   item_id SERIAL PRIMARY key,
+--   user_id INTEGER,
+--   FOREIGN KEY(user_id) REFERENCES d_user(user_id),
+--   firebase_url text  
+-- );
+
+-- INSERT INTO deleted_fb_items (user_id, firebase_url)
+-- VALUES (
+--   2,
+--   'firebase_test_url'
+-- )
