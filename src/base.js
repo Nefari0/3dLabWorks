@@ -1,6 +1,6 @@
 
 import firebase from 'firebase/app'
-import "firebase/storage"
+// import "firebase/storage"
 // import baseBackend from './baseBackend'
 
 const firebaseConfig = {

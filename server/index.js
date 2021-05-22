@@ -17,27 +17,25 @@ const { addProject } = require('./controllers/projectsController');
 // const path = require('path');
 // const { default: reducer } = require('../src/ducks/modelsReducer'); // auto added
 // const cors = require('cors');
+// const { base } = require('./serviceAccounts/base')
 
-//--------firedtore-------//
+//-------- firedtore / firebase -------//
+// const fireApp = require('./serviceAccounts/base') // will probably need to create controller for this
+
 // const admin = require('firebase-admin');
-// const firebase = require('firebase/app');
-// const serviceAccount = require('./serviceAccounts/depot-7bb3e-6e66a08bdc56.json');
-// const { firestore } = require('firebase-admin');
-// admin.initializeApp({
-//   credential: admin.credential.cert(serviceAccount)
-// });
-// let fireStore = admin.firestore();
-
-
-// admin.initializeApp({
-//     credential: admin.credential.cert(serviceAccount)
-// });
-
-// const db = admin.firestore();
-
-// admin.initializeApp();
-
-// const db = admin.firestore();
+const firebase = require('firebase/app');
+const fireController = require('./controllers/fireController');
+const firebaseConfig = {
+    apiKey: "AIzaSyB6ImzEUWfnyXD6bcpNEN8ktaMSfos8Js0",
+    authDomain: "depot-7bb3e.firebaseapp.com",
+    projectId: "depot-7bb3e",
+    storageBucket: "depot-7bb3e.appspot.com",
+    messagingSenderId: "38861699624",
+    appId: "1:38861699624:web:b1d9abfce822f3a4d2531d",
+    measurementId: "G-DSTFFPFHLD"
+  };
+  const fireApp = firebase.initializeApp(firebaseConfig);
+// -------------------------------------------- // 
 
 const { SESSION_SECRET, CONNECTION_STRING, SERVER_PORT } = process.env;
 
@@ -52,9 +50,10 @@ app.use(
         }),
     )
 
-// track deleted firebase items
-// app.post('/api/firedata/:user_id', deletedDataController.addUrl)
+// track deleted firebase items ... this feature will probably not be used
 app.post('/api/firedata', deletedDataController.addUrl) //Post request / body / http://localhost:4000/api/firedata/ / { "user_id":"12","firebase_url":"firebase_url"}
+// test firebase backend with endpoints
+app.get('/api/firebase/test', fireController.fireTestHere)
 
 // thingiverse endpoints
 app.get('/users')
