@@ -103,6 +103,8 @@ class Collections extends Component {
         const firebase_url = 'firebase_url'
         const firebase_url01 = this.state.fileUrl
         // const file = e.target.files[0];
+
+        // this block needs to be moved to backend/controller. once backend is funtional, it will be deleted.
         const storageRef = app.storage().ref()
         const fileRef = storageRef.child(file.name)
             console.log("send to space function")
@@ -113,7 +115,13 @@ class Collections extends Component {
         })
         this.setFileUrl(await fileRef.getDownloadURL())
         console.log('this is file fileRef',fileRef)
-        // console.log('this is file storageRef',storageRef.child())
+
+        // ------------------------------------------ //
+
+        // this block adds item to firebase storage backend through axios. once functional, it will replace the block above
+
+    // axios.post('api/fs
+        //------------------------------------------- //
         
         // axios.post('/api/project/post', {id,name,description,firebase_url,firebase_url01}).then(res => {
         //     this.setState({ ...this.state,newItem:res.data})

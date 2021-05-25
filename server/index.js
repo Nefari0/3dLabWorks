@@ -20,21 +20,22 @@ const { addProject } = require('./controllers/projectsController');
 // const { base } = require('./serviceAccounts/base')
 
 //-------- firedtore / firebase -------//
+//  i am attempting to move all these code blocks to a seperate module/controller
 // const fireApp = require('./serviceAccounts/base') // will probably need to create controller for this
 
 // const admin = require('firebase-admin');
-const firebase = require('firebase/app');
+// const firebase = require('firebase/app');
 const fireController = require('./controllers/fireController');
-const firebaseConfig = {
-    apiKey: "AIzaSyB6ImzEUWfnyXD6bcpNEN8ktaMSfos8Js0",
-    authDomain: "depot-7bb3e.firebaseapp.com",
-    projectId: "depot-7bb3e",
-    storageBucket: "depot-7bb3e.appspot.com",
-    messagingSenderId: "38861699624",
-    appId: "1:38861699624:web:b1d9abfce822f3a4d2531d",
-    measurementId: "G-DSTFFPFHLD"
-  };
-  const fireApp = firebase.initializeApp(firebaseConfig);
+// const firebaseConfig = {
+//     apiKey: "AIzaSyB6ImzEUWfnyXD6bcpNEN8ktaMSfos8Js0",
+//     authDomain: "depot-7bb3e.firebaseapp.com",
+//     projectId: "depot-7bb3e",
+//     storageBucket: "depot-7bb3e.appspot.com",
+//     messagingSenderId: "38861699624",
+//     appId: "1:38861699624:web:b1d9abfce822f3a4d2531d",
+//     measurementId: "G-DSTFFPFHLD"
+//   };
+//   const fireApp = firebase.initializeApp(firebaseConfig);
 // -------------------------------------------- // 
 
 const { SESSION_SECRET, CONNECTION_STRING, SERVER_PORT } = process.env;
@@ -53,7 +54,9 @@ app.use(
 // track deleted firebase items ... this feature will probably not be used
 app.post('/api/firedata', deletedDataController.addUrl) //Post request / body / http://localhost:4000/api/firedata/ / { "user_id":"12","firebase_url":"firebase_url"}
 // test firebase backend with endpoints
-app.get('/api/firebase/test', fireController.fireTestHere)
+app.get('/api/firedata/test', fireController.fireTestHere) // tests fireController
+// app.post('/api/firedata/add', fireController.addFile) // add file to firebase via backend controller
+
 
 // thingiverse endpoints
 app.get('/users')
