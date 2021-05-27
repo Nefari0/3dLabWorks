@@ -14,6 +14,7 @@ class ProjectDetail extends Component {
             info:[],
             userInfo:[],
             comments:[],
+            files:[],
             viewFiles:true,
             viewComments:false,
             viewDetails:false,
@@ -151,7 +152,7 @@ class ProjectDetail extends Component {
 
         const { firebase_url01 } = this.state.info
         const { info, userInfo, viewComments, viewDetails, viewFiles } = this.state
-        console.log(userInfo)
+        
 
         const mappedPhoto = info.map(element => {
             return <ProjectPhotos data={element} key={element.model_id} userInfo={userInfo} />
@@ -253,7 +254,12 @@ class ProjectDetail extends Component {
                     {/* <section className="bottom-row"></section> */}
                     {/* <div className="comment-box"></div> */}
                 </div>
-                {viewComments && <Comments comments={this.state.comments}/>}
+                <div className="comment-box">
+                    {viewFiles && <p className="dark-text" >{firebase_url01}</p>}
+                    {viewComments && <Comments comments={this.state.comments}/>}
+                    {/* {viewComments && <Comments comments={this.state.comments}/>} */}
+                </div>
+                
                 {/* <div className="comment-box"><h3 className="dark-text">comments</h3></div> */}
             </div>
         )

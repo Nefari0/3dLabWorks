@@ -111,7 +111,10 @@ module.exports = {
 
     getComments: async (req,res) => {
         const comments = await req.app.get('db').get_comments();
-        return res.status(200).send(comments)
+        if (comments === null){
+            return res.status(401).send('no comments')
+        }  else {return res.status(200).send(comments)}
+       
     },
 
     getModelComments: async (req,res) => {

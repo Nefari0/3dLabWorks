@@ -171,10 +171,10 @@
 .detail-container {
     margin: auto;
     margin-bottom: 0;
-    margin-top: 0;
+    margin-top: 10px;
     /* padding: 50%; */
     height: 380px;
-    width: 100vw;
+    /* width: 100vw; */
     width: 660px;
     /* background-color: blue; */
     /* background-color: rgb(240, 240, 240); */
@@ -192,7 +192,7 @@
     /* height: 600px; */
     width: 600px;
     max-height: 600px;
-    margin: none;
+    margin: none; 
     padding: 0%;
     background-color: red;
 	display: inline-block;
