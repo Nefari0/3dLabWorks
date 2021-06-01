@@ -12,6 +12,7 @@ import { HashRouter } from 'react-router-dom'
 import Footer from './Components/Footer/Footer'
 import Explore  from './Components/Explore/Explore'
 // import Three from './Components/Three'
+// import ThreeView from './Components/Three/ThreeView'
 
 function App() {
   
