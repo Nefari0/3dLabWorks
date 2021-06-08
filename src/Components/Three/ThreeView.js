@@ -216,5 +216,5 @@ class DemoScene extends React.Component {
     }
   }
   
-//   export default DemoScene;
+  export default DemoScene;
   

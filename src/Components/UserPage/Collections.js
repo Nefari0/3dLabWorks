@@ -47,15 +47,17 @@ class Collections extends Component {
             
     }
 
-    setFileUrl(params){
+    setFileUrl = async (params1,params2) => {
         // const { imageFile } = this.state
-        console.log("set function")
-        this.setState({ fileUrl:params})
-        this.addToDatabase()        
+        console.log("set file function")
+        this.setState({ fileUrl:params1,imageUrl:params2})
+        // this.addToDatabase()        
     }
 
     setImageUrl(params){
+        console.log('set image function')
         this.setState({imageUrl:params})
+        // this.addToDatabase()
     }
 
     addFile(params){
@@ -79,7 +81,7 @@ class Collections extends Component {
     fileHandler = async (params) => {
         const { file, fileUrl, imageFile, imageUrl } = this.state
         const image = true
-        this.sendIntoSpace(file)
+        this.sendIntoSpace()
         // if(imageFile != null){
         //     this.sendImageIntoSpace(imageFile)
         // } else {alert('please add a photo')}
@@ -96,7 +98,8 @@ class Collections extends Component {
         this.setState({imageFile:null})
     }
 
-    sendIntoSpace = async (file) => {
+    sendIntoSpace = async () => {
+        const { file, imageFile } = this.state
         const { id } = this.props.username.user
         const name = 'username'
         const description = 'stuff'
@@ -105,6 +108,9 @@ class Collections extends Component {
         // const file = e.target.files[0];
 
         // this block needs to be moved to backend/controller. once backend is funtional, it will be deleted.
+
+        // ---- this uploads file to firebase ---- //
+        // if (file != null){
         const storageRef = app.storage().ref()
         const fileRef = storageRef.child(file.name)
             console.log("send to space function")
@@ -113,13 +119,24 @@ class Collections extends Component {
         fileRef.put(file).then(() => {
             console.log('uploaded file',file)
         })
-        this.setFileUrl(await fileRef.getDownloadURL())
-        console.log('this is file fileRef',fileRef)
-
+        // this.setFileUrl(await fileRef.getDownloadURL())
+        // console.log('this is file fileRef',fileRef)
+        // }
         // ------------------------------------------ //
-
+        
+        // ---- this uploads image to firebase ---- //
+        // if (imageFile != null) {
+            const storageRef2 = app.storage().ref()
+            const fileRef2 = storageRef2.child(imageFile.name)
+            fileRef2.put(imageFile).then(() => {
+                console.log('uploaded image file')
+            })
+            // this.setImageUrl(await fileRef2.getDownloadURL())
+        // }
+        // ---------------------------------------- //
+        this.setFileUrl(await fileRef.getDownloadURL(),await fileRef2.getDownloadURL())
         // this block adds item to firebase storage backend through axios. once functional, it will replace the block above
-
+        this.addToDatabase()
     // axios.post('api/fs
         //------------------------------------------- //
         
@@ -192,10 +209,13 @@ class Collections extends Component {
         const { id } = this.props.username.user
         const name = 'username'
         const description = 'stuff'
-        const firebase_url = imageUrl
-        const firebase_url01 = fileUrl
-        axios.post('/api/project/post', {id,name,description,firebase_url,firebase_url01})
-        this.setState({fileUrl:null,file:null})
+        const firebase_url = fileUrl
+        const firebase_url01 = imageUrl
+        if (imageUrl != null && fileUrl != null) {
+            axios.post('/api/project/post', {id,name,description,firebase_url,firebase_url01})
+            this.setState({fileUrl:null,file:null})
+        }
+
     }
 
     handleChange(params){
@@ -221,21 +241,26 @@ class Collections extends Component {
             <div className="collections">
                 <section className="input">
                     <div className="collections-h2"><h2 >Collections</h2></div>
+                    <p>add photo</p>
                     <input 
                     type="file"
                     
+                    accept="image/png,image/jpeg"
+                    
                     // onChange={e => this.sendIntoSpace(e)}
+                    // onChange={e => this.handleFile(e)} 
+                    onChange={e => this.handlePhoto(e)} 
+                    />
+                    <p>add file</p>
+                    <input
+                    type="file"
+                    accept=".stl,.blend"
                     onChange={e => this.handleFile(e)} 
                     />
-
-                    {/* <input
-                    type="file"
-                    accept="image/png,image/jpeg"
-                    onChange={e => this.handlePhoto(e)}
-                    /> */}
                     
                     <button onClick={this.fileHandler}>submit</button>
                     <button onClick={this.fileHandlerRemove}>remove file</button>
+                    {/* <button>add model</button> */}
 
                 </section>
                 <section className="items-view">

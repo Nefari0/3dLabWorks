@@ -1,10 +1,11 @@
 
 // --- from hosting video --- //
 require('dotenv').config({ path: __dirname + '/../.env'}); // for production?
+const express = require('express')
 const path = require('path')
+
 // require('dotenv').config(); // original
 
-const express = require('express')
 const session = require('express-session')
 const massive = require('massive')
 const authController = require('./controllers/authController')
@@ -41,7 +42,10 @@ const fireController = require('./controllers/fireController');
 const { SESSION_SECRET, CONNECTION_STRING, SERVER_PORT } = process.env;
 
 const app = express();
+
+// --- pending removal --- //
 app.use(express.json());
+// ------------------------// 
 
 app.use(
     session({

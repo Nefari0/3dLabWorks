@@ -100,12 +100,13 @@
 }
 
 .input {
-    min-height: 10%;
+    /* min-height: 10%; */
+    height: 40%;
     width: 90%;
     /* background-color: crimson; */
     background-color: rgb(248, 244, 244);
     color: #555;
-    margin-top: 30px;
+    margin-top: 100px;
     margin-bottom: 20px;
 }
 
