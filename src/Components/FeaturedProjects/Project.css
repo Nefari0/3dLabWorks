@@ -361,3 +361,8 @@
     
     /* background-color: orangered; */
 }
+
+.hyperlink {
+    color: white;
+    text-decoration: none;
+}

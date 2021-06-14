@@ -150,7 +150,7 @@ class ProjectDetail extends Component {
 
     render() {
 
-        const { firebase_url01 } = this.state.info
+        const { firebase_url01,firebase_url } = this.state.info
         const { info, userInfo, viewComments, viewDetails, viewFiles } = this.state
         
 
@@ -166,7 +166,12 @@ class ProjectDetail extends Component {
                     {/* <div> */}
                     {mappedPhoto}
                     <section className="right">
-                        <div className={`detail-box small down-load ${viewFiles ? true : 'detail-box small down-load-selected'}`} onClick={() => this.changeView('viewFiles')}><p className={`down-load-text ${viewFiles ? true : 'down-load-text-selected'}`}>Download Files</p></div>
+                        
+                    {/* <a href="https://hackaday.com" rel="noreferrer">
+    <h5>FAQ</h5>
+  </a> */}
+
+                        <div className={`detail-box small down-load ${viewFiles ? true : 'detail-box small down-load-selected'}`} onClick={() => this.changeView('viewFiles')}><p className={`down-load-text ${viewFiles ? true : 'down-load-text-selected'}`}><a href={firebase_url01} className="hyperlink">Download Files</a></p></div>
                         <div className="detail-box small">
                         <svg 
                             className="details-icon-big" 

@@ -1,4 +1,5 @@
 const firebase = require('firebase/app');
+const admin = require('firebase-admin');
 // const fireController = require('./controllers/fireController');
 const firebaseConfig = {
     apiKey: "AIzaSyB6ImzEUWfnyXD6bcpNEN8ktaMSfos8Js0",
@@ -14,16 +15,17 @@ const firebaseConfig = {
 //   const db = app.firestore()
 module.exports = {
     fireTestHere: async (req,res) => {
-        const text = 'text from fb controller'
-        const response = await text
-        return res.status(200).send(text)
+        // const text = 'text from fb controller'
+        const text = app
+        const response = await text[0]
+        return res.status(200).send(text).catch(err => consols.log(err))
     }
 
     // addFile: async (req,res) => {
     //     const { id, name, description,firebase_url, firebase_url01} = req.body
     //     console.log(req.body) // pending deletion
-    //     console.log('this is fireApp',db) // pending deletion
     //     const storageRef = await db.storage().ref()
+    //     console.log('this is fireApp',db) // pending deletion
     //     const fileRef = storageRef.child(file.name)
     //         console.log("send to space function")
     //         console.log("storageRef items",storageRef)
