@@ -4,8 +4,8 @@ require('dotenv').config({ path: __dirname + '/../.env'}); // for production?
 const express = require('express')
 const path = require('path')
 
-// require('dotenv').config(); // original
-
+require('dotenv').config(); // original
+const axios = require('axios')
 const session = require('express-session')
 const massive = require('massive')
 const authController = require('./controllers/authController')
@@ -106,9 +106,9 @@ app.get('/api/comments/id/:model_id', projectsController.getModelComments)
 // app.delete('/api/messages/delete')
 
 // -----server ------
-app.use(express.static(__dirname + '/../build'))
+app.use( express.static( __dirname + '/../build'));
 app.get('*', (req,res) => {
-    res.sendFile(path.join(__dirname, '../build/index.html'))
+res.send(path.join(__dirname, '../build/index.html'))
 })
 // -------------------
 
