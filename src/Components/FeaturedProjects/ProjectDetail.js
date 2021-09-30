@@ -166,11 +166,6 @@ class ProjectDetail extends Component {
                     {/* <div> */}
                     {mappedPhoto}
                     <section className="right">
-                        
-                    {/* <a href="https://hackaday.com" rel="noreferrer">
-    <h5>FAQ</h5>
-  </a> */}
-
                         <div className={`detail-box small down-load ${viewFiles ? true : 'detail-box small down-load-selected'}`} onClick={() => this.changeView('viewFiles')}><p className={`down-load-text ${viewFiles ? true : 'down-load-text-selected'}`}><a href={firebase_url01} className="hyperlink">Download Files</a></p></div>
                         <div className="detail-box small">
                         <svg 
@@ -261,7 +256,7 @@ class ProjectDetail extends Component {
                     {/* <div className="comment-box"></div> */}
                 </div>
                 <div className="comment-box">
-                    {viewFiles && <p className="dark-text" >{firebase_url01}</p>}
+                    {viewFiles && <p className="dark-text" >{firebase_url}</p>}
                     {viewComments && <Comments comments={this.state.comments}/>}
                     {/* {viewComments && <Comments comments={this.state.comments}/>} */}
                 </div>

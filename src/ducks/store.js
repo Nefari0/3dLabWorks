@@ -8,10 +8,10 @@ import modelsReducer from './modelsReducer'
 
 
 const rootReducer = combineReducers({
-  characters: breakingBadReducer,
+  // characters: breakingBadReducer,
   user: userReducer,
-  projects: projectsReducer,
-  models: modelsReducer
+  // projects: projectsReducer,
+  // models: modelsReducer
 
 })
 

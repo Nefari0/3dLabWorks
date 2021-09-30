@@ -99,6 +99,7 @@ class Header extends Component{
     render() {
         const { username, isMenuOpen, user_name, password, openLogin, isLoggedInState } = this.state
         const { isLoggedIn } = this.props.user
+        console.log('this is props',this.props)
     return(
         <div className='header-container'>
 

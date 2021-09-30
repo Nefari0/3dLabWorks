@@ -17,7 +17,7 @@ class FeaturedProjects extends Component {
             reduxFeatured:[], //for testing modelsReducer
             setPermission:true
         }
-        this.getRedux = this.getRedux.bind(this)
+        // this.getRedux = this.getRedux.bind(this)
     }
 
 
@@ -41,14 +41,14 @@ class FeaturedProjects extends Component {
     //     this.setState({...this.state, reduxFeatured:data})
     // }
 
-    getRedux = async () => {
-        this.props.getModels()
-        const { data } = this.props.models.models
-        return this.setState({...this.state,featured:data})
-    }
+    // getRedux = async () => {
+    //     this.props.getModels()
+    //     const { data } = this.props.models.models
+    //     return this.setState({...this.state,featured:data})
+    // }
 
     render(){
-        const { data } = this.props.models.models
+        // const { data } = this.props.models.models
         const { featured } = this.state
         // for (var key in data) {
         //     console.log(data[key])
