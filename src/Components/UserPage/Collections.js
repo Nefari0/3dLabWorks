@@ -7,6 +7,7 @@ import ModelItem from './ModelItems'
 import { projectManagement } from 'firebase-admin'
 import { connect } from 'react-redux'
 import { getProjects } from '../../ducks/projectsReducer'
+import AddProject from './AddProject'
 
 const db = app.firestore()
 
@@ -241,14 +242,13 @@ class Collections extends Component {
             <div className="collections">
                 <section className="input">
                     <div className="collections-h2"><h2 >Collections</h2></div>
-                    <p>add photo</p>
+                    <AddProject fileHandler={this.fileHandler} fileHandlerRemove={this.fileHandlerRemove} />
+                    {/* ----- moving this section to seperate functional componant */}
+                    {/* <p>add photo</p>
                     <input 
                     type="file"
                     
                     accept="image/png,image/jpeg"
-                    
-                    // onChange={e => this.sendIntoSpace(e)}
-                    // onChange={e => this.handleFile(e)} 
                     onChange={e => this.handlePhoto(e)} 
                     />
                     <p>add file</p>
@@ -259,8 +259,8 @@ class Collections extends Component {
                     />
                     
                     <button onClick={this.fileHandler}>submit</button>
-                    <button onClick={this.fileHandlerRemove}>remove file</button>
-                    {/* <button>add model</button> */}
+                    <button onClick={this.fileHandlerRemove}>remove file</button> */}
+                    {/* ---------------------------------------------- */}
 
                 </section>
                 <section className="items-view">
