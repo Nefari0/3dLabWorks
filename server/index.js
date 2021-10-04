@@ -93,6 +93,7 @@ app.get('/api/featured/join', projectsController.getFeatured)
 // app.post('/api/project/edit/', )
 app.delete('/api/project/delete/:model_id', projectsController.deleteProject)
 app.get('/api/comments/all', projectsController.getComments)
+app.post('/api/comments/create', projectsController.createComment)
 app.get('/api/comments/id/:model_id', projectsController.getModelComments)
 
 // // storage access end points //
