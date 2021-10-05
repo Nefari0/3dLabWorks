@@ -213,11 +213,12 @@
 }
 
 .add-project {
-    /* height: 300px; */
     position: absolute;
-    height: 340px;
+    height: 240px;
     width: 385px;
-    margin: auto;
+    /* height: 200px; */
+    /* width: 200px; */
+    /* margin: auto; */
     padding: 10px;
     border-radius: 2%;
     background-color: rgb(240, 240, 240);
@@ -237,6 +238,7 @@
 	align-items: stretch;
 	align-content: space-around;
     margin: 20px;
+    z-index: 0;
 }
 
 @media (max-width: 640px) {

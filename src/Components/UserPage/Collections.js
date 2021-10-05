@@ -50,13 +50,13 @@ class Collections extends Component {
 
     setFileUrl = async (params1,params2) => {
         // const { imageFile } = this.state
-        console.log("set file function")
+        // console.log("set file function")
         this.setState({ fileUrl:params1,imageUrl:params2})
         // this.addToDatabase()        
     }
 
     setImageUrl(params){
-        console.log('set image function')
+        // console.log('set image function')
         this.setState({imageUrl:params})
         // this.addToDatabase()
     }
@@ -242,7 +242,7 @@ class Collections extends Component {
             <div className="collections">
                 <section className="input">
                     <div className="collections-h2"><h2 >Collections</h2></div>
-                    <AddProject fileHandler={this.fileHandler} fileHandlerRemove={this.fileHandlerRemove} />
+                    <AddProject fileHandler={this.fileHandler} fileHandlerRemove={this.fileHandlerRemove} handlePhoto={this.handlePhoto} handleFile={this.handleFile} />
                     {/* ----- moving this section to seperate functional componant */}
                     {/* <p>add photo</p>
                     <input 

@@ -4,21 +4,23 @@ const AddProject = (props) => {
 
     return(
         <div className="add-project">
-            <p>add photo</p>
+            <p>add project</p>
             <div className="add-project-button">
+                <form>
                 <input 
                 type="file"
-                
                 accept="image/png,image/jpeg"
-                onChange={e => this.handlePhoto(e)} 
+                onChange={e => props.handlePhoto(e)} 
                 />
+                
+                </form>
             </div>
-            <p>add file</p>
+            {/* <p>add file</p> */}
             <div className="add-project-button">
                 <input
                 type="file"
                 accept=".stl,.blend"
-                onChange={e => this.handleFile(e)} 
+                onChange={e => props.handleFile(e)} 
                 />
             </div>
             
