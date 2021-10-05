@@ -23,5 +23,6 @@ export default (
         <Route path="/register" component={Register} />
         <Route path="/projectdetails/:model_id" component={ProjectDetail} />
         <Route path="/securitytest" component={SecurityTest} />
+        <Route path="/header" component={Header} />
     </Switch>
 )

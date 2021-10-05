@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { loginUser,logoutUser } from '../../ducks/userReducer'
+import axios from 'axios'
+import { loginUser,logoutUser,updateUser } from '../../ducks/userReducer'
 // import {} from '../../ducks/userReducer'
 import { connect } from 'react-redux'
 import './Header.css'
@@ -7,6 +8,7 @@ import { Link } from 'react-router-dom'
 import MobileLogin from '../MobileLogin/MobileLogin'
 import UserPage from '../UserPage/UserPage'
 // import Register from '../Register/Register'
+import { withRouter } from 'react-router'
 
 class Header extends Component{
     constructor(props){
@@ -30,15 +32,16 @@ class Header extends Component{
         this.handleLogout = this.handleLogout.bind(this)
     }
 
-    componentDidMount(){
+    // componentDidMount(){
         // console.log('component did mount',this.state.username)
-    }
+    // }
     
     componentWillUpdate(){
         const { setPermission } = this.state
         const { user } = this.props
 
         if(user.isLoggedIn === true && setPermission===true){
+            
             // this.setState({username:user.user.data.user,setPermission:false})
             this.setState({username:user.user.user.user,isLoggedInState:user.isLoggedIn,setPermission:false})
         }
@@ -99,6 +102,7 @@ class Header extends Component{
     render() {
         const { username, isMenuOpen, user_name, password, openLogin, isLoggedInState } = this.state
         const { isLoggedIn } = this.props.user
+
         console.log('this is props',this.props)
     return(
         <div className='header-container'>
@@ -142,4 +146,5 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps, {loginUser, logoutUser})(Header)
+export default connect(mapStateToProps, {loginUser, logoutUser, updateUser})(Header)
+// export default withRouter(connect(null, {loginUser, logoutUser, updateUser})(Header))

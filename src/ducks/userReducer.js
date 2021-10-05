@@ -40,12 +40,21 @@ export function editUserinfo(photo_url){
     }
 }
 
-export function updateUser(user_id){
+//  ----- rebuilding - commented out for testing------ //
+// export function updateUser(user_id){
+//     return{
+//         type: UPDATE_USER,
+//         payload: axios.get(`/api/users/:${user_id}`)
+//     }
+// }
+export function updateUser(user){
     return{
         type: UPDATE_USER,
-        payload: axios.get(`/api/users/:${user_id}`)
+        payload: user
     }
 }
+// ---------------------------------------------------- //
+
 
 export default function userReducer(state = inititialState, action) {
     switch (action.type) {
@@ -69,9 +78,11 @@ export default function userReducer(state = inititialState, action) {
                 isLoggedIn: false
             }
         case UPDATE_USER + '_FULFILLED':
+            const { user } = action.payload.data
             return {
-                ...state,
-                user:action.payload.data, isLoggedIn:true
+                // ...state,
+                // user:action.payload.data, isLoggedIn:true
+                user
             }            
         case UPDATE_USER + '_REJECTED':
             return {

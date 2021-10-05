@@ -29,7 +29,7 @@ const AddProject = (props) => {
                 <button onClick={props.fileHandlerRemove}>clear</button>
             </div>
             <div>
-                <button>cancel</button>
+                <button onClick={props.addNewProject}>cancel</button>
             </div>
         </div>
     )

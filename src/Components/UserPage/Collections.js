@@ -23,7 +23,8 @@ class Collections extends Component {
             imageFile:null,
             imageUrl:null,
             newItem:{},
-            props:null
+            props:null,
+            openAddProject:false
         }
         this.sendIntoSpace = this.sendIntoSpace.bind(this)
         // this.sendImageIntoSpace = this.sendImageIntoSpace.bind(this)
@@ -36,6 +37,7 @@ class Collections extends Component {
         this.addToDatabase = this.addToDatabase.bind(this)
         this.fileHandlerRemove = this.fileHandlerRemove.bind(this)
         this.removeFileFromSpace = this.removeFileFromSpace.bind(this)
+        this.addNewProject = this.addNewProject.bind(this)
         // this.removeFileFromSpace2 = this.removeFileFromSpace2.bind(this)
         // this.deleteModel = this.deleteModel.bind(this)
     }
@@ -216,11 +218,16 @@ class Collections extends Component {
             axios.post('/api/project/post', {id,name,description,firebase_url,firebase_url01})
             this.setState({fileUrl:null,file:null})
         }
-
     }
 
     handleChange(params){
         this.setState({ file:params })
+    }
+
+    addNewProject(params){
+        this.setState({
+            openAddProject:!this.state.openAddProject
+        })
     }
 
     // deleteModel = (params) => {
@@ -232,7 +239,7 @@ class Collections extends Component {
 
         console.log('this is db',db)
 
-        const { items } = this.state
+        const { items,openAddProject } = this.state
 
         const mappedItems = items.map(element => {
             return <ModelItem key={element.model_id} name={element.name} img={element.firebase_url01} id={element.model_id} delete={this.deleteModel} removeFileFromSpace={this.removeFileFromSpace} />
@@ -242,7 +249,8 @@ class Collections extends Component {
             <div className="collections">
                 <section className="input">
                     <div className="collections-h2"><h2 >Collections</h2></div>
-                    <AddProject fileHandler={this.fileHandler} fileHandlerRemove={this.fileHandlerRemove} handlePhoto={this.handlePhoto} handleFile={this.handleFile} />
+                    <div onClick={this.addNewProject}><p>add project?</p></div>
+                    {!openAddProject ? <div></div> : <AddProject fileHandler={this.fileHandler} fileHandlerRemove={this.fileHandlerRemove} handlePhoto={this.handlePhoto} handleFile={this.handleFile} addNewProject={this.addNewProject} />}
                     {/* ----- moving this section to seperate functional componant */}
                     {/* <p>add photo</p>
                     <input 
