@@ -1,5 +1,6 @@
 .user-info-h2 {
     color: #555;
+	
 }
 
 .input-list {
@@ -17,12 +18,13 @@
 	flex-wrap: nowrap;
 	justify-content: space-around;
 	align-items: baseline;
+	font-size: smaller;
 	/* align-content: stretch; */
 }
 
 .list-text {
     color: #555;
-    margin-right: 10px;
+    /* margin-right: 10px; */
 }
 
 .li-button {
@@ -42,9 +44,21 @@
 	justify-content: center;
 	align-items: center;
 	align-content: stretch;
+	z-index: 6;
 }
 
 .change-photo {
     margin-left: 20px;
     color: #555;
+	z-index: 7;
+}
+
+.edit-user-info {
+	width: 300px;
+	height: 300px;
+	/* padding-left: 100px; */
+    border-radius: 2%;
+    background-color: rgb(240, 240, 240);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+	z-index: 10;
 }

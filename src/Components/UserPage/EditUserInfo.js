@@ -172,16 +172,17 @@ class EditUserInfo extends Component {
         // var file = document.getElementById('fileItem').files[0]
 
         return(
-            <div>
+            <div className="edit-user-info">
                 <section><h2 className="user-info-h2">edit user info</h2></section>
-                <section className="user-photo"><img className="photo-properties" src={file} /> <input id="fileItem" type ="file" className="change-photo" onChange={e => this.handlePhotoChange(e)}/> <button onClick={this.handleCancelClick}>cancel</button> </section>
+                {/* <section className="user-photo"><img className="photo-properties" src={file} /> <input id="fileItem" type ="file" className="change-photo" onChange={e => this.handlePhotoChange(e)}/> <button onClick={this.handleCancelClick}>cancel</button> </section> */}
                 <section className="input-section">
                     <ul className="input-list">
                         <li className="list-item"><p className="list-text">username</p><input placeholder={user} onChange={e => this.handUserName(e.target.value)}/></li>
                         <li className="list-item"><p className="list-text">first name</p><input placeholder={name} onChange={e => this.handleFirstName(e.target.value)}/></li>
                         <li className="list-item"><p className="list-text">last name</p><input placeholder="last name"/></li>
                         <li className="list-item"><p className="list-text">email address</p><input placeholder={email}/></li>
-                        <li className="user-photo"><img className="photo-properties" src={photo}/><button className="li-button">delete</button></li>
+                        <li className="list-item"><img className="photo-properties" src={file} /> <input id="fileItem" type ="file" className="change-photo" accept="image/png,image/jpeg" onChange={e => this.handlePhotoChange(e)}/> <button onClick={this.handleCancelClick}>cancel</button> </li>
+                        {/* <li className="user-photo"><img className="photo-properties" src={photo}/><button className="li-button">delete picture</button></li> */}
                         <li className="list-item"><button onClick={this.handleLaunchPic} className="li-button">submit</button><button className="li-button" onClick={this.props.edit}>cancel</button></li>
                     </ul>
                 </section>
