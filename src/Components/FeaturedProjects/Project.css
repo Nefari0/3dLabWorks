@@ -17,6 +17,10 @@
     font-size: 15px;
 }
 
+.show-dl-url {
+    z-index: 10;
+}
+
 /* .photo-title-border {
     display: flex;
     flex-direction: row;

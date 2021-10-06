@@ -12,7 +12,7 @@ const UserInfo = (props) => {
     }
 
     return(
-        <div className="userz">
+        <div className="display-user-info">
         {editOpen ? (<EditUserInfo edit={toggleEdit}/>):(<div className="user-info">
             <div className="user-info-h2"><p ></p><h2 className=" title-h">UserInfo</h2></div>
             <button className="edit-menu-button" onClick={toggleEdit}>edit</button>

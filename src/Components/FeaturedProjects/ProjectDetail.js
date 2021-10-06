@@ -4,6 +4,7 @@ import './Project.css'
 import ProjectPhotos from './ProjectPhotos'
 import Comments from './Comments/Comments'
 // import logo from './../../assets/logo.png'
+import DlUrl from './DlUrl'
 
 class ProjectDetail extends Component {
 
@@ -11,6 +12,7 @@ class ProjectDetail extends Component {
         super();
 
         this.state = {
+            dlUrl:"",
             info:[],
             userInfo:[],
             comments:[],
@@ -20,6 +22,7 @@ class ProjectDetail extends Component {
             viewDetails:false,
         }
         this.changeView = this.changeView.bind(this)
+        this.getDetails = this.getDetails.bind(this)
     }
 
     componentDidMount(){
@@ -54,7 +57,7 @@ class ProjectDetail extends Component {
     componentDidUpdate(prevProps){
         const { model_id } = this.props.match.params
         if (prevProps.match.params.model_id !== model_id) {
-            // this.getDetails() // original / working function // --- make sure to use this if using getDetails() 
+            this.getDetails() // original / working function // --- make sure to use this if using getDetails() 
         }
     }
 
@@ -82,13 +85,12 @@ class ProjectDetail extends Component {
                 axios.get(`/api/users/${user_id}`).then((res2) => {
                     // console.log('will it work?',res.data,res2.data)
                     this.setState({
+                        dlUrl:res.data.firebase_url,
                         info:res.data,
                         userInfo:res2.data
                     })
                 })
-                // this.setState({
-                //     info:res.data,
-                // })
+
             })
             .catch((err) => {
                 this.props.history.push('/404')
@@ -149,13 +151,16 @@ class ProjectDetail extends Component {
 
 
     render() {
-
         const { firebase_url01,firebase_url } = this.state.info
-        const { info, userInfo, viewComments, viewDetails, viewFiles } = this.state
+        const { info, userInfo, viewComments, viewDetails, viewFiles,dlUrl } = this.state
+
+        // const mappedUrl = info.map(element => {
+        //     return <DlUrl data={element} key={element.model_id} url={element.firebase_url} />
+        // })
         
 
         const mappedPhoto = info.map(element => {
-            return <ProjectPhotos data={element} key={element.model_id} userInfo={userInfo} />
+            return <ProjectPhotos data={element} key={element.model_id} userInfo={userInfo} url={firebase_url} />
         }) 
 
         return(
@@ -255,11 +260,12 @@ class ProjectDetail extends Component {
                     {/* <section className="bottom-row"></section> */}
                     {/* <div className="comment-box"></div> */}
                 </div>
-                <div className="comment-box">
-                    {viewFiles && <p className="dark-text" >{firebase_url}</p>}
+                {/* <div className="comment-box">
+                    <h3 className="dark-text">{dlUrl}</h3>
+                    {viewFiles && <p className="dark-text" >{firebase_url}</p>} 
                     {viewComments && <Comments comments={this.state.comments}/>}
-                    {/* {viewComments && <Comments comments={this.state.comments}/>} */}
-                </div>
+                    {viewComments && <Comments comments={this.state.comments}/>}
+                </div> */}
                 
                 {/* <div className="comment-box"><h3 className="dark-text">comments</h3></div> */}
             </div>
