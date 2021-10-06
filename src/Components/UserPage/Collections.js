@@ -137,7 +137,7 @@ class Collections extends Component {
             // this.setImageUrl(await fileRef2.getDownloadURL())
         // }
         // ---------------------------------------- //
-        await this.setFileUrl(await fileRef.getDownloadURL(),await fileRef2.getDownloadURL()).then(this.addToDatabase())
+        await this.setFileUrl(await fileRef.getDownloadURL(),await fileRef2.getDownloadURL()).then(await this.addToDatabase().then(alert('added to database')))
         // this block adds item to firebase storage backend through axios. once functional, it will replace the block above
         // this.addToDatabase()
     // axios.post('api/fs
@@ -206,7 +206,7 @@ class Collections extends Component {
         // })
     // }
 
-    addToDatabase = () => {
+    addToDatabase = async () => {
         console.log('this is from addToDatabase function')
         const { fileUrl, imageUrl } = this.state
         const { id } = this.props.username.user
