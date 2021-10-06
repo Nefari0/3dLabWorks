@@ -27,7 +27,7 @@
     z-index: 10;
 }
 
-/* .photo-title-border {
+.photo-title-border {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -35,7 +35,7 @@
     align-items: center;
     align-content: stretch;
     margin-top: 0px;
-} */
+}
 
 .project-box-h4 {
     color: #555;
