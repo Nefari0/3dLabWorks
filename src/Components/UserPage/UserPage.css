@@ -149,8 +149,9 @@
     width: 200px;
     background-color: #fff;
     color: #555;
-    border-radius: 5%;
+    border-radius: 2%;
     margin:5px;
+    box-shadow: .1px .1px #888888;
 }
 
 .project-text {
@@ -164,7 +165,7 @@
 .model-img {
     width: 90%;
     height: 60%;
-    border-radius: 5%;
+    border-radius: 2%;
     filter: brightness(80%);
 }
 
@@ -213,6 +214,12 @@
     margin-bottom: 100px;
 }
 
+.title {
+    margin-left: 12px;
+    font-weight: 300;
+    display:flex;
+}
+
 .icon-big {
     margin-top: 30%;
     height: 10vh;
@@ -227,11 +234,15 @@
 .edit-menu-button {
     width: 50px;
     margin: auto;
+    margin-top: none;
+    margin-bottom: none;
+    padding: none;
 }
 
 .display-user-info {
-    height: inherit;
-    width: inherit;
+    /* height: inherit;
+    width: inherit; */
+    
 }
 
 .add-project {

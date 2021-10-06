@@ -44,7 +44,7 @@ const ModelItem = (props) => {
 
     return(
         <div className="props-display">
-            <h2>{props.name}</h2>
+            <p className="title">{props.name}</p>
             <img className="model-img" src={props.img}/>
             <button onClick={handleClick}>delete</button>
             {/* <button onClick={deleteModel}>delete</button>  */}
