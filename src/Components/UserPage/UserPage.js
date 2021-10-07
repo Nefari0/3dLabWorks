@@ -54,7 +54,6 @@ class UserPage extends Component {
     
     hideView(params) {
         this.resetView()
-        console.log(params);
         switch (params) {
             case 'showUserInfo':
                 this.setState({ showUserInfo : !this.state.showUserInfo })

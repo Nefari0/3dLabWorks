@@ -9,7 +9,7 @@ const About = (props) => {
                 <h4 className="about-h4">about</h4>
                 <div className="h4-border"></div>
                 <p>
-                    MadModels is an astablishment ment to allow makers, tinkerers and artist to updload and share 3d models. Ultimately, the purpose of this site is to act as a repository, where makers can share their work, and invite other makers to edit and collaborate on projects. The formats used in this site are .stl and .blend. 
+                    MadModels is an establishment to allow makers, tinkerers and artist to updload and share 3d models. Ultimately, the purpose of this site is to act as a repository, where makers can share their work, and invite other makers to edit and collaborate on projects. The formats used in this site are .stl and .blend. 
                 </p>
             </div>
             <div className="doc-containers">

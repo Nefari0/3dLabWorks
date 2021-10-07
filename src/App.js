@@ -11,6 +11,7 @@ import routes from './routes'
 import { HashRouter } from 'react-router-dom'
 import Footer from './Components/Footer/Footer'
 import Explore  from './Components/Explore/Explore'
+// import FirebaseTest from './Components/FirebaseTest';
 // import Three from './Components/Three'
 // import ThreeView from './Components/Three'
 
@@ -19,6 +20,7 @@ function App() {
   return (
     <HashRouter>
     <div className="App">
+        {/* <FirebaseTest/> */}
         <Header/>
         {/* <Three /> */}
         {routes}

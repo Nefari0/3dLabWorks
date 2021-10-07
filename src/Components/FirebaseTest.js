@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import firebase from 'firebase'
+import {app} from '../../'
 // import App from '../App';
+const db = app.firestore()
 
 export default class FirebaseTest extends Component {
     constructor() {

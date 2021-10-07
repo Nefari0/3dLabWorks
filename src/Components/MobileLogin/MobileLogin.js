@@ -14,7 +14,7 @@ const MobileLogin = (props) => {
     return(
         <div className={`login-container`}>
         <p>username</p><input value={user_name} onChange={e => props.name(e.target.value)} className="input-element"/>
-        <p>password</p><input value={password} onChange={e => props.pass(e.target.value)} className="input-element"/>
+        <p>password</p><input value={password} onChange={e => props.pass(e.target.value)} className="input-element" type="password" />
         {/* <div className="input-element"> */}
         <ul className="buttons">
             {!isLoggedIn ? (<button onClick={props.execute} className="non-link-button">login</button>) :

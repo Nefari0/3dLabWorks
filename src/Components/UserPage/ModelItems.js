@@ -7,7 +7,7 @@ const db = app.firestore()
 const ModelItem = (props) => {
 
     const { img } = props
-    console.log('this is db from ModelItem',db.INTERNAL)
+    // console.log('this is db from ModelItem',db.INTERNAL)
     
     const handleClick = () => {
         const { img,id } = props

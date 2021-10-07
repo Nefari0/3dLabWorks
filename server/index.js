@@ -60,7 +60,7 @@ app.use(
 app.post('/api/firedata', deletedDataController.addUrl) //Post request / body / http://localhost:4000/api/firedata/ / { "user_id":"12","firebase_url":"firebase_url"}
 // test firebase backend with endpoints
 app.get('/api/firedata/test', fireController.fireTestHere) // tests fireController
-// app.post('/api/firedata/add', fireController.addFile) // add file to firebase via backend controller
+app.post('/api/firedata/add', fireController.addFile) // add file to firebase via backend controller
 
 
 // thingiverse endpoints

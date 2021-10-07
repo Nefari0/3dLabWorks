@@ -26,7 +26,7 @@ class Collections extends Component {
             props:null,
             openAddProject:false
         }
-        this.sendIntoSpace = this.sendIntoSpace.bind(this)
+        // this.sendIntoSpace = this.sendIntoSpace.bind(this)
         // this.sendImageIntoSpace = this.sendImageIntoSpace.bind(this)
         this.setFileUrl = this.setFileUrl.bind(this)
         this.handleFile = this.handleFile.bind(this)
@@ -38,6 +38,8 @@ class Collections extends Component {
         this.fileHandlerRemove = this.fileHandlerRemove.bind(this)
         this.removeFileFromSpace = this.removeFileFromSpace.bind(this)
         this.addNewProject = this.addNewProject.bind(this)
+        this.getImUrl = this.getImUrl.bind(this)
+        this.getFileUrl = this.getFileUrl.bind(this)
         // this.removeFileFromSpace2 = this.removeFileFromSpace2.bind(this)
         // this.deleteModel = this.deleteModel.bind(this)
     }
@@ -50,10 +52,11 @@ class Collections extends Component {
             
     }
 
-    setFileUrl = async (params1,params2) => {
+    setFileUrl = async (params) => {
         // const { imageFile } = this.state
         // console.log("set file function")
-        this.setState({ fileUrl:params1,imageUrl:params2})
+        this.setState({ fileUrl:params})
+        // return new Promise(console.log('has been added'))
         // this.addToDatabase()        
     }
 
@@ -102,7 +105,7 @@ class Collections extends Component {
     }
 
     sendIntoSpace = async () => {
-        const { file, imageFile } = this.state
+        const { file, imageFile, fileUrl, imageUrl } = this.state
         const { id } = this.props.username.user
         const name = 'username'
         const description = 'stuff'
@@ -114,14 +117,11 @@ class Collections extends Component {
 
         // ---- this uploads file to firebase ---- //
         // if (file != null){
-        const storageRef = app.storage().ref()
-        const fileRef = storageRef.child(file.name)
-            console.log("send to space function")
-            console.log("storageRef items",storageRef)
-            console.log("fileRef items",fileRef)
-        fileRef.put(file).then(() => {
-            console.log('uploaded file',file)
-        })
+        // const storageRef = app.storage().ref()
+        // const fileRef = storageRef.child(file.name)
+        // fileRef.put(file).then(() => {
+        //     console.log('uploaded file')
+        // })
         // this.setFileUrl(await fileRef.getDownloadURL())
         // console.log('this is file fileRef',fileRef)
         // }
@@ -129,15 +129,35 @@ class Collections extends Component {
         
         // ---- this uploads image to firebase ---- //
         // if (imageFile != null) {
-            const storageRef2 = app.storage().ref()
-            const fileRef2 = storageRef2.child(imageFile.name)
-            fileRef2.put(imageFile).then(() => {
-                console.log('uploaded image file')
-            })
+            // const storageRef2 = app.storage().ref()
+            // const fileRef2 = storageRef2.child(imageFile.name)
+            // fileRef2.put(imageFile).then(() => {
+            //     const theUrl = fileRef2.getDownloadURL()
+            //     this.setFileUrl(theUrl)
+            //     console.log('uploaded image file')
+            // })
             // this.setImageUrl(await fileRef2.getDownloadURL())
         // }
         // ---------------------------------------- //
-        await this.setFileUrl(await fileRef.getDownloadURL(),await fileRef2.getDownloadURL()).then(await this.addToDatabase().then(alert('added to database')))
+        const theFile = await this.getFileUrl(file)
+        this.setFileUrl(await theFile.getDownloadURL())
+        const theImage = await this.getImUrl(imageFile)
+        this.setImageUrl(await theImage.getDownloadURL())
+        this.addToDatabase(this.state.fileUrl,this.state.imageUrl)
+        // if (imageUrl != null && fileUrl != null) {
+        //     this.addToDatabase()
+        //     console.log('added to db')
+        // }
+        // const theImage = await this.getImUrl(imageFile)
+        // return console.log('image', theImage)
+        // console.log('filefilfile',theFile)
+        // const theImage = await this.getImUrl(fileRef2)
+        // return console.log('imageimageimage',theImage)
+        
+        // await this.setFileUrl(await fileRef.getDownloadURL())
+        
+        // await this.setImageUrl(await fileRef2.getDownloadURL())
+        
         // this block adds item to firebase storage backend through axios. once functional, it will replace the block above
         // this.addToDatabase()
     // axios.post('api/fs
@@ -147,6 +167,22 @@ class Collections extends Component {
         //     this.setState({ ...this.state,newItem:res.data})
         // })
     }
+    getImUrl = async (input) => {
+        const storageRef = app.storage().ref()
+        const fileRef = storageRef.child(input.name)
+        await fileRef.put(input)
+        console.log('image loaded')
+        return (fileRef)
+    }
+    getFileUrl = async (input) => {
+        const storageRef = app.storage().ref()
+        const fileRef = storageRef.child(input.name)
+        await fileRef.put(input)
+        console.log('file loaded')
+        // const url = await snapshot.storageRef.getDownloadURL()
+        return (fileRef)
+    }
+
 
     removeFileFromSpace = async (url,id) => {
         // create reference
@@ -206,18 +242,17 @@ class Collections extends Component {
         // })
     // }
 
-    addToDatabase = async () => {
+    addToDatabase = (fileUrl,imageUrl) => {
         console.log('this is from addToDatabase function')
-        const { fileUrl, imageUrl } = this.state
+        // const { fileUrl, imageUrl } = this.state // original
         const { id } = this.props.username.user
         const name = 'username'
         const description = 'stuff'
         const firebase_url = fileUrl
         const firebase_url01 = imageUrl
-        if (imageUrl != null && fileUrl != null) {
-            axios.post('/api/project/post', {id,name,description,firebase_url,firebase_url01})
-            this.setState({fileUrl:null,file:null})
-        }
+        axios.post('/api/project/post', {id,name,description,firebase_url,firebase_url01}).then(res => {
+            return res.status
+        })
     }
 
     handleChange(params){
@@ -236,8 +271,6 @@ class Collections extends Component {
     // }
 
     render(){
-
-        console.log('this is db',db)
 
         const { items,openAddProject } = this.state
 

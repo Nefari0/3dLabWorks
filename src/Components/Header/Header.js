@@ -103,7 +103,7 @@ class Header extends Component{
         const { username, isMenuOpen, user_name, password, openLogin, isLoggedInState } = this.state
         const { isLoggedIn } = this.props.user
 
-        console.log('this is props',this.props)
+
     return(
         <div className='header-container'>
 
@@ -112,7 +112,7 @@ class Header extends Component{
             className="cd-logo"
             />
 
-            <h3 className="header-h3">{isLoggedIn ? `welcome,${this.props.user.user.user}!` :'MadModels3d'}</h3>
+            <h3 className="header-h3">{isLoggedIn ? `Welcome, ${this.props.user.user.user}!` :'MadModels3d'}</h3>
 
             <ul className='link-list'>
                 <Link to="/" style={{ textDecoration: 'none' }}><li className='link-item'><a>home</a></li></Link>
