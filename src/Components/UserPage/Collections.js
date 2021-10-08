@@ -139,11 +139,13 @@ class Collections extends Component {
             // this.setImageUrl(await fileRef2.getDownloadURL())
         // }
         // ---------------------------------------- //
+        this.props.setIsLoading()
         const theFile = await this.getFileUrl(file)
         this.setFileUrl(await theFile.getDownloadURL())
         const theImage = await this.getImUrl(imageFile)
         this.setImageUrl(await theImage.getDownloadURL())
         this.addToDatabase(this.state.fileUrl,this.state.imageUrl)
+        this.props.setIsLoading()
         // if (imageUrl != null && fileUrl != null) {
         //     this.addToDatabase()
         //     console.log('added to db')
@@ -182,7 +184,6 @@ class Collections extends Component {
         // const url = await snapshot.storageRef.getDownloadURL()
         return (fileRef)
     }
-
 
     removeFileFromSpace = async (url,id) => {
         // create reference
@@ -280,9 +281,13 @@ class Collections extends Component {
 
         return(
             <div className="collections">
+                
                 <section className="input">
+
+
                     <div className="collections-h2"><h2 >Collections</h2></div>
                     <div onClick={this.addNewProject}><p>add project?</p></div>
+
                     {!openAddProject ? <div></div> : <AddProject fileHandler={this.fileHandler} fileHandlerRemove={this.fileHandlerRemove} handlePhoto={this.handlePhoto} handleFile={this.handleFile} addNewProject={this.addNewProject} />}
                     {/* ----- moving this section to seperate functional componant */}
                     {/* <p>add photo</p>

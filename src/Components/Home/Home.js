@@ -7,6 +7,7 @@ import { loginUser } from '../../ducks/userReducer'
 import { Icon } from './Icons/Icon'
 import Footer from '../Footer/Footer'
 import FeaturedProjects from '../FeaturedProjects/FeaturedProjects'
+import Loading from '../Loading/Loading'
 
 class Home extends Component {
     constructor() {
@@ -49,7 +50,6 @@ class Home extends Component {
             <div>
                 <div className="hero">
                     <h2>IMAGINE IT - BUILD IT.</h2>
-        
                 </div>
                 <Footer/>
                 <FeaturedProjects/>

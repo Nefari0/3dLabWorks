@@ -1,23 +1,5 @@
 
 
-
-/* .home-container {
-    padding-left: 25%;
-} */
-
-/* .login-container {
-    height: 100px;
-    width: 300px;
-    background-color: chartreuse;
-    display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-	align-items: flex-start;
-    align-content: stretch;
-    position: relative;
-} */
-
 .hero {
     height: 55vh;
      background-image: linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),url(chessboard2.png);

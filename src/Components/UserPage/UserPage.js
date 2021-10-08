@@ -12,6 +12,7 @@ import UserInfo from './UserInfo'
 import {app} from '../../base'
 import SecurityTest from './SecurityTest'
 import MobileLogin from '../MobileLogin/MobileLogin'
+import Loading from '../Loading/Loading';
 
 const db = app.firestore()
 
@@ -26,17 +27,23 @@ class UserPage extends Component {
             showUserInfo:true,
             showCollections:false,
             profilePic:null,
-            userName:null
+            userName:null,
+            isLoading:false
         }
         this.handleCollections = this.handleCollections.bind(this)
         this.hideView = this.hideView.bind(this)
         this.resetView = this.resetView.bind(this)
         this.pleaseLogin = this.pleaeLogin.bind(this)
+        this.setIsLoading = this.setIsLoading.bind(this)
     }
 
     componentDidMount(){
         axios.get('/api/projects/all').then(res =>
             this.setState({ ...this.state,items:res.data}))    
+    }
+
+    setIsLoading = () => {
+        this.setState({isLoading:!this.state.isLoading})
     }
 
     resetView(){
@@ -83,7 +90,7 @@ class UserPage extends Component {
     }
 
     render(){
-        const { showCollections,showUserInfo,items } = this.state
+        const { showCollections,showUserInfo,items,isLoading } = this.state
         const { isLoggedIn } = this.props.user
         const { photo,auth,name } = this.props.user.user
 
@@ -98,6 +105,7 @@ class UserPage extends Component {
             {!isLoggedIn ? (<Route path="/" component={Home}/>) : (
         <div className="user-page">
             <div className="column1">
+            {isLoading ? <Loading/> : null}
                 <div className="portrait">
                 <img className="model-img profile-photo" 
                 src={photo}
@@ -138,7 +146,7 @@ class UserPage extends Component {
                     </ul>
                 </div>
 
-                {showCollections && <Collections username={this.props.user}/>}
+                {showCollections && <Collections username={this.props.user} setIsLoading={this.setIsLoading} />}
                 
                 {showUserInfo && <UserInfo user={this.props.user}/>}
 
