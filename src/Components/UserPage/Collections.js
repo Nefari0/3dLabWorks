@@ -8,6 +8,7 @@ import { projectManagement } from 'firebase-admin'
 import { connect } from 'react-redux'
 import { getProjects } from '../../ducks/projectsReducer'
 import AddProject from './AddProject'
+import EditModel from './EditModel'
 
 const db = app.firestore()
 
@@ -17,6 +18,7 @@ class Collections extends Component {
         super();
 
         this.state = {
+            openEditModel:false,
             items:[],
             fileUrl:null,
             file:null,
@@ -43,6 +45,7 @@ class Collections extends Component {
         this.getImUrl = this.getImUrl.bind(this)
         this.getFileUrl = this.getFileUrl.bind(this)
         this.handleAddText = this.handleAddText.bind(this)
+        this.editProject = this.editProject.bind(this)
         // this.removeFileFromSpace2 = this.removeFileFromSpace2.bind(this)
         // this.deleteModel = this.deleteModel.bind(this)
     }
@@ -53,6 +56,12 @@ class Collections extends Component {
             this.setState({ ...this.state,items:res.data})) 
         // this.props.getProjects()
             
+    }
+
+    editProject() {
+        this.setState({
+            openEditModel:!this.state.openEditModel
+        })
     }
 
     handleAddText(prop, val) {
@@ -282,10 +291,10 @@ class Collections extends Component {
 
     render(){
 
-        const { items,openAddProject } = this.state
+        const { items,openAddProject,openEditModel } = this.state
 
         const mappedItems = items.map(element => {
-            return <ModelItem key={element.model_id} name={element.name} img={element.firebase_url01} id={element.model_id} delete={this.deleteModel} removeFileFromSpace={this.removeFileFromSpace} />
+            return <ModelItem key={element.model_id} name={element.name} img={element.firebase_url01} id={element.model_id} delete={this.deleteModel} removeFileFromSpace={this.removeFileFromSpace} openEdidModel={this.openEditModel} />
         })
 
         return(
@@ -319,7 +328,8 @@ class Collections extends Component {
 
                 </section>
                 <section className="items-view">
-                    {mappedItems}
+                    {openEditModel ? mappedItems : <EditModel/>}
+                    {/* {mappedItems} */}
                 </section>
   
             </div>
