@@ -24,7 +24,9 @@ class Collections extends Component {
             imageUrl:null,
             newItem:{},
             props:null,
-            openAddProject:false
+            openAddProject:false,
+            projectName:'',
+            projectDescription:''
         }
         // this.sendIntoSpace = this.sendIntoSpace.bind(this)
         // this.sendImageIntoSpace = this.sendImageIntoSpace.bind(this)
@@ -40,6 +42,7 @@ class Collections extends Component {
         this.addNewProject = this.addNewProject.bind(this)
         this.getImUrl = this.getImUrl.bind(this)
         this.getFileUrl = this.getFileUrl.bind(this)
+        this.handleAddText = this.handleAddText.bind(this)
         // this.removeFileFromSpace2 = this.removeFileFromSpace2.bind(this)
         // this.deleteModel = this.deleteModel.bind(this)
     }
@@ -51,6 +54,12 @@ class Collections extends Component {
         // this.props.getProjects()
             
     }
+
+    handleAddText(prop, val) {
+        this.setState({
+          [prop]: val
+        })
+      }
 
     setFileUrl = async (params) => {
         // const { imageFile } = this.state
@@ -105,10 +114,10 @@ class Collections extends Component {
     }
 
     sendIntoSpace = async () => {
-        const { file, imageFile, fileUrl, imageUrl } = this.state
+        const { file, imageFile, fileUrl, imageUrl, projectDescription, projectName } = this.state
         const { id } = this.props.username.user
-        const name = 'username'
-        const description = 'stuff'
+        const name = projectName
+        const description = projectDescription
         const firebase_url = 'firebase_url'
         const firebase_url01 = this.state.fileUrl
         // const file = e.target.files[0];
@@ -245,10 +254,10 @@ class Collections extends Component {
 
     addToDatabase = (fileUrl,imageUrl) => {
         console.log('this is from addToDatabase function')
-        // const { fileUrl, imageUrl } = this.state // original
+        const { projectDescription, projectName } = this.state
         const { id } = this.props.username.user
-        const name = 'username'
-        const description = 'stuff'
+        const name = projectName
+        const description = projectDescription
         const firebase_url = fileUrl
         const firebase_url01 = imageUrl
         axios.post('/api/project/post', {id,name,description,firebase_url,firebase_url01}).then(res => {
@@ -288,7 +297,7 @@ class Collections extends Component {
                     <div className="collections-h2"><h2 >Collections</h2></div>
                     <div onClick={this.addNewProject}><p>add project?</p></div>
 
-                    {!openAddProject ? <div></div> : <AddProject fileHandler={this.fileHandler} fileHandlerRemove={this.fileHandlerRemove} handlePhoto={this.handlePhoto} handleFile={this.handleFile} addNewProject={this.addNewProject} />}
+                    {!openAddProject ? <div></div> : <AddProject fileHandler={this.fileHandler} fileHandlerRemove={this.fileHandlerRemove} handlePhoto={this.handlePhoto} handleFile={this.handleFile} addNewProject={this.addNewProject} handleAddText={this.handleAddText} />}
                     {/* ----- moving this section to seperate functional componant */}
                     {/* <p>add photo</p>
                     <input 

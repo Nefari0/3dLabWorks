@@ -22,8 +22,9 @@ const AddProject = (props) => {
                     onChange={e => props.handleFile(e)} 
                 />
             </div>
-            <input placeholder="name"/>
-            <input placeholder="description"/>
+            <input placeholder="name" onChange={e => props.handleAddText('projectName', e.target.value)} />
+            {/* <input placeholder="description"/> */}
+            <input placeholder="description" onChange={e => props.handleAddText('projectDescription', e.target.value)} />
             
             <div className="add-project-button">
                 <button onClick={props.fileHandler}>submit</button>

@@ -15,6 +15,7 @@ const ModelItem = (props) => {
         alert('are you sure you want to delete this file?')
         // props.delete(model_id)
         props.removeFileFromSpace(img,id)
+        
         // deleteDBFile()
     }
     
