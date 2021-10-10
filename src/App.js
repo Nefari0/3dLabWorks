@@ -14,6 +14,7 @@ import Explore  from './Components/Explore/Explore'
 // import FirebaseTest from './Components/FirebaseTest';
 // import Three from './Components/Three'
 // import ThreeView from './Components/Three'
+// import DemoScene from './Components/Three/ThreeView';
 
 function App() {
   
@@ -22,7 +23,7 @@ function App() {
     <div className="App">
         {/* <FirebaseTest/> */}
         <Header/>
-        {/* <Three /> */}
+        {/* <DemoScenes /> */}
         {routes}
         {/* <GroupPage/> */}
 

@@ -48,6 +48,7 @@
 }
 
 .user-photo {
+
     height: 30px;
     width: 30px;
     border-radius: 50%;
@@ -55,15 +56,19 @@
     margin-left: 10px;
 }
 
-.img {
-    /* width: 100%; */
-    width: 250px;
-    /* height: 60%; */
+.image-div {
+    width: 280px;
     height: 150px;
-    margin-left: 15px;
-    /* border-radius: 5%; */
-    /* opacity: .4; */
-    /* filter: brightness(200%); */
+    overflow: hidden;
+}
+
+.img {
+    width: 100%;
+
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 

@@ -306,7 +306,7 @@ class Collections extends Component {
                     <div className="collections-h2"><h2 >Collections</h2></div>
                     <div onClick={this.addNewProject}><p>add project?</p></div>
 
-                    {!openAddProject ? <div></div> : <AddProject fileHandler={this.fileHandler} fileHandlerRemove={this.fileHandlerRemove} handlePhoto={this.handlePhoto} handleFile={this.handleFile} addNewProject={this.addNewProject} handleAddText={this.handleAddText} />}
+                    {!openAddProject ? null : <AddProject fileHandler={this.fileHandler} fileHandlerRemove={this.fileHandlerRemove} handlePhoto={this.handlePhoto} handleFile={this.handleFile} addNewProject={this.addNewProject} handleAddText={this.handleAddText} />}
                     {/* ----- moving this section to seperate functional componant */}
                     {/* <p>add photo</p>
                     <input 
@@ -328,7 +328,7 @@ class Collections extends Component {
 
                 </section>
                 <section className="items-view">
-                    {openEditModel ? mappedItems : <EditModel/>}
+                    {!openEditModel ? mappedItems : <EditModel/>}
                     {/* {mappedItems} */}
                 </section>
   

@@ -44,7 +44,10 @@ const Project = (props) => {
         <div className='project-container' onClick={gotClicked}>
             {/* <div className="photo-title-border"><img src={photo_url} className="user-photo"/><h4 className="project-box-h4">{name}</h4></div> */}
             <div className="photo-title-border"><img src={photo_url} className="user-photo"/><p className="dark-text">{name}<br/>by {user_name}</p></div>
-            <Link to={`projectdetails/${model_id}`}><img className="img" src={firebase_url01}/></Link>
+
+            {/* <Link to={`projectdetails/${model_id}`}><img className="img" src={firebase_url01}/></Link> */}
+            <div className="image-div" ><Link to={`projectdetails/${model_id}`}><img className="img" src={firebase_url01}/></Link></div>
+
             <div className="download-container-top"></div>
             <div className="download-container">
                 <svg className="big" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
