@@ -34,7 +34,9 @@ class EditUserInfo extends Component {
         this.handleFirstName = this.handleFile.bind(this)
         this.handleLastName = this.handleLastName.bind(this)
         this.handleEmail = this.handleEmail.bind(this)
-        this.deleteFromFirebase = this.deleteFromFirebase.bind(this)
+        this.setPhotoUrl = this.setPhotoUrl.bind(this)
+        this.getPhotoUrl = this.getPhotoUrl.bind(this)
+
 
         // temp functions for testing//
         this.handleInfoClick = this.handleInfoClick.bind(this)
@@ -48,37 +50,55 @@ class EditUserInfo extends Component {
     }
 
     launchPic = async (file) => {
-        // const { staticPhoto } = this.state
-        const { photo_url } = this.state.user
-        const { id } = this.props.user.user
+        const { staticPhoto } = this.state
+        const { photo } = this.state.user
+        // const { id,photo } = this.props.user.user
         // if(photo_url != null){
         //     this.deleteFromFirebase(photo_url)
         // }
 
         // ---------- original
-        const photoName = `profile pic ${id}`
-        const storageRef = app.storage().ref()
-        const fileRef = storageRef.child(photoName + file.name)
-        fileRef.put(file).then(() => {
-            console.log('photo uploaded',file)
-        })
-        this.setFileUrl(await fileRef.getDownloadURL())
-        console.log('this is fileRef', fileRef)
+        // const photoName = `profile pic ${id}`
+        // const storageRef = app.storage().ref()
+        // const fileRef = storageRef.child(photoName + file.name)
+        // fileRef.put(file).then(() => {
+        //     console.log('photo uploaded',file)
+        // })
+        // this.setFileUrl(await fileRef.getDownloadURL())
+        // console.log('this is fileRef', fileRef)
         // ----------------------------------
-        // this.props.isLoading()
-        // const thePhoto = await this.getPhotoUrl()
-
-
+        this.props.setIsLoading()
+        // if (photo != null) {this.deleteFromFirebase(await photo)}
+        if (photo != null) {this.props.deleteFromFirebase(await photo)}
+        const thePhoto = await this.getPhotoUrl(staticPhoto)
+        console.log('photo is added')
+        this.setPhotoUrl(await thePhoto.getDownloadURL())
+        console.log('got url')
+        this.addToDatabase(this.state.photoUrl)
+        this.props.updateUser()
+        this.props.setIsLoading()
     }
 
-    deleteFromFirebase(url){
-        const storageRef = app.storage().refFromURL(url)
-        storageRef.delete().then(function deleted(params) {
-            console.log('image deleted')
-        }).catch(function (error) {
-            console.log('there was an error')
-        })
+    getPhotoUrl = async (input) => {
+        const storageRef = app.storage().ref()
+        const fileRef = storageRef.child(input.name)
+        await fileRef.put(input)
+        console.log('image loaded')
+        return (fileRef)
     }
+
+    setPhotoUrl = async (params) => {
+        this.setState({photoUrl:params})
+    }
+
+    // deleteFromFirebase(url){
+    //     const storageRef = app.storage().refFromURL(url)
+    //     storageRef.delete().then(function deleted(params) {
+    //         console.log('image deleted')
+    //     }).catch(function (error) {
+    //         console.log('there was an error')
+    //     })
+    // }
 
     handleLaunchPic(){
         const { staticPhoto } = this.state
@@ -107,13 +127,14 @@ class EditUserInfo extends Component {
         this.addToDatabase()
     }
 
-    addToDatabase(){
+    addToDatabase(newPhoto){
         // const { auth,email,id,name,user } = this.props.user.user
-        const { photoUrl } = this.state
+        // const { photoUrl } = this.state
+        const photo_url = newPhoto
         const { id } = this.state.user
         const user_id = id
-        const photo_url = photoUrl
-        console.log('this is from addToDatabase',user_id,photo_url)
+        // const photo_url = photoUrl
+        console.log('this is from addToDatabase',user_id,newPhoto)
         axios.post(`/api/users/update/${user_id}`,{ photo_url })
         this.props.updateUser(user_id)
         
@@ -125,10 +146,9 @@ class EditUserInfo extends Component {
         this.handleFile(e)
     }
 
-    addPhoto(photoFile){
-        console.log(photoFile)
-        // this.handleFile(photoFile)
-        this.setState({staticPhoto:photoFile})
+    addPhoto(e){
+        const file = e.target.files[0]
+        this.setState({staticPhoto:file})
     }
 
     cancelAddPhoto(){
@@ -141,6 +161,12 @@ class EditUserInfo extends Component {
 
     handleFile(event){
         this.setState({file:URL.createObjectURL(event.target.files[0])})
+    }
+
+    handleAddText(prop,val){
+        this.setState({
+            [prop]: val
+        })
     }
 
     // ---- edit names and email address ---- //
@@ -184,13 +210,13 @@ class EditUserInfo extends Component {
                 {/* <section className="user-photo"><img className="photo-properties" src={file} /> <input id="fileItem" type ="file" className="change-photo" onChange={e => this.handlePhotoChange(e)}/> <button onClick={this.handleCancelClick}>cancel</button> </section> */}
                 <section className="input-section">
                     <ul className="input-list">
-                        <li className="list-item"><p className="list-text">username</p><input placeholder={user} onChange={e => this.handUserName(e.target.value)}/></li>
-                        <li className="list-item"><p className="list-text">first name</p><input placeholder={name} onChange={e => this.handleFirstName(e.target.value)}/></li>
-                        <li className="list-item"><p className="list-text">last name</p><input placeholder="last name"/></li>
-                        <li className="list-item"><p className="list-text">email address</p><input placeholder={email}/></li>
-                        <li className="list-item"><img className="photo-properties" src={file} /> <input id="fileItem" type ="file" className="change-photo" accept="image/png,image/jpeg" onChange={e => this.handlePhotoChange(e)}/> <button onClick={this.handleCancelClick}>cancel</button> </li>
+                        <li className="list-item"><p className="list-text">username</p><input placeholder={user} onChange={e => this.handleAddText('user_name', e.target.value)}/></li>
+                        <li className="list-item"><p className="list-text">first name</p><input placeholder={name} onChange={e => this.handleAddText('first_name', e.target.value)}/></li>
+                        <li className="list-item"><p className="list-text">last name</p><input placeholder="last name" onChange={e => this.handleAddText('last_name', e.target.value)}/></li>
+                        <li className="list-item"><p className="list-text">email address</p><input placeholder={email} onChange={e => this.handleAddText('email', e.target.value)} /></li>
+                        <li className="list-item"><img className="photo-properties" src={file} /> <input id="fileItem" type ="file" className="change-photo" accept="image/png,image/jpeg" onChange={e => this.addPhoto(e)}/> <button onClick={this.handleCancelClick}>cancel</button> </li>
                         {/* <li className="user-photo"><img className="photo-properties" src={photo}/><button className="li-button">delete picture</button></li> */}
-                        <li className="list-item"><button onClick={this.handleLaunchPic} className="li-button">submit</button><button className="li-button" onClick={this.props.edit}>cancel</button></li>
+                        <li className="list-item"><button onClick={this.launchPic} className="li-button">submit</button><button className="li-button" onClick={this.props.edit}>cancel</button></li>
                     </ul>
                 </section>
             </div>

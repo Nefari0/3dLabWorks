@@ -13,7 +13,7 @@ const UserInfo = (props) => {
 
     return(
         <div className="display-user-info">
-        {editOpen ? (<EditUserInfo edit={toggleEdit}/>):(<div className="user-info">
+        {editOpen ? (<EditUserInfo edit={toggleEdit} setIsLoading={props.setIsLoading} deleteFromFirebase={props.deleteFromFirebase} />):(<div className="user-info">
             <div className="user-info-h2"><p ></p><h2 className=" title-h">UserInfo</h2></div>
             <button className="edit-menu-button" onClick={toggleEdit}>edit</button>
             <div className="user-info-h2"><p className="user-info-p" >name:</p><h2 className="text-element">{name}</h2></div>

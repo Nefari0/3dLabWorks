@@ -12,7 +12,7 @@ const authController = require('./controllers/authController')
 const userController = require('./controllers/userController')
 const projectsController = require('./controllers/projectsController');
 const deletedDataController = require('./controllers/deletedDataController')
-const { projectManagement } = require('firebase-admin');
+const { projectManagement, auth } = require('firebase-admin');
 const { addProject } = require('./controllers/projectsController');
 // const baseBackend = require('./../src/baseBackend')
 // const path = require('path');
@@ -71,7 +71,8 @@ app.post('/auth/register',authController.register)
 app.post('/auth/password', authController.changePassword)
 app.post('/auth/login',authController.login)
 app.get('/auth/logout',authController.logout)
-// app.post('/auth/update/:user_id',authController.update)
+app.post('/auth/update/:user_id',authController.update)
+app.post('/auth/getInfo',authController.getInfo)
 
 // // user end points //
 

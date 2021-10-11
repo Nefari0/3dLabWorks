@@ -100,6 +100,13 @@ module.exports = {
         const { user_id } = req.params
         const user = await db.update_user([photo_url,user_id])
         return res.status(200).send(user)
+    },
 
+    getInfo: async (req,res) => {
+        const db = req.app.get('db')
+        const { user_id } = req.body
+        const info = await db.get_info([user_id])
+        return res.status(200).send(info)
+        
     }
 };

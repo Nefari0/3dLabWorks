@@ -7,6 +7,7 @@ import { Component, lazy } from 'react'
 import './UserPage.css'
 import { connect } from 'react-redux'
 import { getProjects } from '../../ducks/projectsReducer';
+import { updateUser } from '../../ducks/userReducer'
 import Collections from './Collections'
 import UserInfo from './UserInfo'
 import {app} from '../../base'
@@ -35,6 +36,7 @@ class UserPage extends Component {
         this.resetView = this.resetView.bind(this)
         this.pleaseLogin = this.pleaeLogin.bind(this)
         this.setIsLoading = this.setIsLoading.bind(this)
+        this.deleteFromFirebase = this.deleteFromFirebase.bind(this)
     }
 
     componentDidMount(){
@@ -73,6 +75,16 @@ class UserPage extends Component {
         }
     }
 
+    deleteFromFirebase(url){
+        const storageRef = app.storage().refFromURL(url)
+        storageRef.delete().then(function deleted(params) {
+            console.log('image deleted')
+        }).catch(function (error) {
+            console.log('there was an error')
+        })
+    }
+
+
     // handleUserInfo(){
 
     // }
@@ -107,20 +119,20 @@ class UserPage extends Component {
             <div className="column1">
             {isLoading ? <Loading/> : null}
                 <div className="portrait">
-                <img className="model-img profile-photo" 
-                src={photo}
-                alt="photo"/>
-                {/* <svg className="icon-big" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg> */}
+                    <img className="model-img profile-photo" 
+                    src={photo}
+                    alt="photo"/>
+                    {/* <svg className="icon-big" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg> */}
 
-                <h2 className="name-container" >{this.props.user.user.name}</h2>
-                {/* <input
-                type="file"
-                accept="image/pne,image/jpeg"
-                onChange={e => this.handlePhoto(e)}
-                /> */}
+                    <h2 className="name-container" >{this.props.user.user.name}</h2>
+                    {/* <input
+                    type="file"
+                    accept="image/pne,image/jpeg"
+                    onChange={e => this.handlePhoto(e)}
+                    /> */}
                 </div>
                 <ul>
                     <li><div onClick={() => this.hideView('showUserInfo')} className="profile-buttons">user info</div></li>
@@ -148,7 +160,7 @@ class UserPage extends Component {
 
                 {showCollections && <Collections username={this.props.user} setIsLoading={this.setIsLoading} />}
                 
-                {showUserInfo && <UserInfo user={this.props.user} setIsLoading={this.setIsLoading} />}
+                {showUserInfo && <UserInfo user={this.props.user} setIsLoading={this.setIsLoading} deleteFromFirebase={this.deleteFromFirebase} />}
 
             </section>
         </div>)}
@@ -159,7 +171,7 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps,{getProjects})(UserPage)
+export default connect(mapStateToProps,{getProjects,updateUser})(UserPage)
 
 // export default UserPage
 
