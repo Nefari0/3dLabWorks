@@ -54,6 +54,8 @@ class EditUserInfo extends Component {
         // if(photo_url != null){
         //     this.deleteFromFirebase(photo_url)
         // }
+
+        // ---------- original
         const photoName = `profile pic ${id}`
         const storageRef = app.storage().ref()
         const fileRef = storageRef.child(photoName + file.name)
@@ -62,6 +64,11 @@ class EditUserInfo extends Component {
         })
         this.setFileUrl(await fileRef.getDownloadURL())
         console.log('this is fileRef', fileRef)
+        // ----------------------------------
+        // this.props.isLoading()
+        // const thePhoto = await this.getPhotoUrl()
+
+
     }
 
     deleteFromFirebase(url){

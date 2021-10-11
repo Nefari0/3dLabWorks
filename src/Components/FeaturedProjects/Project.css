@@ -29,7 +29,7 @@
 
 .photo-title-border {
     display: flex;
-    flex-direction: row;
+    flex-direction: row;    
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center;
@@ -57,18 +57,50 @@
 }
 
 .image-div {
+    /* height: 150px; */
+    height: 195px;
     width: 280px;
-    height: 150px;
+    /* height: auto; */
+    margin: 0;
+    background-color: #000;
     overflow: hidden;
+
+    /* width: 100%;
+    margin: 0;
+    overflow: hidden;
+    background-color: #000; */
+
 }
 
 .img {
-    width: 100%;
+    /* width: 100%;
 
     height: auto;
     display: block;
     margin-left: auto;
-    margin-right: auto;
+    margin-right: auto; */
+
+
+        opacity: 0.7;
+        width: 100%;
+        height: auto;
+        -webkit-transform: scale(1.15);
+        /* -webkit-transform: scale(2.15); */
+        -ms-transform: scale(1.15);
+        /* -ms-transform: scale(2.15); */
+        transform: scale(1.15);
+        -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+        transition: transform 0.5s, opacity 0.5s;
+        overflow: hidden;
+}
+
+img:hover {
+    opacity: 1;
+    -webkit-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+
+    transform: scale(1.03);
+    
 }
 
 

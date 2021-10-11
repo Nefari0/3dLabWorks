@@ -50,9 +50,12 @@ const Project = (props) => {
 
             <div className="download-container-top"></div>
             <div className="download-container">
-                <svg className="big" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {/* <svg className="big" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                </svg>
+                </svg> */}
+                <a style={{margin:"auto"}} href={`${firebase_url}`} ><svg className="big" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10" />
+                </svg></a>
                 <a className="project-text" href={`${firebase_url}`}>download</a>
                 <div className="horizontal-devide"></div>
                 <div className="like-share">

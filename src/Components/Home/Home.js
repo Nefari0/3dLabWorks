@@ -8,6 +8,7 @@ import { Icon } from './Icons/Icon'
 import Footer from '../Footer/Footer'
 import FeaturedProjects from '../FeaturedProjects/FeaturedProjects'
 import Loading from '../Loading/Loading'
+// import Vid from './Video/EC.NC gear train0001-0500.mp4'
 
 class Home extends Component {
     constructor() {
@@ -50,6 +51,18 @@ class Home extends Component {
             <div>
                 <div className="hero">
                     <h2>IMAGINE IT - BUILD IT.</h2>
+                    {/* <video autoPlay loop muted
+                    style={{
+                        position:"relavtive",
+                        width:"100%",
+                        left:"50%",
+                        top:"50%",
+                        height:"100%"
+
+                    }}
+                    >
+                        <source src={Vid} type="video/mp4"/>
+                    </video> */}
                 </div>
                 <Footer/>
                 <FeaturedProjects/>

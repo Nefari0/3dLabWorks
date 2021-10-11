@@ -148,7 +148,7 @@ class UserPage extends Component {
 
                 {showCollections && <Collections username={this.props.user} setIsLoading={this.setIsLoading} />}
                 
-                {showUserInfo && <UserInfo user={this.props.user}/>}
+                {showUserInfo && <UserInfo user={this.props.user} setIsLoading={this.setIsLoading} />}
 
             </section>
         </div>)}
