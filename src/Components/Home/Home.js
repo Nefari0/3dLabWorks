@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import './Home.css'
 import { connect } from 'react-redux'
 // import { updateCharacters } from '../../ducks/breakingBadReducer'
@@ -8,6 +9,8 @@ import { Icon } from './Icons/Icon'
 import Footer from '../Footer/Footer'
 import FeaturedProjects from '../FeaturedProjects/FeaturedProjects'
 import Loading from '../Loading/Loading'
+// import CurrentProject from './CurrentProject/CurrentProject'
+import Project from '../FeaturedProjects/Project'
 // import Vid from './Video/EC.NC gear train0001-0500.mp4'
 
 class Home extends Component {
@@ -15,6 +18,7 @@ class Home extends Component {
         super();
 
         this.state = {
+            projects:[],
             user_name:'',
             password:''
         }
@@ -22,6 +26,11 @@ class Home extends Component {
         this.handlePassword = this.handlePassword.bind(this)
         this.handleClick = this.handleClick.bind(this)
         this.remindWhoUser = this.remindWhoUser.bind(this)
+    }
+
+    componentDidMount() {
+        axios.get('api/project/join').then(res => 
+        this.setState({...this.state,projects:res.data}))
     }
 
     handleUserName(value){
@@ -44,13 +53,20 @@ class Home extends Component {
     }
 
     render() {
-        const { user_name, password } = this.state
+        const { user_name, password, projects } = this.state
         const { loginUser } = this.props
         // console.log(this.props) 
+
+        const mappedModels = projects.map(element => {
+            // return <Project data={element} key={element.user_id}/> // original
+            return <Project data={element} key={element.model_id}/>
+        })
+
         return(
             <div>
                 <div className="hero">
-                    <h2>IMAGINE IT - BUILD IT.</h2>
+                    <h2 className="hero-h2">IMAGINE IT - BUILD IT.</h2>
+                    <div className="deploy-projects">{mappedModels}</div>
                     {/* <video autoPlay loop muted
                     style={{
                         position:"relavtive",
@@ -65,7 +81,7 @@ class Home extends Component {
                     </video> */}
                 </div>
                 <Footer/>
-                <FeaturedProjects/>
+                {/* <FeaturedProjects/> */}
                 {/* <div className="title-border"></div>
                 <section className="intro-text">
                     <h3 className="icon-h3">Join millions  of 3d makers worldwide. Share your work in a community, and be a part of an innovative future</h3>
