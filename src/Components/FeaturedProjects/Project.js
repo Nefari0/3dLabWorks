@@ -62,7 +62,7 @@ const Project = (props) => {
                 </svg></a>
 
                 <a className="project-text" href={`${firebase_url}`}>download</a>
-                {/* <div className="horizontal-devide"></div> */}
+                <div className="horizontal-devide"></div>
                 <div className="like-share">
                     <ul>
                     <li className="like-share-box"><p className="like-share-text">
@@ -73,7 +73,7 @@ const Project = (props) => {
                     {/* {likes}</p></li> */}
                     {isLiked}</p></li>
 
-                    {/* <li className="devide"></li> */}
+                    <li className="devide"></li>
 
                     <li className="like-share-box"><p className="like-share-text">
                     <svg className="small-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
