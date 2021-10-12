@@ -116,7 +116,7 @@ class Header extends Component{
 
             <ul className='link-list'>
                 <Link to="/" style={{ textDecoration: 'none' }}><li className='link-item'><a>home</a></li></Link>
-                <Link to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a>information</a></li></Link>
+                <Link to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a>about</a></li></Link>
                 <Link to="/explore" style={{ textDecoration: 'none' }}><li className='link-item'><a>projects</a></li></Link>
                 {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='link-item'><a>my page</a></li></Link>)}
             </ul>
@@ -132,7 +132,7 @@ class Header extends Component{
             <ul className={`mobile-nav ${isMenuOpen ? false : 'mobile-nav-hide'}`} onClick={this.toggleMenu}>
                 <li className='mobile-link-item' onClick={this.toggleLogin}>sign in</li>
                 <Link to="/" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>home</li></Link>
-                <Link to="/about" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>information</li></Link>
+                <Link to="/about" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>about</li></Link>
                 <Link to="/explore" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>projects</li></Link>
                 {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='mobile-link-item'><a>my page</a></li></Link>)}
             </ul>

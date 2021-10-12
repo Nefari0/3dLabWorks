@@ -148,7 +148,7 @@ class EditUserInfo extends Component {
 
     addPhoto(e){
         const file = e.target.files[0]
-        this.setState({staticPhoto:file})
+        this.setState({staticPhoto:URL.createObjectURL(file)})
     }
 
     cancelAddPhoto(){
@@ -214,7 +214,7 @@ class EditUserInfo extends Component {
                         <li className="list-item"><p className="list-text">first name</p><input placeholder={name} onChange={e => this.handleAddText('first_name', e.target.value)}/></li>
                         <li className="list-item"><p className="list-text">last name</p><input placeholder="last name" onChange={e => this.handleAddText('last_name', e.target.value)}/></li>
                         <li className="list-item"><p className="list-text">email address</p><input placeholder={email} onChange={e => this.handleAddText('email', e.target.value)} /></li>
-                        <li className="list-item"><img className="photo-properties" src={file} /> <input id="fileItem" type ="file" className="change-photo" accept="image/png,image/jpeg" onChange={e => this.addPhoto(e)}/> <button onClick={this.handleCancelClick}>cancel</button> </li>
+                        <li className="list-item"><img className="photo-properties" src={staticPhoto} /> <input id="fileItem" type ="file" className="change-photo" accept="image/png,image/jpeg" onChange={e => this.addPhoto(e)}/> <button onClick={this.handleCancelClick}>cancel</button> </li>
                         {/* <li className="user-photo"><img className="photo-properties" src={photo}/><button className="li-button">delete picture</button></li> */}
                         <li className="list-item"><button onClick={this.launchPic} className="li-button">submit</button><button className="li-button" onClick={this.props.edit}>cancel</button></li>
                     </ul>

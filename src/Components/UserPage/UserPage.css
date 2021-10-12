@@ -250,7 +250,14 @@
 .add-project {
     position: absolute;
     height: 300px;
-    width: 300px;
+    min-width: 300px;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+
     /* height: 200px; */
     /* width: 200px; */
     /* margin: auto; */
@@ -276,7 +283,34 @@
     z-index: 0;
 }
 
-/* @media (max-width: 640px) { */
+.add-project-info-section {
+    height: 300px;
+    width: 300px;
+}
+
+.add-project-photo-section {
+    height: 280px;
+    width: 280px;
+    /* background-color: blue; */
+}
+
+
+
+@media (max-width: 1025px) {
+    .add-project {
+        position: relative;
+        min-height: 600px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+        align-content: stretch;
+        overflow: hidden;
+    }
+}
+
 @media (max-width: 815px) {
     .user-info-h2 {
         font-size: 50%;

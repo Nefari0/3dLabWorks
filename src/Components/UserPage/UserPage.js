@@ -44,6 +44,7 @@ class UserPage extends Component {
             this.setState({ ...this.state,items:res.data}))    
     }
 
+
     setIsLoading = () => {
         this.setState({isLoading:!this.state.isLoading})
     }

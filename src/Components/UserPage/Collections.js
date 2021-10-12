@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Resizer from 'react-image-file-resizer'
 import './UserPage.css'
 import axios from 'axios'
 import UserProject from './UserProject'
@@ -46,6 +47,7 @@ class Collections extends Component {
         this.getFileUrl = this.getFileUrl.bind(this)
         this.handleAddText = this.handleAddText.bind(this)
         this.editProject = this.editProject.bind(this)
+        // this.resizeFile = this.resizeFile.bind(this)
         // this.removeFileFromSpace2 = this.removeFileFromSpace2.bind(this)
         // this.deleteModel = this.deleteModel.bind(this)
     }
@@ -97,10 +99,41 @@ class Collections extends Component {
         this.addFile(await file)
     }
 
+    // ---- resizing photo ---- //
+    // handlePhoto = async (e) => {
+    //     const photo = e.target.files[0]
+    //     this.addPhoto(await photo)
+    // }
+
     handlePhoto = async (e) => {
-        const photo = e.target.files[0]
-        this.addPhoto(await photo)
+        // const photo = e.target.files[0]
+        var fileInput = false;
+
+        if (e.target.files[0]) {
+            fileInput = true
+        }
+
+        if (fileInput) {
+            try {
+                Resizer.imageFileResizer(
+                    e.target.files[0],
+                    300,
+                    300,
+                    "JPEG",
+                    50,
+                    0,
+                    (uri) => {
+                        this.setState({imageFile:URL.createObjectURL(uri)})
+                    },
+                    "file",
+                );
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
     }
+    // ------------------------- //
 
     fileHandler = async (params) => {
         const { file, fileUrl, imageFile, imageUrl } = this.state
@@ -203,6 +236,26 @@ class Collections extends Component {
         return (fileRef)
     }
 
+    // ----- resize image file uploads ----- //
+    // resizeFile = (file) =>
+    //     new Promise((resolve) => {
+    //         Resizer.imageFileResizer(
+    //         file,
+    //         300,
+    //         300,
+    //         "PNG",
+    //         100,
+    //         0,
+    //         (uri) => {
+    //             resolve(uri);
+    //         },
+    //         "base64"
+    //         );
+    //     });
+
+    
+    // -------------------------------------- //
+
     removeFileFromSpace = async (url,id) => {
         // create reference
         // var storage = db.storage();
@@ -291,7 +344,7 @@ class Collections extends Component {
 
     render(){
 
-        const { items,openAddProject,openEditModel } = this.state
+        const { items,openAddProject,openEditModel,imageFile } = this.state
 
         const mappedItems = items.map(element => {
             return <ModelItem key={element.model_id} name={element.name} img={element.firebase_url01} id={element.model_id} delete={this.deleteModel} removeFileFromSpace={this.removeFileFromSpace} openEdidModel={this.openEditModel} />
@@ -306,7 +359,7 @@ class Collections extends Component {
                     <div className="collections-h2"><h2 >Collections</h2></div>
                     <div onClick={this.addNewProject}><p>add project?</p></div>
 
-                    {!openAddProject ? null : <AddProject fileHandler={this.fileHandler} fileHandlerRemove={this.fileHandlerRemove} handlePhoto={this.handlePhoto} handleFile={this.handleFile} addNewProject={this.addNewProject} handleAddText={this.handleAddText} />}
+                    {!openAddProject ? null : <AddProject imageFile={imageFile} fileHandler={this.fileHandler} fileHandlerRemove={this.fileHandlerRemove} handlePhoto={this.handlePhoto} handleFile={this.handleFile} addNewProject={this.addNewProject} handleAddText={this.handleAddText} />}
                     {/* ----- moving this section to seperate functional componant */}
                     {/* <p>add photo</p>
                     <input 

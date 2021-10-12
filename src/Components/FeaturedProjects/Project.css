@@ -65,6 +65,7 @@
     border-radius: 50%;
     margin-right: 2px;
     margin-left: 10px;
+    z-index: 0;
 }
 
 .image-div {
@@ -93,8 +94,10 @@
 
 
         opacity: 0.7;
+        height: 100%;
         width: 100%;
-        height: auto;
+        /* width: 100%; */
+        /* height: auto; */
         -webkit-transform: scale(1.15);
         /* -webkit-transform: scale(2.15); */
         -ms-transform: scale(1.15);
