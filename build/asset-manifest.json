@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.133a21b8.chunk.css",
-    "main.js": "/static/js/main.69908691.chunk.js",
-    "main.js.map": "/static/js/main.69908691.chunk.js.map",
+    "main.css": "/static/css/main.cdcc710e.chunk.css",
+    "main.js": "/static/js/main.717ee0a5.chunk.js",
+    "main.js.map": "/static/js/main.717ee0a5.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.17e6a7a8.js",
     "runtime-main.js.map": "/static/js/runtime-main.17e6a7a8.js.map",
     "static/js/2.b7c00797.chunk.js": "/static/js/2.b7c00797.chunk.js",
@@ -10,14 +10,14 @@
     "static/js/3.7813677a.chunk.js": "/static/js/3.7813677a.chunk.js",
     "static/js/3.7813677a.chunk.js.map": "/static/js/3.7813677a.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.133a21b8.chunk.css.map": "/static/css/main.133a21b8.chunk.css.map",
+    "static/css/main.cdcc710e.chunk.css.map": "/static/css/main.cdcc710e.chunk.css.map",
     "static/js/2.b7c00797.chunk.js.LICENSE.txt": "/static/js/2.b7c00797.chunk.js.LICENSE.txt",
     "static/media/Home.css": "/static/media/chessboard2.3f9432fe.png"
   },
   "entrypoints": [
     "static/js/runtime-main.17e6a7a8.js",
     "static/js/2.b7c00797.chunk.js",
-    "static/css/main.133a21b8.chunk.css",
-    "static/js/main.69908691.chunk.js"
+    "static/css/main.cdcc710e.chunk.css",
+    "static/js/main.717ee0a5.chunk.js"
   ]
 }
