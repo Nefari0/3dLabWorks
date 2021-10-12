@@ -4,7 +4,7 @@ import './UserPage.css'
 
 const AddProject = (props) => {
 
-    const {imageFile} = props
+    const {previewImageFile} = props
 
     return(
         <div className="add-project">
@@ -40,7 +40,7 @@ const AddProject = (props) => {
                 </div>
             </div>
             <div >
-                <img className="add-project-photo-section" src={imageFile} />
+                <img className="add-project-photo-section" src={previewImageFile} />
             </div>
         </div>
     )

@@ -24,6 +24,7 @@ class Collections extends Component {
             fileUrl:null,
             file:null,
             imageFile:null,
+            previewImageFile:null,
             imageUrl:null,
             newItem:{},
             props:null,
@@ -91,7 +92,10 @@ class Collections extends Component {
     }
 
     addPhoto(params){
-        this.setState({imageFile:params})
+        this.setState({
+            imageFile:params,
+            previewImageFile:URL.createObjectURL(params)
+        })
     }
 
     handleFile = async (e) => {
@@ -100,39 +104,39 @@ class Collections extends Component {
     }
 
     // ---- resizing photo ---- //
-    // handlePhoto = async (e) => {
-    //     const photo = e.target.files[0]
-    //     this.addPhoto(await photo)
-    // }
-
     handlePhoto = async (e) => {
-        // const photo = e.target.files[0]
-        var fileInput = false;
-
-        if (e.target.files[0]) {
-            fileInput = true
-        }
-
-        if (fileInput) {
-            try {
-                Resizer.imageFileResizer(
-                    e.target.files[0],
-                    300,
-                    300,
-                    "JPEG",
-                    50,
-                    0,
-                    (uri) => {
-                        this.setState({imageFile:URL.createObjectURL(uri)})
-                    },
-                    "file",
-                );
-            } catch (err) {
-                console.log(err)
-            }
-        }
-
+        const photo = e.target.files[0]
+        this.addPhoto(await photo)
     }
+
+    // handlePhoto = async (e) => {
+    //     // const photo = e.target.files[0]
+    //     var fileInput = false;
+
+    //     if (e.target.files[0]) {
+    //         fileInput = true
+    //     }
+
+    //     if (fileInput) {
+    //         try {
+    //             Resizer.imageFileResizer(
+    //                 e.target.files[0],
+    //                 300,
+    //                 300,
+    //                 "JPEG",
+    //                 50,
+    //                 0,
+    //                 (uri) => {
+    //                     this.setState({imageFile:URL.createObjectURL(uri)})
+    //                 },
+    //                 "file",
+    //             );
+    //         } catch (err) {
+    //             console.log(err)
+    //         }
+    //     }
+
+    // }
     // ------------------------- //
 
     fileHandler = async (params) => {
@@ -344,7 +348,7 @@ class Collections extends Component {
 
     render(){
 
-        const { items,openAddProject,openEditModel,imageFile } = this.state
+        const { items,openAddProject,openEditModel,previewImageFile } = this.state
 
         const mappedItems = items.map(element => {
             return <ModelItem key={element.model_id} name={element.name} img={element.firebase_url01} id={element.model_id} delete={this.deleteModel} removeFileFromSpace={this.removeFileFromSpace} openEdidModel={this.openEditModel} />
@@ -359,7 +363,7 @@ class Collections extends Component {
                     <div className="collections-h2"><h2 >Collections</h2></div>
                     <div onClick={this.addNewProject}><p>add project?</p></div>
 
-                    {!openAddProject ? null : <AddProject imageFile={imageFile} fileHandler={this.fileHandler} fileHandlerRemove={this.fileHandlerRemove} handlePhoto={this.handlePhoto} handleFile={this.handleFile} addNewProject={this.addNewProject} handleAddText={this.handleAddText} />}
+                    {!openAddProject ? null : <AddProject previewImageFile={previewImageFile} fileHandler={this.fileHandler} fileHandlerRemove={this.fileHandlerRemove} handlePhoto={this.handlePhoto} handleFile={this.handleFile} addNewProject={this.addNewProject} handleAddText={this.handleAddText} />}
                     {/* ----- moving this section to seperate functional componant */}
                     {/* <p>add photo</p>
                     <input 
