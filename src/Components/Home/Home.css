@@ -3,6 +3,7 @@
 .hero {
     /* height: 55vh; */
      height: 85vh;
+     width: 100vw;
      /* background-image: linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),url(chessboard2.png); */
      background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url(blender_background.png);
      background-size: cover; 
@@ -15,7 +16,8 @@
      align-items: stretch;
      align-content: flex-start;
      padding-left: 15vw;
-     padding-top: 30px; */
+     padding-top: 30px;
+     overflow-y: scroll; */
 
      display: flex;
      flex-direction: row;
@@ -23,8 +25,9 @@
      justify-content: space-around;
      align-items: center;
      align-content: center;
-
      overflow: hidden;
+
+
 }
 
 .deploy-projects {
@@ -33,10 +36,10 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	justify-content: space-around;
+	/* justify-content: space-around; */
 	align-items: center;
 	align-content: center;
-    overflow: auto;
+    overflow: scroll;
     /* border-radius: 8%; */
     /* white-space: pre-wrap; */
 }
