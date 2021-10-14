@@ -25,13 +25,16 @@
      justify-content: space-around;
      align-items: center;
      align-content: center;
-     overflow: hidden;
+     /* overflow: hidden; */
+     overflow-y: scroll;
+
 
 
 }
 
 .deploy-projects {
     height: 70vh;
+    /* height: 375px; */
     width: 180vh;
 	display: flex;
 	flex-direction: row;
@@ -39,10 +42,15 @@
 	/* justify-content: space-around; */
 	align-items: center;
 	align-content: center;
-    overflow: scroll;
+    /* overflow-x: scroll; */
+    overflow-y: hidden;
+    z-index: 12;
+    /* display: inline-block; */
     /* border-radius: 8%; */
     /* white-space: pre-wrap; */
+    /* background-color: blue; */
 }
+
 
 ::-webkit-scrollbar {
     width: 20px;

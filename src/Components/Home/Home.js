@@ -65,7 +65,7 @@ class Home extends Component {
         return(
             <div>
                 <div className="hero">
-                    <h2 className="hero-h2">IMAGINE IT - BUILD IT.</h2>
+                    <h2 className="hero-h2">IMAGINE IT - BUILD IT.</h2> 
                     <div className="deploy-projects">{mappedModels}</div>
                     {/* <video autoPlay loop muted
                     style={{
