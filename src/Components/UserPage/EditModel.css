@@ -1,0 +1,24 @@
+.edit-project-container {
+    position: absolute;
+    z-index: 13;
+    padding:auto;
+    height: 600px;
+    width: 300px;
+    background-color: blue;
+    display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: center;
+}
+
+.edit-model-h3 {
+    color: #fff;
+}
+
+.text-input {
+    height: 20px;
+    width: 290px;
+    background-color: chartreuse;
+}

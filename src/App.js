@@ -11,10 +11,11 @@ import routes from './routes'
 import { HashRouter } from 'react-router-dom'
 import Footer from './Components/Footer/Footer'
 import Explore  from './Components/Explore/Explore'
+// import EditModel from './Components/UserPage/EditModel' // for testing. will not be rendered in this component
 // import FirebaseTest from './Components/FirebaseTest';
 // import Three from './Components/Three'
 // import ThreeView from './Components/Three'
-// import DemoScene from './Components/Three/ThreeView';
+// import DemoScene from './Components/Three/ThreeView'; // testing react 3
 
 function App() {
   
@@ -23,6 +24,7 @@ function App() {
     <div className="App">
         {/* <FirebaseTest/> */}
         <Header/>
+        {/* <EditModel/> */}
         {/* <DemoScenes /> */}
         {routes}
         {/* <GroupPage/> */}

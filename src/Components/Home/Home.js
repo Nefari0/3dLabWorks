@@ -11,7 +11,7 @@ import FeaturedProjects from '../FeaturedProjects/FeaturedProjects'
 import Loading from '../Loading/Loading'
 // import CurrentProject from './CurrentProject/CurrentProject'
 import Project from '../FeaturedProjects/Project'
-import EditModel from '../UserPage/EditModel' // for testing. will not be rendered in this component
+
 // import Vid from './Video/EC.NC gear train0001-0500.mp4'
 
 class Home extends Component {
