@@ -1,6 +1,7 @@
 
 .header-container {
     /* position: absolute; */
+    /* position: sticky; */
     margin: none;
     /* height: 10vh; */
     height: 60px;
