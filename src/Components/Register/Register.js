@@ -28,21 +28,26 @@ const Register = (props) => {
     return(
         <div className="signup-menu">
             <div className="one-line">
-                <p className="text">username</p>
-                <input value={user_name} className="input" onChange={e => setUserName(e.target.value)}></input>
+                <p className="text">Username</p>
+                <input value={user_name}  onChange={e => setUserName(e.target.value)}></input>
             </div>
             <div className="one-line">
-                <p className="text">password</p>
-                <input value={password} className="input" onChange={e => setPassword(e.target.value)}></input>
+                <p className="text">Password</p>
+                <input className="text-bar" value={password} onChange={e => setPassword(e.target.value)}></input>
             </div>
             <div className="one-line">
-                <p className="text">email</p>
-                <input className="input" value={email} onChange={e => setEmail(e.target.value)}></input>
+                <p className="text">Email</p>
+                <input  value={email} onChange={e => setEmail(e.target.value)}></input>
             </div>
             <div className="one-line">
-                <p className="text">first name</p>
-                <input className="input" value={first_name} onChange={e => setFirstName(e.target.value)}></input>
+                <p className="text">First Name</p>
+                <input value={first_name} onChange={e => setFirstName(e.target.value)}></input>
             </div>
+            <div className="one-line">
+                <p className="text">Last Name</p>
+                <input value={first_name} onChange={e => setFirstName(e.target.value)}></input>
+            </div>
+            
 
             <div className="register-link" onClick={executeRegister}>
                 <h4>signup now</h4>
