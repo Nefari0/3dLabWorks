@@ -120,7 +120,7 @@ class UserPage extends Component {
             <div className="column1">
             {isLoading ? <Loading/> : null}
                 <div className="portrait">
-                    <img className="model-img profile-photo" 
+                    <img className="model-img  profile-photo" 
                     src={photo}
                     alt="photo"/>
                     {/* <svg className="icon-big" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -135,7 +135,7 @@ class UserPage extends Component {
                     onChange={e => this.handlePhoto(e)}
                     /> */}
                 </div>
-                <ul>
+                <ul className="menu" >
                     <li><div onClick={() => this.hideView('showUserInfo')} className="profile-buttons">user info</div></li>
                     <li><div onClick={() => this.hideView('showCollections')} className="profile-buttons">collections</div></li>
                     <li><div className="profile-buttons">groups</div></li>
@@ -151,7 +151,7 @@ class UserPage extends Component {
                     alt="photo"/>
                     <h2 className="name-container" >{this.props.user.user.name}</h2>
                     </div>
-                    <ul>
+                    <ul className="menu" >
                         <li><div onClick={() => this.hideView('showUserInfo')} className="profile-buttons">user info</div></li>
                         <li><div onClick={() => this.hideView('showCollections')} className="profile-buttons">collections</div></li>
                         <li><div className="profile-buttons">groups</div></li>
