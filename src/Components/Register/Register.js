@@ -27,6 +27,7 @@ const Register = (props) => {
 
     return(
         <div className="signup-menu">
+            <h2 style={{color:'#555'}}>Register</h2>
             <div className="one-line">
                 <p className="text">Username</p>
                 <input value={user_name}  onChange={e => setUserName(e.target.value)}></input>

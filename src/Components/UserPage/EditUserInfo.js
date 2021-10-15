@@ -206,18 +206,39 @@ class EditUserInfo extends Component {
 
         return(
             <div className="edit-user-info">
-                <section><h2 className="user-info-h2">edit user info</h2></section>
                 {/* <section className="user-photo"><img className="photo-properties" src={file} /> <input id="fileItem" type ="file" className="change-photo" onChange={e => this.handlePhotoChange(e)}/> <button onClick={this.handleCancelClick}>cancel</button> </section> */}
-                <section className="input-section">
-                    <ul className="input-list">
-                        <li className="list-item"><p className="list-text">username</p><input placeholder={user} onChange={e => this.handleAddText('user_name', e.target.value)}/></li>
-                        <li className="list-item"><p className="list-text">first name</p><input placeholder={name} onChange={e => this.handleAddText('first_name', e.target.value)}/></li>
-                        <li className="list-item"><p className="list-text">last name</p><input placeholder="last name" onChange={e => this.handleAddText('last_name', e.target.value)}/></li>
-                        <li className="list-item"><p className="list-text">email address</p><input placeholder={email} onChange={e => this.handleAddText('email', e.target.value)} /></li>
-                        <li className="list-item"><img className="photo-properties" src={staticPhoto} /> <input id="fileItem" type ="file" className="change-photo" accept="image/png,image/jpeg" onChange={e => this.addPhoto(e)}/> <button onClick={this.handleCancelClick}>cancel</button> </li>
+                <section className="">
+                    <div className="input-list">
+                        <section><h2 style={{color:'#555'}}>edit user info</h2></section>
+
+                        <div>
+                            <p className="list-text">Username</p><input placeholder={user} onChange={e => this.handleAddText('user_name', e.target.value)}/>
+                        </div>
+
+
+                        <div className="">
+                            <p className="list-text">First Name</p><input placeholder={name} onChange={e => this.handleAddText('first_name', e.target.value)}/>
+                        </div>
+
+                        <div className="">
+                            <p className="list-text">Last Name</p><input placeholder="last name" onChange={e => this.handleAddText('last_name', e.target.value)}/>
+                        </div>
+
+                        <div className="">
+                            <p className="list-text">Email Address</p><input placeholder={email} onChange={e => this.handleAddText('email', e.target.value)} />
+                        </div>
+                        
+                        <div >
+                            <p style={{color:'#555'}}>Profile Picture</p>
+                            <img className="photo-properties" src={staticPhoto} /> 
+                            <div className="edit-photo-line">
+                                <input id="fileItem" type ="file" className="change-photo" accept="image/png,image/jpeg" onChange={e => this.addPhoto(e)}/> <button onClick={this.handleCancelClick}>clear</button>
+                            </div>
+                        </div>
+
                         {/* <li className="user-photo"><img className="photo-properties" src={photo}/><button className="li-button">delete picture</button></li> */}
-                        <li className="list-item"><button onClick={this.launchPic} className="li-button">submit</button><button className="li-button" onClick={this.props.edit}>cancel</button></li>
-                    </ul>
+                        <div className=""><button onClick={this.launchPic} className="li-button">submit</button><button className="li-button" onClick={this.props.edit}>cancel</button></div>
+                    </div>
                 </section>
             </div>
         )
