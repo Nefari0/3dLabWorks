@@ -21,29 +21,6 @@
     margin: 0px;
 }
 
-.one-line {
-    /* margin-left: 10px;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: flex-start;
-	align-content: stretch; */
-
-    
-    /* background-color: blue; */
-    /* margin-top: 10px;
-    display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: center;
-	align-content: stretch;
-    text-align: left; */
-
-    /* display: inline-block; */
-}
-
 .text {
     margin: 0%;
     /* margin-right: 50%; */

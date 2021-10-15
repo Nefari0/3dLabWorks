@@ -37,17 +37,6 @@
 	align-items: center;
 }
 
-.list-item {
-    /* display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: space-around;
-	align-items: baseline;
-	font-size: smaller;
-	align-content: stretch;
-	background-color: chartreuse; */
-}
-
 .list-text {
     color: #555;
 	text-align: left;

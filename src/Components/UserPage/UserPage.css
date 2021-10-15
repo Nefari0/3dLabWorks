@@ -185,22 +185,24 @@
     overflow-y:auto;
     padding-top: 10%;
     padding-bottom: 10%;
-    border-radius: 2%;
+    border-radius: 2%;           
 }
 .text-element {
     margin-right: 15px;
     margin-bottom: 5px;
     font-weight: 100;
     text-transform: none;
+    font-size: small;
 }
 
 .user-info-h2 {
     margin-left: 15%;
     margin-right: 15%;
-    margin-top: 2px;
+    margin-top: 5px;
     text-align: right;
     color: #555;
     background-color: rgb(253, 249, 249);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     border-radius: 5%;
 }
 
@@ -208,12 +210,13 @@
     text-align: left;
     margin-left: 15px;
     margin-top: 5px;
+    font-size: small;
 }
 
 .title-h {
     text-align: center;
     font-weight: 300;
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
 }
 
 .title {
@@ -236,7 +239,7 @@
 .edit-menu-button {
     width: 50px;
     margin: auto;
-    margin-top: none;
+    margin-top: 10px;
     margin-bottom: none;
     padding: none;
 }
