@@ -102,6 +102,8 @@ app.get('/api/comments/id/:model_id', projectsController.getModelComments)
 app.get('/api/documents/all', docsController.getAll)
 app.get('/api/documents/about', docsController.getAbout)
 app.get('/api/documents/general', docsController.getGeneral)
+app.post('/api/general/post', docsController.editGeneral)
+// app.post('/api/about/post', docsController.editAbout)
 
 
 // // storage access end points //

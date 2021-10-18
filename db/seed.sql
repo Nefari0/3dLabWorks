@@ -101,3 +101,19 @@
 --   2,
 --   'firebase_test_url'
 -- )
+
+
+-- --------------- documents db ----------------- --
+-- CREATE TABLE d_document (
+--   doc_id SERIAL PRIMARY KEY,
+--   user_id INTEGER,
+--   FOREIGN KEY(user_id) REFERENCES d_user(user_id),
+--   tag TEXT,
+--   content TEXT
+-- )
+
+-- INSERT into d_document(user_id,tag,content)
+-- VALUES (12,'general','This site is an ongoing project. As of 10/4/2021 it is still under construction. Developers are working towards utilizing in app 3d rendering tools to allow users to upload .stl and .mtl files that will automatically be displayed in the app. Since this is currently not supported, it is recommended that you upload a screenshot of your project along with the file so other users can preview your work before downloading the file')
+
+-- UPDATE d_document SET content = 'This site is an ongoing project. As of 10/4/2021 it is still under construction. Developers are working towards utilizing in app 3d rendering tools to allow users to upload .stl and .mtl files that will automatically be displayed in the app. Since this is currently not supported, it is recommended that you upload a screenshot of your project along with the file so other users can preview your work before downloading the file' WHERE tag = 'general'
+
