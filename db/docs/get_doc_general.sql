@@ -1,0 +1,1 @@
+SELECT * FROM  d_document WHERE  tag = 'general'

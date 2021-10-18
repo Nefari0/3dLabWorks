@@ -100,6 +100,8 @@ app.get('/api/comments/id/:model_id', projectsController.getModelComments)
 
 // --- documents and admin edits ---- //
 app.get('/api/documents/all', docsController.getAll)
+app.get('/api/documents/about', docsController.getAbout)
+app.get('/api/documents/general', docsController.getGeneral)
 
 
 // // storage access end points //

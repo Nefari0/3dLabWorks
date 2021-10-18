@@ -17,16 +17,24 @@ export default class About extends Component {
     }
 
     componentDidMount(){
-        axios.get('/api/documents/all').then(res => {
+        axios.get('/api/documents/about').then(res => {
             this.setState({about:res.data})
+        })
+        axios.get('/api/documents/general').then(res => {
+            this.setState({general:res.data})
         })
     }
 
         render(){
 
-            const { about } = this.state
+            const { about,general } = this.state
 
+            // const filterAbout = about.filter(element => {element.tag="about"})
             const mappedAbout = about.map(element => {
+                return <Document data={element} key={element.doc_id} />
+            })
+
+            const mappedGeneral = general.map(element => {
                 return <Document data={element} key={element.doc_id} />
             })
 
@@ -40,13 +48,14 @@ export default class About extends Component {
                         </p>
                     </div> */}
                     {mappedAbout}
-                    <div className="doc-containers">
+                    {/* <div className="doc-containers">
                         <h4 className="about-h4">General Information</h4>
                         <div className="h4-border"></div>
                         <text>
                             This site is an ongoing project. As of 10/4/2021 it is still under construction. Developers are working towards utilizing in app 3d rendering tools to allow users to upload .stl and .mtl files that will automatically be displayed in the app. Since this is currently not supported, it is recommended that you upload a screenshot of your project along with the file so other users can preview your work before downloading the file
                         </text>
-                    </div>
+                    </div> */}
+                    {mappedGeneral}
                 </div>
             )
         }
