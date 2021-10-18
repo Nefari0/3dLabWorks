@@ -14,6 +14,7 @@ const projectsController = require('./controllers/projectsController');
 const deletedDataController = require('./controllers/deletedDataController')
 const { projectManagement, auth } = require('firebase-admin');
 const { addProject } = require('./controllers/projectsController');
+const docsController = require('./controllers/docsController')
 // const baseBackend = require('./../src/baseBackend')
 // const path = require('path');
 // const { default: reducer } = require('../src/ducks/modelsReducer'); // auto added
@@ -96,6 +97,10 @@ app.delete('/api/project/delete/:model_id', projectsController.deleteProject)
 app.get('/api/comments/all', projectsController.getComments)
 app.post('/api/comments/create', projectsController.createComment)
 app.get('/api/comments/id/:model_id', projectsController.getModelComments)
+
+// --- documents and admin edits ---- //
+app.get('/api/documents/all', docsController.getAll)
+
 
 // // storage access end points //
 // app.get('/api/assets/getall')

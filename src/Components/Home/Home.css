@@ -20,9 +20,11 @@
      overflow-y: scroll; */
 
      display: flex;
-     flex-direction: row;
+     /* flex-direction: row; */
+     flex-direction: column;
      flex-wrap: wrap;
      justify-content: space-around;
+     
      align-items: center;
      align-content: center;
      overflow: hidden;
@@ -40,6 +42,7 @@
 	flex-direction: row;
 	flex-wrap: nowrap;
 	/* justify-content: space-around; */
+    /* justify-content: flex-start;   */
 	align-items: center;
 	align-content: center;
     /* overflow-x: scroll; */

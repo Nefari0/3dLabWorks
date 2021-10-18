@@ -10,6 +10,7 @@ import Sites from './Components/SiteLinks/Sites'
 import Register from './Components/Register/Register'
 import ProjectDetail from './Components/FeaturedProjects/ProjectDetail'
 import SecurityTest from './Components/UserPage/SecurityTest'
+import Agreement from './Components/Register/Agreement'
 
 
 export default (
@@ -24,5 +25,6 @@ export default (
         <Route path="/projectdetails/:model_id" component={ProjectDetail} />
         <Route path="/securitytest" component={SecurityTest} />
         <Route path="/header" component={Header} />
+        <Route path="/agreement" component={Agreement} />
     </Switch>
 )
