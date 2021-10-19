@@ -11,6 +11,7 @@ import routes from './routes'
 import { HashRouter } from 'react-router-dom'
 import Footer from './Components/Footer/Footer'
 import Explore  from './Components/Explore/Explore'
+import AdminPage from './Components/AdminPage/AdminPage';
 // import EditModel from './Components/UserPage/EditModel' // for testing. will not be rendered in this component
 // import FirebaseTest from './Components/FirebaseTest';
 // import Three from './Components/Three'
@@ -22,6 +23,7 @@ function App() {
   return (
     <HashRouter>
     <div className="App">
+      {/* <AdminPage /> */}
         {/* <FirebaseTest/> */}
         <Header/>
         {/* <EditModel/> */}

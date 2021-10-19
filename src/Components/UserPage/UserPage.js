@@ -3,7 +3,7 @@ import Home from '../Home/Home'
 import { Switch, Route } from 'react-router-dom'
 import Project from '../FeaturedProjects/Project'
 import { Component, lazy } from 'react'
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './UserPage.css'
 import { connect } from 'react-redux'
 import { getProjects } from '../../ducks/projectsReducer';
@@ -14,6 +14,7 @@ import {app} from '../../base'
 import SecurityTest from './SecurityTest'
 import MobileLogin from '../MobileLogin/MobileLogin'
 import Loading from '../Loading/Loading';
+import AdminPage from '../AdminPage/AdminPage';
 
 const db = app.firestore()
 
@@ -72,7 +73,9 @@ class UserPage extends Component {
             case 'showCollections':
                 this.setState({ showCollections : !this.state.showCollections })
                 break;
-            
+            case 'showAdminPage':
+                this.setState({ showAdminPage : !this.state.showAdminPage})
+                break;
             default:
                 break;
         }
@@ -142,8 +145,8 @@ class UserPage extends Component {
                     <li><div onClick={() => this.hideView('showCollections')} className="profile-buttons">collections</div></li>
                     <li><div className="profile-buttons">groups</div></li>
                     <li><div className="profile-buttons">friends</div></li>
-                    {is_admin ? <li><div onClick={() => this.hideView('showCollections')} className="profile-buttons">admin page</div></li> : null}
-                    {/* <li><div className="profile-buttons">stuff</div></li> */}
+                    {/* {is_admin ? <li><div onClick={() => this.hideView('showCollections')} className="profile-buttons">admin page</div></li> : null} */}
+                    {is_admin ? (<Link to={'/admin'} style={{ textDecoration:'none' }} ><li><div  className="profile-buttons">admin page</div></li></Link>) : null}
                 </ul>
             </div>
             <section className="column2">
@@ -159,6 +162,8 @@ class UserPage extends Component {
                         <li><div onClick={() => this.hideView('showCollections')} className="profile-buttons">collections</div></li>
                         <li><div className="profile-buttons">groups</div></li>
                         <li><div className="profile-buttons">friends</div></li>
+                        {/* {is_admin ? (<Link to={'/admin'} ><li><div onClick={() => this.hideView('showCollections')} className="profile-buttons">admin page</div></li></Link>) : null} */}
+                        {is_admin ? (<Link to={'/admin'} style={{ textDecoration:'none' }}><li><div  className="profile-buttons">admin page</div></li></Link>) : null}
                     </ul>
                 </div>
 

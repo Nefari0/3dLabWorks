@@ -17,8 +17,9 @@ module.exports = {
     // ---- edit docs control ---- //
 
     editGeneral: async (req,res) => {
-        const { user_id,content,tag } = req.body
-        const newContent = await req.app.get('db').docs.edit_doc_general([user_id,content,tag])
+        const { generalContent,tag } = req.body
+        console.log('heres your content',tag)
+        const newContent = await req.app.get('db').docs.edit_doc_general([generalContent,tag])
         return res.status(200).send(newContent)
     },
 

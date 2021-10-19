@@ -1,1 +1,1 @@
-UPDATE d_document SET content = $2 WHERE tag = $3
+UPDATE d_document SET content = $1 WHERE tag = $2
