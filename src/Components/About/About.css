@@ -1,5 +1,5 @@
 
-.about-h4 {
+/* .about-h4 {
     float: left;
     margin: 30px;
     margin-left: 5px;
@@ -13,11 +13,12 @@
     margin-bottom: 10px;
     width: 50px;
     border-bottom: 2px solid #e67e22;;
-}
+} */
 
 .about-container {
     margin-bottom: auto;
-    height: 80vh;
+    /* height: 80vh; */
+    min-height: 300px;
     width: 100vw;
     background-color: rgb(236, 232, 232);
     display: flex;
