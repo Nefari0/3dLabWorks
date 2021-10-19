@@ -27,6 +27,7 @@ class UserPage extends Component {
             user:{},
             showUserInfo:true,
             showCollections:false,
+            showAdminPage:false,
             profilePic:null,
             userName:null,
             isLoading:false
@@ -71,6 +72,7 @@ class UserPage extends Component {
             case 'showCollections':
                 this.setState({ showCollections : !this.state.showCollections })
                 break;
+            
             default:
                 break;
         }
@@ -105,7 +107,7 @@ class UserPage extends Component {
     render(){
         const { showCollections,showUserInfo,items,isLoading } = this.state
         const { isLoggedIn } = this.props.user
-        const { photo,auth,name } = this.props.user.user
+        const { photo,auth,name,is_admin } = this.props.user.user
 
         // const mappedItems = items.map((el,i,all) => {
         //     return <Collections key={el.model_id} />
@@ -140,6 +142,7 @@ class UserPage extends Component {
                     <li><div onClick={() => this.hideView('showCollections')} className="profile-buttons">collections</div></li>
                     <li><div className="profile-buttons">groups</div></li>
                     <li><div className="profile-buttons">friends</div></li>
+                    {is_admin ? <li><div onClick={() => this.hideView('showCollections')} className="profile-buttons">admin page</div></li> : null}
                     {/* <li><div className="profile-buttons">stuff</div></li> */}
                 </ul>
             </div>
