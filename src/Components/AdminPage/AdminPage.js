@@ -16,11 +16,13 @@ class AdminPage extends Component {
 
         this.state = {
             text:'test',
-            generalContent:''
+            generalContent:'',
+            aboutContent:''
 
         }
         this.handleAddText = this.handleAddText.bind(this)
         this.addGeneral = this.addGeneral.bind(this)
+        this.addAbout = this.addAbout.bind(this)
     }
 
     handleAddText(prop, val) {
@@ -32,10 +34,22 @@ class AdminPage extends Component {
     addGeneral = () => {
 
         const { generalContent } = this.state
+        const content = generalContent
         const tag = 'general'
 
-        axios.post('/api/docs/post',{generalContent,tag}).then(alert('new content has been added to General Information element')).catch(err => {
+        axios.post('/api/docs/post',{content,tag}).then(alert('new content has been added to General Information element')).catch(err => {
             console.log('error',err)
+        })
+    }
+
+    addAbout = () => {
+        
+        const { aboutContent } = this.state
+        const content = aboutContent
+        const tag = 'about'
+
+        axios.post('/api/docs/post', {content,tag}).then(alert('new content has been added to About Information element')).catch(err => {
+            console.log(err)
         })
     }
 
@@ -48,12 +62,15 @@ class AdminPage extends Component {
             <div className="admin-container">
                 {!is_admin ? (<Route path="/" component={Home}/>) : (
                     <div>
-                    <h4 style={{color:'#fff'}}>admin page</h4>
+                    <h4>admin page</h4>
                     {/* <input type="text" className="admin-input" ></input> */}
                     <div className="add-doc-div"><textarea onChange={e => this.handleAddText('generalContent', e.target.value)} className="input" name="text" rows="14" cols="100" wrap="soft"> </textarea>
-                    <a onClick={this.addGeneral}>add to general content</a></div>
+                    <button className="text" onClick={this.addGeneral}>add to general content</button></div>
+
+                    <div className="add-doc-div"><textarea onChange={e => this.handleAddText('aboutContent', e.target.value)} className="input" name="text" rows="14" cols="100" wrap="soft"> </textarea>
+                    <button className="text" onClick={this.addAbout}>add to about content</button></div>
                     
-                    <Link to={'/user'} ><a style={{color:'#fff'}}>mypage</a></Link>
+                    <Link to={'/user'} ><a >mypage</a></Link>
                     </div>
                 )}
             </div>

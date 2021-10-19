@@ -1,16 +1,23 @@
 
 .admin-container {
     min-height: 500px;
-    width: 90vw;
-    background-color: blue;
+    min-width: 90hw;
+    background-color: rgb(225, 225, 226);
     margin: auto;
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: stretch;
+
 
     /* z-index: 12; */
 }
 
 .add-doc-div {
     height: 400px;
-    width: 400px;
+    width: 300px;
     /* background-color: chartreuse; */
 	display: flex;
 	flex-direction: column;
@@ -24,7 +31,7 @@ input[type="text"]
 {
     background: transparent;
     /* height: 100vh; */
-    height: 80px;
+    height: 40px;
     width: 300px;
     border-radius: 5%;
     overflow-x: none;
