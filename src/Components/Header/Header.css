@@ -5,7 +5,8 @@
     margin: none;
     /* height: 10vh; */
     height: 60px;
-    width: 100vw;
+    /* width: 100vw; */
+    min-width: 300px;
     /* background-color: rgb(223, 217, 217); */
     /* background-color: #fff; */
     background-color: #6495ed;
