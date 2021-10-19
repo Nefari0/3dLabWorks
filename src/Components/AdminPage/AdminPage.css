@@ -1,6 +1,7 @@
 
 .admin-container {
-    min-height: 500px;
+    /* min-height: 500px; */
+    min-height: 100vh;
     min-width: 90hw;
     background-color: rgb(225, 225, 226);
     margin: auto;
@@ -17,25 +18,40 @@
 
 .add-doc-div {
     height: 400px;
-    width: 300px;
-    /* background-color: chartreuse; */
+    width: 400px;
+    background-color: chartreuse;
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
 	justify-content: flex-start;
 	align-items: center;
-	align-content: stretch;
+	/* align-content: stretch; */
+    margin: 10px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5%;
+    box-shadow: 1px 1px#d1d1d1;
+
 }
 
 input[type="text"]
 {
     background: transparent;
-    /* height: 100vh; */
-    height: 40px;
+    height: 100vh;
+    /* min-height: 400px; */
     width: 300px;
     border-radius: 5%;
     overflow-x: none;
+    /* overflow: auto; */
 
     word-wrap: break-word;
     word-break: break-all;
+
+}
+
+.checkbox {
+    display: flex;
+    flex-direction: row;
+    font-size: x-small;
+    margin-bottom: 10px;
 }

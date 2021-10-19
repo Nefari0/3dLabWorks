@@ -1,0 +1,1 @@
+UPDATE d_document SET display = $1 WHERE tag = $2

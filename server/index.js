@@ -104,6 +104,7 @@ app.get('/api/documents/about', docsController.getAbout)
 app.get('/api/documents/general', docsController.getGeneral)
 // app.post('/api/general/post', docsController.editGeneral)
 app.post('/api/docs/post', docsController.editGeneral)
+app.post('/api/docs/hide', docsController.hideDoc)
 // app.post('/api/about/post', docsController.editAbout)
 
 

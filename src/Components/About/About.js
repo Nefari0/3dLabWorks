@@ -23,7 +23,9 @@ class About extends Component {
 
     componentDidMount(){
         axios.get('/api/documents/about').then(res => {
-            this.setState({about:res.data})
+            this.setState({
+                about:res.data
+            })
         })
         axios.get('/api/documents/general').then(res => {
             this.setState({general:res.data})
@@ -34,7 +36,6 @@ class About extends Component {
 
             const { about,general } = this.state
 
-            // const filterAbout = about.filter(element => {element.tag="about"})
             const mappedAbout = about.map(element => {
                 return <Document data={element} key={element.doc_id} />
             })
@@ -46,6 +47,7 @@ class About extends Component {
             return(
                 <div className="about-container">
                     
+                    {/* {about.display === false ? {mappedAbout} : null} */}
                     {mappedAbout}
 
                     {mappedGeneral}

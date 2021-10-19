@@ -18,8 +18,14 @@ module.exports = {
 
     editGeneral: async (req,res) => {
         const { content,tag } = req.body
-        console.log('heres your content',tag)
         const newContent = await req.app.get('db').docs.edit_doc_general([content,tag])
+        return res.status(200).send(newContent)
+    },
+
+    hideDoc: async (req,res) => {
+        const { content, tag } = req.body
+        console.log('here are your tags/contents',tag)
+        const newContent = await req.app.get('db').docs.hide_doc([content,tag])
         return res.status(200).send(newContent)
     },
 
