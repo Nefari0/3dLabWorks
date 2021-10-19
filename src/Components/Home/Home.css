@@ -20,15 +20,17 @@
      overflow-y: scroll; */
 
      display: flex;
-     /* flex-direction: row; */
-     flex-direction: column;
+     flex-direction: row;
+     /* flex-direction: column; */
      flex-wrap: wrap;
      justify-content: space-around;
      
      align-items: center;
      align-content: center;
+     overflow-x: scroll;
+     overflow-y: scroll;
      overflow: hidden;
-     /* overflow-y: scroll; */
+     /* margin: auto; */
 
 
 
@@ -174,6 +176,12 @@
         text-align: center;
         height: 300px;
         width: 80vw;
+    }
+}
+
+@media (max-width:400px) {
+    .hero-h2 {
+        display: none;
     }
 }
 
