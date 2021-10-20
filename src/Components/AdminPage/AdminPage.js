@@ -18,8 +18,11 @@ class AdminPage extends Component {
             text:'test',
             generalContent:'',
             displayGeneral:true,
+            editGeneral:false,
+
             aboutContent:'',
             displayAbout:true,
+            editAbout:false
 
         }
         this.handleAddText = this.handleAddText.bind(this)
@@ -27,6 +30,8 @@ class AdminPage extends Component {
         this.addAbout = this.addAbout.bind(this)
         this.hideDocAbout = this.hideDocAbout.bind(this)
         this.hideDocGeneral = this.hideDocGeneral.bind(this)
+        this.openEditAbout = this.openEditAbout.bind(this)
+        this.openEditGeneral = this.openEditGeneral.bind(this)
     }
 
     handleAddText(prop, val) {
@@ -47,7 +52,6 @@ class AdminPage extends Component {
     }
 
     addAbout = () => {
-        
         const { aboutContent } = this.state
         const content = aboutContent
         const tag = 'about'
@@ -71,30 +75,62 @@ class AdminPage extends Component {
         axios.post('/api/docs/hide' ,{content,tag}).then(alert('display changed')).catch(err => console.log(err))
     }
 
+    openEditAbout(){
+        this.setState({
+            editAbout:!this.state.editAbout
+        })
+    }
+    openEditGeneral(){
+        this.setState({
+            editGeneral:!this.state.editGeneral
+        })
+    }
+
     render(){
 
-        const { test } = this.state
+        const { test,editAbout,editGeneral } = this.state
         const { photo,auth,name,is_admin } = this.props.user.user
 
         return(
             <div className="admin-container">
                 {!is_admin ? (<Route path="/" component={Home}/>) : (
                     <div>
-                    <h4>admin page</h4>
-                    {/* <input type="text" className="admin-input" ></input> */}
-                    <div className="add-doc-div">
-                        <h4>edit general info</h4>
+                    <ul className="admin-header-ul">
+                    { editGeneral ?
+                    <li className="add-doc-div" >
+                        <a onClick={this.openEditGeneral}>edit general info</a>
                         <textarea onChange={e => this.handleAddText('generalContent', e.target.value)} className="input" name="text" rows="14" cols="100" wrap="soft"> </textarea>
                         <button className="text" onClick={this.addGeneral}>add to general content</button>
                         <div className="checkbox" style={{marginTop:'20px'}}><input type="checkbox" onChange={e => this.handleAddText('displayGeneral',!this.state.displayGeneral)} /><p style={{color:'#555'}}>display this diocument?</p><button onClick={this.hideDocGeneral}>change</button></div>
-                    </div>
+                    </li>
+                    :
+                    <li className="add-doc-div-closed" onClick={this.openEditGeneral}><a>edit general info</a></li>}
 
-                    <div className="add-doc-div">
-                        <h4>edit about info</h4>
+                    { editAbout ?
+                    <li className="add-doc-div">
+                        <a  onClick={this.openEditAbout} className="admin-a">edit about info</a>
                         <textarea onChange={e => this.handleAddText('aboutContent', e.target.value)} className="input" name="text" rows="14" cols="100" wrap="soft"> </textarea>
                         <button className="text" onClick={this.addAbout}>add to about content</button>
                         <div className="checkbox" style={{marginTop:'20px'}}><input type="checkbox" onChange={e => this.handleAddText('displayAbout',!this.state.displayAbout)} /><p style={{color:'#555'}}>display this diocument?</p><button onClick={this.hideDocAbout}>change</button></div>
-                    </div>
+                    </li>
+                    :
+                    <li className="add-doc-div-closed"><a onClick={this.openEditAbout}>edit about info</a></li>}
+
+                    {/*  place holders  */}
+                    <li className="add-doc-div-closed"><a>notifications</a></li>
+                    <li className="add-doc-div-closed"><a>messages</a></li>
+                    <li className="add-doc-div-closed"><a>user details</a></li>
+                    <li className="add-doc-div-closed"><a>terms</a></li>
+                    <li className="add-doc-div-closed"><a>user project details</a></li>
+                    </ul>
+         
+
+                    {/* <div className="add-doc-div-closed"><h4>edit news / notifications</h4></div>
+                    <div className="add-doc-div-closed"><h4>messages</h4></div>
+                    <div className="add-doc-div-closed"><h4></h4></div>
+                    <div className="add-doc-div-closed"><h4></h4></div>
+                    <div className="add-doc-div-closed"><h4></h4></div> */}
+                    
                     
                     <Link to={'/user'} ><a >mypage</a></Link>
                     </div>
