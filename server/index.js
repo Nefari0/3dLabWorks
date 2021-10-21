@@ -106,6 +106,7 @@ app.get('/api/documents/general', docsController.getGeneral)
 app.post('/api/docs/post', docsController.editGeneral)
 app.post('/api/docs/hide', docsController.hideDoc)
 // app.post('/api/about/post', docsController.editAbout)
+app.get('/api/links/get', docsController.getAllLinks)
 
 
 // // storage access end points //

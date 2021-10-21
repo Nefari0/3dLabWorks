@@ -29,7 +29,8 @@ module.exports = {
         return res.status(200).send(newContent)
     },
 
-    editAbout: async (req,res) => {
-
+    getAllLinks: async (req,res) => {
+        const links = await req.app.get('db').docs.get_links()
+        return res.status(200).send(links)
     }
 }
