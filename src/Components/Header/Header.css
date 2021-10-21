@@ -41,6 +41,13 @@
     margin-right: 30px;
 }
 
+ul.link-list li:hover {
+    background-color: #3c598e;
+    border-radius: 10%;
+    color: #fff;
+    transition: all 500ms;
+}
+
 /* -----------reference------------- */
 
 /* Main navi */

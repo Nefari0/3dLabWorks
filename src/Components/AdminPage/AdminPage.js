@@ -122,6 +122,7 @@ class AdminPage extends Component {
                     <li className="add-doc-div-closed"><a>user details</a></li>
                     <li className="add-doc-div-closed"><a>terms</a></li>
                     <li className="add-doc-div-closed"><a>user project details</a></li>
+                    <li className="add-doc-div-closed"><a>memo</a></li>
                     </ul>
          
 
