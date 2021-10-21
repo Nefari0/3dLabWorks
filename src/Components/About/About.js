@@ -7,6 +7,7 @@ import data from '../../data';
 import { connect } from 'react-redux'
 import { updateUser } from '../../ducks/userReducer';
 import UserPage from '../UserPage/UserPage';
+import Links from './Links/Links';
 
 class About extends Component {
 
@@ -17,8 +18,13 @@ class About extends Component {
             about:[],
             showAbout:true,
             general:[],
-            showGeneral:true
+            showGeneral:true,
+
+            mainSelected:true,
+            linksSelected:false
         }
+        this.changeView = this.changeView.bind(this)
+        this.resetView = this.resetView.bind(this)
     }
 
     componentDidMount(){
@@ -32,9 +38,31 @@ class About extends Component {
         })
     }
 
+    resetView = () => {
+        this.setState({
+            mainSelected:false,
+            linksSelected:false
+        })
+    }
+
+    changeView = (params) => {
+        this.resetView()
+        switch(params) {
+            case 'main':
+                this.setState({mainSelected:true})
+                break;
+            case 'links':
+                this.setState({linksSelected:true})
+                break;
+            default:
+                break;
+        }
+
+    }
+
         render(){
 
-            const { about,general } = this.state
+            const { about,general,mainSelected,linksSelected } = this.state
 
             const mappedAbout = about.map(element => {
                 return <Document data={element} key={element.doc_id} />
@@ -45,13 +73,19 @@ class About extends Component {
             })
 
             return(
-                <div className="about-container">
+                <div>
+                    <div className="about-header">
+                        {!mainSelected ? <a onClick={() => this.changeView('main')}>main</a> : <a className="a-selected" >main</a>}
+                        {!linksSelected ? <a onClick={() => this.changeView('links')}>links</a> : <a className="a-selected">links</a>}
+                    </div>
+                    <div className="about-container">
                     
-                    {/* {about.display === false ? {mappedAbout} : null} */}
-                    {mappedAbout}
-
-                    {mappedGeneral}
-
+                        {mainSelected ? <div>{mappedAbout}</div> : null}
+                        {mainSelected ? <div>{mappedGeneral}</div> : null}
+                        {linksSelected ? <Links /> : null}
+                        {/* {!mainSelected ? {mappedAbout} : null} */}
+                        {/* {!mainSelected ? {mappedGeneral} : null} */}
+                    </div>
                 </div>
             )
         }
