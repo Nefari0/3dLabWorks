@@ -6,6 +6,7 @@ const ProjectPhotos = (props) => {
 
     const { firebase_url01, firebase_url, name } = props.data
     const { first_name, photo_url, user_name } = props.userInfo[0]
+    const { isLoggedIn } = props
     
 
     return(
@@ -18,7 +19,7 @@ const ProjectPhotos = (props) => {
                 {/* <p className="dark-text">{name}</p> */}
             </div>
             <img src={firebase_url01} className="detail-photo"/>
-            <a className="dark-text show-dl-url" href={`${firebase_url}`}>Download</a>
+            {isLoggedIn ? <a className="dark-text show-dl-url" href={`${firebase_url}`}>Download</a> : <a className="dark-text show-dl-url" onClick={props.plsSignIn} >Download</a>}
         </div>
         // </div>
 

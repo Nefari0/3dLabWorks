@@ -114,7 +114,7 @@ class Explore extends Component {
         // const { id } = this.props.user.user
     
         const mappedData = data.map(element => {
-            return <Project data={element} key={element.model_id} addLike={this.addLike} handleClick={this.handleClick} />
+            return <Project data={element} key={element.model_id} addLike={this.addLike} handleClick={this.handleClick} isLoggedIn={isLoggedIn} />
         })
 
         return(

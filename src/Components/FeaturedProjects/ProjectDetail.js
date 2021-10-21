@@ -3,6 +3,8 @@ import axios from 'axios'
 import './Project.css'
 import ProjectPhotos from './ProjectPhotos'
 import Comments from './Comments/Comments'
+import { loginUser } from '../../ducks/userReducer'
+import { connect } from 'react-redux'
 // import logo from './../../assets/logo.png'
 import DlUrl from './DlUrl'
 
@@ -23,6 +25,7 @@ class ProjectDetail extends Component {
         }
         this.changeView = this.changeView.bind(this)
         this.getDetails = this.getDetails.bind(this)
+        this.plsSignIn = this.plsSignIn.bind(this)
     }
 
     componentDidMount(){
@@ -149,10 +152,15 @@ class ProjectDetail extends Component {
         }
     }
 
+    plsSignIn = () => {
+        alert('please sign in')
+    }
+
 
     render() {
         const { firebase_url01,firebase_url } = this.state.info
         const { info, userInfo, viewComments, viewDetails, viewFiles,dlUrl } = this.state
+        const { isLoggedIn } = this.props.user
 
         // const mappedUrl = info.map(element => {
         //     return <DlUrl data={element} key={element.model_id} url={element.firebase_url} />
@@ -160,7 +168,7 @@ class ProjectDetail extends Component {
         
 
         const mappedPhoto = info.map(element => {
-            return <ProjectPhotos data={element} key={element.model_id} userInfo={userInfo} url={firebase_url} />
+            return <ProjectPhotos data={element} key={element.model_id} userInfo={userInfo} url={firebase_url} isLoggedIn={isLoggedIn} plsSignIn={this.plsSignIn} />
         }) 
 
         return(
@@ -274,4 +282,10 @@ class ProjectDetail extends Component {
 
 }
 
-export default ProjectDetail
+function mapStateToProps(reduxState){
+    return reduxState
+}
+
+export default connect(mapStateToProps, { loginUser })(ProjectDetail)
+
+// export default ProjectDetail
