@@ -74,6 +74,7 @@ app.post('/auth/login',authController.login)
 app.get('/auth/logout',authController.logout)
 app.post('/auth/update/:user_id',authController.update)
 app.post('/auth/getInfo',authController.getInfo)
+// app.post('./auth/login/merge',authController.loginLike)
 
 // // user end points //
 
