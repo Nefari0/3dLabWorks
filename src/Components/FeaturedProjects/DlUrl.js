@@ -2,11 +2,11 @@ import './Project.css'
 
 const DlUrl = (props) => {
 
-    // const { url } = this.props
+    const { url,isLoggedIn } = props
 
     return(
         <div>
-            {/* <text className="dark-text">{props.DlUrl}</text> */}
+           { isLoggedIn ? <a className="dark-text" href={url} >Download</a> : <a className="dark-text" onClick={props.plsSignIn} >Download</a>}
         </div>
     )
 }

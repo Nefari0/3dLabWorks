@@ -110,7 +110,7 @@ module.exports = {
     },
 
     getComments: async (req,res) => {
-        const comments = await req.app.get('db').get_comments();
+        const comments = await req.app.get('db').comments.get_comments();
         if (comments === null){
             return res.status(401).send('no comments')
         }  else {return res.status(200).send(comments)}
@@ -119,7 +119,7 @@ module.exports = {
 
     getModelComments: async (req,res) => {
         const { model_id } = req.params
-        const comments = await req.app.get('db').get_project_comments([model_id]);
+        const comments = await req.app.get('db').comments.get_project_comments([model_id]);
         return res.status(200).send(comments)
     },
 

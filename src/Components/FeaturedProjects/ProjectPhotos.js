@@ -19,7 +19,7 @@ const ProjectPhotos = (props) => {
                 {/* <p className="dark-text">{name}</p> */}
             </div>
             <img src={firebase_url01} className="detail-photo"/>
-            {isLoggedIn ? <a className="dark-text show-dl-url" href={`${firebase_url}`}>Download</a> : <a className="dark-text show-dl-url" onClick={props.plsSignIn} >Download</a>}
+            {/* {isLoggedIn ? <a className="dark-text show-dl-url" href={`${firebase_url}`}>Download</a> : <a className="dark-text show-dl-url" onClick={props.plsSignIn} >Download</a>} */}
         </div>
         // </div>
 
