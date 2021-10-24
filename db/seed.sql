@@ -60,7 +60,8 @@
 --   FOREIGN KEY(user_id) REFERENCES d_user(user_id),
 --   model_id INTEGER,
 --   FOREIGN KEY(model_id) REFERENCES models(model_id),
---   text VARCHAR(500)
+--   text VARCHAR(500),
+--   date_created timestamp DEFAULT CURRENT_TIMESTAMP
 -- );
 
 -- INSERT INTO comments(user_id,model_id,text)
