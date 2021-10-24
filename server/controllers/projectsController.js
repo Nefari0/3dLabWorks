@@ -124,7 +124,8 @@ module.exports = {
     },
 
     createComment: async (req,res) => {
-        const { content } = req.body
-        const comment = await req.app.get('db').create_comment([content])
+        const { user_id,model_id,text } = req.body
+        const comment = await req.app.get('db').projects.create_comment([user_id,model_id,text])
+        return res.status(200).send(comment)
     }
 }

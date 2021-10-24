@@ -57,11 +57,12 @@ class Home extends Component {
         const { user_name, password, projects } = this.state
         const { loginUser } = this.props
         const { isLoggedIn } = this.props.user
+        const { model_likes } = this.props.user.user
         // console.log(this.props) 
 
         const mappedModels = projects.map(element => {
             // return <Project data={element} key={element.user_id}/> // original
-            return <Project data={element} key={element.model_id} isLoggedIn={isLoggedIn} />
+            return <Project data={element} key={element.model_id} isLoggedIn={isLoggedIn} model_likes={model_likes} />
         })
 
         return(

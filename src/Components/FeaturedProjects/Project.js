@@ -7,7 +7,7 @@ import { getModels } from '../../ducks/modelsReducer'
 // import { addLike } from '../../../server/controllers/projectsController'
 
 const Project = (props) => {
-    const { category, img, firebase_url,firebase_url01, name, description, user_name, likes, model_id, photo_url, user_id } = props.data
+    const { category, img, firebase_url,firebase_url01, name, description, user_name, model_likes, model_id, photo_url, user_id } = props.data
     const { handleClick,isLoggedIn } = props
 
     const [isLiked, setIsLiked] = useState([])

@@ -5,6 +5,7 @@ import ProjectPhotos from './ProjectPhotos'
 import Comments from './Comments/Comments'
 import { loginUser } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
+import CreateComment from './Comments/CreateComment'
 // import logo from './../../assets/logo.png'
 import DlUrl from './DlUrl'
 
@@ -185,7 +186,7 @@ class ProjectDetail extends Component {
                     <section className="right">
                         <div className={`detail-box small down-load ${viewFiles ? true : 'detail-box small down-load-selected'}`} onClick={() => this.changeView('viewFiles')}><p className={`down-load-text ${viewFiles ? true : 'down-load-text-selected'}`}><a>Download Files</a></p></div>
                         <div className="detail-box small">
-                        <svg 
+                        {/* <svg 
                             className="details-icon-big" 
                             xmlns="http://www.w3.org/2000/svg" 
                             fill="none" viewBox="0 0 24 24"
@@ -197,7 +198,14 @@ class ProjectDetail extends Component {
                                 stroke-width="1"
                                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" 
                             />
-                        </svg>
+                        </svg> */}
+                            {!null ? <svg xmlns="http://www.w3.org/2000/svg" className="details-icon-big" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                            </svg>
+                            :
+                            <svg xmlns="http://www.w3.org/2000/svg" className="details-icon-big" viewBox="0 0 20 20" fill="currentColor">
+  <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+</svg>}
                             <p className="dark-text">Like</p></div>
 
                             
@@ -239,7 +247,7 @@ class ProjectDetail extends Component {
                             <p className="dark-text">Comment</p></div> */}
 
                         <div className="detail-box small">
-                        <svg 
+                        {/* <svg 
                             className="details-icon-big" 
                             xmlns="http://www.w3.org/2000/svg" 
                             fill="none" viewBox="0 0 24 24"
@@ -251,10 +259,18 @@ class ProjectDetail extends Component {
                                 stroke-width="1"
                                 d="M22.28,11.75a2.54,2.54,0,0,0,.6-2.56,2.43,2.43,0,0,0-1.95-1.7l-4.44-.66a.47.47,0,0,1-.36-.27l-2-4.17A2.39,2.39,0,0,0,12,1h0A2.37,2.37,0,0,0,9.83,2.4l-2,4.18a.46.46,0,0,1-.36.27l-4.43.69a2.4,2.4,0,0,0-1.94,1.7,2.53,2.53,0,0,0,.61,2.56L5,15.05a.49.49,0,0,1,.14.43l-.75,4.6a2.53,2.53,0,0,0,1,2.44,2.3,2.3,0,0,0,1.4.48,2.4,2.4,0,0,0,1.13-.29l4-2.18a.45.45,0,0,1,.45,0l4,2.16a2.33,2.33,0,0,0,2.53-.2,2.55,2.55,0,0,0,1-2.45l-.77-4.59a.51.51,0,0,1,.13-.44Zm-4.56,1.83A2.58,2.58,0,0,0,17,15.79l.77,4.6a.48.48,0,0,1-.18.48.46.46,0,0,1-.5,0l-4-2.16a2.34,2.34,0,0,0-2.24,0l-4,2.18a.46.46,0,0,1-.5,0,.47.47,0,0,1-.19-.48L7,15.82a2.58,2.58,0,0,0-.69-2.21L3.08,10.36A.49.49,0,0,1,3,9.86a.48.48,0,0,1,.39-.34l4.43-.68A2.4,2.4,0,0,0,9.58,7.47l2-4.19A.46.46,0,0,1,12,3a.46.46,0,0,1,.43.27l2,4.18a2.43,2.43,0,0,0,1.81,1.36l4.44.66a.45.45,0,0,1,.38.33.48.48,0,0,1-.12.51Z" 
                             />
-                        </svg>
+                        </svg> */}
+                            {!null ? <svg xmlns="http://www.w3.org/2000/svg" className="details-icon-big" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                            </svg>
+                            :
+                            <svg xmlns="http://www.w3.org/2000/svg" className="details-icon-big" viewBox="0 0 20 20" fill="currentColor">
+  <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
+  <path stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 11h4m-2-2v4" />
+</svg>}
                             <p className="dark-text">Add To Favorites</p></div>
                         <div className="detail-box small">
-                        <svg 
+                        {/* <svg 
                             className="details-icon-big" 
                             xmlns="http://www.w3.org/2000/svg" 
                             fill="none" viewBox="0 0 24 24"
@@ -266,7 +282,10 @@ class ProjectDetail extends Component {
                                 stroke-width="1"
                                 d="M18,16.08 C17.24,16.08 16.56,16.38 16.04,16.85 L8.91,12.7 C8.96,12.47 9,12.24 9,12 C9,11.76 8.96,11.53 8.91,11.3 L15.96,7.19 C16.5,7.69 17.21,8 18,8 C19.66,8 21,6.66 21,5 C21,3.34 19.66,2 18,2 C16.34,2 15,3.34 15,5 C15,5.24 15.04,5.47 15.09,5.7 L8.04,9.81 C7.5,9.31 6.79,9 6,9 C4.34,9 3,10.34 3,12 C3,13.66 4.34,15 6,15 C6.79,15 7.5,14.69 8.04,14.19 L15.16,18.35 C15.11,18.56 15.08,18.78 15.08,19 C15.08,20.61 16.39,21.92 18,21.92 C19.61,21.92 20.92,20.61 20.92,19 C20.92,17.39 19.61,16.08 18,16.08 Z" 
                             />
-                        </svg>
+                        </svg> */}
+                            <svg xmlns="http://www.w3.org/2000/svg" className="details-icon-big" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                            </svg>
                             <p className="dark-text">Share</p>
                         </div>
                     </section>
@@ -280,7 +299,8 @@ class ProjectDetail extends Component {
                 </div>
                 {/* {viewFiles ? <Comments link={firebase_url}/> : null} */}
                 <div className="comment-box">
-                    {/* {viewComments ? (<div className="post-box"><p className="dark-text"></p></div>) : (null)} */}
+                    {/* {viewComments ? (<div className="post-box"><p className="dark-text">enter your coment here</p></div>) : (null)} */}
+                    {viewComments ? <CreateComment /> : null}
                     {viewComments ? mappedComments : null}
                     {viewFiles ? mappedUrl : null}
                     {/* <h3 className="dark-text">{dlUrl}</h3> */}

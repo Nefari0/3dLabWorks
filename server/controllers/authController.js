@@ -72,12 +72,12 @@ module.exports = {
             return res.status(401).send("user not found")
         }
         const isAuthenticated = bcrypt.compareSync(password, user.hash);
-        console.log('isAuthenticated',isAuthenticated)
         if (!isAuthenticated) {
             return res.status(403).send('Incorrect password');
         }
-        // req.session.user = { isAdmin: user.is_admin, id: user.user_id, email: user.email, username: user.user_name};
+        const user_likes = await req.app.get('db').get_likes([user.user_id]);
         req.session.user = { 
+            user_likes: user_likes,
             email: user.email,
             is_admin: user.is_admin, 
             user: user.user_name,
@@ -86,6 +86,7 @@ module.exports = {
              photo: user.photo_url,
              auth: isAuthenticated
          };
+        //  const randomInfo = "random info"
             return res.status(200).send(req.session.user)
     },
 
