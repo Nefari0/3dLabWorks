@@ -158,14 +158,18 @@ class ProjectDetail extends Component {
 
 
     render() {
+        const { comments } = this.state
         const { firebase_url01,firebase_url } = this.state.info
         const { info, userInfo, viewComments, viewDetails, viewFiles,dlUrl } = this.state
         const { isLoggedIn } = this.props.user
 
-        // const mappedUrl = info.map(element => {
-        //     return <DlUrl data={element} key={element.model_id} url={element.firebase_url} />
-        // })
+        const mappedUrl = info.map(element => {
+            return <DlUrl data={element} key={element.model_id} url={element.firebase_url} isLoggedIn={isLoggedIn} plsSignIn={this.plsSignIn} />
+        })
         
+        const mappedComments = comments.map(element => {
+            return <Comments content={element.text} model_id={element.model_id} date_created={element.date_created} comment_id={element.comment_id} user_id={element.user_id} />
+        })
 
         const mappedPhoto = info.map(element => {
             return <ProjectPhotos data={element} key={element.model_id} userInfo={userInfo} url={firebase_url} isLoggedIn={isLoggedIn} plsSignIn={this.plsSignIn} />
@@ -179,7 +183,7 @@ class ProjectDetail extends Component {
                     {/* <div> */}
                     {mappedPhoto}
                     <section className="right">
-                        <div className={`detail-box small down-load ${viewFiles ? true : 'detail-box small down-load-selected'}`} onClick={() => this.changeView('viewFiles')}><p className={`down-load-text ${viewFiles ? true : 'down-load-text-selected'}`}><a href={firebase_url01} className="hyperlink">Download Files</a></p></div>
+                        <div className={`detail-box small down-load ${viewFiles ? true : 'detail-box small down-load-selected'}`} onClick={() => this.changeView('viewFiles')}><p className={`down-load-text ${viewFiles ? true : 'down-load-text-selected'}`}><a>Download Files</a></p></div>
                         <div className="detail-box small">
                         <svg 
                             className="details-icon-big" 
@@ -199,7 +203,7 @@ class ProjectDetail extends Component {
                             
 
                             <div className={`detail-box small ${!viewComments ? true : 'detail-box small selected'}`} onClick={() => this.changeView('viewComments')}>
-                        <svg 
+                        {/* <svg 
                             className={`details-icon-big ${!viewComments ? true : 'detail-icons-big selected-icon'}`} 
                             xmlns="http://www.w3.org/2000/svg" 
                             fill="none" viewBox="0 0 24 24"
@@ -211,9 +215,14 @@ class ProjectDetail extends Component {
                                 stroke-width="1"
                                 d="M19,2H5A3,3,0,0,0,2,5V15a3,3,0,0,0,3,3H16.59l3.7,3.71A1,1,0,0,0,21,22a.84.84,0,0,0,.38-.08A1,1,0,0,0,22,21V5A3,3,0,0,0,19,2Zm1,16.59-2.29-2.3A1,1,0,0,0,17,16H5a1,1,0,0,1-1-1V5A1,1,0,0,1,5,4H19a1,1,0,0,1,1,1Z" 
                             />
-                        </svg>
+                        </svg> */}
 
-                            <p className={`dark-text ${!viewComments ? true : 'light-text'}`}>Comment</p></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" className={`details-icon-big ${!viewComments ? true : 'detail-icons-big selected-icon'}`}  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                            </svg>
+
+                            <p className={`dark-text ${!viewComments ? true : 'light-text'}`}>Comment</p>
+                            </div>
 
                         {/* --- this is my attemt at writing my own icon --- */}
                         {/* <div className="detail-box small">
@@ -267,15 +276,21 @@ class ProjectDetail extends Component {
                 
                     {/* <section className="bottom-row"></section> */}
                     {/* <div className="comment-box"></div> */}
+                
                 </div>
-                {/* <div className="comment-box">
-                    <h3 className="dark-text">{dlUrl}</h3>
-                    {viewFiles && <p className="dark-text" >{firebase_url}</p>} 
-                    {viewComments && <Comments comments={this.state.comments}/>}
-                    {viewComments && <Comments comments={this.state.comments}/>}
-                </div> */}
+                {/* {viewFiles ? <Comments link={firebase_url}/> : null} */}
+                <div className="comment-box">
+                    {/* {viewComments ? (<div className="post-box"><p className="dark-text"></p></div>) : (null)} */}
+                    {viewComments ? mappedComments : null}
+                    {viewFiles ? mappedUrl : null}
+                    {/* <h3 className="dark-text">{dlUrl}</h3> */}
+                    {/* {viewFiles && <p className="dark-text" >{firebase_url}</p>}  */}
+                    {/* {viewComments && <Comments comments={this.state.comments}/>} */}
+                    {/* {viewComments && <Comments comments={this.state.comments}/>} */}
+                </div>
                 
                 {/* <div className="comment-box"><h3 className="dark-text">comments</h3></div> */}
+                {/* <div className="comment-box"></div> */}
             </div>
         )
     }
