@@ -40,6 +40,7 @@
 .comment-text {
     /* font-size: x-small; */
     font-size: small;
+    font-weight: 400;
 }
 
 .post-input {
@@ -62,5 +63,9 @@
     .content-box {
         height: 150px;
         overflow: scroll;
+    }
+
+    .comment-text {
+        font-weight: 500;
     }
 }
