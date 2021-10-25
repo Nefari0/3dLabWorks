@@ -223,6 +223,7 @@ img:hover {
     margin: none;
     /* padding: 50%; */
     min-height: 90vh;
+    /* min-width: 300px; */
     /* width: 100vw; */
     /* width: 660px; */
     /* background-color: green; */
@@ -504,6 +505,14 @@ img:hover {
         width: 290px;
     }
 
+}
+
+@media (max-width:400px) {
+    .detail-container {
+        width: 300px;
+        /* padding: 20px; */
+        /* background-color: green; */
+    }
 }
 
 @media (max-height:300px) {

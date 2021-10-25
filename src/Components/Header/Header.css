@@ -7,8 +7,7 @@
     height: 60px;
     /* width: 100vw; */
     min-width: 300px;
-    /* background-color: rgb(223, 217, 217); */
-    /* background-color: #fff; */
+    /* background-color: green; */
     background-color: #6495ed;
     display: flex;
 	flex-direction: row;
@@ -181,4 +180,10 @@ border-bottom: 2px solid #3c598e;
 
 .cd-logo {
     height: 96px;
+}
+
+@media (max-width:300px) {
+    .header-container {
+        max-width: 300px;
+    }
 }

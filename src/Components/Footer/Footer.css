@@ -5,3 +5,9 @@
     margin: auto;
     background-color: #6495ed;
 }
+
+@media (max-width:300px) {
+    .footer-container {
+        width: 300px;
+    }
+}
