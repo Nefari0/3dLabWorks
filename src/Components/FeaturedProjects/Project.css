@@ -220,10 +220,10 @@ img:hover {
 /* details container stying  */
 
 .view {
-    /* margin: auto; */
+    margin: none;
     /* padding: 50%; */
     min-height: 90vh;
-    width: 100vw;
+    /* width: 100vw; */
     /* width: 660px; */
     /* background-color: green; */
     background-color: rgb(240, 240, 240);
@@ -231,18 +231,20 @@ img:hover {
     display: flex;
 	flex-direction: column;
 	/* flex-wrap: nowrap; */
-    flex-wrap: nowrap;
-	justify-content: center;
+    /* flex-wrap: nowrap; */
+	/* justify-content: center; */
+    /* justify-content: flex-start; */
+
 	/* align-items: baseline; */
-	align-content: flex-start;
+	/* align-content: flex-start; */
 }
 
 .detail-container {
     margin: auto;
     margin-bottom: 0;
-    margin-top: 10px;
+    margin-top: 5px;
     /* padding: 50%; */
-    height: 380px;
+    height: 312px;
     /* width: 100vw; */
     width: 660px;
     /* background-color: blue; */
@@ -250,6 +252,7 @@ img:hover {
     /* display:inline-flexbox; */
     display: flex;
 	flex-direction: row;
+    /* flex-direction: column; */
 	/* flex-wrap: nowrap; */
     flex-wrap: wrap;
 	justify-content: center;
@@ -263,7 +266,7 @@ img:hover {
     max-height: 600px;
     margin: none; 
     padding: 0%;
-    background-color: red;
+    /* background-color: red; */
 	display: inline-block;
     flex-direction: row;
      /* background-color: #fff; */
@@ -274,7 +277,7 @@ img:hover {
     height: 400px;
     width: 20px;
     float: right;
-    background-color: green;
+    /* background-color: green; */
 }
 
 .bottom-row {
@@ -365,25 +368,30 @@ img:hover {
 
 .left {
     width: 360px;
-    height: 400px;
+    /* height: 400px; */
+    height: 310px;
     margin: none;
     /* background-color: yellow; */
     display: flex;
-	flex-direction: column;
+	/* flex-direction: column; */
+    flex-direction: row;
 	flex-wrap: wrap;
 	/* justify-content: center; */
 	align-items: baseline;
 	align-content: stretch;
+    /* background-color: red; */
 }
 
 .right {
     width: 300px;
-    height: 400px;
+    /* width: 360px; */
+    /* height: 400px; */
+    height: 310px;
     margin: none;
-    margin-top: 65px;
-    /* background-color: red; */
+    padding-top: 5px;
     display: flex;
 	flex-direction: column;
+    /* flex-direction: row; */
 	flex-wrap: wrap;
 	/* justify-content: center; */
 	align-items: baseline;
@@ -434,14 +442,14 @@ img:hover {
 
 .comment-box {
     margin: auto;
-    margin-top: 2px;
+    /* margin-top: 2px; */
     padding-top: 10px;
     min-height: 300px;
     width: 660px;
     background-color: #fff;
     box-shadow: .1px .1px#555;
     border-radius: .1%;
-    
+
 	display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -456,43 +464,47 @@ img:hover {
 }
 
 
-/* @media (max-height:525px) {
-    .project-container {
-        max-height: 290px;
+@media (max-width:680px) {
+    .detail-container {
+        min-height: 600px;
+        width: 400px;
+        /* display:list-item; */
     }
 
-    .download-container {
-        display: none;
+    .detail-photo {
+        width: 300px;
+        height: 100%;
     }
 
-    .img {
-        height: 200px;
-        width: 100%;
-    }
-} */
-
-/* @media (max-height:430px) {
-    .img {
-        height: 150px;
-    }
-
-    .image-div {
-        width: 200px;
-    }
-
-    .project-container {
-        height: 250px;
-    }
-
-    .user-photo {
-        margin: 0px;
-    }
-
-    .dark-text {
+    .left {
+        width: 300px;
+        height: auto;
         margin: none;
-        font-size: small;
+        /* height: 258px; */
+        overflow: hidden;
+        /* background-color: red; */
     }
-} */
+    
+    .right {
+        width: 300px;
+        /* padding: auto; */
+        /* background-color: green; */
+    }
+
+    .detail-box {
+        width: 300px;
+        margin: auto;
+    }
+
+    .comment-box {
+        width: 300px;
+    }
+
+    .post-box {
+        width: 290px;
+    }
+
+}
 
 @media (max-height:300px) {
     .img {

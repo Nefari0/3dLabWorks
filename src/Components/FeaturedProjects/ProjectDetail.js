@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import CreateComment from './Comments/CreateComment'
 // import logo from './../../assets/logo.png'
 import DlUrl from './DlUrl'
+import TheMaker from './TheMaker'
 
 class ProjectDetail extends Component {
 
@@ -86,10 +87,8 @@ class ProjectDetail extends Component {
             axios
             .get(`/api/projects/id/${model_id}`)
             .then((res) => {
-                // console.log(res.data[0].user_id)
-                const { user_id } = res.data[0]
+                const { user_id, } = res.data[0]
                 axios.get(`/api/users/${user_id}`).then((res2) => {
-                    // console.log('will it work?',res.data,res2.data)
                     this.setState({
                         model_id:model_id,
                         dlUrl:res.data.firebase_url,
@@ -171,24 +170,32 @@ class ProjectDetail extends Component {
         const { firebase_url01,firebase_url } = this.state.info
         const { info, userInfo, viewComments, viewDetails, viewFiles,dlUrl } = this.state
         const { isLoggedIn } = this.props.user
-        const { user,id } = this.props.user.user
+        const { user,id,photo_url,user_name } = this.props.user.user
+        // const { name } = this.state.info[0]
 
         const mappedUrl = info.map(element => {
             return <DlUrl data={element} key={element.model_id} url={element.firebase_url} isLoggedIn={isLoggedIn} plsSignIn={this.plsSignIn} />
         })
         
         const mappedComments = comments.map(element => {
-            return <Comments content={element.text} model_id={element.model_id} date_created={element.date_created} comment_id={element.comment_id} user_id={element.user_id} />
+            return <Comments content={element.text} model_id={element.model_id} date_created={element.date_created} comment_id={element.comment_id} user_id={element.user_id} user_name={element.user_name} />
         })
 
         const mappedPhoto = info.map(element => {
             return <ProjectPhotos data={element} key={element.model_id} userInfo={userInfo} url={firebase_url} isLoggedIn={isLoggedIn} plsSignIn={this.plsSignIn} />
         })
 
-        console.log('this is model id',model_id)
+        const mappedUserInfo = userInfo.map(element => {
+            return <TheMaker data={element} key={element.user_id} photo_url={element.photo_url} user_name={element.user_name} info={info} />
+        })
 
         return(
             <div className="view">
+                {mappedUserInfo}
+                {/* <div className="detail-box">
+                    <img src={userInfo.photo_url} className="logo-box"/>
+                    <p className="dark-text"><br/>by {user_name}</p>
+                </div> */}
                 <div className="detail-container">
                     {mappedPhoto}
                     <section className="right">
@@ -199,8 +206,8 @@ class ProjectDetail extends Component {
                             </svg>
                             :
                             <svg xmlns="http://www.w3.org/2000/svg" className="details-icon-big" viewBox="0 0 20 20" fill="currentColor">
-  <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-</svg>}
+                            <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                            </svg>}
                             <p className="dark-text">Like</p></div>
 
                             

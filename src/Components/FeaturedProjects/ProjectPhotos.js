@@ -12,12 +12,10 @@ const ProjectPhotos = (props) => {
     return(
         // <div className="detail-photo-main"> //original
         <div className="left">
-            <div className="detail-box">
+            {/* <div className="detail-box">
                 <img src={photo_url} className="logo-box"/>
-                {/* <h4>this is project details</h4> */}
                 <p className="dark-text">{name}<br/>by {user_name}</p>
-                {/* <p className="dark-text">{name}</p> */}
-            </div>
+            </div> */}
             <img src={firebase_url01} className="detail-photo"/>
             {/* {isLoggedIn ? <a className="dark-text show-dl-url" href={`${firebase_url}`}>Download</a> : <a className="dark-text show-dl-url" onClick={props.plsSignIn} >Download</a>} */}
         </div>
