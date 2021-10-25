@@ -4,16 +4,16 @@
 -- id:12,
 -- pass:pass
 
--- CREATE TABLE d_user (
---     user_id SERIAL PRIMARY KEY,
---     user_name VARCHAR(100) NOT NULL,
---     email VARCHAR(100) NOT NULL,
---     phone DECIMAL(10),
---     first_name VARCHAR(100) NOT NULL,
---     last_name VARCHAR(100),
---     hash text NOT NULL,
---     is_admin BOOLEAN
--- )
+-- CREATE TABLE comments (
+--   comment_id SERIAL PRIMARY KEY,
+--   user_id INTEGER,
+--   FOREIGN KEY(user_id) REFERENCES d_user(user_id),
+--   model_id INTEGER,
+--   FOREIGN KEY(model_id) REFERENCES models(model_id),
+--   user_name VARCHAR(250),
+--   text VARCHAR(500),
+--   date_created timestamp DEFAULT CURRENT_TIMESTAMP
+-- );
 
 -- INSERT INTO d_user (user_name,email,first_name,last_name)
 -- VALUES(
