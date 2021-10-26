@@ -8,7 +8,7 @@ import { getModels } from '../../ducks/modelsReducer'
 
 const Project = (props) => {
     const { category, img, firebase_url,firebase_url01, name, description, user_name, model_likes, model_id, photo_url, user_id, likes } = props.data
-    const { handleClick,isLoggedIn } = props
+    const { handleClick,isLoggedIn,id } = props
 
     const [isLiked, setIsLiked] = useState(0)
 
@@ -21,18 +21,17 @@ const Project = (props) => {
     //     props.addLike(model_id)
     // }
 
-    const likeFunc = (params) => {
-
-    }
+    // const likeFunc = (params) => {
+    //     const user_id = id
+    //     axios.post('/api/projects/like', { user_id,model_id })
+    // }
 
     const plsSignIn = () => {
         alert('please sign in')
     }
 
     const gotClicked = () => {
-
-        // console.log('clicked happended in project component')
-        // props.data.getModels()
+        props.likeFunc(id,model_id)
     }
 
     // const liking = (params) => {
@@ -81,9 +80,11 @@ const Project = (props) => {
                     <div className="like-share">
                         <ul>
                         <li className="like-share-box"><p className="like-share-text">
-                        <svg className="small-icon" onClick={likeFunc} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+                        {isLoggedIn ? <svg className="small-icon" onClick={gotClicked} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg>
+                        </svg> : <svg className="small-icon" onClick={plsSignIn} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        </svg>}
                         
                         {/* {likes}</p></li> */}
                         {likes}</p></li>

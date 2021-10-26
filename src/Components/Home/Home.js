@@ -27,6 +27,7 @@ class Home extends Component {
         this.handlePassword = this.handlePassword.bind(this)
         this.handleClick = this.handleClick.bind(this)
         this.remindWhoUser = this.remindWhoUser.bind(this)
+        this.likeFunc = this.likeFunc.bind(this)
     }
 
     componentDidMount() {
@@ -53,16 +54,21 @@ class Home extends Component {
         console.log(this.props.user.user.data)
     }
 
+    likeFunc = (user_id,model_id) => {
+        // const user_id = id
+        axios.post('/api/projects/like', { user_id,model_id })
+    }
+
     render() {
         const { user_name, password, projects } = this.state
         const { loginUser } = this.props
         const { isLoggedIn } = this.props.user
-        const { model_likes } = this.props.user.user
+        const { model_likes,id } = this.props.user.user
         // console.log(this.props) 
 
         const mappedModels = projects.map(element => {
             // return <Project data={element} key={element.user_id}/> // original
-            return <Project data={element} key={element.model_id} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} />
+            return <Project data={element} key={element.model_id} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={id} likeFunc={this.likeFunc} />
         })
 
         return(
