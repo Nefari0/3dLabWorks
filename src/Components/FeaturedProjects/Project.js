@@ -13,55 +13,39 @@ const Project = (props) => {
     const [numOfLikes, setNumOfLikes] = useState(0)
 
     useEffect(() => {
-        setNumOfLikes(numOfLikes + likes)
+        setNumOfLikes(likes)
     },[])
-
-    // const likeFunc = (params) => {
-    //     props.addLike(model_id)
-    // }
-
-    // const likeFunc = (params) => {
-    //     const user_id = id
-    //     axios.post('/api/projects/like', { user_id,model_id })
-    // }
 
     const plsSignIn = () => {
         alert('please sign in')
     }
 
-    const likeFunc = (id,m_id) => {
+    const likeFunc = async (id,m_id) => {
         const user_id = id
         const model_id = m_id
-        axios.post('/api/projects/like', { user_id,model_id })
+        await axios.post('/api/projects/like', { user_id,model_id })
+        await updateLikes(model_id)
     }
 
-    const updateLikes = () => {
-        axios.get(`/api/like/update:${model_id}`)
+    const updateLikes = async (params) => {
+        console.log('params',params)
+        axios.get(`/api/like/update/${params}`).then(res => {
+            const { likes } = res.data[0]
+            console.log(likes)
+            return(setNumOfLikes(likes))
+            // setNumOfLikes(res.data.likes)
+        })
     }
-    const gotClicked = () => {
+    // const gotClicked = () => {
     //     console.log('got click',id,model_id)
     //    if (isLoggedIn === true && id != undefined) {likeFunc(id,model_id)} else {plsSignIn()}
-    }
+    // }
 
     const clickedLike = () => {
         // console.log('clicked like',id,model_id)
        if (isLoggedIn === true && id != undefined) {likeFunc(id,model_id)} else {plsSignIn()}
     }
 
-    // const liking = (params) => {
-       // check for existing like from user
-    //    axios.post('/api/project/like')
-       // if like from user === true: unlike{
-            // remove from like database
-            // remove from model database
-        // }
-
-        // else: like
-        // add to model database
-        // add to like database
-    // }
-
-    // const { id } = props
     return(
         <div className='project-container'>
                 <div>

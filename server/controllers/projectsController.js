@@ -116,9 +116,9 @@ module.exports = {
 
     updateProjectLikes: async (req,res) => {
         const { model_id } = req.params
-        console.log(model_id)
-        const likes = await req.app.get('db').projects.update_project_likes([model_id])
-        return res.status(200).send(likes)
+        const getLikes = await req.app.get('db').projects.update_project_likes([model_id])
+        // const { likes } = getLikes[0]
+        return res.status(200).send(getLikes)
     },
 
     getLikeCount: async (req,res) => {
