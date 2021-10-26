@@ -40,8 +40,6 @@ module.exports = {
 
     addLike: async (req,res) => {
         const { user_id, model_id } = req.body
-        // const currentId = user_id
-        // const model_id = params_id
         const db = req.app.get('db')
 
         // check if user already likes model_id
@@ -50,70 +48,25 @@ module.exports = {
         // const isLiked = foundLike[0].user_id
         console.log('found like',foundLike[0])
 
+        // if not like: add to db
         if (foundLike[0] === undefined) {
 
             await db.projects.add_model_like([1,model_id])
             await db.add_user_like([user_id,model_id])
-
             return res.status(200).send('like added')
+        // else: remove from db
         } else if (foundLike[0] != undefined) {
             await db.remove_model_like([1,model_id])
             await db.projects.remove_user_like_by_id([user_id,model_id])
             return res.status(200).send('deleted')
         }
-        // const liked = foundLike[0].like_id
-        // const { like } = foundLike[0]
-        // await db.remove_model_like([1,model_id])
-        // await db.projects.remove_user_like_by_id([user_id,model_id])
-        // console.log('hit end here')
-        // return res.sendStatus(200).send('deleted')
-        // return res.status(200).send('deleted')
-        
-        // if (liked != null) {
-        //     // remove from model_like db by like_id (...liked) 
-        //     console.log('liked', liked)
-        //     await db.remove_model_like([1,liked])
-        //     await db.remove_user_like([liked])
-        //     // model.like -= 1 by id
-        //     // await db.projects.get_like_by_id([user_id,model_id])
-        //     // await db.projects.add_model_like([1,model_id])
-            
-        //     // return res.sendStatus(404).send('not liked  ')
-        // }
-
-        // const newModelLike = await db.projects.add_model_like([1,model_id])
-        // await db.projects.add_model_like([1,model_id])
-
-        // return await db.add_user_like([user_id,model_id])
 
 
         // add to user and model_id db
         return res.status(200).send(liked)
-        
-        
-        return res.status(404).send('returned')
-        // return (console.log('is likes'))
-        // return res.status(200).send(user)
-        // return res.status(200).send(liked)
-        // if liked: 
-                // remove like from modile
-                // remove user/model_id from model_likes db
-            // else add like to model_il
-                // add user/model_id to db
-
-        // get likes from current model
-        // const result = await db.get_likes([model_id])
-
-
-            // await db.add_model_like([total,model_id])
-            // await db.projects.add_model_like([1,model_id])
-            // await db.projects.add_user_like([user_id,model_id])
-            // return res.status(200).send(`${model_id} is likes by ${user_id}`)
-            // return res.status(200).send(`${model_id} is likes by ${user_id}`)
-        // }
 
     },
-
+    // realtime update of like number in Project.js
     updateProjectLikes: async (req,res) => {
         const { model_id } = req.params
         const getLikes = await req.app.get('db').projects.update_project_likes([model_id])
