@@ -10,11 +10,10 @@ const Project = (props) => {
     const { category, img, firebase_url,firebase_url01, name, description, user_name, model_likes, model_id, photo_url, user_id, likes } = props.data
     const { handleClick,isLoggedIn,id } = props
 
-    const [isLiked, setIsLiked] = useState(0)
+    const [numOfLikes, setNumOfLikes] = useState(0)
 
     useEffect(() => {
-        // setIsLiked(likes)
-        // axios.get(`/api/like/count:${model_id}`).then(res => setIsLiked(res.data[0]))
+        setNumOfLikes(numOfLikes + likes)
     },[])
 
     // const likeFunc = (params) => {
@@ -30,8 +29,23 @@ const Project = (props) => {
         alert('please sign in')
     }
 
+    const likeFunc = (id,m_id) => {
+        const user_id = id
+        const model_id = m_id
+        axios.post('/api/projects/like', { user_id,model_id })
+    }
+
+    const updateLikes = () => {
+        axios.get(`/api/like/update:${model_id}`)
+    }
     const gotClicked = () => {
-        props.likeFunc(id,model_id)
+    //     console.log('got click',id,model_id)
+    //    if (isLoggedIn === true && id != undefined) {likeFunc(id,model_id)} else {plsSignIn()}
+    }
+
+    const clickedLike = () => {
+        // console.log('clicked like',id,model_id)
+       if (isLoggedIn === true && id != undefined) {likeFunc(id,model_id)} else {plsSignIn()}
     }
 
     // const liking = (params) => {
@@ -49,7 +63,7 @@ const Project = (props) => {
 
     // const { id } = props
     return(
-        <div className='project-container' onClick={gotClicked}>
+        <div className='project-container'>
                 <div>
                 {/* <div className="photo-title-border"><img src={photo_url} className="user-photo"/><h4 className="project-box-h4">{name}</h4></div> */}
                 <div className="photo-title-border"><img src={photo_url} className="user-photo"/><p className="dark-text">{name}<br/>by {user_name}</p></div>
@@ -80,14 +94,12 @@ const Project = (props) => {
                     <div className="like-share">
                         <ul>
                         <li className="like-share-box"><p className="like-share-text">
-                        {isLoggedIn ? <svg className="small-icon" onClick={gotClicked} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+                        <svg className="small-icon" onClick={clickedLike} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg> : <svg className="small-icon" onClick={plsSignIn} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg>}
+                        </svg>
                         
                         {/* {likes}</p></li> */}
-                        {likes}</p></li>
+                        {numOfLikes}</p></li>
 
                         <li className="devide"></li>
 

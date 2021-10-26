@@ -3,7 +3,7 @@ import axios from 'axios'
 import './Home.css'
 import { connect } from 'react-redux'
 // import { updateCharacters } from '../../ducks/breakingBadReducer'
-import { loginUser } from '../../ducks/userReducer'
+import { loginUser,updateUser } from '../../ducks/userReducer'
 // import FirebaseTest from '.././FirebaseTest'
 import { Icon } from './Icons/Icon'
 import Footer from '../Footer/Footer'
@@ -27,12 +27,16 @@ class Home extends Component {
         this.handlePassword = this.handlePassword.bind(this)
         this.handleClick = this.handleClick.bind(this)
         this.remindWhoUser = this.remindWhoUser.bind(this)
-        this.likeFunc = this.likeFunc.bind(this)
+        // this.likeFunc = this.likeFunc.bind(this)
     }
 
     componentDidMount() {
         axios.get('api/project/join').then(res => 
         this.setState({...this.state,projects:res.data}))
+    }
+
+    componentDidUpdate() {
+        this.props.updateUser()
     }
 
     handleUserName(value){
@@ -54,10 +58,11 @@ class Home extends Component {
         console.log(this.props.user.user.data)
     }
 
-    likeFunc = (user_id,model_id) => {
-        // const user_id = id
-        axios.post('/api/projects/like', { user_id,model_id })
-    }
+    // likeFunc = (id,m_id) => {
+    //     const user_id = id
+    //     const model_id = m_id
+    //     axios.post('/api/projects/like', { user_id,model_id })
+    // }
 
     render() {
         const { user_name, password, projects } = this.state
@@ -68,7 +73,7 @@ class Home extends Component {
 
         const mappedModels = projects.map(element => {
             // return <Project data={element} key={element.user_id}/> // original
-            return <Project data={element} key={element.model_id} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={id} likeFunc={this.likeFunc} />
+            return <Project data={element} key={element.model_id} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={id} />
         })
 
         return(
@@ -132,4 +137,4 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps, { loginUser })(Home)
+export default connect(mapStateToProps, { loginUser,updateUser })(Home)

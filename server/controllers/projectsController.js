@@ -48,7 +48,7 @@ module.exports = {
 
         const foundLike = await db.projects.get_like_by_id([user_id,model_id])
         // const isLiked = foundLike[0].user_id
-        // console.log('found like',isLiked)
+        console.log('found like',foundLike[0])
 
         if (foundLike[0] === undefined) {
 
@@ -56,14 +56,18 @@ module.exports = {
             await db.add_user_like([user_id,model_id])
 
             return res.status(200).send('like added')
+        } else if (foundLike[0] != undefined) {
+            await db.remove_model_like([1,model_id])
+            await db.projects.remove_user_like_by_id([user_id,model_id])
+            return res.status(200).send('deleted')
         }
         // const liked = foundLike[0].like_id
         // const { like } = foundLike[0]
-        await db.remove_model_like([1,model_id])
-        await db.projects.remove_user_like_by_id([user_id,model_id])
-        console.log('hit end here')
+        // await db.remove_model_like([1,model_id])
+        // await db.projects.remove_user_like_by_id([user_id,model_id])
+        // console.log('hit end here')
         // return res.sendStatus(200).send('deleted')
-        return res.status(200).send('deleted')
+        // return res.status(200).send('deleted')
         
         // if (liked != null) {
         //     // remove from model_like db by like_id (...liked) 
@@ -108,7 +112,14 @@ module.exports = {
             // return res.status(200).send(`${model_id} is likes by ${user_id}`)
         // }
 
-    },  
+    },
+
+    updateProjectLikes: async (req,res) => {
+        const { model_id } = req.params
+        console.log(model_id)
+        const likes = await req.app.get('db').projects.update_project_likes([model_id])
+        return res.status(200).send(likes)
+    },
 
     getLikeCount: async (req,res) => {
         const { model_id } = req.params

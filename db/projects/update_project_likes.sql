@@ -1,0 +1,1 @@
+SELECT likes from models where model_id = $1
