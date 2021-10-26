@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './Explore.css'
 import Project from '../FeaturedProjects/Project'
 // import { getProjects } from '../../ducks/projectsReducer'
-import { loginUser } from '../../ducks/userReducer'
+import { loginUser,updateUser } from '../../ducks/userReducer'
 
 import { connect } from 'react-redux'
 import axios from 'axios'
@@ -30,15 +30,9 @@ class Explore extends Component {
         //     this.setState({ ...this.state,data:res.data,userId:id}))   
     }
 
-    // componentDidUpdate(){
-    //     const { id,isLoggedIn } = this.props.user.user
-    //     const { userId } = this.state
-    //     if (userId === null) {
-    //         this.userIdToState()
-    //         this.setState({userId : id})
-    //         console.log('update component',id)
-    //     }
-    // }
+    componentDidUpdate() {
+        this.props.updateUser()
+    }
 
     updateState(){
         
@@ -109,12 +103,13 @@ class Explore extends Component {
 
         const { data } = this.state
         const { isLoggedIn } = this.props.user
-        console.log(isLoggedIn)
-        if(isLoggedIn === true){ let { id } = this.props.user}
+        const { id } = this.props.user.user
+        // console.log(isLoggedIn)
+        // if(isLoggedIn === true){ let { id } = this.props.user}
         // const { id } = this.props.user.user
     
         const mappedData = data.map(element => {
-            return <Project data={element} key={element.model_id} addLike={this.addLike} handleClick={this.handleClick} isLoggedIn={isLoggedIn} />
+            return <Project data={element} key={element.model_id} handleClick={this.handleClick} isLoggedIn={isLoggedIn} likes={element.likes} id={id} />
         })
 
         return(
@@ -129,4 +124,4 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 // export default Explore
-export default connect(mapStateToProps, { loginUser })(Explore)
+export default connect(mapStateToProps, { loginUser,updateUser })(Explore)
