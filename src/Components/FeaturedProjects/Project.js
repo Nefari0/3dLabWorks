@@ -7,17 +7,22 @@ import { getModels } from '../../ducks/modelsReducer'
 // import { addLike } from '../../../server/controllers/projectsController'
 
 const Project = (props) => {
-    const { category, img, firebase_url,firebase_url01, name, description, user_name, model_likes, model_id, photo_url, user_id } = props.data
+    const { category, img, firebase_url,firebase_url01, name, description, user_name, model_likes, model_id, photo_url, user_id, likes } = props.data
     const { handleClick,isLoggedIn } = props
 
-    const [isLiked, setIsLiked] = useState([])
+    const [isLiked, setIsLiked] = useState(0)
 
-    // useEffect(() => {
-    //     setIsLiked(likes)
-    // },[])
+    useEffect(() => {
+        // setIsLiked(likes)
+        // axios.get(`/api/like/count:${model_id}`).then(res => setIsLiked(res.data[0]))
+    },[])
+
+    // const likeFunc = (params) => {
+    //     props.addLike(model_id)
+    // }
 
     const likeFunc = (params) => {
-        props.addLike(model_id)
+
     }
 
     const plsSignIn = () => {
@@ -81,7 +86,7 @@ const Project = (props) => {
                         </svg>
                         
                         {/* {likes}</p></li> */}
-                        {isLiked}</p></li>
+                        {likes}</p></li>
 
                         <li className="devide"></li>
 

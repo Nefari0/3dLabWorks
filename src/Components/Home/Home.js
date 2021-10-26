@@ -62,7 +62,7 @@ class Home extends Component {
 
         const mappedModels = projects.map(element => {
             // return <Project data={element} key={element.user_id}/> // original
-            return <Project data={element} key={element.model_id} isLoggedIn={isLoggedIn} model_likes={model_likes} />
+            return <Project data={element} key={element.model_id} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} />
         })
 
         return(
