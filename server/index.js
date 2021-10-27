@@ -72,7 +72,7 @@ app.post('/auth/register',authController.register)
 app.post('/auth/password', authController.changePassword)
 app.post('/auth/login',authController.login)
 app.get('/auth/logout',authController.logout)
-app.post('/auth/update/:user_id',authController.update)
+app.post('/auth/update/:user_id',authController.userData)
 app.post('/auth/getInfo',authController.getInfo)
 // app.post('./auth/login/merge',authController.loginLike)
 
@@ -81,6 +81,8 @@ app.post('/auth/getInfo',authController.getInfo)
 app.get('/api/users/all', userController.getUsers)
 app.get('/api/users/:user_id', userController.getUser) //Post request / body / http://localhost:4000/api/users/update/12 / { "photo_url":"new_url" }
 app.post('/api/users/update/:user_id', userController.updateUser)
+// save session:
+// app.post()
 
 // projects endpoints
 

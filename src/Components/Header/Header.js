@@ -32,9 +32,11 @@ class Header extends Component{
         this.handleLogout = this.handleLogout.bind(this)
     }
 
-    // componentDidMount(){
-        // console.log('component did mount',this.state.username)
-    // }
+    async componentDidMount() {
+        let res = await axios.get('/auth/update/:user_id')
+        console.log(res)
+        if (res.data.loggedIn) this.props.history.push('/my-budget')
+      }
     
     componentWillUpdate(){
         const { setPermission } = this.state
