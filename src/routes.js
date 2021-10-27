@@ -17,6 +17,8 @@ import AdminPage from './Components/AdminPage/AdminPage'
 export default (
     <Switch>
         <Route exact path="/" component={Home} />
+        {/* <Route exact path="/" component={Header} /> */}
+        {/* <Route path="/home" component={Home} /> */}
         <Route path="/explore" component={Explore} />
         <Route path="/group" component={GroupPage} />
         <Route path="/user" component={UserPage} />

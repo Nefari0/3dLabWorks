@@ -7,7 +7,7 @@ class EditModel extends Component {
         super();
 
         this.state = {
-
+            name:''
         }
     }
 

@@ -103,5 +103,11 @@ module.exports = {
         const { user_id,model_id,user,text } = req.body
         const comment = await req.app.get('db').projects.create_comment([user_id,model_id,user,text])
         return res.status(200).send(comment)
+    },
+
+    editProjectName: async (req,res) => {
+        const { model_id, name } = req.body
+        const model = await req.app.get('db').projects.change_name([name,model_id])
+        return res.status(200).send(model)
     }
 }

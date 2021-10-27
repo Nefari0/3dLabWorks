@@ -51,7 +51,7 @@ app.use(express.json());
 app.use(
     session({
             resave: true,
-            saveUninitialized: false,
+            saveUninitialized: true,
             secret: SESSION_SECRET,
             cookie: { maxAge: 1000 * 60 * 5 },
         }),
@@ -89,6 +89,7 @@ app.post('/api/users/update/:user_id', userController.updateUser)
 app.get('/api/projects/all', projectsController.getAllProjects)
 app.get('/api/projects/:user_id', projectsController.getUserProject) //GET request / params / http://localhost:4004/api/projects/12 --- this code works
 app.get('/api/projects/id/:model_id', projectsController.getProjectById) // GET request / params / http://localhost:4000/api/projects/id/4 --- this code works
+app.post('/api/project/edit/name',projectsController.editProjectName)
 // app.post('api/projects/user',projectsController.getUserProject)
 app.post('/api/project/post',projectsController.addProject)
 app.get('/api/project/join', projectsController.joinProject)

@@ -4,7 +4,7 @@
     padding:auto;
     height: 600px;
     width: 300px;
-    /* background-color: blue; */
+    background-color: blue;
     display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
