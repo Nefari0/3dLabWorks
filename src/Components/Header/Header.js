@@ -33,9 +33,10 @@ class Header extends Component{
     }
 
     async componentDidMount() {
-        let res = await axios.get('/auth/update/:user_id')
-        console.log(res)
-        if (res.data.loggedIn) this.props.history.push('/my-budget')
+        this.props.updateUser()
+        // let res = await axios.get(`/auth/update/session`)
+    //     console.log(res)
+        // if (res.data.isLoggedIn) this.props.history.push('/user')
       }
     
     componentWillUpdate(){
@@ -146,7 +147,13 @@ class Header extends Component{
 
 function mapStateToProps(reduxState){
     return reduxState
+    // return {
+    //     user:reduxState.username
+    // }
+
 }
 
 export default connect(mapStateToProps, {loginUser, logoutUser, updateUser})(Header)
+
+// export default connect(mapStateToProps, {   updateUser})(Header)
 // export default withRouter(connect(null, {loginUser, logoutUser, updateUser})(Header))

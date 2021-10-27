@@ -72,7 +72,7 @@ app.post('/auth/register',authController.register)
 app.post('/auth/password', authController.changePassword)
 app.post('/auth/login',authController.login)
 app.get('/auth/logout',authController.logout)
-app.post('/auth/update/:user_id',authController.userData)
+app.get('/auth/update/session',authController.userData)
 app.post('/auth/getInfo',authController.getInfo)
 // app.post('./auth/login/merge',authController.loginLike)
 
