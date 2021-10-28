@@ -86,7 +86,7 @@ module.exports = {
              photo: user.photo_url,
              auth: isAuthenticated
          };
-        //  const randomInfo = "random info"
+        //  userData(req.session.data)
             return res.status(200).send(req.session.user)
     },
 

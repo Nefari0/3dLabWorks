@@ -9,6 +9,7 @@ import CreateComment from './Comments/CreateComment'
 // import logo from './../../assets/logo.png'
 import DlUrl from './DlUrl'
 import TheMaker from './TheMaker'
+import EditModel from './EditProject/EditModel'
 
 class ProjectDetail extends Component {
 
@@ -173,6 +174,8 @@ class ProjectDetail extends Component {
             return <TheMaker data={element} key={element.user_id} photo_url={element.photo_url} user_name={element.user_name} info={info} />
         })
 
+        // mappedEditProject = info.map(elenent) 
+
         return(
             <div className="view">
                 {mappedUserInfo}
@@ -240,6 +243,7 @@ class ProjectDetail extends Component {
                     {viewComments ? <CreateComment user={user} id={id} isLoggedIn={isLoggedIn} model_id={model_id} plsSignIn={this.plsSignIn} getComments={this.getComments} /> : null}
                     {viewComments ? mappedComments : null}
                     {viewFiles ? mappedUrl : null}
+                    {viewFiles ? <EditModel info={info} getDetails={this.getDetails} /> : null}
                     {/* <h3 className="dark-text">{dlUrl}</h3> */}
                     {/* {viewFiles && <p className="dark-text" >{firebase_url}</p>}  */}
                     {/* {viewComments && <Comments comments={this.state.comments}/>} */}

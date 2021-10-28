@@ -9,7 +9,7 @@ import { projectManagement } from 'firebase-admin'
 import { connect } from 'react-redux'
 import { getProjects } from '../../ducks/projectsReducer'
 import AddProject from './AddProject'
-import EditModel from './EditModel'
+import EditModel from '../FeaturedProjects/EditProject/EditModel'
 
 const db = app.firestore()
 

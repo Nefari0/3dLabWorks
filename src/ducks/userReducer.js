@@ -10,6 +10,7 @@ const LOGOUT_USER = 'LOGOUT_USER'
 const REGISTER_USER = 'REGISTER_USER'
 const EDIT_USERINFO = 'EDIT_USERINFO'
 const UPDATE_USER = 'UPDATE_USER'
+const SHOW_DATA = 'SHOW_DATA'
 
 export function loginUser(user_name, password) {
     return {
@@ -29,6 +30,14 @@ export function registerUser(user_name, password, email, first_name, is_admin){
     return {
         type: REGISTER_USER,
         payload: axios.post('/auth/register', { user_name, password, email, first_name, is_admin})
+    }
+}
+
+export function showData(){
+    const { user } = inititialState
+    return {
+        type: SHOW_DATA,
+        payload:user
     }
 }
 
@@ -58,10 +67,15 @@ export function updateUser(user){
 
 export default function userReducer(state = inititialState, action) {
     switch (action.type) {
+        case SHOW_DATA + 'FULFILLED':
+            console.log(user)
+            return {
+                inititialState
+            }
         case LOGIN_USER + '_FULFILLED':
             return {
                 ...state,
-                user: action.payload.data, isLoggedIn: true
+                user: action.payload.data, isLoggedIn: true,
             }
         case LOGOUT_USER + '_FULFILLED':
                 return {
@@ -80,9 +94,9 @@ export default function userReducer(state = inititialState, action) {
         case UPDATE_USER + '_FULFILLED':
             const { user } = action.payload.data
             return {
-                // ...state,
-                // user:action.payload.data, isLoggedIn:true
-                user
+                ...state,
+                user:action.payload.data, isLoggedIn:true
+                // user
             }            
         case UPDATE_USER + '_REJECTED':
             return {

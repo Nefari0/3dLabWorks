@@ -32,10 +32,10 @@ class Header extends Component{
         this.handleLogout = this.handleLogout.bind(this)
     }
 
-    async componentDidMount() {
+    async componentDidMount(prevProps) {
         this.props.updateUser()
-        // let res = await axios.get(`/auth/update/session`)
-    //     console.log(res)
+        let res = await axios.get(`/auth/update/session`)
+        console.log(res)
         // if (res.data.isLoggedIn) this.props.history.push('/user')
       }
     

@@ -90,7 +90,6 @@ app.get('/api/projects/all', projectsController.getAllProjects)
 app.get('/api/projects/:user_id', projectsController.getUserProject) //GET request / params / http://localhost:4004/api/projects/12 --- this code works
 app.get('/api/projects/id/:model_id', projectsController.getProjectById) // GET request / params / http://localhost:4000/api/projects/id/4 --- this code works
 app.post('/api/project/edit/name',projectsController.editProjectName)
-// app.post('api/projects/user',projectsController.getUserProject)
 app.post('/api/project/post',projectsController.addProject)
 app.get('/api/project/join', projectsController.joinProject)
 app.post('/api/projects/like', projectsController.addLike) //Get request / req.body / http://localhost:4004/api/project/like / {"user_id":"12","model_id":"5"}

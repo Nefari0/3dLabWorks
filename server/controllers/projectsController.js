@@ -109,5 +109,5 @@ module.exports = {
         const { model_id, name } = req.body
         const model = await req.app.get('db').projects.change_name([name,model_id])
         return res.status(200).send(model)
-    }
+    },
 }
