@@ -26,6 +26,7 @@ class ProjectDetail extends Component {
             viewFiles:true,
             viewComments:false,
             viewDetails:false,
+            viewEditProject:false,
         }
         this.changeView = this.changeView.bind(this)
         this.getDetails = this.getDetails.bind(this)
@@ -41,25 +42,7 @@ class ProjectDetail extends Component {
         // ---get project comments by model_id --- //
         this.getComments()
 
-        // ---test code below ---//
 
-        // const { model_id } = this.props.match.params
-
-        // await axios.get(`/api/projects/id/${model_id}`)
-        // const [ firstResponse ] = await Promise.all([
-        //     axios.get(`/api/projects/id/${model_id}`)
-        // ])
-
-        // extract user_id from firstResponse // then call user by user_id
-        // const { user_id } = firstResponse.data[0]
-        // console.log(user_id)
-        // const [ secondResponse ] = await axios.get(`/api/users/${user_id}`)
-
-        // adds to state //
-
-        // this.setState({
-        //     info:firstResponse.data
-        // })
     }
 
     componentDidUpdate(prevProps){
@@ -69,19 +52,7 @@ class ProjectDetail extends Component {
         }
     }
 
-    // getDetails = () => {
-    //     const { model_id } = this.props.match.params
-    //     axios
-    //         .get(`/api/projects/id/${model_id}`)
-    //         .then((res) => {
-    //             this.setState({
-    //                 info:res.data,
-    //             })
-    //         })
-    //         .catch((err) => {
-    //             this.props.history.push('/404')
-    //         })
-    // }
+
     async getDetails(){
         const { model_id } = this.props.match.params
         await (
@@ -138,8 +109,8 @@ class ProjectDetail extends Component {
                     // viewComments : !this.state.viewComments
                     viewComments : true,
                     viewDetails : false,
-                    viewFiles : false
-
+                    viewFiles : false,
+                    viewEditProject : false
                 })
                 }
                 break;
@@ -154,7 +125,18 @@ class ProjectDetail extends Component {
                         // viewFiles : !this.state.viewFiles
                         viewFiles : true,
                         viewComments : false,
-                        viewDetails : false
+                        viewDetails : false,
+                        viewEditProject : false
+                    })
+                }
+                break;
+            case 'viewEditProject':
+                if (this.state.viewEditProject === false){
+                    this.setState({
+                        viewFiles : false,
+                        viewComments :false,
+                        viewDetails : false,
+                        viewEditProject : true
                     })
                 }
             default:
@@ -170,7 +152,7 @@ class ProjectDetail extends Component {
     render() {
         const { comments,model_id,maker_id } = this.state
         const { firebase_url01,firebase_url,user_id } = this.state.info
-        const { info, userInfo, viewComments, viewDetails, viewFiles,dlUrl } = this.state
+        const { info, userInfo, viewComments, viewDetails, viewFiles,dlUrl,viewEditProject } = this.state
         const { isLoggedIn } = this.props.user
         const { user,id,photo_url,user_name } = this.props.user.user
         // const { name } = this.state.info[0]
@@ -223,6 +205,11 @@ class ProjectDetail extends Component {
                             <p className={`dark-text ${!viewComments ? true : 'light-text'}`}>Comment</p>
                             </div>
 
+                        {isLoggedIn === true && this.props.user.user.id === maker_id ? <div className={`detail-box small ${!viewEditProject ? true : 'detail-box small selected'}`} onClick={() => this.changeView('viewEditProject')}>
+                            <svg xmlns="http://www.w3.org/2000/svg" className={`details-icon-big ${!viewEditProject ? true : 'detail-icons-big selected-icon'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                        </svg><p className={`dark-text ${!viewEditProject ? true : 'light-text'}`}>Edit Project</p></div>
+                        :
                         <div className="detail-box small">
                             {!null ? <svg xmlns="http://www.w3.org/2000/svg" className="details-icon-big" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
@@ -232,8 +219,10 @@ class ProjectDetail extends Component {
                             <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
                             <path stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 11h4m-2-2v4" />
                             </svg>}
-                            {isLoggedIn === true && this.props.user.user.id === maker_id ? <p className="dark-text">Edit Project</p> : <p className="dark-text">Add To Favorites</p>}
-                            </div>
+                            <p className="dark-text">Add To Favorites</p>
+                        </div>}
+                        
+                        
                             
 
                         <div className="detail-box small">
