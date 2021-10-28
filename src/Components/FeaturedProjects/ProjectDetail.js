@@ -243,7 +243,7 @@ class ProjectDetail extends Component {
                     {viewComments ? <CreateComment user={user} id={id} isLoggedIn={isLoggedIn} model_id={model_id} plsSignIn={this.plsSignIn} getComments={this.getComments} /> : null}
                     {viewComments ? mappedComments : null}
                     {viewFiles ? mappedUrl : null}
-                    {viewFiles ? <EditModel info={info} getDetails={this.getDetails} /> : null}
+                    {viewEditProject ? <EditModel info={info} getDetails={this.getDetails} /> : null}
                     {/* <h3 className="dark-text">{dlUrl}</h3> */}
                     {/* {viewFiles && <p className="dark-text" >{firebase_url}</p>}  */}
                     {/* {viewComments && <Comments comments={this.state.comments}/>} */}
