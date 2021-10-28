@@ -3,7 +3,7 @@ import axios from 'axios'
 import './Project.css'
 import ProjectPhotos from './ProjectPhotos'
 import Comments from './Comments/Comments'
-import { loginUser } from '../../ducks/userReducer'
+import { loginUser, updateUser } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
 import CreateComment from './Comments/CreateComment'
 // import logo from './../../assets/logo.png'
@@ -16,6 +16,7 @@ class ProjectDetail extends Component {
         super();
 
         this.state = {
+            maker_id:null,
             model_id:null,
             dlUrl:"",
             info:[],
@@ -90,6 +91,7 @@ class ProjectDetail extends Component {
                 const { user_id, } = res.data[0]
                 axios.get(`/api/users/${user_id}`).then((res2) => {
                     this.setState({
+                        maker_id:user_id,
                         model_id:model_id,
                         dlUrl:res.data.firebase_url,
                         info:res.data,
@@ -166,8 +168,8 @@ class ProjectDetail extends Component {
 
 
     render() {
-        const { comments,model_id } = this.state
-        const { firebase_url01,firebase_url } = this.state.info
+        const { comments,model_id,maker_id } = this.state
+        const { firebase_url01,firebase_url,user_id } = this.state.info
         const { info, userInfo, viewComments, viewDetails, viewFiles,dlUrl } = this.state
         const { isLoggedIn } = this.props.user
         const { user,id,photo_url,user_name } = this.props.user.user
@@ -227,10 +229,13 @@ class ProjectDetail extends Component {
                             </svg>
                             :
                             <svg xmlns="http://www.w3.org/2000/svg" className="details-icon-big" viewBox="0 0 20 20" fill="currentColor">
-  <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
-  <path stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 11h4m-2-2v4" />
-</svg>}
-                            <p className="dark-text">Add To Favorites</p></div>
+                            <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
+                            <path stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 11h4m-2-2v4" />
+                            </svg>}
+                            {isLoggedIn === true && this.props.user.user.id === maker_id ? <p className="dark-text">Edit Project</p> : <p className="dark-text">Add To Favorites</p>}
+                            </div>
+                            
+
                         <div className="detail-box small">
                             <svg xmlns="http://www.w3.org/2000/svg" className="details-icon-big" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
@@ -264,6 +269,6 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps, { loginUser })(ProjectDetail)
+export default connect(mapStateToProps, { loginUser,updateUser })(ProjectDetail)
 
 // export default ProjectDetail
