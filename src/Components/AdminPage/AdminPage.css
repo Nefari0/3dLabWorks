@@ -34,6 +34,7 @@
     border-radius: 2%;
     box-shadow: 2px 2px#d1d1d1;
     z-index: 0;
+    overflow: scroll;
 }
 
 .add-doc-div-closed {
@@ -98,4 +99,19 @@ input[type="text"]
 ul.admin-header-ul li a {
     color: #555;
     text-transform: uppercase;
+}
+
+.admin-a {
+    color: #555;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: flex-start;
+	align-content: stretch;
+}
+
+.show-user {
+    margin: 10px;
+    color: #555;
 }

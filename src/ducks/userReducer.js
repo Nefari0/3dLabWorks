@@ -13,6 +13,7 @@ const UPDATE_USER = 'UPDATE_USER'
 const SHOW_DATA = 'SHOW_DATA'
 
 export function loginUser(user_name, password) {
+    const myInfo = window.localStorage
     return {
         type: LOGIN_USER,
         payload: axios.post('/auth/login', {user_name, password})

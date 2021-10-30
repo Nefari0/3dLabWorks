@@ -9,6 +9,7 @@ import MobileLogin from '../MobileLogin/MobileLogin'
 import UserPage from '../UserPage/UserPage'
 // import Register from '../Register/Register'
 import { withRouter } from 'react-router'
+import BaseBackend from '../../BaseBackend'
 
 class Header extends Component{
     constructor(props){

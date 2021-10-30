@@ -1,12 +1,13 @@
 import react from 'react'
 import axios from 'axios'
 import { app } from './../../base'
+import { Link } from 'react-router-dom'
 
 const db = app.firestore()
 
 const ModelItem = (props) => {
 
-    const { img } = props
+    const { img,id } = props
     // console.log('this is db from ModelItem',db.INTERNAL)
     
     const handleClick = () => {
@@ -46,7 +47,7 @@ const ModelItem = (props) => {
     return(
         <div className="props-display">
             <p className="title">{props.name}</p>
-            <img className="model-img" src={props.img}/>
+            <Link to={`projectdetails/${id}`}><img className="model-img" src={props.img}/></Link>
             <button onClick={handleClick}>delete</button>
             {/* <button onClick={deleteModel}>delete</button>  */}
             {/* <button onClick={deleteDBFile}>delete</button> */}
