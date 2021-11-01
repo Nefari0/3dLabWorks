@@ -212,14 +212,14 @@ class ProjectDetail extends Component {
 
                         {isLoggedIn === true && this.props.user.user.id === maker_id ? <div className={`detail-box small ${!viewEditProject ? true : 'detail-box small selected'}`} onClick={() => this.changeView('viewEditProject')}>
 
-                        <svg className="small-icon" style={{margin:'auto',marginLeft:'10px',marginRight:'10px', height:'45px',width:'45px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+                        <svg className="small-icon" style={{margin:'auto',marginLeft:'12px',marginRight:'10px', height:'47px',width:'47px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
                             </svg>
                         <p className={`dark-text ${!viewEditProject ? true : 'light-text'}`}>Edit Project</p></div>
                         :
                         <div className="detail-box small">
 
-                            <svg className="small-icon" style={{margin:'auto',marginLeft:'15px',marginRight:'10px', height:'45px',width:'45px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+                            <svg className="small-icon" style={{margin:'auto',marginLeft:'12px',marginRight:'10px', height:'46px',width:'46px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
                             </svg>
 
