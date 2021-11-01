@@ -49,7 +49,7 @@
 	align-content: center;
     /* overflow-x: scroll; */
     overflow-y: hidden;
-    z-index: 12;
+    z-index: 0;
     /* display: inline-block; */
     /* border-radius: 8%; */
     /* white-space: pre-wrap; */
