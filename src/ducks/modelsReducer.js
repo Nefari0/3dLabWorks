@@ -3,7 +3,7 @@ import axios from "axios";
 const initialState = {
   models: [],
   featured:[],
-  models: {},
+  // models: [],
   isloading: false,
 };
 
@@ -14,7 +14,7 @@ export function getModels() {
   return {
     type: GET_MODELS,
     // payload: axios.get("https://www.breakingbadapi.com/api/characters")
-    payload: axios.get('/api/projects/all')
+    payload: axios.get('/api/project/join')
   };
 }
 
@@ -37,7 +37,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isloading: false,
-        models: action.payload
+        models: action.payload.data
       };
     case GET_MODELS + "_REJECTED":
       return {

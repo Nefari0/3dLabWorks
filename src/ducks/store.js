@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   // characters: breakingBadReducer,
   user: userReducer,
   // projects: projectsReducer,
-  // models: modelsReducer
+  models: modelsReducer
 
 })
 

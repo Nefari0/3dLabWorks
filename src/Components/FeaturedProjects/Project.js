@@ -8,9 +8,10 @@ import { getModels } from '../../ducks/modelsReducer'
 
 const Project = (props) => {
     const { category, img, firebase_url,firebase_url01, name, description, user_name, model_likes, model_id, photo_url, user_id, likes } = props.data
-    const { handleClick,isLoggedIn,id } = props
+    const { handleClick,isLoggedIn,id,user_likes } = props
 
     const [numOfLikes, setNumOfLikes] = useState(0)
+    // const [heart,setHeart] = useState(false) // for highlighting hearts if current user has already like this project
 
     useEffect(() => {
         setNumOfLikes(likes)
@@ -46,6 +47,15 @@ const Project = (props) => {
        if (isLoggedIn === true && id != undefined) {likeFunc(id,model_id)} else {plsSignIn()}
     }
 
+    // ---- this portion of the code is experimental. it's pupose is to 'highlight' hearts in projects the current user has already liked.
+    // const checkIfLiked = () => {
+    //     const { user_likes } = props
+    //     var userLike = user_likes.filter(element => element.model_id === model_id)
+    //     if (userLike[0] != undefined && props.data.model_id === userLike[0].model_id) {setHeart(true)}
+    //     console.log(heart)
+    // }
+    // // checkIfLiked()
+    // {if (props.user_likes != undefined) {checkIfLiked()}}
     return(
         <div className='project-container'>
                 <div>
@@ -78,12 +88,15 @@ const Project = (props) => {
                     <div className="like-share">
                         <ul>
                         <li className="like-share-box"><p className="like-share-text">
+
                         <svg className="small-icon" onClick={clickedLike} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"  />
                         </svg>
                         
                         {/* {likes}</p></li> */}
-                        {numOfLikes}</p></li>
+                        
+                        {numOfLikes}</p>
+                        </li>
 
                         <li className="devide"></li>
 

@@ -4,6 +4,7 @@ import './Home.css'
 import { connect } from 'react-redux'
 // import { updateCharacters } from '../../ducks/breakingBadReducer'
 import { loginUser,updateUser } from '../../ducks/userReducer'
+import { getModels } from './../../ducks/modelsReducer'
 // import FirebaseTest from '.././FirebaseTest'
 import { Icon } from './Icons/Icon'
 import Footer from '../Footer/Footer'
@@ -31,11 +32,15 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        axios.get('api/project/join').then(res => 
-        this.setState({...this.state,projects:res.data}))
+
+        this.props.getModels()
+
+        // axios.get('api/project/join').then(res => 
+        // this.setState({...this.state,projects:res.data}))
     }
 
     componentDidUpdate() {
+        // this.props.getModels()
         this.props.updateUser()
     }
 
@@ -68,13 +73,26 @@ class Home extends Component {
         const { user_name, password, projects } = this.state
         const { loginUser } = this.props
         const { isLoggedIn } = this.props.user
-        const { model_likes,id } = this.props.user.user
+        const { user_likes,model_likes,id } = this.props.user.user
+        const { models } = this.props.models
         // console.log(this.props) 
 
-        const mappedModels = projects.map(element => {
-            // return <Project data={element} key={element.user_id}/> // original
-            return <Project data={element} key={element.model_id} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={id} />
+        const mappedModels = models.map(element => {
+            return <Project data={element} key={element.model_id} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={id} user_likes={user_likes} />
         })
+        // {if (user_likes != undefined){mappedModels.forEach(element => {
+        //     for (let i = 0; i < user_likes.length; i++){
+        //         if(element.model_id === user_likes.model_id) {
+        //             mappedModels.isLikedByUser = true
+        //             // console.log('model like',user_likes[i])
+        //         }
+        //     }
+        // })}}
+
+        // const mappedModels = projects.map(element => {
+        //     // return <Project data={element} key={element.user_id}/> // original
+        //     return <Project data={element} key={element.model_id} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={id} />
+        // })
 
         return(
             <div>
@@ -137,4 +155,4 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps, { loginUser,updateUser })(Home)
+export default connect(mapStateToProps, { loginUser,updateUser,getModels })(Home)
