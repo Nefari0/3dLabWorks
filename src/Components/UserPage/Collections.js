@@ -266,16 +266,19 @@ class Collections extends Component {
         // var storageRef = storage.ref();
 
         // delete from firebase
+        this.props.setIsLoading()
         if(url != null){
-            const storageRef = app.storage().refFromURL(url)
-            storageRef.delete().then(function deleted(params) {
+            // const storageRef = app.storage().refFromURL(url)
+            const storageRef = await app.storage().refFromURL(url)
+            await storageRef.delete().then(function deleted(params) {
                 console.log('image deleted')
             }).catch(function (error) {
-                console.log('there was an error')
+                console.log('there was an error',error)
             })
         }
         // delete from heroku db
-        axios.delete(`/api/project/delete/${id}`)
+        await axios.delete(`/api/project/delete/${id}`)
+        this.props.setIsLoading()
 
 
         // const fileRef = storageRef.child(url)
