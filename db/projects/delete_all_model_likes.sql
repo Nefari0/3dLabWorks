@@ -1,0 +1,1 @@
+DELETE FROM model_likes WHERE model_id = $1
