@@ -13,7 +13,6 @@
     "espress": "0.0.0",
     "express-session": "^1.17.1",
     "firebase": "^8.2.4",
-    "firebase-admin": "^9.4.2",
     "massive": "^6.6.4",
     "nodemon": "^2.0.14",
     "react": "^17.0.1",
