@@ -12,7 +12,7 @@ const authController = require('./controllers/authController')
 const userController = require('./controllers/userController')
 const projectsController = require('./controllers/projectsController');
 const deletedDataController = require('./controllers/deletedDataController')
-const { projectManagement, auth } = require('firebase-admin');
+// const { projectManagement, auth } = require('firebase-admin');
 const { addProject } = require('./controllers/projectsController');
 const docsController = require('./controllers/docsController')
 // const baseBackend = require('./../src/baseBackend')
@@ -24,6 +24,32 @@ const docsController = require('./controllers/docsController')
 //-------- firedtore / firebase -------//
 //  i am attempting to move all these code blocks to a seperate module/controller
 // const fireApp = require('./serviceAccounts/base') // will probably need to create controller for this
+
+
+// import firebase from 'firebase/app'
+const firebase = require('firebase/app')
+// import "firebase/storage"
+// const admin = require('firebase-admin');
+// import baseBackend from './baseBackend'
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB6ImzEUWfnyXD6bcpNEN8ktaMSfos8Js0",
+    authDomain: "depot-7bb3e.firebaseapp.com",
+    projectId: "depot-7bb3e",
+    storageBucket: "depot-7bb3e.appspot.com",
+    messagingSenderId: "38861699624",
+    appId: "1:38861699624:web:b1d9abfce822f3a4d2531d",
+    // appId: "1:38861699624:web:88599df2268262afd2531d",
+    measurementId: "G-DSTFFPFHLD"
+  };
+  const fireApp = firebase.initializeApp(firebaseConfig);
+  fireFile = async (input) => {
+    const storageRef = fireApp.storage().ref()
+    const fileRef = storageRef.child(input.name)
+    await fileRef.put(input)
+    console.log('image loaded')
+    return (fileRef)
+}
 
 // const admin = require('firebase-admin');
 // const firebase = require('firebase/app');
@@ -37,8 +63,8 @@ const fireController = require('./controllers/fireController');
 //     appId: "1:38861699624:web:b1d9abfce822f3a4d2531d",
 //     measurementId: "G-DSTFFPFHLD"
 //   };
-//   const fireApp = firebase.initializeApp(firebaseConfig);
 // -------------------------------------------- // 
+//   const fireApp = firebase.initializeApp(firebaseConfig);
 
 const { SESSION_SECRET, CONNECTION_STRING, SERVER_PORT } = process.env;
 
@@ -115,7 +141,7 @@ app.get('/api/links/get', docsController.getAllLinks)
 
 // // storage access end points //
 // app.get('/api/assets/getall')
-// app.post('api/asset/upload/add:item_id')
+app.post('api/asset/upload/add',fireFile)
 // app.delete('/api/asset/delete/item/:item_id')
 
 // // messaging end points //

@@ -7,7 +7,7 @@ const db = app.firestore()
 
 const ModelItem = (props) => {
 
-    const { img,id } = props
+    const { img,id,file } = props
     // console.log('this is db from ModelItem',db.INTERNAL)
     
     const handleClick = () => {
@@ -15,7 +15,7 @@ const ModelItem = (props) => {
         const model_id = props.id
         alert('are you sure you want to delete this file?')
         // props.delete(model_id)
-        props.removeFileFromSpace(img,id)
+        props.removeFileFromSpace(img,id,file)
         
         // deleteDBFile()
     }

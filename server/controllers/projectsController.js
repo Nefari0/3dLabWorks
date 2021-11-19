@@ -33,6 +33,8 @@ module.exports = {
     deleteProject: async (req,res) => {
         const { model_id } = req.params
         const db = req.app.get('db')
+        await db.projects.delete_all_model_comments([model_id])
+        await db.projects.delete_all_model_likes([model_id])
         await db.delete_project([model_id])
         // await db.delete_project([]) 
         return res.status(200).send('deleted')

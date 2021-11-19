@@ -1,5 +1,5 @@
 const firebase = require('firebase/app');
-const admin = require('firebase-admin');
+// const admin = require('firebase-admin');
 // const fireController = require('./controllers/fireController');
 const firebaseConfig = {
     apiKey: "AIzaSyB6ImzEUWfnyXD6bcpNEN8ktaMSfos8Js0",

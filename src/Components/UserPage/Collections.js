@@ -198,6 +198,7 @@ class Collections extends Component {
         const theFile = await this.getFileUrl(file)
         this.setFileUrl(await theFile.getDownloadURL())
         const theImage = await this.getImUrl(imageFile)
+        // await axios.post('api/asset/upload/add',{ imageFile }) // tranfering to backend
         this.setImageUrl(await theImage.getDownloadURL())
         this.addToDatabase(this.state.fileUrl,this.state.imageUrl)
         this.props.setIsLoading()
@@ -260,22 +261,34 @@ class Collections extends Component {
     
     // -------------------------------------- //
 
-    removeFileFromSpace = async (url,id) => {
+    removeFileFromSpace = async (url,id,file) => {
         // create reference
         // var storage = db.storage();
         // var storageRef = storage.ref();
 
         // delete from firebase
+        this.props.setIsLoading()
         if(url != null){
-            const storageRef = app.storage().refFromURL(url)
-            storageRef.delete().then(function deleted(params) {
+            // const storageRef = app.storage().refFromURL(url)
+            const storageRef = await app.storage().refFromURL(url) // delete image
+            await storageRef.delete().then(function deleted(params) {
                 console.log('image deleted')
             }).catch(function (error) {
-                console.log('there was an error')
+                console.log('there was an error',error)
+            })
+        }
+        if(file != null){
+            // const storageRef = app.storage().refFromURL(url)
+            const storageRef2 = await app.storage().refFromURL(file) // delete image
+            await storageRef2.delete().then(function deleted(params) {
+                console.log('image deleted')
+            }).catch(function (error) {
+                console.log('there was an error',error)
             })
         }
         // delete from heroku db
-        axios.delete(`/api/project/delete/${id}`)
+        await axios.delete(`/api/project/delete/${id}`)
+        this.props.setIsLoading()
 
 
         // const fileRef = storageRef.child(url)
@@ -351,7 +364,7 @@ class Collections extends Component {
         const { items,openAddProject,openEditModel,previewImageFile } = this.state
 
         const mappedItems = items.map(element => {
-            return <ModelItem key={element.model_id} name={element.name} img={element.firebase_url01} id={element.model_id} delete={this.deleteModel} removeFileFromSpace={this.removeFileFromSpace} openEdidModel={this.openEditModel} />
+            return <ModelItem key={element.model_id} name={element.name} img={element.firebase_url01} file={element.firebase_url} id={element.model_id} delete={this.deleteModel} removeFileFromSpace={this.removeFileFromSpace} openEdidModel={this.openEditModel} />
         })
 
         return(
