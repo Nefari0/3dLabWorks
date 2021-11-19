@@ -45,12 +45,12 @@ module.exports = {
         // check if user already likes model_id
 
         const foundLike = await db.projects.get_like_by_id([user_id,model_id])
+
         // const isLiked = foundLike[0].user_id
-        console.log('found like',foundLike[0])
+        // console.log('found like',foundLike[0] === undefined)
 
         // if not like: add to db
         if (foundLike[0] === undefined) {
-
             await db.projects.add_model_like([1,model_id])
             await db.add_user_like([user_id,model_id])
             return res.status(200).send('like added')

@@ -66,6 +66,10 @@ module.exports = {
 
     login: async (req,res) => {
         const { user_name, password } = req.body;
+        console.log('this is user',user_name)
+        if (user_name.split('').length < 1) {
+            return res.status(401).send('user not found')
+        }
         const foundUser = await req.app.get('db').get_user([user_name]);
         const user = foundUser[0];
         if (!user) {
