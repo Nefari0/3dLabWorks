@@ -80,6 +80,7 @@ class Home extends Component {
         const mappedModels = models.map(element => {
             return <Project data={element} key={element.model_id} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={id} user_likes={user_likes} />
         })
+
         // {if (user_likes != undefined){mappedModels.forEach(element => {
         //     for (let i = 0; i < user_likes.length; i++){
         //         if(element.model_id === user_likes.model_id) {

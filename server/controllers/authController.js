@@ -34,7 +34,7 @@ module.exports = {
              id: user.user_id
          };
 
-        console.log(req.session.user)
+        // console.log(req.session.user)
         return res.status(201).send(req.session.user).catch(err => console.log(err))
     },
 
@@ -90,6 +90,7 @@ module.exports = {
              photo: user.photo_url,
              auth: isAuthenticated
          };
+        //  console.log('this is req.session',req.session)
         //  userData(req.session.data)
             return res.status(200).send(req.session.user)
     },
