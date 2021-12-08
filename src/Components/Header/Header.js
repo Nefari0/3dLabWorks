@@ -34,42 +34,21 @@ class Header extends Component{
         this.handleLogout = this.handleLogout.bind(this)
         this.setSaveSession = this.setSaveSession.bind(this)
 
-    // --- these two functions are for testing to add user session to browser
-    // --- they will probably not be used
-        this.viewTheWindow = this.viewTheWindow.bind(this)
+    // --- this function saves user info to browser
         this.sessionToWindow = this.sessionToWindow.bind(this)
     }
-// testing window
-    viewTheWindow() {
-        // const localStorage = window.localStorage
-        console.log('my Info window',localStorage.getItem('password'),localStorage.getItem('user_name'))
-    }
-    sessionToWindow(prop,val) {
-        // const localStorage = window.localStorage
-        localStorage.setItem(prop,val)
 
-        // localStorage.removeItem("name1");
-        // console.log('window not set',window.localStorage)
+    sessionToWindow(prop,val) {
+        localStorage.setItem(prop,val)
     }
-// testing window
 
     async componentDidMount(prevProps) {
-
-        // check if user_info is saved in localStorage
-        // if user_info is in localStorage:
-                // loginUser(['user_info'])
         const savedUsername = localStorage['user_name']
         const savedPassword = localStorage['password']
         if (localStorage['user_name'] != undefined && localStorage['password'] != undefined) {
             this.props.loginUser(savedUsername,savedPassword)
 
         }
-
-
-        // this.props.updateUser()
-        // let res = await axios.get(`/auth/update/session`)
-        // console.log(res)
-        // if (res.data.isLoggedIn) this.props.history.push('/user')
       }
     
     componentWillUpdate(){
