@@ -21,7 +21,8 @@ class Header extends Component{
             password:'',
             setPermission:true,
             openLogin:true,
-            isLoggedInState:null
+            isLoggedInState:null,
+            saveSession:false
         }
         this.handleLogging = this.handleLogging.bind(this)
         this.resetState = this.resetState.bind(this)
@@ -31,12 +32,43 @@ class Header extends Component{
         this.handleUserName = this.handleUserName.bind(this)
         this.toggleLogin = this.toggleLogin.bind(this)
         this.handleLogout = this.handleLogout.bind(this)
+        this.setSaveSession = this.setSaveSession.bind(this)
+
+    // --- these two functions are for testing to add user session to browser
+    // --- they will probably not be used
+        this.viewTheWindow = this.viewTheWindow.bind(this)
+        this.sessionToWindow = this.sessionToWindow.bind(this)
     }
+// testing window
+    viewTheWindow() {
+        // const localStorage = window.localStorage
+        console.log('my Info window',localStorage.getItem('password'),localStorage.getItem('user_name'))
+    }
+    sessionToWindow(prop,val) {
+        // const localStorage = window.localStorage
+        localStorage.setItem(prop,val)
+
+        // localStorage.removeItem("name1");
+        // console.log('window not set',window.localStorage)
+    }
+// testing window
 
     async componentDidMount(prevProps) {
-        this.props.updateUser()
-        let res = await axios.get(`/auth/update/session`)
-        console.log(res)
+
+        // check if user_info is saved in localStorage
+        // if user_info is in localStorage:
+                // loginUser(['user_info'])
+        const savedUsername = localStorage['user_name']
+        const savedPassword = localStorage['password']
+        if (localStorage['user_name'] != undefined && localStorage['password'] != undefined) {
+            this.props.loginUser(savedUsername,savedPassword)
+
+        }
+
+
+        // this.props.updateUser()
+        // let res = await axios.get(`/auth/update/session`)
+        // console.log(res)
         // if (res.data.isLoggedIn) this.props.history.push('/user')
       }
     
@@ -51,9 +83,9 @@ class Header extends Component{
         }   
     }
 
-    componentDidUpdate(prevProps){
-        console.log('prev props',prevProps)
-    }
+    // componentDidUpdate(prevProps){
+    //     console.log('prev props',prevProps)
+    // }
 
     resetState(){
         this.setState({
@@ -79,14 +111,43 @@ class Header extends Component{
         this.setState({isMenuOpen: !this.state.isMenuOpen})
     }
 
-    handleClick() {
-        const { user_name, password } = this.state
-        this.props.loginUser(user_name,password)
+    async handleClick() {
+        const { user_name, password, saveSession } = this.state
+        // const savedUsername = localStorage['user_name']
+        // const savedPassword = localStorage['password']
+
+            // if save username and password === true:
+            //      {localStorage.setItem('user_name',user_name)}
+            //      localStorage.setItem('password',password)
+            // else:
+                // localStorage.removeItem("user_name");
+                // localStorage.removeItem("password");
+
+                
+                // if (localStorage['user_name'] != undefined && localStorage['password'] != undefined) {
+                    //     this.props.loginUser(savedUsername,savedPassword)
+                    
+                    // }
+                    
+                    // localStorage.setItem('user_name',user_name)
+        await this.props.loginUser(user_name,password)
+        // console.log('from user login',this.props.user.isLoggedIn)
+        // TESTING
+        if (saveSession === true && this.props.user.isLoggedIn === true) {
+            localStorage.setItem('user_name',user_name)
+            localStorage.setItem('password',password)
+        }
+        // const { auth, email, name, is_admin, user } = this.props.user.user
+        // const { user } = this.props.user
+        // await console.log('login props',email)
+        // await localStorage.setItem('session',{user})
         this.toggleLogin()
         this.setState({user_name:'',password:''})
     }
 
     handleLogout() {
+        localStorage.removeItem("user_name");
+        localStorage.removeItem("password");
         this.toggleLogin()
         this.props.logoutUser()
     }
@@ -103,18 +164,21 @@ class Header extends Component{
         this.setState({openLogin: !this.state.openLogin})
     }
 
+    setSaveSession() {
+        this.setState({saveSession:!this.state.saveSession})
+    }
+
             
     
 
     render() {
-        const { username, isMenuOpen, user_name, password, openLogin, isLoggedInState } = this.state
+        const { saveSession, username, isMenuOpen, user_name, password, openLogin, isLoggedInState } = this.state
         const { isLoggedIn } = this.props.user
-
 
     return(
         <div className='header-container'>
 
-            <img 
+            <img onClick={this.viewTheWindow}
             src="https://firebasestorage.googleapis.com/v0/b/depot-7bb3e.appspot.com/o/logo.png?alt=media&token=3d889013-f357-4d66-adc2-286bdb367ce6"
             className="cd-logo"
             />
@@ -125,6 +189,8 @@ class Header extends Component{
                 {/* <Link to="/" style={{ textDecoration: 'none' }}><li className='link-item'><a>home</a></li></Link> */}
                 <Link to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a>about</a></li></Link>
                 <Link to="/explore" style={{ textDecoration: 'none' }}><li className='link-item'><a>projects</a></li></Link>
+                {/* <a onClick={() => this.viewTheWindow()}>view window</a> */}
+                {/* <a onClick={() => this.addToWindow('name1','name3')}>set window</a> */}
                 {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='link-item'><a>my page</a></li></Link>)}
             </ul>
 
@@ -144,7 +210,7 @@ class Header extends Component{
                 {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='mobile-link-item'><a>my page</a></li></Link>)}
             </ul>
 
-            {!openLogin ? (<MobileLogin login={this.props.loginUser} logout={this.handleLogout} execute={this.handleClick} name={this.handleUserName} pass={this.handlePassword} hide={this.state.openLogin} exit={this.toggleLogin} isLoggedIn={this.props.user.isLoggedIn}/>):(<div className="blank-div"></div>)}
+            {!openLogin ? (<MobileLogin setSaveSession={this.setSaveSession} login={this.props.loginUser} logout={this.handleLogout} execute={this.handleClick} name={this.handleUserName} pass={this.handlePassword} hide={this.state.openLogin} exit={this.toggleLogin} isLoggedIn={this.props.user.isLoggedIn} saveSession={saveSession} />):(<div className="blank-div"></div>)}
         </div>
     )}
 } 
