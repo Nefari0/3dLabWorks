@@ -182,7 +182,7 @@ class Header extends Component{
             </svg>
 
             <ul className={`mobile-nav ${isMenuOpen ? false : 'mobile-nav-hide'}`} onClick={this.toggleMenu}>
-                <li className='mobile-link-item' onClick={this.toggleLogin}>sign in</li>
+                {!isLoggedIn ? <li className='mobile-link-item' onClick={this.toggleLogin}>login</li>:<li className='mobile-link-item' onClick={this.toggleLogin}>logout</li>}
                 {/* <Link to="/" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>home</li></Link> */}
                 <Link to="/about" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>about</li></Link>
                 <Link to="/explore" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>projects</li></Link>
