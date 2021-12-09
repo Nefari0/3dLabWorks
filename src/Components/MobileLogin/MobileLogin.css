@@ -107,3 +107,13 @@
 	align-items: center;
     font-size: 10px;
 }
+
+@media (max-width: 360px) {
+    .plogin-container {
+        width: 300px;
+    }
+
+    .close-button {
+        right: 30px;
+    }
+}

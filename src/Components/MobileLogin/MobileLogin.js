@@ -21,7 +21,7 @@ const Prototype = (props) => {
             <h2 style={{textTransform:'none'}} >Log In to Your Accout</h2></section>
         <section className="form">
         <input value={user_name} onChange={e => props.name(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" style={{paddingBottom:'5px',marginTop:'20px'}}/>
-        <input value={password} onChange={e => props.pass(e.target.value)} placeholder="Password" className="log-input log-form-length disabled" style={{paddingBottom:'5px',marginTop:'15px'}} type="password" />
+        <input value={password} onChange={e => props.pass(e.target.value)} placeholder="Password" className="log-input log-form-length disabled" style={{paddingBottom:'5px',marginTop:'17px'}} type="password" />
  
         {/* <div className="input-element"> */}
         <ul className="keep-session log-form-length">
