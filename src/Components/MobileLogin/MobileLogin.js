@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react'
 import './MobileLogin.css'
 import { Link } from 'react-router-dom'
 
-const Prototype = (props) => {
+const MobileLogin = (props) => {
 
-    const { isLoggedIn,saveSession } = props
+    const { isLoggedIn,saveSession,current_user } = props
     
     const { user_name, setUsername } = useState('')
     const { password, setPassword } = useState('')
@@ -49,10 +49,10 @@ const Prototype = (props) => {
 
         {!isLoggedIn ? <a className="login-button log-form-length" onClick={props.execute} >Log In</a> : <a className="login-button log-form-length" onClick={props.logout} >Log Out</a>}
 
-        <div className="build-account" ><p>Need an account?</p><Link to="/register" style={{ textDecoration: 'none' }}><a style={{fontWeight:'400',color:"blue"}} onClick={props.exit}>Sign up</a></Link></div>
+        {!isLoggedIn ? <div className="build-account" ><p>Need an account?</p><Link to="/register" style={{ textDecoration: 'none' }}><a style={{fontWeight:'400',color:"blue"}} onClick={props.exit}>Sign up</a></Link></div> : <div className="build-account" ><p>Logged in as:</p><a style={{fontWeight:'400',color:"blue"}} onClick={props.exit}>{current_user}</a></div>}
         </section>
     </div>
     )
 
 }
-export default Prototype
+export default MobileLogin
