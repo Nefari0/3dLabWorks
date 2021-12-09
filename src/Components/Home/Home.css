@@ -2,6 +2,7 @@
 
 .hero {
     /* height: 75vh; */
+     /* height: 90vh; */
      height: 90vh;
      width: 100vw;
      /* background-image: linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.7)),url(chessboard2.png); */
@@ -30,6 +31,7 @@
      overflow-x: scroll;
      overflow-y: scroll;
      overflow: hidden;
+     border-bottom: solid 40px #6495ed;
      /* margin: auto; */
 
 
