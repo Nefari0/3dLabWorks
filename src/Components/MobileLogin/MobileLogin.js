@@ -47,7 +47,7 @@ const MobileLogin = (props) => {
             <p style={{fontSize:'10px',marginBottom:'0px',marginLeft:'0px', color:'blue' }} >Forgot password?</p>
         </ul>
 
-        {!isLoggedIn ? <a className="login-button log-form-length" onClick={props.execute} >Log In</a> : <a className="login-button log-form-length" onClick={props.logout} >Log Out</a>}
+        {!isLoggedIn ? <a className="login-button" onClick={props.execute} >Log In</a> : <a className="login-button" onClick={props.logout} >Log Out</a>}
 
         {!isLoggedIn ? <div className="build-account" ><p>Need an account?</p><Link to="/register" style={{ textDecoration: 'none' }}><a style={{fontWeight:'400',color:"blue"}} onClick={props.exit}>Sign up</a></Link></div> : <div className="build-account" ><p>Logged in as:</p><a style={{fontWeight:'400',color:"blue"}} onClick={props.exit}>{current_user}</a></div>}
         </section>
