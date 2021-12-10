@@ -8,11 +8,9 @@
     padding-bottom: 30px;
     height: 350px;
     width: 280px;
-    box-shadow: .1px .1px #888888;
+    box-shadow: 0 2.5rem 2rem -2rem hsl(200 50% 20% / 40%);
     background-color: #fff;
-    /* background-color: brown; */
     text-align: left;
-    /* opacity: 80%; */
 
     display: flex;
 	flex-direction: column;
@@ -159,7 +157,7 @@ img:hover {
 
 .download-container-top {
     border-top:1px solid #555;
-    opacity: 10%;
+    opacity: 30%;
     margin: none;
 }
 
@@ -196,16 +194,17 @@ img:hover {
 }
 
 .devide {
+    z-index: 1011;
     height: 0px;
     border-bottom:1px solid #555;
-    opacity: 10%;
+    opacity: 30%;
     margin: 0px;
 }
 
 .horizontal-devide {
     height: 82px;
     margin-bottom: none;
-    opacity: 10%;
+    opacity: 30%;
     border-left:1px solid #555;
 
 }
