@@ -80,7 +80,7 @@ export default function userReducer(state = inititialState, action) {
             }
         case LOGOUT_USER + '_FULFILLED':
                 return {
-                    ...state, isLoggedIn: false
+                    ...state, user: action.payload.data, isLoggedIn: false
                 }
         case REGISTER_USER + '_FULFILLED':
             return {
