@@ -3,13 +3,19 @@
     margin: auto;
     min-height: 70vh;
     width: 90vw;
-    background-color: rgb(221, 221, 221);
+    /* width: 100vw; */
+    /* background-color: rgb(221, 221, 221); */
+    background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url(white-backround1.jpg);
+    background-size: cover; 
+    background-position: center bottom;
+    /* background-attachment: fixed; */
     display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: space-around;
 	align-items: stretch;
 	align-content: space-around;
+    overflow: scroll;
 }
 
 h4 {
