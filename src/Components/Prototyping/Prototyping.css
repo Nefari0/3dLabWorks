@@ -5,6 +5,7 @@
     padding: 2px;
     border-radius: 3%;
     background-color: #fff;
+    /* background-color: blue; */
     color: #555;
 	display: flex;
 	flex-direction: column;
@@ -19,10 +20,11 @@
     box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
     margin: none;
     overflow: hidden;
-    transition: all 100ms;
+    /* transition: all 100ms; */
 }
 .r-selected {
     height: 500px;
+    top: 60px;
     transition: all 100ms;
 }
 
@@ -40,7 +42,7 @@
     /* border-top: solid 1px #3c598e; */
     padding-top: 20%;
     margin: none;
-    transition: all 100mx;
+    transition: all 100ms;
 }
 
 .rlogin-title {
@@ -57,7 +59,7 @@
     /* border-bottom: solid 1px #3c598e; */
     /* border-top: solid 1px #3c598e; */
     padding-top: 10%;
-    transition: all 1000ms;
+    transition: all 100ms;
     margin: none;
 }
 
@@ -79,6 +81,7 @@
 	align-items: center;
 	align-content: flex-start;
     /* background-color: pink; */
+    transition: all 100ms;
 }
 
 .rform {
@@ -95,6 +98,10 @@
 	align-items: center;
 	align-content: flex-start;
     /* background-color: yellow; */
+    transition: all 200ms;
+}
+.agree-form {
+    width: 90vw;
 }
 
 .log-btn {
