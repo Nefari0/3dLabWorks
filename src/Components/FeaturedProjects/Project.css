@@ -7,7 +7,7 @@
 
     padding-bottom: 30px;
     height: 350px;
-    min-width: 280px;
+    width: 280px;
     box-shadow: 0 2.5rem 2rem -2rem hsl(200 50% 20% / 40%);
     background-color: #fff;
     text-align: left;
@@ -512,6 +512,47 @@ img:hover {
         width: 300px;
         /* padding: 20px; */
         /* background-color: green; */
+    }
+}
+
+@media (max-width:325px) {
+    .project-container {
+        width: 250px;
+    }
+
+    .image-div {
+        width:250px
+    }
+
+    .like-share-text {
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .like-share-box {
+        margin-right: 15px;
+        padding-right: 1px;
+    }
+}
+
+
+@media (max-width:300px) {
+    .project-container {
+        width: 220px;
+    }
+
+    .image-div {
+        width: 220px;
+    }
+
+    .like-share-box {
+        margin-right: 2px;
+        /* padding-left: 5px; */
+        padding-right: 0px;
+    }
+
+    .project-text {
+        display: none;
     }
 }
 
