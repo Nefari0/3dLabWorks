@@ -10,12 +10,21 @@
     background-size: cover; 
     background-position: center bottom;
     /* background-attachment: fixed; */
+
     display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: space-around;
 	align-items: stretch;
 	align-content: space-around;
+
+    /* display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: space-around; */
+
     overflow: scroll;
 }
 
