@@ -5,7 +5,6 @@
     padding: 2px;
     border-radius: 3%;
     background-color: #fff;
-    /* background-color: blue; */
     color: #555;
 	display: flex;
 	flex-direction: column;
@@ -20,8 +19,6 @@
     box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
     margin: none;
     overflow: hidden;
-    /* background-color: blue; */
-    /* transition: all 100ms; */
 }
 .r-selected {
     height: 500px;
@@ -40,11 +37,7 @@
     top: -1px;
     height: 120px;
     width: 355px;
-    /* background-color: #6495ed; */
-    /* background: linear-gradient(0turn,#5a86d5,#6495ed); */
     background: linear-gradient(0turn,#5077be,#6495ed);
-    /* border-bottom: solid 1px #3c598e; */
-    /* border-top: solid 1px #3c598e; */
     padding-top: 20%;
     margin: none;
     transition: all 100ms;
@@ -55,14 +48,9 @@
     position: absolute;
     text-transform: none;
     top: -1px;
-    /* height: 120px; */
     height: 80px;
     width: 355px;
-    /* background-color: #6495ed; */
-    /* background: linear-gradient(0turn,#5a86d5,#6495ed); */
     background: linear-gradient(0turn,#5077be,#6495ed);
-    /* border-bottom: solid 1px #3c598e; */
-    /* border-top: solid 1px #3c598e; */
     padding-top: 10%;
     transition: all 100ms;
     margin: none;
@@ -90,7 +78,6 @@
 	justify-content: flex-start;
 	align-items: center;
 	align-content: flex-start;
-    /* background-color: pink; */
     transition: all 100ms;
 }
 
@@ -98,7 +85,6 @@
     position: absolute;
     margin: 1px;
     padding: 1px;
-    /* height: 350px; */
     height: 380px;
     width: 100%;
     bottom: 15px;
@@ -108,7 +94,7 @@
 	justify-content: flex-start;
 	align-items: center;
 	align-content: flex-start;
-    /* background-color: yellow; */
+
     transition: all 200ms;
 }
 .agree-form {
@@ -152,7 +138,6 @@
 }
 .login-button {
     height: 35px;
-    /* height: 50px; */
     width: 200px;
     padding-bottom: 20px;
     background: linear-gradient(0turn,#3c598e,#5077be);

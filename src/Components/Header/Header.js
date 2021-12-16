@@ -7,6 +7,7 @@ import './Header.css'
 import { Link } from 'react-router-dom'
 import MobileLogin from '../MobileLogin/MobileLogin'
 import UserPage from '../UserPage/UserPage'
+// import Prototyping from '../Prototyping/Prototyping'
 // import Register from '../Register/Register'
 import { withRouter } from 'react-router'
 // import BaseBackend from '../../BaseBackend'
@@ -189,6 +190,7 @@ class Header extends Component{
             </ul>
 
             {!openLogin ? (<MobileLogin current_user={user_name} setSaveSession={this.setSaveSession} login={this.props.loginUser} logout={this.handleLogout} execute={this.handleClick} name={this.handleUserName} pass={this.handlePassword} hide={this.state.openLogin} exit={this.toggleLogin} isLoggedIn={this.props.user.isLoggedIn} saveSession={saveSession} />):(<div className="blank-div"></div>)}
+            {/* {!openLogin ? (<Prototyping current_user={user_name} setSaveSession={this.setSaveSession} login={this.props.loginUser} logout={this.handleLogout} execute={this.handleClick} name={this.handleUserName} pass={this.handlePassword} hide={this.state.openLogin} exit={this.toggleLogin} isLoggedIn={this.props.user.isLoggedIn} saveSession={saveSession} />):(<div className="blank-div"></div>)} */}
         </div>
     )}
 } 

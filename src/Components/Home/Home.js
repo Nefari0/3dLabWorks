@@ -12,7 +12,7 @@ import FeaturedProjects from '../FeaturedProjects/FeaturedProjects'
 import Loading from '../Loading/Loading'
 // import CurrentProject from './CurrentProject/CurrentProject'
 import Project from '../FeaturedProjects/Project'
-
+import Prototyping from '../Prototyping/Prototyping'
 // import Vid from './Video/EC.NC gear train0001-0500.mp4'
 
 class Home extends Component {
@@ -74,6 +74,7 @@ class Home extends Component {
             <div>
                 <div className="hero">
                     <h2 className="hero-h2">IMAGINE IT - BUILD IT.</h2>
+                    {/* <Prototyping /> */}
                     <div className="deploy-projects">{mappedModels}</div>
                     {/* <video autoPlay loop muted
                     style={{

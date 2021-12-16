@@ -80,7 +80,6 @@ const Register = (props) => {
                 <h4>signup now</h4>
             </div>}</div> : <Agreement handleOpenIAgree={handleOpenIAgree} />}
 
-            
         </div>
     )
 }

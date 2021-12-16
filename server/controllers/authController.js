@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt')
 
 module.exports = {
     register: async (req,res) => {
-        console.log(req.body)
+        console.log('req body',req.body)
         const {user_name, password, email, first_name, is_admin} = req.body;
         if (is_admin != false){
             return(alert('this operation cannot be completed because of a security breach'))
@@ -28,14 +28,26 @@ module.exports = {
         //     id: user.user_id
         //  };
 
+        // req.session.user = { 
+        //     isAdmin: user.is_admin, 
+        //     user: user.user_name,
+        //      id: user.user_id
+        //  };
+
         req.session.user = { 
-            isAdmin: user.is_admin, 
+            // user_likes: user_likes,
+            email: user.email,
+            is_admin: user.is_admin, 
             user: user.user_name,
-             id: user.user_id
+             id: user.user_id,
+             name: user.first_name,
+             photo: user.photo_url,
+            //  auth: isAuthenticated
          };
 
-        // console.log(req.session.user)
-        return res.status(201).send(req.session.user).catch(err => console.log(err))
+        console.log('req.session from controller',req.session.user)
+        // return res.status(201).send(req.session.user).catch(err => console.log(err))
+        return res.status(201).send(req.session.user)
     },
 
     changePassword: async (req,res) => {
@@ -60,7 +72,7 @@ module.exports = {
             
         }
 
-        return res.status(202).send(user).catch
+        return res.status(202).send(user)
 
     },
 

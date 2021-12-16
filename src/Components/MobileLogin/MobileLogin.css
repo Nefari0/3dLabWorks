@@ -1,4 +1,4 @@
-/* .plogin-container {
+.plogin-container {
     position: absolute;
     height: 400px;
     width: 350px;
@@ -20,6 +20,15 @@
     margin: none;
     overflow: hidden;
 }
+.r-selected {
+    height: 500px;
+    top: 50px;
+    transition: all 100ms;
+}
+
+.agree-view {
+    width: 90vw;
+}
 
 .login-title {
     color: #fff;
@@ -31,6 +40,25 @@
     background: linear-gradient(0turn,#5077be,#6495ed);
     padding-top: 20%;
     margin: none;
+    transition: all 100ms;
+}
+
+.rlogin-title {
+    color: #fff;
+    position: absolute;
+    text-transform: none;
+    top: -1px;
+    height: 80px;
+    width: 355px;
+    background: linear-gradient(0turn,#5077be,#6495ed);
+    padding-top: 10%;
+    transition: all 100ms;
+    margin: none;
+}
+
+.rlogin-title-agreement {
+    width: 90vw;
+    padding-top: 35px;
 }
 
 .close-button {
@@ -50,6 +78,27 @@
 	justify-content: flex-start;
 	align-items: center;
 	align-content: flex-start;
+    transition: all 100ms;
+}
+
+.rform {
+    position: absolute;
+    margin: 1px;
+    padding: 1px;
+    height: 380px;
+    width: 100%;
+    bottom: 15px;
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: flex-start;
+
+    transition: all 200ms;
+}
+.agree-form {
+    width: 90vw;
 }
 
 .log-btn {
@@ -61,7 +110,7 @@
 }
 
 .log-input {
-    height: 30px;
+    height: 33px;
     color: #555;
     text-decoration: overline;
     font-size: 20px;
@@ -90,6 +139,7 @@
 .login-button {
     height: 35px;
     width: 200px;
+    padding-bottom: 20px;
     background: linear-gradient(0turn,#3c598e,#5077be);
     box-shadow: 0px 30px 8px -17px #000000;
     border: solid 1px #3c598e;
@@ -115,4 +165,4 @@
     .close-button {
         right: 30px;
     }
-} */
+}
