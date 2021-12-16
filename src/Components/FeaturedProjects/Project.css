@@ -3,11 +3,11 @@
 .project-container {
     border-radius: 2%;
     margin: 10px;
-    /* margin-right: 40px; */
+    margin-left: 20px;
 
     padding-bottom: 30px;
     height: 350px;
-    width: 280px;
+    min-width: 280px;
     box-shadow: 0 2.5rem 2rem -2rem hsl(200 50% 20% / 40%);
     background-color: #fff;
     text-align: left;

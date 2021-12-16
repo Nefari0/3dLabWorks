@@ -1,9 +1,10 @@
 
 .explore-container {
-    margin: auto;
+    padding: 1%;
     min-height: 70vh;
-    width: 90vw;
+    /* width: 90vw; */
     /* width: 100vw; */
+    min-width: 300px;
     /* background-color: rgb(221, 221, 221); */
     background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url(white-backround1.jpg);
     background-size: cover; 
