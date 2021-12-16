@@ -20,12 +20,17 @@
     box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
     margin: none;
     overflow: hidden;
+    /* background-color: blue; */
     /* transition: all 100ms; */
 }
 .r-selected {
     height: 500px;
-    top: 60px;
+    top: 50px;
     transition: all 100ms;
+}
+
+.agree-view {
+    width: 90vw;
 }
 
 .login-title {
@@ -63,6 +68,11 @@
     margin: none;
 }
 
+.rlogin-title-agreement {
+    width: 90vw;
+    padding-top: 35px;
+}
+
 .close-button {
     position: absolute;
     top: 1px;
@@ -88,7 +98,8 @@
     position: absolute;
     margin: 1px;
     padding: 1px;
-    height: 350px;
+    /* height: 350px; */
+    height: 380px;
     width: 100%;
     bottom: 15px;
     display: flex;
