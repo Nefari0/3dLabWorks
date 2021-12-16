@@ -516,7 +516,7 @@ img:hover {
 }
 
 @media (max-width:325px) {
-    /* .project-container {
+    .project-container {
         width: 250px;
     }
 
@@ -526,33 +526,33 @@ img:hover {
 
     .like-share-text {
         font-size: 12px;
-        font-weight: 600;
+        /* font-weight: 600; */
     }
 
     .like-share-box {
         margin-right: 15px;
         padding-right: 1px;
-    } */
+    }
 }
 
 
 @media (max-width:300px) {
-    /* .project-container {
+    .project-container {
         width: 220px;
-    } */
+    }
 
-    /* .image-div {
+    .image-div {
         width: 220px;
-    } */
+    }
 
-    /* .like-share-box {
+    .like-share-box {
         margin-right: 2px;
         padding-right: 0px;
-    } */
+    }
 
-    /* .project-text {
+    .project-text {
         display: none;
-    } */
+    }
 }
 
 @media (max-height:300px) {
