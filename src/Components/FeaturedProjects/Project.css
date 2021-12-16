@@ -537,23 +537,22 @@ img:hover {
 
 
 @media (max-width:300px) {
-    .project-container {
+    /* .project-container {
         width: 220px;
-    }
+    } */
 
-    .image-div {
+    /* .image-div {
         width: 220px;
-    }
+    } */
 
-    .like-share-box {
+    /* .like-share-box {
         margin-right: 2px;
-        /* padding-left: 5px; */
         padding-right: 0px;
-    }
+    } */
 
-    .project-text {
+    /* .project-text {
         display: none;
-    }
+    } */
 }
 
 @media (max-height:300px) {
