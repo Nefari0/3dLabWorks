@@ -5,10 +5,10 @@
     /* width: 90vw; */
     /* width: 100vw; */
     min-width: 280px;
-    background-color: rgb(221, 221, 221);
-    /* background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url(white-backround1.jpg); */
-    /* background-size: cover;  */
-    /* background-position: center bottom; */
+    /* background-color: rgb(221, 221, 221); */
+    background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url(white-backround1.jpg);
+    background-size: cover; 
+    background-position: center bottom;
     /* background-attachment: fixed; */
 
     display: flex;
