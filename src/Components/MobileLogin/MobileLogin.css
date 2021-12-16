@@ -1,4 +1,4 @@
-.plogin-container {
+/* .plogin-container {
     position: absolute;
     height: 400px;
     width: 350px;
@@ -28,11 +28,7 @@
     top: -1px;
     height: 120px;
     width: 355px;
-    /* background-color: #6495ed; */
-    /* background: linear-gradient(0turn,#5a86d5,#6495ed); */
     background: linear-gradient(0turn,#5077be,#6495ed);
-    /* border-bottom: solid 1px #3c598e; */
-    /* border-top: solid 1px #3c598e; */
     padding-top: 20%;
     margin: none;
 }
@@ -119,4 +115,4 @@
     .close-button {
         right: 30px;
     }
-}
+} */
