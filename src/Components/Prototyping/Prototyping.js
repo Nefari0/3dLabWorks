@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import './Prototyping.css'
 import { Link } from 'react-router-dom'
-import { registerUser } from '../../ducks/userReducer'
+import { loginUser,registerUser } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
 import Agreement from '../Register/Agreement'
 
@@ -48,6 +48,10 @@ const Prototyping = (props) => {
         console.log(openIAgree)
     }
 
+    const getLoggedIn = () => {
+        props.loginUser(user_name,password)
+    }
+
     return(
         <div className={`plogin-container ${!signup ? true : `plogin-Container r-selected ${openIAgree ? true : `plogin-container r-selected agree-view`}`}`}>
         {/* <section className="login-title"> */}
@@ -59,9 +63,14 @@ const Prototyping = (props) => {
             
             {!signup ? <h2 style={{textTransform:'none'}} >Log In to Your Accout</h2> : <h2 style={{textTransform:'none'}} >Create Account</h2>}</section>
         {!signup ? <section className="form">
-        <input value={user_name} onChange={e => props.name(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'20px'}}/>
-        <input value={password} onChange={e => props.pass(e.target.value)} placeholder="Password" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'17px'}} type="password" />
- 
+        {/* <input value={user_name} onChange={e => props.name(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'20px'}}/> */}
+        <input value={user_name} onChange={e => setUsername(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'20px'}}/>
+
+        {/* <input value={password} onChange={e => props.pass(e.target.value)} placeholder="Password" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'17px'}} type="password" /> */}
+        <input value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'17px'}} type="password" />
+
+
+
         <ul className="keep-session log-form-length">
 
             <div className="keep-session-check">
@@ -79,7 +88,8 @@ const Prototyping = (props) => {
             <p style={{fontSize:'10px',marginBottom:'0px',marginLeft:'0px', color:'blue' }} >Forgot password?</p>
         </ul>
 
-        {!isLoggedIn ? <a className="login-button" onClick={props.execute} >Log In</a> : <a className="login-button" onClick={props.logout} >Log Out</a>}
+        {/* {!isLoggedIn ? <a className="login-button" onClick={props.execute} >Log In</a> : <a className="login-button" onClick={props.logout} >Log Out</a>} */}
+        {!isLoggedIn ? <a className="login-button" onClick={getLoggedIn} >Log In</a> : <a className="login-button" onClick={props.logout} >Log Out</a>}
 
         {!isLoggedIn ? <div className="build-account" ><p>Need an account?</p><a style={{fontWeight:'400',color:"blue"}} onClick={selectSignUp}>Sign up</a></div> : <div className="build-account" ><p>Logged in as:</p><a style={{fontWeight:'400',color:"blue"}} onClick={props.exit}>{current_user}</a></div>}
         </section>
@@ -110,6 +120,7 @@ const Prototyping = (props) => {
             <p style={{fontSize:'10px',marginBottom:'0px',marginLeft:'0px'}} onClick={openAgreement} >I agree to terms and conditions</p>
             </div>
 
+                {/* {openIAgree ? <a className="login-button" style={{marginTop:'10px'}} onClick={executeRegister} >Sign Up</a> : null} */}
                 {openIAgree ? <a className="login-button" style={{marginTop:'10px'}} onClick={executeRegister} >Sign Up</a> : null}
                 <div className="build-account" ><a style={{fontWeight:'400',color:"blue"}} onClick={selectSignUp}>Cancel</a></div>
             </section>
@@ -123,4 +134,4 @@ const Prototyping = (props) => {
 function mapStateToProps(reduxState){
     return reduxState
 }
-export default connect(mapStateToProps,{registerUser})(Prototyping)
+export default connect(mapStateToProps,{registerUser,loginUser})(Prototyping)
