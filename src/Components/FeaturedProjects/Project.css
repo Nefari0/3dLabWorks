@@ -516,7 +516,7 @@ img:hover {
 }
 
 @media (max-width:325px) {
-    .project-container {
+    /* .project-container {
         width: 250px;
     }
 
@@ -532,7 +532,7 @@ img:hover {
     .like-share-box {
         margin-right: 15px;
         padding-right: 1px;
-    }
+    } */
 }
 
 
