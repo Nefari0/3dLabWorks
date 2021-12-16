@@ -8,6 +8,7 @@ import Agreement from '../Register/Agreement'
 const MobileLogin = (props) => {
 
     const { isLoggedIn,saveSession,current_user } = props
+    const { user } = props.user.user
     
     const [ user_name, setUsername ] = useState('')
     const [ password, setPassword ] = useState('')
@@ -61,7 +62,7 @@ const MobileLogin = (props) => {
     const getLoggedIn = async () => {
         props.execute(user_name,password,saveInfo)
     }
-
+    // console.log('current user',user)
     return(
         <div className={`plogin-container ${!signup ? true : `plogin-Container r-selected ${openIAgree ? true : `plogin-container r-selected agree-view`}`}`}>
         {/* <section className="login-title"> */}
@@ -104,7 +105,7 @@ const MobileLogin = (props) => {
         {/* {!isLoggedIn ? <a className="login-button" onClick={props.execute} >Log In</a> : <a className="login-button" onClick={props.logout} >Log Out</a>} */}
         {!isLoggedIn ? <a className="login-button" onClick={getLoggedIn} >Log In</a> : <a className="login-button" onClick={props.logout} >Log Out</a>}
 
-        {!isLoggedIn ? <div className="build-account" ><p>Need an account?</p><a style={{fontWeight:'400',color:"blue"}} onClick={selectSignUp}>Sign up</a></div> : <div className="build-account" ><p>Logged in as:</p><a style={{fontWeight:'400',color:"blue"}} onClick={props.exit}>{current_user}</a></div>}
+        {!isLoggedIn ? <div className="build-account" ><p>Need an account?</p><a style={{fontWeight:'400',color:"blue"}} onClick={selectSignUp}>Sign up</a></div> : <div className="build-account" ><p>Logged in as:</p><a style={{fontWeight:'400',color:"blue"}}>{user}</a></div>}
         </section>
         :
         // <section className="rform">
