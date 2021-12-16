@@ -91,8 +91,8 @@ class Header extends Component{
         this.setState({isMenuOpen: !this.state.isMenuOpen})
     }
 
-    async handleClick() {
-        const { user_name, password, saveSession } = this.state
+    async handleClick(signInName,signInPass,saveMyInfo) {
+        // const { user_name, password, saveSession } = this.state
         // const savedUsername = localStorage['user_name']
         // const savedPassword = localStorage['password']
 
@@ -110,12 +110,12 @@ class Header extends Component{
                     // }
                     
                     // localStorage.setItem('user_name',user_name)
-        await this.props.loginUser(user_name,password)
+        await this.props.loginUser(signInName,signInPass)
         // console.log('from user login',this.props.user.isLoggedIn)
         // TESTING
-        if (saveSession === true && this.props.user.isLoggedIn === true) {
-            localStorage.setItem('user_name',user_name)
-            localStorage.setItem('password',password)
+        if (saveMyInfo === true && this.props.user.isLoggedIn === true) {
+            localStorage.setItem('user_name',signInName)
+            localStorage.setItem('password',signInPass)
         }
         // const { auth, email, name, is_admin, user } = this.props.user.user
         // const { user } = this.props.user

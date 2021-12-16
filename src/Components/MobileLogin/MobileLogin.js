@@ -13,7 +13,7 @@ const MobileLogin = (props) => {
     const [ password, setPassword ] = useState('')
     // const [ new_user_name, setNewUserName ] = useState('')
     // const [ new_password, setNewPassword ] = useState('')
-    const { saveInfo,setSaveInfo } = useState(false)
+    const [ saveInfo,setSaveInfo ] = useState(false)
     const [ signup,setSignup ] = useState(false)
     const [ email, setEmail ] = useState('')
     const [ first_name, setFirstName] = useState('')
@@ -21,17 +21,21 @@ const MobileLogin = (props) => {
     const [ photo_url, setPhoto ] = useState('')
     const [ is_admin ] = useState(false)
     const [ iAgree, setIAgree ] = useState(false)
-    const [ openIAgree, setOpenIAgree ] = useState(false)
+    const [ openIAgree, setOpenIAgree ] = useState(true)
 
     const selectSignUp = () => {
-        console.log('lign up',signup)
+        // console.log('lign up',signup)
         setSignup(!signup)
     }
 
     const executeIAgree = () => {
         setIAgree(!iAgree)
-        console.log(iAgree)
+        // console.log(iAgree)
     }
+
+    // const sessionInfo = () => {
+    //     setSaveInfo(!saveInfo)
+    // }
 
     const executeRegister = () => {
         if (iAgree === true) {
@@ -45,11 +49,17 @@ const MobileLogin = (props) => {
 
     const openAgreement = () => {
         setOpenIAgree(!openIAgree)
-        console.log(openIAgree)
+        console.log('open agreement',openIAgree)
     }
 
-    const getLoggedIn = () => {
-        props.loginUser(user_name,password)
+    // const waitForLogin = () => {
+    //     if (props.user.isLoggedIn === true) {
+    //         return (true)
+    //     }
+    // }
+
+    const getLoggedIn = async () => {
+        props.execute(user_name,password,saveInfo)
     }
 
     return(
@@ -74,12 +84,15 @@ const MobileLogin = (props) => {
         <ul className="keep-session log-form-length">
 
             <div className="keep-session-check">
-            {!saveSession ?
-            <svg onClick={() => props.setSaveSession()} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            {!saveInfo ?
+            // <svg onClick={() => props.setSaveSession()} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg onClick={() => setSaveInfo(!saveInfo)} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             :
-            <svg onClick={() => props.setSaveSession()} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            // <svg onClick={() => props.setSaveSession()} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg onClick={() => setSaveInfo(!saveInfo)} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             }
