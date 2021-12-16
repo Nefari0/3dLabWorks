@@ -74,7 +74,7 @@ const MobileLogin = (props) => {
             {!signup ? <h2 style={{textTransform:'none'}} >Log In to Your Accout</h2> : <h2 style={{textTransform:'none'}} >Create Account</h2>}</section>
         {!signup ? <section className="form">
         {/* <input value={user_name} onChange={e => props.name(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'20px'}}/> */}
-        <input value={user_name} onChange={e => setUsername(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'20px'}}/>
+        <input value={user_name} onChange={e => setUsername(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'21px'}}/>
 
         {/* <input value={password} onChange={e => props.pass(e.target.value)} placeholder="Password" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'17px'}} type="password" /> */}
         <input value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'17px'}} type="password" />
@@ -112,11 +112,11 @@ const MobileLogin = (props) => {
 
             {!openIAgree ? <Agreement/> :
             <div style={{height:'450px'}}>
-                <input value={user_name} onChange={e => setUsername(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" />
-                <input value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" className="log-input log-form-length disabled" style={{marginTop:'17px',marginBottom:'2px'}} type="password" />
-                <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" className="log-input log-form-length disabled" style={{marginTop:'17px',marginBottom:'2px'}} />
-                <input value={first_name} onChange={e => setFirstName(e.target.value)} placeholder="First Name" className="log-input log-form-length disabled" style={{marginTop:'17px',marginBottom:'2px'}} />
-                <input value={last_name} onChange={e => setLastName(e.target.value)} placeholder="Last Name" className="log-input log-form-length disabled" style={{marginBottom:'20px',marginTop:'17px'}} />
+                <input value={user_name} onChange={e => setUsername(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" style={{marginLeft:'2px'}}/>
+                <input value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" className="log-input log-form-length disabled" style={{marginLeft:'2px',marginTop:'17px',marginBottom:'2px'}} type="password" />
+                <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" className="log-input log-form-length disabled" style={{marginLeft:'2px',marginTop:'18px',marginBottom:'2px'}} />
+                <input value={first_name} onChange={e => setFirstName(e.target.value)} placeholder="First Name" className="log-input log-form-length disabled" style={{marginLeft:'2px',marginTop:'17px',marginBottom:'2px'}} />
+                <input value={last_name} onChange={e => setLastName(e.target.value)} placeholder="Last Name" className="log-input log-form-length disabled" style={{marginLeft:'2px',marginBottom:'20px',marginTop:'17px'}} />
             </div>}
             <div className="keep-session-check">
 
