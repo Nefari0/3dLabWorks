@@ -10,7 +10,6 @@
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
     "dotenv": "^8.2.0",
-    "espress": "0.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "firebase": "^8.2.4",
@@ -57,6 +56,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:4001",
+  "proxy": "http://localhost:4002",
   "main": "server/index.js"
 }
