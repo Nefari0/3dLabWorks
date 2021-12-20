@@ -10,11 +10,16 @@
 .load-box {
   /* margin: 200px auto; */
   width: 200px;
-  position:absolute;
-  margin: 25vh 30vh;
+  height: 200px;
+  /* position:absolute; */
+  position: fixed;
+  /* margin: 25vh 30vh; */
   /* position:100vh; */
   animation: rotating .75s linear infinite;
-  z-index: 11;
+  /* top: 15vh; */
+  left: 40vw;
+  bottom: 50%;
+  z-index: 1111;
 }
 .load-background {
   border-radius:50%;
@@ -31,13 +36,13 @@
   border-top: 10px solid #283c5f;
   width: 200px;
   height: 200px;
-  position: absolute;
+  position: absolute;  
   top: 0;
   left: 0;
 }
 
-@media (max-width: 1620px) {
+/* @media (max-width: 1620px) {
   .load-box {
     margin: 25vh 55vh;
   }
-}
+} */

@@ -1,10 +1,11 @@
 
 
 .user-page {
-
+    position: relative;
     margin: auto;
     height: 80vh;
-    width: 90vw;
+    /* width: 90vw; */
+    min-width: 300px;
     background-color: rgb(238, 238, 238);
     display: flex;
 	flex-direction: row;
@@ -379,6 +380,13 @@
     @media (max-width: 650px) {
         .user-page {
             flex-direction: column;
+        }
+
+        .load-box {
+            position: absolute;
+            top: 50%;
+            right: 25%;
+
         }
 
         .show-user-small {

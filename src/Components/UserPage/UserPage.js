@@ -121,9 +121,10 @@ class UserPage extends Component {
         <div>
             {/* {!isLoggedIn ? (<div className="blue-screen-of-death">{alert("please log i")}</div>) : ( */}
             {!isLoggedIn ? (<Route path="/" component={Home}/>) : (
-        <div className="user-page">
-            <div className="column1">
+                <div className="user-page">
+            {/* <Loading/> */}
             {isLoading ? <Loading/> : null}
+            <div className="column1">
                 <div className="portrait">
                     <img className="model-img  profile-photo" 
                     src={photo}
@@ -139,6 +140,7 @@ class UserPage extends Component {
                     accept="image/pne,image/jpeg"
                     onChange={e => this.handlePhoto(e)}
                     /> */}
+                    {/* <Loading/> */}
                 </div>
                 <ul className="menu" >
                     <li><div onClick={() => this.hideView('showUserInfo')} className="profile-buttons">user info</div></li>
@@ -150,6 +152,7 @@ class UserPage extends Component {
                 </ul>
             </div>
             <section className="column2">
+            {/* <Loading/> */}
                 <div className="show-user-small">
                     <div className="portrait">
                     <img className="model-img profile-photo" 
