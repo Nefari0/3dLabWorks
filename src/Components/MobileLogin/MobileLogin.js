@@ -72,7 +72,7 @@ const MobileLogin = (props) => {
                 <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
             </svg>
             
-            {!signup ? <h2 style={{textTransform:'none'}} >Log In to Your Accout</h2> : <h2 style={{textTransform:'none'}} >Create Account</h2>}</section>
+            {!signup ? (!isLoggedIn ? <h2 style={{textTransform:'none'}} >Log In to Your Accout</h2> : <h2 style={{textTransform:'none'}} >Log Out</h2>) : <h2 style={{textTransform:'none'}} >Create Account</h2>}</section>
         {!signup ? <section className="form">
         {/* <input value={user_name} onChange={e => props.name(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'20px'}}/> */}
         <input value={user_name} onChange={e => setUsername(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'21px'}}/>
@@ -82,25 +82,25 @@ const MobileLogin = (props) => {
 
 
 
-        <ul className="keep-session log-form-length">
+        {!isLoggedIn ? <ul className="keep-session log-form-length">
 
             <div className="keep-session-check">
-            {!saveInfo ?
-            // <svg onClick={() => props.setSaveSession()} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <svg onClick={() => setSaveInfo(!saveInfo)} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                {!saveInfo ?
+                // <svg onClick={() => props.setSaveSession()} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg onClick={() => setSaveInfo(!saveInfo)} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            :
-            // <svg onClick={() => props.setSaveSession()} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <svg onClick={() => setSaveInfo(!saveInfo)} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            }
-            <p style={{fontSize:'10px',marginBottom:'0px',marginLeft:'0px'}} >stay logged in?</p>
-        </div>
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                :
+                // <svg onClick={() => props.setSaveSession()} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg onClick={() => setSaveInfo(!saveInfo)} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                }
+                <p style={{fontSize:'10px',marginBottom:'0px',marginLeft:'0px'}} >stay logged in?</p>
+            </div>
             <p style={{fontSize:'10px',marginBottom:'0px',marginLeft:'0px', color:'blue' }} >Forgot password?</p>
-        </ul>
+        </ul> : <div className="keep-session log-form-length"></div>}
 
         {/* {!isLoggedIn ? <a className="login-button" onClick={props.execute} >Log In</a> : <a className="login-button" onClick={props.logout} >Log Out</a>} */}
         {!isLoggedIn ? <a className="login-button" onClick={getLoggedIn} >Log In</a> : <a className="login-button" onClick={props.logout} >Log Out</a>}
