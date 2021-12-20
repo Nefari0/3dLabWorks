@@ -12,7 +12,8 @@
 	justify-content: flex-start;
 	align-items: center;
 	align-content: stretch;
-    top: 20vh;
+    /* top: 20vh; */
+    top: 10vh;
     padding: 0px;
     position: absolute;
     z-index:10;
