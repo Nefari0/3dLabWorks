@@ -92,7 +92,7 @@ class Collections extends Component {
     }
 
     addPhoto(params){
-        console.log('hit add photo')
+        // console.log('hit add photo')
         this.setState({
             imageFile:params,
             previewImageFile:URL.createObjectURL(params)
