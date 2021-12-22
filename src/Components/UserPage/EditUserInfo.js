@@ -50,16 +50,17 @@ class EditUserInfo extends Component {
     }
 
     launchPic = async (file) => {
-        const { staticPhoto } = this.state
-        const { photo } = this.state.user
-        // const { id,photo } = this.props.user.user
+        const { staticPhoto,photoUrl } = this.state
+        // const { photo } = this.state.user
+        
+        const { id,photo,user } = this.props.user.user
         // if(photo_url != null){
         //     this.deleteFromFirebase(photo_url)
         // }
 
         // ---------- original
         // const photoName = `profile pic ${id}`
-        // const storageRef = app.storage().ref()
+        // const storageRef = app.storage().ref(`${user}/`)
         // const fileRef = storageRef.child(photoName + file.name)
         // fileRef.put(file).then(() => {
         //     console.log('photo uploaded',file)
@@ -68,9 +69,9 @@ class EditUserInfo extends Component {
         // console.log('this is fileRef', fileRef)
         // ----------------------------------
         this.props.setIsLoading()
-        // if (photo != null) {this.deleteFromFirebase(await photo)}
-        if (photo != null) {this.props.deleteFromFirebase(await photo)}
-        const thePhoto = await this.getPhotoUrl(staticPhoto)
+        console.log('hit launch pic',photoUrl)
+        // if (photo != null) {this.props.deleteFromFirebase(await photo)}
+        const thePhoto = await this.getPhotoUrl(photoUrl)
         console.log('photo is added')
         this.setPhotoUrl(await thePhoto.getDownloadURL())
         console.log('got url')
@@ -80,7 +81,8 @@ class EditUserInfo extends Component {
     }
 
     getPhotoUrl = async (input) => {
-        const storageRef = app.storage().ref()
+        const { user } = this.props.user.user 
+        const storageRef = app.storage().ref(`${user}/photos`)
         const fileRef = storageRef.child(input.name)
         await fileRef.put(input)
         console.log('image loaded')
@@ -148,7 +150,7 @@ class EditUserInfo extends Component {
 
     addPhoto(e){
         const file = e.target.files[0]
-        this.setState({staticPhoto:URL.createObjectURL(file)})
+        this.setState({staticPhoto:URL.createObjectURL(file),photoUrl:file})
     }
 
     cancelAddPhoto(){
