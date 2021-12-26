@@ -2,7 +2,7 @@ import './Project.css'
 import React, { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
-import { connect, connent } from 'react-redux'
+import { connect } from 'react-redux'
 import { getModels } from '../../ducks/modelsReducer'
 // import { addLike } from '../../../server/controllers/projectsController'
 

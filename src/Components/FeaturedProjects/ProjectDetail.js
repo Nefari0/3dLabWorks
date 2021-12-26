@@ -4,6 +4,7 @@ import './Project.css'
 import ProjectPhotos from './ProjectPhotos'
 import Comments from './Comments/Comments'
 import { loginUser, updateUser } from '../../ducks/userReducer'
+
 import { connect } from 'react-redux'
 import CreateComment from './Comments/CreateComment'
 // import logo from './../../assets/logo.png'
@@ -35,6 +36,8 @@ class ProjectDetail extends Component {
         this.getDetails = this.getDetails.bind(this)
         this.plsSignIn = this.plsSignIn.bind(this)
         this.getComments = this.getComments.bind(this)
+        this.likeFunc = this.likeFunc.bind(this)
+        this.clickLike = this.clickLike.bind(this)
     }
 
     componentDidMount(){
@@ -57,8 +60,8 @@ class ProjectDetail extends Component {
 
     componentDidUpdate(prevProps){
         const { model_id } = this.props.match.params
-        const { user_likes,isLoggedIn } = this.props.user.user
-        if (user_likes != undefined){this.seeIfLiked()}
+        // const { user_likes } = this.props.user.user
+        // if (user_likes != undefined){this.seeIfLiked()}
         if (prevProps.match.params.model_id !== model_id) {
             this.getDetails() // original / working function // --- make sure to use this if using getDetails() 
         }
@@ -190,22 +193,37 @@ class ProjectDetail extends Component {
         alert('please sign in')
     }
 
-    seeIfLiked = () => {
+    // seeIfLiked = () => {
         // const { user_likes,isLoggedIn } = this.props.user.user
-        const { model_id,myLike,allLikes } = this.state
+        // const { model_id,myLike,allLikes } = this.state
 
         // console.log(user)
 
         // console.log(user_likes.find((el) => el.model_id === +model_id))
         // if (user_likes.find((el) => el.model_id === +model_id) != -1 && myLike === false) {this.setState({ myLike:true })}
         // if (user_likes.findIndex((el) => el.model_id === +model_id) != -1 && myLike === false) {this.setState({ myLike:true })}
-        const theIndex = allLikes.findIndex((el) => el.model_id === model_id) 
-        console.log('s liked?',theIndex)
+        // const theIndex = allLikes.findIndex((el) => el.model_id === model_id) 
+        // console.log('s liked?',theIndex)
         // console.log('user likes',user_likes[theIndex])
 
         // if (theLike === true) { this.setState({myLike:true}) }
+    // }
+
+    likeFunc = async () => {
+        const { id } = this.props.user.user
+        const { model_id } = this.state
+        const user_id = id
+        await axios.post('/api/projects/like', { user_id,model_id })
+        // await updateLikes(model_id)
+        this.setState({myLike:!this.state.myLike})
     }
 
+    clickLike = () => {
+        const { isLoggedIn } = this.props.user
+        if (isLoggedIn === true) {
+            this.likeFunc()
+        }
+    }
 
     render() {
         const { comments,model_id,maker_id,myLike } = this.state
@@ -251,8 +269,8 @@ class ProjectDetail extends Component {
                     {mappedPhoto}
                     <section className="right">
                         <div className={`detail-box small down-load ${viewFiles ? true : 'detail-box small down-load-selected'}`} onClick={() => this.changeView('viewFiles')}><p className={`down-load-text ${viewFiles ? true : 'down-load-text-selected'}`}><a>Download Files</a></p></div>
-                        <div className="detail-box small">
-                            {isLoggedIn === true && myLike === true ? <svg className="small-icon" style={{margin:'auto',marginLeft:'10px',marginRight:'10px', height:'45px',width:'45px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                        <div className="detail-box small" onClick={this.clickLike} >
+                            {isLoggedIn === true && myLike === true ? <svg  className="small-icon" style={{margin:'auto',marginLeft:'10px',marginRight:'10px', height:'45px',width:'45px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                             </svg>
                             :
