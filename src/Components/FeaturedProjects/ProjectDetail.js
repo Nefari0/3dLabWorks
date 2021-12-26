@@ -28,6 +28,8 @@ class ProjectDetail extends Component {
             viewComments:false,
             viewDetails:false,
             viewEditProject:false,
+            myLike:false,
+            allLikes:[]
         }
         this.changeView = this.changeView.bind(this)
         this.getDetails = this.getDetails.bind(this)
@@ -36,32 +38,57 @@ class ProjectDetail extends Component {
     }
 
     componentDidMount(){
-
+        const { model_id } = this.props.match.params
+        const { user_likes,isLoggedIn } = this.props.user.user
         // ---get project info by model_id --- //
         this.getDetails().then((val) => console.log(val)) // original/working function
 
         // ---get project comments by model_id --- //
         this.getComments()
+        // if (isLoggedIn === true) {
+        //     const theLike = user_likes.find((el) => el.model_id).model_id === model_id
+            
+        //     this.setState({myLike:theLike})
+        //     console.log('the like',theLike)
+        // }
 
 
     }
 
     componentDidUpdate(prevProps){
         const { model_id } = this.props.match.params
+        const { user_likes,isLoggedIn } = this.props.user.user
+        if (user_likes != undefined){this.seeIfLiked()}
         if (prevProps.match.params.model_id !== model_id) {
             this.getDetails() // original / working function // --- make sure to use this if using getDetails() 
         }
+        
+        // if (user_likes != undefined) {
+        //     var theIndex = user_likes.findIndex((el) => el.model_id).model_id
+            // const theLike = user_likes.findIndex((el) => el.model_id === model_id)
+            // if(theLike != undefined) { this.setState({myLike:theLike}) } else { this.setState({ myLike:false })}
+            // if(user_likes[theLike].model_id=== model_id) { this.setState({myLike:true}) } else { this.setState({ myLike:false })}
+            
+            // this.setState({myLike:theLike})
+        //     console.log('user likes',user_likes[theIndex])
+        //     console.log('the like',theIndex)
+        // }
     }
 
 
     async getDetails(){
+        // console.log('got hit')
         const { model_id } = this.props.match.params
+        // const { user_id,isLoggedIn } = this.props.user.user
         await (
             axios
             .get(`/api/projects/id/${model_id}`)
             .then((res) => {
                 const { user_id, } = res.data[0]
                 axios.get(`/api/users/${user_id}`).then((res2) => {
+                    const { id } = this.props.user.user
+                    const { isLoggedIn } = this.props.user
+                    // if (isLoggedIn === true) {console.log('is loggin in')}
                     this.setState({
                         maker_id:user_id,
                         model_id:model_id,
@@ -69,6 +96,19 @@ class ProjectDetail extends Component {
                         info:res.data,
                         userInfo:res2.data
                     })
+                    if(isLoggedIn === true) {
+                        axios.post(`/api/project/getLike`, {id,model_id}).then((res3) => {
+                        if(res3.data.user_id != null) {
+                        this.setState({
+                    //         maker_id:user_id,
+                    //         model_id:model_id,
+                    //         dlUrl:res.data.firebase_url,
+                    //         info:res.data,
+                    //         userInfo:res2.data,
+                            myLike:true
+                        })}
+                        } )
+                    }
                 })
 
             })
@@ -76,6 +116,7 @@ class ProjectDetail extends Component {
                 this.props.history.push('/404')
             })
         )
+        await axios.get('')
 
     }
 
@@ -149,21 +190,42 @@ class ProjectDetail extends Component {
         alert('please sign in')
     }
 
+    seeIfLiked = () => {
+        // const { user_likes,isLoggedIn } = this.props.user.user
+        const { model_id,myLike,allLikes } = this.state
+
+        // console.log(user)
+
+        // console.log(user_likes.find((el) => el.model_id === +model_id))
+        // if (user_likes.find((el) => el.model_id === +model_id) != -1 && myLike === false) {this.setState({ myLike:true })}
+        // if (user_likes.findIndex((el) => el.model_id === +model_id) != -1 && myLike === false) {this.setState({ myLike:true })}
+        const theIndex = allLikes.findIndex((el) => el.model_id === model_id) 
+        console.log('s liked?',theIndex)
+        // console.log('user likes',user_likes[theIndex])
+
+        // if (theLike === true) { this.setState({myLike:true}) }
+    }
+
 
     render() {
-        const { comments,model_id,maker_id } = this.state
+        const { comments,model_id,maker_id,myLike } = this.state
         const { firebase_url01,firebase_url,user_id } = this.state.info
         const { info, userInfo, viewComments, viewDetails, viewFiles,dlUrl,viewEditProject } = this.state
         const { isLoggedIn } = this.props.user
-        const { user,id,photo_url,user_name } = this.props.user.user
-        // const { name } = this.state.info[0]
+        const { user,id,photo_url,user_name,user_likes } = this.props.user.user
+        // const isUserLiked = Object.values(user_likes.filter(el => el.model_id === model_id))
+        // const isUserLiked = user_likes.filter(el => el.model_id === model_id)
+        // console.log('is liked',isUserLiked)
+
+        // use this to highlight heart icon if liked
+        
 
         const mappedUrl = info.map(element => {
             return <DlUrl data={element} key={element.model_id} url={element.firebase_url} isLoggedIn={isLoggedIn} plsSignIn={this.plsSignIn} />
         })
         
         const mappedComments = comments.map(element => {
-            return <Comments content={element.text} model_id={element.model_id} date_created={element.date_created} comment_id={element.comment_id} user_id={element.user_id} user_name={element.user_name} />
+            return <Comments content={element.text} key={element.comment_id} model_id={element.model_id} date_created={element.date_created} comment_id={element.comment_id} user_id={element.user_id} user_name={element.user_name} />
         })
 
         const mappedPhoto = info.map(element => {
@@ -178,6 +240,8 @@ class ProjectDetail extends Component {
 
         return(
             <div className="view">
+                {/* {console.log(user_likes.find((el) => el.model_id === model_id),'model id',model_id)} */}
+                {/* {console.log(user_likes[user_likes.findIndex((el) => el.model_id === model_id)])} */}
                 {mappedUserInfo}
                 {/* <div className="detail-box">
                     <img src={userInfo.photo_url} className="logo-box"/>
@@ -188,9 +252,9 @@ class ProjectDetail extends Component {
                     <section className="right">
                         <div className={`detail-box small down-load ${viewFiles ? true : 'detail-box small down-load-selected'}`} onClick={() => this.changeView('viewFiles')}><p className={`down-load-text ${viewFiles ? true : 'down-load-text-selected'}`}><a>Download Files</a></p></div>
                         <div className="detail-box small">
-                            {null ? <svg className="details-icon-big" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                        </svg>
+                            {isLoggedIn === true && myLike === true ? <svg className="small-icon" style={{margin:'auto',marginLeft:'10px',marginRight:'10px', height:'45px',width:'45px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                            </svg>
                             :
                             <a><svg className="small-icon" style={{margin:'auto',marginLeft:'10px',marginRight:'10px', height:'45px',width:'45px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
@@ -209,22 +273,19 @@ class ProjectDetail extends Component {
 
                             <p className={`dark-text ${!viewComments ? true : 'light-text'}`}>Comment</p>
                             </div>
-
                         {isLoggedIn === true && this.props.user.user.id === maker_id ? <div className={`detail-box small ${!viewEditProject ? true : 'detail-box small selected'}`} onClick={() => this.changeView('viewEditProject')}>
 
                         <svg className="small-icon" style={{margin:'auto',marginLeft:'12px',marginRight:'10px', height:'46px',width:'46px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                         </svg>
 
-                        {/* <svg className="small-icon" style={{margin:'auto',marginLeft:'12px',marginRight:'10px', height:'47px',width:'47px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
-                        </svg> */}
+                            
                         <p className={`dark-text ${!viewEditProject ? true : 'light-text'}`}>Edit Project</p></div>
                         :
                         <div className="detail-box small">
 
                             <svg className="small-icon" style={{margin:'auto',marginLeft:'12px',marginRight:'10px', height:'46px',width:'46px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
                             </svg>
 
                             
@@ -235,7 +296,7 @@ class ProjectDetail extends Component {
 
                             
 
-                            <p className="dark-text">Add To Favorites</p>
+                        <p className="dark-text">Add To Favorites</p>
                         </div>}
                         
                         

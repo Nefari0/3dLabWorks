@@ -47,10 +47,10 @@ module.exports = {
         const foundLike = await db.projects.get_like_by_id([user_id,model_id])
         // const like = foundLike[0].user_id
         // return res.status(200).send(foundLike[0] === undefined)
-        // if (foundLike[0] === un) {
-         
-        // }
-        // console.log(foundLike[0].user_id,'found like')
+        if (foundLike[0] != undefined) {
+            foundLike[0].is_liked = true
+            console.log(foundLike[0].user_id,'found like')
+        }
         return res.status(200).send(foundLike[0])
     },
 
