@@ -40,6 +40,20 @@ module.exports = {
         return res.status(200).send('deleted')
     },
 
+    getLikeById: async (req,res) => {
+        const { id,model_id } = req.body
+        const user_id = id
+        const db = req.app.get('db')
+        const foundLike = await db.projects.get_like_by_id([user_id,model_id])
+        // const like = foundLike[0].user_id
+        // return res.status(200).send(foundLike[0] === undefined)
+        // if (foundLike[0] === un) {
+         
+        // }
+        // console.log(foundLike[0].user_id,'found like')
+        return res.status(200).send(foundLike[0])
+    },
+
     addLike: async (req,res) => {
         const { user_id, model_id } = req.body
         const db = req.app.get('db')
@@ -72,7 +86,8 @@ module.exports = {
     updateProjectLikes: async (req,res) => {
         const { model_id } = req.params
         const getLikes = await req.app.get('db').projects.update_project_likes([model_id])
-        // const { likes } = getLikes[0]
+        const { likes } = getLikes[0]
+        // console.log(likes)
         return res.status(200).send(getLikes)
     },
 
