@@ -222,6 +222,8 @@ class ProjectDetail extends Component {
         const { isLoggedIn } = this.props.user
         if (isLoggedIn === true) {
             this.likeFunc()
+        } else {
+            alert("please sign in")
         }
     }
 
