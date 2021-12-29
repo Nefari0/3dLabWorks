@@ -15,7 +15,7 @@ const Project = (props) => {
 
     useEffect(() => {
         setNumOfLikes(likes)
-        checkIfLiked()
+        // checkIfLiked()
     },[])
 
     const plsSignIn = () => {
@@ -25,7 +25,8 @@ const Project = (props) => {
     const likeFunc = async (id,m_id) => {
         const user_id = id
         const model_id = m_id
-        setHeart(!heart)
+        // setHeart(!heart)
+        checkIfLiked()
         await axios.post('/api/projects/like', { user_id,model_id })
         await updateLikes(model_id)
     }
@@ -37,6 +38,7 @@ const Project = (props) => {
             console.log(likes)
             // return(setNumOfLikes(likes))
             setNumOfLikes(likes)
+            // props.projectIsLiked(model_id,user_likes)
             
             // setNumOfLikes(res.data.likes)
         })
@@ -61,15 +63,19 @@ const Project = (props) => {
     // // checkIfLiked()
     // {if (props.user_likes != undefined) {checkIfLiked()}}
     const checkIfLiked = () => {
-        let isLiked = props.projectIsLiked(model_id,user_likes)
-        console.log('set heart')
-        setHeart(isLiked)
+        // console.log(props.projectIsLiked(model_id,user_likes))
+        console.log('hit check if liked')
+        if (props.projectIsLiked(model_id,user_likes) === true){ return(true) } else { return(false) } 
+        // const isLiked = user_likes.filter((el) => el.model_id === model_id)
+        // if(isLiked.model_id === model_id) { return(true) } else { return(false) }
+
     }
 
     // console.log(isLiked,'is liked')
     return(
+            // checkIfLiked()
         <div className='project-container'>
-            {/* {console.log(checkIfLiked())} */}
+            {checkIfLiked()}
                 <div>
                 {/* <div className="photo-title-border"><img src={photo_url} className="user-photo"/><h4 className="project-box-h4">{name}</h4></div> */}
                 <div className="photo-title-border"><img src={photo_url} className="user-photo"/><p className="dark-text">{name}<br/>by {user_name}</p></div>
@@ -118,9 +124,9 @@ const Project = (props) => {
                         </ul> */}
 
                     <div>
+                        {/* {checkIfLiked()} */}
                         <div className="like-share-box"><p className="like-share-text">
-
-                        {!heart ? <svg className="small-icon" onClick={clickedLike} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+                        {checkIfLiked() === false ? <svg className="small-icon" onClick={clickedLike} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"  />
                         </svg>
                         :

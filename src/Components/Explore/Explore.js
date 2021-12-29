@@ -103,9 +103,14 @@ class Explore extends Component {
         // const { user_likes } = this.props.user.user
         // let likeValue = userLike.filter(el => el.model_id === projectId)
         // return likeValue
+        console.log('hit project is liked')
         try {
-            // let likeValue = userLike.filter(el => el.model_id === projectId);
-            return(userLike.filter(el => el.model_id === projectId)[0].model_id === projectId)
+            let likeValue = userLike.filter(el => el.model_id === projectId);
+            console.log('like value',likeValue)
+            if(likeValue[0].model_id === projectId){
+                return(true)
+            } else {return(false)}
+            // return(userLike.filter(el => el.model_id === projectId)[0].model_id === projectId)
           } catch (error) {
             console.log('user does not like this project',error);
             // expected output: ReferenceError: nonExistentFunction is not defined
