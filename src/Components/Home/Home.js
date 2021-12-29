@@ -28,6 +28,7 @@ class Home extends Component {
         this.handlePassword = this.handlePassword.bind(this)
         this.handleClick = this.handleClick.bind(this)
         this.remindWhoUser = this.remindWhoUser.bind(this)
+        this.projectIsLiked = this.projectIsLiked.bind(this)
     }
 
     componentDidMount() {
@@ -59,6 +60,21 @@ class Home extends Component {
         console.log(this.props.user.user.data)
     }
 
+    projectIsLiked(projectId,userLike) {
+        // const { user_likes } = this.props.user.user
+        // let likeValue = userLike.filter(el => el.model_id === projectId)
+        // return likeValue
+        try {
+            // let likeValue = userLike.filter(el => el.model_id === projectId);
+            return(userLike.filter(el => el.model_id === projectId)[0].model_id === projectId)
+          } catch (error) {
+            console.log('user does not like this project',error);
+            // expected output: ReferenceError: nonExistentFunction is not defined
+            // Note - error messages will vary depending on browser
+          }
+        // return(likeValue.model_id === undefined ? true : false)
+    }
+
     render() {
         const { user_name, password, projects } = this.state
         const { loginUser } = this.props
@@ -67,7 +83,7 @@ class Home extends Component {
         const { models } = this.props.models
 
         const mappedModels = models.map(element => {
-            return <Project data={element} key={element.model_id} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={id} user_likes={user_likes} />
+            return <Project data={element} key={element.model_id} projectIsLiked={this.projectIsLiked} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={id} user_likes={user_likes} />
         })
 
         return(

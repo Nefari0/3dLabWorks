@@ -11,10 +11,11 @@ const Project = (props) => {
     const { handleClick,isLoggedIn,id,user_likes } = props
 
     const [numOfLikes, setNumOfLikes] = useState(0)
-    // const [heart,setHeart] = useState(false) // for highlighting hearts if current user has already like this project
+    const [heart,setHeart] = useState(false) // for highlighting hearts if current user has already like this project
 
     useEffect(() => {
         setNumOfLikes(likes)
+        checkIfLiked()
     },[])
 
     const plsSignIn = () => {
@@ -24,6 +25,7 @@ const Project = (props) => {
     const likeFunc = async (id,m_id) => {
         const user_id = id
         const model_id = m_id
+        setHeart(!heart)
         await axios.post('/api/projects/like', { user_id,model_id })
         await updateLikes(model_id)
     }
@@ -33,7 +35,9 @@ const Project = (props) => {
         axios.get(`/api/like/update/${params}`).then(res => {
             const { likes } = res.data[0]
             console.log(likes)
-            return(setNumOfLikes(likes))
+            // return(setNumOfLikes(likes))
+            setNumOfLikes(likes)
+            
             // setNumOfLikes(res.data.likes)
         })
     }
@@ -56,8 +60,16 @@ const Project = (props) => {
     // }
     // // checkIfLiked()
     // {if (props.user_likes != undefined) {checkIfLiked()}}
+    const checkIfLiked = () => {
+        let isLiked = props.projectIsLiked(model_id,user_likes)
+        console.log('set heart')
+        setHeart(isLiked)
+    }
+
+    // console.log(isLiked,'is liked')
     return(
         <div className='project-container'>
+            {/* {console.log(checkIfLiked())} */}
                 <div>
                 {/* <div className="photo-title-border"><img src={photo_url} className="user-photo"/><h4 className="project-box-h4">{name}</h4></div> */}
                 <div className="photo-title-border"><img src={photo_url} className="user-photo"/><p className="dark-text">{name}<br/>by {user_name}</p></div>
@@ -108,9 +120,13 @@ const Project = (props) => {
                     <div>
                         <div className="like-share-box"><p className="like-share-text">
 
-                        <svg className="small-icon" onClick={clickedLike} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+                        {!heart ? <svg className="small-icon" onClick={clickedLike} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"  />
                         </svg>
+                        :
+                        <svg className="small-icon" onClick={clickedLike} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                            <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                        </svg>}
                         
                         {numOfLikes}</p>
                         </div>
