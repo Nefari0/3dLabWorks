@@ -20,6 +20,7 @@ class Explore extends Component {
         this.addLike = this.addLike.bind(this)
         this.handleClick = this.handleClick.bind(this)
         this.updateState = this.updateState.bind(this)
+        this.projectIsLiked = this.projectIsLiked.bind(this)
     }
 
     componentDidMount(){
@@ -97,6 +98,21 @@ class Explore extends Component {
         // alert('click from even handler')
         this.addLike()
     }
+
+    projectIsLiked(projectId,userLike) {
+        // const { user_likes } = this.props.user.user
+        // let likeValue = userLike.filter(el => el.model_id === projectId)
+        // return likeValue
+        try {
+            // let likeValue = userLike.filter(el => el.model_id === projectId);
+            return(userLike.filter(el => el.model_id === projectId)[0].model_id === projectId)
+          } catch (error) {
+            console.log('user does not like this project',error);
+            // expected output: ReferenceError: nonExistentFunction is not defined
+            // Note - error messages will vary depending on browser
+          }
+        // return(likeValue.model_id === undefined ? true : false)
+    }
     
     render(){
 
@@ -109,7 +125,7 @@ class Explore extends Component {
         // const { id } = this.props.user.user
     
         const mappedData = data.map(element => {
-            return <Project data={element} key={element.model_id} handleClick={this.handleClick} isLoggedIn={isLoggedIn} likes={element.likes} id={id} />
+            return <Project data={element} key={element.model_id} projectIsLiked={this.projectIsLiked} handleClick={this.handleClick} isLoggedIn={isLoggedIn} likes={element.likes} id={id} />
         })
 
         return(
