@@ -29,9 +29,11 @@
 	align-content: center;
 }
 
-/* .link-item {
-    margin-right: 30px;
-} */
+.link-item {
+    /* margin-right: 30px; */
+    color: #3c598e;
+    font-weight: 400;
+}
 
 .link-list li {
     margin-right: 30px;

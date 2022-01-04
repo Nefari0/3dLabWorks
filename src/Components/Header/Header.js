@@ -63,10 +63,6 @@ class Header extends Component{
         }   
     }
 
-    // componentDidUpdate(prevProps){
-    //     console.log('prev props',prevProps)
-    // }
-
     resetState(){
         this.setState({
             setPermission:false,
