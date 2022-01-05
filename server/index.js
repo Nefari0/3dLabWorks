@@ -12,6 +12,7 @@ const authController = require('./controllers/authController')
 const userController = require('./controllers/userController')
 const projectsController = require('./controllers/projectsController');
 const deletedDataController = require('./controllers/deletedDataController')
+const projectImageController = require('./controllers/projectImageController')
 // const { projectManagement, auth } = require('firebase-admin');
 const { addProject } = require('./controllers/projectsController');
 const docsController = require('./controllers/docsController')
@@ -118,13 +119,17 @@ app.get('/api/projects/id/:model_id', projectsController.getProjectById) // GET 
 app.post('/api/project/edit/name',projectsController.editProjectName)
 app.post('/api/project/post',projectsController.addProject)
 app.get('/api/project/join', projectsController.joinProject)
+app.get('/api/featured/join', projectsController.getFeatured)
+// --- images end points
+app.get('/api/project/photos/get/:model_id',projectImageController.getImages)
+// --- likes end points
 app.post('/api/project/getLike', projectsController.getLikeById)
 app.post('/api/projects/like', projectsController.addLike) //Get request / req.body / http://localhost:4004/api/project/like / {"user_id":"12","model_id":"5"}
 app.get('/api/like/update/:model_id', projectsController.updateProjectLikes)
 app.get('/api/like/count:id', projectsController.getLikeCount)
-app.get('/api/featured/join', projectsController.getFeatured)
 // app.post('/api/project/edit/', )
 app.delete('/api/project/delete/:model_id', projectsController.deleteProject)
+// --- comment end points
 app.get('/api/comments/all', projectsController.getComments)
 app.post('/api/comments/create', projectsController.createComment)
 app.get('/api/comments/id/:model_id', projectsController.getModelComments)
