@@ -53,6 +53,24 @@
 -- INSERT INTO model_likes(user_id,model_id)
 -- VALUES (12,27)
 
+-- ------ model images -------- --
+-- DROP TABLE model_images
+
+-- CREATE TABLE  model_images (
+--   image_id SERIAL PRIMARY KEY,
+--   model_id INTEGER,
+--   FOREIGN KEY(model_id) REFERENCES models(model_id),
+--   name VARCHAR(250),
+--   photo_url TEXT
+-- )
+
+-- INSERT INTO model_images (model_id,name,photo_url)
+-- VALUES (
+--   184,
+--   'photo of actual model after printing',
+--   'https://photo.jpg'
+-- )
+
 -- ------ comments ------- --
 -- CREATE TABLE comments (
 --   comment_id SERIAL PRIMARY KEY,
