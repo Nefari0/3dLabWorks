@@ -30,7 +30,8 @@ class ProjectDetail extends Component {
             viewDetails:false,
             viewEditProject:false,
             myLike:false,
-            allLikes:[]
+            allLikes:[],
+            modelImages:[],
         }
         this.changeView = this.changeView.bind(this)
         this.getDetails = this.getDetails.bind(this)
@@ -45,6 +46,8 @@ class ProjectDetail extends Component {
         const { user_likes,isLoggedIn } = this.props.user.user
         // ---get project info by model_id --- //
         this.getDetails().then((val) => console.log(val)) // original/working function
+        // --- get project images by model_is --- //
+        this.getImages()
 
         // ---get project comments by model_id --- //
         this.getComments()
@@ -64,6 +67,7 @@ class ProjectDetail extends Component {
         // if (user_likes != undefined){this.seeIfLiked()}
         if (prevProps.match.params.model_id !== model_id) {
             this.getDetails() // original / working function // --- make sure to use this if using getDetails() 
+            this.getImages()
         }
         
         // if (user_likes != undefined) {
@@ -76,6 +80,13 @@ class ProjectDetail extends Component {
         //     console.log('user likes',user_likes[theIndex])
         //     console.log('the like',theIndex)
         // }
+    }
+
+    async getImages() {
+        const { model_id } = this.props.match.params
+        axios.get(`/api/project/photos/get/${model_id}`).then((res) => {
+            this.setState({modelImages:res.data})
+        })
     }
 
 
@@ -91,17 +102,30 @@ class ProjectDetail extends Component {
                 axios.get(`/api/users/${user_id}`).then((res2) => {
                     const { id } = this.props.user.user
                     const { isLoggedIn } = this.props.user
-                    // if (isLoggedIn === true) {console.log('is loggin in')}
-                    this.setState({
-                        maker_id:user_id,
-                        model_id:model_id,
-                        dlUrl:res.data.firebase_url,
-                        info:res.data,
-                        userInfo:res2.data
+                    
+                    // this.setState({
+                    //     maker_id:user_id,
+                    //     model_id:model_id,
+                    //     dlUrl:res.data.firebase_url,
+                    //     info:res.data,
+                    //     userInfo:res2.data
+                    // })
+                    axios
+                    .get(`/api/project/photos/get/${model_id}`)
+                    .then((res3) => {
+                        console.log('function')
+                        this.setState({
+                            maker_id:user_id,
+                            model_id:model_id,
+                            dlUrl:res.data.firebase_url,
+                            info:res.data,
+                            userInfo:res2.data,
+                            modelImages:res3.data
+                        })
                     })
                     if(isLoggedIn === true) {
-                        axios.post(`/api/project/getLike`, {id,model_id}).then((res3) => {
-                        if(res3.data.user_id != null) {
+                        axios.post(`/api/project/getLike`, {id,model_id}).then((res4) => {
+                        if(res4.data.user_id != null) {
                         this.setState({
                     //         maker_id:user_id,
                     //         model_id:model_id,
