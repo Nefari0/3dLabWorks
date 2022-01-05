@@ -292,6 +292,7 @@ img:hover {
     height: 300px;
     width: 350px;
     margin: 5px;
+    pointer-events: none;
 }
 
 /* --- detail box classes --- */
