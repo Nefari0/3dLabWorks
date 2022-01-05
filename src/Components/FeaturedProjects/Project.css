@@ -157,6 +157,7 @@ img:hover {
 }
 
 .download-container-top {
+    content: "";
     border-top:1px solid #555;
     opacity: 30%;
     margin: none;
@@ -195,6 +196,7 @@ img:hover {
 }
 
 .devide {
+    content: "";
     z-index: 1011;
     height: 0px;
     border-bottom:1px solid #555;
@@ -203,6 +205,7 @@ img:hover {
 }
 
 .horizontal-devide {
+    content: "";
     height: 82px;
     margin-bottom: none;
     opacity: 30%;
