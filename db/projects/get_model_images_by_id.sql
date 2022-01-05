@@ -1,0 +1,1 @@
+SELECT * FROM model_images WHERE model_id = $1
