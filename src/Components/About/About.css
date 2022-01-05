@@ -36,7 +36,8 @@
     margin-top: 2px;
     height: 30px;
     width: 100vw;
-    background-color: #6495ed;
+    /* background-color: #6495ed; */
+    background: linear-gradient(0turn,#5077be,#6495ed);
     display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
@@ -44,6 +45,12 @@
 	align-items: baseline;
 	align-content: stretch;
     /* z-index: 12; */
+}
+
+.about-header-item {
+    width: 50px;
+    height: 30px;
+    /* background-color: crimson; */
 }
 
 div.about-header a {

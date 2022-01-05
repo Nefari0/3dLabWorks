@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import { updateUser } from '../../ducks/userReducer';
 import UserPage from '../UserPage/UserPage';
 import Links from './Links/Links';
+import Notice from '../Notice/Notice';
 
 class About extends Component {
 
@@ -75,10 +76,11 @@ class About extends Component {
             return(
                 <div>
                     <div className="about-header">
-                        {!mainSelected ? <a onClick={() => this.changeView('main')}>main</a> : <a className="a-selected" >main</a>}
-                        {!linksSelected ? <a onClick={() => this.changeView('links')}>links</a> : <a className="a-selected">links</a>}
+                        {!mainSelected ? (<a onClick={() => this.changeView('main')}>main</a>) : (<a className="a-selected" >main</a>)}
+                        {!linksSelected ? (<div className='about-header-item'><Notice item={'about-links'} content={'Resources'} /><a onClick={() => this.changeView('links')}>links</a></div>) : (<a className="a-selected">links</a>)}
                     </div>
                     <div className="about-container">
+                        
                     
                         {mainSelected ? <div>{mappedAbout}</div> : null}
                         {mainSelected ? <div>{mappedGeneral}</div> : null}
