@@ -31,11 +31,7 @@
      overflow-x: scroll;
      overflow-y: scroll;
      overflow: hidden;
-     border-bottom: solid 40px #6495ed;
-     /* margin: auto; */
-
-
-
+     border-bottom: solid 20px #6495ed;
 }
 
 .deploy-projects {
