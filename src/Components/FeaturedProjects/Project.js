@@ -15,7 +15,6 @@ const Project = (props) => {
 
     useEffect(() => {
         setNumOfLikes(likes)
-        // checkIfLiked()
     },[])
 
     const plsSignIn = () => {
@@ -25,7 +24,6 @@ const Project = (props) => {
     const likeFunc = async (id,m_id) => {
         const user_id = id
         const model_id = m_id
-        // setHeart(!heart)
         checkIfLiked()
         await axios.post('/api/projects/like', { user_id,model_id })
         await updateLikes(model_id)
@@ -36,133 +34,67 @@ const Project = (props) => {
         axios.get(`/api/like/update/${params}`).then(res => {
             const { likes } = res.data[0]
             console.log(likes)
-            // return(setNumOfLikes(likes))
             setNumOfLikes(likes)
-            // props.projectIsLiked(model_id,user_likes)
-            
-            // setNumOfLikes(res.data.likes)
         })
     }
-    // const gotClicked = () => {
-    //     console.log('got click',id,model_id)
-    //    if (isLoggedIn === true && id != undefined) {likeFunc(id,model_id)} else {plsSignIn()}
-    // }
 
     const clickedLike = () => {
-        // console.log('clicked like',id,model_id)
        if (isLoggedIn === true && id != undefined) {likeFunc(id,model_id)} else {plsSignIn()}
     }
 
-    // ---- this portion of the code is experimental. it's pupose is to 'highlight' hearts in projects the current user has already liked.
-    // const checkIfLiked = () => {
-    //     const { user_likes } = props
-    //     var userLike = user_likes.filter(element => element.model_id === model_id)
-    //     if (userLike[0] != undefined && props.data.model_id === userLike[0].model_id) {setHeart(true)}
-    //     console.log(heart)
-    // }
-    // // checkIfLiked()
-    // {if (props.user_likes != undefined) {checkIfLiked()}}
     const checkIfLiked = () => {
-        // console.log(props.projectIsLiked(model_id,user_likes))
-        console.log('hit check if liked')
         if (props.projectIsLiked(model_id,user_likes) === true){ return(true) } else { return(false) } 
-        // const isLiked = user_likes.filter((el) => el.model_id === model_id)
-        // if(isLiked.model_id === model_id) { return(true) } else { return(false) }
-
     }
 
-    // console.log(isLiked,'is liked')
     return(
-            // checkIfLiked()
         <div className='project-container'>
             {checkIfLiked()}
-                <div>
-                {/* <div className="photo-title-border"><img src={photo_url} className="user-photo"/><h4 className="project-box-h4">{name}</h4></div> */}
+            <div>
                 <div className="photo-title-border"><img src={photo_url} className="user-photo"/><p className="dark-text">{name}<br/>by {user_name}</p></div>
-
-                {/* <Link to={`projectdetails/${model_id}`}><img className="img" src={firebase_url01}/></Link> */}
                 <div className="image-div" ><Link to={`projectdetails/${model_id}`}><img className="img" src={firebase_url01}/></Link></div>
             </div>
             <div>
                 <div className="download-container">
-                {/* <div className="download-container-top"> */}
 
-                    {/* { isLoggedIn ? <a href={`${firebase_url}`} ><svg className="small-icon" style={{marginLeft:'10px',marginRight:'20px', height:'50px',width:'50px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg></a> : <a onClick={plsSignIn} ><svg className="small-icon" style={{marginLeft:'10px',marginRight:'20px', height:'50px',width:'50px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg></a>}
-
-                    
-                    { isLoggedIn ? <a className="project-text" href={`${firebase_url}`}>download</a> : <a className="project-text" onClick={plsSignIn}>download</a>} */}
-
-                    {/* <div className="horizontal-devide"></div> */}
-                {/* </div> */}
-
-                { isLoggedIn ? <a href={`${firebase_url}`} ><svg className="small-icon" style={{marginLeft:'10px',marginRight:'5px', height:'50px',width:'50px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg></a> : <a onClick={plsSignIn} ><svg className="small-icon" style={{marginLeft:'10px',marginRight:'5px', height:'50px',width:'50px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                    </svg></a>}
-
+                    { isLoggedIn ? 
+                    <a href={`${firebase_url}`} >
+                        <svg className="small-icon" style={{marginLeft:'10px',marginRight:'5px', height:'50px',width:'50px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                    </a> 
+                    : 
+                    <a onClick={plsSignIn} >
+                        <svg className="small-icon" style={{marginLeft:'10px',marginRight:'5px', height:'50px',width:'50px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                        </svg>
+                    </a>}
                     
                     { isLoggedIn ? <a className="project-text" href={`${firebase_url}`}>download</a> : <a className="project-text" onClick={plsSignIn}>download</a>}
 
-                    {/* <div className="horizontal-devide"></div> */}
-
                     <div className="like-share">
-                        {/* <ul>
-                        <li className="like-share-box"><p className="like-share-text">
+                        <div>
+                            <div className="like-share-box" style={{borderBottom:'1px solid #555'}}>
+                                {checkIfLiked() === false ? <svg className="small-icon small-icon-tweaks" onClick={clickedLike} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"  />
+                                </svg>
+                                :
+                                <svg className="small-icon small-icon-tweaks" onClick={clickedLike} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
+                                </svg>}
+                                <p className="like-share-text" style={{marginLeft:'10px'}}>{numOfLikes}</p>
+                            </div>
 
-                        <svg className="small-icon" onClick={clickedLike} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"  />
-                        </svg>
-                        
-                        {numOfLikes}</p>
-                        </li>
-
-                        <li className="devide"></li>
-
-                        <li className="like-share-box"><p className="like-share-text">
-                        <svg className="small-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                        </svg>
-                        share</p></li>
-                        </ul> */}
-
-                    <div>
-                        {/* {checkIfLiked()} */}
-                        <div className="like-share-box" style={{borderBottom:'1px solid #555'}}>
-                            {/* <p className="like-share-text"> */}
-                        {checkIfLiked() === false ? <svg className="small-icon small-icon-tweaks" onClick={clickedLike} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"  />
-                        </svg>
-                        :
-                        <svg className="small-icon small-icon-tweaks" onClick={clickedLike} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-                        </svg>}
-                        <p className="like-share-text" style={{marginLeft:'10px'}}>
-                        {numOfLikes}</p>
-                        </div>
-
-                        {/* <div className="devide"></div> */}
-
-                        <div className="like-share-box">
-                            {/* <p className="like-share-text"> */}
-                        <svg className="small-icon small-icon-tweaks" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                        </svg>
-                        <p className="like-share-text" style={{marginLeft:'10px'}}>
-                        share</p>
-                        {/* <p style={{color:'#555'}}>text</p> */}
-                        </div>
+                            <div className="like-share-box">
+                                <svg className="small-icon small-icon-tweaks" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                                </svg>
+                                <p className="like-share-text" style={{marginLeft:'10px'}}>share</p>
+                            </div>
                         </div>
 
                     </div>
                 </div>
             </div>
-            {/* <p className="project-text">{description}</p> */}
-            
         </div>
     )
 }
