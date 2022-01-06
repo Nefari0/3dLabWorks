@@ -88,6 +88,6 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps, { getModels,updateCharacters })(FeaturedProjects)
+// export default connect(mapStateToProps, { getModels,updateCharacters })(FeaturedProjects)
 
 // export default FeaturedProjects
