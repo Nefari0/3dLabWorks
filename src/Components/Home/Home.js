@@ -2,15 +2,12 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import './Home.css'
 import { connect } from 'react-redux'
-// import { updateCharacters } from '../../ducks/breakingBadReducer'
 import { loginUser,updateUser } from '../../ducks/userReducer'
 import { getModels } from './../../ducks/modelsReducer'
-// import FirebaseTest from '.././FirebaseTest'
 import { Icon } from './Icons/Icon'
 import Footer from '../Footer/Footer'
 import FeaturedProjects from '../FeaturedProjects/FeaturedProjects'
 import Loading from '../Loading/Loading'
-// import CurrentProject from './CurrentProject/CurrentProject'
 import Project from '../FeaturedProjects/Project'
 import Prototyping from '../Prototyping/Prototyping'
 // import Vid from './Video/EC.NC gear train0001-0500.mp4'
@@ -27,7 +24,6 @@ class Home extends Component {
         this.handleUserName = this.handleUserName.bind(this)
         this.handlePassword = this.handlePassword.bind(this)
         this.handleClick = this.handleClick.bind(this)
-        // this.remindWhoUser = this.remindWhoUser.bind(this)
         this.projectIsLiked = this.projectIsLiked.bind(this)
     }
 
@@ -61,18 +57,13 @@ class Home extends Component {
     // }
 
     projectIsLiked(projectId,userLike) {
-        // const { user_likes } = this.props.user.user
-        // let likeValue = userLike.filter(el => el.model_id === projectId)
-        // return likeValue
         try {
-            // let likeValue = userLike.filter(el => el.model_id === projectId);
             return(userLike.filter(el => el.model_id === projectId)[0].model_id === projectId)
           } catch (error) {
             console.log('user does not like this project',error);
             // expected output: ReferenceError: nonExistentFunction is not defined
             // Note - error messages will vary depending on browser
           }
-        // return(likeValue.model_id === undefined ? true : false)
     }
 
     render() {
@@ -92,6 +83,7 @@ class Home extends Component {
                     <h2 className="hero-h2">IMAGINE IT - BUILD IT.</h2>
                     {/* <Prototyping /> */}
                     <div className="deploy-projects">{mappedModels}</div>
+                    <Footer />
                     {/* <video autoPlay loop muted
                     style={{
                         position:"relavtive",
