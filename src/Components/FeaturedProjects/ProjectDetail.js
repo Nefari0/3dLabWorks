@@ -254,7 +254,7 @@ class ProjectDetail extends Component {
     render() {
         const { comments,model_id,maker_id,myLike } = this.state
         const { firebase_url01,firebase_url,user_id } = this.state.info
-        const { info, userInfo, viewComments, viewDetails, viewFiles,dlUrl,viewEditProject } = this.state
+        const { info, userInfo, viewComments, viewDetails, viewFiles,dlUrl,viewEditProject,modelImages } = this.state
         const { isLoggedIn } = this.props.user
         const { user,id,photo_url,user_name,user_likes } = this.props.user.user
         // const isUserLiked = Object.values(user_likes.filter(el => el.model_id === model_id))
@@ -280,6 +280,10 @@ class ProjectDetail extends Component {
             return <TheMaker data={element} key={element.user_id} photo_url={element.photo_url} user_name={element.user_name} info={info} />
         })
 
+        const mappedThumbNails = modelImages.map((el) => {
+            return <div className='thumbnail-imgae'><img src={el.photo_url}/></div>
+        })
+
         // mappedEditProject = info.map(elenent) 
 
         return(
@@ -291,6 +295,17 @@ class ProjectDetail extends Component {
                     <img src={userInfo.photo_url} className="logo-box"/>
                     <p className="dark-text"><br/>by {user_name}</p>
                 </div> */}
+                <div className='image-viewer'>
+                    {/* <h2 style={{color:'#555'}}>element</h2> */}
+                    {/* <div className='thumbnail-image'></div> */}
+                    {/* <div className='thumbnail-image'></div> */}
+                    {/* <div className='thumbnail-image'></div> */}
+                    {/* <div className='thumbnail-image'></div> */}
+                    {/* <div className='thumbnail-image'></div> */}
+                    {/* <div className='thumbnail-image'></div> */}
+                    {/* <div className='thumbnail-image'></div> */}
+                    {/* <div className='thumbnail-image'></div> */}
+                </div>
                 <div className="detail-container">
                     {mappedPhoto}
                     <section className="right">
@@ -327,24 +342,11 @@ class ProjectDetail extends Component {
                         <p className={`dark-text ${!viewEditProject ? true : 'light-text'}`}>Edit Project</p></div>
                         :
                         <div className="detail-box small">
-
                             <svg className="small-icon" style={{margin:'auto',marginLeft:'12px',marginRight:'10px', height:'46px',width:'46px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
                             </svg>
-
-                            
-
-
-
-                            
-
-                            
-
-                        <p className="dark-text">Add To Favorites</p>
+                            <p className="dark-text">Add To Favorites</p>
                         </div>}
-                        
-                        
-                            
 
                         <div className="detail-box small">
 
@@ -362,6 +364,7 @@ class ProjectDetail extends Component {
                 
                 </div>
                 {/* {viewFiles ? <Comments link={firebase_url}/> : null} */}
+
                 <div className="comment-box">
                     {/* {viewComments ? (<div className="post-box"><p className="dark-text">enter your coment here</p></div>) : (null)} */}
                     {viewComments ? <CreateComment user={user} id={id} isLoggedIn={isLoggedIn} model_id={model_id} plsSignIn={this.plsSignIn} getComments={this.getComments} /> : null}
