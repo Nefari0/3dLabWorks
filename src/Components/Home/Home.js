@@ -27,7 +27,7 @@ class Home extends Component {
         this.handleUserName = this.handleUserName.bind(this)
         this.handlePassword = this.handlePassword.bind(this)
         this.handleClick = this.handleClick.bind(this)
-        this.remindWhoUser = this.remindWhoUser.bind(this)
+        // this.remindWhoUser = this.remindWhoUser.bind(this)
         this.projectIsLiked = this.projectIsLiked.bind(this)
     }
 
@@ -55,10 +55,10 @@ class Home extends Component {
         this.setState({user_name:'',password:''})
     }
 
-    remindWhoUser(){
-        const { user_name, password } = this.state
-        console.log(this.props.user.user.data)
-    }
+    // remindWhoUser(){
+    //     const { user_name, password } = this.state
+    //     console.log(this.props.user.user.data)
+    // }
 
     projectIsLiked(projectId,userLike) {
         // const { user_likes } = this.props.user.user
