@@ -1,4 +1,3 @@
-// import { useState, useEffect } from 'react'
 import { Component } from 'react'
 import './About.css'
 import Document from './../Document'
@@ -58,7 +57,6 @@ class About extends Component {
             default:
                 break;
         }
-
     }
 
         render(){
@@ -79,14 +77,10 @@ class About extends Component {
                         {!mainSelected ? (<a onClick={() => this.changeView('main')}>main</a>) : (<a className="a-selected" >main</a>)}
                         {!linksSelected ? (<div className='about-header-item'><Notice item={'about-links'} content={'Resources'} /><a onClick={() => this.changeView('links')}>links</a></div>) : (<a className="a-selected">links</a>)}
                     </div>
-                    <div className="about-container">
-                        
-                    
+                    <div className="about-container">   
                         {mainSelected ? <div>{mappedAbout}</div> : null}
                         {mainSelected ? <div>{mappedGeneral}</div> : null}
                         {linksSelected ? <Links /> : null}
-                        {/* {!mainSelected ? {mappedAbout} : null} */}
-                        {/* {!mainSelected ? {mappedGeneral} : null} */}
                     </div>
                 </div>
             )
@@ -98,5 +92,3 @@ function mapStateToProps(reduxState){
 }
 
 export default connect(mapStateToProps,{updateUser})(About)
-
-// export default class About
