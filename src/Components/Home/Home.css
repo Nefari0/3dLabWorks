@@ -8,11 +8,9 @@
      background-position: center bottom;
      background-attachment: fixed;
      display: flex;
-     /* flex-direction: row; */
      flex-direction: column;
      flex-wrap: wrap;
      justify-content: space-around;
-     
      align-items: center;
      align-content: center;
      overflow-x: scroll;
@@ -27,17 +25,8 @@
 	flex-wrap: nowrap;
 	align-items: center;
 	align-content: center;
-    
-    /* overflow-y: scroll; */
     overflow-y: hidden;
-    
     z-index: 0;
-    /* display: inline-block; */
-    /* border-radius: 8%; */
-    /* white-space: pre-wrap; */
-    /* background-color: blue; */
-    /* transform: rotate(-90deg); */
-    /* scroll-behavior: smooth; */
 }
 
 
@@ -64,7 +53,6 @@
     margin-top: 50px;
     margin-left: 25px;
     margin-right: 100vw;
-    /* float: left; */
     height: 4vh;
     color:  #6495ed;
 }
@@ -73,7 +61,6 @@
     text-align: left;
     margin: auto;
     margin-top: 50px;
-    /* margin-right: 100px; */
     height: 15vh;
     width: 80vw;
     color: #555;
@@ -89,11 +76,8 @@
 }
 
 .title-border {
-    /* margin: auto; */
-    /* margin-left: 5px; */
     margin-top: 20px;
     margin-left: 45vw;
-    /* margin-bottom: 10px; */
     width: 10vw;
     border-bottom: 2px solid #6495ed;
     justify-content: center;
@@ -108,13 +92,11 @@
 }
 
 .icon-h3 {
-    /* background-color: teal; */
     margin: auto;
     text-align: center;
 }
 
 .icon-text {
-    /* float: left; */
     margin-top: 60px;
     margin-left: 30px;
     height: 100px;
@@ -123,22 +105,11 @@
     font-weight: 300;
     color: #555;
     text-align: left;
-    /* background-color: yellow; */
 }
 
 @media (max-width: 540px) {
 
-    /* .icon-container {
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        align-items: stretch;
-        align-content: flex-end;
-    } */
-
     .icon {
-        /* background-color: yellowgreen; */
         height: 3vh;
         justify-content: center;
         float: left;
@@ -148,7 +119,6 @@
     }
 
     .icon-h4 {
-        /* background-color: yellowgreen; */
         padding-bottom: 10px;
         width: 80vw;
         height: 4vh;
@@ -156,7 +126,6 @@
     }
 
     .icon-text {
-        /* background-color: tomato; */
         text-align: center;
         height: 300px;
         width: 80vw;
@@ -175,7 +144,6 @@
     }
 
     .icon-h4{
-        /* margin-left: 0px; */
         margin-bottom: 20px;
     }
 
@@ -193,10 +161,6 @@
     .hero-h2 {
         display: none;
     }
-    /* .hero {
-        height: 100vh;
-        z-index: 0;
-    } */
 }
 
 @media (max-width:300px) {
