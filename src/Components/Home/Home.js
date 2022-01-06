@@ -83,7 +83,7 @@ class Home extends Component {
                     <h2 className="hero-h2">IMAGINE IT - BUILD IT.</h2>
                     {/* <Prototyping /> */}
                     <div className="deploy-projects">{mappedModels}</div>
-                    <Footer />
+                    {/* <Footer /> */}
                     {/* <video autoPlay loop muted
                     style={{
                         position:"relavtive",
