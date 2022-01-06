@@ -135,38 +135,19 @@ class AdminPage extends Component {
                     </li>
                     :
                     <li className="add-doc-div-closed"><a onClick={this.openEditAbout}>edit about info</a></li>}
-
-                    {/*  place holders  */}
                     <li className="add-doc-div-closed"><a>notifications</a></li>
                     <li className="add-doc-div-closed"><a>messages</a></li>
-
-
                     { editUserInfo ?
                     <li className="add-doc-div">
                         <a  onClick={this.openEditUserInfo} className="admin-a">edit about info</a>
                         {mappedUsers}
-                        {/* <textarea onChange={e => this.handleAddText('aboutContent', e.target.value)} className="input" name="text" rows="14" cols="100" wrap="soft"> </textarea> */}
-                        {/* <button className="text" onClick={this.addAbout}>add to about content</button> */}
-                        {/* <div className="checkbox" style={{marginTop:'20px'}}><input type="checkbox" onChange={e => this.handleAddText('displayAbout',!this.state.displayAbout)} /><p style={{color:'#555'}}>display this diocument?</p><button onClick={this.hideDocAbout}>change</button></div> */}
                     </li>
                     :
                     <li className="add-doc-div-closed"><a onClick={this.openEditUserInfo}>User Details</a></li>}
-                    {/* <li className="add-doc-div-closed"><a>user details</a></li> */}
-
-
                     <li className="add-doc-div-closed"><a>terms</a></li>
                     <li className="add-doc-div-closed"><a>user project details</a></li>
                     <li className="add-doc-div-closed"><a>memo</a></li>
                     </ul>
-         
-
-                    {/* <div className="add-doc-div-closed"><h4>edit news / notifications</h4></div>
-                    <div className="add-doc-div-closed"><h4>messages</h4></div>
-                    <div className="add-doc-div-closed"><h4></h4></div>
-                    <div className="add-doc-div-closed"><h4></h4></div>
-                    <div className="add-doc-div-closed"><h4></h4></div> */}
-                    
-                    
                     <Link to={'/user'} ><a >mypage</a></Link>
                     </div>
                 )}
