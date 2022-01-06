@@ -50,7 +50,14 @@ const Project = (props) => {
         <div className='project-container'>
             {checkIfLiked()}
             <div>
-                <div className="photo-title-border"><img src={photo_url} className="user-photo"/><p className="dark-text">{name}<br/>by {user_name}</p></div>
+            {/* <p className="dark-text-larger">{name}</p> */}
+                {/* <div className="photo-title-border"><img src={photo_url} className="project-user-photo"/><p className="dark-text-larger">{name}<br/><p className='usr-nm-txt'>by {user_name}</p></p></div> */}
+
+
+                <div className="photo-title-border"><img src={photo_url} className="project-user-photo"/>
+                {/* <p className="dark-text-larger">{name}</p> */}
+                <p className="dark-text">{name}<br/><p className='usr-nm-txt'>by {user_name}</p></p></div>
+
                 <div className="image-div" ><Link to={`projectdetails/${model_id}`}><img className="img" src={firebase_url01}/></Link></div>
             </div>
             <div>
