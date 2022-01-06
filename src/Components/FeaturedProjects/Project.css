@@ -587,8 +587,11 @@ img:hover {
         margin-right: 15px;
         padding-right: 1px;
     }
-}
 
+    .small-icon-tweaks {
+        padding-left: 10px;
+    }
+}
 
 @media (max-width:300px) {
     .project-container {
@@ -606,6 +609,15 @@ img:hover {
 
     .project-text {
         display: none;
+    }
+
+    .small-icon-tweaks {
+        padding-left: 40px;
+    }
+
+    .usr-nm-txt {
+        font-size: x-small;
+        font-weight: 400;
     }
 }
 
