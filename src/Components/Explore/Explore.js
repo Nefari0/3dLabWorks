@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import './Explore.css'
 import Project from '../FeaturedProjects/Project'
-// import { getProjects } from '../../ducks/projectsReducer'
 import { loginUser,updateUser } from '../../ducks/userReducer'
-
 import { connect } from 'react-redux'
 import axios from 'axios'
 
@@ -24,7 +22,6 @@ class Explore extends Component {
     }
 
     componentDidMount(){
-        // const { id } = this.props.user.user
         this.updateState()
     }
 
@@ -46,12 +43,10 @@ class Explore extends Component {
         const { userId } = this.state
         if(user_id != undefined){
             axios.post('/api/projects/like', { user_id, params_id }).then(res => {
-
             })
                 for(let key in data){
                     if (data[key].model_id === params_id) {
                     console.log(key,data[key],data[key].likes)
-                    // this.setState({})
                     }
                 }
         } else {
@@ -68,14 +63,10 @@ class Explore extends Component {
             return(userLike.filter(el => el.model_id === projectId)[0].model_id === projectId)
           } catch (error) {
             console.log('user does not like this project',error);
-            // expected output: ReferenceError: nonExistentFunction is not defined
-            // Note - error messages will vary depending on browser
           }
     }
     
     render(){
-
-
         const { data } = this.state
         const { isLoggedIn } = this.props.user
         const { user_likes,model_likes,id } = this.props.user.user
