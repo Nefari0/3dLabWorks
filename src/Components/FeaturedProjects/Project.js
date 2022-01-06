@@ -4,16 +4,19 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { getModels } from '../../ducks/modelsReducer'
+import { updateUser } from '../../ducks/userReducer'
 // import { addLike } from '../../../server/controllers/projectsController'
 
 const Project = (props) => {
     const { category, img, firebase_url,firebase_url01, name, description, user_name, model_likes, model_id, photo_url, user_id, likes } = props.data
     const { handleClick,isLoggedIn,id,user_likes } = props
+    // const { user_likes } = props.user.user
 
     const [numOfLikes, setNumOfLikes] = useState(0)
     const [heart,setHeart] = useState(false) // for highlighting hearts if current user has already like this project
 
     useEffect(() => {
+        
         setNumOfLikes(likes)
     },[])
 
@@ -24,9 +27,10 @@ const Project = (props) => {
     const likeFunc = async (id,m_id) => {
         const user_id = id
         const model_id = m_id
-        checkIfLiked()
         await axios.post('/api/projects/like', { user_id,model_id })
         await updateLikes(model_id)
+        await setHeart(!heart)
+        await checkIfLiked(heart)
     }
 
     const updateLikes = async (params) => {
@@ -42,7 +46,10 @@ const Project = (props) => {
        if (isLoggedIn === true && id != undefined) {likeFunc(id,model_id)} else {plsSignIn()}
     }
 
-    const checkIfLiked = () => {
+    const checkIfLiked = (params) => {
+        // console.log('clicked "check if liked"')
+        console.log('clicked check if likeds',params)
+        // if(params != undefined) {return(params)}
         if (props.projectIsLiked(model_id,user_likes) === true){ return(true) } else { return(false) } 
     }
 
@@ -81,7 +88,7 @@ const Project = (props) => {
                     <div className="like-share">
                         <div>
                             <div className="like-share-box" style={{borderBottom:'1px solid #555'}}>
-                                {checkIfLiked() === false ? <svg className="small-icon small-icon-tweaks" onClick={clickedLike} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+                                {checkIfLiked() === false ? <svg className="small-icon small-icon-tweaks" onClick={() => clickedLike()} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"  />
                                 </svg>
                                 :
@@ -110,6 +117,6 @@ function mapStateToProps(reduxState) {
     return reduxState
 }
 
-export default connect(mapStateToProps, { getModels })(Project)
+export default connect(mapStateToProps, { getModels,updateUser })(Project)
 
 // export default Project
