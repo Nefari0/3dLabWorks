@@ -2,12 +2,21 @@
 .footer-container {
     height: 40px;
     width: 100vw;
+    position: absolute;
+    bottom: 0;
+    left: 0;
     margin: auto;
-    background-color: #6495ed;
+    background: linear-gradient(0turn,#5077be,#6495ed);
 }
 
 @media (max-width:300px) {
     .footer-container {
         width: 300px;
+    }
+}
+
+@media (max-height:562px) {
+    .footer-container {
+        height: 20px;
     }
 }
