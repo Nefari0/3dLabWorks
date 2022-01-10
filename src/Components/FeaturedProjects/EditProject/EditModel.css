@@ -1,16 +1,202 @@
 .edit-project-container {
-    width: 90%;
+    width: 100%;
+    /* min-height: 300px; */
+    min-height: 200px;
+    /* display: flex; */
+    /* justify-content: space-between; */
+    /* align-items: center; */
+    /* margin: 5px 0; */
+    /* background-color: green; */
+
+    /* display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch; */
+
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 5px 0;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: flex-start;
+    overflow-y: hidden;
+    /* background-color: greenyellow; */
   }
 
-.edit-model-h3 {
+ 
+
+.edit-project-title {
+    /* width: 100%;
+    height: 40px;
+    transition: all 100ms;
+    margin: none; */
     color: #555;
+
+    /* background: linear-gradient(0turn,#5077be,#6495ed); */
+    /* background-color: #fff; */
+    background-color: #6495ed;
+    opacity: .5;
+    /* border: solid 1px #6495ed; */
+
+
+    height: 30px;
+    width: 645px;
+    /* width: 645px; */
+    /* background-color: #fff; */
+    display: flex;
+    /* flex-direction: row; */
+    /* align-items: center; */
+
+    box-shadow: .1px .1px #555;
+}
+
+.edit-model-h3 {
+    margin-left: 10px;
+    color: #555;
+    text-transform: none;
+    font-weight: 600;
+    /* opacity: 1; */
+    /* font-weight: 0; */
+}
+
+.edit-project-row {
+    width: 100%;
+    height: 300px;
+    /* height: 25%; */
+    /* background-color: #adff2f; */
+    display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: stretch;
+    /* margin-top: 16%; */
+    /* margin-bottom: 16%; */
+}
+.row-x {
+    /* flex-direction: row; */
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: center;
+    height: 95px;
+    margin-top: 20px;
+    border-bottom: solid 1px #555;
+    /* background-color: greenyellow; */
+    overflow-x: scroll;
+}
+
+/* .with-photos {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+} */
+
+/* .input[type=button], input[type=submit], input[type=reset] {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 16px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+  } */
+  .input[type='file']
+  {
+      /* background-color: blue; */
+      text-indent: -999em;
+      outline: none;
+      /* width: 100%; */
+      /* width: 10%; */
+      /* height: 100%; */
+      /* height: 10%; */
+      /* top: 200px; */
+      /* left: 150px; */
+      position: absolute;
+      opacity: .8;
+      /* top: 0px; */
+      /* padding-top: 10%; */
+  }
+.select-photo-1 {
+    left: 5px;
+    bottom: 5px;
+    /* top: 1px; */
+    width: 50%;
+    height: 100%;
+    /* background-color: blue; */
+    /* opacity: .1; */
+}
+
+.select-photo-text {
+    position: relative;
+    color: #555;
+    left: 50px;
+}
+
+.photo-input-box {
+    position: relative;
+    height: 90px;
+    width: 150px;
+    margin-left: 0px;
+    /* width: 100%; */
+    /* color: #555; */
+    /* background-color: brown; */
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: flex-start;
+	align-content: center;
+    
+}
+.file-input-box {
+    height: 90px;
+    width: 280px;
+    /* padding: 30px; */
+    /* color: #555; */
+    /* background-color: brown; */
+    display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: flex-start;
+	align-content: center;
 }
 
 .text-input {
-    height: 20px;
-    width: 290px;
+    margin-top:10px;
+    height: 33px;
+    width: 75%;
+    color: #555;
+    text-decoration: overline;
+    font-size: 20px;
+    border-radius: 5px;
+    text-align: top;
+    border: solid 1px #6495ed;;
+
+    /* border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove; */
+    /* outline: none; */
+
+}
+.input-description {
+    height: 200px;
+}
+
+@media (max-width:680px) {
+    .text-input {
+        width: 100%;
+    }
+    .input-description {
+        height: 100px;
+    }
 }
