@@ -24,6 +24,21 @@
     /* z-index: 1100; */
 }
 
+.project-selection-title {
+    background-color: #6495ed;
+    opacity: .8;
+    height: 32px;
+    width: 645px;
+    display: flex;
+}
+
+.prodect-selection-h3 {
+    margin-left: 10px;
+    color: #3c598e;
+    text-transform: none;
+    font-weight: 600;
+}
+
 .small-text {
     font-size: 12px;
     margin: 2px;
