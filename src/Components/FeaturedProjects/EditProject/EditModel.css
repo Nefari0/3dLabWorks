@@ -27,39 +27,20 @@
 
  
 
-.edit-project-title {
-    /* width: 100%;
-    height: 40px;
-    transition: all 100ms;
-    margin: none; */
-    color: #555;
-
-    /* background: linear-gradient(0turn,#5077be,#6495ed); */
-    /* background-color: #fff; */
+/* .edit-project-title {
     background-color: #6495ed;
-    opacity: .5;
-    /* border: solid 1px #6495ed; */
-
-
+    opacity: .8;
     height: 30px;
     width: 645px;
-    /* width: 645px; */
-    /* background-color: #fff; */
     display: flex;
-    /* flex-direction: row; */
-    /* align-items: center; */
-
-    box-shadow: .1px .1px #555;
 }
 
 .edit-model-h3 {
     margin-left: 10px;
-    color: #555;
+    color: #3c598e;
     text-transform: none;
     font-weight: 600;
-    /* opacity: 1; */
-    /* font-weight: 0; */
-}
+} */
 
 .edit-project-row {
     width: 100%;
@@ -75,6 +56,14 @@
     /* margin-top: 16%; */
     /* margin-bottom: 16%; */
 }
+.pic {
+    height: 130px;
+    /* background-color: green; */
+    border-bottom: solid 1px #555;
+    border-top: solid 1px #555;
+    flex-wrap: nowrap;
+    
+}
 .row-x {
     /* flex-direction: row; */
     display: flex;
@@ -85,9 +74,9 @@
 	align-content: center;
     height: 95px;
     margin-top: 20px;
-    border-bottom: solid 1px #555;
+    /* border-bottom: solid 1px #555; */
     /* background-color: greenyellow; */
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
 }
 
 /* .with-photos {
@@ -120,7 +109,8 @@
       /* top: 200px; */
       /* left: 150px; */
       position: absolute;
-      opacity: .8;
+      opacity: .1;
+      height: 50px;
       /* top: 0px; */
       /* padding-top: 10%; */
   }
@@ -170,6 +160,15 @@
 	align-content: center;
 }
 
+.column {
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: stretch;
+	align-content: stretch;
+}
+
 .text-input {
     margin-top:10px;
     height: 33px;
@@ -190,6 +189,26 @@
 }
 .input-description {
     height: 200px;
+}
+
+.add-button {
+    /* background-color: blue; */
+    /* position: absolute;
+    right: 50%;
+    bottom: -110px; */
+    background: linear-gradient(0turn,#5077be,#6495ed);
+    height: 25px;
+    width: 40px;
+    border-radius: 2px;
+    font-size: smaller;
+    border:solid 1px #3c598e
+}
+.pic-button {
+    margin-bottom: 25px;
+}
+.file-button {
+    margin-right: 25px;
+    color: #fff;
 }
 
 @media (max-width:680px) {

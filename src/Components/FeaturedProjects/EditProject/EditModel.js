@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { Component } from 'react'
 import './EditModel.css'
 import Loading from '../../Loading/Loading';
+import Notice from '../../Notice/Notice'
 import {app} from '../../../base'
 const db = app.firestore()
 
@@ -37,6 +38,7 @@ class EditModel extends Component {
         this.addPhoto = this.addPhoto.bind(this)
         this.setIsLoading = this.setIsLoading.bind(this)
         this.imageToDb = this.imageToDb.bind(this)
+        this.passNewPhotoToFB = this.passNewPhotoToFB.bind(this)
         // const { description,firebase_url,firebase_url01,firebase_url02,model_id,name,user_id} = props.info[0]
     }
 
@@ -69,11 +71,11 @@ class EditModel extends Component {
         })
     }
 
-    fileHandler = async (e,preview) => {
+    fileHandler = async (e,preview,photo_url) => {
         const file = e.target.files[0]
         // alert('hit file handle')
         this.setState({
-            photo_url:file,
+            [photo_url]:file,
             [preview]:URL.createObjectURL(file)
             // previewImageFile:URL.createObjectURL(file)
         })
@@ -92,16 +94,29 @@ class EditModel extends Component {
         this.setState({isLoading:!this.state.isLoading})
     }
 
-    addPhoto =  async () => {
+    passNewPhotoToFB = async () => {
+        const { photo_url,photo_url2,photo_url3,photo_url4 } = this.state
+        const prevArray = [photo_url,photo_url2,photo_url3,photo_url4]
+        await prevArray.forEach(el => {
+            if (el != undefined && el != null) {
+                // console.log('url',el)
+                this.addPhoto(el)
+            }
+        })
+    }
+
+    uploadNewFile = () => {
+        alert('this action will permanently remove current file. continue?')
+    }
+
+    addPhoto =  async (photo_url) => {
         // convert the two following lines to arrays.
         // pass each element to firebase
         // pass each element to DB
-        const { photo_url,photo_url2,photo_url3,photo_url4 } = this.state
-        const {previewImageFile,previewImageFile2,previewImageFile3,previewImageFile4} = this.state
-        // console.log('photo in fyunction',photo_url)
+
         this.setIsLoading()
+        // console.log('url',photo_url)
         const thePhoto = await this.getImUrl(photo_url)
-        // if (thePhoto != imageUrl) {this.setImageUrl(await thePhoto.getDownloadURL())} 
         this.setImageUrl(await thePhoto.getDownloadURL())
         this.imageToDb(this.state.imageUrl)
         console.log('file uploaded')
@@ -109,9 +124,10 @@ class EditModel extends Component {
     }
     getImUrl = async (input) => {
         // const { user } = this.props.user.user
+        const { user_id } = this.props
         const { imageUrl } = this.state
         if (input === null) {return imageUrl}
-        const storageRef = app.storage().ref(`modelIms/`)
+        const storageRef = app.storage().ref(`photos/${user_id}/`)
         const fileRef = storageRef.child(input.name)
         await fileRef.put(input)
         console.log('image loaded')
@@ -145,11 +161,12 @@ class EditModel extends Component {
         // const { description,firebase_url,firebase_url01,firebase_url02,model_id,name,user_id} = this.state.information
         const { description,firebase_url,firebase_url01,firebase_url02,model_id,name,user_id} = this.props.info
         const { previewImageFile,previewImageFile2,previewImageFile3,previewImageFile4,isLoading } = this.state
+        // const prevArray = [previewImageFile,previewImageFile2,previewImageFile3,previewImageFile4]
         return(
             <div className="edit-project-container" >
                 {isLoading ? <Loading/> : null}
                 {/* adding photos */}
-                <section className='edit-project-title'><h3 className="edit-model-h3">Edit Project</h3></section>
+                <section className='project-selection-title'><h3 className="prodect-selection-h3">Edit Project</h3></section>
 
                 {/* --- adding a file ----- */}
                 <section className='edit-project-row row-x' style={{height:'30px',color:'#555'}} >
@@ -162,12 +179,16 @@ class EditModel extends Component {
                         onChange={e => this.fileHandler(e)} 
                         />
                     </div>
-                <button onClick={() => this.addPhoto()}>click to add</button>
+                {/* <button onClick={() => this.passNewPhotoToFB()}>click to add</button> */}
+                <div className='add-button file-button' onClick={() => this.uploadNewFile()}>add</div>
                 </section>
                 {/* ---------------------- */}
 
                 {/* --- adding additional photos ----- */}
-                <section className='edit-project-row row-x'>
+                {/* <section className='column'>
+                    <div className='edit-project-row row-x'> */}
+                <section className='edit-project-row pic'>
+                    <div className='row-x'>
                     <div className='photo-input-box'>
                         <img style={{width:'50px',height:'50px',borderRadius:'10px',marginLeft:'60px',marginBottom:'10px'}} src={previewImageFile} />
                         <input className='input select-photo-1'
@@ -175,7 +196,7 @@ class EditModel extends Component {
                         type="file"
                         accept="image/png,image/jpeg"
                         // onChange={e => this.fileHandler(e)} 
-                        onChange={e => this.fileHandler(e,'previewImageFile')} 
+                        onChange={e => this.fileHandler(e,'previewImageFile','photo_url')} 
                         />
                     </div>
                     <div className='photo-input-box'>
@@ -184,7 +205,7 @@ class EditModel extends Component {
                         style={{marginLeft:'40px'}}
                         type="file"
                         accept="image/png,image/jpeg"
-                        onChange={e => this.fileHandler(e,'previewImageFile2')} 
+                        onChange={e => this.fileHandler(e,'previewImageFile2','photo_url2')} 
                         />
                     </div>
                     <div className='photo-input-box'>
@@ -193,7 +214,7 @@ class EditModel extends Component {
                         style={{marginLeft:'40px'}}
                         type="file"
                         accept="image/png,image/jpeg"
-                        onChange={e => this.fileHandler(e,'previewImageFile3')} 
+                        onChange={e => this.fileHandler(e,'previewImageFile3','photo_url3')} 
                         />
                         {/* <p style={{position:'reletive',color:'#555'}}>text</p> */}
                         {/* <p className='select-photo-text'>text</p> */}
@@ -204,12 +225,12 @@ class EditModel extends Component {
                         style={{marginLeft:'40px'}}
                         type="file"
                         accept="image/png,image/jpeg"
-                        onChange={e => this.fileHandler(e,'previewImageFile4')} 
+                        onChange={e => this.fileHandler(e,'previewImageFile4','photo_url4')} 
                         />
                         {/* <p className='select-photo-text'>text</p> */}
                     </div>
-                    
-                {/* <button onClick={() => this.addPhoto()}>click to add</button> */}
+                    </div>
+                    <div className='add-button pic-button' onClick={() => this.passNewPhotoToFB()}>add</div>
                 </section>
                 {/* ---------------------- */}
 
