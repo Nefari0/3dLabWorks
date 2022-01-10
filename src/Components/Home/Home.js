@@ -9,7 +9,7 @@ import Footer from '../Footer/Footer'
 // import FeaturedProjects from '../FeaturedProjects/FeaturedProjects'
 import Loading from '../Loading/Loading'
 import Project from '../FeaturedProjects/Project'
-import Prototyping from '../Prototyping/Prototyping'
+// import Prototyping from '../Prototyping/Prototyping'
 // import Vid from './Video/EC.NC gear train0001-0500.mp4'
 
 class Home extends Component {
@@ -19,7 +19,8 @@ class Home extends Component {
         this.state = {
             projects:[],
             user_name:'',
-            password:''
+            password:'',
+            userLikes:null
         }
         this.handleUserName = this.handleUserName.bind(this)
         this.handlePassword = this.handlePassword.bind(this)
@@ -35,6 +36,7 @@ class Home extends Component {
 
     componentDidUpdate() {
         this.props.updateUser()
+        // if (this.state.userLikes === null) {this.setState({...this.state,userLikes:this.props.user.user.user_likes})}
     }
 
     handleUserName(value){
@@ -74,6 +76,8 @@ class Home extends Component {
         const { models } = this.props.models
 
         const mappedModels = models.map(element => {
+            // const { user_likes } = this.props.user.user
+            // const mappedLike = user_likes.map((el) => el.model_id = element.model_id)
             return <Project data={element} key={element.model_id} projectIsLiked={this.projectIsLiked} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={id} user_likes={user_likes} />
         })
 

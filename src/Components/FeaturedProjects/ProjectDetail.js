@@ -11,6 +11,7 @@ import CreateComment from './Comments/CreateComment'
 import DlUrl from './DlUrl'
 import TheMaker from './TheMaker'
 import EditModel from './EditProject/EditModel'
+// import Prototyping from '../Prototyping/Prototyping'
 
 class ProjectDetail extends Component {
 
@@ -276,12 +277,17 @@ class ProjectDetail extends Component {
             return <ProjectPhotos data={element} key={element.model_id} userInfo={userInfo} url={firebase_url} isLoggedIn={isLoggedIn} plsSignIn={this.plsSignIn} />
         })
 
+        // const mappedPrototype = info.map(element => {
+        //     return <Prototyping data={element} key={element.model_id} userInfo={userInfo} url={element.firebase_url01} isLoggedIn={isLoggedIn}  />
+        // })
+
         const mappedUserInfo = userInfo.map(element => {
             return <TheMaker data={element} key={element.user_id} photo_url={element.photo_url} user_name={element.user_name} info={info} />
         })
 
         const mappedThumbNails = modelImages.map((el) => {
-            return <div className='thumbnail-imgae'><img src={el.photo_url}/></div>
+            // return <div className='thumbnail-image'><img src={el.photo_url}/></div>
+            return <div ><img className='thumbnail-image' src={el.photo_url}/></div>
         })
 
         // mappedEditProject = info.map(elenent) 
@@ -296,6 +302,7 @@ class ProjectDetail extends Component {
                     <p className="dark-text"><br/>by {user_name}</p>
                 </div> */}
                 <div className='image-viewer'>
+                    {mappedThumbNails}
                     {/* <h2 style={{color:'#555'}}>element</h2> */}
                     {/* <div className='thumbnail-image'></div> */}
                     {/* <div className='thumbnail-image'></div> */}
@@ -307,6 +314,7 @@ class ProjectDetail extends Component {
                     {/* <div className='thumbnail-image'></div> */}
                 </div>
                 <div className="detail-container">
+                    {/* {mappedPrototype} */}
                     {mappedPhoto}
                     <section className="right">
                         <div className={`detail-box small down-load ${viewFiles ? true : 'detail-box small down-load-selected'}`} onClick={() => this.changeView('viewFiles')}><p className={`down-load-text ${viewFiles ? true : 'down-load-text-selected'}`}><a>Download Files</a></p></div>
@@ -370,7 +378,7 @@ class ProjectDetail extends Component {
                     {viewComments ? <CreateComment user={user} id={id} isLoggedIn={isLoggedIn} model_id={model_id} plsSignIn={this.plsSignIn} getComments={this.getComments} /> : null}
                     {viewComments ? mappedComments : null}
                     {viewFiles ? mappedUrl : null}
-                    {viewEditProject ? <EditModel info={info} getDetails={this.getDetails} /> : null}
+                    {viewEditProject ? <EditModel info={info} model_id={model_id} getDetails={this.getDetails} /> : null}
                     {/* <h3 className="dark-text">{dlUrl}</h3> */}
                     {/* {viewFiles && <p className="dark-text" >{firebase_url}</p>}  */}
                     {/* {viewComments && <Comments comments={this.state.comments}/>} */}

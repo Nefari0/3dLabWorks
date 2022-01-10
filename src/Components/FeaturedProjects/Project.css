@@ -21,7 +21,7 @@
     justify-content: space-around;
 	align-items: stretch;
 	align-content: stretch;
-    z-index: 1100;
+    /* z-index: 1100; */
 }
 
 .small-text {

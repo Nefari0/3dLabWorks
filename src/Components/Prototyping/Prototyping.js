@@ -4,6 +4,7 @@
 // import { loginUser,registerUser } from '../../ducks/userReducer'
 // import { connect } from 'react-redux'
 // import Agreement from '../Register/Agreement'
+import './Prototyping.css'
 
 // const Prototyping = (props) => {
 
@@ -135,3 +136,47 @@
 //     return reduxState
 // }
 // export default connect(mapStateToProps,{registerUser,loginUser})(Prototyping)
+
+{/* ----------------------- experimental -----------------------------------  */}
+ const Prototyping = (props) => {
+
+    const { url } = props
+
+    return (
+
+                // <div class="flip-box">
+                //     <div class="flip-box-inner">
+                //         <div class="flip-box-front">
+                //         {/* <img src="img_paris.jpg" alt="Paris" style="width:300px;height:200px"/> */}
+                //         <img src={url} style={{width:"300px",height:"200px"}}/>
+                //         </div>
+                //         <div class="flip-box-back">
+                //         </div>
+                //     </div>
+                // </div>
+
+                <div className="upload" style={{marginLeft:'600px'}}>
+    <div className="container">
+        <div className="row">
+            <div className="col-md-12">
+                <h1>Would you like to <span style={{color:"lightGreen"}}>Upload</span> or <span style={{color:"orangeRed"}}>Delete</span> a file?</h1>
+                <div style={{position:"relative",height:"275px"}}>
+                    <form action="" method="post" enctype="multipart/form-data" class="formUp">
+
+                        {/* <input type="file" name="fileToUpload[]" id="fileToUpload" accept="image/*" multiple="multiple"><p>Click here to upload images.</p></input> */}
+                <input type="file"  name="fileToUpload[]" id="fileToUpload" accept="image/*" multiple="multiple"/><p>Click here to upload images.</p>
+                        <input type="submit" value="Upload Images" name="submitUpload" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                
+    )
+ }
+
+//  export default Prototyping
+
+{/* ----------------------- experimental -----------------------------------  */}
