@@ -122,6 +122,7 @@ app.get('/api/project/join', projectsController.joinProject)
 app.get('/api/featured/join', projectsController.getFeatured)
 // --- images end points
 app.get('/api/project/photos/get/:model_id',projectImageController.getImages)
+app.post('/api/project/photos/put',projectImageController.putImage)
 // --- likes end points
 app.post('/api/project/getLike', projectsController.getLikeById)
 app.post('/api/projects/like', projectsController.addLike) //Get request / req.body / http://localhost:4004/api/project/like / {"user_id":"12","model_id":"5"}
