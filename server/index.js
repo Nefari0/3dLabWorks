@@ -13,6 +13,7 @@ const userController = require('./controllers/userController')
 const projectsController = require('./controllers/projectsController');
 const deletedDataController = require('./controllers/deletedDataController')
 const projectImageController = require('./controllers/projectImageController')
+const messageController = require('./controllers/messageController')
 // const { projectManagement, auth } = require('firebase-admin');
 const { addProject } = require('./controllers/projectsController');
 const docsController = require('./controllers/docsController')
@@ -144,6 +145,9 @@ app.post('/api/docs/post', docsController.editGeneral)
 app.post('/api/docs/hide', docsController.hideDoc)
 // app.post('/api/about/post', docsController.editAbout)
 app.get('/api/links/get', docsController.getAllLinks)
+
+// contact admin endpoints
+app.get('/api/messages/user/:user_id', messageController.getUserMessages)
 
 
 // // storage access end points //
