@@ -1,0 +1,107 @@
+
+.messages-container {
+    height: 75vh;
+    width: 80vw;
+    background-color: rgb(230, 228, 228);
+    margin: auto;
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: stretch;
+}
+
+.read-message,
+.write-message {
+    position: relative; 
+    height: 150px;
+    width: 300px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+    background-color: white;
+    border-radius: 2%;
+    box-shadow: 2px 2px#d1d1d1;
+    z-index: 0;
+    overflow: scroll;
+}
+
+.read-message {
+    position: relative; 
+    min-height: 300px;
+}
+
+.write-message-input {
+    margin-left: 20px;
+    margin-top: 5px;
+    border: solid 1px #3c598e;
+}
+
+.send-button {
+    background: linear-gradient(0turn,#5077be,#6495ed);
+    height: 25px;
+    width: 40px;
+    border-radius: 2px;
+    font-size: smaller;
+    border:solid 1px #3c598e;
+    margin-top: 10px;
+}
+
+.message-box {
+    min-height: 150px;
+    width: 90%;
+    margin: auto;
+    margin-left: 15px;
+    padding: 0px;
+    border:solid 1px #3c598e;
+    display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: stretch;
+	align-content: stretch;
+    /* background-color: blue; */
+}
+
+.from-name {
+    height: 20px;
+    width: 100%;
+    /* background-color: green; */
+    display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: stretch;
+    margin-left: 10px;
+}
+
+.message-content-container {
+    min-height: 80%;
+    width: 220px;
+    font-size: large;
+    font-weight: 400;
+    overflow: hidden;
+    display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	align-content: stretch;
+    /* background-color: greenyellow; */
+}
+
+/* .name-text, */
+.content-text {
+    color: #555;
+}
+
+.name-text {
+    font-size: small;
+    font-weight: 400;
+    /* position: ; */
+    color: blue;
+}
