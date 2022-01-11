@@ -371,24 +371,19 @@ class ProjectDetail extends Component {
                     </section>
                 
                 </div>
-                {/* {viewFiles ? <Comments link={firebase_url}/> : null} */}
+                    <div className="comment-box">
+                        {viewComments ? <section className='project-selection-title'><h3 className="prodect-selection-h3">Comments</h3></section> : null}
+                        {viewComments ? <CreateComment user={user} id={id} isLoggedIn={isLoggedIn} model_id={model_id} plsSignIn={this.plsSignIn} getComments={this.getComments} /> : null}
+                        {viewComments ? mappedComments : null}
+                        {viewFiles ? <section className='project-selection-title'><h3 className="prodect-selection-h3">Download File</h3></section> : null}
+                        {viewFiles ? mappedUrl : null}
+                        {viewEditProject ? <EditModel info={info} model_id={model_id} user_id={id} getDetails={this.getDetails} /> : null}
+                    </div>
 
-                <div className="comment-box">
-                    {/* {viewComments ? (<div className="post-box"><p className="dark-text">enter your coment here</p></div>) : (null)} */}
-                    {viewComments ? <section className='project-selection-title'><h3 className="prodect-selection-h3">Comments</h3></section> : null}
-                    {viewComments ? <CreateComment user={user} id={id} isLoggedIn={isLoggedIn} model_id={model_id} plsSignIn={this.plsSignIn} getComments={this.getComments} /> : null}
-                    {viewComments ? mappedComments : null}
-                    {viewFiles ? <section className='project-selection-title'><h3 className="prodect-selection-h3">Download File</h3></section> : null}
-                    {viewFiles ? mappedUrl : null}
-                    {viewEditProject ? <EditModel info={info} model_id={model_id} user_id={id} getDetails={this.getDetails} /> : null}
-                    {/* <h3 className="dark-text">{dlUrl}</h3> */}
-                    {/* {viewFiles && <p className="dark-text" >{firebase_url}</p>}  */}
-                    {/* {viewComments && <Comments comments={this.state.comments}/>} */}
-                    {/* {viewComments && <Comments comments={this.state.comments}/>} */}
-                </div>
+
                 
-                {/* <div className="comment-box"><h3 className="dark-text">comments</h3></div> */}
-                {/* <div className="comment-box"></div> */}
+                
+
             </div>
         )
     }
