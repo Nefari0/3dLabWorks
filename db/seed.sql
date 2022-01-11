@@ -136,3 +136,20 @@
 
 -- UPDATE d_document SET content = 'This site is an ongoing project. As of 10/4/2021 it is still under construction. Developers are working towards utilizing in app 3d rendering tools to allow users to upload .stl and .mtl files that will automatically be displayed in the app. Since this is currently not supported, it is recommended that you upload a screenshot of your project along with the file so other users can preview your work before downloading the file' WHERE tag = 'general'
 
+
+-- -------------------- MESSAGING -------------- ---
+-- CREATE TABLE d_user_admin_message (
+--   message_id SERIAL PRIMARY KEY,
+--   user_id INTEGER,
+--   FOREIGN KEY(user_id) REFERENCES d_user(user_id),
+--   text VARCHAR(500),
+--   message_description VARCHAR(100),
+--   date_created timestamp DEFAULT CURRENT_TIMESTAMP
+-- )
+
+-- INSERT INTO d_user_admin_message (user_id,text,message_description)
+-- VALUES (
+--   12,
+--   'this message is for testing',
+--   'check this message out'
+-- )
