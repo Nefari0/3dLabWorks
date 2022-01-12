@@ -17,8 +17,8 @@ export default class CreateComment extends Component {
 
     sendPost() {
         const { text } = this.state
-        const { user_id,model_id,user } = this.props
-        axios.post('/api/comments/create',{user_id,model_id,user,text}).then(this.props.getComments)
+        const { id,model_id,user } = this.props
+        axios.post('/api/comments/create',{id,model_id,user,text}).then(this.props.getComments)
     }
 
     
@@ -33,11 +33,12 @@ export default class CreateComment extends Component {
         const { isLoggedIn } = this.props
  
         return(
-            <div className="content-box post-box" style={{minHeight:'100px'}}>
-                {/* <textarea value={this.state.text} name="text" rows="5" cols="50" wrap="soft" style={{minWidth:'100%',marginBottom:'auto'}} onChange={e => this.handleText('text',e.target.value)} > </textarea> */}
-                <textarea value={this.state.text} name="text" rows="5" cols="50" wrap="soft" className="post-input" onChange={e => this.handleText('text',e.target.value)} > </textarea>
+            <div className="create-post" style={{minHeight:'100px'}}>
 
-                {!isLoggedIn ? <button style={{marginTop:'auto'}} onClick={this.props.plsSignIn} >post</button> : <button style={{marginTop:'auto'}} onClick={this.sendPost} >post</button>}
+                <textarea className='comment-text-input post-input' value={this.state.text} name="text" rows="5" cols="50" wrap="soft" onChange={e => this.handleText('text',e.target.value)} > </textarea>
+
+                {!isLoggedIn ? <div className='add-button file-button' onClick={this.props.plsSignIn} style={{marginLeft:'200px'}} >send</div> : <div className='add-button submit-message-button' onClick={this.sendPost} style={{marginLeft:'200px'}} >send</div>}
+
             </div>
         )
     }
