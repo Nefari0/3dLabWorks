@@ -3,16 +3,14 @@ import './Comments.css'
 
 const Comments = (props) => {
 
-    const { content,date_created,user_name } = props
-    // console.log(props.comments[0])
+    const { content,date_created,user_name,photo_url } = props
 
     return(
-        // <div className="comment-box">
-        <div className="content-box post-box">
-            <div><h5 className='comment-h5 comment-text-dark'>{user_name}</h5></div>
-            {/* <h3 className='dark-text'>text</h3> */}
-        <p className='dark-text comment-text' >{content}</p>
-            
+        <div className="container-flex">
+            <img src={photo_url} className='author-pic'/>
+            <div className='right-column-flex'>
+                <div className='comment-text'><p >{content}</p></div>
+            </div>
         </div>
     )
 }
