@@ -4,14 +4,11 @@ import './Project.css'
 import ProjectPhotos from './ProjectPhotos'
 import Comments from './Comments/Comments'
 import { loginUser, updateUser } from '../../ducks/userReducer'
-
 import { connect } from 'react-redux'
 import CreateComment from './Comments/CreateComment'
-// import logo from './../../assets/logo.png'
 import DlUrl from './DlUrl'
 import TheMaker from './TheMaker'
 import EditModel from './EditProject/EditModel'
-// import Prototyping from '../Prototyping/Prototyping'
 
 class ProjectDetail extends Component {
 
@@ -52,35 +49,15 @@ class ProjectDetail extends Component {
 
         // ---get project comments by model_id --- //
         this.getComments()
-        // if (isLoggedIn === true) {
-        //     const theLike = user_likes.find((el) => el.model_id).model_id === model_id
-            
-        //     this.setState({myLike:theLike})
-        //     console.log('the like',theLike)
-        // }
-
-
     }
 
     componentDidUpdate(prevProps){
         const { model_id } = this.props.match.params
-        // const { user_likes } = this.props.user.user
-        // if (user_likes != undefined){this.seeIfLiked()}
         if (prevProps.match.params.model_id !== model_id) {
             this.getDetails() // original / working function // --- make sure to use this if using getDetails() 
             this.getImages()
         }
-        
-        // if (user_likes != undefined) {
-        //     var theIndex = user_likes.findIndex((el) => el.model_id).model_id
-            // const theLike = user_likes.findIndex((el) => el.model_id === model_id)
-            // if(theLike != undefined) { this.setState({myLike:theLike}) } else { this.setState({ myLike:false })}
-            // if(user_likes[theLike].model_id=== model_id) { this.setState({myLike:true}) } else { this.setState({ myLike:false })}
-            
-            // this.setState({myLike:theLike})
-        //     console.log('user likes',user_likes[theIndex])
-        //     console.log('the like',theIndex)
-        // }
+    
     }
 
     async getImages() {
@@ -92,9 +69,9 @@ class ProjectDetail extends Component {
 
 
     async getDetails(){
-        // console.log('got hit')
+
         const { model_id } = this.props.match.params
-        // const { user_id,isLoggedIn } = this.props.user.user
+
         await (
             axios
             .get(`/api/projects/id/${model_id}`)
@@ -103,14 +80,6 @@ class ProjectDetail extends Component {
                 axios.get(`/api/users/${user_id}`).then((res2) => {
                     const { id } = this.props.user.user
                     const { isLoggedIn } = this.props.user
-                    
-                    // this.setState({
-                    //     maker_id:user_id,
-                    //     model_id:model_id,
-                    //     dlUrl:res.data.firebase_url,
-                    //     info:res.data,
-                    //     userInfo:res2.data
-                    // })
                     axios
                     .get(`/api/project/photos/get/${model_id}`)
                     .then((res3) => {
@@ -128,11 +97,6 @@ class ProjectDetail extends Component {
                         axios.post(`/api/project/getLike`, {id,model_id}).then((res4) => {
                         if(res4.data.user_id != null) {
                         this.setState({
-                    //         maker_id:user_id,
-                    //         model_id:model_id,
-                    //         dlUrl:res.data.firebase_url,
-                    //         info:res.data,
-                    //         userInfo:res2.data,
                             myLike:true
                         })}
                         } )
@@ -157,11 +121,6 @@ class ProjectDetail extends Component {
         })
     }
 
-    // async createComment() {
-    //     const { username,newText } =  
-    //     axios.post('/api/comments/create',{username,newText}).then(this.getComments)
-    // }
-
     resetView() {
         this.setState({
             viewFiles:true,
@@ -171,12 +130,10 @@ class ProjectDetail extends Component {
     }
 
     changeView(params) {
-        // this.resetView()
         switch (params) {
             case 'viewComments':
                 if( this.state.viewComments === false){
                 this.setState({ 
-                    // viewComments : !this.state.viewComments
                     viewComments : true,
                     viewDetails : false,
                     viewFiles : false,
@@ -218,22 +175,6 @@ class ProjectDetail extends Component {
         alert('please sign in')
     }
 
-    // seeIfLiked = () => {
-        // const { user_likes,isLoggedIn } = this.props.user.user
-        // const { model_id,myLike,allLikes } = this.state
-
-        // console.log(user)
-
-        // console.log(user_likes.find((el) => el.model_id === +model_id))
-        // if (user_likes.find((el) => el.model_id === +model_id) != -1 && myLike === false) {this.setState({ myLike:true })}
-        // if (user_likes.findIndex((el) => el.model_id === +model_id) != -1 && myLike === false) {this.setState({ myLike:true })}
-        // const theIndex = allLikes.findIndex((el) => el.model_id === model_id) 
-        // console.log('s liked?',theIndex)
-        // console.log('user likes',user_likes[theIndex])
-
-        // if (theLike === true) { this.setState({myLike:true}) }
-    // }
-
     likeFunc = async () => {
         const { id } = this.props.user.user
         const { model_id } = this.state
@@ -258,63 +199,36 @@ class ProjectDetail extends Component {
         const { info, userInfo, viewComments, viewDetails, viewFiles,dlUrl,viewEditProject,modelImages } = this.state
         const { isLoggedIn } = this.props.user
         const { user,id,photo_url,user_name,user_likes } = this.props.user.user
-        // const isUserLiked = Object.values(user_likes.filter(el => el.model_id === model_id))
-        // const isUserLiked = user_likes.filter(el => el.model_id === model_id)
-        // console.log('is liked',isUserLiked)
-
-        // use this to highlight heart icon if liked
-        
 
         const mappedUrl = info.map(element => {
             return <DlUrl data={element} key={element.model_id} url={element.firebase_url} isLoggedIn={isLoggedIn} plsSignIn={this.plsSignIn} />
         })
         
         const mappedComments = comments.map(element => {
-            return <Comments content={element.text} key={element.comment_id} model_id={element.model_id} date_created={element.date_created} comment_id={element.comment_id} user_id={element.user_id} user_name={element.user_name} />
+            return <Comments content={element.text} key={element.comment_id} model_id={element.model_id} date_created={element.date_created} photo_url={element.photo_url} comment_id={element.comment_id} user_id={element.user_id} user_name={element.user_name} date_created={element.date_created} />
         })
 
         const mappedPhoto = info.map(element => {
             return <ProjectPhotos data={element} key={element.model_id} userInfo={userInfo} url={firebase_url} isLoggedIn={isLoggedIn} plsSignIn={this.plsSignIn} />
         })
 
-        // const mappedPrototype = info.map(element => {
-        //     return <Prototyping data={element} key={element.model_id} userInfo={userInfo} url={element.firebase_url01} isLoggedIn={isLoggedIn}  />
-        // })
-
         const mappedUserInfo = userInfo.map(element => {
             return <TheMaker data={element} key={element.user_id} photo_url={element.photo_url} user_name={element.user_name} info={info} />
         })
 
         const mappedThumbNails = modelImages.map((el) => {
-            // return <div className='thumbnail-image'><img src={el.photo_url}/></div>
             return <div ><img className='thumbnail-image' src={el.photo_url}/></div>
         })
 
-        // mappedEditProject = info.map(elenent) 
-
         return(
             <div className="view">
-                {/* {console.log(user_likes.find((el) => el.model_id === model_id),'model id',model_id)} */}
-                {/* {console.log(user_likes[user_likes.findIndex((el) => el.model_id === model_id)])} */}
+
                 {mappedUserInfo}
-                {/* <div className="detail-box">
-                    <img src={userInfo.photo_url} className="logo-box"/>
-                    <p className="dark-text"><br/>by {user_name}</p>
-                </div> */}
+
                 <div className='image-viewer'>
                     {mappedThumbNails}
-                    {/* <h2 style={{color:'#555'}}>element</h2> */}
-                    {/* <div className='thumbnail-image'></div> */}
-                    {/* <div className='thumbnail-image'></div> */}
-                    {/* <div className='thumbnail-image'></div> */}
-                    {/* <div className='thumbnail-image'></div> */}
-                    {/* <div className='thumbnail-image'></div> */}
-                    {/* <div className='thumbnail-image'></div> */}
-                    {/* <div className='thumbnail-image'></div> */}
-                    {/* <div className='thumbnail-image'></div> */}
                 </div>
                 <div className="detail-container">
-                    {/* {mappedPrototype} */}
                     {mappedPhoto}
                     <section className="right">
                         <div className={`detail-box small down-load ${viewFiles ? true : 'detail-box small down-load-selected'}`} onClick={() => this.changeView('viewFiles')}><p className={`down-load-text ${viewFiles ? true : 'down-load-text-selected'}`}><a>Download Files</a></p></div>
@@ -326,20 +240,14 @@ class ProjectDetail extends Component {
                             <a><svg className="small-icon" style={{margin:'auto',marginLeft:'10px',marginRight:'10px', height:'45px',width:'45px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                             </svg></a>}
-                            <p className="dark-text">Like</p></div>
+                            <p className="dark-text">Like</p>
+                        </div>
 
-                            
-
-                            <div className={`detail-box small ${!viewComments ? true : 'detail-box small selected'}`} onClick={() => this.changeView('viewComments')}><svg className="small-icon" style={{margin:'auto',marginLeft:'10px',marginRight:'10px', height:'45px',width:'45px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+                        <div className={`detail-box small ${!viewComments ? true : 'detail-box small selected'}`} onClick={() => this.changeView('viewComments')}><svg className="small-icon" style={{margin:'auto',marginLeft:'10px',marginRight:'10px', height:'45px',width:'45px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                             </svg>
-
-                            {/* <svg xmlns="http://www.w3.org/2000/svg" className={`details-icon-big ${!viewComments ? true : 'detail-icons-big selected-icon'}`}  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                            </svg> */}
-
                             <p className={`dark-text ${!viewComments ? true : 'light-text'}`}>Comment</p>
-                            </div>
+                        </div>
                         {isLoggedIn === true && this.props.user.user.id === maker_id ? <div className={`detail-box small ${!viewEditProject ? true : 'detail-box small selected'}`} onClick={() => this.changeView('viewEditProject')}>
 
                         <svg className="small-icon" style={{margin:'auto',marginLeft:'12px',marginRight:'10px', height:'46px',width:'46px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -361,11 +269,6 @@ class ProjectDetail extends Component {
                         <svg className="small-icon" style={{margin:'auto',marginLeft:'10px',marginRight:'10px', height:'45px',width:'45px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                             </svg>
-
-                            {/* <svg xmlns="http://www.w3.org/2000/svg" className="details-icon-big" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                            </svg> */}
-
                             <p className="dark-text">Share</p>
                         </div>
                     </section>
@@ -373,17 +276,12 @@ class ProjectDetail extends Component {
                 </div>
                     <div className="comment-box">
                         {viewComments ? <section className='project-selection-title'><h3 className="prodect-selection-h3">Comments</h3></section> : null}
-                        {viewComments ? <CreateComment user={user} id={id} isLoggedIn={isLoggedIn} model_id={model_id} plsSignIn={this.plsSignIn} getComments={this.getComments} /> : null}
+                        {viewComments ? <CreateComment user={user} key={id} id={id} isLoggedIn={isLoggedIn} model_id={model_id} plsSignIn={this.plsSignIn} getComments={this.getComments} /> : null}
                         {viewComments ? mappedComments : null}
                         {viewFiles ? <section className='project-selection-title'><h3 className="prodect-selection-h3">Download File</h3></section> : null}
                         {viewFiles ? mappedUrl : null}
-                        {viewEditProject ? <EditModel info={info} model_id={model_id} user_id={id} getDetails={this.getDetails} /> : null}
+                        {viewEditProject ? <EditModel key={model_id} info={info} model_id={model_id} user_id={id} getDetails={this.getDetails} /> : null}
                     </div>
-
-
-                
-                
-
             </div>
         )
     }
@@ -395,5 +293,3 @@ function mapStateToProps(reduxState){
 }
 
 export default connect(mapStateToProps, { loginUser,updateUser })(ProjectDetail)
-
-// export default ProjectDetail
