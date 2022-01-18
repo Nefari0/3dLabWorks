@@ -4,12 +4,13 @@ import './UserPage.css'
 import axios from 'axios'
 import UserProject from './UserProject'
 import {app} from '../../base'
-import ModelItem from './ModelItems'
+import ModelItems from './ModelItems'
 // import { projectManagement } from 'firebase-admin'
 import { connect } from 'react-redux'
 import { getProjects } from '../../ducks/projectsReducer'
 import AddProject from './AddProject'
 import EditModel from '../FeaturedProjects/EditProject/EditModel'
+import Project from '../FeaturedProjects/Project'
 
 const db = app.firestore()
 
@@ -20,7 +21,8 @@ class Collections extends Component {
 
         this.state = {
             openEditModel:false,
-            items:[],
+            // items:[],
+            data:[],
             fileUrl:null,
             file:null,
             imageFile:null,
@@ -48,6 +50,7 @@ class Collections extends Component {
         this.getFileUrl = this.getFileUrl.bind(this)
         this.handleAddText = this.handleAddText.bind(this)
         this.editProject = this.editProject.bind(this)
+        this.projectIsLiked = this.projectIsLiked.bind(this)
         // this.resizeFile = this.resizeFile.bind(this)
         // this.removeFileFromSpace2 = this.removeFileFromSpace2.bind(this)
         // this.deleteModel = this.deleteModel.bind(this)
@@ -56,7 +59,7 @@ class Collections extends Component {
     componentDidMount(){
         const { id } = this.props.user.user
         axios.get(`/api/projects/${id}`).then(res =>
-            this.setState({ ...this.state,items:res.data})) 
+            this.setState({ ...this.state,data:res.data})) 
         // this.props.getProjects()
             
     }
@@ -308,6 +311,14 @@ class Collections extends Component {
         })
     }
 
+    projectIsLiked(projectId,userLike) {
+        try {
+            return(userLike.filter(el => el.model_id === projectId)[0].model_id === projectId)
+          } catch (error) {
+            console.log('user does not like this project',error);
+          }
+    }
+
     // deleteModel = (params) => {
     //     console.log('this is params from delete model',params)
     //     axios.delete(`/api/project/delete/${params}`)
@@ -315,22 +326,29 @@ class Collections extends Component {
 
     render(){
 
-        const { items,openAddProject,openEditModel,previewImageFile } = this.state
+        const { openAddProject,openEditModel,previewImageFile,data } = this.state
+        const { photo_url,user } = this.props
 
-        const mappedItems = items.map(element => {
-            return <ModelItem key={element.model_id} name={element.name} img={element.firebase_url01} file={element.firebase_url} id={element.model_id} delete={this.deleteModel} removeFileFromSpace={this.removeFileFromSpace} openEdidModel={this.openEditModel} />
+        // const mappedItems = items.map(element => {
+        //     return <ModelItems key={element.model_id} name={element.name} img={element.firebase_url01} file={element.firebase_url} id={element.model_id} delete={this.deleteModel} removeFileFromSpace={this.removeFileFromSpace} openEdidModel={this.openEditModel} />
+        // })
+
+        const mappedProjects = data.map(element => {
+            return <Project key={element.model_id} data={element} name={element.name} img={element.firebase_url01} file={element.firebase_url} id={element.model_id} delete={this.deleteModel} removeFileFromSpace={this.removeFileFromSpace} openEdidModel={this.openEditModel} projectIsLiked={this.projectIsLiked} user_photo_url={photo_url} current_user_name={user.user.user} />
         })
 
         return(
             <div className="collections">
+  
                 
-                <section className="input">
+                {/* <section className="input"> */}
+                {/* <section> */}
 
 
-                    <div className="collections-h2"><h2 >Collections</h2></div>
-                    <div onClick={this.addNewProject}><p>add project?</p></div>
+                    {/* <div className="collections-h2"><h2 >Collections</h2></div> */}
+                    {/* <div onClick={this.addNewProject}><p>add project?</p></div> */}
 
-                    {!openAddProject ? null : <AddProject previewImageFile={previewImageFile} fileHandler={this.fileHandler} fileHandlerRemove={this.fileHandlerRemove} handlePhoto={this.handlePhoto} handleFile={this.handleFile} addNewProject={this.addNewProject} handleAddText={this.handleAddText} />}
+                    {/* {!openAddProject ? null : <AddProject previewImageFile={previewImageFile} fileHandler={this.fileHandler} fileHandlerRemove={this.fileHandlerRemove} handlePhoto={this.handlePhoto} handleFile={this.handleFile} addNewProject={this.addNewProject} handleAddText={this.handleAddText} />} */}
                     {/* ----- moving this section to seperate functional componant */}
                     {/* <p>add photo</p>
                     <input 
@@ -350,11 +368,15 @@ class Collections extends Component {
                     <button onClick={this.fileHandlerRemove}>remove file</button> */}
                     {/* ---------------------------------------------- */}
 
-                </section>
-                <section className="items-view">
-                    {!openEditModel ? mappedItems : <EditModel/>}
+                {/* </section> */}
+                {/* <section className="items-view"> */}
+                {/* <section> */}
+
                     {/* {mappedItems} */}
-                </section>
+                    {mappedProjects}
+
+                    {/* {mappedItems} */}
+                {/* </section> */}
   
             </div>
         )
