@@ -8,7 +8,8 @@ import { updateUser } from '../../ducks/userReducer'
 // import { addLike } from '../../../server/controllers/projectsController'
 
 const Project = (props) => {
-    const { category, img, firebase_url,firebase_url01, name, description, user_name, model_likes, model_id, photo_url, user_id, likes } = props.data
+    // const { category, img, firebase_url,firebase_url01, name, description, user_name, model_likes, model_id, photo_url, user_id, likes } = props.data
+    const { category, img, firebase_url,firebase_url01, name, description, user_name, model_likes, model_id,photo_url, user_id, likes } = props.data
     const { handleClick,isLoggedIn,id,user_likes } = props
     // const { user_likes } = props.user.user
 
@@ -53,6 +54,20 @@ const Project = (props) => {
         if (props.projectIsLiked(model_id,user_likes) === true){ return(true) } else { return(false) } 
     }
 
+    const getPhotoUrl = () => {
+        const { user_photo_url } = props
+        if (photo_url != undefined) {
+            return(photo_url)
+        } else return(user_photo_url)
+    }
+
+    const getUserName = () => {
+        const { current_user_name } = props
+        if (user_name != undefined) {
+            return(user_name)
+        } else return(current_user_name)
+    }
+
     return(
         <div className='project-container'>
             {checkIfLiked()}
@@ -61,11 +76,13 @@ const Project = (props) => {
                 {/* <div className="photo-title-border"><img src={photo_url} className="project-user-photo"/><p className="dark-text-larger">{name}<br/><p className='usr-nm-txt'>by {user_name}</p></p></div> */}
 
 
-                <div className="photo-title-border"><img src={photo_url} className="project-user-photo"/>
+                {/* <div className="photo-title-border"><img src={photo_url} className="project-user-photo"/> */}
+                <div className="photo-title-border"><img src={getPhotoUrl()} className="project-user-photo"/>
                 {/* <p className="dark-text-larger">{name}</p> */}
-                <p className="dark-text">{name}<br/><p className='usr-nm-txt'>by {user_name}</p></p></div>
+                {/* <p className="dark-text">{name}<br/><p className='usr-nm-txt'>by {user_name}</p></p></div> */}
+                <p className="dark-text">{name}<br/><p className='usr-nm-txt'>by {getUserName()}</p></p></div>
 
-                <div className="image-div" ><Link to={`projectdetails/${model_id}`}><img className="img" src={firebase_url01}/></Link></div>
+                <div className="image-div" ><Link to={`projectdetails/${model_id}`}><img className="model-photo" src={firebase_url01}/></Link></div>
             </div>
             <div>
                 <div className="download-container">
