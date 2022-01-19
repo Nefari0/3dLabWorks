@@ -1,0 +1,11 @@
+
+.im-prev-container {
+    /* position: absolute; */
+    position: fixed;
+    top: 200px;
+    height: 150px;
+    width: 150px;
+    /* background-color: red; */
+    z-index: 1000;
+    box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
+}
