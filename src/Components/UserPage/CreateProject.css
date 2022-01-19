@@ -10,7 +10,7 @@
     height: 450px;
     /* width: 350px; */
     width: 300px;
-    padding: 2px;
+    /* padding: 2px; */
     border-radius: 3%;
     background-color: #fff;
     /* background-color: chartreuse; */
@@ -25,6 +25,14 @@
     /* top: 20vh; */
     top: 5vh;
     /* padding: 0px; */
+
+    /* display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-content: center; */
+
     position: absolute;
     z-index:10;
     box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
@@ -37,17 +45,18 @@
     position: absolute;
     text-transform: none;
     top: -1px;
-    height: 60px;
+    height: 80px;
     /* width: 355px; */
     /* width: 300px; */
     width: 100%;
     background: linear-gradient(0turn,#5077be,#6495ed);
-    /* padding-top: 20%; */
+    padding-top: 10%;
     margin: none;
     transition: all 100ms;
 }
 
 .upload-div {
+
     display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -73,9 +82,9 @@
 
 .create-form {
     position: absolute;
-    height: 260px;
+    height: 300px;
     width: 100%;
-    bottom: 15px;
+    bottom: 40px;
     display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -86,27 +95,132 @@
 }
 
 .create-section-title {
-    /* background-color: #6495ed; */
-    border-bottom: solid 1px #6495ed;
-    opacity: .8;
-    height: 24px;
-    /* width: 350px; */
+    height: 20px;
     width: 100%;
-    margin-bottom: 10px;
-    display: flex;
-}
-
-.create-section-title-text {
+    border-top: solid 1px #6495ed;
+    margin-top: 10px;
+    text-align: left;
     margin-left: 5px;
-    margin-bottom: 0px;    
-    /* margin-top: 10px; */
     font-size: x-small;
-    color: #3c598e;
-    text-transform: none;
-    font-weight: 600;
+    font-weight: 600
 }
 
 .create-upload-div {
     height: 100px;
     background-color: blue;
 }
+
+
+/* --------- upload section components --------------- */
+
+.create-project-row {
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	align-items: center;
+	align-content: stretch;
+}
+
+.add-file-button {
+    background: linear-gradient(0turn,#5077be,#6495ed);
+    margin: auto;
+    margin-bottom: 50px;
+    margin-left: 45px;
+    height: 25px;
+    width: 200px;
+    border-radius: 2px;
+    font-size: smaller;
+    border:solid 1px #3c598e;
+    z-index: 0;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+
+}
+
+.add-file-button-text {
+    color: #fff;
+}
+
+.file-add {
+    position: absolute;
+    height: 80px;
+    width: 100%;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: stretch;
+    overflow: none;
+    
+}
+
+.input-file {
+    position: absolute;
+    top: 10px;
+    height: 40px;
+    width: 300px;
+    color: #555;
+    z-index: 10000;
+}
+
+.select-file-1 {
+    opacity: .01;
+    left: 5px;
+    bottom: 5px;
+    width: 150%;
+    height: 27%;
+    z-index: 1;
+}
+
+
+/* --------- add photo ------------- */
+
+.create-input-box {
+    position: relative;
+    height: 90px;
+    width: 100%;
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: flex-start;
+	align-content: center;
+    
+}
+
+.input[type='file']
+{
+    text-indent: -999em;
+    outline: none;
+    position: absolute;
+    left: 20%;
+    opacity: .1;
+    height: 80px;
+    width: 80px;
+    z-index: 10000;
+}
+/* --------------------------------- */
+
+/* -------------- send file ----------- */
+.send-file {
+    background: linear-gradient(0turn,#5077be,#6495ed);
+    height: 25px;
+    width: 60px;
+    border-radius: 2px;
+    font-size: smaller;
+    margin-top: 10px;
+    border:solid 1px #3c598e
+}
+
+.send-file-button {
+    color: #fff;
+}
+/* ------------------------------------- */
