@@ -100,6 +100,7 @@ module.exports = {
              id: user.user_id,
              name: user.first_name,
              photo: user.photo_url,
+             background_url: user.background_url,
              auth: isAuthenticated
          };
         //  console.log('this is req.session',req.session)
