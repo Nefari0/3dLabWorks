@@ -1,34 +1,21 @@
 
 
-.user-page {
-    position: relative;
-    margin: auto;
-    height: 80vh;
-    /* width: 90vw; */
-    min-width: 300px;
-    background-color: rgb(238, 238, 238);
-    display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: center;
-    align-content: center;
 
+.user-page {
+    min-height: 87vh;
+    min-width: 300px;
+    background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url(white-backround1.jpg);
+    background-size: cover; 
+    background-position: center bottom;
+    display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
 }
 
 .menu {
     list-style: none;
-}
-
-.blue-screen-of-death {
-    height: 100vh;
-    width: 100vw;
-    background-color: blue;
-}
-
-.sec-test-container {
-    height: 50vh;
-    width: 50vh;
-    background-color: blue;
 }
 
 .userpage-h3 {
@@ -36,13 +23,9 @@
 }
 
 /* -------column1----------- */
-
 .column1 {
-    margin-top: 20px;
-    /* margin-right: 5vw; */
-    width: 225px;
-    /* width: 30%; */
-    height: 75vh;
+    width: 350px;
+    min-height: 70vh;
     float: left;
     overflow-y:auto;
     display: flex;
@@ -50,16 +33,27 @@
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: flex-start;
-    align-content: stretch;
-    text-align: left;
+}
+
+.name-container {
+    height: 45px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    font-weight: 300;
+    color: #555;
+    text-transform: none;
+}
+
+.background-photo {
+    height: 200px;
+    width: 99%;
 }
 
 .portrait{
-    height: 250px;
+    height: 200px;
     width: 99%;
-    background-color: white;
     color: black;
-    border-radius: 5%;
+    border-radius: 5px;
     display: flex;
 	flex-direction: column;
 	flex-wrap: nowrap;
@@ -67,67 +61,87 @@
 	align-items: center;
 	align-content: center;
     overflow-y: none;
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 25px rgba(0, 0,  0, 0.1);
+    background-color: #fff;
 }
 
-.edit-pic {
-    margin-top: 25px;
+.portrait-row {
+    position: relative;
+    top: -50px;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
 }
 
-.profile-buttons {
-    height:75px;
-    width: 99%;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    border-radius: 5%;
-    color: #555;
-    text-transform: uppercase;
+.profile-photo {
+    position: relative;
+    top: -50px;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border:solid 8px #fff;
+    text-align: center;
 }
 
-.name-container {
-    height: 65px;
-    margin-top: 10px;
-    margin-bottom: 40px;
-    font-weight: 300;
-    color: #555;
+.user-buttons {
+    background: linear-gradient(0turn,#5077be,#6495ed);
+    color: #fff;
+    height: 50px;
+    width: 120px;
+    border-radius: 2px;
+    font-size: smaller;
+    border:solid 1px #3c598e;
+    margin-left: 10px;
+    margin-right: 10px;
 }
+
+.go-to-admin {
+    position: absolute;
+    bottom: -35px;
+    font-size: small;
+    font-weight: 600;
+    color: blue;
+}
+
+
+
 /* -------column2----------- */
 .show-user-small {
     display: none;
 }
 
 .column2 {
-    margin-top: 20px;
-    width: 550px;
-    height: 75vh;
-    float: right;
-    border-radius: 5%;
+    border-radius: 5px;
+    min-height: 70vh;
+    width: 800px;
+    float: left;
+    overflow-y:auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    
 }
 
 .collections {
-    padding-top: 50px;
-    height: 100%;
-    width: 100%;
-    background-color: rgb(248, 244, 244);
+    width: 650px;
+    height: 800px;
     display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: stretch;
-    align-content: center;
+    flex-direction: row;
+	flex-wrap: wrap;
+    justify-content: space-around;
     border-radius: 2%;
     overflow-y:auto;
 }
 
 .input {
-    /* min-height: 10%; */
     height: 40%;
     width: 90%;
-    /* background-color: crimson; */
-    background-color: rgb(248, 244, 244);
     color: #555;
-    margin-top: 100px;
-    margin-bottom: 20px;
 }
 
 .collections-h2 {
@@ -136,15 +150,10 @@
 }
 
 .items-view {
-    margin-top: 40px;
-    min-height: 90%;
-    margin-left: auto;
     width: 90%;
     display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
- 
-    justify-content: center;
 	align-items: baseline;
     align-content: stretch;
     overflow-y:auto;
@@ -152,13 +161,12 @@
 
 /* ----props display info---- */
 .props-display {
-    height: 250px;
+    height: 188;
     width: 200px;
     background-color: #fff;
     color: #555;
-    border-radius: 2%;
-    margin:5px;
-    box-shadow: .1px .1px #888888;
+    margin: 5px;
+    box-shadow: 0 2.5rem 2rem -2rem hsl(200 50% 20% / 40%);
 }
 
 .project-text {
@@ -170,58 +178,17 @@
 }
 
 .model-img {
-    width: 90%;
-    height: 60%;
-    border-radius: 2%;
+    width: 100%;
+    height: 90%;
     filter: brightness(80%);
 }
 
-.user-info {
-
-    height: 100%;
-    width: 100%;
-    background-color: rgb(248, 244, 244);
-    display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: stretch;
-    align-content: center;
-    overflow-y:auto;
-    padding-top: 10%;
-    padding-bottom: 10%;
-    border-radius: 2%;           
-}
 .text-element {
     margin-right: 15px;
     margin-bottom: 5px;
     font-weight: 100;
     text-transform: none;
     font-size: small;
-}
-
-.user-info-h2 {
-    margin-left: 15%;
-    margin-right: 15%;
-    margin-top: 5px;
-    text-align: right;
-    color: #555;
-    background-color: rgb(253, 249, 249);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-    border-radius: 5%;
-}
-
-.user-info-p {
-    text-align: left;
-    margin-left: 15px;
-    margin-top: 5px;
-    font-size: small;
-}
-
-.title-h {
-    text-align: center;
-    font-weight: 300;
-    /* margin-bottom: 100px; */
 }
 
 .title {
@@ -241,20 +208,6 @@
     height: 5vh;
 }
 
-.edit-menu-button {
-    width: 50px;
-    margin: auto;
-    margin-top: 10px;
-    margin-bottom: none;
-    padding: none;
-}
-
-/* .display-user-info {
-    height: inherit;
-    width: inherit;
-    
-} */
-
 .add-project {
     position: absolute;
     height: 300px;
@@ -265,10 +218,6 @@
 	justify-content: flex-start;
 	align-items: stretch;
 	align-content: stretch;
-
-    /* height: 200px; */
-    /* width: 200px; */
-    /* margin: auto; */
     padding: 10px;
     border-radius: 2%;
     background-color: rgb(240, 240, 240);
@@ -277,7 +226,6 @@
     opacity: 100;
     transition: all 150ms;
     z-index: 5;
-    /* background-color: #555; */
 }
 
 .add-project-button {
@@ -299,118 +247,24 @@
 .add-project-photo-section {
     height: 280px;
     width: 280px;
-    /* background-color: blue; */
 }
 
 
 
-@media (max-width: 1025px) {
-    .add-project {
-        position: relative;
-        min-height: 600px;
-        width: 300px;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        justify-content: center;
-        align-items: center;
-        align-content: stretch;
-        overflow: hidden;
+@media (max-width: 1075px) {
+    .column2 {
+        width: 350px;
+        overflow: auto;
     }
 }
 
-@media (max-width: 815px) {
-    .user-info-h2 {
-        font-size: 50%;
-        margin-right: auto;     
-        margin-top: 2px;
-        width: 80%;
-    }
-
-    .user-info-p {
-        margin-left: 5px;
-    }
-
-    .name-container {
-        margin-bottom: 10px;
-        height: 40px;
-        border-bottom: 1px solid #6495ed;
-    }
-
-    .profile-buttons {
-        margin: 1px;
-        height: 40px;
+@media (max-width: 700px) {
+    .column2 {
+        top: 500px;
+        width: 400px;
     }
 
     .column1 {
-        width: 30%;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        margin: 20px;
+        margin-top: 10px;
     }
-
-    .column2 {
-        width: 100%;
-        align-items: center;
-        align-content: center;
-    }
-
-    .user-page {
-        margin: 0%;
-        width: 100vw;
-    }
-
-    .portrait {
-        height: 200px;
-        width: 134px;
-        margin: auto;
-    }
-
-    .items-view {
-        margin-top: 20%;
-        margin-top: 0px;
-        margin-left: auto;
-    }
-
-    .collections-h2 {
-        padding-top: 0px;
-    }
-
-    @media (max-width: 650px) {
-        .user-page {
-            flex-direction: column;
-        }
-
-        .load-box {
-            position: absolute;
-            top: 50%;
-            right: 25%;
-
-        }
-
-        .show-user-small {
-            display: flex;
-            margin-bottom: 50px;
-        }
-
-        .column1 {
-            display: none;
-            /* padding-top: 100px;
-            width: 100vw;
-            height: 200px;
-            padding-bottom: 200px;
-
-            float: none;
-            overflow-y:auto;
-            z-index: 0; */
-        }
-
-        .profile-buttons {
-            margin-right: 100px;
-        }
-
-
-    }
-
 }

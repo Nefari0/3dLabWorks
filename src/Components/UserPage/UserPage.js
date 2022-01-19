@@ -1,5 +1,6 @@
 import axios from 'axios';
 import Home from '../Home/Home'
+// import CreateProject from './CreateProject';
 import { Switch, Route } from 'react-router-dom'
 import Project from '../FeaturedProjects/Project'
 import { Component, lazy } from 'react'
@@ -24,11 +25,12 @@ class UserPage extends Component {
         super(props);
 
         this.state ={
-            items:{},
+            items:[],
             user:{},
             showUserInfo:true,
             showCollections:false,
             showAdminPage:false,
+            showCreateProject:false,
             profilePic:null,
             userName:null,
             isLoading:false
@@ -39,6 +41,7 @@ class UserPage extends Component {
         this.pleaseLogin = this.pleaeLogin.bind(this)
         this.setIsLoading = this.setIsLoading.bind(this)
         this.deleteFromFirebase = this.deleteFromFirebase.bind(this)
+        this.openCreate = this.openCreate.bind(this)
     }
 
     componentDidMount(){
@@ -107,26 +110,24 @@ class UserPage extends Component {
         alert('please log in')
     }
 
+    openCreate() {
+        this.setState({showCreateProject:!this.state.showCreateProject})
+    }
+
     render(){
-        const { showCollections,showUserInfo,items,isLoading } = this.state
+        const { showCollections,showUserInfo,items,isLoading,showCreateProject } = this.state
         const { isLoggedIn } = this.props.user
-        const { photo,auth,name,is_admin } = this.props.user.user
+        const { photo,auth,name,is_admin,background_url } = this.props.user.user
 
-        // const mappedItems = items.map((el,i,all) => {
-        //     return <Collections key={el.model_id} />
-        // })
-
-        // const { first_name } =this.props.user.user.user
     return(
         <div>
-            {/* {!isLoggedIn ? (<div className="blue-screen-of-death">{alert("please log i")}</div>) : ( */}
             {!isLoggedIn ? (<Route path="/" component={Home}/>) : (
-                <div className="user-page">
-            {/* <Loading/> */}
+            <div className="user-page">
             {isLoading ? <Loading/> : null}
-            <div className="column1">
+            <section className="column1">
+                <img src={background_url} className='background-photo' />
                 <div className="portrait">
-                    <img className="model-img  profile-photo" 
+                    <img className="profile-photo" 
                     src={photo}
                     alt="photo"/>
                     {/* <svg className="icon-big" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -134,45 +135,23 @@ class UserPage extends Component {
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg> */}
 
-                    <h2 className="name-container" >{this.props.user.user.name}</h2>
-                    {/* <input
-                    type="file"
-                    accept="image/pne,image/jpeg"
-                    onChange={e => this.handlePhoto(e)}
-                    /> */}
-                    {/* <Loading/> */}
-                </div>
-                <ul className="menu" >
-                    <li><div onClick={() => this.hideView('showUserInfo')} className="profile-buttons">user info</div></li>
-                    <li><div onClick={() => this.hideView('showCollections')} className="profile-buttons">collections</div></li>
-                    <li><div className="profile-buttons">groups</div></li>
-                    <li><div className="profile-buttons">friends</div></li>
-                    {/* {is_admin ? <li><div onClick={() => this.hideView('showCollections')} className="profile-buttons">admin page</div></li> : null} */}
-                    {is_admin ? (<Link to={'/admin'} style={{ textDecoration:'none' }} ><li><div  className="profile-buttons">admin page</div></li></Link>) : null}
-                </ul>
-            </div>
-            <section className="column2">
-            {/* <Loading/> */}
-                <div className="show-user-small">
-                    <div className="portrait">
-                    <img className="model-img profile-photo" 
-                    src={photo}
-                    alt="photo"/>
-                    <h2 className="name-container" >{this.props.user.user.name}</h2>
+                    {/* <h2 className="name-container" >{this.props.user.user.name}</h2> */}
+                    <h2 className="portrait-row" style={{textTransform:'none'}} >{this.props.user.user.user}</h2>
+                    <div className='portrait-row'>
+                        <div className='user-buttons' style={{marginTop:'30px'}} ><p style={{marginTop:'10px'}}>Edit Profile</p></div>
+                        <div className='user-buttons' style={{marginTop:'30px'}} ><p style={{marginTop:'10px'}} onClick={() => this.openCreate()} >Create</p></div>
                     </div>
-                    <ul className="menu" >
-                        <li><div onClick={() => this.hideView('showUserInfo')} className="profile-buttons">user info</div></li>
-                        <li><div onClick={() => this.hideView('showCollections')} className="profile-buttons">collections</div></li>
-                        <li><div className="profile-buttons">groups</div></li>
-                        <li><div className="profile-buttons">friends</div></li>
-                        {/* {is_admin ? (<Link to={'/admin'} ><li><div onClick={() => this.hideView('showCollections')} className="profile-buttons">admin page</div></li></Link>) : null} */}
-                        {is_admin ? (<Link to={'/admin'} style={{ textDecoration:'none' }}><li><div  className="profile-buttons">admin page</div></li></Link>) : null}
-                    </ul>
-                </div>
+ 
+                    <div className='portrait-row' >{is_admin ? (<Link to={'/admin'} style={{ textDecoration:'none' }}><p className='go-to-admin'>admin</p></Link>) : null} </div>
 
-                {showCollections && <Collections username={this.props.user} setIsLoading={this.setIsLoading} />}
-                
+                </div>
                 {showUserInfo && <UserInfo user={this.props.user} setIsLoading={this.setIsLoading} deleteFromFirebase={this.deleteFromFirebase} />}
+
+            </section>
+
+            <section className="column2">
+
+                {<Collections username={this.props.user} setIsLoading={this.setIsLoading} photo_url={photo} openCreate={this.openCreate} showCreateProject={showCreateProject} />}
 
             </section>
         </div>)}
@@ -184,10 +163,6 @@ function mapStateToProps(reduxState){
 }
 
 export default connect(mapStateToProps,{getProjects,updateUser})(UserPage)
-
-// export default UserPage
-
-
 
 
 /*
