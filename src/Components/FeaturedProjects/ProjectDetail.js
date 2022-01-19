@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import { Switch,Route } from 'react-router-dom'
 import axios from 'axios'
 import './Project.css'
 import ProjectPhotos from './ProjectPhotos'
@@ -9,6 +10,8 @@ import CreateComment from './Comments/CreateComment'
 import DlUrl from './DlUrl'
 import TheMaker from './TheMaker'
 import EditModel from './EditProject/EditModel'
+import UserPage from '../UserPage/UserPage'
+import Home from '../Home/Home'
 
 class ProjectDetail extends Component {
 
@@ -30,6 +33,7 @@ class ProjectDetail extends Component {
             myLike:false,
             allLikes:[],
             modelImages:[],
+            isDeleted:false,
         }
         this.changeView = this.changeView.bind(this)
         this.getDetails = this.getDetails.bind(this)
@@ -37,6 +41,7 @@ class ProjectDetail extends Component {
         this.getComments = this.getComments.bind(this)
         this.likeFunc = this.likeFunc.bind(this)
         this.clickLike = this.clickLike.bind(this)
+        this.setIsDeleted = this.setIsDeleted.bind(this)
     }
 
     componentDidMount(){
@@ -193,10 +198,14 @@ class ProjectDetail extends Component {
         }
     }
 
+    setIsDeleted = () => {
+        this.setState({isDeleted:!this.state.isDeleted})
+    }
+
     render() {
         const { comments,model_id,maker_id,myLike } = this.state
         const { firebase_url01,firebase_url,user_id } = this.state.info
-        const { info, userInfo, viewComments, viewDetails, viewFiles,dlUrl,viewEditProject,modelImages } = this.state
+        const { info, userInfo, viewComments, viewDetails, viewFiles,dlUrl,viewEditProject,modelImages,isDeleted } = this.state
         const { isLoggedIn } = this.props.user
         const { user,id,photo_url,user_name,user_likes } = this.props.user.user
 
@@ -221,7 +230,9 @@ class ProjectDetail extends Component {
         })
 
         return(
-            <div className="view">
+            <div>
+            {isDeleted ? (<Route path="/" component={Home}/>) :
+            (<div className="view">
 
                 {mappedUserInfo}
 
@@ -280,12 +291,11 @@ class ProjectDetail extends Component {
                         {viewComments ? mappedComments : null}
                         {viewFiles ? <section className='project-selection-title'><h3 className="prodect-selection-h3">Download File</h3></section> : null}
                         {viewFiles ? mappedUrl : null}
-                        {viewEditProject ? <EditModel key={model_id} info={info} model_id={model_id} user_id={id} getDetails={this.getDetails} /> : null}
+                        {viewEditProject ? <EditModel key={model_id} info={info} model_id={model_id} user_id={id} getDetails={this.getDetails} setIsDeleted={this.setIsDeleted} /> : null}
                     </div>
+            </div>)}
             </div>
-        )
-    }
-
+        )}
 }
 
 function mapStateToProps(reduxState){
