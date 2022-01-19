@@ -1,14 +1,15 @@
 
 import { Component } from 'react'
 import './AdminPage.css'
-import { Link } from 'react-router-dom';
-import { Switch, Route } from 'react-router-dom'
+// import { Link } from 'react-router-dom';
+import { Link, Switch, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { updateUser } from '../../ducks/userReducer';
 import { getProjects } from '../../ducks/projectsReducer';
 import Home from '../Home/Home';
 import axios from 'axios';
 import ShowUser from './ShowUser';
+// import DemoScene from './Three/DemoScene';
 
 class AdminPage extends Component {
 
