@@ -5,12 +5,12 @@ import axios from 'axios'
 import UserProject from './UserProject'
 import {app} from '../../base'
 import ModelItems from './ModelItems'
-// import { projectManagement } from 'firebase-admin'
 import { connect } from 'react-redux'
 import { getProjects } from '../../ducks/projectsReducer'
 import AddProject from './AddProject'
 import EditModel from '../FeaturedProjects/EditProject/EditModel'
 import Project from '../FeaturedProjects/Project'
+import CreateProject from './CreateProject'
 
 const db = app.firestore()
 
@@ -21,12 +21,12 @@ class Collections extends Component {
 
         this.state = {
             openEditModel:false,
-            // items:[],
             data:[],
             fileUrl:null,
             file:null,
             imageFile:null,
             previewImageFile:null,
+            previewModelFile:null,
             imageUrl:null,
             newItem:{},
             props:null,
@@ -34,8 +34,6 @@ class Collections extends Component {
             projectName:'',
             projectDescription:''
         }
-        // this.sendIntoSpace = this.sendIntoSpace.bind(this)
-        // this.sendImageIntoSpace = this.sendImageIntoSpace.bind(this)
         this.setFileUrl = this.setFileUrl.bind(this)
         this.handleFile = this.handleFile.bind(this)
         this.addFile = this.addFile.bind(this)
@@ -49,25 +47,18 @@ class Collections extends Component {
         this.getImUrl = this.getImUrl.bind(this)
         this.getFileUrl = this.getFileUrl.bind(this)
         this.handleAddText = this.handleAddText.bind(this)
-        this.editProject = this.editProject.bind(this)
         this.projectIsLiked = this.projectIsLiked.bind(this)
-        // this.resizeFile = this.resizeFile.bind(this)
-        // this.removeFileFromSpace2 = this.removeFileFromSpace2.bind(this)
-        // this.deleteModel = this.deleteModel.bind(this)
+        this.getProjects = this.getProjects.bind(this)
     }
 
     componentDidMount(){
+        this.getProjects()
+    }
+
+    getProjects = () => {
         const { id } = this.props.user.user
         axios.get(`/api/projects/${id}`).then(res =>
             this.setState({ ...this.state,data:res.data})) 
-        // this.props.getProjects()
-            
-    }
-
-    editProject() {
-        this.setState({
-            openEditModel:!this.state.openEditModel
-        })
     }
 
     handleAddText(prop, val) {
@@ -76,38 +67,39 @@ class Collections extends Component {
         })
       }
 
+    // saves file url to state pending "add to SQL"
     setFileUrl = async (params) => {
-        // const { imageFile } = this.state
-        // console.log("set file function")
         this.setState({ fileUrl:params})
-        // return new Promise(console.log('has been added'))
-        // this.addToDatabase()        
     }
 
+    // saves image url to state pending "add to SQL"
     setImageUrl = async (params) => {
-        // console.log('set image function')
         this.setState({imageUrl:params})
-        // this.addToDatabase()
     }
 
+    // adds actual model file to state pending firebase upload
     addFile(params){
-        this.setState({file:params})
+        this.setState({
+            file:params,
+            previewModelFile:URL.createObjectURL(params)
+        })
     }
 
+    // adds actual image file to state pending firebase upload. creates preview image
     addPhoto(params){
-        // console.log('hit add photo')
         this.setState({
             imageFile:params,
             previewImageFile:URL.createObjectURL(params)
         })
     }
 
+    // async load model file to state callback
     handleFile = async (e) => {
         const file = e.target.files[0];
         this.addFile(await file)
     }
 
-    // ---- resizing photo ---- //
+    // async load image to state callback
     handlePhoto = async (e) => {
         const photo = e.target.files[0]
         this.addPhoto(await photo)
@@ -147,12 +139,6 @@ class Collections extends Component {
         const { file, fileUrl, imageFile, imageUrl } = this.state
         const image = true
         this.sendIntoSpace()
-        // if(imageFile != null){
-        //     this.sendImageIntoSpace(imageFile)
-        // } else {alert('please add a photo')}
-
-        // this.addToDatabase(await fileUrl,imageUrl)
-        
     }
 
     fileHandlerRemove = (params) => {
@@ -163,6 +149,7 @@ class Collections extends Component {
         this.setState({imageFile:null})
     }
 
+    // this loads the model file and image file to firebase, then adds the info to SQL table
     sendIntoSpace = async () => {
         const { file, imageFile, fileUrl, imageUrl, projectDescription, projectName } = this.state
         const { id } = this.props.username.user
@@ -174,12 +161,13 @@ class Collections extends Component {
         const theFile = await this.getFileUrl(file)
         this.setFileUrl(await theFile.getDownloadURL())
         const theImage = await this.getImUrl(imageFile)
-        // await axios.post('api/asset/upload/add',{ imageFile }) // tranfering to backend
         this.setImageUrl(await theImage.getDownloadURL())
         this.addToDatabase(this.state.fileUrl,this.state.imageUrl)
         this.props.setIsLoading()
-
+        this.getProjects()
+        this.props.openCreate()
     }
+    // adds image to firebase
     getImUrl = async (input) => {
         const { user } = this.props.user.user
         const storageRef = app.storage().ref(`${user}/`)
@@ -188,45 +176,20 @@ class Collections extends Component {
         console.log('image loaded')
         return (fileRef)
     }
+    // adds model file to firebase
     getFileUrl = async (input) => {
         const { user } = this.props.user.user
         const storageRef = app.storage().ref(`${user}/`)
         const fileRef = storageRef.child(input.name)
         await fileRef.put(input)
         console.log('file loaded')
-        // const url = await snapshot.storageRef.getDownloadURL()
         return (fileRef)
     }
 
-    // ----- resize image file uploads ----- //
-    // resizeFile = (file) =>
-    //     new Promise((resolve) => {
-    //         Resizer.imageFileResizer(
-    //         file,
-    //         300,
-    //         300,
-    //         "PNG",
-    //         100,
-    //         0,
-    //         (uri) => {
-    //             resolve(uri);
-    //         },
-    //         "base64"
-    //         );
-    //     });
-
-    
-    // -------------------------------------- //
-
+    // deletes file from firebase
     removeFileFromSpace = async (url,id,file) => {
-        // create reference
-        // var storage = db.storage();
-        // var storageRef = storage.ref();
-
-        // delete from firebase
         this.props.setIsLoading()
         if(url != null){
-            // const storageRef = app.storage().refFromURL(url)
             const storageRef = await app.storage().refFromURL(url) // delete image
             await storageRef.delete().then(function deleted(params) {
                 console.log('image deleted')
@@ -235,59 +198,19 @@ class Collections extends Component {
             })
         }
         if(file != null){
-            // const storageRef = app.storage().refFromURL(url)
-            const storageRef2 = await app.storage().refFromURL(file) // delete image
+            const storageRef2 = await app.storage().refFromURL(file) // delete file
             await storageRef2.delete().then(function deleted(params) {
                 console.log('image deleted')
             }).catch(function (error) {
                 console.log('there was an error',error)
             })
         }
-        // delete from heroku db
+        // delete from DB
         await axios.delete(`/api/project/delete/${id}`)
         this.props.setIsLoading()
-
-
-        // const fileRef = storageRef.child(url)
-        // delete file
-
-        // fileRef.delete(url).then(() => {
-        //     console.log('file has been deleted')
-        // }).catch((error) => {
-        //     console.log(error)
-        // })
-
     }
 
-    // removeFileFromSpace2 = async (url) => {
-    //     const photoRef = app.storage.getReferenceFromUrl(url);
-
-    // }
-
-    // sendImageIntoSpace = async (file) => {
-
-        // ----not used in original----
-        // const { id } = this.props.username.user
-        // const name = 'username'
-        // const description = 'stuff'
-        // const firebase_url = 'firebase_url'
-        // const firebase_url01 = this.state.fileUrl
-        // const file = e.target.files[0];
-        // const storageRef = app.storage().ref()
-        // const fileRef = storageRef.child(file.name)
-            // console.log("send to space function")
-        // fileRef.put(file).then(() => {
-            // console.log('uploaded file')
-        // })
-        // this.setFileUrl(await fileRef.getDownloadURL())
-        // console.log('this state fileUrl',this.state.fileUrl)
-        // console.log(fileRef)
-        
-        // axios.post('/api/project/post', {id,name,description,firebase_url,firebase_url}).then(res => {
-        //     this.setState({ ...this.state,newItem:res.data})
-        // })
-    // }
-
+    // adds file to SQL table
     addToDatabase = (fileUrl,imageUrl) => {
         console.log('this is from addToDatabase function')
         const { projectDescription, projectName } = this.state
@@ -305,6 +228,7 @@ class Collections extends Component {
         this.setState({ file:params })
     }
 
+    // opens "add project" window
     addNewProject(params){
         this.setState({
             openAddProject:!this.state.openAddProject
@@ -319,19 +243,10 @@ class Collections extends Component {
           }
     }
 
-    // deleteModel = (params) => {
-    //     console.log('this is params from delete model',params)
-    //     axios.delete(`/api/project/delete/${params}`)
-    // }
-
     render(){
 
-        const { openAddProject,openEditModel,previewImageFile,data } = this.state
-        const { photo_url,user } = this.props
-
-        // const mappedItems = items.map(element => {
-        //     return <ModelItems key={element.model_id} name={element.name} img={element.firebase_url01} file={element.firebase_url} id={element.model_id} delete={this.deleteModel} removeFileFromSpace={this.removeFileFromSpace} openEdidModel={this.openEditModel} />
-        // })
+        const { openAddProject,openEditModel,previewImageFile,previewModelFile,data,file } = this.state
+        const { photo_url,user,showCreateProject } = this.props
 
         const mappedProjects = data.map(element => {
             return <Project key={element.model_id} data={element} name={element.name} img={element.firebase_url01} file={element.firebase_url} id={element.model_id} delete={this.deleteModel} removeFileFromSpace={this.removeFileFromSpace} openEdidModel={this.openEditModel} projectIsLiked={this.projectIsLiked} user_photo_url={photo_url} current_user_name={user.user.user} />
@@ -339,44 +254,9 @@ class Collections extends Component {
 
         return(
             <div className="collections">
-  
-                
-                {/* <section className="input"> */}
-                {/* <section> */}
+                {showCreateProject ? <CreateProject openCreate={this.props.openCreate} handleFile={this.handleFile} handleAddText={this.handleAddText} handlePhoto={this.handlePhoto} previewImageFile={previewImageFile} previewModelFile={previewModelFile} file={file} sendIntoSpace={this.sendIntoSpace} /> : null}
 
-
-                    {/* <div className="collections-h2"><h2 >Collections</h2></div> */}
-                    {/* <div onClick={this.addNewProject}><p>add project?</p></div> */}
-
-                    {/* {!openAddProject ? null : <AddProject previewImageFile={previewImageFile} fileHandler={this.fileHandler} fileHandlerRemove={this.fileHandlerRemove} handlePhoto={this.handlePhoto} handleFile={this.handleFile} addNewProject={this.addNewProject} handleAddText={this.handleAddText} />} */}
-                    {/* ----- moving this section to seperate functional componant */}
-                    {/* <p>add photo</p>
-                    <input 
-                    type="file"
-                    
-                    accept="image/png,image/jpeg"
-                    onChange={e => this.handlePhoto(e)} 
-                    />
-                    <p>add file</p>
-                    <input
-                    type="file"
-                    accept=".stl,.blend"
-                    onChange={e => this.handleFile(e)} 
-                    />
-                    
-                    <button onClick={this.fileHandler}>submit</button>
-                    <button onClick={this.fileHandlerRemove}>remove file</button> */}
-                    {/* ---------------------------------------------- */}
-
-                {/* </section> */}
-                {/* <section className="items-view"> */}
-                {/* <section> */}
-
-                    {/* {mappedItems} */}
-                    {mappedProjects}
-
-                    {/* {mappedItems} */}
-                {/* </section> */}
+                {mappedProjects}
   
             </div>
         )
@@ -388,5 +268,3 @@ function mapStateToProps(reduxState){
 }
 
 export default connect(mapStateToProps, {getProjects})(Collections)
-
-// export default Collections
