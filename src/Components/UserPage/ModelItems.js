@@ -2,58 +2,30 @@ import react from 'react'
 import axios from 'axios'
 import { app } from './../../base'
 import { Link } from 'react-router-dom'
+import './ModelItems.css'
 
 const db = app.firestore()
 
-const ModelItem = (props) => {
+const ModelItems = (props) => {
 
     const { img,id,file } = props
-    // console.log('this is db from ModelItem',db.INTERNAL)
     
     const handleClick = () => {
         const { img,id } = props
         const model_id = props.id
         alert('are you sure you want to delete this file?')
-        // props.delete(model_id)
         props.removeFileFromSpace(img,id,file)
-        
-        // deleteDBFile()
     }
-    
-    // function deleteModel(){
-    //     const { id,img } = props
-    //     deleteDBFile(img)
-    //     axios.delete(`/api/project/delete/${id}`).then(res => {
-    //         console.log('this should be res data',res.data)
-    //     })
-    // } 
-
-    // const deleteModel = () => {
-    //     const { id,img } = props
-    //     deleteDBFile(img)
-    //     axios.delete(`/api/project/delete/${id}`).then(res => {
-    //         console.log('this should be res data',res.data)
-    //     })
-    // } 
-    
-    // const deleteDBFile = async () => {
-    //     const { img } = props
-    //     console.log(img)
-    //     db.INTERNAL.delete(await img).then(() => {
-    //         console.log('file deleted')
-    //     }).catch(('uh oh'))
-    // }
 
     return(
-        <div className="props-display">
-            <p className="title">{props.name}</p>
+        <div className="user-model-flex">
+            <div className='props-display-row'>
+                <p className="title">{props.name}</p>
+                <p onClick={handleClick} style={{marginRight:'10px'}}>X</p>
+            </div>
             <Link to={`projectdetails/${id}`}><img className="model-img" src={props.img}/></Link>
-            <button onClick={handleClick}>delete</button>
-            {/* <button onClick={deleteModel}>delete</button>  */}
-            {/* <button onClick={deleteDBFile}>delete</button> */}
-
         </div>
     )
 }
 
-export default ModelItem
+// export default ModelItems
