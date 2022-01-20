@@ -95,6 +95,7 @@
 }
 
 .create-section-title {
+    opacity: .5;
     height: 20px;
     width: 100%;
     border-top: solid 1px #6495ed;
