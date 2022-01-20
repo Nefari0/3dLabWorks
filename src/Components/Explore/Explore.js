@@ -14,11 +14,15 @@ class Explore extends Component {
             names:[],
             userId:null,
             likes:[],
+            projectSearch:"",
+            openSearchBar:false,
         }
         this.addLike = this.addLike.bind(this)
         this.handleClick = this.handleClick.bind(this)
         this.updateState = this.updateState.bind(this)
         this.projectIsLiked = this.projectIsLiked.bind(this)
+        this.handleText = this.handleText.bind(this)
+        this.openSearch = this.openSearch.bind(this)
     }
 
     componentDidMount(){
@@ -65,20 +69,50 @@ class Explore extends Component {
             console.log('user does not like this project',error);
           }
     }
+
+    handleText = (prop,val) => {
+        this.setState({
+            [prop]:val,
+        })
+    }
+
+    openSearch = () => {
+        this.setState({openSearchBar:!this.state.openSearchBar})
+    }
     
     render(){
-        const { data } = this.state
+        const { data,projectSearch,openSearchBar } = this.state
         const { isLoggedIn } = this.props.user
         const { user_likes,model_likes,id } = this.props.user.user
-    
-        const mappedData = data.map(element => {
+
+        const filterProjects = data.filter(element => element.name.toString().includes(projectSearch))
+
+        const mappedData = filterProjects.map(element => {
             return <Project data={element} key={element.model_id} projectIsLiked={this.projectIsLiked} handleClick={this.handleClick} isLoggedIn={isLoggedIn} likes={element.likes} id={id} user_likes={user_likes} />
         })
+    
+        // const mappedData = data.map(element => {
+        //     return <Project data={element} key={element.model_id} projectIsLiked={this.projectIsLiked} handleClick={this.handleClick} isLoggedIn={isLoggedIn} likes={element.likes} id={id} user_likes={user_likes} />
+        // })
 
         return(
+            // search-menu-closed
+            // dont-show-bar
             <div className="explore-container">
+                {/* className for "about header" is in About.css and App.css */}
+                {/* <div className="about-header-closed project-search" style={{marginLeft:'0px',width:'100%'}}>  */}
+                <div className={`search-menu ${openSearchBar ? true : 'search-menu-closed'}`} >
+
+                    <svg onClick={() => this.openSearch()} style={{width:'25px',opacity:'.5'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <div className={`show-bar ${openSearchBar ? false : 'dont-show-bar'}`}>
+                    <input placeholder="search" type="text" style={{height:'25px',width:'100px',borderRadius:'10px',color:'#fff',marginLeft:'10px'}} onChange={e => this.handleText("projectSearch",e.target.value)} ></input>
+                    </div>
+                </div>
                 {mappedData}
             </div>
+
         )
     }
 }
