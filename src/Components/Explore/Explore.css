@@ -66,17 +66,18 @@ h4 {
 }
 
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #fff;
+    /* color: #fff; */
+    color: #555;
     
     opacity: .5; 
   }
   
   :-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: #fff;
+    /* color: #fff; */
   }
   
   ::-ms-input-placeholder { /* Microsoft Edge */
-    color: #fff;
+    /* color: #fff; */
   }
 
   @media (max-width: 600px) {
