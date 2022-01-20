@@ -44,6 +44,7 @@ class ProjectDetail extends Component {
         this.likeFunc = this.likeFunc.bind(this)
         this.clickLike = this.clickLike.bind(this)
         this.setIsDeleted = this.setIsDeleted.bind(this)
+        this.getImages = this.getImages.bind(this)
     }
 
     componentDidMount(){
@@ -69,6 +70,7 @@ class ProjectDetail extends Component {
 
     async getImages() {
         const { model_id } = this.props.match.params
+        console.log('hit getImages function')
         axios.get(`/api/project/photos/get/${model_id}`).then((res) => {
             this.setState({modelImages:res.data})
         })
@@ -319,7 +321,7 @@ class ProjectDetail extends Component {
                         {viewComments ? mappedComments : null}
                         {viewFiles ? <section className='project-selection-title'><h3 className="prodect-selection-h3">Download File</h3></section> : null}
                         {viewFiles ? mappedUrl : null}
-                        {viewEditProject ? <EditModel key={model_id} info={info} model_id={model_id} user_id={id} getDetails={this.getDetails} setIsDeleted={this.setIsDeleted} /> : null}
+                        {viewEditProject ? <EditModel key={model_id} info={info} model_id={model_id} user_id={id} getDetails={this.getDetails} setIsDeleted={this.setIsDeleted} getImages={this.getImages} /> : null}
                         {viewInfo ? <section className='project-selection-title'><h3 className="prodect-selection-h3">Information</h3></section> : null}
                         {/* {viewInfo ? <section className='doc-container'><p style={{color:'#555'}} >{description}</p></section> : null} */}
                         {viewInfo ? mappedDescription : null}

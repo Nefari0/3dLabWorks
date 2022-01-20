@@ -57,6 +57,7 @@ class Collections extends Component {
 
     getProjects = () => {
         const { id } = this.props.user.user
+        // alert('hit get projects function')
         axios.get(`/api/projects/${id}`).then(res =>
             this.setState({ ...this.state,data:res.data})) 
     }
@@ -162,9 +163,9 @@ class Collections extends Component {
         this.setFileUrl(await theFile.getDownloadURL())
         const theImage = await this.getImUrl(imageFile)
         this.setImageUrl(await theImage.getDownloadURL())
-        this.addToDatabase(this.state.fileUrl,this.state.imageUrl)
+        await this.addToDatabase(this.state.fileUrl,this.state.imageUrl)
+        await this.getProjects()
         this.props.setIsLoading()
-        this.getProjects()
         this.props.openCreate()
     }
     // adds image to firebase
@@ -211,7 +212,7 @@ class Collections extends Component {
     }
 
     // adds file to SQL table
-    addToDatabase = (fileUrl,imageUrl) => {
+    addToDatabase =  async (fileUrl,imageUrl) => {
         console.log('this is from addToDatabase function')
         const { projectDescription, projectName } = this.state
         const { id } = this.props.username.user
@@ -219,9 +220,10 @@ class Collections extends Component {
         const description = projectDescription
         const firebase_url = fileUrl
         const firebase_url01 = imageUrl
-        axios.post('/api/project/post', {id,name,description,firebase_url,firebase_url01}).then(res => {
+        await axios.post('/api/project/post', {id,name,description,firebase_url,firebase_url01}).then(res => {
             return res.status
         })
+        await this.props.getProjects()
     }
 
     handleChange(params){

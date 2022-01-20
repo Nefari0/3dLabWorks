@@ -47,7 +47,7 @@ class EditModel extends Component {
 
 
     async componentDidUpdate(){
-
+        // if ()
     }
 
     // setIsLoading = () => {
@@ -112,6 +112,7 @@ class EditModel extends Component {
             }
         })
         this.setState({previewImageFile:null})
+        await this.props.getImages()
     }
 
     uploadNewFile = () => {
@@ -140,12 +141,13 @@ class EditModel extends Component {
         this.setState({imageUrl:params})
     }
 
-    imageToDb = () => {
+    imageToDb = async () => {
         const { imageUrl } = this.state
         const { model_id } = this.props
         const name = 'random word'
         const photo_url = imageUrl
-        axios.post('/api/project/photos/put',{model_id,name,photo_url})
+        await axios.post('/api/project/photos/put',{model_id,name,photo_url})
+        await this.props.getImages()
     }
 
     executeChange(){
