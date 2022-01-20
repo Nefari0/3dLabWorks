@@ -8,6 +8,7 @@ import { loginUser, updateUser } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
 import CreateComment from './Comments/CreateComment'
 import DlUrl from './DlUrl'
+import Description from './Description'
 import TheMaker from './TheMaker'
 import EditModel from './EditProject/EditModel'
 import UserPage from '../UserPage/UserPage'
@@ -30,6 +31,7 @@ class ProjectDetail extends Component {
             viewComments:false,
             viewDetails:false,
             viewEditProject:false,
+            viewInfo:false,
             myLike:false,
             allLikes:[],
             modelImages:[],
@@ -142,6 +144,7 @@ class ProjectDetail extends Component {
                     viewComments : true,
                     viewDetails : false,
                     viewFiles : false,
+                    viewInfo : false,
                     viewEditProject : false
                 })
                 }
@@ -158,6 +161,7 @@ class ProjectDetail extends Component {
                         viewFiles : true,
                         viewComments : false,
                         viewDetails : false,
+                        viewInfo : false,
                         viewEditProject : false
                     })
                 }
@@ -168,7 +172,19 @@ class ProjectDetail extends Component {
                         viewFiles : false,
                         viewComments :false,
                         viewDetails : false,
+                        viewInfo : false,
                         viewEditProject : true
+                    })
+                }
+                break;
+            case 'viewInfo':
+                if (this.state.viewInfo === false){
+                    this.setState({
+                        viewFiles : false,
+                        viewComments :false,
+                        viewDetails : false,
+                        viewEditProject : false,
+                        viewInfo : true,
                     })
                 }
             default:
@@ -204,10 +220,14 @@ class ProjectDetail extends Component {
 
     render() {
         const { comments,model_id,maker_id,myLike } = this.state
-        const { firebase_url01,firebase_url,user_id } = this.state.info
-        const { info, userInfo, viewComments, viewDetails, viewFiles,dlUrl,viewEditProject,modelImages,isDeleted } = this.state
+        const { firebase_url01,firebase_url,user_id,description } = this.state.info
+        const { info, userInfo, viewComments, viewDetails, viewFiles, viewInfo, dlUrl,viewEditProject,modelImages,isDeleted } = this.state
         const { isLoggedIn } = this.props.user
         const { user,id,photo_url,user_name,user_likes } = this.props.user.user
+
+        const mappedDescription = info.map(el => {
+            return <Description key={el.model_id} description={el.description} />
+        })
 
         const mappedUrl = info.map(element => {
             return <DlUrl data={element} key={element.model_id} url={element.firebase_url} isLoggedIn={isLoggedIn} plsSignIn={this.plsSignIn} />
@@ -228,6 +248,8 @@ class ProjectDetail extends Component {
         const mappedThumbNails = modelImages.map((el) => {
             return <div ><img className='thumbnail-image' src={el.photo_url}/></div>
         })
+
+        console.log('here is the description',description)
 
         return(
             <div>
@@ -275,12 +297,18 @@ class ProjectDetail extends Component {
                             <p className="dark-text">Add To Favorites</p>
                         </div>}
 
-                        <div className="detail-box small">
+                        {/* -----------------------------------------------information about project-------------------------------------------------- */}
 
-                        <svg className="small-icon" style={{margin:'auto',marginLeft:'10px',marginRight:'10px', height:'45px',width:'45px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+                        <div className={`detail-box small ${!viewInfo ? true : 'detail-box small selected'}`} onClick={() => this.changeView('viewInfo')} >
+
+                        <svg className="small-icon" style={{margin:'auto',marginLeft:'12px',marginRight:'10px', height:'46px',width:'46px',opacity:'60%'}}  xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+
+                        {/* <svg className="small-icon" style={{margin:'auto',marginLeft:'10px',marginRight:'10px', height:'45px',width:'45px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                            </svg>
-                            <p className="dark-text">Share</p>
+                        </svg> */}
+                            <p className={`dark-text ${!viewInfo ? true : 'light-text'}`} >Info</p>
                         </div>
                     </section>
                 
@@ -292,6 +320,9 @@ class ProjectDetail extends Component {
                         {viewFiles ? <section className='project-selection-title'><h3 className="prodect-selection-h3">Download File</h3></section> : null}
                         {viewFiles ? mappedUrl : null}
                         {viewEditProject ? <EditModel key={model_id} info={info} model_id={model_id} user_id={id} getDetails={this.getDetails} setIsDeleted={this.setIsDeleted} /> : null}
+                        {viewInfo ? <section className='project-selection-title'><h3 className="prodect-selection-h3">Information</h3></section> : null}
+                        {/* {viewInfo ? <section className='doc-container'><p style={{color:'#555'}} >{description}</p></section> : null} */}
+                        {viewInfo ? mappedDescription : null}
                     </div>
             </div>)}
             </div>
