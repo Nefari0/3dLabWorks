@@ -417,6 +417,10 @@
 
 @media (max-width:680px) {
 
+    .prodect-selection-h3 {
+        font-size: large;
+    }
+
     .project-selection-title {
         width: 100%;
     }
