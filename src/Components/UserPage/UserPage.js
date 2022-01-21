@@ -16,6 +16,7 @@ import SecurityTest from './SecurityTest'
 import MobileLogin from '../MobileLogin/MobileLogin'
 import Loading from '../Loading/Loading';
 import AdminPage from '../AdminPage/AdminPage';
+import EditUserInfo from './EditUserInfo';
 
 const db = app.firestore()
 
@@ -31,9 +32,11 @@ class UserPage extends Component {
             showCollections:false,
             showAdminPage:false,
             showCreateProject:false,
+            showEditUserInto:false,
             profilePic:null,
             userName:null,
-            isLoading:false
+            isLoading:false,
+            setPermission:true,
         }
         this.handleCollections = this.handleCollections.bind(this)
         this.hideView = this.hideView.bind(this)
@@ -49,6 +52,19 @@ class UserPage extends Component {
             this.setState({ ...this.state,items:res.data}))    
     }
 
+    // componentDidUpdate() {
+    //     const { setPermission } = this.state
+    //     if (setPermission === true) {
+    //         this.props.updateUser()
+    //         this.setState({setPermission:false})
+    //     }
+    // }
+
+    // thisUpdateUser() {
+    //     this.props.updateUser()
+
+    // }
+
 
     setIsLoading = () => {
         this.setState({isLoading:!this.state.isLoading})
@@ -57,7 +73,8 @@ class UserPage extends Component {
     resetView(){
         this.setState({
             showCollections:false,
-            showUserInfo:false
+            showUserInfo:false,
+            showEditUserInto:false,
         })
     }
 
@@ -79,6 +96,8 @@ class UserPage extends Component {
             case 'showAdminPage':
                 this.setState({ showAdminPage : !this.state.showAdminPage})
                 break;
+            case 'showEditUserInfo':
+                this.setState({ showEditUserInto : !this.state.showEditUserInto})
             default:
                 break;
         }
@@ -115,7 +134,7 @@ class UserPage extends Component {
     }
 
     render(){
-        const { showCollections,showUserInfo,items,isLoading,showCreateProject } = this.state
+        const { showCollections,showUserInfo,items,isLoading,showCreateProject,showEditUserInto } = this.state
         const { isLoggedIn } = this.props.user
         const { photo,auth,name,is_admin,background_url } = this.props.user.user
 
@@ -123,8 +142,10 @@ class UserPage extends Component {
         <div>
             {!isLoggedIn ? (<Route path="/" component={Home}/>) : (
             <div className="user-page">
+                {/* {showEditUserInto === true ? <EditUserInfo /> : null} */}
             {isLoading ? <Loading/> : null}
             <section className="column1">
+            {/* {showEditUserInto === true ? <EditUserInfo /> : null} */}
                 <img src={background_url} className='background-photo' />
                 <div className="portrait">
                     <img className="profile-photo" 
@@ -138,18 +159,21 @@ class UserPage extends Component {
                     {/* <h2 className="name-container" >{this.props.user.user.name}</h2> */}
                     <h2 className="portrait-row" style={{textTransform:'none'}} >{this.props.user.user.user}</h2>
                     <div className='portrait-row'>
-                        <div className='user-buttons' style={{marginTop:'30px'}} ><p style={{marginTop:'10px'}}>Edit Profile</p></div>
-                        <div className='user-buttons' style={{marginTop:'30px'}} ><p style={{marginTop:'10px'}} onClick={() => this.openCreate()} >Create</p></div>
+                        <div className='user-buttons' style={{marginTop:'30px'}} ><p style={{marginTop:'10px'}} onClick={() => this.hideView('showEditUserInfo')} >Edit Profile</p></div>
+                        <div className='user-buttons' style={{marginTop:'30px'}}  onClick={() => this.openCreate()} ><p style={{marginTop:'10px'}} >Create</p></div>
                     </div>
  
                     <div className='portrait-row' >{is_admin ? (<Link to={'/admin'} style={{ textDecoration:'none' }}><p className='go-to-admin'>admin</p></Link>) : null} </div>
 
                 </div>
-                {showUserInfo && <UserInfo user={this.props.user} setIsLoading={this.setIsLoading} deleteFromFirebase={this.deleteFromFirebase} />}
+                {/* {showUserInfo && <UserInfo user={this.props.user} setIsLoading={this.setIsLoading} deleteFromFirebase={this.deleteFromFirebase} />} */}
+                <UserInfo user={this.props.user} setIsLoading={this.setIsLoading} deleteFromFirebase={this.deleteFromFirebase} />
 
             </section>
 
             <section className="column2">
+
+                {showEditUserInto === true ? <EditUserInfo setIsLoading={this.setIsLoading} hideView={this.hideView} /> : null}
 
                 {<Collections username={this.props.user} setIsLoading={this.setIsLoading} photo_url={photo} openCreate={this.openCreate} showCreateProject={showCreateProject} />}
 
