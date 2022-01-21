@@ -13,13 +13,15 @@ class EditUserInfo extends Component {
         super(props);
 
         this.state = {
+            user_id:null,
             user_name:'',
             email:'',
-            first_name:'',
+            first:'',
             photoUrl:null,  // this is the url pulled from database used to access photo
             staticPhoto:null, //this is the photo in browser pending database entry
             file:null,
-            user:{}
+            user:{},
+            setPermission:true,
 
         }
         this.handlePhotoChange = this.handlePhotoChange.bind(this)
@@ -31,24 +33,60 @@ class EditUserInfo extends Component {
         this.setFileUrl = this.setFileUrl.bind(this)
         this.handleLaunchPic = this.handleLaunchPic.bind(this)
         this.addToDatabase = this.addToDatabase.bind(this)
-        this.handleFirstName = this.handleFile.bind(this)
-        this.handleLastName = this.handleLastName.bind(this)
-        this.handleEmail = this.handleEmail.bind(this)
+        // this.handleFirstName = this.handleFile.bind(this)
+        // this.handleLastName = this.handleLastName.bind(this)
+        // this.handleEmail = this.handleEmail.bind(this)
         this.setPhotoUrl = this.setPhotoUrl.bind(this)
         this.getPhotoUrl = this.getPhotoUrl.bind(this)
-
+        this.userInfoFromProps = this.userInfoFromProps.bind(this)
+        // this.handleTextInput = this.handleTextInput.bind(this)
 
         // temp functions for testing//
         this.handleInfoClick = this.handleInfoClick.bind(this)
         this.giveMeInfo = this.giveMeInfo.bind(this)
-        this.addToDeleted = this.addToDeleted.bind(this)
+        // this.addToDeleted = this.addToDeleted.bind(this)
     }
 
     componentDidMount(){
-        const { user } = this.props.user
-        this.setState({user:user})
+        // const { email,photo,user,background_url,name,id } = this.props.user.user
+        // this.setState({
+        //     first:name,
+        //     user_name:user,
+        //     photoUrl:photo,
+        //     background_url:background_url,
+        //     email:email,
+        //     user_id:id
+        // })
+
+        this.userInfoFromProps()
+
     }
 
+    componentDidUpdate() {
+        const  { setPermission } = this.state
+        if (setPermission === true) {
+            this.props.updateUser()
+            this.userInfoFromProps()
+            this.setState({
+                setPermission:false
+            })
+        }
+    }
+
+    userInfoFromProps = () => {
+        const { email,photo,user,background_url,name,id } = this.props.user.user
+        // const { user, } = this.props
+        this.setState({
+            first:name,
+            user_name:user,
+            photoUrl:photo,
+            background_url:background_url,
+            email:email,
+            user_id:id
+        })
+    }
+
+    // adds file to firebase. sends all info to db callback function
     launchPic = async (file) => {
         const { staticPhoto,photoUrl } = this.state
         // const { photo } = this.state.user
@@ -109,7 +147,7 @@ class EditUserInfo extends Component {
         if ( staticPhoto != null){this.launchPic(staticPhoto)} else {alert('please add photo')}
 
         if ( photo != null ) {
-            this.addToDeleted(photo,id)
+            // this.addToDeleted(photo,id)
             this.deleteFromFirebase(photo)
         } // adds current photo to db that tracks deleted items in firebase
         // adds/updates firstname
@@ -118,10 +156,10 @@ class EditUserInfo extends Component {
         
     }
 
-    addToDeleted(photo,id){
-        const info = 'this is a profile picture that has been deleted'
-        axios.post(`/api/firedata/`,{ id,photo,info })
-    }
+    // addToDeleted(photo,id){
+    //     const info = 'this is a profile picture that has been deleted'
+    //     axios.post(`/api/firedata/`,{ id,photo,info })
+    // }
 
     setFileUrl(pURL){
         const { id } = this.state.user
@@ -129,16 +167,28 @@ class EditUserInfo extends Component {
         this.addToDatabase()
     }
 
-    addToDatabase(newPhoto){
+    async addToDatabase(newPhoto){
         // const { auth,email,id,name,user } = this.props.user.user
         // const { photoUrl } = this.state
+        const {
+            first:name,
+            user_name:user,
+            photoUrl:photo,
+            background_url:background_url,
+            email:email,
+            user_id
+        } = this.state
+
         const photo_url = newPhoto
-        const { id } = this.state.user
-        const user_id = id
+        // const { id } = this.state.user
+        // const user_id = id
         // const photo_url = photoUrl
         console.log('this is from addToDatabase',user_id,newPhoto)
-        axios.post(`/api/users/update/${user_id}`,{ photo_url })
-        this.props.updateUser(user_id)
+        // axios.post(`/api/users/update/${user_id}`,{ photo_url })
+        axios.post(`/api/users/update/${user_id}`,{ photo_url,email })
+        // this.props.updateUser(user_id)
+        await this.props.updateUser()
+        await this.userInfoFromProps()
         
     }
 
@@ -172,21 +222,27 @@ class EditUserInfo extends Component {
     }
 
     // ---- edit names and email address ---- //
-    handleFirstName(val){
-        this.setState({first_name : val})
-    }
+    // handleFirstName(val){
+    //     this.setState({first_name : val})
+    // }
 
-    handleLastName(val){
-        this.setState({last_name : val})
-    }
+    // handleLastName(val){
+    //     this.setState({last_name : val})
+    // }
 
-    handleEmail(val){
-        this.setState({email : val})
-    }
+    // handleEmail(val){
+    //     this.setState({email : val})
+    // }
 
-    handUserName(val){
-        // this.setState({usae})
-    }
+    // handUserName(val){
+    //     this.setState({usae})
+    // }
+
+    // handleTextInput = (props,val) => {
+    //     this.setState({
+    //         [props]:val
+    //     })
+    // }
 
 
     // ---temp functions for testing--//
@@ -239,7 +295,7 @@ class EditUserInfo extends Component {
                         </div>
 
                         {/* <li className="user-photo"><img className="photo-properties" src={photo}/><button className="li-button">delete picture</button></li> */}
-                        <div className=""><button onClick={this.launchPic} className="li-button">submit</button><button className="li-button" onClick={this.props.edit}>cancel</button></div>
+                        <div className=""><button onClick={this.launchPic} className="li-button">submit</button><button className="li-button" onClick={() => this.props.hideView('showEditUserInfo')} >cancel</button></div>
                     </div>
                 </section>
             </div>
