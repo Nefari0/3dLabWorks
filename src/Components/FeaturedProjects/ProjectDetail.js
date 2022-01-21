@@ -36,6 +36,7 @@ class ProjectDetail extends Component {
             allLikes:[],
             modelImages:[],
             isDeleted:false,
+            selectedPhoto:null,
         }
         this.changeView = this.changeView.bind(this)
         this.getDetails = this.getDetails.bind(this)
@@ -45,6 +46,7 @@ class ProjectDetail extends Component {
         this.clickLike = this.clickLike.bind(this)
         this.setIsDeleted = this.setIsDeleted.bind(this)
         this.getImages = this.getImages.bind(this)
+        this.highLightedPhoto = this.highLightedPhoto.bind(this)
     }
 
     componentDidMount(){
@@ -99,7 +101,8 @@ class ProjectDetail extends Component {
                             dlUrl:res.data.firebase_url,
                             info:res.data,
                             userInfo:res2.data,
-                            modelImages:res3.data
+                            modelImages:res3.data,
+                            selectedPhoto:res.data[0].firebase_url01,
                         })
                     })
                     if(isLoggedIn === true) {
@@ -220,10 +223,16 @@ class ProjectDetail extends Component {
         this.setState({isDeleted:!this.state.isDeleted})
     }
 
+    highLightedPhoto = (url) => {
+        this.setState({
+            selectedPhoto:url
+        })
+    }
+
     render() {
         const { comments,model_id,maker_id,myLike } = this.state
         const { firebase_url01,firebase_url,user_id,description } = this.state.info
-        const { info, userInfo, viewComments, viewDetails, viewFiles, viewInfo, dlUrl,viewEditProject,modelImages,isDeleted } = this.state
+        const { info, userInfo, viewComments, viewDetails, viewFiles, viewInfo, dlUrl,viewEditProject,modelImages,isDeleted,selectedPhoto } = this.state
         const { isLoggedIn } = this.props.user
         const { user,id,photo_url,user_name,user_likes } = this.props.user.user
 
@@ -240,7 +249,7 @@ class ProjectDetail extends Component {
         })
 
         const mappedPhoto = info.map(element => {
-            return <ProjectPhotos data={element} key={element.model_id} userInfo={userInfo} url={firebase_url} isLoggedIn={isLoggedIn} plsSignIn={this.plsSignIn} />
+            return <ProjectPhotos data={element} key={element.model_id} userInfo={userInfo} url={selectedPhoto} isLoggedIn={isLoggedIn} plsSignIn={this.plsSignIn} />
         })
 
         const mappedUserInfo = userInfo.map(element => {
@@ -248,10 +257,10 @@ class ProjectDetail extends Component {
         })
 
         const mappedThumbNails = modelImages.map((el) => {
-            return <div ><img className='thumbnail-image' src={el.photo_url}/></div>
+            return <div onClick={() => this.highLightedPhoto(el.photo_url)} ><img className='thumbnail-image' src={el.photo_url} highLightedPhoto={this.highLightedPhoto} /></div>
         })
 
-        console.log('here is the description',description)
+        // console.log('here is the description',description)
 
         return(
             <div>
