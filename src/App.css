@@ -144,5 +144,9 @@ align-content: stretch;
   }
 } */
 
-/* @media (max-width:) */
+@media (max-width: 700px) {
+  .doc-containers {
+    width: 300px;
+  }
+}
 
