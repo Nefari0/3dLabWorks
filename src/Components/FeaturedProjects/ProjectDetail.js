@@ -260,16 +260,21 @@ class ProjectDetail extends Component {
             return <div onClick={() => this.highLightedPhoto(el.photo_url)} ><img className='thumbnail-image' src={el.photo_url} highLightedPhoto={this.highLightedPhoto} /></div>
         })
 
+        const mappedMainPhoto = info.map(el => {
+            return <div onClick={() => this.highLightedPhoto(el.firebase_url01)} ><img className='thumbnail-image' src={el.firebase_url01} highLightedPhoto={this.highLightedPhoto} /></div>
+        })
+
         // console.log('here is the description',description)
 
         return(
             <div>
             {isDeleted ? (<Route path="/" component={Home}/>) :
             (<div className="view">
-
+                
                 {mappedUserInfo}
 
                 <div className='image-viewer'>
+                    {mappedMainPhoto}
                     {mappedThumbNails}
                 </div>
                 <div className="detail-container">
