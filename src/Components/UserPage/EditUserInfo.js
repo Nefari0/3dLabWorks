@@ -171,7 +171,7 @@ class EditUserInfo extends Component {
         // const { auth,email,id,name,user } = this.props.user.user
         // const { photoUrl } = this.state
         const {
-            first:name,
+            first:first_name,
             user_name:user,
             photoUrl:photo,
             background_url:background_url,
@@ -185,7 +185,7 @@ class EditUserInfo extends Component {
         // const photo_url = photoUrl
         console.log('this is from addToDatabase',user_id,newPhoto)
         // axios.post(`/api/users/update/${user_id}`,{ photo_url })
-        axios.post(`/api/users/update/${user_id}`,{ photo_url,email })
+        axios.post(`/api/users/update/${user_id}`,{ photo_url,email,user,first_name })
         // this.props.updateUser(user_id)
         await this.props.updateUser()
         await this.userInfoFromProps()
