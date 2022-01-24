@@ -10,6 +10,7 @@ import Home from '../Home/Home';
 import axios from 'axios';
 import ShowUser from './ShowUser';
 // import DemoScene from './Three/DemoScene';
+// import ViewUserV2 from './ViewUserV2';
 
 class AdminPage extends Component {
 
@@ -150,6 +151,7 @@ class AdminPage extends Component {
                     <li className="add-doc-div-closed"><a>memo</a></li>
                     </ul>
                     <Link to={'/user'} ><a >mypage</a></Link>
+{/* <ViewUserV2 /> */}
                     </div>
                 )}
             </div>
