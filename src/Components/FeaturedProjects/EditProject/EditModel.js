@@ -58,6 +58,7 @@ class EditModel extends Component {
 
     removeFileFromSpace = async () => {
         const { firebase_url,model_id,firebase_url01 } = this.props.info[0] 
+        const { modelImages } = this.state
         console.log('remove',firebase_url)
         this.setIsLoading()
         if(firebase_url01 != null){
@@ -78,11 +79,25 @@ class EditModel extends Component {
                 console.log('there was an error',error)
             })
         }
+        // delete associated images
+        // modelImages.forEach(el => {
+        //     await this.deleteImages(url)
+        // })
         // delete from DB
         console.log('got to db delete',model_id)
         await axios.delete(`/api/project/delete/${model_id}`)
         this.setIsLoading()
         this.props.setIsDeleted()
+    }
+    // delete images
+    deleteImages = async (url) => {
+        const storageRef = await app.storage().refFromURL(url)
+        await storageRef.delete().then(function deleted(params) {
+            console.log('images delete').catch(function (error) {
+                console.log('there was an error',error)
+            })
+        })
+        return
     }
 
     fileHandler = async (e,preview,photo_url) => {

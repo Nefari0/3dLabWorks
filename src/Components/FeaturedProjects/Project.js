@@ -76,8 +76,13 @@ const Project = (props) => {
                 {/* <div className="photo-title-border"><img src={photo_url} className="project-user-photo"/><p className="dark-text-larger">{name}<br/><p className='usr-nm-txt'>by {user_name}</p></p></div> */}
 
 
-                {/* <div className="photo-title-border"><img src={photo_url} className="project-user-photo"/> */}
-                <div className="photo-title-border"><img src={getPhotoUrl()} className="project-user-photo"/>
+                <div className="photo-title-border"><img src={photo_url} className="project-user-photo"/>
+
+                {/* --------------- */}
+                {/* <div className="photo-title-border"><Link to={`viewuser/${user_id}`} ><img src={getPhotoUrl()} className="project-user-photo"/></Link> */}
+                {/* <div className="photo-title-border"><Link to={`viewuser/${user_id}`} ><img src={getPhotoUrl()} className="project-user-photo"/></Link> */}
+                {/* ------------- */}
+                
                 {/* <p className="dark-text-larger">{name}</p> */}
                 {/* <p className="dark-text">{name}<br/><p className='usr-nm-txt'>by {user_name}</p></p></div> */}
                 <p className="dark-text">{name}<br/><p className='usr-nm-txt'>by {getUserName()}</p></p></div>
