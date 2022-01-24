@@ -13,6 +13,8 @@ import SecurityTest from './Components/UserPage/SecurityTest'
 import Agreement from './Components/Register/Agreement'
 import AdminPage from './Components/AdminPage/AdminPage'
 import Messages from './Components/Messages/Messages'
+import ViewUser from './Components/ViewUser/ViewUser'
+// import ViewUserV2 from './Components/AdminPage/ViewUserV2'
 
 
 export default (
@@ -20,6 +22,8 @@ export default (
         <Route exact path="/" component={Home} />
         {/* <Route exact path="/" component={Header} /> */}
         {/* <Route path="/home" component={Home} /> */}
+        {/* <Route path="/viewuser/:user_id" component={ViewUser} /> */}
+        <Route path="/viewuser/:user_id" component={ViewUser} />
         <Route path="/explore" component={Explore} />
         <Route path="/group" component={GroupPage} />
         <Route path="/user" component={UserPage} />
