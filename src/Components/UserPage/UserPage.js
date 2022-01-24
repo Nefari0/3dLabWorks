@@ -178,7 +178,8 @@ class UserPage extends Component {
                 {<Collections username={this.props.user} setIsLoading={this.setIsLoading} photo_url={photo} openCreate={this.openCreate} showCreateProject={showCreateProject} />}
 
             </section>
-        </div>)}
+        </div>
+        )}
         </div>
         )}
 }
