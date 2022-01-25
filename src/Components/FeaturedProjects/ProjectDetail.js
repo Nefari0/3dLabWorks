@@ -249,7 +249,7 @@ class ProjectDetail extends Component {
         })
 
         const mappedPhoto = info.map(element => {
-            return <ProjectPhotos data={element} key={element.model_id} userInfo={userInfo} url={selectedPhoto} isLoggedIn={isLoggedIn} plsSignIn={this.plsSignIn} />
+            return <ProjectPhotos data={element} key={element.model_id} userInfo={userInfo} url={selectedPhoto} isLoggedIn={isLoggedIn} id={id} maker_id={maker_id} plsSignIn={this.plsSignIn} />
         })
 
         const mappedUserInfo = userInfo.map(element => {
