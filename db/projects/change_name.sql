@@ -1,3 +1,3 @@
 UPDATE models
-SET name = $1 WHERE model_id = $2
+SET name = $1, description = $2 WHERE model_id = $3
 RETURNING *;
