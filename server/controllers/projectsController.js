@@ -30,6 +30,15 @@ module.exports = {
         return res.status(200).send(newProject)
     },
 
+    updateFile: async (req,res) => {
+        const { url, model_id } = req.body
+        const firebase_url = url
+        console.log('hit update file controller',firebase_url)
+        const db = req.app.get('db')
+        const newFile = await db.projects.update_project_file([firebase_url,model_id])
+        return res.status(200).send(newFile)
+    },
+
     deleteProject: async (req,res) => {
         const { model_id } = req.params
         const db = req.app.get('db')
@@ -126,8 +135,8 @@ module.exports = {
     },
 
     editProjectName: async (req,res) => {
-        const { model_id, name } = req.body
-        const model = await req.app.get('db').projects.change_name([name,model_id])
+        const { model_id, name, description } = req.body
+        const model = await req.app.get('db').projects.change_name([name,description,model_id])
         return res.status(200).send(model)
     },
 }
