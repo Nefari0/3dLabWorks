@@ -43,18 +43,11 @@ class EditModel extends Component {
         this.passNewPhotoToFB = this.passNewPhotoToFB.bind(this)
         this.removeFileFromSpace = this.removeFileFromSpace.bind(this)
         this.confirmDelete = this.confirmDelete.bind(this)
+        this.newModelToDB = this.newModelToDB.bind(this)
+        this.replaceModelFile = this.replaceModelFile.bind(this)
+        this.getNewFileUrl = this.getNewFileUrl.bind(this)
+        this.createNewModel = this.createNewModel.bind(this)
     }
-
-
-    async componentDidUpdate(){
-        // if ()
-    }
-
-    // setIsLoading = () => {
-    //     this.setState({
-    //         isLoading:!this.state.isLoading
-    //     })
-    // }
 
     removeFileFromSpace = async () => {
         const { firebase_url,model_id,firebase_url01 } = this.props.info[0] 
@@ -100,6 +93,48 @@ class EditModel extends Component {
         return
     }
 
+    replaceModelFile = async () => {
+        const { photo_url } = this.state
+        const { model_id,firebase_url } = this.props.info[0]
+        const { user_id } = this.props
+        
+        // remove current file
+        const storageRef = await app.storage().refFromURL(firebase_url) // delete image
+        await storageRef.delete().then(function deleted(params) {
+            console.log('image deleted')
+        }).catch(function (error) {
+            console.log('there was an error',error)
+        })
+        // add new file
+        this.setIsLoading()
+        const newModel = await this.createNewModel(photo_url)
+        // get url
+        this.setImageUrl(await newModel.getDownloadURL())
+        // url to DB
+        await this.newModelToDB(model_id,this.state.imageUrl)
+        this.setIsLoading()
+    }
+
+    createNewModel = async (input) => {
+        const { user_id,user_name } = this.props
+        const storageRef = app.storage().ref(`${user_name}/`)
+        const fileRef = storageRef.child(input.name)
+        await fileRef.put(input)
+        console.log('image loaded')
+        return (fileRef)
+    }
+
+    getNewFileUrl =  async (photo_url) => {
+        this.setIsLoading()
+        const thePhoto = await this.getImUrl(photo_url)
+        this.setImageUrl(await thePhoto.getDownloadURL())
+        console.log('file uploaded')
+        this.setIsLoading()
+    }
+    newModelToDB = (model_id,url) => {
+        axios.post('/api/project/update/file', {url,model_id})
+    }
+
     fileHandler = async (e,preview,photo_url) => {
         const file = e.target.files[0]
         this.setState({
@@ -130,10 +165,6 @@ class EditModel extends Component {
         await this.props.getImages()
     }
 
-    uploadNewFile = () => {
-        alert('this action will permanently remove current file. continue?')
-    }
-
     addPhoto =  async (photo_url) => {
         this.setIsLoading()
         const thePhoto = await this.getImUrl(photo_url)
@@ -146,7 +177,7 @@ class EditModel extends Component {
         const { user_id } = this.props
         const { imageUrl } = this.state
         if (input === null) {return imageUrl}
-        const storageRef = app.storage().ref(`photos/${user_id}/`)
+        const storageRef = app.storage().ref(`madmodels/files/${user_id}/`)
         const fileRef = storageRef.child(input.name)
         await fileRef.put(input)
         console.log('image loaded')
@@ -169,7 +200,7 @@ class EditModel extends Component {
         const { model_id } = this.props.info[0]
         const { name, description } = this.state
         
-        axios.post('/api/project/edit/name', {name,model_id})
+        axios.post('/api/project/edit/name', {name,description,model_id})
         this.props.getDetails()
     }
 
@@ -177,33 +208,21 @@ class EditModel extends Component {
         this.setState({openDeleteConfirm:!this.state.openDeleteConfirm})
     }
 
-    // setIsDeleted = () => {
-    //     this.setState({isDeleted:!this.state.isDeleted})
-    // }
-
     render() {
         const { description,firebase_url,firebase_url01,firebase_url02,model_id,name,user_id} = this.props.info
-        const { previewImageFile,previewImageFile2,previewImageFile3,previewImageFile4,isLoading,openDeleteConfirm,isDeleted } = this.state
+        const { previewImageFile,previewImageFile2,previewImageFile3,previewImageFile4,isLoading,openDeleteConfirm,isDeleted,imageUr1,newModel,photo_url } = this.state
         return(            
             <div className="edit-project-container" >
                 
                 {isLoading ? <Loading/> : null}
                 <section className='project-selection-title'><h3 className="prodect-selection-h3">{openDeleteConfirm ? "Delete this Project?" : "Edit Project"}</h3>{!openDeleteConfirm ? <p className="delete-project-button" onClick={() => this.confirmDelete()} >X</p>:<div onClick={() => this.confirmDelete()} className='select-delete'><p className='delete-button-txt' onClick={() => this.removeFileFromSpace()} >yes</p><p className='delete-button-txt'>no</p></div>}</section>
-                {/* <Notice /> */}
                 {/* --- adding a file ----- */}
                 <div className='section-title'><p style={{color:'#555'}}>Add Image / Update File</p></div>
                 {previewImageFile ? <ImagePreview previewImageFile={previewImageFile} passNewPhotoToFB={this.passNewPhotoToFB} /> : null}
+                {photo_url ? <div style={{height:'100px',width:'100px',backgroundColor:'red'}} onClick={() => this.replaceModelFile()} ><h4 style={{color:'#fff'}} >replace this file?</h4></div> : null}
                 <section className='edit-project-row row-x' style={{height:'30px',color:'#555'}} >
-                        {/* <input
-                        type="file"
-                        accept="image/png,image/jpeg"
-                        onChange={e => this.fileHandler(e)} 
-                        />
-                <div className='add-button file-button' onClick={() => this.uploadNewFile()}>Submit</div> */}
 
                     <div className='edit-file-input-box '>
-                        {/* <img style={{width:'50px',height:'50px',borderRadius:'10px',marginLeft:'10px',marginBottom:'0px'}} src={previewImageFile} /> */}
-                        {/* <div className='add-file-button add-file-button-text' >{this.getFileName()}</div> */}
                         <div className='edit-file-button ' ><p>Image</p></div>
 
                         {/* <input className='input-file edit-select-file' */}
@@ -216,39 +235,16 @@ class EditModel extends Component {
                     </div>
 
                     <div className='edit-photo-input-box '>
-                        {/* <img style={{width:'50px',height:'50px',borderRadius:'10px',marginLeft:'10px',marginBottom:'0px'}} src={previewImageFile} /> */}
-                        {/* <div className='add-file-button add-file-button-text' >{this.getFileName()}</div> */}
                         <div className='edit-file-button' ><p>New File</p></div>
-
                         <input className='fake-input-file'
                         style={{marginLeft:'40px'}}
                         type="file"
                         accept=".blend,.stl"
-                        // onChange={e => this.props.handleFile(e)} 
+                        onChange={e => this.fileHandler(e,null,'photo_url')} 
                         />
                     </div>
 
                 </section>
-                {/* ---------------------- */}
-
-                {/* --- adding additional photos ----- */}
-                {/* <section className='edit-project-row pic-title'>
-                    <div className='section-title'><p style={{color:'#555'}}>Add Photo</p></div>
-                    <div className='pic-add'>
-                    <div className='photo-input-box '>
-                        <img style={{width:'50px',height:'50px',borderRadius:'10px',marginLeft:'10px',marginBottom:'0px'}} src={previewImageFile} />
-                        <input className='input select-photo-1'
-                        style={{marginLeft:'40px'}}
-                        type="file"
-                        accept="image/png,image/jpeg"
-                        onChange={e => this.fileHandler(e,'previewImageFile','photo_url')} 
-                        />
-                    </div>
-
-                    <div className='add-button file-button' style={{marginTop:'30px'}} onClick={() => this.passNewPhotoToFB()}>Submit</div>
-                    </div>
-                </section> */}
-                {/* ---------------------- */}
 
                 <section className='edit-project-row text-input-row'>
                     <div className='input-left-column'>
@@ -256,7 +252,7 @@ class EditModel extends Component {
                     <input placeholder="project name" className="text-input" onChange={e => this.handleText('name',e.target.value)} ></input>
                     {/* <div className='section-title'><p style={{color:'#555'}}>Update File</p></div> */}
                     <div className='section-title'><p style={{color:'#555'}}>Description</p></div>
-                        <textarea name="text" rows="5" cols="50" wrap="soft" placeholder='text' className="text-input input-description" onChange={e => this.handleText('text',e.target.value)} > </textarea>
+                        <textarea name="text" rows="5" cols="50" wrap="soft" placeholder='text' className="text-input input-description" onChange={e => this.handleText('description',e.target.value)} > </textarea>
                         {/* <div className='add-button text-add'onClick={() => this.executeChange()}>Submit</div> */}
                     </div>
                     <div className='input-right-column'>
@@ -265,7 +261,7 @@ class EditModel extends Component {
 
                 </section> 
                 <div className='section-title'><p style={{color:'#555'}}>Submit Changes</p></div>
-                    <div className='edit-file-button' style={{position:'relative',marginTop:'10px',height:'30px',width:'80px'}} onClick={() => this.passNewPhotoToFB()} ><p>Submit</p></div>
+                    <div className='edit-file-button' style={{position:'relative',marginTop:'10px',height:'30px',width:'80px'}} onClick={() => this.executeChange()} ><p>Submit</p></div>
             </div>
         )
     }
