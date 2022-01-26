@@ -136,6 +136,8 @@ app.delete('/api/project/delete/:model_id', projectsController.deleteProject)
 app.get('/api/comments/all', projectsController.getComments)
 app.post('/api/comments/create', projectsController.createComment)
 app.get('/api/comments/id/:model_id', projectsController.getModelComments)
+// --- view user / user page
+app.get('/api/user/projects/get/:user_id',projectsController.getUserAndProjects)
 
 // --- documents and admin edits ---- //
 app.get('/api/documents/all', docsController.getAll)

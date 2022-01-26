@@ -139,4 +139,10 @@ module.exports = {
         const model = await req.app.get('db').projects.change_name([name,description,model_id])
         return res.status(200).send(model)
     },
+
+    getUserAndProjects: async (req,res) => {
+        const { user_id } = req.params
+        const info = await req.app.get('db').projects.get_user_and_projects([user_id])
+        return res.status(200).send(info)
+    }
 }
