@@ -11,7 +11,7 @@ import '../UserPage/UserPage.css'
 // import { getProjects } from '../../ducks/projectsReducer';
 // import { updateUser } from '../../ducks/userReducer'
 // import Collections from '../../Collections'
-import Collections from '../UserPage/Collections';
+import UserCollections from './UserCollections';
 // import UserInfo from './UserInfo'
 import UserInfo from '../UserPage/UserInfo';
 import {app} from '../../base'
@@ -47,17 +47,24 @@ class ViewUser extends Component {
         this.pleaseLogin = this.pleaeLogin.bind(this)
         this.setIsLoading = this.setIsLoading.bind(this)
         this.deleteFromFirebase = this.deleteFromFirebase.bind(this)
-        this.openCreate = this.openCreate.bind(this)
+        // this.openCreate = this.openCreate.bind(this)
     }
 
     componentDidMount(){
         const { user_id } = this.props.match.params
+        this.getUserAndProjects()
         // axios.get('/api/projects/all').then(res =>
         axios.get(`/api/users/${user_id}`).then(res => 
             this.setState({
                 user:res.data,
                 userName:res.data.user_name
             }))
+    }
+    getUserAndProjects() {
+        const { user_id } = this.props.match.params
+        axios.get(`/api/user/projects/get/${user_id}`).then(res => {
+            this.setState({items:res.data})
+        })
     }
 
     // componentDidUpdate() {
@@ -139,9 +146,9 @@ class ViewUser extends Component {
         alert('please log in')
     }
 
-    openCreate() {
-        this.setState({showCreateProject:!this.state.showCreateProject})
-    }
+    // openCreate() {
+    //     this.setState({showCreateProject:!this.state.showCreateProject})
+    // }
 
     render(){
         const { showCollections,showUserInfo,items,isLoading,showCreateProject,showEditUserInto,user } = this.state
@@ -150,7 +157,7 @@ class ViewUser extends Component {
         const { photo_url,auth,name,is_admin,background_url,user_name } = this.state.user
 
         const mappedUserName = user.map(el => {
-            return <h2 className="portrait-row" style={{textTransform:'none'}} >{el.user_name}</h2>
+            return <h2 className="portrait-row" style={{textTransform:'none'}} hey={el.user_id} >{el.user_name}</h2>
         })
 
         const mappedBackground = user.map(el => {
@@ -160,6 +167,10 @@ class ViewUser extends Component {
         const mappedProfilePhoto = user.map(el => {
             return <img className="profile-photo" src={el.photo_url} alt="photo"/>
         })
+
+        // const mappedProjects = items.map(el => {
+        //     return <Project key={el.model_id} data={el} />
+        // })
 
     return(
         <div>
@@ -186,7 +197,7 @@ class ViewUser extends Component {
                     {/* <h2 className="portrait-row" style={{textTransform:'none'}} >{user_name},user</h2> */}
                     <div className='portrait-row'>
                         {/* <div className='user-buttons' style={{marginTop:'30px'}} ><p style={{marginTop:'10px'}} onClick={() => this.hideView('showEditUserInfo')} >Edit Profile</p></div> */}
-                        <div className='user-buttons' style={{marginTop:'30px'}}  onClick={() => this.openCreate()} ><p style={{marginTop:'10px'}} >Message</p></div>
+                        <div className='user-buttons' style={{marginTop:'30px'}}  onClick={() => this.openCreate()} ><p style={{marginTop:'10px'}} >Send Message</p></div>
                     </div>
  
                     {/* <div className='portrait-row' >{is_admin ? (<Link to={'/admin'} style={{ textDecoration:'none' }}><p className='go-to-admin'>admin</p></Link>) : null} </div> */}
@@ -201,9 +212,11 @@ class ViewUser extends Component {
 
             <section className="column2">
 
+                {/* {mappedProjects} */}
+
                 {/* {showEditUserInto === true ? <EditUserInfo setIsLoading={this.setIsLoading} hideView={this.hideView} /> : null} */}
 
-                {<Collections username={this.props.user} setIsLoading={this.setIsLoading} photo_url={this.state.user.photo_url} openCreate={this.openCreate} showCreateProject={showCreateProject} />}
+                {<UserCollections username={this.props.user} setIsLoading={this.setIsLoading} photo_url={this.state.user.photo_url}/>}
 
             </section>
         </div>
