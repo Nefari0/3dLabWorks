@@ -10,15 +10,15 @@ import axios from 'axios'
 // import { getProjects } from '../../ducks/projectsReducer'
 // import AddProject from './AddProject'
 // import EditModel from '../FeaturedProjects/EditProject/EditModel'
-import Project from '../FeaturedProjects/Project'
+import UserProject from '../FeaturedProjects/Project'
 // import CreateProject from './CreateProject'
 
 // const db = app.firestore()
 
 class UserCollections extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
         this.state = {
             openEditModel:false,
@@ -49,18 +49,18 @@ class UserCollections extends Component {
         // this.getFileUrl = this.getFileUrl.bind(this)
         // this.handleAddText = this.handleAddText.bind(this)
         this.projectIsLiked = this.projectIsLiked.bind(this)
-        this.getProjects = this.getProjects.bind(this)
+        // this.getProjects = this.getProjects.bind(this)
     }
 
     componentDidMount(){
-        this.getProjects()
+        // this.getProjects()    
     }
 
-    getProjects = () => {
-        const { id } = this.props
-        axios.get(`/api/projects/${id}`).then(res =>
-            this.setState({ ...this.state,data:res.data})) 
-    }
+    // getProjects = () => {
+    //     const { user_id } = this.props.user
+    //     axios.get(`/api/projects/${user_id}`).then(res =>
+    //         this.setState({ ...this.state,data:res.data})) 
+    // }
 
     // handleAddText(prop, val) {
     //     this.setState({
@@ -243,14 +243,15 @@ class UserCollections extends Component {
     render(){
 
         const { openAddProject,openEditModel,previewImageFile,previewModelFile,data,file } = this.state
-        const { photo_url,user,showCreateProject } = this.props
+        const { photo_url,user,showCreateProject,items } = this.props
 
-        const mappedProjects = data.map(element => {
-            return <Project key={element.model_id} data={element} name={element.name} img={element.firebase_url01} file={element.firebase_url} id={element.model_id} delete={this.deleteModel} removeFileFromSpace={this.removeFileFromSpace} openEdidModel={this.openEditModel} projectIsLiked={this.projectIsLiked} user_photo_url={photo_url} current_user_name={user.user.user} />
+        const mappedProjects = items.map(element => {
+            return <UserProject key={element.model_id} data={element} projectIsLiked={this.projectIsLiked} />
         })
 
         return(
             <div className="collections">
+                <h4 style={{color:'#555'}} >text</h4>
                 {/* {showCreateProject ? <CreateProject openCreate={this.props.openCreate} handleFile={this.handleFile} handleAddText={this.handleAddText} handlePhoto={this.handlePhoto} previewImageFile={previewImageFile} previewModelFile={previewModelFile} file={file} sendIntoSpace={this.sendIntoSpace} /> : null} */}
 
                 {mappedProjects}
