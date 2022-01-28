@@ -1,5 +1,6 @@
 
 module.exports = {
+    // ---- messages to admin ---- //
     getUserMessages: async (req,res) => {
         const { user_id } = req.params
         const db = req.app.get('db')
@@ -19,5 +20,14 @@ module.exports = {
         const db = req.app.get('db')
         const query = await db.messaging.delete_message([message_id])
         return res.status(200).send(query)
+    },
+    // --------------------------------- //
+
+    // ---- site messaging system below ---- //
+    getConversationByUserId: async (req,res) => {
+        const { user_id } = req.body
+        const db = req.app.get('db')
+        const conversations = await db.messaging.get_conversations_by_user_id([user_id])
+        return res.status(200).send(conversations)
     }
 }

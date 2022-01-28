@@ -56,6 +56,7 @@ const firebaseConfig = {
 // const admin = require('firebase-admin');
 // const firebase = require('firebase/app');
 const fireController = require('./controllers/fireController');
+// const { applyMiddleware } = require('redux');
 // const firebaseConfig = {
 //     apiKey: "AIzaSyB6ImzEUWfnyXD6bcpNEN8ktaMSfos8Js0",
 //     authDomain: "depot-7bb3e.firebaseapp.com",
@@ -153,6 +154,9 @@ app.get('/api/links/get', docsController.getAllLinks)
 app.get('/api/messages/user/:user_id', messageController.getUserMessages)
 app.post('/api/messages/user/add', messageController.createMessage)
 app.post('/api/messages/user/delete',messageController.deleteMessage)
+
+// site messaging system endpoints
+app.get('/api/conversations/user',messageController.getConversationByUserId)
 
 
 // // storage access end points //
