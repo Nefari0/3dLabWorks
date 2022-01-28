@@ -136,7 +136,7 @@ class UserPage extends Component {
     render(){
         const { showCollections,showUserInfo,items,isLoading,showCreateProject,showEditUserInto } = this.state
         const { isLoggedIn } = this.props.user
-        const { photo,auth,name,is_admin,background_url } = this.props.user.user
+        const { photo,auth,name,is_admin,background_url,user,email } = this.props.user.user
 
     return(
         <div>
@@ -167,7 +167,7 @@ class UserPage extends Component {
 
                 </div>
                 {/* {showUserInfo && <UserInfo user={this.props.user} setIsLoading={this.setIsLoading} deleteFromFirebase={this.deleteFromFirebase} />} */}
-                <UserInfo user={this.props.user} setIsLoading={this.setIsLoading} deleteFromFirebase={this.deleteFromFirebase} />
+                <UserInfo user={user} name={name} email={email} setIsLoading={this.setIsLoading} deleteFromFirebase={this.deleteFromFirebase} />
 
             </section>
 
