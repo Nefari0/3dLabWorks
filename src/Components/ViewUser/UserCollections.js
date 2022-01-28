@@ -15,46 +15,46 @@ import UserProject from '../FeaturedProjects/Project'
 
 // const db = app.firestore()
 
-class UserCollections extends Component {
+// class UserCollections extends Component {
 
-    constructor(props){
-        super(props);
+//     constructor(props){
+//         super(props);
 
-        this.state = {
-            openEditModel:false,
-            data:[],
-            fileUrl:null,
-            file:null,
-            imageFile:null,
-            previewImageFile:null,
-            previewModelFile:null,
-            imageUrl:null,
-            newItem:{},
-            props:null,
-            openAddProject:false,
-            projectName:'',
-            projectDescription:''
-        }
-        // this.setFileUrl = this.setFileUrl.bind(this)
-        // this.handleFile = this.handleFile.bind(this)
-        // this.addFile = this.addFile.bind(this)
-        // this.addPhoto = this.addPhoto.bind(this)
-        // this.handlePhoto = this.handlePhoto.bind(this)
-        // this.fileHandler = this.fileHandler.bind(this)
-        // this.addToDatabase = this.addToDatabase.bind(this)
-        // this.fileHandlerRemove = this.fileHandlerRemove.bind(this)
-        // this.removeFileFromSpace = this.removeFileFromSpace.bind(this)
-        // this.addNewProject = this.addNewProject.bind(this)
-        // this.getImUrl = this.getImUrl.bind(this)
-        // this.getFileUrl = this.getFileUrl.bind(this)
-        // this.handleAddText = this.handleAddText.bind(this)
-        this.projectIsLiked = this.projectIsLiked.bind(this)
-        // this.getProjects = this.getProjects.bind(this)
-    }
+//         this.state = {
+//             openEditModel:false,
+//             data:[],
+//             fileUrl:null,
+//             file:null,
+//             imageFile:null,
+//             previewImageFile:null,
+//             previewModelFile:null,
+//             imageUrl:null,
+//             newItem:{},
+//             props:null,
+//             openAddProject:false,
+//             projectName:'',
+//             projectDescription:''
+//         }
+//         this.setFileUrl = this.setFileUrl.bind(this)
+//         this.handleFile = this.handleFile.bind(this)
+//         this.addFile = this.addFile.bind(this)
+//         this.addPhoto = this.addPhoto.bind(this)
+//         this.handlePhoto = this.handlePhoto.bind(this)
+//         this.fileHandler = this.fileHandler.bind(this)
+//         this.addToDatabase = this.addToDatabase.bind(this)
+//         this.fileHandlerRemove = this.fileHandlerRemove.bind(this)
+//         this.removeFileFromSpace = this.removeFileFromSpace.bind(this)
+//         this.addNewProject = this.addNewProject.bind(this)
+//         this.getImUrl = this.getImUrl.bind(this)
+//         this.getFileUrl = this.getFileUrl.bind(this)
+//         this.handleAddText = this.handleAddText.bind(this)
+//         this.projectIsLiked = this.projectIsLiked.bind(this)
+//         this.getProjects = this.getProjects.bind(this)
+//     }
 
-    componentDidMount(){
-        // this.getProjects()    
-    }
+//     componentDidMount(){
+
+//     }
 
     // getProjects = () => {
     //     const { user_id } = this.props.user
@@ -232,37 +232,35 @@ class UserCollections extends Component {
     //     })
     // }
 
-    projectIsLiked(projectId,userLike) {
-        try {
-            return(userLike.filter(el => el.model_id === projectId)[0].model_id === projectId)
-          } catch (error) {
-            console.log('user does not like this project',error);
-          }
-    }
+//     projectIsLiked(projectId,userLike) {
+//         try {
+//             return(userLike.filter(el => el.model_id === projectId)[0].model_id === projectId)
+//           } catch (error) {
+//             console.log('user does not like this project',error);
+//           }
+//     }
 
-    render(){
+//     render(){
 
-        const { openAddProject,openEditModel,previewImageFile,previewModelFile,data,file } = this.state
-        const { photo_url,user,showCreateProject,items } = this.props
+//         const { openAddProject,openEditModel,previewImageFile,previewModelFile,data,file } = this.state
+//         const { photo_url,user,showCreateProject,items } = this.props
 
-        const mappedProjects = items.map(element => {
-            return <UserProject key={element.model_id} data={element} projectIsLiked={this.projectIsLiked} />
-        })
+//         const mappedProjects = items.map(element => {
+//             return <UserProject key={element.model_id} data={element} projectIsLiked={this.projectIsLiked} />
+//         })
 
-        return(
-            <div className="collections">
-                <h4 style={{color:'#555'}} >text</h4>
-                {/* {showCreateProject ? <CreateProject openCreate={this.props.openCreate} handleFile={this.handleFile} handleAddText={this.handleAddText} handlePhoto={this.handlePhoto} previewImageFile={previewImageFile} previewModelFile={previewModelFile} file={file} sendIntoSpace={this.sendIntoSpace} /> : null} */}
+//         return(
+//             <div className="collections">
 
-                {mappedProjects}
+//                 {mappedProjects}
   
-            </div>
-        )
-    }
-}
+//             </div>
+//         )
+//     }
+// }
 
 // function mapStateToProps(reduxState){
 //     return reduxState
 // }
 
-export default UserCollections
+// export default UserCollections
