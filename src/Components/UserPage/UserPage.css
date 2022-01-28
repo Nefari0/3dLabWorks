@@ -10,8 +10,9 @@
     display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	align-items: center;
+	align-items: flex-start;
 	align-content: center;
+    padding-top: 5px;
 }
 
 .menu {
