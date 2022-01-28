@@ -76,11 +76,12 @@ const Project = (props) => {
                 {/* <div className="photo-title-border"><img src={photo_url} className="project-user-photo"/><p className="dark-text-larger">{name}<br/><p className='usr-nm-txt'>by {user_name}</p></p></div> */}
 
 
-                <div className="photo-title-border"><img src={photo_url} className="project-user-photo"/>
+                {/* <div className="photo-title-border"><img src={photo_url} className="project-user-photo"/> */}
+                {/* <div className="photo-title-border"><img src={photo_url} className="project-user-photo"/> */}
 
                 {/* --------------- */}
-                {/* <div className="photo-title-border"><Link to={`viewuser/${user_id}`} ><img src={getPhotoUrl()} className="project-user-photo"/></Link> */}
-                {/* <div className="photo-title-border"><Link to={`viewuser/${user_id}`} ><img src={getPhotoUrl()} className="project-user-photo"/></Link> */}
+                <div className="photo-title-border"><Link to={`viewuser/${user_id}`} ><img src={getPhotoUrl()} className="project-user-photo"/></Link>
+                {/* <div className="image-div" ><Link to={`viewuser/${user_id}`}><img className="model-photo" src={photo_url}/></Link></div> */}
                 {/* ------------- */}
                 
                 {/* <p className="dark-text-larger">{name}</p> */}
