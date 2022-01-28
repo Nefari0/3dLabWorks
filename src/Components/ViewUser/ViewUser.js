@@ -162,7 +162,7 @@ class ViewUser extends Component {
                     {mappedUserName}
  
                     <div className='portrait-row'>
-                        <div className='user-buttons' style={{marginTop:'30px'}}  onClick={() => this.openCreate()} ><p style={{marginTop:'10px'}} >Send Message</p></div>
+                        <div className='user-buttons' style={{marginTop:'30px'}} ><p style={{marginTop:'10px'}} >Send Message</p></div>
                     </div>
 
 
