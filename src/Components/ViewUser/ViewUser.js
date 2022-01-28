@@ -2,16 +2,16 @@ import axios from 'axios';
 import Home from '../Home/Home'
 // import CreateProject from './CreateProject';
 import { Switch, Route } from 'react-router-dom'
-import Project from '../FeaturedProjects/Project'
+import UserProject from './UserProject'
 import { Component, lazy } from 'react'
 import { Link } from 'react-router-dom';
 // import './UserPage.css'
 import '../UserPage/UserPage.css'
-// import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 // import { getProjects } from '../../ducks/projectsReducer';
-// import { updateUser } from '../../ducks/userReducer'
+import { updateUser } from '../../ducks/userReducer'
 // import Collections from '../../Collections'
-import UserCollections from './UserCollections';
+// import UserCollections from './UserCollections';
 // import UserInfo from './UserInfo'
 import UserInfo from '../UserPage/UserInfo';
 import {app} from '../../base'
@@ -47,13 +47,11 @@ class ViewUser extends Component {
         this.pleaseLogin = this.pleaeLogin.bind(this)
         this.setIsLoading = this.setIsLoading.bind(this)
         this.deleteFromFirebase = this.deleteFromFirebase.bind(this)
-        // this.openCreate = this.openCreate.bind(this)
     }
 
     componentDidMount(){
         const { user_id } = this.props.match.params
         this.getUserAndProjects()
-        // axios.get('/api/projects/all').then(res =>
         axios.get(`/api/users/${user_id}`).then(res => 
             this.setState({
                 user:res.data,
@@ -63,25 +61,16 @@ class ViewUser extends Component {
     getUserAndProjects() {
         const { user_id } = this.props.match.params
         axios.get(`/api/user/projects/get/${user_id}`).then(res => {
-            this.setState({items:res.data})
+            this.setState({...this.state,items:res.data})
         })
     }
-
-    // componentDidUpdate() {
-    //     const { setPermission } = this.state
-    //     const { user_id } = this.props.match.params
-    //     if (setPermission === true) {
-    //         axios.get(`/api/users/${user_id}`).then(res => 
-    //             this.setState({user:res.data}))
-    //         this.setState({setPermission:false})
-    //     }
-    // }
-
-    // thisUpdateUser() {
-    //     this.props.updateUser()
-
-    // }
-
+    projectIsLiked(projectId,userLike) {
+        try {
+            return(userLike.filter(el => el.model_id === projectId)[0].model_id === projectId)
+          } catch (error) {
+            console.log('user does not like this project',error);
+          }
+    }
 
     setIsLoading = () => {
         this.setState({isLoading:!this.state.isLoading})
@@ -129,15 +118,6 @@ class ViewUser extends Component {
         })
     }
 
-
-    // handleUserInfo(){
-
-    // }
-
-    // handleGroups(){
-
-    // }
-
     handleFriends(){
         this.setState({isView:'isFriends'})
     }
@@ -146,77 +126,57 @@ class ViewUser extends Component {
         alert('please log in')
     }
 
-    // openCreate() {
-    //     this.setState({showCreateProject:!this.state.showCreateProject})
-    // }
-
     render(){
         const { showCollections,showUserInfo,items,isLoading,showCreateProject,showEditUserInto,user } = this.state
-        // const { isLoggedIn } = this.props.user
-        // const { photo,auth,name,is_admin,background_url } = this.props.user.user
-        const { photo_url,auth,name,is_admin,background_url,user_name } = this.state.user
+        const { photo_url,auth,name,email,is_admin,background_url,user_name,user_id } = this.state.user
 
         const mappedUserName = user.map(el => {
-            return <h2 className="portrait-row" style={{textTransform:'none'}} hey={el.user_id} >{el.user_name}</h2>
+            return <h2 className="portrait-row" style={{textTransform:'none'}} key={el.user_id} >{el.user_name}</h2>
+        })
+
+        const mappedUserInfo = user.map(el => {
+            return <UserInfo  key={el.user_id} user={el.user_name} name={el.first_name} email={el.email} />
         })
 
         const mappedBackground = user.map(el => {
-           return <img src={el.background_url} className='background-photo' />
+           return <img src={el.background_url} key={el.user_id} className='background-photo' />
         })
 
         const mappedProfilePhoto = user.map(el => {
-            return <img className="profile-photo" src={el.photo_url} alt="photo"/>
+            return <img className="profile-photo" src={el.photo_url} key={el.user_id} alt="photo"/>
         })
 
-        // const mappedProjects = items.map(el => {
-        //     return <Project key={el.model_id} data={el} />
-        // })
+        const mappedProjects = items.map(el => {
+            return <UserProject key={el.model_id} model_id={el.model_id} data={el} projectIsLiked={this.projectIsLiked} />
+        })
 
     return(
         <div>
-            {/* {!isLoggedIn ? (<Route path="/" component={Home}/>) : ( */}
             <div className="user-page">
-                {/* {showEditUserInto === true ? <EditUserInfo /> : null} */}
             {isLoading ? <Loading/> : null}
             <section className="column1">
-            {/* {showEditUserInto === true ? <EditUserInfo /> : null} */}
-                {/* <img src={background_url} className='background-photo' /> */}
                 {mappedBackground}
                 <div className="portrait">
-                    {/* <img className="profile-photo" src={photo_url} alt="photo"/> */}
 
                     {mappedProfilePhoto}
-
-                    {/* <svg className="icon-big" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg> */}
-
-                    {/* <h2 className="name-container" >{this.props.user.user.name}</h2> */}
                     {mappedUserName}
-                    {/* <h2 className="portrait-row" style={{textTransform:'none'}} >{user_name},user</h2> */}
+ 
                     <div className='portrait-row'>
-                        {/* <div className='user-buttons' style={{marginTop:'30px'}} ><p style={{marginTop:'10px'}} onClick={() => this.hideView('showEditUserInfo')} >Edit Profile</p></div> */}
                         <div className='user-buttons' style={{marginTop:'30px'}}  onClick={() => this.openCreate()} ><p style={{marginTop:'10px'}} >Send Message</p></div>
                     </div>
- 
-                    {/* <div className='portrait-row' >{is_admin ? (<Link to={'/admin'} style={{ textDecoration:'none' }}><p className='go-to-admin'>admin</p></Link>) : null} </div> */}
+
 
                 </div>
-                {/* {showUserInfo && <UserInfo user={this.props.user} setIsLoading={this.setIsLoading} deleteFromFirebase={this.deleteFromFirebase} />} */}
-                {/* <UserInfo user={this.props.user} setIsLoading={this.setIsLoading} deleteFromFirebase={this.deleteFromFirebase} /> */}
 
-                {/* {showUserInfo && <UserInfo user={this.state.user} setIsLoading={this.setIsLoading} deleteFromFirebase={this.deleteFromFirebase} />} */}
+                {mappedUserInfo}
 
             </section>
 
-            <section className="column2">
+            <section className="column2" >
 
-                {/* {mappedProjects} */}
-
-                {/* {showEditUserInto === true ? <EditUserInfo setIsLoading={this.setIsLoading} hideView={this.hideView} /> : null} */}
-
-                {<UserCollections username={this.props.user} setIsLoading={this.setIsLoading} photo_url={this.state.user.photo_url}/>}
+                <div className='collections'>
+                    {mappedProjects}
+                </div>
 
             </section>
         </div>
