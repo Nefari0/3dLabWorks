@@ -4,7 +4,7 @@ import EditUserInfo from './EditUserInfo'
 import React, { useState, useEffect } from 'react'
 
 const UserInfo = (props) => {
-    const { user,name,email } = props.user.user
+    const { user,name,email } = props
     const [editOpen,setEditOpen ] = useState(false)
 
     function toggleEdit(){
