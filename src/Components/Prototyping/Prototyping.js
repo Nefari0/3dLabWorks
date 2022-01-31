@@ -4,179 +4,68 @@
 // import { loginUser,registerUser } from '../../ducks/userReducer'
 // import { connect } from 'react-redux'
 // import Agreement from '../Register/Agreement'
+import axios from 'axios'
+import { Component } from 'react'
 import './Prototyping.css'
 
-// const Prototyping = (props) => {
-
-//     const { isLoggedIn,saveSession,current_user } = props
-    
-//     const [ user_name, setUsername ] = useState('')
-//     const [ password, setPassword ] = useState('')
-//     // const [ new_user_name, setNewUserName ] = useState('')
-//     // const [ new_password, setNewPassword ] = useState('')
-//     const { saveInfo,setSaveInfo } = useState(false)
-//     const [ signup,setSignup ] = useState(false)
-//     const [ email, setEmail ] = useState('')
-//     const [ first_name, setFirstName] = useState('')
-//     const [ last_name, setLastName ] = useState('')
-//     const [ photo_url, setPhoto ] = useState('')
-//     const [ is_admin ] = useState(false)
-//     const [ iAgree, setIAgree ] = useState(false)
-//     const [ openIAgree, setOpenIAgree ] = useState(false)
-
-//     const selectSignUp = () => {
-//         console.log('lign up',signup)
-//         setSignup(!signup)
-//     }
-
-//     const executeIAgree = () => {
-//         setIAgree(!iAgree)
-//         console.log(iAgree)
-//     }
-
-//     const executeRegister = () => {
-//         if (iAgree === true) {
-//         props.registerUser(user_name, password, email, first_name, is_admin)
-//         // props.history.push('/user')
-//     } else {
-//         return (alert('please agree to conditions'))
-//     }
-//     props.exit()
-//     }
-
-//     const openAgreement = () => {
-//         setOpenIAgree(!openIAgree)
-//         console.log(openIAgree)
-//     }
-
-//     const getLoggedIn = () => {
-//         props.loginUser(user_name,password)
-//     }
-
-//     return(
-//         <div className={`plogin-container ${!signup ? true : `plogin-Container r-selected ${openIAgree ? true : `plogin-container r-selected agree-view`}`}`}>
-//         {/* <section className="login-title"> */}
-//         <section className={`login-title ${!signup ? true : `rlogin-title ${openIAgree ? true : `rlogin-title rlogin-title-agreement`}`}`}>
-
-//             <svg className="close-button" style={{color:'#fff', height:'35px',width:'35px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} onClick={props.exit} xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20" fill="currentColor">
-//                 <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-//             </svg>
-            
-//             {!signup ? <h2 style={{textTransform:'none'}} >Log In to Your Accout</h2> : <h2 style={{textTransform:'none'}} >Create Account</h2>}</section>
-//         {!signup ? <section className="form">
-//         {/* <input value={user_name} onChange={e => props.name(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'20px'}}/> */}
-//         <input value={user_name} onChange={e => setUsername(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'20px'}}/>
-
-//         {/* <input value={password} onChange={e => props.pass(e.target.value)} placeholder="Password" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'17px'}} type="password" /> */}
-//         <input value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'17px'}} type="password" />
 
 
+ class Prototyping extends Component {
+     constructor() {
+        super()
 
-//         <ul className="keep-session log-form-length">
+        this.state = {
+            messages:[],
+            user_id:12,
+            thread:[],
+        }
+        this.getMessages = this.getMessages.bind(this)
+        this.openMessage = this.openMessage.bind(this)
+     }
 
-//             <div className="keep-session-check">
-//             {!saveSession ?
-//             <svg onClick={() => props.setSaveSession()} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-//                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-//             </svg>
-//             :
-//             <svg onClick={() => props.setSaveSession()} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-//                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-//             </svg>
-//             }
-//             <p style={{fontSize:'10px',marginBottom:'0px',marginLeft:'0px'}} >stay logged in?</p>
-//         </div>
-//             <p style={{fontSize:'10px',marginBottom:'0px',marginLeft:'0px', color:'blue' }} >Forgot password?</p>
-//         </ul>
+     componentDidMount() {
+        this.getMessages()
+     }
 
-//         {/* {!isLoggedIn ? <a className="login-button" onClick={props.execute} >Log In</a> : <a className="login-button" onClick={props.logout} >Log Out</a>} */}
-//         {!isLoggedIn ? <a className="login-button" onClick={getLoggedIn} >Log In</a> : <a className="login-button" onClick={props.logout} >Log Out</a>}
+     getMessages = () => {
+         const user_id = 12
+        axios.get(`/api/conversations/${user_id}`).then(res => {
+            this.setState({
+                messages:res.data
+            })
+        })
+     }
 
-//         {!isLoggedIn ? <div className="build-account" ><p>Need an account?</p><a style={{fontWeight:'400',color:"blue"}} onClick={selectSignUp}>Sign up</a></div> : <div className="build-account" ><p>Logged in as:</p><a style={{fontWeight:'400',color:"blue"}} onClick={props.exit}>{current_user}</a></div>}
-//         </section>
-//         :
-//         // <section className="rform">
-//         <section className={`rform`}>
+     openMessage = (conversation_id) => {
+        axios.get(`/api/conversation/messages/get/${conversation_id}`).then(res => {
+            this.setState({thread:res.data})
+        })
+     }
 
-//             {!openIAgree ? <Agreement/> :
-//             <div style={{height:'450px'}}>
-//                 <input value={user_name} onChange={e => setUsername(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" />
-//                 <input value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" className="log-input log-form-length disabled" style={{marginTop:'17px',marginBottom:'2px'}} type="password" />
-//                 <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" className="log-input log-form-length disabled" style={{marginTop:'17px',marginBottom:'2px'}} />
-//                 <input value={first_name} onChange={e => setFirstName(e.target.value)} placeholder="First Name" className="log-input log-form-length disabled" style={{marginTop:'17px',marginBottom:'2px'}} />
-//                 <input value={last_name} onChange={e => setLastName(e.target.value)} placeholder="Last Name" className="log-input log-form-length disabled" style={{marginBottom:'20px',marginTop:'17px'}} />
-//             </div>}
-//             <div className="keep-session-check">
+     render() {
 
-//             {!iAgree ?
-//             <svg onClick={executeIAgree} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-//                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-//             </svg>
-//             :
-//             <svg onClick={executeIAgree} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-//                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-//             </svg>
-//             }
+        const { messages,thread } = this.state
+        
+        const mappedMessageNames = messages.map(el => {
+            return <div key={el.conversation_id} conversation_name={el.conversation_name} conversation_id={el.conversation_id} openMessage={this.openMessage} ><p style={{color:'#555'}} onClick={() => this.openMessage(el.conversation_id)} >{el.conversation_name}</p></div>
+        })
 
-//             <p style={{fontSize:'10px',marginBottom:'0px',marginLeft:'0px'}} onClick={openAgreement} >I agree to terms and conditions</p>
-//             </div>
+        const mappedThread = thread.map(el => {
+            return <div content={el.content} ><p>{el.content}</p></div>
+        })
 
-//                 {/* {openIAgree ? <a className="login-button" style={{marginTop:'10px'}} onClick={executeRegister} >Sign Up</a> : null} */}
-//                 {openIAgree ? <a className="login-button" style={{marginTop:'10px'}} onClick={executeRegister} >Sign Up</a> : null}
-//                 <div className="build-account" ><a style={{fontWeight:'400',color:"blue"}} onClick={selectSignUp}>Cancel</a></div>
-//             </section>
-//         }
-//     </div>
-//     )
-    
-// }
-// // export default Prototyping
+        return(<div className='message-board' >
+            <section className='dash column-flex'>
+                <p className='size-test'>left</p>
+                {mappedMessageNames}
+            </section>
 
-// function mapStateToProps(reduxState){
-//     return reduxState
-// }
-// export default connect(mapStateToProps,{registerUser,loginUser})(Prototyping)
-
-{/* ----------------------- experimental -----------------------------------  */}
- const Prototyping = (props) => {
-
-    const { url } = props
-
-    return (
-
-                // <div class="flip-box">
-                //     <div class="flip-box-inner">
-                //         <div class="flip-box-front">
-                //         {/* <img src="img_paris.jpg" alt="Paris" style="width:300px;height:200px"/> */}
-                //         <img src={url} style={{width:"300px",height:"200px"}}/>
-                //         </div>
-                //         <div class="flip-box-back">
-                //         </div>
-                //     </div>
-                // </div>
-
-                <div className="upload" style={{marginLeft:'600px'}}>
-    <div className="container">
-        <div className="row">
-            <div className="col-md-12">
-                <h1>Would you like to <span style={{color:"lightGreen"}}>Upload</span> or <span style={{color:"orangeRed"}}>Delete</span> a file?</h1>
-                <div style={{position:"relative",height:"275px"}}>
-                    <form action="" method="post" enctype="multipart/form-data" class="formUp">
-
-                        {/* <input type="file" name="fileToUpload[]" id="fileToUpload" accept="image/*" multiple="multiple"><p>Click here to upload images.</p></input> */}
-                <input type="file"  name="fileToUpload[]" id="fileToUpload" accept="image/*" multiple="multiple"/><p>Click here to upload images.</p>
-                        <input type="submit" value="Upload Images" name="submitUpload" />
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-                
-    )
+            <section className='board column-flex'>
+                <p className='size-test'>right</p>
+                {mappedThread}
+            </section>
+        </div>)
+     }
  }
 
-//  export default Prototyping
-
-{/* ----------------------- experimental -----------------------------------  */}
+export default Prototyping
