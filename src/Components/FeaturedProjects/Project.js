@@ -71,7 +71,6 @@ const Project = (props) => {
 
     return(
         <div className='project-container'>
-            {checkIfLiked()}
             <div>
                 <div className="photo-title-border"><Link to={`viewuser/${user_id}`} ><img src={getPhotoUrl()} className="project-user-photo"/></Link>
 
