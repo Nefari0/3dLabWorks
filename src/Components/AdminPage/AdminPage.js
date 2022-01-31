@@ -9,6 +9,8 @@ import { getProjects } from '../../ducks/projectsReducer';
 import Home from '../Home/Home';
 import axios from 'axios';
 import ShowUser from './ShowUser';
+// import Prototyping from '../Prototyping/Prototyping';
+import MessageBoard from '../UserMessages/MessageBoard';
 // import DemoScene from './Three/DemoScene';
 // import ViewUserV2 from './ViewUserV2';
 
@@ -152,6 +154,8 @@ class AdminPage extends Component {
                     </ul>
                     <Link to={'/user'} ><a >mypage</a></Link>
 {/* <ViewUserV2 /> */}
+{/* <Prototyping /> */}
+<MessageBoard/>
                     </div>
                 )}
             </div>
