@@ -25,9 +25,17 @@ module.exports = {
 
     // ---- site messaging system below ---- //
     getConversationByUserId: async (req,res) => {
-        const { user_id } = req.body
+        const { user_id } = req.params
+        console.log('hit backend',user_id)
         const db = req.app.get('db')
         const conversations = await db.messaging.get_conversations_by_user_id([user_id])
         return res.status(200).send(conversations)
+    },
+
+    getConversationMessagesById: async (req,res) => {
+        const { conversation_id } = req.params
+        const db = req.app.get('db')
+        const messages = await db.messaging.get_conversation_messages_by_id([conversation_id])
+        return res.status(200).send(messages)
     }
 }
