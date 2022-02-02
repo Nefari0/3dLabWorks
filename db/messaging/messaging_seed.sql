@@ -16,6 +16,16 @@
 --   FOREIGN KEY(user_id) REFERENCES d_user(user_id)
 -- )
 
+-- create table d_user_messages (
+--   user_id INTEGER,
+--   FOREIGN KEY(user_id) REFERENCES d_user(user_id),
+--   conversation_id INTEGER,
+--   FOREIGN KEY(conversation_id) REFERENCES d_conversation(conversation_id),
+--   to_user INTEGER,
+--   FOREIGN KEY(to_user) REFERENCES d_user(user_id)
+-- )
+
+-- phasing this table out
 -- INSERT INTO d_conversation_members (conversation_id,user_id)
 -- VALUES (
 --   1,
