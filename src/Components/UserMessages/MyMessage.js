@@ -6,22 +6,26 @@ const MyMessage = (props) => {
 
     useEffect(() => {
         // setShowNotice(false)
+        if(loggedInUser === user_id){setIsUser(true)}
     },[])
+
+    const [isUser,setIsUser] = useState(false)
 
     const testFunc = () => {
         alert('does it work')
     }
 
     const { item,content,loggedInUser,user_id,photo_url } = props
-
+    console.log(loggedInUser === user_id)
     return (
-        <div>
+        <div className={`over-flow ${loggedInUser === user_id ? true : 'user-over-flow'}`}>
         <div className={`my-message-container ${loggedInUser === user_id ? true : 'user-message-container'}`}>
-            <img src={photo_url} className={`my-message-photo ${loggedInUser === user_id ? true : 'user-message-photo'}`} />
-
+        {/* <div className={`my-message-container`}> */}
             <p style={{textTransform:'none'}}>{content}</p>
         </div>
+            <div><img src={photo_url} className={`my-message-photo ${isUser ? true : 'my-message-photo'}`} /></div>
         </div>
+        
     )
 }
 
