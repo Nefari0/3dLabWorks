@@ -1,0 +1,23 @@
+.create-message-container {
+    position: fixed;
+    top: 33%;
+    height: 300px;
+    width: 600px;
+    /* right: 50vw; */
+    /* background-color: chartreuse; */
+    background-color: #fff;
+    z-index: 1000;
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: stretch;
+	align-content: stretch;
+    border-radius: 5px;
+    box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
+}
+
+.new-message-text-input {
+    width: 500px;
+    margin: auto;
+}
