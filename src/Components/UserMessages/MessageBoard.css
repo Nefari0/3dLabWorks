@@ -1,27 +1,38 @@
 
 .message-board {
     width: 95vw;
-    height: 95vh;
+    max-height: 95vh;
     display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	justify-content: space-around;
+	justify-content: center;
 	align-items: flex-start;
 	align-content: flex-start;
-    background-color: blue;
+    overflow: scroll;
+    /* background-color: blue; */
 }
 
 .dash {
-    width: 33%;
-    height: 100%;
-    background-color: burlywood;
+    width: 210px;
+    height: 80%;
+    margin-right: 5px;
+    /* background-color: burlywood; */
 }
 
 .board {
-    width: 66%;
-    height: 100%;
+    width: 56%;
+    /* height: 80vh; */
+    min-height: 600px;
     background-color: grey;
+    display: flex;
+	flex-direction: column-reverse;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: stretch;
+    overflow: scroll;
 }
+
 .column-flex {
     
     /* display: flex;
@@ -32,11 +43,11 @@
     align-content: flex-start; */
 }
 
-.size-test {
-    height: 30px;
-    width: 300px;
-    background-color: hotpink;
-}
+/* .size-test { */
+    /* height: 30px; */
+    /* width: 300px; */
+    /* background-color: hotpink; */
+/* } */
 
 .user-message-photo {
     position: relative;
@@ -44,46 +55,50 @@
     width: 40px;
     border-radius: 50%;
     margin: 0px;
-    right: 55%;
+    /* right: 80px; */
 }
 .my-message-photo {
-    position: relative;
+    /* position: relative; */
     height: 40px;
     width: 40px;
     border-radius: 50%;
     margin: 0px;
-    left: -55%;
+    /* margin-right: 30px; */
+    /* left: 60px; */
 }
+.user-over-flow,
+.over-flow {
+    width: 520px;
+    min-height: 40px;
+    /* margin: 10px; */
+    /* background-color: crimson; */
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: flex-start;
+    /* overflow: scroll; */
+}
+.user-over-flow { 
+    flex-direction: row-reverse;
+    /* background-color: darkgoldenrod; */
 
+
+}
 
 /* -------------- message box ---------------------- */
-
+.user-message-container,
 .my-message-container{
     /* position: absolute; */
-    float: left;
-    width: 520px;
-    min-height: 30px;
+    float: right;
+    width: 420px;
+    min-height: 60px;
     margin:10px;
+    padding: 3px;
+    /* margin-right: 150px; */
     /* background: linear-gradient(0turn,#5077be,#6495ed); */
     /* background-color: #6495ed; */
-    background-color: #fff;
-    color: #555;
-    border-radius: 5px;
-    visibility: visible;
-    opacity: 1;
-    transition: opacity 2s linear;
-
-    /* transform: translateX(-78px) rotate(0); */
-    box-shadow: 0 4px 3px 0  rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-}
-
-.user-message-container{
-    /* position: absolute; */
-    float: right;
-    width: 520px;
-    min-height: 30px;
-    margin:10px;
-    /* background: linear-gradient(0turn,#5077be,#6495ed); */
     background-color: #6495ed;
     color: #fff;
     border-radius: 5px;
@@ -93,6 +108,34 @@
 
     /* transform: translateX(-78px) rotate(0); */
     box-shadow: 0 4px 3px 0  rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: stretch;
+}
+
+.user-message-container{
+    float: left;
+    width: 420px;
+    min-height: 60px;
+    padding: 3px;
+    margin:10px;
+    background-color: #fff;
+    color: #555;
+    border-radius: 5px;
+    visibility: visible;
+    opacity: 1;
+    /* transition: opacity 2s linear; */
+    /* box-shadow: 0 4px 3px 0  rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2); */
+    /* display: flex; */
+	/* flex-direction: row-reverse; */
+	/* flex-wrap: nowrap; */
+	/* justify-content: space-between; */
+	/* align-items: center; */
+	/* align-content: stretch; */
 }
 /* .hidden {
     visibility: hidden;
