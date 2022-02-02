@@ -150,3 +150,12 @@ align-content: stretch;
   }
 }
 
+.white-background {
+  min-height: 70vh;
+  /* max-height: 120vh; */
+  min-width: 300px;
+  /* max-width: 100vw; */
+  background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url(white-backround1.jpg);
+  background-size: cover; 
+  background-position: center bottom;
+}
