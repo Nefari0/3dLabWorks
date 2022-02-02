@@ -1,15 +1,16 @@
 // import { useState, useEffect } from 'react'
 // import './Prototyping.css'
 // import { Link } from 'react-router-dom'
-// import { loginUser,registerUser } from '../../ducks/userReducer'
-// import { connect } from 'react-redux'
+import { loginUser,registerUser,updateUser } from '../../ducks/userReducer'
+import { connect } from 'react-redux'
 // import Agreement from '../Register/Agreement'
 import axios from 'axios'
 import { Component } from 'react'
 import './MessageBoard.css'
 import MyMessage from './MyMessage'
-
-
+import CreateMessage from './CreateMessage'
+import SelectedMessage from './SelectedMessage'
+import { useRef } from 'react'
 
  class MessageBoard extends Component {
      constructor() {
@@ -17,59 +18,76 @@ import MyMessage from './MyMessage'
 
         this.state = {
             messages:[],
-            user_id:12,
             thread:[],
+            conversation_id:null,
         }
         this.getMessages = this.getMessages.bind(this)
         this.openMessage = this.openMessage.bind(this)
      }
 
      componentDidMount() {
+        this.props.updateUser()
         this.getMessages()
+
+        const objDiv = document.getElementById('the-beginning');
+        objDiv.scrollTop = objDiv.scrollHeight;
      }
 
      getMessages = () => {
-         const user_id = 12
+        const { id } = this.props.user.user
+        const user_id = id
         axios.get(`/api/conversations/${user_id}`).then(res => {
             this.setState({
-                messages:res.data
+                messages:res.data,
+                loggedInUser:id
             })
         })
      }
 
      openMessage = (conversation_id) => {
         axios.get(`/api/conversation/messages/get/${conversation_id}`).then(res => {
-            this.setState({thread:res.data})
+            this.setState({
+                thread:res.data,
+                conversation_id:conversation_id,
+            })
         })
      }
 
      render() {
 
-        const { messages,thread,user_id } = this.state
+        const { messages,thread,selectedMessage,conversation_id } = this.state
+        const { id } = this.props.user.user
+        const user_id = id
         
-        const mappedMessageNames = messages.map(el => {
-            return <div key={el.conversation_id} conversation_name={el.conversation_name} conversation_id={el.conversation_id} openMessage={this.openMessage} ><p style={{color:'#555'}} onClick={() => this.openMessage(el.conversation_id)} >{el.conversation_name}</p></div>
+        const mappedMessageUsers = messages.map(el => {
+            return <SelectedMessage key={el.conversation_id} selectedMessage={conversation_id} conversation_name={el.conversation_name} conversation_id={el.conversation_id} openMessage={this.openMessage} photo_url={el.photo_url} user_name={el.user_name} />
         })
 
         const mappedThread = thread.map(el => {
             return <MyMessage key={el.message_id} loggedInUser={user_id} content={el.content} user_id={el.user_id} photo_url={el.photo_url} user_name={el.user_name} />
         })
 
-        return(<div className='message-board' >
+        return(<div className='message-board white-background' >
             <section className='dash column-flex'>
-                <p className='size-test'>left</p>
-                {mappedMessageNames}
+
+                {mappedMessageUsers}
+                <div id='the-beginning'></div>
+                
             </section>
 
             <section className='board column-flex'>
-                <p className='size-test'>right</p>
-                {/* <MyMessage/>
-                <MyMessage/>
-                <MyMessage/> */}
+                <CreateMessage conversation_id={this.state.conversation_id} user_id={user_id} openMessage={this.openMessage} />
                 {mappedThread}
+
             </section>
         </div>)
      }
  }
 
-export default MessageBoard
+ function mapStateToProps(reduxState) {
+     return reduxState
+ }
+
+ export default connect(mapStateToProps, {updateUser})(MessageBoard)
+
+// export default MessageBoard
