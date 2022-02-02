@@ -158,6 +158,8 @@ app.post('/api/messages/user/delete',messageController.deleteMessage)
 // site messaging system endpoints
 app.get('/api/conversations/:user_id',messageController.getConversationByUserId) // gets all user conversations
 app.get('/api/conversation/messages/get/:conversation_id',messageController.getConversationMessagesById) // get all user messages in user's conversations
+app.post('/api/conversation/new',messageController.createNewConversation)
+app.post('/api/conversation/user/new', messageController.sendMessage)
 
 
 // // storage access end points //
