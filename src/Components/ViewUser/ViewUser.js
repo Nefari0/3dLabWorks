@@ -18,6 +18,7 @@ import {app} from '../../base'
 // import SecurityTest from './SecurityTest'
 import MobileLogin from '../MobileLogin/MobileLogin'
 import Loading from '../Loading/Loading';
+import CreateNewMessage from './CreateNewMessage';
 // import AdminPage from '../AdminPage/AdminPage';
 // import EditUserInfo from './EditUserInfo';
 
@@ -40,26 +41,33 @@ class ViewUser extends Component {
             userName:null,
             isLoading:false,
             setPermission:true,
+            openMessageBox:false,
         }
-        this.handleCollections = this.handleCollections.bind(this)
-        this.hideView = this.hideView.bind(this)
-        this.resetView = this.resetView.bind(this)
+        // this.handleCollections = this.handleCollections.bind(this)
+        // this.hideView = this.hideView.bind(this)
+        // this.resetView = this.resetView.bind(this)
         this.pleaseLogin = this.pleaeLogin.bind(this)
         this.setIsLoading = this.setIsLoading.bind(this)
         this.deleteFromFirebase = this.deleteFromFirebase.bind(this)
+        this.openMessageBox = this.openMessageBox.bind(this)
     }
 
     componentDidMount(){
         const { user_id } = this.props.match.params
-        this.getUserAndProjects()
+        this.getUserAndProjects(user_id)
         axios.get(`/api/users/${user_id}`).then(res => 
             this.setState({
                 user:res.data,
                 userName:res.data.user_name
             }))
     }
-    getUserAndProjects() {
-        const { user_id } = this.props.match.params
+
+    openMessageBox = () => {
+        this.setState({openMessageBox:!this.state.openMessageBox})
+    }
+
+    getUserAndProjects(user_id) {
+        // const { user_id } = this.props.match.params
         axios.get(`/api/user/projects/get/${user_id}`).then(res => {
             this.setState({...this.state,items:res.data})
         })
@@ -84,30 +92,30 @@ class ViewUser extends Component {
         })
     }
 
-    handleCollections(params){
-        this.setState({isView:'isCollections'})
-        console.log(this.state.isView)
-    }
+    // handleCollections(params){
+    //     this.setState({isView:'isCollections'})
+    //     console.log(this.state.isView)
+    // }
     
     
-    hideView(params) {
-        this.resetView()
-        switch (params) {
-            case 'showUserInfo':
-                this.setState({ showUserInfo : !this.state.showUserInfo })
-                break;
-            case 'showCollections':
-                this.setState({ showCollections : !this.state.showCollections })
-                break;
-            case 'showAdminPage':
-                this.setState({ showAdminPage : !this.state.showAdminPage})
-                break;
-            case 'showEditUserInfo':
-                this.setState({ showEditUserInto : !this.state.showEditUserInto})
-            default:
-                break;
-        }
-    }
+    // hideView(params) {
+    //     this.resetView()
+    //     switch (params) {
+    //         case 'showUserInfo':
+    //             this.setState({ showUserInfo : !this.state.showUserInfo })
+    //             break;
+    //         case 'showCollections':
+    //             this.setState({ showCollections : !this.state.showCollections })
+    //             break;
+    //         case 'showAdminPage':
+    //             this.setState({ showAdminPage : !this.state.showAdminPage})
+    //             break;
+    //         case 'showEditUserInfo':
+    //             this.setState({ showEditUserInto : !this.state.showEditUserInto})
+    //         default:
+    //             break;
+    //     }
+    // }
 
     deleteFromFirebase(url){
         const storageRef = app.storage().refFromURL(url)
@@ -129,6 +137,10 @@ class ViewUser extends Component {
     render(){
         const { showCollections,showUserInfo,items,isLoading,showCreateProject,showEditUserInto,user } = this.state
         const { photo_url,auth,name,email,is_admin,background_url,user_name,user_id } = this.state.user
+
+        const mappedNewMessage = user.map(el => {
+            return <CreateNewMessage key={el.user_id} user_id={el.user_id} user_name={el.user_name} openMessageBox={this.openMessageBox} />
+        })
 
         const mappedUserName = user.map(el => {
             return <h2 className="portrait-row" style={{textTransform:'none'}} key={el.user_id} >{el.user_name}</h2>
@@ -153,6 +165,8 @@ class ViewUser extends Component {
     return(
         <div>
             <div className="user-page">
+            {/* {this.state.openMessageBox ? <CreateNewMessage openMessageBox={this.openMessageBox} user_id={user_id} user_name={user_name} /> : null} */}
+            {this.state.openMessageBox ? mappedNewMessage : null}
             {isLoading ? <Loading/> : null}
             <section className="column1">
                 {mappedBackground}
@@ -162,7 +176,7 @@ class ViewUser extends Component {
                     {mappedUserName}
  
                     <div className='portrait-row'>
-                        <div className='user-buttons' style={{marginTop:'30px'}} ><p style={{marginTop:'10px'}} >Send Message</p></div>
+                        <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.openMessageBox()} ><p style={{marginTop:'10px'}} >Send Message</p></div>
                     </div>
 
 
