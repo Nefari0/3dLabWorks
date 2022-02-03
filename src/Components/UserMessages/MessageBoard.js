@@ -1,36 +1,60 @@
 // import { useState, useEffect } from 'react'
+import './MessageBoard.css'
 // import './Prototyping.css'
 // import { Link } from 'react-router-dom'
 import { loginUser,registerUser,updateUser } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
+import { Route } from 'react-router-dom'
+import Home from '../Home/Home'
 // import Agreement from '../Register/Agreement'
 import axios from 'axios'
 import { Component } from 'react'
-import './MessageBoard.css'
 import MyMessage from './MyMessage'
 import CreateMessage from './CreateMessage'
 import SelectedMessage from './SelectedMessage'
-import { useRef } from 'react'
+import EndOfMessages from './EndOfMessages'
+// import { useRef } from 'react'
+// import createRef from 'react'
+import React from 'react'
+
 
  class MessageBoard extends Component {
      constructor() {
-        super()
-
-        this.state = {
-            messages:[],
-            thread:[],
-            conversation_id:null,
+         super()
+         
+         this.state = {
+             messages:[],
+             thread:[],
+             conversation_id:null,
+             gotMessages:false,
+             expand:false,
+            }
+            this.getMessages = this.getMessages.bind(this)
+            this.openMessage = this.openMessage.bind(this)
+            // this.getScrollLocations = this.getScrollLocations.bind(this)
+            // this.scrollToBottom = this.scrollToBottom.bind(this)
         }
-        this.getMessages = this.getMessages.bind(this)
-        this.openMessage = this.openMessage.bind(this)
-     }
-
-     componentDidMount() {
+        // scrollToBottom = () => {
+        //     this.messagesEndRef.scrollIntoView({ behavior: 'smooth' })
+        // }
+        // getScrollLocations() {
+            //     const EndOfMessages = document.getElementById('EndOfMessages');
+            //     EndOfMessages.scrollIntoView();
+            //   }
+            
+    componentDidMount() {
+        // const messagesEndRef = React.createRef()
         this.props.updateUser()
-        this.getMessages()
-
-        const objDiv = document.getElementById('the-beginning');
-        objDiv.scrollTop = objDiv.scrollHeight;
+        // this.getMessages()
+        // this.scrollToBottom()
+     }
+     componentDidUpdate() {
+         const { gotMessages } = this.state
+         const { id } = this.props.user.user
+         if(gotMessages === false && id != undefined){
+             this.setState({gotMessages:true})
+             this.getMessages()
+         }
      }
 
      getMessages = () => {
@@ -55,8 +79,9 @@ import { useRef } from 'react'
 
      render() {
 
-        const { messages,thread,selectedMessage,conversation_id } = this.state
+        const { messages,thread,selectedMessage,conversation_id,expand } = this.state
         const { id } = this.props.user.user
+        const { isLoggedIn } = this.props.user
         const user_id = id
         
         const mappedMessageUsers = messages.map(el => {
@@ -67,19 +92,27 @@ import { useRef } from 'react'
             return <MyMessage key={el.message_id} loggedInUser={user_id} content={el.content} user_id={el.user_id} photo_url={el.photo_url} user_name={el.user_name} />
         })
 
-        return(<div className='message-board white-background' >
+        return(<div>
+            {!isLoggedIn ? null : (
+            <div className='message-board ' >
             <section className='dash column-flex'>
 
                 {mappedMessageUsers}
-                <div id='the-beginning'></div>
                 
             </section>
 
             <section className='board column-flex'>
-                <CreateMessage conversation_id={this.state.conversation_id} user_id={user_id} openMessage={this.openMessage} />
-                {mappedThread}
+                {/* {this.getScrollLocations()} */}
+                {/* {EndOfMessages.scrollIntoView} */}
+                
+                {/* <EndOfMessages id='EndOfMessages' /> */}
+                {/* <div ref={this.messagesEndRef} /> */}
+                <div style={{marginTop:'150px'}}>{mappedThread}</div>
+                {/* <CreateMessage id='EndOfMessages' conversation_id={this.state.conversation_id} user_id={user_id} openMessage={this.openMessage} /> */}
+                <div className='text-input-container'><CreateMessage id='EndOfMessages' conversation_id={this.state.conversation_id} user_id={user_id} openMessage={this.openMessage} /></div>
 
             </section>
+        </div>)}
         </div>)
      }
  }
