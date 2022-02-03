@@ -1,7 +1,14 @@
 
 .message-board {
-    width: 95vw;
-    max-height: 95vh;
+    position: absolute;
+    position: fixed;
+    /* position: sticky; */
+    width: 800px;
+    /* width: 600px; */
+    height: 85vh;
+    /* height: 500px; */
+    /* left: 3px; */
+
     display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
@@ -9,21 +16,32 @@
 	align-items: flex-start;
 	align-content: flex-start;
     overflow: scroll;
+
     /* background-color: blue; */
+    background: rgba(116, 116, 116, 0.2);
+    backdrop-filter: blur(12px);
+    z-index: 10000;
+    /* opacity: .9; */
+    /* padding: 20px; */
 }
 
 .dash {
+    /* position: fixed;
+    top: 150px;
+    left: 10%; */
     width: 210px;
-    height: 80%;
+    height: 90%;
     margin-right: 5px;
-    /* background-color: burlywood; */
+    background-color: burlywood;
+    z-index: 100000;
 }
 
 .board {
-    width: 56%;
-    /* height: 80vh; */
-    min-height: 600px;
-    background-color: grey;
+    /* width: 56%; */
+    width: 500px;
+    height: 80vh;
+    /* min-height: 300px; */
+    /* background-color: grey; */
     display: flex;
 	flex-direction: column-reverse;
 	flex-wrap: nowrap;
@@ -48,6 +66,19 @@
     /* width: 300px; */
     /* background-color: hotpink; */
 /* } */
+
+.text-input-container {
+    position: fixed;
+    top: 50px;
+    /* position: relative; */
+    height: 150px;
+    width: 500px;
+    /* width: 40%; */
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 4px 3px 0  rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+    /* opacity: .9; */
+}
 
 .user-message-photo {
     position: relative;
