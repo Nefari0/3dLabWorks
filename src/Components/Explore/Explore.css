@@ -32,7 +32,7 @@
 	justify-content: center;
 	align-items: center;
 	align-content: stretch;
-    z-index: 10000;
+    z-index: 1;
 }
 
 .search-menu-closed {
@@ -52,7 +52,7 @@
 	justify-content: center;
 	align-items: center;
 	align-content: stretch;
-    z-index: 10000;
+    z-index: 1;
 }
 
 .show-bar { display: inline; }
@@ -68,7 +68,7 @@ h4 {
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
     /* color: #fff; */
     color: #555;
-    
+    /* background-color: #fff; */
     opacity: .5; 
   }
   
