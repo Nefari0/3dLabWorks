@@ -108,15 +108,6 @@ class ViewUser extends Component {
         this.setState({isLoading:!this.state.isLoading})
     }
 
-    // deleteFromFirebase(url){
-    //     const storageRef = app.storage().refFromURL(url)
-    //     storageRef.delete().then(function deleted(params) {
-    //         console.log('image deleted')
-    //     }).catch(function (error) {
-    //         console.log('there was an error')
-    //     })
-    // }
-
     handleFriends(){
         this.setState({isView:'isFriends'})
     }
@@ -156,7 +147,6 @@ class ViewUser extends Component {
     return(
         <div>
             <div className="user-page">
-            {/* {this.state.openMessageBox ? <CreateNewMessage openMessageBox={this.openMessageBox} user_id={user_id} user_name={user_name} /> : null} */}
             {this.state.openMessageBox ? mappedNewMessage : null}
             {isLoading ? <Loading/> : null}
             <section className="column1">
@@ -194,13 +184,3 @@ function mapStateToProps(reduxState){
 }
 
 export default connect(mapStateToProps,{updateUser})(ViewUser)
-// export default ViewUser
-
-
-/*
-userinfo
-models/colections
-friends
-edit
-groups
-*/
