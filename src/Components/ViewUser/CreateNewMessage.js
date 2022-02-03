@@ -22,15 +22,10 @@ class CreateNewMessage extends Component {
     }
 
     executeSendMessage = async () => {
-        // to:user_id
-        // from:user_id
-        // content
         const { text } = this.state
         const { id } = this.props.user.user
         const { user_id } =  this.props
         const conversation = await axios.post('/api/conversation/new',{user_id,id,text})
-        // const { conversation_id,conversation_name } = conversation
-        // const userConversation = await axios.post('./')
     }
 
     
