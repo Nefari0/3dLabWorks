@@ -160,6 +160,7 @@ app.get('/api/conversations/:user_id',messageController.getConversationByUserId)
 app.get('/api/conversation/messages/get/:conversation_id',messageController.getConversationMessagesById) // get all user messages in user's conversations
 app.post('/api/conversation/new',messageController.createNewConversation)
 app.post('/api/conversation/user/new', messageController.sendMessage)
+app.post('/api/conversation/exists',messageController.checkExisting)
 
 
 // // storage access end points //
