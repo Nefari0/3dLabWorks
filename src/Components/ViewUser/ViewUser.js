@@ -30,6 +30,7 @@ class ViewUser extends Component {
         super(props);
 
         this.state ={
+            currentUserMessage:null,
             items:[],
             user:[],
             showUserInfo:true,
@@ -48,8 +49,9 @@ class ViewUser extends Component {
         // this.resetView = this.resetView.bind(this)
         this.pleaseLogin = this.pleaeLogin.bind(this)
         this.setIsLoading = this.setIsLoading.bind(this)
-        this.deleteFromFirebase = this.deleteFromFirebase.bind(this)
+        // this.deleteFromFirebase = this.deleteFromFirebase.bind(this)
         this.openMessageBox = this.openMessageBox.bind(this)
+        this.checkForExistingMessage = this.checkForExistingMessage.bind(this)
     }
 
     componentDidMount(){
@@ -60,10 +62,32 @@ class ViewUser extends Component {
                 user:res.data,
                 userName:res.data.user_name
             }))
+        // this.checkForExistingMessage()
+    }
+
+    componentDidUpdate() {
+        const { currentUserMessage } = this.state
+        const { user_id } = this.props.match.params
+        const { id } = this.props.user.user
+        if(currentUserMessage === null && id != undefined) {
+            this.checkForExistingMessage(id,user_id)
+        }
+    }
+
+    checkForExistingMessage = (id,user_id) => {
+        // const { id } = this.props.user.user
+        // const { user_id } = this.state.user
+        axios.post('/api/conversation/exists',{id,user_id}).then(res => {
+            this.setState({currentUserMessage:res.data})
+        })
     }
 
     openMessageBox = () => {
+        const { isLoggedIn } = this.props.user
+        const { currentUserMessage } = this.state
+        if(currentUserMessage === false && isLoggedIn === true){
         this.setState({openMessageBox:!this.state.openMessageBox})
+    }
     }
 
     getUserAndProjects(user_id) {
@@ -84,47 +108,14 @@ class ViewUser extends Component {
         this.setState({isLoading:!this.state.isLoading})
     }
 
-    resetView(){
-        this.setState({
-            showCollections:false,
-            showUserInfo:false,
-            showEditUserInto:false,
-        })
-    }
-
-    // handleCollections(params){
-    //     this.setState({isView:'isCollections'})
-    //     console.log(this.state.isView)
+    // deleteFromFirebase(url){
+    //     const storageRef = app.storage().refFromURL(url)
+    //     storageRef.delete().then(function deleted(params) {
+    //         console.log('image deleted')
+    //     }).catch(function (error) {
+    //         console.log('there was an error')
+    //     })
     // }
-    
-    
-    // hideView(params) {
-    //     this.resetView()
-    //     switch (params) {
-    //         case 'showUserInfo':
-    //             this.setState({ showUserInfo : !this.state.showUserInfo })
-    //             break;
-    //         case 'showCollections':
-    //             this.setState({ showCollections : !this.state.showCollections })
-    //             break;
-    //         case 'showAdminPage':
-    //             this.setState({ showAdminPage : !this.state.showAdminPage})
-    //             break;
-    //         case 'showEditUserInfo':
-    //             this.setState({ showEditUserInto : !this.state.showEditUserInto})
-    //         default:
-    //             break;
-    //     }
-    // }
-
-    deleteFromFirebase(url){
-        const storageRef = app.storage().refFromURL(url)
-        storageRef.delete().then(function deleted(params) {
-            console.log('image deleted')
-        }).catch(function (error) {
-            console.log('there was an error')
-        })
-    }
 
     handleFriends(){
         this.setState({isView:'isFriends'})
@@ -198,12 +189,12 @@ class ViewUser extends Component {
         </div>
         )}
 }
-// function mapStateToProps(reduxState){
-//     return reduxState
-// }
+function mapStateToProps(reduxState){
+    return reduxState
+}
 
-// export default connect(mapStateToProps,{getProjects,updateUser})(ViewUser)
-export default ViewUser
+export default connect(mapStateToProps,{updateUser})(ViewUser)
+// export default ViewUser
 
 
 /*
