@@ -1,20 +1,15 @@
-// import { useState, useEffect } from 'react'
+
 import './MessageBoard.css'
-// import './Prototyping.css'
-// import { Link } from 'react-router-dom'
 import { loginUser,registerUser,updateUser } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
 import { Route } from 'react-router-dom'
 import Home from '../Home/Home'
-// import Agreement from '../Register/Agreement'
 import axios from 'axios'
 import { Component } from 'react'
 import MyMessage from './MyMessage'
 import CreateMessage from './CreateMessage'
 import SelectedMessage from './SelectedMessage'
 import EndOfMessages from './EndOfMessages'
-// import { useRef } from 'react'
-// import createRef from 'react'
 import React from 'react'
 
 
@@ -31,22 +26,11 @@ import React from 'react'
             }
             this.getMessages = this.getMessages.bind(this)
             this.openMessage = this.openMessage.bind(this)
-            // this.getScrollLocations = this.getScrollLocations.bind(this)
-            // this.scrollToBottom = this.scrollToBottom.bind(this)
+            this.expandMessageBoard = this.expandMessageBoard.bind(this)
         }
-        // scrollToBottom = () => {
-        //     this.messagesEndRef.scrollIntoView({ behavior: 'smooth' })
-        // }
-        // getScrollLocations() {
-            //     const EndOfMessages = document.getElementById('EndOfMessages');
-            //     EndOfMessages.scrollIntoView();
-            //   }
             
     componentDidMount() {
-        // const messagesEndRef = React.createRef()
         this.props.updateUser()
-        // this.getMessages()
-        // this.scrollToBottom()
      }
      componentDidUpdate() {
          const { gotMessages } = this.state
@@ -77,9 +61,13 @@ import React from 'react'
         })
      }
 
+     expandMessageBoard = () => {
+         this.setState({expand:!this.state.expand})
+     }
+
      render() {
 
-        const { messages,thread,selectedMessage,conversation_id,expand } = this.state
+        const { messages,thread,selectedMessage,conversation_id,expand,gotMessages } = this.state
         const { id } = this.props.user.user
         const { isLoggedIn } = this.props.user
         const user_id = id
@@ -92,9 +80,34 @@ import React from 'react'
             return <MyMessage key={el.message_id} loggedInUser={user_id} content={el.content} user_id={el.user_id} photo_url={el.photo_url} user_name={el.user_name} />
         })
 
+        if(isLoggedIn === false && gotMessages === true){
+            this.setState({
+                messages:[],
+                thread:[],
+                conversation_id:null,
+                gotMessages:false,
+                expand:false,
+            })
+        }
+
         return(<div>
-            {!isLoggedIn ? null : (
+            {isLoggedIn ?  (!expand ? <div className='message-board-closed' onClick={() => this.expandMessageBoard()} >
+
+            <svg xmlns="http://www.w3.org/2000/svg" style={{width:'25px',opacity:'.5'}} className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+
+            </div> :
             <div className='message-board ' >
+            <div className='message-board-title'>
+
+            <svg className="close-message-box" onClick={() => this.expandMessageBoard()} style={{color:'#fff', height:'35px',width:'35px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+            </svg>
+
+            <h2 style={{textTransform:'none'}} >Messages</h2>
+
+            </div>
             <section className='dash column-flex'>
 
                 {mappedMessageUsers}
@@ -102,17 +115,10 @@ import React from 'react'
             </section>
 
             <section className='board column-flex'>
-                {/* {this.getScrollLocations()} */}
-                {/* {EndOfMessages.scrollIntoView} */}
-                
-                {/* <EndOfMessages id='EndOfMessages' /> */}
-                {/* <div ref={this.messagesEndRef} /> */}
-                <div style={{marginTop:'150px'}}>{mappedThread}</div>
-                {/* <CreateMessage id='EndOfMessages' conversation_id={this.state.conversation_id} user_id={user_id} openMessage={this.openMessage} /> */}
                 <div className='text-input-container'><CreateMessage id='EndOfMessages' conversation_id={this.state.conversation_id} user_id={user_id} openMessage={this.openMessage} /></div>
-
+                <div style={{marginTop:'150px'}}>{mappedThread}</div>
             </section>
-        </div>)}
+        </div>) : null}
         </div>)
      }
  }
@@ -122,5 +128,3 @@ import React from 'react'
  }
 
  export default connect(mapStateToProps, {updateUser})(MessageBoard)
-
-// export default MessageBoard
