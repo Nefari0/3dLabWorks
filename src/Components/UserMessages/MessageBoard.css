@@ -43,7 +43,8 @@
 
 .message-board-closed {
     position: fixed;
-    left: 100px;
+    /* left: 100px; */
+    left: 30px;
     top: 70px;
     z-index: 10000;
     position: absolute;
@@ -61,6 +62,7 @@
 	align-content: stretch;
     z-index: 10000;
     transition: all 500ms;
+    z-index: 2;
 }
 
 .dash {
@@ -201,6 +203,13 @@
     }
     .message-board-title {
         width: 415px;
+    }
+    .message-board-closed {
+        -webkit-transform: scale(.50);
+        -ms-transform: scale(.50);
+        transform: scale(.50);
+        opacity: 1;
+        left: 0px;
     }
 }
 
