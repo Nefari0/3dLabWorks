@@ -101,12 +101,12 @@ class Explore extends Component {
             <div className="explore-container">
                 {/* className for "about header" is in About.css and App.css */}
                 {/* <div className="about-header-closed project-search" style={{marginLeft:'0px',width:'100%'}}>  */}
-                <div className={`search-menu ${openSearchBar ? true : 'search-menu-closed'}`} >
+                <div className={`search-menu ${!isLoggedIn ? true : 'slide-over'} ${openSearchBar ? true : `search-menu-closed ${!isLoggedIn ? true : 'slide-over'}`}`} >
 
                     <svg onClick={() => this.openSearch()} style={{width:'25px',opacity:'.5'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                     </svg>
-                    <div className={`show-bar ${openSearchBar ? false : 'dont-show-bar'}`}>
+                    <div className={`show-bar ${openSearchBar ? false : `dont-show-bar`}`}>
                     <input placeholder="search" type="text" style={{height:'25px',width:'100px',borderRadius:'10px',color:'#fff',marginLeft:'10px'}} onChange={e => this.handleText("projectSearch",e.target.value)} ></input>
                     </div>
                 </div>
