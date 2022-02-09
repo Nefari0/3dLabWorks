@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Component } from "react";
 import '../../Components/FeaturedProjects/Comments/Comments'
+import './CreateMessage.css'
 
 
 export default class CreateMessage extends Component {
@@ -37,12 +38,18 @@ export default class CreateMessage extends Component {
         const { isLoggedIn } = this.props
  
         return(
-            <div className="create-post" style={{minHeight:'100px'}}>
+            <div className="input-background" style={{maxHeight:'50px'}}>
+            {/* <div className="input-background" > */}
 
-                <textarea className='comment-text-input post-input' value={this.state.text} name="text" rows="5" cols="50" wrap="soft" onChange={e => this.handleText('text',e.target.value)} > </textarea>
+                <textarea className=' message-input' style={{minHeight:'45px'}} value={this.state.text} name="text" rows="5" cols="50" wrap="soft" onChange={e => this.handleText('text',e.target.value)} > </textarea>
 
                 {/* {!isLoggedIn ? <div className='add-button file-button' onClick={this.props.plsSignIn} style={{marginLeft:'200px'}} >send</div> : <div className='add-button submit-message-button'  style={{marginLeft:'200px'}} onClick={() => this.executeSendMessage()} >send</div>} */}
-                <div className='add-button file-button' onClick={() => this.executeSendMessage()} style={{marginLeft:'200px'}} >send</div> 
+                <div className='send-message-button' onClick={() => this.executeSendMessage()} style={{position:'absolute',height:'30px',width:'30px'}} >
+                    {/* send */}
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                </div> 
 
             </div>
         )

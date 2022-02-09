@@ -1,0 +1,35 @@
+.message-input {
+    width: 90%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    /* margin-right: 10px; */
+    padding-left: 5px;
+    border: solid 1px #6495ed;
+    border-radius: 20px;
+}
+
+.send-message-button {
+    background: linear-gradient(0turn,#5077be,#6495ed);
+    height: 25px;
+    width: 60px;
+    border-radius: 2px;
+    font-size: smaller;
+    border:solid 1px #3c598e;
+    height: 40px;
+    width: 30px;
+    left: 355px;
+
+    margin-right: 25px;
+    color: #fff;
+}
+
+/* @media (max-width:910px) { */
+@media(max-width:825px) {
+    .send-message-button {
+        left: 210px;
+    }
+}
+
+@media(max-width:410px) {
+
+}
