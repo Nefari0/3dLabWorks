@@ -13,6 +13,7 @@ import Footer from './Components/Footer/Footer'
 import Explore  from './Components/Explore/Explore'
 import AdminPage from './Components/AdminPage/AdminPage';
 import MessageBoard from './Components/UserMessages/MessageBoard';
+import Dash from './Components/Dash/Dash'
 // import BaseBackend from './BaseBackend';
 // import EditModel from './Components/UserPage/EditModel' // for testing. will not be rendered in this component
 // import FirebaseTest from './Components/FirebaseTest';
@@ -28,6 +29,7 @@ function App() {
       {/* <AdminPage /> */}
         {/* <FirebaseTest/> */}
         <Header/>
+        {/* <Dash/> */}
         <MessageBoard />
         {/* <EditModel/> */}
         {/* <DemoScenes /> */}
