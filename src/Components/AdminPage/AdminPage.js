@@ -112,7 +112,7 @@ class AdminPage extends Component {
         const { photo,auth,name,is_admin } = this.props.user.user
 
         const mappedUsers = users.map(element => {
-            return <ShowUser user_name={element.user_name} first_name={element.first_name} last_name={element.last_name} />
+            return <ShowUser user_name={element.user_name} first_name={element.first_name} last_name={element.last_name} user_id={element.user_id} />
         })
 
         return(
