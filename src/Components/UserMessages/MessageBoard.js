@@ -23,7 +23,7 @@ import React from 'react'
              conversation_id:null,
              gotMessages:false,
              expand:false,
-             openContacts:false,
+             openContacts:true,
             }
             this.getMessages = this.getMessages.bind(this)
             this.openMessage = this.openMessage.bind(this)
