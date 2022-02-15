@@ -129,12 +129,12 @@ import React from 'react'
 
             </div>
             
-            <section className='dash'>
-                {mappedMessageUsers}
+            <section>
+                <div className='dash' >{mappedMessageUsers}</div>
             </section>
 
             <section className={`mobile-dash ${openContacts ? false : 'mobile-dash-closed'}`}>
-                {openContacts === true ? mappedMessageUsers : null }
+                <div >{openContacts === true ? mappedMessageUsers : null }</div>
             </section>
 
             <section className=' board'>
