@@ -13,6 +13,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.1",
     "firebase": "^8.2.4",
+    "http": "^0.0.1-security",
     "massive": "^6.6.4",
     "nodemon": "^2.0.15",
     "react": "^17.0.1",
@@ -30,6 +31,8 @@
     "redux-thunk": "^2.3.0",
     "three": "^0.126.1",
     "web-vitals": "^0.2.4",
+    "websocket": "^1.0.34",
+    "ws": "^8.5.0",
     "yarn": "^1.22.10"
   },
   "scripts": {
