@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { Component } from "react";
-import '../../Components/FeaturedProjects/Comments/Comments'
+// import '../../Components/FeaturedProjects/Comments/Comments'
 import './CreateMessage.css'
 
 
@@ -24,6 +24,7 @@ export default class CreateMessage extends Component {
 
         await axios.post('/api/conversation/user/new',{conversation_id,user_id,text})
         await this.props.openMessage(conversation_id)
+        this.setState({text:''})
     }
 
     
