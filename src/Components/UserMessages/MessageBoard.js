@@ -11,8 +11,8 @@ import CreateMessage from './CreateMessage'
 import SelectedMessage from './SelectedMessage'
 import EndOfMessages from './EndOfMessages'
 import React from 'react'
-import { w3cwebsocket as W3CWebSocket } from "websocket";
-const client = new W3CWebSocket(`ws://127.0.0.1:8000`);
+// import { w3cwebsocket as W3CWebSocket } from "websocket";
+// const client = new W3CWebSocket(`ws://127.0.0.1:8000`);
 
 
  class MessageBoard extends Component {
@@ -32,7 +32,7 @@ const client = new W3CWebSocket(`ws://127.0.0.1:8000`);
             this.openMessage = this.openMessage.bind(this)
             this.expandMessageBoard = this.expandMessageBoard.bind(this)
             this.setOpenContacts = this.setOpenContacts.bind(this)
-            this.sendToSockets = this.sendToSockets.bind(this)
+            // this.sendToSockets = this.sendToSockets.bind(this)
             // this.getConnected = this.getConnected.bind(this)
         }
 
@@ -50,37 +50,37 @@ const client = new W3CWebSocket(`ws://127.0.0.1:8000`);
      }
 
      // --- sockets --- //
-     getConnected = (input) => {
-         const { conversation_id } = this.state
-         console.log(`got connected to ${input}`,input === conversation_id)
-        const contentDefaultMessage = "default message as string"
-        client.onopen = () => {
-         console.log('WebSocket Client Connected');
-        };
+    //  getConnected = (input) => {
+    //      const { conversation_id } = this.state
+    //      console.log(`got connected to ${input}`,input === conversation_id)
+    //     const contentDefaultMessage = "default message as string"
+    //     client.onopen = () => {
+    //      console.log('WebSocket Client Connected');
+    //     };
     
-          client.onmessage = (message) => {
+    //       client.onmessage = (message) => {
         
-          const dataFromServer = JSON.parse(message.data);
-          console.log('got reply',dataFromServer)
-          if (dataFromServer.type === 'message' && input === conversation_id ) {
-            this.openMessage(conversation_id)
-            this.setState((State) =>
-            ({newMessages:[...this.state.newMessages,
-            {
-              msg: dataFromServer.msg,
-              user:dataFromServer.user
-            }]
+    //       const dataFromServer = JSON.parse(message.data);
+    //       console.log('got reply',dataFromServer)
+    //       if (dataFromServer.type === 'message' && input === conversation_id ) {
+    //         this.openMessage(conversation_id)
+    //         this.setState((State) =>
+    //         ({newMessages:[...this.state.newMessages,
+    //         {
+    //           msg: dataFromServer.msg,
+    //           user:dataFromServer.user
+    //         }]
     
-          }))
-            console.log('is messaged')
-          }
-          }
-    }
-    sendToSockets = (text,conversation_id) => {
-        const { messages,loggedInUser } = this.state
-        const { user } = this.props.user.user
-        client.send(JSON.stringify({type: "message",msg:text,user:user, conversation_id:conversation_id}))
-    };
+    //       }))
+    //         console.log('is messaged')
+    //       }
+    //       }
+    // }
+    // sendToSockets = (text,conversation_id) => {
+    //     const { messages,loggedInUser } = this.state
+    //     const { user } = this.props.user.user
+    //     client.send(JSON.stringify({type: "message",msg:text,user:user, conversation_id:conversation_id}))
+    // };
     //     // --------------- //
                 
 
@@ -104,7 +104,7 @@ const client = new W3CWebSocket(`ws://127.0.0.1:8000`);
                 openContacts:false
             })
         })
-        await this.getConnected(conversation_id)
+        // await this.getConnected(conversation_id)
      }
 
      expandMessageBoard = () => {
@@ -185,7 +185,9 @@ const client = new W3CWebSocket(`ws://127.0.0.1:8000`);
                 
             </section>
             <section>
-                <div className='text-input-container'><CreateMessage id='EndOfMessages' conversation_id={this.state.conversation_id} user_id={user_id} openMessage={this.openMessage} sendToSockets={this.sendToSockets} /></div>
+                {/* <div className='text-input-container'><CreateMessage id='EndOfMessages' conversation_id={this.state.conversation_id} user_id={user_id} openMessage={this.openMessage} sendToSockets={this.sendToSockets} /></div> */}
+                <div className='text-input-container'><CreateMessage id='EndOfMessages' conversation_id={this.state.conversation_id} user_id={user_id} openMessage={this.openMessage} /></div>
+
             </section>
         </div>) : null}
         </div>)
