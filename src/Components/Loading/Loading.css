@@ -18,7 +18,8 @@
   animation: rotating .75s linear infinite;
   /* top: 15vh; */
   left: 40vw;
-  bottom: 50%;
+  /* bottom: 50%; */
+  bottom: 25%;
   z-index: 1111;
 }
 .load-background {
@@ -41,8 +42,20 @@
   left: 0;
 }
 
-/* @media (max-width: 1620px) {
+@media (max-width: 480px) {
   .load-box {
-    margin: 25vh 55vh;
+    left: 30vw;
+  }
+}
+
+@media (max-width: 350px) {
+  .load-box {
+    left: 20vw;
+  }
+}
+
+/* @media (max-height:300px) {
+  .load-box {
+    top: 50vh;
   }
 } */
