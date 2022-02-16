@@ -2,7 +2,8 @@ import axios from 'axios'
 
 const inititialState = {
     user: {},
-    isLoggedIn:false
+    isLoggedIn:false,
+    isLoading:false,
 }
 
 const LOGIN_USER = 'LOGIN_USER'
@@ -73,19 +74,29 @@ export default function userReducer(state = inititialState, action) {
             return {
                 inititialState
             }
+        case LOGIN_USER + '_PENDING':
+            return {
+                ...state,
+                isLoading: true
+            }
         case LOGIN_USER + '_FULFILLED':
             return {
                 ...state,
-                user: action.payload.data, isLoggedIn: true,
+                user: action.payload.data, isLoggedIn: true, isLoading:false
             }
         case LOGOUT_USER + '_FULFILLED':
                 return {
                     ...state, user: action.payload.data, isLoggedIn: false
                 }
+        case REGISTER_USER + '_PENDING':
+                return {
+                    ...state,
+                    isLoading: true
+                }
         case REGISTER_USER + '_FULFILLED':
             return {
                 ...state,
-                user: action.payload.data, isLoggedIn: true
+                user: action.payload.data, isLoggedIn: true, isLoading:false
             }
         case REGISTER_USER + '_REJECTED':
             return { 
