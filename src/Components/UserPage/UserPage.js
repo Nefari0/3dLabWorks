@@ -39,7 +39,7 @@ class UserPage extends Component {
             setPermission:true,
         }
         this.handleCollections = this.handleCollections.bind(this)
-        // this.hideView = this.hideView.bind(this)
+        this.hideView = this.hideView.bind(this)
         this.resetView = this.resetView.bind(this)
         this.pleaseLogin = this.pleaeLogin.bind(this)
         this.setIsLoading = this.setIsLoading.bind(this)
@@ -84,24 +84,24 @@ class UserPage extends Component {
     }
     
     
-    // hideView(params) {
-    //     this.resetView()
-    //     switch (params) {
-    //         case 'showUserInfo':
-    //             this.setState({ showUserInfo : !this.state.showUserInfo })
-    //             break;
-    //         case 'showCollections':
-    //             this.setState({ showCollections : !this.state.showCollections })
-    //             break;
-    //         case 'showAdminPage':
-    //             this.setState({ showAdminPage : !this.state.showAdminPage})
-    //             break;
-    //         case 'showEditUserInfo':
-    //             this.setState({ showEditUserInto : !this.state.showEditUserInto})
-    //         default:
-    //             break;
-    //     }
-    // }
+    hideView(params) {
+        this.resetView()
+        switch (params) {
+            case 'showUserInfo':
+                this.setState({ showUserInfo : !this.state.showUserInfo })
+                break;
+            case 'showCollections':
+                this.setState({ showCollections : !this.state.showCollections })
+                break;
+            case 'showAdminPage':
+                this.setState({ showAdminPage : !this.state.showAdminPage})
+                break;
+            case 'showEditUserInfo':
+                this.setState({ showEditUserInto : !this.state.showEditUserInto})
+            default:
+                break;
+        }
+    }
 
     deleteFromFirebase(url){
         const storageRef = app.storage().refFromURL(url)
@@ -142,7 +142,7 @@ class UserPage extends Component {
                     alt="photo"/>
                     <h2 className="portrait-row" style={{textTransform:'none'}} >{this.props.user.user.user}</h2>
                     <div className='portrait-row'>
-                        <div className='user-buttons' style={{marginTop:'30px'}} ><p style={{marginTop:'10px'}} onClick={() => this.hideView('showEditUserInfo')} >Edit Profile</p></div>
+                        <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.hideView('showEditUserInfo')}><p style={{marginTop:'10px'}}  >Edit Profile</p></div>
                         <div className='user-buttons' style={{marginTop:'30px'}}  onClick={() => this.openCreate()} ><p style={{marginTop:'10px'}} >Create</p></div>
                     </div>
  
