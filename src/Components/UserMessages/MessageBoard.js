@@ -12,8 +12,8 @@ import SelectedMessage from './SelectedMessage'
 import EndOfMessages from './EndOfMessages'
 import React from 'react'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-const client = new W3CWebSocket(`ws://127.0.0.1:8000`);
-
+// const client = new W3CWebSocket(`ws://127.0.0.1:8000`);
+const client = new W3CWebSocket(`ws://165.227.102.189:8000`);
 
  class MessageBoard extends Component {
      constructor() {
