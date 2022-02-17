@@ -12,8 +12,8 @@ import SelectedMessage from './SelectedMessage'
 import EndOfMessages from './EndOfMessages'
 import React from 'react'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-// const client = new W3CWebSocket(`ws://127.0.0.1:8000`);
-const client = new W3CWebSocket(`ws://165.227.102.189:8000`);
+// const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
+const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
 
  class MessageBoard extends Component {
      constructor() {
@@ -53,16 +53,16 @@ const client = new W3CWebSocket(`ws://165.227.102.189:8000`);
      // --- sockets --- //
      getConnected = (input) => {
          const { conversation_id } = this.state
-         console.log(`got connected to ${input}`,input === conversation_id)
+        //  console.log(`got connected to ${input}`,input === conversation_id)
         const contentDefaultMessage = "default message as string"
         client.onopen = () => {
-         console.log('WebSocket Client Connected');
+        //  console.log('WebSocket Client Connected');
         };
     
           client.onmessage = (message) => {
         
           const dataFromServer = JSON.parse(message.data);
-          console.log('got reply',dataFromServer)
+        //   console.log('got reply',dataFromServer)
           if (dataFromServer.type === 'message' && input === conversation_id ) {
             this.openMessage(conversation_id)
             this.setState((State) =>
@@ -73,14 +73,15 @@ const client = new W3CWebSocket(`ws://165.227.102.189:8000`);
             }]
     
           }))
-            console.log('is messaged')
+            // console.log('is messaged')
           }
           }
     }
     sendToSockets = (text,conversation_id) => {
         const { messages,loggedInUser } = this.state
         const { user } = this.props.user.user
-        client.send(JSON.stringify({type: "message",msg:text,user:user, conversation_id:conversation_id}))
+        // client.send(JSON.stringify({type: "message",msg:text,user:user, conversation_id:conversation_id}))
+        client.send(JSON.stringify({type: "message",conversation_id:conversation_id}))
     };
     //     // --------------- //
                 
@@ -162,7 +163,7 @@ const client = new W3CWebSocket(`ws://165.227.102.189:8000`);
             </svg>
 
 
-            <h2 style={{textTransform:'none'}} >Messages</h2>
+            <h2 className='hide-message-h2' style={{textTransform:'none'}} >Messages</h2>
 
             <svg className={`toggle-contacts ${openContacts ? true : 'toggle-contacts-rotated'}`} style={{ height:'35px',width:'35px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20" fill="currentColor" onClick={() => this.setOpenContacts()}>
                 <path d="M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z" />
