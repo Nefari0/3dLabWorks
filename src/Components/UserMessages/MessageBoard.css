@@ -74,11 +74,11 @@
     z-index: 2;
 }
 
-.board-flex {
+/* .board-flex {
     display: flex;
     flex-direction: column;
 
-}
+} */
 
 .dash {
     margin-top: 70px;
@@ -295,80 +295,36 @@
     .message-board {
         width: 400px;
         flex-direction: row;
-        /* flex-direction: column; */
     }
-    /* .board { */
-        /* width: ; */
-        /* background-color: yellow; */
-    /* } */
 
     .input-background {
         /* right: 225px; */
         right: 280px;
         width: 230px;
     }
-
-    /* .user-over-flow { */
-        /* background-color:yellow; */
-    /* } */
     .dash {
         display: none;
-        /* position: absolute; */
-        
-        /* height:50px; */
-        /* width: 200px; */
-        
-        /* height: 200px; */
-        /* height: 50px; */
-        /* left: 30px; */
-        /* top: 30px; */
-        /* background-color: pink; */
-        /* z-index: 200000000; */
     }
     .mobile-dash {
         position: absolute;
-        /* position: relative; */
-        /* top: 55px; */
         top: 105px;
         left: 20px;
-        /* width: 265px; */
         width: 245px;
-        /* min-height: 100px; */
         max-height: 300px;
-        /* height: 250px; */
-        /* background-color: yellow; */
         background: rgba(165, 165, 165, 0.116);
         backdrop-filter: blur(12px);
-        /* padding-top: 5px; */
-        /* padding-bottom: 5px; */
-        /* padding-right: 10px; */
-        /* padding-left: 10px; */
-
-
         display: flex;
         flex-direction: column;
         align-content: center;
         align-items: center;
         justify-content: flex-start;
-
-        /* display: flex;
-        flex-direction: column-reverse;
-        flex-wrap: nowrap;
-        justify-content: flex-start;
-        align-items: center;
-        align-content: stretch;
-        overflow: scroll; */
-
         z-index: 100000000000000000;
-        /* transition: transform all .5s; */
-        /* transition: all 100ms; */
         overflow: scroll;
     }
     .mobile-dash-closed {
         top: 100px;
         min-height: 0px;
         width: 0px;
-        /* transition: transform all .5s; */
         transition: all 100ms;
         
     }
@@ -455,4 +411,36 @@
         height: 20px;
         opacity: 1;
     } */
+}
+
+@media (max-height:430px) {
+    .message-board-title {
+        height: 40px;
+    }
+    .message-board {
+        top:5px;
+        height: 90vh;
+    }
+    .board {
+        height: 90%;
+        margin-top: 0px;
+        margin-bottom: auto;
+    }
+    .input-background {
+        top: 40px;
+    }
+    .toggle-contacts,
+    .toggle-contacts-rotated {
+        top: 40px;
+    }
+    .mobile-dash {
+        top: 40px;
+        left: 50px;
+    }
+    .message-board-title {
+        background: rgba(0,0,0,0.2);
+    }
+    .hide-message-h2 {
+        display: none;
+    }
 }
