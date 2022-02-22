@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { updateUser,changePassword,loginUser } from '../../ducks/userReducer'
+import { updateUser,loginUser } from '../../ducks/userReducer'
 // import { store } from 'react-redux'
 import './EditUserInfo.css'
 import {app} from '../../base'
@@ -348,4 +348,4 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps, {updateUser,changePassword,loginUser} )(EditUserInfo)
+export default connect(mapStateToProps, {updateUser,loginUser} )(EditUserInfo)
