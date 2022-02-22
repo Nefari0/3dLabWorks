@@ -50,7 +50,7 @@ const MobileLogin = (props) => {
 
     const openAgreement = () => {
         setOpenIAgree(!openIAgree)
-        console.log('open agreement',openIAgree)
+        // console.log('open agreement',openIAgree)
     }
 
     // const waitForLogin = () => {
