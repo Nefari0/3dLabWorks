@@ -271,7 +271,12 @@ class EditUserInfo extends Component {
         const user_name = user
         // console.log('here is user',user_name)
         if(newPassword1 === newPassword2){
-            await this.props.changePassword(user_name,oldPassword,newPassword1,newPassword2)
+            // await this.props.changePassword(user_name,oldPassword,newPassword1,newPassword2)
+            axios.post('/auth/password',{newPassword1,newPassword2,oldPassword,user_name}).then(res => {
+                this.openChangePass()
+                this.props.hideView('showEditUserInfo')
+                // return (alert('Your password has been changed'))
+            })
             // console.log('await?',newPassword1,user)
             // await this.props.updateUser()
         }
