@@ -4,6 +4,7 @@ const inititialState = {
     user: {},
     isLoggedIn:false,
     isLoading:false,
+    loginError:false,
 }
 
 const LOGIN_USER = 'LOGIN_USER'
@@ -12,12 +13,21 @@ const REGISTER_USER = 'REGISTER_USER'
 const EDIT_USERINFO = 'EDIT_USERINFO'
 const UPDATE_USER = 'UPDATE_USER'
 const SHOW_DATA = 'SHOW_DATA'
+const CHANGE_PASSWORD = 'CHANGE_PASSWORD'
 
 export function loginUser(user_name, password) {
     const myInfo = window.localStorage
     return {
         type: LOGIN_USER,
         payload: axios.post('/auth/login', {user_name, password})
+    };
+}
+
+export function changePassword(user_name, oldPassword, newPassword1, newPassword2) {
+    // const myInfo = window.localStorage
+    return {
+        type: LOGIN_USER,
+        payload: axios.post('/auth/password', { user_name, oldPassword, newPassword1, newPassword2 })
     };
 }
 
@@ -70,19 +80,29 @@ export function updateUser(user){
 export default function userReducer(state = inititialState, action) {
     switch (action.type) {
         case SHOW_DATA + 'FULFILLED':
-            console.log(user)
+            
+            // console.log(user)
             return {
                 inititialState
             }
         case LOGIN_USER + '_PENDING':
+            // console.log(action.type,'here is actions and type')
             return {
                 ...state,
                 isLoading: true
             }
         case LOGIN_USER + '_FULFILLED':
+            // console.log(action.type,'here is actions and type')
             return {
                 ...state,
                 user: action.payload.data, isLoggedIn: true, isLoading:false
+            }
+        case LOGIN_USER + '_REJECTED':
+            alert('Your username or password is incorrect')
+            // console.log(action.type,'here is actions and type')
+            return {
+                ...state,
+                loginError:true,isLoading:false
             }
         case LOGOUT_USER + '_FULFILLED':
                 return {
@@ -115,6 +135,11 @@ export default function userReducer(state = inititialState, action) {
                 ...state,
                 isLoggedIn: false
             }
+            case CHANGE_PASSWORD + '_FULFILLED':
+                return {
+                    ...state,
+
+                }
 
         // case GET_INFO + '_FULFULLED':
         //     return {
