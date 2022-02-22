@@ -23,13 +23,13 @@ export function loginUser(user_name, password) {
     };
 }
 
-export function changePassword(user_name, oldPassword, newPassword1, newPassword2) {
-    // const myInfo = window.localStorage
-    return {
-        type: LOGIN_USER,
-        payload: axios.post('/auth/password', { user_name, oldPassword, newPassword1, newPassword2 })
-    };
-}
+// export function changePassword(user_name, oldPassword, newPassword1, newPassword2) {
+//     // const myInfo = window.localStorage
+//     return {
+//         type: LOGIN_USER,
+//         payload: axios.post('/auth/password', { user_name, oldPassword, newPassword1, newPassword2 })
+//     };
+// }
 
 export function logoutUser(){
     return {
@@ -135,11 +135,10 @@ export default function userReducer(state = inititialState, action) {
                 ...state,
                 isLoggedIn: false
             }
-            case CHANGE_PASSWORD + '_FULFILLED':
-                return {
-                    ...state,
-
-                }
+            // case CHANGE_PASSWORD + '_FULFILLED':
+            //     return {
+            //         ...state,
+            //     }
 
         // case GET_INFO + '_FULFULLED':
         //     return {
