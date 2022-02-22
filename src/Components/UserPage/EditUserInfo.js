@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { updateUser,changePassword } from '../../ducks/userReducer'
+import { updateUser,changePassword,loginUser } from '../../ducks/userReducer'
 // import { store } from 'react-redux'
 import './EditUserInfo.css'
 import {app} from '../../base'
@@ -263,13 +263,23 @@ class EditUserInfo extends Component {
     openChangePass() {
         this.setState({openNewPass:!this.state.openNewPass})
     }
-    launchNewPass() {
+    launchNewPass = async () => {
+        this.setState({setPermission:true})
+        // this.user
         const { newPassword1,newPassword2,oldPassword } = this.state
         const { user } = this.props.user.user
         const user_name = user
         // console.log('here is user',user_name)
-        this.props.changePassword(user_name,oldPassword,newPassword1,newPassword2)
+        if(newPassword1 === newPassword2){
+            await this.props.changePassword(user_name,oldPassword,newPassword1,newPassword2)
+            // console.log('await?',newPassword1,user)
+            // await this.props.updateUser()
+        }
+        // await this.userInfoFromProps()
     }
+    // reLogin = () => {
+    //     this.props.loginUser()
+    // }
 
     render(){
 
@@ -333,4 +343,4 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps, {updateUser,changePassword} )(EditUserInfo)
+export default connect(mapStateToProps, {updateUser,changePassword,loginUser} )(EditUserInfo)
