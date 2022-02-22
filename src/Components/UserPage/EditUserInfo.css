@@ -94,3 +94,32 @@
 	align-items: baseline;
 	align-content: stretch;
 }
+
+.change-pass-container {
+	position: absolute;
+	height: 200px;
+	width: 300px;
+	top: 75px;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: stretch;
+	/* background-color: yellow; */
+	background-color: rgb(240, 240, 240);
+    /* box-shadow: 0 0 25px rgba(0, 0, 0, 0.1); */
+	box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
+	opacity: 1;
+	z-index: 1000000000;
+}
+
+.change-pass-button-flex {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	/* align-items: center; */
+	align-content: flex-start;
+}

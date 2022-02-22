@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { updateUser } from '../../ducks/userReducer'
+import { updateUser,changePassword } from '../../ducks/userReducer'
 // import { store } from 'react-redux'
 import './EditUserInfo.css'
 import {app} from '../../base'
@@ -22,7 +22,10 @@ class EditUserInfo extends Component {
             file:null,
             user:{},
             setPermission:true,
-
+            openNewPass:false,
+            oldPassword:'',
+            newPassword1:'',
+            newPassword2:'',
         }
         this.handlePhotoChange = this.handlePhotoChange.bind(this)
         this.addPhoto = this.addPhoto.bind(this)
@@ -40,6 +43,7 @@ class EditUserInfo extends Component {
         this.getPhotoUrl = this.getPhotoUrl.bind(this)
         this.userInfoFromProps = this.userInfoFromProps.bind(this)
         // this.handleTextInput = this.handleTextInput.bind(this)
+        this.launchNewPass = this.launchNewPass.bind(this)
 
         // temp functions for testing//
         this.handleInfoClick = this.handleInfoClick.bind(this)
@@ -256,18 +260,39 @@ class EditUserInfo extends Component {
     }
     //  -------------------------//
 
+    openChangePass() {
+        this.setState({openNewPass:!this.state.openNewPass})
+    }
+    launchNewPass() {
+        const { newPassword1,newPassword2,oldPassword } = this.state
+        const { user } = this.props.user.user
+        const user_name = user
+        // console.log('here is user',user_name)
+        this.props.changePassword(user_name,oldPassword,newPassword1,newPassword2)
+    }
+
     render(){
 
         const { email,name,user,photo } = this.props.user.user
-        const { staticPhoto,file } = this.state
+        const { staticPhoto,file,openNewPass } = this.state
         // var file = document.getElementById('fileItem').files[0]
 
         return(
             <div className="edit-user-info">
+                {openNewPass ? <div className='change-pass-container'>
+                    <input placeholder='Old Password' onChange={e => this.handleAddText('oldPassword',e.target.value)} ></input>
+                    <input placeholder='New Password' onChange={e => this.handleAddText('newPassword1',e.target.value)} ></input>
+                    <input placeholder='Verify New Password' onChange={e => this.handleAddText('newPassword2',e.target.value)} ></input>
+                    <div className='change-pass-button-flex' >
+                        <button onClick={() => {this.launchNewPass()}}>submit</button>
+                        <button onClick={() => this.setState({openNewPass:false})}>cancel</button>
+                    </div>
+                </div> : null}
                 {/* <section className="user-photo"><img className="photo-properties" src={file} /> <input id="fileItem" type ="file" className="change-photo" onChange={e => this.handlePhotoChange(e)}/> <button onClick={this.handleCancelClick}>cancel</button> </section> */}
                 <section className="">
                     <div className="input-list">
                         <section><h2 style={{color:'#555'}}>edit user info</h2></section>
+                        <input id="fileItem" type ="file" className="change-photo" accept="image/png,image/jpeg"/> <button onClick={() => this.openChangePass()}>change password</button>
 
                         <div>
                             <p className="list-text">Username</p><input placeholder={user} onChange={e => this.handleAddText('user_name', e.target.value)}/>
@@ -308,4 +333,4 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps, {updateUser} )(EditUserInfo)
+export default connect(mapStateToProps, {updateUser,changePassword} )(EditUserInfo)
