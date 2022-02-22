@@ -52,6 +52,8 @@ module.exports = {
 
     changePassword: async (req,res) => {
         const { user_name, oldPassword, newPassword1, newPassword2 } = req.body;
+        // console.log('this is from change pass',oldPassword, newPassword1, newPassword2, user_name)
+        // console.log('this is from change pass',user_name,oldPassword,newPassword2,newPassword1)
         const db = req.app.get('db')
         const foundUser = await req.app.get('db').get_user([user_name]);
         const user = foundUser[0];
