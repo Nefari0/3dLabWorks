@@ -44,10 +44,20 @@ const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
      componentDidUpdate(prevProps,prevState) {
          const { gotMessages } = this.state
          const { id } = this.props.user.user
+         const { isLoggedIn } = this.props.user
          if(gotMessages === false && id != undefined){
              this.setState({gotMessages:true})
              this.getMessages()
          }
+         if(isLoggedIn === false && gotMessages === true){
+            this.setState({
+                messages:[],
+                thread:[],
+                conversation_id:null,
+                gotMessages:false,
+                expand:false,
+            })
+        }
      }
 
      // --- sockets --- //
@@ -137,15 +147,15 @@ const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
             return <p style={{color:'#555'}}>{el.msg} </p>
         })
 
-        if(isLoggedIn === false && gotMessages === true){
-            this.setState({
-                messages:[],
-                thread:[],
-                conversation_id:null,
-                gotMessages:false,
-                expand:false,
-            })
-        }
+        // if(isLoggedIn === false && gotMessages === true){
+        //     this.setState({
+        //         messages:[],
+        //         thread:[],
+        //         conversation_id:null,
+        //         gotMessages:false,
+        //         expand:false,
+        //     })
+        // }
 
         return(<div>
             {isLoggedIn ?  (!expand ? <div className='message-board-closed' onClick={() => this.expandMessageBoard()} >
