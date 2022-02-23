@@ -14,15 +14,15 @@ import { updateUser } from '../../ducks/userReducer'
 // import UserCollections from './UserCollections';
 // import UserInfo from './UserInfo'
 import UserInfo from '../UserPage/UserInfo';
-import {app} from '../../base'
+// import {app} from '../../base'
 // import SecurityTest from './SecurityTest'
-import MobileLogin from '../MobileLogin/MobileLogin'
+// import MobileLogin from '../MobileLogin/MobileLogin'
 import Loading from '../Loading/Loading';
 import CreateNewMessage from './CreateNewMessage';
 // import AdminPage from '../AdminPage/AdminPage';
 // import EditUserInfo from './EditUserInfo';
 
-const db = app.firestore()
+// const db = app.firestore()
 
 
 class ViewUser extends Component {
@@ -117,8 +117,8 @@ class ViewUser extends Component {
     }
 
     render(){
-        const { showCollections,showUserInfo,items,isLoading,showCreateProject,showEditUserInto,user } = this.state
-        const { photo_url,auth,name,email,is_admin,background_url,user_name,user_id } = this.state.user
+        const { items,isLoading,user } = this.state
+        // const { photo_url,auth,name,email,is_admin,background_url,user_name,user_id } = this.state.user
 
         const mappedNewMessage = user.map(el => {
             return <CreateNewMessage key={el.user_id} user_id={el.user_id} user_name={el.user_name} openMessageBox={this.openMessageBox} />

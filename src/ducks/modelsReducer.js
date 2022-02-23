@@ -8,7 +8,6 @@ const initialState = {
 };
 
 const GET_MODELS = "GET_MODELS";
-const GET_FEATURED = "GET_FEATURED";
 
 export function getModels() {
   return {
