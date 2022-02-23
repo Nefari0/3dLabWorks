@@ -154,7 +154,6 @@ app.get('/api/links/get', docsController.getAllLinks)
 app.get('/api/messages/user/:user_id', messageController.getUserMessages)
 app.post('/api/messages/user/add', messageController.createMessage)
 app.post('/api/messages/user/delete',messageController.deleteMessage)
-app.post('/api/messages/read',messageController.markAsRead)
 
 // site messaging system endpoints
 app.get('/api/conversations/:user_id',messageController.getConversationByUserId) // gets all user conversations
@@ -162,6 +161,7 @@ app.get('/api/conversation/messages/get/:conversation_id',messageController.getC
 app.post('/api/conversation/new',messageController.createNewConversation)
 app.post('/api/conversation/user/new', messageController.sendMessage)
 app.post('/api/conversation/exists',messageController.checkExisting)
+app.post('/api/messages/read',messageController.markAsRead)
 
 
 // // storage access end points //
