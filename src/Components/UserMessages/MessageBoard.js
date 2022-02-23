@@ -107,13 +107,14 @@ const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
         })
      }
 
-     openMessage = async (conversation_id) => {
+     openMessage = async (conversation_id,to_user) => {
         // this.getConnected(conversation_id)
         await axios.get(`/api/conversation/messages/get/${conversation_id}`).then(res => {
             this.setState({
                 thread:res.data,
                 conversation_id:conversation_id,
-                openContacts:false
+                openContacts:false,
+                to_user:to_user
             })
         })
         await this.getConnected(conversation_id)
@@ -129,13 +130,13 @@ const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
 
      render() {
 
-        const { messages,thread,selectedMessage,conversation_id,expand,gotMessages,openContacts,newMessages } = this.state
+        const { messages,thread,selectedMessage,conversation_id,expand,gotMessages,openContacts,newMessages,to_user } = this.state
         const { id } = this.props.user.user
         const { isLoggedIn } = this.props.user
         const user_id = id
         
         const mappedMessageUsers = messages.map(el => {
-            return <SelectedMessage key={el.conversation_id} selectedMessage={conversation_id} conversation_name={el.conversation_name} conversation_id={el.conversation_id} openMessage={this.openMessage} photo_url={el.photo_url} user_name={el.user_name} getConnected={this.getConnected} />
+            return <SelectedMessage key={el.conversation_id} selectedMessage={conversation_id} conversation_name={el.conversation_name} conversation_id={el.conversation_id} to_user={el.to_user} openMessage={this.openMessage} photo_url={el.photo_url} user_name={el.user_name} read_by={el.read_by} id={id} getConnected={this.getConnected} />
         })
 
         const mappedThread = thread.map(el => {
@@ -197,7 +198,7 @@ const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
                 
             </section>
             <section>
-                <div className='text-input-container'><CreateMessage id='EndOfMessages' conversation_id={this.state.conversation_id} user_id={user_id} openMessage={this.openMessage} sendToSockets={this.sendToSockets} /></div>
+                <div className='text-input-container'><CreateMessage id='EndOfMessages' conversation_id={this.state.conversation_id} user_id={user_id} to_user={to_user} openMessage={this.openMessage} sendToSockets={this.sendToSockets} /></div>
                 {/* <div className='text-input-container'><CreateMessage id='EndOfMessages' conversation_id={this.state.conversation_id} user_id={user_id} openMessage={this.openMessage} /></div> */}
 
             </section>
