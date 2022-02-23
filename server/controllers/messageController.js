@@ -77,5 +77,13 @@ module.exports = {
         console.log('here is user',existingMessages[0] === undefined)
         return res.status(200).send(existingMessages[0] != undefined)
         
+    },
+
+    markAsRead: async (req,res) => {
+        const db = req.app.get('db')
+        const conversation_id = req.body
+        console.log('marked as read here',conversation_id)
+        const gotRead = await db.messaging.mark_as_read([conversation_id])
+        return res.status(200).send(gotRead)
     }
 }
