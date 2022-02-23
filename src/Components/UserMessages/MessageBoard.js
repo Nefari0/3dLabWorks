@@ -64,7 +64,7 @@ const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
      getConnected = (input) => {
          const { conversation_id } = this.state
         //  console.log(`got connected to ${input}`,input === conversation_id)
-        const contentDefaultMessage = "default message as string"
+        // const contentDefaultMessage = "default message as string"
         client.onopen = () => {
         //  console.log('WebSocket Client Connected');
         };
@@ -72,7 +72,7 @@ const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
           client.onmessage = (message) => {
         
           const dataFromServer = JSON.parse(message.data);
-        //   console.log('got reply',dataFromServer)
+          console.log('got reply',dataFromServer)
           if (dataFromServer.type === 'message' && input === conversation_id ) {
             this.openMessage(conversation_id)
             this.setState((State) =>
