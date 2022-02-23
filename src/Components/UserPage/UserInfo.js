@@ -15,7 +15,7 @@ const UserInfo = (props) => {
         <div className="user-info">
             <div className="user-info-title"><p ></p><h2 className="user-info-title-text">My Info</h2></div>
             <div className="user-info-h2"><p className="user-info-p" >name:</p><h2 className="text-element">{name}</h2></div>
-            <div className="user-info-h2"><p className="user-info-p">email:</p><h2 className="text-element">{email}</h2></div>  
+            {email != null ? <div className="user-info-h2"><p className="user-info-p">email:</p><h2 className="text-element">{email}</h2></div> : null}  
             <div className="user-info-h2"><p className="user-info-p">username:</p><h2 className="text-element" >{user}</h2></div>
         </div>
     )
