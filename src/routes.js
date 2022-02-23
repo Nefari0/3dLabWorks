@@ -1,6 +1,6 @@
 import { Switch, Route } from 'react-router-dom'
 import Home from './Components/Home/Home'
-import FeaturedProjects from './Components/FeaturedProjects/FeaturedProjects'
+// import FeaturedProjects from './Components/FeaturedProjects/FeaturedProjects'
 import GroupPage from './Components/GroupPage/GroupPage'
 import UserPage from './Components/UserPage/UserPage'
 import Header from './Components/Header/Header'
