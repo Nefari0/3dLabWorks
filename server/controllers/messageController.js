@@ -61,8 +61,9 @@ module.exports = {
 
     sendMessage: async (req,res) => {
         const db = req.app.get('db')
-        const { user_id,conversation_id,text } = req.body
+        const { user_id,conversation_id,text,to_user } = req.body
         const conversation = await db.messaging.create_conversation_message([user_id,conversation_id,text])
+        const stampId = await db.messaging.mark_as_read([to_user,conversation_id])
         const info = conversation[0]
         return res.status(200).send(info)
     },
@@ -81,9 +82,10 @@ module.exports = {
 
     markAsRead: async (req,res) => {
         const db = req.app.get('db')
-        const conversation_id = req.body
-        console.log('marked as read here',conversation_id)
-        const gotRead = await db.messaging.mark_as_read([conversation_id])
+        const {conversation_id,to_user} = req.body
+        // const value = null
+        // console.log('marked as read here',conversation_id)
+        const gotRead = await db.messaging.mark_as_read([to_user,conversation_id])
         return res.status(200).send(gotRead)
     }
 }
