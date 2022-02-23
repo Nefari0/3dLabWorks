@@ -13,23 +13,13 @@ const REGISTER_USER = 'REGISTER_USER'
 const EDIT_USERINFO = 'EDIT_USERINFO'
 const UPDATE_USER = 'UPDATE_USER'
 const SHOW_DATA = 'SHOW_DATA'
-const CHANGE_PASSWORD = 'CHANGE_PASSWORD'
 
 export function loginUser(user_name, password) {
-    const myInfo = window.localStorage
     return {
         type: LOGIN_USER,
         payload: axios.post('/auth/login', {user_name, password})
     };
 }
-
-// export function changePassword(user_name, oldPassword, newPassword1, newPassword2) {
-//     // const myInfo = window.localStorage
-//     return {
-//         type: LOGIN_USER,
-//         payload: axios.post('/auth/password', { user_name, oldPassword, newPassword1, newPassword2 })
-//     };
-// }
 
 export function logoutUser(){
     return {
@@ -80,26 +70,21 @@ export function updateUser(user){
 export default function userReducer(state = inititialState, action) {
     switch (action.type) {
         case SHOW_DATA + 'FULFILLED':
-            
-            // console.log(user)
             return {
                 inititialState
             }
         case LOGIN_USER + '_PENDING':
-            // console.log(action.type,'here is actions and type')
             return {
                 ...state,
                 isLoading: true
             }
         case LOGIN_USER + '_FULFILLED':
-            // console.log(action.type,'here is actions and type')
             return {
                 ...state,
                 user: action.payload.data, isLoggedIn: true, isLoading:false
             }
         case LOGIN_USER + '_REJECTED':
             alert('Your username or password is incorrect')
-            // console.log(action.type,'here is actions and type')
             return {
                 ...state,
                 loginError:true,isLoading:false
@@ -124,26 +109,15 @@ export default function userReducer(state = inititialState, action) {
                 isLoggedIn: false
             }
         case UPDATE_USER + '_FULFILLED':
-            const { user } = action.payload.data
             return {
                 ...state,
                 user:action.payload.data, isLoggedIn:true
-                // user
             }            
         case UPDATE_USER + '_REJECTED':
             return {
                 ...state,
                 isLoggedIn: false
             }
-            // case CHANGE_PASSWORD + '_FULFILLED':
-            //     return {
-            //         ...state,
-            //     }
-
-        // case GET_INFO + '_FULFULLED':
-        //     return {
-        //         cond
-        //     }
         default:
             return state;
     }
