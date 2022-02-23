@@ -8,8 +8,8 @@ import './CreateMessage.css'
 
 export default class CreateMessage extends Component {
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
 
         this.state = {
             text:"",
@@ -20,9 +20,9 @@ export default class CreateMessage extends Component {
 
     executeSendMessage = async () => {
         const { text } = this.state
-        const { user_id,conversation_id } = this.props
+        const { user_id,conversation_id,to_user } = this.props
 
-        await axios.post('/api/conversation/user/new',{conversation_id,user_id,text})
+        await axios.post('/api/conversation/user/new',{conversation_id,user_id,text,to_user})
         await this.props.sendToSockets(text,conversation_id)
         // this.props.openMessage(conversation_id) 
         this.setState({text:''})
