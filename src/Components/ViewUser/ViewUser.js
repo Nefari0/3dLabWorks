@@ -129,7 +129,8 @@ class ViewUser extends Component {
         })
 
         const mappedUserInfo = user.map(el => {
-            return <UserInfo  key={el.user_id} user={el.user_name} name={el.first_name} email={el.email} />
+            // return <UserInfo  key={el.user_id} user={el.user_name} name={el.first_name} email={el.email} />
+            return <UserInfo  key={el.user_id} user={el.user_name} name={el.first_name} email={null} />
         })
 
         const mappedBackground = user.map(el => {

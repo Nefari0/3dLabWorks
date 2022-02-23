@@ -149,7 +149,7 @@ class UserPage extends Component {
                     <div className='portrait-row' >{is_admin ? (<Link to={'/admin'} style={{ textDecoration:'none' }}><p className='go-to-admin'>admin</p></Link>) : null}  </div>
 
                 </div>
-                <UserInfo user={user} name={name} email={email} setIsLoading={this.setIsLoading} deleteFromFirebase={this.deleteFromFirebase} />
+                <UserInfo user={user} name={name} email={email} id={id} setIsLoading={this.setIsLoading} deleteFromFirebase={this.deleteFromFirebase} />
 
             </section>
 
