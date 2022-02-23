@@ -1,10 +1,10 @@
 import axios from 'axios';
-import Home from '../Home/Home'
+// import Home from '../Home/Home'
 // import CreateProject from './CreateProject';
-import { Switch, Route } from 'react-router-dom'
+// import { Switch, Route } from 'react-router-dom'
 import UserProject from './UserProject'
-import { Component, lazy } from 'react'
-import { Link } from 'react-router-dom';
+import { Component } from 'react'
+// import { Link } from 'react-router-dom';
 // import './UserPage.css'
 import '../UserPage/UserPage.css'
 import { connect } from 'react-redux'
@@ -69,7 +69,7 @@ class ViewUser extends Component {
         const { currentUserMessage } = this.state
         const { user_id } = this.props.match.params
         const { id } = this.props.user.user
-        if(currentUserMessage === null && id != undefined) {
+        if(currentUserMessage === null && id !== undefined) {
             this.checkForExistingMessage(id,user_id)
         }
     }
