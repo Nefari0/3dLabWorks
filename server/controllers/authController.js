@@ -2,7 +2,6 @@ const bcrypt = require('bcrypt')
 
 module.exports = {
     register: async (req,res) => {
-        console.log('req body',req.body)
         const {user_name, password, email, first_name, is_admin} = req.body;
         if (is_admin != false){
             return(alert('this operation cannot be completed because of a security breach'))
