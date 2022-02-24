@@ -17,6 +17,10 @@ const messageController = require('./controllers/messageController')
 // const { projectManagement, auth } = require('firebase-admin');
 const { addProject } = require('./controllers/projectsController');
 const docsController = require('./controllers/docsController')
+// const trackingController = require('./controllers/trackingController')
+const webSocketServer = require('websocket').server;
+const http = require('http');
+const trackingController = require('./controllers/trackingController');
 // const baseBackend = require('./../src/baseBackend')
 // const path = require('path');
 // const { default: reducer } = require('../src/ducks/modelsReducer'); // auto added
@@ -173,6 +177,10 @@ app.post('api/asset/upload/add',fireFile)
 // app.get('/api/messages/getall')
 // app.post('/api/messages/send')
 // app.delete('/api/messages/delete')
+// Track User / Browser
+app.post('/api/track/new/',trackingController.addNewBrowse)
+app.post('/api/track/increment/',trackingController.addNewMount)
+app.get('/api/track/getall/',trackingController.getAllTraffic)
 
 // -----server ------
 app.use( express.static( __dirname + '/../build'));
@@ -184,8 +192,7 @@ res.send(path.join(__dirname, '../build/index.html'))
 
 // --- websocket for messanger ------------------------ //
 const webSocketsServerPort = 8000;
-const webSocketServer = require('websocket').server;
-const http = require('http');
+
 // Spinning the http server and the websocket server.
 const server = http.createServer();
 server.listen(webSocketsServerPort, () => console.log(`sockets connected on ${webSocketsServerPort}`));
