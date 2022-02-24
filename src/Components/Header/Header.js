@@ -41,13 +41,27 @@ class Header extends Component{
     }
 
     async componentDidMount(prevProps) {
+        
+        const visited = localStorage['visited']
         const savedUsername = localStorage['user_name']
         const savedPassword = localStorage['password']
         if (localStorage['user_name'] != undefined && localStorage['password'] != undefined) {
             this.props.loginUser(savedUsername,savedPassword)
-
+            
         }
-      }
+
+        const getUniqueID = () => {
+            const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+            return s4() + s4() + '-' + s4();
+          };
+
+        if (visited === undefined) {
+            const unique_id = getUniqueID()
+            await axios.post('/api/track/new/',{unique_id}).then(res => this.sessionToWindow('visited',res.data))
+        } else {
+            const unique_id = visited
+            axios.post('/api/track/increment',{unique_id}).catch(err => {console.log(err)})}
+    }
     
     componentWillUpdate(){
         const { setPermission } = this.state
