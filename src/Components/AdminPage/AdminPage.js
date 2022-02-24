@@ -9,6 +9,7 @@ import { getProjects } from '../../ducks/projectsReducer';
 import Home from '../Home/Home';
 import axios from 'axios';
 import ShowUser from './ShowUser';
+import ShowTraffic from './ShowTraffic'
 // import Prototyping from '../Prototyping/Prototyping';
 import MessageBoard from '../UserMessages/MessageBoard';
 // import DemoScene from './Three/DemoScene';
@@ -21,6 +22,7 @@ class AdminPage extends Component {
 
         this.state = {
             users:[],
+            traffic:[],
 
             text:'test',
             generalContent:'',
@@ -47,6 +49,9 @@ class AdminPage extends Component {
     componentDidMount() {
         axios.get('/api/users/all').then(res => {
             this.setState({users:res.data})
+        })
+        axios.get('/api/track/getall').then(res => {
+            this.setState({traffic:res.data})
         })
     }
 
@@ -108,11 +113,15 @@ class AdminPage extends Component {
 
     render(){
 
-        const { test,editAbout,editGeneral,editUserInfo,users } = this.state
+        const { test,editAbout,editGeneral,editUserInfo,users,traffic } = this.state
         const { photo,auth,name,is_admin } = this.props.user.user
 
         const mappedUsers = users.map(element => {
             return <ShowUser user_name={element.user_name} first_name={element.first_name} last_name={element.last_name} user_id={element.user_id} />
+        })
+
+        const mappedTraffic = traffic.map(el => {
+            return <ShowTraffic key={el.browser_id} date_created={el.date_created} unique_id={el.unique_id} remount={el.remount} />
         })
 
         return(
@@ -153,6 +162,10 @@ class AdminPage extends Component {
                     <li className="add-doc-div-closed"><a>memo</a></li>
                     </ul>
                     <Link to={'/user'} ><a >mypage</a></Link>
+                    <div className='display-traffic' >
+                        <div className='traffic-display-unit' ><p className='traffic-text' >Date Created</p><p className='traffic-text' >Unique Id</p><p className='traffic-text' >Re-mounts</p></div>
+                        {mappedTraffic}
+                    </div>
 {/* <ViewUserV2 /> */}
 {/* <Prototyping /> */}
 <MessageBoard/>

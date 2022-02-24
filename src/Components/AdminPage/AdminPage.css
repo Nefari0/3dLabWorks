@@ -93,3 +93,24 @@ ul.admin-header-ul li a {
     margin: 10px;
     color: #555;
 }
+
+.display-traffic {
+    min-height: 100%;
+    width: 600px;
+    background-color: #fff;
+    
+}
+
+.traffic-text {
+    color: #555;
+    margin: auto;
+}
+
+.traffic-display-unit {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: stretch;
+}
