@@ -120,9 +120,15 @@ class AdminPage extends Component {
             return <ShowUser user_name={element.user_name} first_name={element.first_name} last_name={element.last_name} user_id={element.user_id} />
         })
 
-        const mappedTraffic = traffic.map(el => {
-            return <ShowTraffic key={el.browser_id} date_created={el.date_created} unique_id={el.unique_id} remount={el.remount} />
+        const filterNull = traffic.filter(el => el.last_visit != null)
+
+        const mappedTraffic = filterNull.map(el => {
+            return <ShowTraffic key={el.browser_id} id={el.browser_id} date_created={el.date_created} unique_id={el.unique_id} remount={el.remount} last_visit={el.last_visit} />
         })
+
+        // const mappedTraffic = traffic.map(el => {
+        //     return <ShowTraffic key={el.browser_id} id={el.browser_id} date_created={el.date_created} unique_id={el.unique_id} remount={el.remount} last_visit={el.last_visit} />
+        // })
 
         return(
             <div className="admin-container">
@@ -163,7 +169,7 @@ class AdminPage extends Component {
                     </ul>
                     <Link to={'/user'} ><a >mypage</a></Link>
                     <div className='display-traffic' >
-                        <div className='traffic-display-unit' ><p className='traffic-text' >Date Created</p><p className='traffic-text' >Unique Id</p><p className='traffic-text' >Re-mounts</p></div>
+                        <div className='traffic-display-unit' ><p className='traffic-text' >Date Created</p><p className='traffic-text' >Browser ID</p><p className='traffic-text' >Unique Id</p><p className='traffic-text' >Re-mounts</p><p className='traffic-text' >Last Visit</p></div>
                         {mappedTraffic}
                     </div>
 {/* <ViewUserV2 /> */}
