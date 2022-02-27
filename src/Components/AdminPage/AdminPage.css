@@ -96,7 +96,7 @@ ul.admin-header-ul li a {
 
 .display-traffic {
     min-height: 100%;
-    width: 600px;
+    min-width: 600px;
     background-color: #fff;
     
 }
