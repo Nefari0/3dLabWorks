@@ -45,8 +45,11 @@ class Header extends Component{
         const visited = localStorage['visited']
         const savedUsername = localStorage['user_name']
         const savedPassword = localStorage['password']
+        // const last_visit = new Date().toString()
+        const last_visit = new Date().toString().split('(')[0]
+        // console.log('last visit', last_visit)
         if (localStorage['user_name'] != undefined && localStorage['password'] != undefined) {
-            this.props.loginUser(savedUsername,savedPassword)
+            this.props.loginUser(savedUsername,savedPassword,last_visit,visited)
             
         }
 
@@ -60,7 +63,8 @@ class Header extends Component{
             await axios.post('/api/track/new/',{unique_id}).then(res => this.sessionToWindow('visited',res.data))
         } else {
             const unique_id = visited
-            axios.post('/api/track/increment',{unique_id}).catch(err => {console.log(err)})}
+            // const last_visit = new Date().toString()
+            axios.post('/api/track/increment',{unique_id,last_visit}).catch(err => {console.log(err)})}
     }
     
     componentWillUpdate(){
@@ -86,9 +90,11 @@ class Header extends Component{
     handleLogging(){
         const { user_name, password } = this.state
         const { loginUser,logoutUser } = this.props
+        const last_visit = new Date()
+        const visited = localStorage['visited']
         this.toggleLogin()
         if(this.props.isLoggedIn === false){
-            loginUser(user_name,password)
+            loginUser(user_name,password,last_visit,visited)
         } else {logoutUser()}
     }
 
