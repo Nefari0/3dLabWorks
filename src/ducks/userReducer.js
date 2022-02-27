@@ -14,10 +14,10 @@ const EDIT_USERINFO = 'EDIT_USERINFO'
 const UPDATE_USER = 'UPDATE_USER'
 const SHOW_DATA = 'SHOW_DATA'
 
-export function loginUser(user_name, password) {
+export function loginUser(user_name, password, last_visit, visited) {
     return {
         type: LOGIN_USER,
-        payload: axios.post('/auth/login', {user_name, password})
+        payload: axios.post('/auth/login', {user_name, password, last_visit, visited})
     };
 }
 
