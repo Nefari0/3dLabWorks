@@ -10,9 +10,9 @@ module.exports = {
     
     addNewMount: async (req,res) => {
         const db = req.app.get('db')
-        const { unique_id } = req.body
+        const { unique_id,last_visit } = req.body
         // console.log(unique_id,'here is unique id in controller')
-        const newVisit = await db.tracking.add_new_visit([unique_id])
+        const newVisit = await db.tracking.add_new_visit([last_visit,unique_id])
         return res.status(200).send(newVisit)
     },
 

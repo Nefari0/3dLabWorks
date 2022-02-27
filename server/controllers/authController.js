@@ -78,8 +78,9 @@ module.exports = {
     },
 
     login: async (req,res) => {
-        const { user_name, password } = req.body;
-        console.log('this is user',user_name)
+        const { user_name, password, last_visit, visited } = req.body;
+        const from_browser = visited
+        console.log('this is user in authController',user_name,last_visit,visited)
         if (user_name.split('').length < 1) {
             return res.status(401).send('user not found')
         }
@@ -92,6 +93,7 @@ module.exports = {
         if (!isAuthenticated) {
             return res.status(403).send('Incorrect password');
         }
+        const add_visit = await req.app.get('db').add_login_time_stamp([last_visit,from_browser,user_name])
         const user_likes = await req.app.get('db').get_likes([user.user_id]);
         req.session.user = { 
             user_likes: user_likes,
