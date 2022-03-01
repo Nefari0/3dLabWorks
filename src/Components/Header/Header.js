@@ -58,9 +58,8 @@ class Header extends Component{
             return s4() + s4() + '-' + s4();
           };
 
-          console.log('USER IS DEFINED',localStorage)
         if (visited === undefined) {
-            console.log('visited is not defined')
+            // console.log('visited is not defined')
             const unique_id = getUniqueID()
             await axios.post('/api/track/new/',{unique_id}).then(res => this.sessionToWindow('visited',res.data))
         } else {
