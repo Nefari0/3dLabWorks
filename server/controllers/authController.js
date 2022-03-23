@@ -80,7 +80,7 @@ module.exports = {
     login: async (req,res) => {
         const { user_name, password, last_visit, visited } = req.body;
         const from_browser = visited
-        console.log('this is user in authController',user_name,last_visit,visited)
+        // console.log('this is user in authController',user_name,last_visit,visited)
         if (user_name.split('').length < 1) {
             return res.status(401).send('user not found')
         }
