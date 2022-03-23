@@ -14,6 +14,9 @@ import ShowTraffic from './ShowTraffic'
 import MessageBoard from '../UserMessages/MessageBoard';
 // import DemoScene from './Three/DemoScene';
 // import ViewUserV2 from './ViewUserV2';
+import { w3cwebsocket as W3CWebSocket } from "websocket";
+// const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
+const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
 
 class AdminPage extends Component {
 
