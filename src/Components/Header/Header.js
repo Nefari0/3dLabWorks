@@ -35,6 +35,7 @@ class Header extends Component{
 
     // --- this function saves user info to browser
         this.sessionToWindow = this.sessionToWindow.bind(this)
+        this.trackingHandler = this.trackingHandler.bind(this)
     }
 
     sessionToWindow(prop,val) {
@@ -96,7 +97,15 @@ class Header extends Component{
     trackingHandler(tag) {
         const { unique_id } = this.state
         if(unique_id !== null){
-            axios.post('/api/track/add/click/',{unique_id,tag}).catch(err => {console.log(err)})
+            // axios.post('/api/track/add/click/',{unique_id,tag}).catch(err => {console.log(err)})
+            switch(tag) {
+                case 'login':
+                    return axios.post('/api/track/login/click/',{unique_id,tag}).catch(err => {console.log(err)})
+                case 'projects':
+                    return axios.post('/api/track/projects/click/',{unique_id,tag}).catch(err => {console.log(err)})
+                case 'about':
+                    return axios.post('/api/track/about/click/',{unique_id,tag}).catch(err => {console.log(err)})
+            }
         }
     }
 
@@ -144,6 +153,7 @@ class Header extends Component{
     }
 
     toggleLogin(){
+        this.trackingHandler('login')
         this.setState({openLogin: !this.state.openLogin})
     }
 
@@ -169,8 +179,8 @@ class Header extends Component{
             <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><h3 className="header-h3">{isLoggedIn ? `Welcome, ${this.props.user.user.user}!` :'MadModels3d'}</h3></Link>
 
             <ul className='link-list'>
-                <Link to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a>about</a></li></Link>
-                <Link to="/explore" style={{ textDecoration: 'none' }}><li className='link-item'><a>projects</a></li></Link>
+                <Link onClick={() => this.trackingHandler('about')} to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a>about</a></li></Link>
+                <Link onClick={() => this.trackingHandler('projects')} to="/explore" style={{ textDecoration: 'none' }}><li className='link-item'><a>projects</a></li></Link>
                 {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='link-item'><a>my page</a></li></Link>)}
             </ul>
 
@@ -183,8 +193,8 @@ class Header extends Component{
 
             <ul className={`mobile-nav ${isMenuOpen ? false : 'mobile-nav-hide'}`} onClick={this.toggleMenu}>
                 {!isLoggedIn ? <li className='mobile-link-item' onClick={this.toggleLogin}>login</li>:<li className='mobile-link-item' onClick={this.toggleLogin}>logout</li>}
-                <Link to="/about" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>about</li></Link>
-                <Link to="/explore" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>projects</li></Link>
+                <Link onClick={() => this.trackingHandler('about')} to="/about" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>about</li></Link>
+                <Link onClick={() => this.trackingHandler('projects')} to="/explore" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>projects</li></Link>
                 {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='mobile-link-item'><a>my page</a></li></Link>)}
             </ul>
 
