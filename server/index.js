@@ -177,10 +177,23 @@ app.post('api/asset/upload/add',fireFile)
 // app.get('/api/messages/getall')
 // app.post('/api/messages/send')
 // app.delete('/api/messages/delete')
-// Track User / Browser
+
+// --- Track User / Browser --- //
 app.post('/api/track/new/',trackingController.addNewBrowse)
 app.post('/api/track/increment/',trackingController.addNewMount)
 app.get('/api/track/getall/',trackingController.getAllTraffic)
+app.post('/api/add/value',trackingController.trackClicks)
+
+    // test api for clients
+    // module.exports = {
+    //     apiFunc: async (req,res) => {
+    //     theData = await app.get(clients)
+    //     return res.status(200).send(newData)
+    //     // console.log(theData,'clients')
+    //     // return clients
+    // }}
+    // app.get('/api/test/text',apiFunc)
+    // ---------------------------------------------------- //
 
 // -----server ------
 app.use( express.static( __dirname + '/../build'));
@@ -200,6 +213,8 @@ const wsServer = new webSocketServer({
   httpServer: server
 });
 
+// console.log(wsServer,'wsServer')
+
 const clients = {};
 
 // // This code generates unique userid for everyuser.
@@ -214,16 +229,18 @@ wsServer.on('request', function(request) {
     clients[userID] = connection;
     connection.on('message', function(message) {
         if (message.type === 'utf8') {
-            // console.log('Recieved Message: ',message.utf8Data);
+            console.log('Recieved Message: ',message.utf8Data);
         }
 
         for(key in clients) {
             clients[key].sendUTF(message.utf8Data);
         }
     })
+    // connection.on('admin',function(admin){
+    //     if (admin.type === u)
+    // })
 
     });
-// ---------------------------------------------------- //
 
 massive({
     connectionString: CONNECTION_STRING,
