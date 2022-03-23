@@ -11,7 +11,7 @@ module.exports = {
     addNewMount: async (req,res) => {
         const db = req.app.get('db')
         const { unique_id,last_visit } = req.body
-        // console.log(visited,'here is unique id in controller')
+        console.log(unique_id,last_visit,'here is unique id in controller')
         const newVisit = await db.tracking.add_new_visit([last_visit,unique_id])
         return res.status(200).send(newVisit)
     },
@@ -20,5 +20,16 @@ module.exports = {
         const db = req.app.get('db')
         const traffic = await db.tracking.get_all_traffic()
         return res.status(200).send(traffic)
+    },
+
+    trackClicks: async (req,res) => {
+// --- tag item is string that selects whickh clumn needs to be updated --- //
+        const { unique_id,tag } = req.body
+        const db = req.app.get('db')
+        var increment = await db.tracking.add_login_click([unique_id,tag])
+
+        // switch (param)
+
+        return res.status(200).send(increment)
     }
 }
