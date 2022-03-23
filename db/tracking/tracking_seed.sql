@@ -1,0 +1,9 @@
+-- create table d_visitors (
+--   browser_id SERIAL PRIMARY KEY,
+--   date_created timestamp DEFAULT CURRENT_TIMESTAMP,
+--   unique_id VARCHAR(250),
+--   remount INTEGER,
+--   clicked_projects integer,
+--   clicked_about INTEGER,
+--   clicked_login INTEGER
+-- )
