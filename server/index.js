@@ -182,7 +182,9 @@ app.post('api/asset/upload/add',fireFile)
 app.post('/api/track/new/',trackingController.addNewBrowse)
 app.post('/api/track/increment/',trackingController.addNewMount)
 app.get('/api/track/getall/',trackingController.getAllTraffic)
-app.post('/api/track/add/click/',trackingController.trackClicks)
+app.post('/api/track/login/click/',trackingController.loginClicks)
+app.post('/api/track/about/click/',trackingController.aboutClicks)
+app.post('/api/track/projects/click/',trackingController.projectsClicks)
 
     // test api for clients
     // module.exports = {
