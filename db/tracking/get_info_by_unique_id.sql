@@ -1,0 +1,1 @@
+SELECT * FROM d_visitors WHERE unique_id = $1

@@ -20,7 +20,8 @@ class Header extends Component{
             setPermission:true,
             openLogin:true,
             isLoggedInState:null,
-            saveSession:false
+            saveSession:false,
+            unique_id:null,
         }
         this.handleLogging = this.handleLogging.bind(this)
         this.resetState = this.resetState.bind(this)
@@ -67,6 +68,8 @@ class Header extends Component{
             // const last_visit = new Date().toString()
             axios.post('/api/track/increment/',{unique_id,last_visit}).catch(err => {console.log(err)})
         }
+        if(visited !== undefined){this.setState({unique_id:visited})}
+        return
     }
     
     componentWillUpdate(){
@@ -87,6 +90,14 @@ class Header extends Component{
             isMenuOpen:false,
             toggleHideLoggin:true
         })
+    }
+
+    // --- handles tracked info --- //
+    trackingHandler(tag) {
+        const { unique_id } = this.state
+        if(unique_id !== null){
+            axios.post('/api/track/add/click/',{unique_id,tag}).catch(err => {console.log(err)})
+        }
     }
 
     handleLogging(){
