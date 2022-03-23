@@ -245,7 +245,7 @@ class ProjectDetail extends Component {
         })
         
         const mappedComments = comments.map(element => {
-            return <Comments content={element.text} key={element.comment_id} model_id={element.model_id} date_created={element.date_created} photo_url={element.photo_url} comment_id={element.comment_id} user_id={element.user_id} user_name={element.user_name} date_created={element.date_created} />
+            return <Comments content={element.text} key={element.comment_id} model_id={element.model_id} date_created={element.date_created} photo_url={element.photo_url} comment_id={element.comment_id} user_id={element.user_id} user_name={element.user_name} />
         })
 
         const mappedPhoto = info.map(element => {
@@ -257,11 +257,11 @@ class ProjectDetail extends Component {
         })
 
         const mappedThumbNails = modelImages.map((el) => {
-            return <div key={el.image_id} onClick={() => this.highLightedPhoto(el.photo_url)} ><img className='thumbnail-image' src={el.photo_url} highLightedPhoto={this.highLightedPhoto} /></div>
+            return <div key={el.image_id} onClick={() => this.highLightedPhoto(el.photo_url)} ><img className='thumbnail-image' src={el.photo_url}/></div>
         })
 
         const mappedMainPhoto = info.map(el => {
-            return <div key={el.model_id} onClick={() => this.highLightedPhoto(el.firebase_url01)} ><img className='thumbnail-image' src={el.firebase_url01} highLightedPhoto={this.highLightedPhoto} /></div>
+            return <div key={el.model_id} onClick={() => this.highLightedPhoto(el.firebase_url01)} ><img className='thumbnail-image' src={el.firebase_url01}/></div>
         })
 
         // console.log('here is the description',description)
@@ -299,7 +299,7 @@ class ProjectDetail extends Component {
                         </div>
                         {isLoggedIn === true && this.props.user.user.id === maker_id ? <div className={`detail-box small ${!viewEditProject ? true : 'detail-box small selected'}`} onClick={() => this.changeView('viewEditProject')}>
 
-                        <svg className="small-icon" style={{margin:'auto',marginLeft:'12px',marginRight:'10px', height:'46px',width:'46px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="small-icon" style={{margin:'auto',marginLeft:'12px',marginRight:'10px', height:'46px',width:'46px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                         </svg>
 
