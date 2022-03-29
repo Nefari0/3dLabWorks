@@ -51,12 +51,12 @@
 }
 
 .message-board-closed {
-    position: fixed;
+    /* position: fixed; */
     /* left: 100px; */
     left: 30px;
     top: 70px;
     z-index: 10000;
-    position: absolute;
+    /* position: absolute; */
     position: fixed;
     opacity: .7;
     width: 60px;
