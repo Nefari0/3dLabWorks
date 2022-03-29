@@ -1,0 +1,223 @@
+.tile-location {
+    position: relative;
+    height: 42px;
+    width: 42px;
+    margin: none;
+}
+
+.tile-color-dark,
+.tile-color {
+    position: relative;
+    height: 40px;
+    width: 40px;
+    /* background-color: black; */
+    /* background-color: coral; */
+    /* background-color: #6495ed; */
+    background-color: #3c598e;
+    /* opacity: .2; */
+    margin: 1px;
+    z-index: 10;
+    /* transform: scaleY(.9); */
+    /* box-shadow: 5px 5px 20px -7px #000000; */
+}
+
+.tile-color-dark {
+    /* background-color: #DF2E2E; */
+    /* background-color: wheat; */
+    /* background-color: #3c598e; */
+    background-color: #6495ed;
+    /* opacity: .1; */
+    z-index: 10;
+}
+
+.bad-player,
+.good-player {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    /* background-color: #555; */
+    /* background: linear-gradient(0turn,#555,rgb(143, 143, 143)); */
+    background: linear-gradient(0turn,#3c598e,#5077be);
+    box-shadow: 5px 5px 20px -7px #000000;
+    border: .1px solid #fff;
+    /* transform: scaleY(.7); */
+    visibility: visible;
+    opacity: 1;
+    transition: opacity .2s linear;
+    z-index: 0;
+}
+
+.bad-player {
+    background: linear-gradient(0turn,rgb(160, 158, 158),rgb(226, 226, 226));
+    /* background: linear-gradient(0turn,#5077be,#6495ed); */
+    /* background: linear-gradient(0turn,#3c598e,#5077be); */
+    /* background: linear-gradient(0turn,#3c598e,#5077be); */
+    /* border: .1px solid #555; */
+    border: .1px solid #fff;
+}
+
+.hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 1s, opacity 1s linear;
+}
+
+.display-opac {
+    opacity: .4;
+    transition: visibility 0s .25s, opacity .25s linear;
+}
+.hide-opac {
+    opacity: 1;
+    transition: visibility 0s .25s, opacity .25s linear;
+}
+
+.player-text {
+    position: absolute;
+    color: white;
+    margin: none;
+    z-index: 2;
+}
+
+.emo-head-good,
+.emo-head-bad {
+    left: 4px;
+    top: -0px;
+    color: #555;
+    position: absolute;
+    height: 30px;
+    width: 30px;
+}
+.emo-head-good {
+    color: #fff;
+}
+
+/* .not-selected {
+    display: none;
+    color: #fff;
+} */
+
+.select-box-overlay {
+    position: absolute;
+    height: 150px;
+    width: 150px;
+    right: -55px;
+    top: -55px;
+    /* opacity: .3; */
+    /* background-color: blue; */
+    z-index: 100;
+}
+
+/* .select-box {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    right: -20px;
+    top: -20px;
+    padding-left: 100px;
+    background-color: yellow;
+    z-index: 0;
+} */
+
+.top-left,
+.top-right,
+.low-left,
+.low-right,
+.arrow {
+    /* margin: 0px; */
+        /* margin-right: 0px; */
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    border: solid green;
+    border-width: 0 6px 6px 0;
+    display: inline-block;
+    /* left:110px;
+    top: 110px; */
+    z-index: 11;
+    /* z-index: 11; */
+    /* padding: 0px; */
+}
+
+.low-right {
+    left:105px;
+    top: 105px;
+}
+.low-left {
+    left:20px;
+    top: 105px;
+    transform: rotate(90deg); /* Equal to rotateZ(45deg) */
+}
+.top-left {
+    left: 20px;
+    top: 20px;
+    transform: rotate(180deg)
+}
+.top-right {
+    left:105px;
+    top: 20px;
+    transform: rotate(270deg)
+}
+
+.cancel-select-tile {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: red;
+    top: 55px;
+    left: 55px;
+    display: flex;
+	flex-direction: row-reverse;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+}
+
+/* .no-display {
+    display: none;
+} */
+
+/* .hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 2s, opacity 2s linear;
+  } */
+
+  /* .visible {
+    height: 100px;
+    width: 100px;
+    background-color: yellow;
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 2s linear;
+  } */
+
+  /* .alive-piece {
+    visibility: hidden;
+  } */
+
+  
+  /* .alive-piece {
+      visibility: hidden;
+      position: absolute;
+      top:3px;
+      left: 3px;
+      height: 15px;
+      width: 15px;
+      background-color: yellow;
+      z-index: 0;
+      transition: visibility 0s 2s, opacity 2s linear;
+    } */
+
+    /* .show {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0s 4s, opacity 4s linear;
+    } */
+
+    /* .dead-piece {
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s 4s, opacity 4s linear;
+    } */
