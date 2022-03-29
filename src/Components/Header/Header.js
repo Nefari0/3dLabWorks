@@ -67,7 +67,13 @@ class Header extends Component{
         } else {
             const unique_id = visited
             // const last_visit = new Date().toString()
-            axios.post('/api/track/increment/',{unique_id,last_visit}).catch(err => {console.log(err)})
+            axios.post('/api/track/increment/',{unique_id,last_visit}).catch(err => {
+                console.log('here is the error',err)
+                localStorage.removeItem('visited')
+                const unique_id = getUniqueID()
+                axios.post('/api/track/new/',{unique_id}).then(res => this.sessionToWindow('visited',res.data))
+            })
+            this.setState({unique_id:localStorage['visited']})
         }
         if(visited !== undefined){this.setState({unique_id:visited})}
         return
