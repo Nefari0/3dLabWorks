@@ -134,8 +134,20 @@
   }
 }
 
-@media (max-width:320px) {
+@media (max-width:350px) {
   .checker-table {
-    /* left: -20px; */
+    left: -30px;
+    -webkit-transform: scale(.80);
+    -ms-transform: scale(.80);
+    transform: scale(.80);
+  }
+}
+
+@media (max-width:300px) {
+  .checker-table {
+    left: -35px;
+    -webkit-transform: scale(.75);
+    -ms-transform: scale(.75);
+    transform: scale(.75);
   }
 }
