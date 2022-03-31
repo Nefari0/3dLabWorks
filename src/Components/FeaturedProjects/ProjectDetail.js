@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import { Switch,Route } from 'react-router-dom'
+import { Switch,Route,Link } from 'react-router-dom'
 import axios from 'axios'
 import './Project.css'
 import ProjectPhotos from './ProjectPhotos'
@@ -253,7 +253,7 @@ class ProjectDetail extends Component {
         })
 
         const mappedUserInfo = userInfo.map(element => {
-            return <TheMaker data={element} key={element.user_id} photo_url={element.photo_url} user_name={element.user_name} info={info} />
+            return <TheMaker data={element} key={element.user_id} photo_url={element.photo_url} user_name={element.user_name} info={info} maker_id={maker_id} />
         })
 
         const mappedThumbNails = modelImages.map((el) => {

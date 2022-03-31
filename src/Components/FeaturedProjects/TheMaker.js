@@ -1,16 +1,17 @@
-import { useEffect, useState } from 'react'
 import './Project.css'
+import { Link } from 'react-router-dom'
+// import { useEffect, useState } from 'react'
 // import logo from './../../assets/logo.png'
 
 const TheMaker = (props) => {
 
     // const { firebase_url01, firebase_url, name } = props.info
-    const { first_name, photo_url, user_name,info } = props
+    const { first_name, photo_url, user_name,info,maker_id } = props
     // const { isLoggedIn } = props
     
 
     return(
- 
+        // <Link to={`viewuser/${user_id}`} ><img src={getPhotoUrl()} className="project-user-photo"/></Link>
             <div className="detail-box" style={{margin:'auto',marginTop:'5px'}}>
                 <img src={photo_url} className="logo-box"/>
                 <p className="dark-text">{info[0].name}<br/>by {user_name}</p>
