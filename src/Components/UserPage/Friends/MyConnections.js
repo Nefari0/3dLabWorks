@@ -1,15 +1,16 @@
 import './MyConnection.css'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const MyConnection = (props) => {
 
-    const { photo_url,user_name } = props 
+    const { photo_url,user_name,user_id } = props 
 
     const [menuOpen,setMenuOpen] = useState(false)
 
     return(<div className="connection-container">
 
-        <div className='photo-name-flex' ><img src={photo_url} className='connection-photo' /><p className='connection-name' >{user_name}</p></div>
+        <div className='photo-name-flex' ><Link to={`viewuser/${user_id}`} ><img src={photo_url} className='connection-photo' /></Link><p className='connection-name' >{user_name}</p></div>
 
         {menuOpen === true ? <ul className={`friend-options`} >
             <div className='friend-menu-row'>

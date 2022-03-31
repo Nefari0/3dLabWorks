@@ -19,6 +19,7 @@ import AdminPage from '../AdminPage/AdminPage';
 import EditUserInfo from './EditUserInfo';
 import Table from './../Games/Table'
 import MyConnection from './Friends/MyConnections';
+import ConnectRequests from './Friends/ConnectRequests';
 // import FriendBox from './Friends/FriendBox';
 
 const db = app.firestore()
@@ -32,6 +33,7 @@ class UserPage extends Component {
             items:[],
             user:{},
             friends:[],
+            requests:[],
             showUserInfo:true,
             showCollections:true,
             showAdminPage:false,
@@ -50,6 +52,8 @@ class UserPage extends Component {
         this.pleaseLogin = this.pleaeLogin.bind(this)
         this.setIsLoading = this.setIsLoading.bind(this)
         this.deleteFromFirebase = this.deleteFromFirebase.bind(this)
+        this.acceptRequest = this.acceptRequest.bind(this)
+        this.removeConnection = this.removeConnection.bind(this)
         // this.openCreate = this.openCreate.bind(this)
     }
 
@@ -61,10 +65,15 @@ class UserPage extends Component {
 
     componentDidUpdate() {
         const { id } = this.props.user.user
-        console.log('updating')
-        if(this.state.friends.length < 1 && id != undefined){
-            axios.get(`/api/join/friends/${id}`).then(res => this.setState({friends:res.data}))   
-        }
+        // if(this.state.friends.length < 1 && id != undefined){
+        //     axios.get(`/api/join/friends/${id}`).then(res => this.setState({friends:res.data}))   
+        // }
+        // if(this.state.setPermission === true && id != undefined) {
+        //     axios.get(`/api/get/pending/friends/${id}`).then(res2 => this.setState({requests:res2.data})).catch(err => {
+        //         this.setState({requests:[]})
+        //     })
+        // }
+        // this.setState({setPermission:false})
     }
 
     // thisUpdateUser() {
@@ -139,6 +148,16 @@ class UserPage extends Component {
         alert('please log in')
     }
 
+    acceptRequest = async (from,to) => {
+        const yes = true
+        await axios.post('/api/accept/connection/',{from,to,yes})
+    }
+
+    removeConnection = async (from,to) => {
+        console.log('hit remove', from,to)
+        await axios.post('/api/remove/connection/',{from,to})
+    }
+
     // openCreate() {
     //     this.setState({showCreateProject:!this.state.showCreateProject})
     // }
@@ -157,7 +176,7 @@ class UserPage extends Component {
     // }
 
     render(){
-        const { showCollections,showUserInfo,items,isLoading,showCreateProject,showEditUserInto,showGames,showFriends,friends } = this.state
+        const { showCollections,showUserInfo,items,isLoading,showCreateProject,showEditUserInto,showGames,showFriends,friends,requests } = this.state
         const { isLoggedIn } = this.props.user
         const { photo,auth,name,is_admin,background_url,user,email,id } = this.props.user.user
 
@@ -175,6 +194,10 @@ class UserPage extends Component {
         // })
         const mappedConnections = friends.map(el => {
             return <MyConnection key={el.user_id} photo_url={el.photo_url} user_id={el.user_id} user_name={el.user_name} />
+        })
+
+        const mappedRequests = requests.map(el => {
+            return <ConnectRequests key={el.user_id} photo_url={el.photo_url} user_name={el.user_name} user_id={el.user_id} my_id={id} removeConnection={this.removeConnection} acceptRequest={this.acceptRequest} />
         })
 
     return(
@@ -212,6 +235,7 @@ class UserPage extends Component {
 
                 {showCollections === true ? <Collections username={this.props.user} setIsLoading={this.setIsLoading} photo_url={photo} hideView={this.hideView} showCreateProject={showCreateProject}/> : null} 
 
+                {showFriends === true ? mappedRequests : null}
                 {showFriends === true ? mappedConnections : null}
 
             </section>
