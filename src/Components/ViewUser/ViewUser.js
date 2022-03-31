@@ -99,6 +99,18 @@ class ViewUser extends Component {
         } else {this.pleaseLogin()}
     }
 
+    connectInvite = () => {
+        // --- this is for sending connection requests --- //
+        const { id } = this.props.user.user
+        const { user_id } = this.state.user[0]
+        const friend_id = user_id
+        const no = false
+        console.log('hit invite',id,friend_id)
+        // if(id != undefined){
+        //     axios.post('/api/friends/add/',{id,friend_id,no})
+        // }
+    }
+
     getUserAndProjects(user_id) {
         // const { user_id } = this.props.match.params
         axios.get(`/api/user/projects/get/${user_id}`).then(res => {
@@ -168,7 +180,7 @@ class ViewUser extends Component {
  
                     <div className='portrait-row'>
                         <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.openMessageBox()} ><p style={{marginTop:'10px'}} >Message</p></div>
-                        {this.props.user.isLoggedIn === true ? <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.openMessageBox()} ><p style={{marginTop:'10px'}} >Connect</p></div>
+                        {this.props.user.isLoggedIn === true ? <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.connectInvite()} ><p style={{marginTop:'10px'}} >Connect</p></div>
                        : <div className='user-buttons' style={{marginTop:'30px'}} ><p style={{marginTop:'10px'}} >Connect</p></div>}
                     </div>
 
