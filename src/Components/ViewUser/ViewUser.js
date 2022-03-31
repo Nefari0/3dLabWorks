@@ -47,7 +47,7 @@ class ViewUser extends Component {
         // this.handleCollections = this.handleCollections.bind(this)
         // this.hideView = this.hideView.bind(this)
         // this.resetView = this.resetView.bind(this)
-        this.pleaseLogin = this.pleaeLogin.bind(this)
+        this.pleaseLogin = this.pleaseLogin.bind(this)
         this.setIsLoading = this.setIsLoading.bind(this)
         // this.deleteFromFirebase = this.deleteFromFirebase.bind(this)
         this.openMessageBox = this.openMessageBox.bind(this)
@@ -74,20 +74,29 @@ class ViewUser extends Component {
         }
     }
 
-    checkForExistingMessage = (id,user_id) => {
+    checkForExistingMessage = async (id,user_id) => {
         // const { id } = this.props.user.user
         // const { user_id } = this.state.user
-        axios.post('/api/conversation/exists',{id,user_id}).then(res => {
-            this.setState({currentUserMessage:res.data})
-        })
+        const conversation= await axios.post('/api/conversation/exists',{id,user_id})
+        this.setState({currentUserMessage:conversation.data})
+        // console.log('id in function',conversation.data)
+        // axios.post('/api/conversation/exists',{id,user_id}).then(res => {
+        //     this.setState({currentUserMessage:res.data})
+        // })
+
+        // await axios.get(`/api/conversation/messages/get/${conversation_id}`).then(res2 => {
+        //     this.setState({currentUserMessage:res2.data})
+        // })
     }
 
     openMessageBox = () => {
-        const { isLoggedIn } = this.props.user
-        const { currentUserMessage } = this.state
-        if(currentUserMessage === false && isLoggedIn === true){
-        this.setState({openMessageBox:!this.state.openMessageBox})
-    }
+            const { isLoggedIn } = this.props.user
+            const { id } = this.props.user.user
+            const { currentUserMessage } = this.state
+        
+            if(id != undefined && isLoggedIn === true){
+            this.setState({openMessageBox:!this.state.openMessageBox})
+        } else {this.pleaseLogin()}
     }
 
     getUserAndProjects(user_id) {
@@ -112,16 +121,16 @@ class ViewUser extends Component {
         this.setState({isView:'isFriends'})
     }
 
-    pleaeLogin(){
+    pleaseLogin(){
         alert('please log in')
     }
 
     render(){
-        const { items,isLoading,user } = this.state
+        const { items,isLoading,user,currentUserMessage } = this.state
         // const { photo_url,auth,name,email,is_admin,background_url,user_name,user_id } = this.state.user
 
         const mappedNewMessage = user.map(el => {
-            return <CreateNewMessage key={el.user_id} user_id={el.user_id} user_name={el.user_name} openMessageBox={this.openMessageBox} />
+            return <CreateNewMessage key={el.user_id} user_id={el.user_id} user_name={el.user_name} currentUserMessage={currentUserMessage} pleaeLogin={this.pleaseLogin} openMessageBox={this.openMessageBox} />
         })
 
         const mappedUserName = user.map(el => {
@@ -158,7 +167,9 @@ class ViewUser extends Component {
                     {mappedUserName}
  
                     <div className='portrait-row'>
-                        <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.openMessageBox()} ><p style={{marginTop:'10px'}} >Send Message</p></div>
+                        <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.openMessageBox()} ><p style={{marginTop:'10px'}} >Message</p></div>
+                        {this.props.user.isLoggedIn === true ? <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.openMessageBox()} ><p style={{marginTop:'10px'}} >Connect</p></div>
+                       : <div className='user-buttons' style={{marginTop:'30px'}} ><p style={{marginTop:'10px'}} >Connect</p></div>}
                     </div>
 
 
