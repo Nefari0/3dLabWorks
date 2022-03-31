@@ -24,8 +24,18 @@ class CreateNewMessage extends Component {
     executeSendMessage = async () => {
         const { text } = this.state
         const { id } = this.props.user.user
-        const { user_id } =  this.props
-        const conversation = await axios.post('/api/conversation/new',{user_id,id,text})
+        const { isLoggedIn } = this.props.user
+        const { user_id,currentUserMessage } =  this.props
+        // console.log('here is id',conversation_id)
+        if (isLoggedIn != false && id != undefined) {
+        if (currentUserMessage === null ){
+            await axios.post('/api/conversation/new',{user_id,id,text})
+        } else if (id != undefined && isLoggedIn != false){
+            const conversation_id = currentUserMessage[0].conversation_id
+            await axios.post('/api/conversation/user/new',{conversation_id,id,text,user_id})
+        }
+    }
+        // const conversation = await axios.post('/api/conversation/new',{user_id,id,text})
     }
 
     
@@ -33,7 +43,7 @@ class CreateNewMessage extends Component {
     render() {
 
         const { user_id,user_name } = this.props
-        const { loggedInUser } = this.props
+        const { loggedInUser,currentUserMessage } = this.props
 
         return(<div className='create-message-container'>
                     <h4 style={{color:'#555',textTransform:'none'}} >Send message to {user_name} ?</h4>
