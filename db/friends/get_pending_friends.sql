@@ -1,0 +1,1 @@
+SELECT * FROM d_friends WHERE friend_id = $1 AND is_accepted = false

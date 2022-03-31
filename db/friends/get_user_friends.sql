@@ -1,0 +1,1 @@
+SELECT * FROM d_friends WHERE user_id = $1
