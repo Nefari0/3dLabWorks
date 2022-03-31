@@ -71,12 +71,17 @@ module.exports = {
     checkExisting: async (req,res) => {
         const db = req.app.get('db')
         const { id,user_id } = req.body
-        console.log('hit "checkExisting"',req.body)
+        // console.log('hit "checkExisting"',req.body)
         const existingMessages = await db.messaging.check_for_existing_message([id,user_id])
         const existing = existingMessages[0]
+        const { conversation_id } = existing
         // const user = existing['user_id']
-        console.log('here is user',existingMessages[0] === undefined)
-        return res.status(200).send(existingMessages[0] != undefined)
+        const messages = await db.messaging.get_conversation_messages_by_id([conversation_id])
+
+    
+        // console.log('here is user',messages)
+        return res.status(200).send(messages)
+        // return res.status(200).send(existingMessages[0] != undefined)
         
     },
 
