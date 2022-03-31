@@ -19,13 +19,38 @@ module.exports = {
         const { user_id } = req.params
         const db = req.app.get('db')
         const friends = await db.friends.get_pending_friends([user_id])
+        if(friends.length < 1){
+            return res.status(404).send('no pending request')
+        }
+        console.log('from pending',friends)
         return res.status(200).send(friends)
     },
 
     addFriend: async (req,res) => {
-        const { user_id,friend_id } = req.body
+        const { id,friend_id } = req.body
         const db = req.app.get('db')
-        const friend = await db.friends.addFriend([user_id,friend_id,false])
+        const existingFriend = await db.friends.existing_friend([id,friend_id])
+        if(existingFriend) {
+            return res.status(409).send('already exists')
+        }
+        const friend = await db.friends.add_friend([id,friend_id,false])
         return res.status(200).send(friend)
+    },
+    
+    confirmRequest: async (req,res) => {
+        const { from,to,yes } = req.body
+        const db = req.app.get('db')
+        const accepted = await db.friends.confirm_request([from,to])
+        const newFriend = await db.friends.add_friend([to,from,yes])
+        return res.status(200).send(newFriend)
+    },
+
+    removeConnection: async (req,res) => {
+        const { from,to } = req.body
+        console.log('hit remove in backend',req.body)
+        const db = req.app.get('db')
+        const xMyFriend = await db.friends.remove_connection([from,to])
+        const xYourFriend = await db.friends.remove_connection([to,from])
+        return res.status(200).send(xMyFriend)
     }
 }
