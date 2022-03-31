@@ -75,3 +75,25 @@
 .friend-menu-text {
     font-size: smaller;
 }
+
+.connection-buttons,
+.connection-buttons-full {
+    background: linear-gradient(0turn,#5077be,#6495ed);
+    color: #fff;
+    height: 30px;
+    width: 70px;
+    border-radius: 2px;
+    font-size: smaller;
+    border:solid 1px #3c598e;
+    /* margin-left: 10px; */
+    /* margin-right: 10px; */
+    margin-left: 2px;
+    margin-right: 2px;
+    font-weight: 200;
+}
+
+.connection-buttons {
+    color: #3c598e;
+    background: #fff;
+    /* font-weight: 600; */
+}
