@@ -74,6 +74,9 @@ module.exports = {
         // console.log('hit "checkExisting"',req.body)
         const existingMessages = await db.messaging.check_for_existing_message([id,user_id])
         const existing = existingMessages[0]
+        if(!existing){
+            return res.status(404).send('there are not messages yet')
+        }
         const { conversation_id } = existing
         // const user = existing['user_id']
         const messages = await db.messaging.get_conversation_messages_by_id([conversation_id])
