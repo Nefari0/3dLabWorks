@@ -18,6 +18,8 @@ import Loading from '../Loading/Loading';
 import AdminPage from '../AdminPage/AdminPage';
 import EditUserInfo from './EditUserInfo';
 import Table from './../Games/Table'
+import MyConnection from './Friends/MyConnections';
+// import FriendBox from './Friends/FriendBox';
 
 const db = app.firestore()
 
@@ -29,12 +31,14 @@ class UserPage extends Component {
         this.state ={
             items:[],
             user:{},
+            friends:[],
             showUserInfo:true,
-            showCollections:false,
+            showCollections:true,
             showAdminPage:false,
             showCreateProject:false,
             showEditUserInto:false,
             showGames:false,
+            showFriends:false,
             profilePic:null,
             userName:null,
             isLoading:false,
@@ -51,16 +55,17 @@ class UserPage extends Component {
 
     componentDidMount(){
         axios.get('/api/projects/all').then(res =>
-            this.setState({ ...this.state,items:res.data}))    
+            this.setState({ ...this.state,items:res.data}))
+            // axios.get(`/api/friends/${this.props.user.user.id}`).then(res => this.setState({friends:res.data})) 
     }
 
-    // componentDidUpdate() {
-    //     const { setPermission } = this.state
-    //     if (setPermission === true) {
-    //         this.props.updateUser()
-    //         this.setState({setPermission:false})
-    //     }
-    // }
+    componentDidUpdate() {
+        const { id } = this.props.user.user
+        console.log('updating')
+        if(this.state.friends.length < 1 && id != undefined){
+            axios.get(`/api/join/friends/${id}`).then(res => this.setState({friends:res.data}))   
+        }
+    }
 
     // thisUpdateUser() {
     //     this.props.updateUser()
@@ -74,11 +79,12 @@ class UserPage extends Component {
 
     resetView(){
         this.setState({
-            showCollections:false,
+            showCollections:true,
             showUserInfo:false,
             showEditUserInto:false,
             showCreateProject:false,
             showGames:false,
+            showFriends:false,
         })
     }
 
@@ -95,20 +101,22 @@ class UserPage extends Component {
                 this.setState({ showUserInfo : !this.state.showUserInfo })
                 break;
             case 'showCollections':
-                this.setState({ showCollections : !this.state.showCollections })
+                this.setState({ showCollections : true })
                 break;
             case 'showAdminPage':
                 this.setState({ showAdminPage : !this.state.showAdminPage})
                 break;
             case 'showEditUserInfo':
-                this.setState({ showEditUserInto : !this.state.showEditUserInto})
+                this.setState({ showEditUserInto : true})
                 break;
             case 'showCreateProject':
-                this.setState({showCreateProject : !this.state.showCreateProject})
+                this.setState({showCreateProject : true})
                 break;
             case 'showGames':
-                this.setState({showGames:!this.state.showGames})
+                this.setState({showGames:true})
                 break;
+            case 'showFriends':
+                this.setState({ showFriends : true, showCollections:false})
             default:
                 break;
         }
@@ -149,9 +157,25 @@ class UserPage extends Component {
     // }
 
     render(){
-        const { showCollections,showUserInfo,items,isLoading,showCreateProject,showEditUserInto,showGames } = this.state
+        const { showCollections,showUserInfo,items,isLoading,showCreateProject,showEditUserInto,showGames,showFriends,friends } = this.state
         const { isLoggedIn } = this.props.user
         const { photo,auth,name,is_admin,background_url,user,email,id } = this.props.user.user
+
+        // --- unconfirmed requests from other users ---- //
+        // const pendingRequest = friends.filter(el => {
+        //     return el.is_accepted === false && el.frien_id === id
+        // })
+        // const mappedPending = pendingRequest.map(el => {
+        //     return <div></div>
+        // })
+
+        // --- all accepted requests ---- //
+        // const allFriends = friends.filter(el => {
+        //     return el.is_accepted === true
+        // })
+        const mappedConnections = friends.map(el => {
+            return <MyConnection key={el.user_id} photo_url={el.photo_url} user_id={el.user_id} user_name={el.user_name} />
+        })
 
     return(
         <div>
@@ -165,10 +189,12 @@ class UserPage extends Component {
                     src={photo}
                     alt="photo"/>
                     <h2 className="portrait-row" style={{textTransform:'none'}} >{this.props.user.user.user}</h2>
-                    <div className='portrait-row'>
-                        <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.hideView('showEditUserInfo')}><p style={{marginTop:'10px'}}  >Edit Profile</p></div>
-                        <div className='user-buttons' style={{marginTop:'30px'}}  onClick={() => this.hideView('showCreateProject')} ><p style={{marginTop:'10px'}} >Create</p></div>
-                        <div className='user-buttons' style={{marginTop:'30px'}}  onClick={() => this.hideView('showGames')} ><p style={{marginTop:'10px'}} >Games</p></div>
+                    <div className='portrait-row' style={{flexWrap:'wrap',justifyContent:'center'}}>
+                        <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showEditUserInfo')}><p style={{marginTop:'5px'}}  >Edit Profile</p></div>
+                        <div className='user-buttons' style={{marginTop:'10px'}}  onClick={() => this.hideView('showCreateProject')} ><p style={{marginTop:'5px'}} >Create</p></div>
+                        <div className='user-buttons' style={{marginTop:'10px'}}  onClick={() => this.hideView('showGames')} ><p style={{marginTop:'5px'}} >Games</p></div>
+                        <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showFriends')} ><p style={{marginTop:'5px'}} >Friends</p></div>
+                        <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showCollections')} ><p style={{marginTop:'5px'}} >Collections</p></div>
                     </div>
  
                     <div className='portrait-row' >{is_admin ? (<Link to={'/admin'} style={{ textDecoration:'none' }}><p className='go-to-admin'>admin</p></Link>) : null}  </div>
@@ -182,9 +208,11 @@ class UserPage extends Component {
 
                 {showGames === true ? <Table hideView={this.hideView} /> : null}
 
-                {showEditUserInto === true ? <EditUserInfo setIsLoading={this.setIsLoading} hideView={this.hideView} /> : null}
+                {showEditUserInto === true ? <EditUserInfo setIsLoading={this.setIsLoading} resetView={this.resetView} /> : null}
 
-                {<Collections username={this.props.user} setIsLoading={this.setIsLoading} photo_url={photo} hideView={this.hideView} showCreateProject={showCreateProject} />}
+                {showCollections === true ? <Collections username={this.props.user} setIsLoading={this.setIsLoading} photo_url={photo} hideView={this.hideView} showCreateProject={showCreateProject}/> : null} 
+
+                {showFriends === true ? mappedConnections : null}
 
             </section>
         </div>
