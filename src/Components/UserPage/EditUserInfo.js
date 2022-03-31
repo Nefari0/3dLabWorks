@@ -335,7 +335,7 @@ class EditUserInfo extends Component {
                         </div>
 
                         {/* <li className="user-photo"><img className="photo-properties" src={photo}/><button className="li-button">delete picture</button></li> */}
-                        <div className=""><button onClick={this.launchPic} className="li-button">submit</button><button className="li-button" onClick={() => this.props.hideView('showEditUserInfo')} >cancel</button></div>
+                        <div className=""><button onClick={this.launchPic} className="li-button">submit</button><button className="li-button" onClick={() => this.props.resetView()} >cancel</button></div>
                     </div>
                 </section>
             </div>
