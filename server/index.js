@@ -14,6 +14,7 @@ const projectsController = require('./controllers/projectsController');
 const deletedDataController = require('./controllers/deletedDataController')
 const projectImageController = require('./controllers/projectImageController')
 const messageController = require('./controllers/messageController')
+const connectionController = require('./controllers/connectionController')
 // const { projectManagement, auth } = require('firebase-admin');
 const { addProject } = require('./controllers/projectsController');
 const docsController = require('./controllers/docsController')
@@ -177,6 +178,11 @@ app.post('api/asset/upload/add',fireFile)
 // app.get('/api/messages/getall')
 // app.post('/api/messages/send')
 // app.delete('/api/messages/delete')
+
+//  ---- user conntection endpoints ---- //
+app.get('/api/friends/:user_id', connectionController.getUserFriends)
+app.get('/api/join/friends/:user_id',connectionController.getFriendInfo)
+app.get('/api/get/pending/friends/:user_id', connectionController.getPendingFriends) // unconfirmend requests
 
 // --- Track User / Browser --- //
 app.post('/api/track/new/',trackingController.addNewBrowse)
