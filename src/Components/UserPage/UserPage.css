@@ -90,15 +90,15 @@
 .user-buttons {
     background: linear-gradient(0turn,#5077be,#6495ed);
     color: #fff;
-    height: 50px;
-    width: 100px;
+    height: 40px;
+    width: 80px;
     border-radius: 2px;
     font-size: smaller;
     border:solid 1px #3c598e;
     /* margin-left: 10px; */
     /* margin-right: 10px; */
-    margin-left: 5px;
-    margin-right: 5px;
+    margin-left: 2px;
+    margin-right: 2px;
 }
 
 .go-to-admin {
@@ -124,10 +124,10 @@
     overflow-y:auto;
     display: flex;
     flex-direction: row;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     justify-content: flex-start;
     align-items: flex-start;
-    
+    /* background-color: #6495ed; */
 }
 
 .collections {
