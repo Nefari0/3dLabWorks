@@ -1,7 +1,7 @@
 .friend-container {
     width: 650px;
     height: 800px;
-    background-color: red;
+    /* background-color: red; */
     display: flex;
     flex-direction: row;
 	flex-wrap: wrap;
