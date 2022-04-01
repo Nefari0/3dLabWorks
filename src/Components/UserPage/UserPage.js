@@ -20,7 +20,7 @@ import EditUserInfo from './EditUserInfo';
 import Table from './../Games/Table'
 import MyConnection from './Friends/MyConnections';
 import ConnectRequests from './Friends/ConnectRequests';
-// import FriendBox from './Friends/FriendBox';
+import DisplayFriends from './Friends/DisplayFriends';
 
 const db = app.firestore()
 
@@ -52,14 +52,13 @@ class UserPage extends Component {
         this.pleaseLogin = this.pleaeLogin.bind(this)
         this.setIsLoading = this.setIsLoading.bind(this)
         this.deleteFromFirebase = this.deleteFromFirebase.bind(this)
-        this.acceptRequest = this.acceptRequest.bind(this)
-        this.removeConnection = this.removeConnection.bind(this)
         // this.openCreate = this.openCreate.bind(this)
     }
 
     componentDidMount(){
-        axios.get('/api/projects/all').then(res =>
-            this.setState({ ...this.state,items:res.data}))
+        // console.log('is user already here?',this.props.user.user)
+        // axios.get('/api/projects/all').then(res =>
+            // this.setState({ ...this.state,items:res.data}))
             // axios.get(`/api/friends/${this.props.user.user.id}`).then(res => this.setState({friends:res.data})) 
     }
 
@@ -148,16 +147,6 @@ class UserPage extends Component {
         alert('please log in')
     }
 
-    acceptRequest = async (from,to) => {
-        const yes = true
-        await axios.post('/api/accept/connection/',{from,to,yes})
-    }
-
-    removeConnection = async (from,to) => {
-        console.log('hit remove', from,to)
-        await axios.post('/api/remove/connection/',{from,to})
-    }
-
     // openCreate() {
     //     this.setState({showCreateProject:!this.state.showCreateProject})
     // }
@@ -192,13 +181,13 @@ class UserPage extends Component {
         // const allFriends = friends.filter(el => {
         //     return el.is_accepted === true
         // })
-        const mappedConnections = friends.map(el => {
-            return <MyConnection key={el.user_id} photo_url={el.photo_url} user_id={el.user_id} user_name={el.user_name} />
-        })
+        // const mappedConnections = friends.map(el => {
+        //     return <MyConnection key={el.user_id} photo_url={el.photo_url} user_id={el.user_id} user_name={el.user_name} />
+        // })
 
-        const mappedRequests = requests.map(el => {
-            return <ConnectRequests key={el.user_id} photo_url={el.photo_url} user_name={el.user_name} user_id={el.user_id} my_id={id} removeConnection={this.removeConnection} acceptRequest={this.acceptRequest} />
-        })
+        // const mappedRequests = requests.map(el => {
+        //     return <ConnectRequests key={el.user_id} photo_url={el.photo_url} user_name={el.user_name} user_id={el.user_id} my_id={id} removeConnection={this.removeConnection} acceptRequest={this.acceptRequest} />
+        // })
 
     return(
         <div>
@@ -235,8 +224,10 @@ class UserPage extends Component {
 
                 {showCollections === true ? <Collections username={this.props.user} setIsLoading={this.setIsLoading} photo_url={photo} hideView={this.hideView} showCreateProject={showCreateProject}/> : null} 
 
-                {showFriends === true ? mappedRequests : null}
-                {showFriends === true ? mappedConnections : null}
+                {showFriends === true ? <DisplayFriends id={id} /> : null }
+
+                {/* {showFriends === true ? mappedRequests : null} */}
+                {/* {showFriends === true ? mappedConnections : null} */}
 
             </section>
         </div>

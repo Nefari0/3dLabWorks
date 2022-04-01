@@ -1,0 +1,11 @@
+.friend-container {
+    width: 650px;
+    height: 800px;
+    background-color: red;
+    display: flex;
+    flex-direction: row;
+	flex-wrap: wrap;
+    justify-content: space-around;
+    border-radius: 2%;
+    overflow-y:auto;
+}
