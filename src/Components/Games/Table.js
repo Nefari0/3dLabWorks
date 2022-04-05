@@ -1,10 +1,13 @@
 import { useState,useEffect } from "react"
 import CheckerBoard from "./checkers/CheckerBoard"
+import GameInvite from "../UserPage/Friends/GameInvite"
 import './Table.css'
 // import { loginUser,registerUser,updateUser } from '../../../ducks/userReducer'
 // import { connect } from 'react-redux'
 
 const Table = (props) => {
+
+    const { challengeUser,currentGame } = props
 
 // const [ openTable,setOpenTable ] = useState(false)
 
@@ -17,7 +20,8 @@ const Table = (props) => {
         </section>
         
         <section >
-            <CheckerBoard />
+            {challengeUser != null ? <img className="foe-photo" src={challengeUser.gameInformation.photo} /> : null}
+            <CheckerBoard currentGame={currentGame} client={props.client} />
         </section>
     </div>)
 }

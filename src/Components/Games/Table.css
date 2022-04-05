@@ -1,6 +1,6 @@
 
 .game-container {
-    /* position: absolute; */
+    /* position: relative; */
     /* height: 400px; */
     /* width: 200px; */
     /* top: 50px; */
@@ -58,6 +58,16 @@
     padding-top: 10%;
     margin: none;
     transition: all 100ms;
+}
+
+.foe-photo {
+    position: absolute;
+    margin-top: 50px;
+    margin-bottom: 0px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    z-index: 10000;
 }
 
 @media(max-width:690px) {
