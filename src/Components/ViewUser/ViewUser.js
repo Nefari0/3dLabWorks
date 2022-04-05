@@ -67,15 +67,15 @@ class ViewUser extends Component {
         this.checkForExistingMessage()
     }
 
-    componentDidUpdate() {
-        const { currentUserMessage } = this.state
-        const { user_id } = this.props.match.params
-        const { id } = this.props.user.user
-        if(currentUserMessage === null && id !== undefined) {
-            this.checkForExistingMessage(id,user_id)
-            this.getConnectionStatus(id,user_id)
-        }
-    }
+    // componentDidUpdate() {
+    //     const { currentUserMessage } = this.state
+    //     const { user_id } = this.props.match.params
+    //     const { id } = this.props.user.user
+    //     if(currentUserMessage === null && id !== undefined) {
+    //         this.checkForExistingMessage(id,user_id)
+    //         this.getConnectionStatus(id,user_id)
+    //     }
+    // }
 
     getConnectionStatus = () => {
         const { id } = this.props.user.user
