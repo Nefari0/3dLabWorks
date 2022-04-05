@@ -7,13 +7,13 @@ import Tile from './Tile/Tile'
 import pieces from './pieces'
 import CurrentPlayer from './CurrentPlayer'
 // import Notice from '../Notice/Notice'
-import { w3cwebsocket as W3CWebSocket } from "websocket";
-// const client = new W3CWebSocket(`ws://127.0.0.1:8001`); // production
-const client = new W3CWebSocket(`ws://165.227.102.189:8002`); // build
+// import { w3cwebsocket as W3CWebSocket } from "websocket";
+// const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
+// const client = new W3CWebSocket(`ws://165.227.102.189:8002`); // build
 
 class CheckerBoard extends Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
 
         this.state = {
             playerGood:{},
@@ -48,32 +48,39 @@ class CheckerBoard extends Component {
         // this.kingAll = this.kingAll.bind(this)
 
         // this.autoStartTurn = this.autoStartTurn.bind(this)
+        
     }
 
     componentDidMount() {
-        // console.log('is mounted',pieces)
+        console.log('is mounted')
         // this.props.updateUser()
         this.setState({pieces:pieces})
         this.boardFactory()
         this.getConnected()
+        // localStorage.setItem('testing',pieces)
     }
 
     getConnected = (input) => {
+        const { client } = this.props
         client.onopen = () => {
             console.log('client connected')
         }
-        client.onmessage = (message) => {
         
+        client.onmessage = (message) => {
             const dataFromServer = JSON.parse(message.data);
+            // const { id } = this.props.user.user
+            
+            
+            if (dataFromServer.type === 'checkerTurn' && dataFromServer.gameID === this.props.currentGame ) {
+                // console.log('data from server',dataFromServer.sender === id)
+                // console.log(dataFromServer.input)
             const { currentPlayer } = dataFromServer.input
-
-            if (dataFromServer.type === 'checkerTurn' ) {
                 this.setState({
                     pieces:dataFromServer.input.newPieces,
                     chainKillData:dataFromServer.input.chainKillData,
                     // currentPlayer:currentPlayer
                 })
-                // this.autoStartTurn() // for testing / pending removal
+
                 this.switchPlayer(currentPlayer)
                 if(this.state.chainKillAvailable === true){
                     if(this.state.chainKillData !== undefined){
@@ -101,9 +108,18 @@ class CheckerBoard extends Component {
     }
 
     sendToSocketsSwitch = (input) => {
+        const { client,currentGame } = this.props
+        const { id } = this.props.user.user // this is for playing a game with another user.
         // console.log('hit sockets')
-        client.send(JSON.stringify({type: "checkerTurn",input}))
+        client.send(JSON.stringify({type: "checkerTurn",input, gameID:currentGame}))
     };
+
+    // --- this function is for testing -- //
+    sendToSocketsUpdate = (input) => {
+        const { client } = this.props
+
+        // client.send(JSON.stringify({type: "checkerTurn",input, sender:id}))
+    }
 
     boardFactory = () => {
     var matrix = []
