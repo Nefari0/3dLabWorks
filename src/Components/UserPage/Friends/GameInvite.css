@@ -1,0 +1,87 @@
+.invite {
+    position: absolute;
+    height: 40px;
+    width: 40px;
+    right: 100px;
+    top: 10px;
+    /* background-color: yellowgreen; */
+    border-radius: 50%;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+    z-index: 1;
+}
+
+.invite-photo {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+
+.game-invite-icon {
+    position: absolute;
+    /* padding-top: 10px; */
+    height: 20px;
+    width: 20px;
+    top: 25px;
+    left: 20px;
+    /* color: #e67e22; */
+    border-radius: 50%;
+    background-color: #fff;
+    color: red;
+}
+
+.choose-accept {
+    /* position: absolute; */
+    height: 50px;
+    width: 100px;
+    border-radius: 3px;
+    background-color: #fff;
+
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: stretch;
+	align-content: stretch;
+
+    overflow: hidden;
+}
+
+.game-invite-title-text,
+.choose-accept-text {
+    color: #555;
+    font-size: x-small;
+    font-weight: 600;
+}
+.game-invite-title-text {
+    color: #fff;
+}
+
+.invite-yes-no {
+    display: flex;
+	flex-direction: row-reverse;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: stretch;
+    margin-bottom: 10px;
+}
+
+.game-invite-title {
+    color: #fff;
+    /* position: absolute; */
+    text-transform: none;
+    /* top: -1px; */
+    height: 20px;
+    width: 100%;
+    background: linear-gradient(0turn,#5077be,#6495ed);
+    /* padding-top: 20%; */
+    /* margin: none; */
+    transition: all 100ms;
+}
+
+
