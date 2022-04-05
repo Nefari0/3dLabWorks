@@ -21,6 +21,10 @@ import Table from './../Games/Table'
 import MyConnection from './Friends/MyConnections';
 import ConnectRequests from './Friends/ConnectRequests';
 import DisplayFriends from './Friends/DisplayFriends';
+import GameInvite from './Friends/GameInvite'; // notice to indicate invite to play game
+import { w3cwebsocket as W3CWebSocket } from "websocket";
+// const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
+const client = new W3CWebSocket(`ws://165.227.102.189:8002`); // build
 
 const db = app.firestore()
 
@@ -45,6 +49,8 @@ class UserPage extends Component {
             userName:null,
             isLoading:false,
             setPermission:true,
+            challengeUser:null, // challenge this your to game
+            currentGame:null,
         }
         this.handleCollections = this.handleCollections.bind(this)
         this.hideView = this.hideView.bind(this)
@@ -52,10 +58,16 @@ class UserPage extends Component {
         this.pleaseLogin = this.pleaeLogin.bind(this)
         this.setIsLoading = this.setIsLoading.bind(this)
         this.deleteFromFirebase = this.deleteFromFirebase.bind(this)
+        this.getUserID = this.getUserID.bind(this)
+        this.receiveInvite = this.receiveInvite.bind(this)
+        // this.stateInput = this.stateInput.bind(this)
         // this.openCreate = this.openCreate.bind(this)
     }
 
     componentDidMount(){
+        this.receiveInvite()
+        this.setState({currentGame:this.getUniqueID()})
+        
         // console.log('is user already here?',this.props.user.user)
         // axios.get('/api/projects/all').then(res =>
             // this.setState({ ...this.state,items:res.data}))
@@ -64,8 +76,12 @@ class UserPage extends Component {
 
     componentDidUpdate() {
         const { id } = this.props.user.user
-        // if(this.state.friends.length < 1 && id != undefined){
-        //     axios.get(`/api/join/friends/${id}`).then(res => this.setState({friends:res.data}))   
+        if(this.state.friends.length < 1 && id != undefined){
+            // console.log('here')
+            axios.get(`/api/join/friends/${id}`).then(res => this.setState({friends:res.data}))   
+        }
+        // if(this.state.setPermission === true){
+        //     this.setState({...this.state,user:this.props.user.user,setPermission:false})
         // }
         // if(this.state.setPermission === true && id != undefined) {
         //     axios.get(`/api/get/pending/friends/${id}`).then(res2 => this.setState({requests:res2.data})).catch(err => {
@@ -79,6 +95,63 @@ class UserPage extends Component {
     //     this.props.updateUser()
 
     // }
+
+    changeGameID = (confirm,val) => {
+        if(confirm === true){this.setState({currentGame:val})} else {this.setState({challengeUser:null})}
+        
+    }
+
+    receiveInvite = () => {
+        client.onopen = () => {
+        }
+        client.onmessage = (message) => {
+            const dataFromServer = JSON.parse(message.data)
+            const { id } = this.props.user.user
+            
+            // console.log('hit,,,data',dataFromServer)
+            if(dataFromServer.type === 'gameInvite' && dataFromServer.gameInformation.to === id) {
+                // console.log('connected to invite',id)
+                // alert('should be on both')
+                this.setState({challengeUser:dataFromServer})
+            // if(dataFromServer.type === 'gameIvite') {
+                console.log('invite send to server',typeof(dataFromServer.to), typeof(id))
+            }
+        }
+    }
+
+    sendInvite = (gameInformation) => {
+        console.log('hit send invite')
+        const { id } = this.props.user.user
+        
+        // var sendInfo = {
+        //     "id":id,
+        //     "to":to
+        // }
+        client.send(JSON.stringify({type: 'gameInvite',gameInformation:gameInformation}))
+    }
+    
+    // --- get user_id from props. this is used to invite other users to join an activity --- //
+    getUniqueID = () => {
+        const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+        return s4() + s4() + '-' + s4();
+      };
+    getUserID = (to) => {
+        console.log('hit "sendUserId')
+        const { id,photo } = this.props.user.user
+        var { currentGame } = this.state
+        // var newChallenge = [...challengeUser]
+        // const gameID = this.getUniqueID()
+        var gameInformation = {
+            to:to,
+            from:id,
+            isAccepted:false,
+            photo:photo,
+            gameID:currentGame
+
+        }
+        // this.setState({currentGame:gameID})
+        this.sendInvite(gameInformation)
+    }
 
 
     setIsLoading = () => {
@@ -103,6 +176,7 @@ class UserPage extends Component {
     
     
     hideView(params) {
+        this.receiveInvite()
         this.resetView()
         switch (params) {
             case 'showUserInfo':
@@ -165,7 +239,7 @@ class UserPage extends Component {
     // }
 
     render(){
-        const { showCollections,showUserInfo,items,isLoading,showCreateProject,showEditUserInto,showGames,showFriends,friends,requests } = this.state
+        const { showCollections,showUserInfo,items,isLoading,showCreateProject,showEditUserInto,showGames,showFriends,friends,requests,challengeUser,currentGame } = this.state
         const { isLoggedIn } = this.props.user
         const { photo,auth,name,is_admin,background_url,user,email,id } = this.props.user.user
 
@@ -196,12 +270,13 @@ class UserPage extends Component {
             {isLoading ? <Loading/> : null}
             <section className="column1">
                 <img src={background_url} className='background-photo' />
+                   {challengeUser === null ? null: <GameInvite challengeUser={challengeUser} changeGameID={this.changeGameID} hideView={this.hideView} /> }
                 <div className="portrait">
                     <img className="profile-photo" 
                     src={photo}
                     alt="photo"/>
                     <h2 className="portrait-row" style={{textTransform:'none'}} >{this.props.user.user.user}</h2>
-                    <div className='portrait-row' style={{flexWrap:'wrap',justifyContent:'center'}}>
+                    <div className='portrait-row' style={{flexWrap:'wrap',justifyContent:'center',width:'300px'}}>
                         <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showEditUserInfo')}><p style={{marginTop:'5px'}}  >Edit Profile</p></div>
                         <div className='user-buttons' style={{marginTop:'10px'}}  onClick={() => this.hideView('showCreateProject')} ><p style={{marginTop:'5px'}} >Create</p></div>
                         <div className='user-buttons' style={{marginTop:'10px'}}  onClick={() => this.hideView('showGames')} ><p style={{marginTop:'5px'}} >Games</p></div>
@@ -218,13 +293,13 @@ class UserPage extends Component {
 
             <section className="column2">
 
-                {showGames === true ? <Table hideView={this.hideView} /> : null}
+                {showGames === true ? <Table hideView={this.hideView} challengeUser={challengeUser} client={client} currentGame={currentGame} /> : null}
 
                 {showEditUserInto === true ? <EditUserInfo setIsLoading={this.setIsLoading} resetView={this.resetView} /> : null}
 
                 {showCollections === true ? <Collections username={this.props.user} setIsLoading={this.setIsLoading} photo_url={photo} hideView={this.hideView} showCreateProject={showCreateProject}/> : null} 
 
-                {showFriends === true ? <DisplayFriends id={id} /> : null }
+                {showFriends === true ? <DisplayFriends id={id} getUserID={this.getUserID} /> : null }
 
                 {/* {showFriends === true ? mappedRequests : null} */}
                 {/* {showFriends === true ? mappedConnections : null} */}
