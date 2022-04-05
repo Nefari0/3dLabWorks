@@ -34,7 +34,7 @@
 
 ul.link-list li:hover {
     background-color: #3c598e;
-    border-radius: 10%;
+    border-radius: 2px;
     color: #fff;
     transition: all 500ms;
 }

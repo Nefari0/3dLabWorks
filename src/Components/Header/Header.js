@@ -198,9 +198,9 @@ class Header extends Component{
             <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><h3 className="header-h3">{isLoggedIn ? `Welcome, ${this.props.user.user.user}!` :'MadModels3d'}</h3></Link>
 
             <ul className='link-list'>
-                <Link onClick={() => this.trackingHandler('about')} to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a>about</a></li></Link>
-                <Link onClick={() => this.trackingHandler('projects')} to="/explore" style={{ textDecoration: 'none' }}><li className='link-item'><a>projects</a></li></Link>
-                {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='link-item'><a>my page</a></li></Link>)}
+                <Link onClick={() => this.trackingHandler('about')} to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a>About</a></li></Link>
+                <Link onClick={() => this.trackingHandler('projects')} to="/explore" style={{ textDecoration: 'none' }}><li className='link-item'><a>Projects</a></li></Link>
+                {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='link-item'><a>My Page</a></li></Link>)}
             </ul>
 
             {!isLoggedIn ? (<h4 className="login-link" onClick={this.toggleLogin} >Login</h4>):(<h4 className="login-link" onClick={this.toggleLogin} >Log Out</h4>)}
