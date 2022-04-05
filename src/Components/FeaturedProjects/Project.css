@@ -537,7 +537,7 @@
     .project-container {
         height: 330px;
         /* box-shadow: 0 2.5rem 2rem -2rem hsl(200 50% 20% / 40%); */
-        box-shadow: 1px 1px#d1d1d1;
+        box-shadow: 1px 1px #d1d1d1;
     }
     .image-div {
         max-height: 170px;
