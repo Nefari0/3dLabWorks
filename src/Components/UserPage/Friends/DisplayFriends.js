@@ -41,10 +41,10 @@ class DisplayFriends extends Component {
         const { id } = this.props
         // console.log('hit user in props',this.props)
         // --- requests this user has sent --- //
-        await axios.get(`/api/join/friends/${id}`).then(res => this.setState({friends:res.data}))
+        await axios.get(`/api/join/friends/${id}`).then(res => this.setState({friends:res.data})).catch(err => console.log(err))
 
         // --- unconfirmed request this user has recieved --- //
-        await axios.get(`/api/get/pending/friends/${id}`).then(res2 => this.setState({requests:res2.data}))
+        await axios.get(`/api/get/pending/friends/${id}`).then(res2 => this.setState({requests:res2.data})).catch(err2 => console.log(err2))
 
         return
     }
@@ -78,11 +78,11 @@ class DisplayFriends extends Component {
         const { id } = this.props
 
         const mappedConnections = friends.map(el => {
-            return <MyConnection key={el.user_id} photo_url={el.photo_url} user_id={el.user_id} user_name={el.user_name} my_id={id} removeConnection={this.removeConnection} />
+            return <MyConnection key={el.user_id} photo_url={el.photo_url} user_id={el.user_id} user_name={el.user_name} my_id={id} removeConnection={this.removeConnection} getUserID={this.props.getUserID} />
         })
 
         const mappedRequests = requests.map(el => {
-            return <ConnectRequests key={el.user_id} photo_url={el.photo_url} user_name={el.user_name} user_id={el.user_id} my_id={id} removeConnection={this.removeConnection} acceptRequest={this.acceptRequest} />
+            return <ConnectRequests key={el.user_id} photo_url={el.photo_url} user_name={el.user_name} user_id={el.user_id} my_id={id} removeConnection={this.removeConnection}  acceptRequest={this.acceptRequest} />
         })
 
         return(<div className="friend-container">
