@@ -70,5 +70,13 @@ module.exports = {
         
         const increment = await db.tracking.add_about_click([unique_id])
         return res.status(200).send(increment)
+    },
+
+    setIsAdmin: async (req,res) => {
+        const db = req.app.get('db')
+        const { unique_id } = req.body
+        console.log('hit is admin',unique_id)
+        const admin = await db.tracking.set_is_admin([unique_id])
+        return res.status(200).send(admin)
     }
 }

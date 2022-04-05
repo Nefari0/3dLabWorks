@@ -195,6 +195,7 @@ app.get('/api/track/getall/',trackingController.getAllTraffic)
 app.post('/api/track/login/click/',trackingController.loginClicks)
 app.post('/api/track/about/click/',trackingController.aboutClicks)
 app.post('/api/track/projects/click/',trackingController.projectsClicks)
+// app.post('/api/tracking/setIsAdmin/',trackingController.setIsAdmin) // tracks browsers used in development
 
     // test api for clients
     // module.exports = {
