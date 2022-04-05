@@ -63,5 +63,13 @@ module.exports = {
         const xMyFriend = await db.friends.remove_connection([from,to])
         const xYourFriend = await db.friends.remove_connection([to,from])
         return res.status(200).send(xMyFriend)
+    },
+
+    // --- checks for connection between logged in user and another user -- //
+    getFriendStatus: async (req,res) => {
+        const { id,user_id } = req.body
+        const db = req.app.get('db')
+        const friendShip = await db.friends.existing_friend([id,user_id])
+        return res.status(200).send(friendShip)
     }
 }
