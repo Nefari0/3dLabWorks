@@ -43,6 +43,7 @@ class ViewUser extends Component {
             isLoading:false,
             setPermission:true,
             openMessageBox:false,
+            friendShipInfo:null,
         }
         // this.handleCollections = this.handleCollections.bind(this)
         // this.hideView = this.hideView.bind(this)
@@ -52,6 +53,7 @@ class ViewUser extends Component {
         // this.deleteFromFirebase = this.deleteFromFirebase.bind(this)
         this.openMessageBox = this.openMessageBox.bind(this)
         this.checkForExistingMessage = this.checkForExistingMessage.bind(this)
+        this.getUserAndProjects = this.getUserAndProjects.bind(this)
     }
 
     componentDidMount(){
@@ -62,7 +64,7 @@ class ViewUser extends Component {
                 user:res.data,
                 userName:res.data.user_name
             }))
-        // this.checkForExistingMessage()
+        this.checkForExistingMessage()
     }
 
     componentDidUpdate() {
@@ -71,14 +73,24 @@ class ViewUser extends Component {
         const { id } = this.props.user.user
         if(currentUserMessage === null && id !== undefined) {
             this.checkForExistingMessage(id,user_id)
+            this.getConnectionStatus(id,user_id)
+        }
+    }
+
+    getConnectionStatus = () => {
+        const { id } = this.props.user.user
+        const { isLoggedIn } = this.props.user
+        const { user_id } = this.props.match.params
+        if(id != undefined && isLoggedIn === true) {
+            axios.post('/api/get/friend/status',{id,user_id}).then(res => this.setState({friendShipInfo:res.data}))
         }
     }
 
     checkForExistingMessage = async (id,user_id) => {
         // const { id } = this.props.user.user
         // const { user_id } = this.state.user
-        const conversation= await axios.post('/api/conversation/exists',{id,user_id})
-        this.setState({currentUserMessage:conversation.data})
+        await axios.post('/api/conversation/exists',{id,user_id}).then(res => this.setState({currentUserMessage:res.data})).catch(err => console.log('err'))
+        // this.setState({currentUserMessage:conversation.data})
         // console.log('id in function',conversation.data)
         // axios.post('/api/conversation/exists',{id,user_id}).then(res => {
         //     this.setState({currentUserMessage:res.data})
@@ -102,13 +114,14 @@ class ViewUser extends Component {
     sendConnectInvite = () => {
         // --- this is for sending connection requests --- //
         const { id } = this.props.user.user
+        const { isLoggedIn } = this.props.user
         const { user_id } = this.state.user[0]
         const friend_id = user_id
         const no = false
-        console.log('hit invite',id,friend_id)
-        if(id != undefined){
-            axios.post('/api/friends/add/',{id,friend_id,no})
-        }
+        // console.log('hit invite',id,friend_id)
+        if(id != undefined && isLoggedIn === true){
+            axios.post('/api/friends/add/',{id,friend_id,no}).then().catch(err => console.log(err))
+        } else {this.pleaseLogin()}
     }
 
     getUserAndProjects(user_id) {
@@ -180,8 +193,8 @@ class ViewUser extends Component {
  
                     <div className='portrait-row'>
                         <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.openMessageBox()} ><p style={{marginTop:'10px'}} >Message</p></div>
-                        {this.props.user.isLoggedIn === true ? <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.sendConnectInvite()} ><p style={{marginTop:'10px'}} >Connect</p></div>
-                       : <div className='user-buttons' style={{marginTop:'30px'}} ><p style={{marginTop:'10px'}} >Connect</p></div>}
+                        {this.props.user.isLoggedIn === true ? <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.sendConnectInvite()} >{this.state.friendShipInfo === null ? <p style={{marginTop:'10px'}} >Connect</p> : <p style={{marginTop:'10px'}} >Connect</p>}</div>
+                       : null}
                     </div>
 
 
