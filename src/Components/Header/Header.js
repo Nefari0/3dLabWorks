@@ -47,9 +47,9 @@ class Header extends Component{
         const visited = localStorage['visited']
         const savedUsername = localStorage['user_name']
         const savedPassword = localStorage['password']
-        // const last_visit = new Date().toString()
+        
         const last_visit = new Date().toString().split('(')[0]
-        // console.log('last visit', last_visit)
+        
         if (localStorage['user_name'] != undefined && localStorage['password'] != undefined) {
             this.props.loginUser(savedUsername,savedPassword,last_visit,visited)
             
@@ -61,12 +61,12 @@ class Header extends Component{
           };
 
         if (visited === undefined) {
-            // console.log('visited is not defined')
+           
             const unique_id = getUniqueID()
-            await axios.post('/api/track/new/',{unique_id}).then(res => this.sessionToWindow('visited',res.data))
+            axios.post('/api/track/new/',{unique_id}).then(res => this.sessionToWindow('visited',res.data))
         } else {
             const unique_id = visited
-            // const last_visit = new Date().toString()
+            
             axios.post('/api/track/increment/',{unique_id,last_visit}).catch(err => {
                 console.log('here is the error',err)
                 localStorage.removeItem('visited')
@@ -84,8 +84,10 @@ class Header extends Component{
     componentWillUpdate(){
         const { setPermission } = this.state
         const { user } = this.props
-
+        // console.log('hit update')
+        // this.trackAdminUser()
         if(user.isLoggedIn === true && setPermission===true){
+            if(user.user.is_admin === true) {this.trackAdminUser(true)}
             this.setState({username:user.user.user.user,isLoggedInState:user.isLoggedIn,setPermission:false})
         }   
     }
@@ -105,7 +107,7 @@ class Header extends Component{
     trackingHandler(tag) {
         const { unique_id } = this.state
         if(unique_id !== null){
-            // axios.post('/api/track/add/click/',{unique_id,tag}).catch(err => {console.log(err)})
+            
             switch(tag) {
                 case 'login':
                     return axios.post('/api/track/login/click/',{unique_id,tag}).catch(err => {console.log(err)})
@@ -118,13 +120,16 @@ class Header extends Component{
     }
 
     //  --- this block identifies brower as used during developent --- //
-    // trackAdminUser = () => {
-    //     const { is_admin } = this.props.user.user
-    //     const { unique_id } = this.state
-    //     if(is_admin === true && unique_id !== null){
-    //         axios.post('/api/tracking/setIsAdmin/',unique_id).then().catch(err => console.log(err))
-    //     }
-    // }
+    trackAdminUser = (params) => {
+        // const { is_admin } = this.props.user.user
+        
+        const unique_id = localStorage['visited']
+        const isAdmin = params
+        console.log('hit in header',unique_id,params)
+        if(params === true && unique_id !== undefined){
+            axios.post('/api/tracking/setIsAdmin',{unique_id,isAdmin}).then().catch(err => console.log(err))
+        }
+    }
 
     // --- ----------------------- --- //
 
@@ -198,8 +203,8 @@ class Header extends Component{
             <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><h3 className="header-h3">{isLoggedIn ? `Welcome, ${this.props.user.user.user}!` :'MadModels3d'}</h3></Link>
 
             <ul className='link-list'>
-                <Link onClick={() => this.trackingHandler('about')} to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a>About</a></li></Link>
-                <Link onClick={() => this.trackingHandler('projects')} to="/explore" style={{ textDecoration: 'none' }}><li className='link-item'><a>Projects</a></li></Link>
+                <Link to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a onClick={() => this.trackingHandler('about')} >About</a></li></Link>
+                <Link to="/explore" style={{ textDecoration: 'none' }}><li className='link-item'><a onClick={() => this.trackingHandler('projects')} >Projects</a></li></Link>
                 {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='link-item'><a>My Page</a></li></Link>)}
             </ul>
 
@@ -224,12 +229,12 @@ class Header extends Component{
                 </svg>
                 <a>Logout</a>
                 </li></Link> : null)}
-                {isMenuOpen === true ? <Link onClick={() => this.trackingHandler('about')} to="/about" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>
+                {isMenuOpen === true ? <Link to="/about" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>
                 <svg xmlns="http://www.w3.org/2000/svg" className="header-menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                     <a>About</a></li></Link> : null}
-                {isMenuOpen === true ? <Link onClick={() => this.trackingHandler('projects')} to="/explore" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>
+                {isMenuOpen === true ? <Link to="/explore" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>
                 <svg xmlns="http://www.w3.org/2000/svg" className="header-menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                 </svg>
