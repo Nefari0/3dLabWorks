@@ -180,12 +180,12 @@ app.post('api/asset/upload/add',fireFile)
 // app.delete('/api/messages/delete')
 
 //  ---- user connection endpoints ---- //
-app.post('/api/friends/add/',connectionController.addFriend)
+app.post('/api/friends/add',connectionController.addFriend)
 app.get('/api/friends/:user_id', connectionController.getUserFriends) 
 app.get('/api/join/friends/:user_id',connectionController.getFriendInfo)
 app.get('/api/get/pending/friends/:user_id', connectionController.getPendingFriends) // unconfirmend requests
-app.post('/api/accept/connection/',connectionController.confirmRequest)
-app.post('/api/remove/connection/',connectionController.removeConnection)
+app.post('/api/accept/connection',connectionController.confirmRequest)
+app.post('/api/remove/connection',connectionController.removeConnection)
 app.post('/api/get/friend/status', connectionController.getFriendStatus) // get connection status between two users
 
 // --- Track User / Browser --- //

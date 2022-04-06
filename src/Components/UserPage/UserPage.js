@@ -24,7 +24,7 @@ import DisplayFriends from './Friends/DisplayFriends';
 import GameInvite from './Friends/GameInvite'; // notice to indicate invite to play game
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 // const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
-const client = new W3CWebSocket(`ws://165.227.102.189:8002`); // build
+const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
 
 const db = app.firestore()
 

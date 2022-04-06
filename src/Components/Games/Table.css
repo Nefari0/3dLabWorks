@@ -62,8 +62,8 @@
 
 .foe-photo {
     position: absolute;
-    margin-top: 50px;
-    margin-bottom: 0px;
+    margin-top: 25px;
+    /* margin-bottom: 0px; */
     height: 40px;
     width: 40px;
     border-radius: 50%;

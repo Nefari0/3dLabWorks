@@ -56,7 +56,7 @@ class DisplayFriends extends Component {
     acceptRequest = async (from,to) => {
         const yes = true
         // this.startLoading()
-        await axios.post('/api/accept/connection/',{from,to,yes})
+        await axios.post('/api/accept/connection',{from,to,yes})
         await this.getMyFriends()
         // this.startLoading()
     }
@@ -64,7 +64,7 @@ class DisplayFriends extends Component {
     removeConnection = async (from,to) => {
         console.log('hit remove', from,to)
         // this.startLoading()
-        axios.post('/api/remove/connection/',{from,to})
+        axios.post('/api/remove/connection',{from,to})
         // this.startLoading()
     }
 

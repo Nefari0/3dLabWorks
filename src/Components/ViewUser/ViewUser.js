@@ -120,7 +120,7 @@ class ViewUser extends Component {
         const no = false
         // console.log('hit invite',id,friend_id)
         if(id != undefined && isLoggedIn === true){
-            axios.post('/api/friends/add/',{id,friend_id,no}).then().catch(err => console.log(err))
+            axios.post('/api/friends/add',{id,friend_id,no}).then().catch(err => console.log(err))
         } else {this.pleaseLogin()}
     }
 

@@ -27,6 +27,7 @@ const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
              gotMessages:false,
              expand:false,
              openContacts:true,
+             challengeUser:null // adding game challenge notifications to messageBoard
             }
             this.getMessages = this.getMessages.bind(this)
             this.openMessage = this.openMessage.bind(this)
