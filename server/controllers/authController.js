@@ -80,8 +80,9 @@ module.exports = {
     login: async (req,res) => {
         const { user_name, password, last_visit, visited } = req.body;
         const from_browser = visited
-        // console.log('this is user in authController',user_name,last_visit,visited)
-        if (user_name.split('').length < 1) {
+        console.log('this is user in authController',user_name,last_visit,visited)
+        if(visited !== undefined){req.app.get('db').tracking.track_user_logging([user_name,visited])}
+        if (user_name.split('').length < 1) { // --- does user_name from req.body exist
             return res.status(401).send('user not found')
         }
         const foundUser = await req.app.get('db').get_user([user_name]);

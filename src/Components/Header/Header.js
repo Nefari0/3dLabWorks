@@ -125,7 +125,7 @@ class Header extends Component{
         
         const unique_id = localStorage['visited']
         const isAdmin = params
-        console.log('hit in header',unique_id,params)
+        // console.log('hit in header',unique_id,params)
         if(params === true && unique_id !== undefined){
             axios.post('/api/tracking/setIsAdmin',{unique_id,isAdmin}).then().catch(err => console.log(err))
         }
@@ -149,8 +149,10 @@ class Header extends Component{
     }
 
     async handleClick(signInName,signInPass,saveMyInfo) {
-
-        await this.props.loginUser(signInName,signInPass)
+        const visited = localStorage['visited']
+        const last_visit = new Date()
+        // console.log('is visited defined',localStorage)
+        await this.props.loginUser(signInName,signInPass,last_visit,visited)
 
         if (saveMyInfo === true && this.props.user.isLoggedIn === true) {
             localStorage.setItem('user_name',signInName)
@@ -223,13 +225,13 @@ class Header extends Component{
                     <a>Login</a>
                     </li></Link> : null)
                     :
-                    (isMenuOpen === true ? <Link style={{ textDecoration: 'none',marginTop:'10px' }}><li className='mobile-link-item' onClick={this.toggleLogin}>
+                    (isMenuOpen === true ? <Link to="" style={{ textDecoration: 'none',marginTop:'10px' }}><li className='mobile-link-item' onClick={this.toggleLogin}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="header-menu-icon" style={{color:'#fff',marginLeft:'20[x'}} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                 </svg>
                 <a>Logout</a>
                 </li></Link> : null)}
-                {isMenuOpen === true ? <Link to="/about" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>
+                {isMenuOpen === true ? <Link to="/about" style={{ textDecoration: 'none' }}><li className='mobile-link-item' onClick={() => this.trackingHandler('about')} >
                 <svg xmlns="http://www.w3.org/2000/svg" className="header-menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
@@ -246,7 +248,7 @@ class Header extends Component{
                 <a>My page</a></li></Link> : null)}
             </ul>
 
-            {!openLogin ? (<MobileLogin current_user={user_name} setSaveSession={this.setSaveSession} login={this.props.loginUser} logout={this.handleLogout} execute={this.handleClick} name={this.handleUserName} pass={this.handlePassword} hide={this.state.openLogin} exit={this.toggleLogin} isLoggedIn={this.props.user.isLoggedIn} saveSession={saveSession} />):(<div className="blank-div"></div>)}
+            {!openLogin ? (<MobileLogin current_user={user_name} setSaveSession={this.setSaveSession} logout={this.handleLogout} execute={this.handleClick} name={this.handleUserName} pass={this.handlePassword} hide={this.state.openLogin} exit={this.toggleLogin} isLoggedIn={this.props.user.isLoggedIn} saveSession={saveSession} />):(<div className="blank-div"></div>)}
         </div>
     )}
 } 
