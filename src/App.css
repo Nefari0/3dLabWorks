@@ -106,7 +106,7 @@ h1 {
   width: 400px;
   background-color: white;
   border-radius: 1%;
-  box-shadow: 1px 1px#d1d1d1;
+  box-shadow: 1px #d1d1d1;
   color: #555;
   text-align: left;
   display: flex;
@@ -121,11 +121,11 @@ h1 {
   width: 100vw;
   background: linear-gradient(0turn,#5077be,#6495ed);
   display: flex;
-flex-direction: row;
-flex-wrap: nowrap;
-justify-content: space-around;
-align-items: baseline;
-align-content: stretch;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  align-items: baseline;
+  align-content: stretch;
 }
 
 .about-header-closed {
