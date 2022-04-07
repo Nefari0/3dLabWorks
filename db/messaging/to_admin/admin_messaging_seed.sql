@@ -1,0 +1,7 @@
+-- create table d_user_admin_message (
+--   dum_id serial primary key,
+--   messageContent VARCHAR(1000),
+--   email VARCHAR(250),
+--   visited VARCHAR(250),
+--   date_created timestamp DEFAULT CURRENT_TIMESTAMP
+-- )
