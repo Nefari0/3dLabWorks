@@ -9,9 +9,11 @@ module.exports = {
     },
 
     createMessage: async (req,res) => {
-        const { user_id, text, message_discription, send_from } = req.body
+        // const { user_id, text, message_discription, send_from } = req.body
+        const { messageContent,email,visited } = req.body
         const db = req.app.get('db')
-        const message = await db.messaging.add_message([user_id,text,message_discription,send_from])
+        const message = await db.messaging.to_admin.add_message([messageContent,email,visited])
+        console.log('hit message backend',message)
         return res.status(200).send(message)
     },
 
