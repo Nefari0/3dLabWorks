@@ -13,12 +13,21 @@ class Message extends Component {
             contactAdmin:false,
             messageContent:'Enter Message',
             email:'Enter your email address',
+            welcomeGreeting:'Welcome to MadModels3d. Click here to contact me',
+            responseGreeting:"Your message has been sent. I'll get back to you asap"
         }
         this.hideGreeting = this.hideGreeting.bind(this)
     }
 
     componentDidMount() {
         if(localStorage['visited'] !== undefined){this.setState({visited:localStorage['visited']})}
+    }
+
+    showGreeting() {
+        const { responseGreeting } = this.state
+        this.setState({showActualMessage:true,welcomeGreeting:responseGreeting})
+        
+        // this.setState({showActualMessage:false})
     }
 
     hideGreeting() {
@@ -37,11 +46,13 @@ class Message extends Component {
     sendMessageToAdmin = () => {
         const { messageContent,email,visited } = this.state
         axios.post('/api/messages/user/add',{ messageContent,email,visited })
+        this.setContactAdmin()
+        this.showGreeting()
     }
 
     render() {
 
-        const { showActualMessage,contactAdmin,messageContent,email } = this.state
+        const { showActualMessage,contactAdmin,messageContent,email,welcomeGreeting,responseGreeting } = this.state
 
         return(
             <div>
@@ -49,7 +60,7 @@ class Message extends Component {
                 {contactAdmin === false ? <div 
                 onMouseEnter={this.hideGreeting} 
                 className={`actual-message ${showActualMessage ? true : 'hidden'}`}  >
-                    <p className='contact-admin-text' >Welcome to MadModels3d. Click here to contact me</p>
+                    <p className='contact-admin-text' >{welcomeGreeting}</p>
                     <img src={photo} className='admin-message-photo' />
                 </div> : null}
 
