@@ -14,6 +14,7 @@ import Explore  from './Components/Explore/Explore'
 import AdminPage from './Components/AdminPage/AdminPage';
 import MessageBoard from './Components/UserMessages/MessageBoard';
 import Dash from './Components/Dash/Dash'
+import Message from './Components/Messages/Message';
 // import BaseBackend from './BaseBackend';
 // import EditModel from './Components/UserPage/EditModel' // for testing. will not be rendered in this component
 // import FirebaseTest from './Components/FirebaseTest';
@@ -31,6 +32,7 @@ function App() {
         <Header/>
         {/* <Dash/> */}
         <MessageBoard />
+        <Message />
         {/* <EditModel/> */}
         {/* <DemoScenes /> */}
         {routes}
