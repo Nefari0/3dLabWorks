@@ -2,6 +2,7 @@ import './Messages.css'
 import React from 'react'
 import  { Component } from 'react'
 import photo from './admin_photo1.jpg'
+import axios from 'axios';
 
 class Message extends Component {
     constructor() {
@@ -11,9 +12,13 @@ class Message extends Component {
             showActualMessage:true,
             contactAdmin:false,
             messageContent:'Enter Message',
-            email:'email',
+            email:'Enter your email address',
         }
         this.hideGreeting = this.hideGreeting.bind(this)
+    }
+
+    componentDidMount() {
+        if(localStorage['visited'] !== undefined){this.setState({visited:localStorage['visited']})}
     }
 
     hideGreeting() {
@@ -27,6 +32,11 @@ class Message extends Component {
 
     inputHandler = (prop,val) => {
         this.setState({[prop]:val})
+    }
+
+    sendMessageToAdmin = () => {
+        const { messageContent,email,visited } = this.state
+        axios.post('/api/messages/user/add',{ messageContent,email,visited })
     }
 
     render() {
@@ -56,7 +66,7 @@ class Message extends Component {
                         </svg>
                         <textarea onChange={(e) => this.inputHandler("email",e.target.value)} style={{minHeight:'25px',marginTop:'40px'}} name="text" rows="0" cols="35" wrap="soft" placeholder={email} />
                         <textarea onChange={(e) => this.inputHandler("messageContent",e.target.value)} style={{minHeight:'45px',marginTop:'10px'}} name="text" rows="5" cols="35" wrap="soft" placeholder={messageContent} />
-                        <div className='contact-admin-send-button' ><p style={{color:'#fff'}} >send</p></div>
+                        <div className='contact-admin-send-button' ><p style={{color:'#fff'}} onClick={() => this.sendMessageToAdmin()} >send</p></div>
                     </div>
                 </div> : null}
             </div>

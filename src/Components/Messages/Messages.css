@@ -174,4 +174,17 @@
         /* margin-left: 10%; */
         width: 300px;
     }
+    .send-message-title {
+        width: 300px;
+    }
+}
+
+@media (max-width:350px) {
+    .send-message {
+        /* right: 25px; */
+        width: 280px;
+    }
+    .send-message-title {
+        width: 280px;
+    }
 }
