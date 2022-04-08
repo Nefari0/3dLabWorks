@@ -23,7 +23,7 @@
 	align-items: center;
     background-color: white;
     border-radius: 2%;
-    box-shadow: 2px 2px#d1d1d1;
+    /* box-shadow: 2px 2px#d1d1d1; */
     z-index: 0;
     overflow: scroll;
 }
@@ -61,7 +61,7 @@ input[type="text"]
     height: 30px;
     min-width: 90vw;
     background-color: rgb(243, 243, 250);
-    box-shadow: 2px 2px#d1d1d1;
+    /* box-shadow: 2px 2px#d1d1d1; */
     list-style-type: none;
     margin: 0;
     padding: 0;

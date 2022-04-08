@@ -14,6 +14,7 @@ import ShowTraffic from './ShowTraffic'
 import MessageBoard from '../UserMessages/MessageBoard';
 // import DemoScene from './Three/DemoScene';
 // import ViewUserV2 from './ViewUserV2';
+import UserAdminMessage from './UserAdminMessage/UserAdminMessage';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 // const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
 const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
@@ -38,6 +39,9 @@ class AdminPage extends Component {
 
             editUserInfo:false,
 
+            showMessages:false,
+            userMessages:[],
+
         }
         this.handleAddText = this.handleAddText.bind(this)
         this.addGeneral = this.addGeneral.bind(this)
@@ -47,6 +51,7 @@ class AdminPage extends Component {
         this.openEditAbout = this.openEditAbout.bind(this)
         this.openEditGeneral = this.openEditGeneral.bind(this)
         this.openEditUserInfo = this.openEditUserInfo.bind(this)
+        this.hideMessages = this.hideMessages.bind(this)
     }
 
     componentDidMount() {
@@ -55,6 +60,9 @@ class AdminPage extends Component {
         })
         axios.get('/api/track/getall').then(res => {
             this.setState({traffic:res.data})
+        })
+        axios.get('/api/messages/user').then(res => {
+            this.setState({userMessages:res.data})
         })
     }
 
@@ -92,6 +100,10 @@ class AdminPage extends Component {
         axios.post('/api/docs/hide' ,{content,tag}).then(alert('display changed')).catch(err => console.log(err))
     }
 
+    hideMessages = () => {
+        this.setState({showMessages:!this.state.showMessages})
+    }
+
     hideDocAbout = () => {
         const { displayAbout } = this.state
         const content = displayAbout
@@ -116,7 +128,7 @@ class AdminPage extends Component {
 
     render(){
 
-        const { test,editAbout,editGeneral,editUserInfo,users,traffic } = this.state
+        const { test,editAbout,editGeneral,editUserInfo,users,traffic,showMessages,userMessages } = this.state
         const { photo,auth,name,is_admin } = this.props.user.user
 
         const mappedUsers = users.map(element => {
@@ -127,6 +139,10 @@ class AdminPage extends Component {
 
         const mappedTraffic = filterNull.map(el => {
             return <ShowTraffic key={el.browser_id} id={el.browser_id} date_created={el.date_created} unique_id={el.unique_id} remount={el.remount} last_visit={el.last_visit} />
+        })
+
+        const mappedMessages = userMessages.map(el => {
+            return <UserAdminMessage key={el.dum_id} messagecontent={el.messagecontent} email={el.email} />
         })
 
         // const mappedTraffic = traffic.map(el => {
@@ -158,10 +174,14 @@ class AdminPage extends Component {
                     :
                     <li className="add-doc-div-closed"><a onClick={this.openEditAbout}>edit about info</a></li>}
                     <li className="add-doc-div-closed"><a>notifications</a></li>
-                    <li className="add-doc-div-closed"><a>messages</a></li>
+                    {!showMessages ? <li className="add-doc-div-closed" onClick={() => this.hideMessages()} ><a>messages</a></li>
+                    :
+                    <li className="add-doc-div" onClick={() => this.hideMessages()} ><a>messages</a>
+                        {mappedMessages}
+                    </li>}
                     { editUserInfo ?
                     <li className="add-doc-div">
-                        <a  onClick={this.openEditUserInfo} className="admin-a">edit about info</a>
+                        <a  onClick={this.openEditUserInfo} className="admin-a">User Details</a>
                         {mappedUsers}
                     </li>
                     :
@@ -169,15 +189,16 @@ class AdminPage extends Component {
                     <li className="add-doc-div-closed"><a>terms</a></li>
                     <li className="add-doc-div-closed"><a>user project details</a></li>
                     <li className="add-doc-div-closed"><a>memo</a></li>
+                    <li className="add-doc-div-closed"><a>show traffic</a></li>
                     </ul>
                     <Link to={'/user'} ><a >mypage</a></Link>
                     <div className='display-traffic' >
                         <div className='traffic-display-unit' ><p className='traffic-text' >Date Created</p><p className='traffic-text' >Browser ID</p><p className='traffic-text' >Unique Id</p><p className='traffic-text' >Re-mounts</p><p className='traffic-text' >Last Visit</p></div>
                         {mappedTraffic}
                     </div>
-{/* <ViewUserV2 /> */}
-{/* <Prototyping /> */}
-<MessageBoard/>
+                    {/* <ViewUserV2 /> */}
+                    {/* <Prototyping /> */}
+                    <MessageBoard/>
                     </div>
                 )}
             </div>

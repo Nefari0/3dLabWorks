@@ -2,9 +2,9 @@
 module.exports = {
     // ---- messages to admin ---- //
     getUserMessages: async (req,res) => {
-        const { user_id } = req.params
+        // const { user_id } = req.params
         const db = req.app.get('db')
-        const messages = await db.messaging.get_messages_from_user([user_id])
+        const messages = await db.messaging.to_admin.get_messages_from_user()
         return res.status(200).send(messages)
     },
 

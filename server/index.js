@@ -156,7 +156,9 @@ app.post('/api/docs/hide', docsController.hideDoc)
 app.get('/api/links/get', docsController.getAllLinks)
 
 // contact admin endpoints
-app.get('/api/messages/user/:user_id', messageController.getUserMessages)
+app.get('/api/messages/user', messageController.getUserMessages)
+// app.get('/api/messages/user/:user_id', messageController.getUserMessages)
+
 app.post('/api/messages/user/add', messageController.createMessage)
 app.post('/api/messages/user/delete',messageController.deleteMessage)
 
