@@ -58,7 +58,8 @@ class Message extends Component {
             <div>
             <div className={`messages-container`}>
                 {contactAdmin === false ? <div 
-                onMouseEnter={this.hideGreeting} 
+                onMouseEnter={this.hideGreeting}
+                onClick={this.hideGreeting}
                 className={`actual-message ${showActualMessage ? true : 'hidden'}`}  >
                     <p className='contact-admin-text' >{welcomeGreeting}</p>
                     <img src={photo} className='admin-message-photo' />
