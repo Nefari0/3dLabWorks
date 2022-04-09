@@ -13,7 +13,7 @@ class Message extends Component {
             contactAdmin:false,
             messageContent:'Enter Message',
             email:'Enter your email address',
-            welcomeGreeting:'Welcome to MadModels3d. Click here to contact me',
+            welcomeGreeting:'Welcome to MadModels3d. Click here if you have questions or comments',
             responseGreeting:"Your message has been sent. I'll get back to you asap"
         }
         this.hideGreeting = this.hideGreeting.bind(this)
@@ -65,7 +65,7 @@ class Message extends Component {
                     <img src={photo} className='admin-message-photo' />
                 </div> : null}
 
-                {contactAdmin === false ? <svg onClick={() => this.setContactAdmin()} xmlns="http://www.w3.org/2000/svg" class="admin-message-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                {contactAdmin === false ? <svg onClick={() => this.setContactAdmin()} xmlns="http://www.w3.org/2000/svg" class={`admin-message-icon`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg> : null}
 
