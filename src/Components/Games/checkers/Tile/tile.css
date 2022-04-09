@@ -14,6 +14,7 @@
     /* background-color: coral; */
     /* background-color: #6495ed; */
     background-color: #3c598e;
+    /* background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url(American_walnut_pxr128_normaljpg.jpg); */
     /* opacity: .2; */
     margin: 1px;
     z-index: 10;
@@ -56,7 +57,7 @@
     border: .1px solid #fff;
 }
 
-.hidden {
+.hide-game-piece {
     visibility: hidden;
     opacity: 0;
     transition: visibility 0s 1s, opacity 1s linear;
