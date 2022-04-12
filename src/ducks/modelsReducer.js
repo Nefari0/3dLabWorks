@@ -8,6 +8,7 @@ const initialState = {
 };
 
 const GET_MODELS = "GET_MODELS";
+const GET_FEATURED = "GET_FEATURED"
 
 export function getModels() {
   return {
@@ -17,13 +18,13 @@ export function getModels() {
   };
 }
 
-// export function getFeatured() {
-//   return {
-//       type : GET_FEATURED,
-//       payload: axios.get('api/projects/featured')
-//   };
+export function getFeatured() {
+  return {
+      type : GET_FEATURED,
+      payload: axios.get('api/featured/join')
+  };
   
-// }
+}
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
@@ -43,21 +44,22 @@ export default function reducer(state = initialState, action) {
         ...state,
         isloading: false
       }
-    // case GET_FEATURED + "_PENDING":
-    //   return {
-    //     ...state,
-    //     isloading:true,
-    //   }
-    // case GET_FEATURED + "_FULLFILED":
-    //   return {
-    //     ...state,
-    //     featured: action.payload
-    //   }
-    // case GET_FEATURED + "_REJECTED":
-    //   return {
-    //     ...state,
-    //     isloading:false
-    //   }
+    case GET_FEATURED + "_PENDING":
+      return {
+        ...state,
+        isloading:true,
+      }
+    case GET_FEATURED + "_FULFILLED":
+      return {
+        ...state,
+        isloading: false,
+        featured: action.payload.data
+      }
+    case GET_FEATURED + "_REJECTED":
+      return {
+        ...state,
+        isloading:false
+      }
     default:
       return state;
   }
