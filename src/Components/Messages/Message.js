@@ -12,7 +12,8 @@ class Message extends Component {
             showActualMessage:true,
             contactAdmin:false,
             messageContent:'Enter Message',
-            email:'Enter your email address',
+            email:'email address',
+            name:'your name',
             welcomeGreeting:'Welcome to MadModels3d. Click here if you have questions or comments',
             responseGreeting:"Your message has been sent. I'll get back to you asap"
         }
@@ -52,7 +53,7 @@ class Message extends Component {
 
     render() {
 
-        const { showActualMessage,contactAdmin,messageContent,email,welcomeGreeting,responseGreeting } = this.state
+        const { showActualMessage,contactAdmin,messageContent,email,welcomeGreeting,responseGreeting,name } = this.state
 
         return(
             <div>
@@ -76,7 +77,8 @@ class Message extends Component {
                         <svg onClick={() => this.setContactAdmin()} className="contact-admin-close-button"  xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20" fill="currentColor">
                             <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                         </svg>
-                        <textarea onChange={(e) => this.inputHandler("email",e.target.value)} style={{minHeight:'25px',marginTop:'40px'}} name="text" rows="0" cols="35" wrap="soft" placeholder={email} />
+                        <textarea onChange={(e) => this.inputHandler("name",e.target.value)} style={{minHeight:'25px',marginTop:'40px'}} name="text" rows="0" cols="35" wrap="soft" placeholder={name} />
+                        <textarea onChange={(e) => this.inputHandler("email",e.target.value)} style={{minHeight:'25px',marginTop:'10px'}} name="text" rows="0" cols="35" wrap="soft" placeholder={email} />
                         <textarea onChange={(e) => this.inputHandler("messageContent",e.target.value)} style={{minHeight:'45px',marginTop:'10px'}} name="text" rows="5" cols="35" wrap="soft" placeholder={messageContent} />
                         <div className='contact-admin-send-button' ><p style={{color:'#fff'}} onClick={() => this.sendMessageToAdmin()} >send</p></div>
                     </div>
