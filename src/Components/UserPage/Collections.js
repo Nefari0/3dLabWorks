@@ -166,7 +166,9 @@ class Collections extends Component {
         await this.addToDatabase(this.state.fileUrl,this.state.imageUrl)
         await this.getProjects()
         this.props.setIsLoading()
-        this.props.openCreate()
+        // this.props.openCreate()
+        // this.props.hideView('showCreateProject')
+        this.props.resetView()
     }
     // adds image to firebase
     getImUrl = async (input) => {
