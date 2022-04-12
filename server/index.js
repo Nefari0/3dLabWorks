@@ -119,7 +119,6 @@ app.post('/api/users/update/:user_id', userController.updateUser)
 // app.post()
 
 // projects endpoints
-
 app.get('/api/projects/all', projectsController.getAllProjects)
 app.get('/api/projects/:user_id', projectsController.getUserProject) //GET request / params / http://localhost:4004/api/projects/12 --- this code works
 app.get('/api/projects/id/:model_id', projectsController.getProjectById) // GET request / params / http://localhost:4000/api/projects/id/4 --- this code works
@@ -158,7 +157,6 @@ app.get('/api/links/get', docsController.getAllLinks)
 // contact admin endpoints
 app.get('/api/messages/user', messageController.getUserMessages)
 // app.get('/api/messages/user/:user_id', messageController.getUserMessages)
-
 app.post('/api/messages/user/add', messageController.createMessage)
 app.post('/api/messages/user/delete',messageController.deleteMessage)
 

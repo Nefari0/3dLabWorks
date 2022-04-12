@@ -109,6 +109,7 @@ module.exports = {
 
     getFeatured: async (req,res) => {
         const featured = await req.app.get('db').join_featured();
+        console.log('hit back end', featured)
         return res.status(200).send(featured)
     },
 

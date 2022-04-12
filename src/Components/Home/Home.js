@@ -3,7 +3,7 @@ import axios from 'axios'
 import './Home.css'
 import { connect } from 'react-redux'
 import { loginUser,updateUser } from '../../ducks/userReducer'
-import { getModels } from './../../ducks/modelsReducer'
+import { getModels,getFeatured } from './../../ducks/modelsReducer'
 import { Icon } from './Icons/Icon'
 import Footer from '../Footer/Footer'
 // import FeaturedProjects from '../FeaturedProjects/FeaturedProjects'
@@ -20,7 +20,8 @@ class Home extends Component {
             projects:[],
             user_name:'',
             password:'',
-            userLikes:null
+            userLikes:null,
+            loading:false,
         }
         this.handleUserName = this.handleUserName.bind(this)
         this.handlePassword = this.handlePassword.bind(this)
@@ -29,15 +30,25 @@ class Home extends Component {
     }
 
     componentDidMount() {
-
+        
         this.props.getModels()
-
+        // this.props.getFeatured()
+        
+        
     }
+
+    // getFeaturedProjects = async () => {
+    //     await axios.get('/api/featured/join').then(res => {
+    //         console.log('res',res.data)
+    //         this.setState({projects:res.data})
+    //     })
+    // }
 
     componentDidUpdate() {
         this.props.updateUser()
         // if (this.state.userLikes === null) {this.setState({...this.state,userLikes:this.props.user.user.user_likes})}
     }
+
 
     handleUserName(value){
         this.setState({...this.state,user_name:value})
@@ -69,15 +80,17 @@ class Home extends Component {
     }
 
     render() {
-        const { user_name, password, projects } = this.state
+        const { user_name, password, projects, loading } = this.state
         const { loginUser } = this.props
         const { isLoggedIn } = this.props.user
         const { user_likes,model_likes,id } = this.props.user.user
-        const { models } = this.props.models
+        // const { models } = this.props.models
+        const { models,featured } = this.props.models
 
+        // const mappedModels = featured.map(element => {
+        //     return <Project data={element} key={element.model_id} projectIsLiked={this.projectIsLiked} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={element.user_id} user_likes={user_likes} />
+        // })
         const mappedModels = models.map(element => {
-            // const { user_likes } = this.props.user.user
-            // const mappedLike = user_likes.map((el) => el.model_id = element.model_id)
             return <Project data={element} key={element.model_id} projectIsLiked={this.projectIsLiked} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={id} user_likes={user_likes} />
         })
 
@@ -85,7 +98,9 @@ class Home extends Component {
             <div>
                 <div className="hero">
                     <h2 className="hero-h2">IMAGINE IT - BUILD IT.</h2>
+                    {/* <h2 className="hero-h2">JOIN THE MAKER REVOLUTION</h2> */}
                     {/* <Prototyping /> */}
+                    {/* {loading === true ? <Loading/> : null} */}
                     <div className="deploy-projects">{mappedModels}</div>
                     {/* <Footer /> */}
                     {/* <video autoPlay loop muted
@@ -109,4 +124,4 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps, { loginUser,updateUser,getModels })(Home)
+export default connect(mapStateToProps, { loginUser,updateUser,getModels,getFeatured })(Home)
