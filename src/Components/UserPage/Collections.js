@@ -258,7 +258,7 @@ class Collections extends Component {
 
         return(
             <div className="collections">
-                {showCreateProject ? <CreateProject hideView={this.props.hideView} handleFile={this.handleFile} handleAddText={this.handleAddText} handlePhoto={this.handlePhoto} previewImageFile={previewImageFile} previewModelFile={previewModelFile} file={file} sendIntoSpace={this.sendIntoSpace} /> : null}
+                {showCreateProject ? <CreateProject resetView={this.props.resetView} handleFile={this.handleFile} handleAddText={this.handleAddText} handlePhoto={this.handlePhoto} previewImageFile={previewImageFile} previewModelFile={previewModelFile} file={file} sendIntoSpace={this.sendIntoSpace} /> : null}
 
                 {mappedProjects}
   
