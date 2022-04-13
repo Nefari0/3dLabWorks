@@ -9,7 +9,7 @@ const VideoPlayer = (props) => {
         <div className='player-container' >
             <header className='video-title' >
                 <img className='video-user-photo' src={photo_url} />
-                <p className="dark-text">{name === 'dummy project' ? video_name : name}<br/><p className='usr-nm-txt' style={{marginRight:'100px'}} >by {user_name}</p></p>
+                <p className="dark-text" >{name === 'dummy project' ? video_name : name}<br/><p className='usr-nm-txt' style={{marginRight:'60px'}} >Video by {user_name}</p></p>
             </header>
             <div className='' style={{marginTop:'50px'}} >
                 <ReactPlayer
