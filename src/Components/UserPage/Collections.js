@@ -222,7 +222,8 @@ class Collections extends Component {
         const description = projectDescription
         const firebase_url = fileUrl
         const firebase_url01 = imageUrl
-        await axios.post('/api/project/post', {id,name,description,firebase_url,firebase_url01}).then(res => {
+        const is_hidden = false
+        await axios.post('/api/project/post', {id,name,description,firebase_url,firebase_url01,is_hidden}).then(res => {
             return res.status
         })
         await this.props.getProjects()
