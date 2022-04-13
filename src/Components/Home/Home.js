@@ -33,21 +33,29 @@ class Home extends Component {
 
     componentDidMount() {
         
-        this.props.getModels()
+        // this.props.getModels()
         // axios.get('/api/videos/get').then(res => {
         //     this.setState({videos:res.data})
         // })
+        // axios.get('/api/videos/featured').then(res => {
+        //     this.setState({videos:res.data})
+        // })
         // this.props.getFeatured()
+        this.getFeaturedVideos()
         
         
     }
 
-    // getFeaturedProjects = async () => {
-    //     await axios.get('/api/featured/join').then(res => {
-    //         console.log('res',res.data)
-    //         this.setState({projects:res.data})
-    //     })
-    // }
+    getFeaturedVideos = async () => {
+        // await axios.get('/api/featured/join').then(res => {
+        //     console.log('res',res.data)
+        //     this.setState({projects:res.data})
+        // })
+        this.props.getFeatured()
+        await axios.get('/api/videos/featured').then(res2 => {
+            this.setState({videos:res2.data})
+        })
+    }
 
     componentDidUpdate() {
         this.props.updateUser()
@@ -92,15 +100,15 @@ class Home extends Component {
         // const { models } = this.props.models
         const { models,featured } = this.props.models
 
-        // const mappedModels = featured.map(element => {
-        //     return <Project data={element} key={element.model_id} projectIsLiked={this.projectIsLiked} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={element.user_id} user_likes={user_likes} />
-        // })
-        const mappedModels = models.map(element => {
-            return <Project data={element} key={element.model_id} projectIsLiked={this.projectIsLiked} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={id} user_likes={user_likes} />
+        const mappedModels = featured.map(element => {
+            return <Project data={element} key={element.model_id} projectIsLiked={this.projectIsLiked} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={element.user_id} user_likes={user_likes} />
         })
+        // const mappedModels = models.map(element => {
+        //     return <Project data={element} key={element.model_id} projectIsLiked={this.projectIsLiked} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={id} user_likes={user_likes} />
+        // })
 
         const mappedVideos = videos.map(el => {
-            return <VideoPlayer key={el.video_id} video_url={el.video_url} category={el.category} tag={el.tag} firebase_url={el.firebase_url} photo_url={el.photo_url} user_name={el.user_name} />
+            return <VideoPlayer key={el.video_id} video_url={el.video_url} category={el.category} tag={el.tag} firebase_url={el.firebase_url} photo_url={el.photo_url} user_name={el.user_name} name={el.name} video_name={el.video_name} />
         })
 
         return(
@@ -117,8 +125,8 @@ class Home extends Component {
                     {/* <VideoPlayer /> */}
                     {/* <VideoPlayer /> */}
                     {/* <VideoPlayer /> */}
+                        {mappedVideos}
                         {mappedModels}
-                        {/* {mappedVideos} */}
                     </div>
                     {/* <Footer /> */}
                     {/* <video autoPlay loop muted
