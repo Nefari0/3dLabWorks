@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './Explore.css'
 import Project from '../FeaturedProjects/Project'
+import VideoPlayer from '../VideoPlayer/VideoPlayer'
 import { loginUser,updateUser } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
 import axios from 'axios'
@@ -12,10 +13,15 @@ class Explore extends Component {
         this.state = {
             data:[],
             names:[],
+            videos:[],
             userId:null,
             likes:[],
             projectSearch:"",
             openSearchBar:false,
+
+    // --- select items to view --- //
+            viewModels:true,
+            viewVideos:false,
         }
         this.addLike = this.addLike.bind(this)
         this.handleClick = this.handleClick.bind(this)
@@ -35,7 +41,11 @@ class Explore extends Component {
 
     updateState(){
         axios.get('/api/project/join').then(res =>
-            this.setState({ ...this.state,data:res.data})) 
+            this.setState({ ...this.state,data:res.data}))
+
+        axios.get('/api/videos/get').then(res2 => {
+            this.setState({videos:res2.data})
+        })
     }
 
     addLike(params_id){
@@ -79,9 +89,27 @@ class Explore extends Component {
     openSearch = () => {
         this.setState({openSearchBar:!this.state.openSearchBar})
     }
+
+    changeView = (param) => {
+        this.resetView()
+        switch(param) {
+            case '3D Models':
+                this.setState({viewModels:true})
+                break;
+            case 'Videos':
+                this.setState({viewVideos:true})
+                break;
+        }
+    }
+    resetView = () => {
+        this.setState({
+            viewModels:false,
+            viewVideos:false,
+        })
+    }
     
     render(){
-        const { data,projectSearch,openSearchBar } = this.state
+        const { data,projectSearch,openSearchBar,videos } = this.state
         const { isLoggedIn } = this.props.user
         const { user_likes,model_likes,id } = this.props.user.user
 
@@ -90,15 +118,23 @@ class Explore extends Component {
         const mappedData = filterProjects.map(element => {
             return <Project data={element} key={element.model_id} projectIsLiked={this.projectIsLiked} handleClick={this.handleClick} isLoggedIn={isLoggedIn} likes={element.likes} id={id} user_likes={user_likes} />
         })
+
+        const mappedVideos = videos.map(el => {
+            return <VideoPlayer key={el.video_id} video_url={el.video_url} category={el.category} tag={el.tag} firebase_url={el.firebase_url} photo_url={el.photo_url} user_name={el.user_name} name={el.name} video_name={el.video_name}  />
+        })
     
         // const mappedData = data.map(element => {
         //     return <Project data={element} key={element.model_id} projectIsLiked={this.projectIsLiked} handleClick={this.handleClick} isLoggedIn={isLoggedIn} likes={element.likes} id={id} user_likes={user_likes} />
         // })
 
         return(
-            // search-menu-closed
-            // dont-show-bar
-            <div className="explore-container">
+            <div >
+
+            <div className="sub-header" style={{position:'absolute'}}>
+                <a onClick={() => this.changeView('3D Models')} className={`null ${!this.state.viewModels ? true : 'a-selected'}`} >3D Models</a>
+                <a onClick={() => this.changeView("Videos")} className={`null ${!this.state.viewVideos ? true : 'a-selected'}`} >Videos</a>
+            </div>
+            <div className="explore-container" style={{paddingTop:'25px'}}>
                 {/* className for "about header" is in About.css and App.css */}
                 {/* <div className="about-header-closed project-search" style={{marginLeft:'0px',width:'100%'}}>  */}
                 <div className={`search-menu ${!isLoggedIn ? true : 'slide-over'} ${openSearchBar ? true : `search-menu-closed ${!isLoggedIn ? true : 'slide-over'}`}`} >
@@ -110,7 +146,9 @@ class Explore extends Component {
                     <input placeholder="search" type="text" style={{height:'25px',width:'100px',borderRadius:'10px',color:'#fff',marginLeft:'10px'}} onChange={e => this.handleText("projectSearch",e.target.value)} ></input>
                     </div>
                 </div>
-                {mappedData}
+                {this.state.viewModels === true ? mappedData : null}
+                {this.state.viewVideos === true ? mappedVideos : null}
+            </div>
             </div>
 
         )
