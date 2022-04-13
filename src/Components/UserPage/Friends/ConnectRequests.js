@@ -24,8 +24,10 @@ const ConnectRequests = (props) => {
         <div className='photo-name-flex' ><Link to={`viewuser/${user_id}`} ><img src={photo_url} className='connection-photo' /></Link><p className='connection-name' >{user_name}</p></div>
         {/* <button>confirm</button> */}
         {/* <div className='connection-buttons-full'><p>Confirm</p></div> */}
-        <p className='connection-buttons' style={{marginBottom:'10px'}} onClick={() => handleRemove(user_id,my_id)} >Remove</p>
-        <p className='connection-buttons-full' style={{marginBottom:'10px',marginRight:'10px'}} onClick={() => handleConfirm(user_id,my_id)} >Confirm</p>
+        <div className='button-row' >
+            <p className='connection-buttons' style={{marginBottom:'10px'}} onClick={() => handleRemove(user_id,my_id)} >Remove</p>
+            <p className='connection-buttons-full' style={{marginBottom:'10px',marginRight:'10px'}} onClick={() => handleConfirm(user_id,my_id)} >Confirm</p>
+        </div>
     </div> : null}</div>)
 }
 
