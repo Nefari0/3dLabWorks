@@ -196,11 +196,12 @@ class EditModel extends Component {
         await this.props.getImages()
     }
 
-    executeChange(){
+    executeChange = async () => {
         const { model_id } = this.props.info[0]
         const { name, description } = this.state
-        
-        axios.post('/api/project/edit/name', {name,description,model_id})
+        this.setIsLoading()
+        await axios.post('/api/project/edit/name', {name,description,model_id})
+        this.setIsLoading()
         this.props.getDetails()
     }
 
