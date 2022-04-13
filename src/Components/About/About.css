@@ -26,7 +26,7 @@
 	align-content: stretch;
 } */
 
-.about-header-item {
+/* .about-header-item {
     width: 50px;
     height: 30px;
 }
@@ -41,7 +41,7 @@ div.about-header a:hover{
 }
 div.about-header .a-selected{
     color: #fff;
-}
+} */
 
 ::-webkit-scrollbar {
     width: 20px;
