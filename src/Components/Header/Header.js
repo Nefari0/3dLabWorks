@@ -206,7 +206,7 @@ class Header extends Component{
 
             <ul className='link-list'>
                 <Link to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a onClick={() => this.trackingHandler('about')} >About</a></li></Link>
-                <Link to="/explore" style={{ textDecoration: 'none' }}><li className='link-item'><a onClick={() => this.trackingHandler('projects')} >Projects</a></li></Link>
+                <Link to="/explore" style={{ textDecoration: 'none' }}><li className='link-item'><a onClick={() => this.trackingHandler('projects')} >Explore</a></li></Link>
                 {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='link-item'><a>My Page</a></li></Link>)}
             </ul>
 
