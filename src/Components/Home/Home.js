@@ -9,6 +9,7 @@ import Footer from '../Footer/Footer'
 // import FeaturedProjects from '../FeaturedProjects/FeaturedProjects'
 import Loading from '../Loading/Loading'
 import Project from '../FeaturedProjects/Project'
+import VideoPlayer from '../VideoPlayer/VideoPlayer'
 // import Prototyping from '../Prototyping/Prototyping'
 // import Vid from './Video/EC.NC gear train0001-0500.mp4'
 
@@ -18,6 +19,7 @@ class Home extends Component {
 
         this.state = {
             projects:[],
+            videos:[],
             user_name:'',
             password:'',
             userLikes:null,
@@ -32,6 +34,9 @@ class Home extends Component {
     componentDidMount() {
         
         this.props.getModels()
+        // axios.get('/api/videos/get').then(res => {
+        //     this.setState({videos:res.data})
+        // })
         // this.props.getFeatured()
         
         
@@ -80,7 +85,7 @@ class Home extends Component {
     }
 
     render() {
-        const { user_name, password, projects, loading } = this.state
+        const { user_name, password, projects, loading, videos } = this.state
         const { loginUser } = this.props
         const { isLoggedIn } = this.props.user
         const { user_likes,model_likes,id } = this.props.user.user
@@ -94,6 +99,10 @@ class Home extends Component {
             return <Project data={element} key={element.model_id} projectIsLiked={this.projectIsLiked} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={id} user_likes={user_likes} />
         })
 
+        const mappedVideos = videos.map(el => {
+            return <VideoPlayer key={el.video_id} video_url={el.video_url} category={el.category} tag={el.tag} firebase_url={el.firebase_url} photo_url={el.photo_url} user_name={el.user_name} />
+        })
+
         return(
             <div>
                 <div className="hero">
@@ -101,7 +110,16 @@ class Home extends Component {
                     {/* <h2 className="hero-h2">JOIN THE MAKER REVOLUTION</h2> */}
                     {/* <Prototyping /> */}
                     {/* {loading === true ? <Loading/> : null} */}
-                    <div className="deploy-projects">{mappedModels}</div>
+                    
+                    {/* <VideoPlayer /> */}
+                    {/* <VideoPlayer /> */}
+                    <div className="deploy-projects">
+                    {/* <VideoPlayer /> */}
+                    {/* <VideoPlayer /> */}
+                    {/* <VideoPlayer /> */}
+                        {mappedModels}
+                        {/* {mappedVideos} */}
+                    </div>
                     {/* <Footer /> */}
                     {/* <video autoPlay loop muted
                     style={{
