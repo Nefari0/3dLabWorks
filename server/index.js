@@ -200,6 +200,7 @@ app.post('/api/tracking/setIsAdmin',trackingController.setIsAdmin) // tracks bro
 
 // --- Video Endpoints --- //
 app.get('/api/videos/get',videoController.getVids)
+app.get('/api/videos/featured',videoController.getFeaturedVids)
 
     // test api for clients
     // module.exports = {
