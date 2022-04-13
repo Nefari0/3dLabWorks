@@ -3,7 +3,6 @@ module.exports = {
     addNewBrowse: async (req,res) => {
         const db = req.app.get('db')
         const { unique_id } = req.body
-        console.log(unique_id)
         const newBrowser = await db.tracking.add_new_browser([unique_id])
         return res.status(200).send(newBrowser[0].unique_id)
     },
@@ -11,7 +10,6 @@ module.exports = {
     addNewMount: async (req,res) => {
         const db = req.app.get('db')
         const { unique_id,last_visit } = req.body
-        // console.log(unique_id,last_visit,'here is unique id in controller')
         const result = await db.tracking.get_info_by_unique_id([unique_id])
         const existingId = result[0]
         if(!existingId) {
@@ -75,7 +73,7 @@ module.exports = {
     setIsAdmin: async (req,res) => {
         const db = req.app.get('db')
         const { unique_id,isAdmin } = req.body
-        console.log('hit is admin',unique_id)
+        // console.log('hit is admin',unique_id)
         const admin = await db.tracking.set_is_admin([isAdmin,unique_id])
         return res.status(200).send(admin)
     }
