@@ -5,6 +5,8 @@
 --   video_url VARCHAR(500),
 --   model_id INTEGER,
 --   FOREIGN KEY(model_id) REFERENCES models(model_id)
+--   is_featured BOOLEAN,
+--   video_name VARCHAR(250)
 -- )
 
 -- INSERT INTO d_videos (tag,category,video_url,model_id)
