@@ -169,6 +169,10 @@
     .hero-h2 {
         display: none;
     }
+    .deploy-projects {
+        height: 490px;
+        overflow: none;
+    }
 }
 
 @media (max-width:300px) {
