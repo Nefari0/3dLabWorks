@@ -30,7 +30,8 @@
 --   FOREIGN KEY(user_id) REFERENCES d_user(user_id),
 --   name VARCHAR(250) NOT NULL, 
 --   description VARCHAR(500),
---   firebase_url text
+--   firebase_url text,
+--   is_hidden BOOLEAN
 -- );
 
 -- INSERT INTO models (user_id,name,description,firebase_url01)
