@@ -23,9 +23,9 @@ module.exports = {
     },
 
     addProject: async (req,res) => {
-        const { id, name, description, firebase_url, firebase_url01, firebase_url02 } = req.body
+        const { id, name, description, firebase_url, firebase_url01, firebase_url02, is_hidden } = req.body
         const db = req.app.get('db')
-        const newProject = await db.add_new_project([id,name,description,firebase_url,firebase_url01, firebase_url02, 0])
+        const newProject = await db.add_new_project([id,name,description,firebase_url,firebase_url01, firebase_url02, 0, is_hidden])
         return res.status(200).send(newProject)
     },
 
