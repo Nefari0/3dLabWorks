@@ -6,7 +6,7 @@ const DlUrl = (props) => {
 
     return(
         <div>
-           { isLoggedIn ? <a className="dark-text" href={url} >Download</a> : <a className="dark-text" onClick={props.plsSignIn} >Download</a>}
+           { isLoggedIn ? <a className="dark-text" href={url} target="_blank" >Download</a> : <a className="dark-text" onClick={props.plsSignIn} >Download</a>}
         </div>
     )
 }

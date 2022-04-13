@@ -94,7 +94,7 @@ const Project = (props) => {
                         </svg>
                     </a>}
                     
-                    { isLoggedIn ? <a className="project-text" href={`${firebase_url}`}>download</a> : <a className="project-text" onClick={plsSignIn}>download</a>}
+                    { isLoggedIn ? <a className="project-text" href={`${firebase_url}`} target="_blank" >download</a> : <a className="project-text" onClick={plsSignIn}>download</a>}
 
                     <div className="like-share">
                         <div>
