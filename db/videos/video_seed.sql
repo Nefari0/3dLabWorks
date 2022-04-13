@@ -1,0 +1,16 @@
+-- CREATE TABLE d_videos (
+--   video_id SERIAL PRIMARY KEY,
+--   tag VARCHAR(500),
+--   category VARCHAR(50),
+--   video_url VARCHAR(500),
+--   model_id INTEGER,
+--   FOREIGN KEY(model_id) REFERENCES models(model_id)
+-- )
+
+-- INSERT INTO d_videos (tag,category,video_url,model_id)
+-- VALUES(
+--   'use this simple tool to create any cookie cutter shape in just a few minutes',
+--   'Tutorial',
+--   'https://vimeo.com/698418589',
+--   234
+-- )
