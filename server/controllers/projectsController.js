@@ -6,7 +6,6 @@ module.exports = {
     },
 
     getUserProject: async (req,res) => {
-        // const { user_id } = req.body
         const { user_id } = req.params
         const projects = await req.app.get('db').get_user_projects([user_id]);
         return res.status(200).send(projects)
@@ -33,7 +32,6 @@ module.exports = {
     updateFile: async (req,res) => {
         const { url, model_id } = req.body
         const firebase_url = url
-        console.log('hit update file controller',firebase_url)
         const db = req.app.get('db')
         const newFile = await db.projects.update_project_file([firebase_url,model_id])
         return res.status(200).send(newFile)
@@ -46,7 +44,6 @@ module.exports = {
         await db.projects.delete_all_model_likes([model_id])
         await db.projects.delete_model_images([model_id])
         await db.delete_project([model_id])
-        // await db.delete_project([]) 
         return res.status(200).send('deleted')
     },
 
@@ -55,8 +52,6 @@ module.exports = {
         const user_id = id
         const db = req.app.get('db')
         const foundLike = await db.projects.get_like_by_id([user_id,model_id])
-        // const like = foundLike[0].user_id
-        // return res.status(200).send(foundLike[0] === undefined)
         if (foundLike[0] != undefined) {
             foundLike[0].is_liked = true
             console.log(foundLike[0].user_id,'found like')
@@ -71,9 +66,6 @@ module.exports = {
         // check if user already likes model_id
 
         const foundLike = await db.projects.get_like_by_id([user_id,model_id])
-
-        // const isLiked = foundLike[0].user_id
-        // console.log('found like',foundLike[0] === undefined)
 
         // if not like: add to db
         if (foundLike[0] === undefined) {
@@ -97,7 +89,6 @@ module.exports = {
         const { model_id } = req.params
         const getLikes = await req.app.get('db').projects.update_project_likes([model_id])
         const { likes } = getLikes[0]
-        // console.log(likes)
         return res.status(200).send(getLikes)
     },
 
@@ -109,7 +100,6 @@ module.exports = {
 
     getFeatured: async (req,res) => {
         const featured = await req.app.get('db').join_featured();
-        console.log('hit back end', featured)
         return res.status(200).send(featured)
     },
 
