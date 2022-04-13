@@ -173,3 +173,29 @@ h1 {
   padding-left: 40px;
   margin-bottom: 10px;
 }
+
+.dark-text {
+  padding-top: 15px;
+  padding-bottom: 5px;
+  color: #555;
+  margin: auto;
+  margin-left: 10px;
+}
+
+.usr-nm-txt {
+  margin-left: 10px;
+  margin-bottom: 2px;
+  color: #6495ed;
+  font-size: xx-small;
+  font-weight: 600;
+}
+
+    /* .usr-nm-txt {
+    } */
+
+/* @media (max-height:375px) {
+    .photo-title-border {
+      margin-bottom: auto;
+      margin-top: 2%;
+  }
+} */
