@@ -15,8 +15,8 @@ class EditModel extends Component {
         super(props);
 
         this.state = {
-            name:'',
-            description:'',
+            name:this.props.info[0].name,
+            description:this.props.info[0].description,
             photo_url:null,
             photo_url2:null,
             photo_url3:null,
@@ -209,8 +209,8 @@ class EditModel extends Component {
     }
 
     render() {
-        const { description,firebase_url,firebase_url01,firebase_url02,model_id,name,user_id} = this.props.info
-        const { previewImageFile,previewImageFile2,previewImageFile3,previewImageFile4,isLoading,openDeleteConfirm,isDeleted,imageUr1,newModel,photo_url } = this.state
+        const { firebase_url,firebase_url01,firebase_url02,model_id,user_id} = this.props.info
+        const { previewImageFile,previewImageFile2,previewImageFile3,previewImageFile4,isLoading,openDeleteConfirm,isDeleted,imageUr1,newModel,photo_url,description,name } = this.state
         return(            
             <div className="edit-project-container" >
                 
@@ -249,10 +249,10 @@ class EditModel extends Component {
                 <section className='edit-project-row text-input-row'>
                     <div className='input-left-column'>
                 <div className='section-title'><p style={{color:'#555'}}>Name</p></div>
-                    <input placeholder="project name" className="text-input" onChange={e => this.handleText('name',e.target.value)} ></input>
+                    <input value={name} className="text-input" onChange={e => this.handleText('name',e.target.value)} ></input>
                     {/* <div className='section-title'><p style={{color:'#555'}}>Update File</p></div> */}
                     <div className='section-title'><p style={{color:'#555'}}>Description</p></div>
-                        <textarea name="text" rows="5" cols="50" wrap="soft" placeholder='text' className="text-input input-description" onChange={e => this.handleText('description',e.target.value)} > </textarea>
+                        <textarea name="text" rows="5" cols="50" wrap="soft" placeholder='text' value={description} className="text-input input-description" onChange={e => this.handleText('description',e.target.value)} > </textarea>
                         {/* <div className='add-button text-add'onClick={() => this.executeChange()}>Submit</div> */}
                     </div>
                     <div className='input-right-column'>
