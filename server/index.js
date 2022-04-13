@@ -18,10 +18,12 @@ const connectionController = require('./controllers/connectionController')
 // const { projectManagement, auth } = require('firebase-admin');
 const { addProject } = require('./controllers/projectsController');
 const docsController = require('./controllers/docsController')
+const trackingController = require('./controllers/trackingController');
+const fireController = require('./controllers/fireController');
+const videoController = require('./controllers/videoController');
 // const trackingController = require('./controllers/trackingController')
 const webSocketServer = require('websocket').server;
 const http = require('http');
-const trackingController = require('./controllers/trackingController');
 // const baseBackend = require('./../src/baseBackend')
 // const path = require('path');
 // const { default: reducer } = require('../src/ducks/modelsReducer'); // auto added
@@ -60,7 +62,6 @@ const firebaseConfig = {
 
 // const admin = require('firebase-admin');
 // const firebase = require('firebase/app');
-const fireController = require('./controllers/fireController');
 // const { applyMiddleware } = require('redux');
 // const firebaseConfig = {
 //     apiKey: "AIzaSyB6ImzEUWfnyXD6bcpNEN8ktaMSfos8Js0",
@@ -196,6 +197,9 @@ app.post('/api/track/login/click/',trackingController.loginClicks)
 app.post('/api/track/about/click/',trackingController.aboutClicks)
 app.post('/api/track/projects/click/',trackingController.projectsClicks)
 app.post('/api/tracking/setIsAdmin',trackingController.setIsAdmin) // tracks browsers used in development
+
+// --- Video Endpoints --- //
+app.get('/api/videos/get',videoController.getVids)
 
     // test api for clients
     // module.exports = {
