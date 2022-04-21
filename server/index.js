@@ -202,6 +202,9 @@ app.post('/api/tracking/setIsAdmin',trackingController.setIsAdmin) // tracks bro
 app.get('/api/videos/get',videoController.getVids)
 app.get('/api/videos/featured',videoController.getFeaturedVids)
 
+// --- Memos Endpoints --- //
+app.get('/api/memos/get/all',docsController.getAllMemos)
+
     // test api for clients
     // module.exports = {
     //     apiFunc: async (req,res) => {

@@ -32,5 +32,11 @@ module.exports = {
     getAllLinks: async (req,res) => {
         const links = await req.app.get('db').docs.get_links()
         return res.status(200).send(links)
+    },
+
+    // -- ADMIN memos -- //
+    getAllMemos: async (req,res) => {
+        const memos = await req.app.get('db').memo.get_all_memos()
+        return res.status(200).send(memos)
     }
 }
