@@ -5,7 +5,7 @@ import { useState,useEffect } from 'react'
 const Notice = (props) => {
 
     useEffect(() => {
-        setShowNotice(false)
+        if(notDefault === undefined){setShowNotice(false)}
     },[])
 
     const [ showNotice, setShowNotice ] = useState(true)
@@ -14,7 +14,7 @@ const Notice = (props) => {
         alert('does it work')
     }
 
-    const { item,content } = props
+    const { item,content,notDefault } = props
 
     return (
         <div className={`notice-container ${item} ${showNotice ? true : 'hidden'}`}>
