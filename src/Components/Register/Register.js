@@ -14,6 +14,7 @@ const Register = (props) => {
     const [ last_name, setLastName ] = useState('')
     const [ photo_url, setPhoto ] = useState('')
     const [ is_admin ] = useState(false)
+    const [ is_sudo ] = useState(false)
     const [ iAgree, setIAgree ] = useState(false)
     const [ openIAgree, setOpenIAgree ] = useState(false)
     
@@ -35,7 +36,7 @@ const Register = (props) => {
     }
 
     function executeRegister(){
-        props.registerUser(user_name, password, email, first_name, is_admin)
+        props.registerUser(user_name, password, email, first_name, is_admin, is_sudo)
     }
 
     return(
