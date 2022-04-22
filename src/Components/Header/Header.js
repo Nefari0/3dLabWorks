@@ -50,13 +50,13 @@ class Header extends Component{
         
         const last_visit = new Date().toString().split('(')[0]
         
-        if(visited != undefined){if (localStorage['user_name'] != undefined && localStorage['password'] != undefined) {
+        if(visited != undefined && localStorage['user_name'] != undefined){
             // this.props.loginUser(savedUsername,savedPassword,last_visit,visited).catch(err =>{
             this.props.autoLogin(savedUsername,last_visit,visited).catch(err => {
-                console.log('there was an error',err)
+                return console.log('there was an error',err)
             })
             
-        }}
+        }
 
         const getUniqueID = () => {
             const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
