@@ -204,6 +204,7 @@ app.get('/api/videos/featured',videoController.getFeaturedVids)
 
 // --- Memos Endpoints --- //
 app.get('/api/memos/get/all',docsController.getAllMemos)
+app.post('/api/memo/update',docsController.updateMemo)
 
     // test api for clients
     // module.exports = {

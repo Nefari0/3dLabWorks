@@ -38,5 +38,12 @@ module.exports = {
     getAllMemos: async (req,res) => {
         const memos = await req.app.get('db').memo.get_all_memos()
         return res.status(200).send(memos)
+    },
+
+    updateMemo: async (req,res) => {
+        const { text,memo_id } = req.body
+        // console.log('hitting backend?',text)
+        const update = await req.app.get('db').memo.update_memo([text,memo_id])
+        return res.status(200).send(update)
     }
 }

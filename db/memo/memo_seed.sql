@@ -1,5 +1,6 @@
 
 -- CREATE TABLE d_memos (
+--   memo_id SERIAL PRIMARY KEY,
 --   title VARCHAR(250),
 --   body VARCHAR(1000)
 -- )
