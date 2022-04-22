@@ -109,6 +109,7 @@ app.post('/auth/login',authController.login)
 app.get('/auth/logout',authController.logout)
 app.get('/auth/update/session',authController.userData)
 app.post('/auth/getInfo',authController.getInfo)
+app.post('/auth/browser/login',authController.browserLogin)
 // app.post('./auth/login/merge',authController.loginLike)
 
 // // user end points //
