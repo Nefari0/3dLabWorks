@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt')
 
 module.exports = {
     register: async (req,res) => {
-        const {user_name, password, email, first_name, is_admin} = req.body;
+        const {user_name, password, email, first_name, is_admin, is_sudo} = req.body;
         if (is_admin != false){
             return(alert('this operation cannot be completed because of a security breach'))
         }
@@ -14,7 +14,7 @@ module.exports = {
         }
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password,salt);
-        const registeredUser= await db.register_site_user([user_name, hash, email, first_name, is_admin])
+        const registeredUser= await db.register_site_user([user_name, hash, email, first_name, is_admin, is_sudo])
         const user = registeredUser[0];
 
   
@@ -41,10 +41,11 @@ module.exports = {
              id: user.user_id,
              name: user.first_name,
              photo: user.photo_url,
+             is_sudo:user.is_sudo,
             //  auth: isAuthenticated
          };
 
-        console.log('req.session from controller',req.session.user)
+        // console.log('req.session from controller',req.session.user)
         // return res.status(201).send(req.session.user).catch(err => console.log(err))
         return res.status(201).send(req.session.user)
     },
@@ -105,7 +106,8 @@ module.exports = {
              name: user.first_name,
              photo: user.photo_url,
              background_url: user.background_url,
-             auth: isAuthenticated
+             auth: isAuthenticated,
+             is_sudo: user.is_sudo,
          };
         //  console.log('this is req.session',req.session)
         //  userData(req.session.data)
