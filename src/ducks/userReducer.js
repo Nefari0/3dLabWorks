@@ -13,6 +13,7 @@ const REGISTER_USER = 'REGISTER_USER'
 const EDIT_USERINFO = 'EDIT_USERINFO'
 const UPDATE_USER = 'UPDATE_USER'
 const SHOW_DATA = 'SHOW_DATA'
+const AUTO_LOGIN = 'AUTO_LOGIN'
 
 export function loginUser(user_name, password, last_visit, visited) {
     return {
@@ -66,6 +67,13 @@ export function updateUser(user){
 }
 // ---------------------------------------------------- //
 
+// --- auto login from browser if usersession is saved --- //
+export function autoLogin(user_name, last_visit, visited){
+    return{
+        type: AUTO_LOGIN,
+        payload: axios.post('/auth/browser/login', {user_name,last_visit,visited})
+    }
+}
 
 export default function userReducer(state = inititialState, action) {
     switch (action.type) {
@@ -118,6 +126,23 @@ export default function userReducer(state = inititialState, action) {
                 ...state,
                 isLoggedIn: false
             }
+            // --- auto login --- //
+            case AUTO_LOGIN + '_PENDING':
+                return {
+                    ...state,
+                    isLoading: true
+                }
+            case AUTO_LOGIN + '_FULFILLED':
+                return {
+                    ...state,
+                    user: action.payload.data, isLoggedIn: true, isLoading:false
+                }
+            case AUTO_LOGIN + '_REJECTED':
+                // alert('Cannot auto login: Your username or password is incorrect')
+                return {
+                    ...state,
+                    loginError:true, isLoading:false
+                }
         default:
             return state;
     }
