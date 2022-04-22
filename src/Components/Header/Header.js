@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { loginUser,logoutUser,updateUser } from '../../ducks/userReducer'
+import { loginUser,logoutUser,updateUser,autoLogin } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
 import './Header.css'
 import { Link } from 'react-router-dom'
@@ -50,10 +50,13 @@ class Header extends Component{
         
         const last_visit = new Date().toString().split('(')[0]
         
-        if (localStorage['user_name'] != undefined && localStorage['password'] != undefined) {
-            this.props.loginUser(savedUsername,savedPassword,last_visit,visited)
+        if(visited != undefined){if (localStorage['user_name'] != undefined && localStorage['password'] != undefined) {
+            // this.props.loginUser(savedUsername,savedPassword,last_visit,visited).catch(err =>{
+            this.props.autoLogin(savedUsername,last_visit,visited).catch(err => {
+                console.log('there was an error',err)
+            })
             
-        }
+        }}
 
         const getUniqueID = () => {
             const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
@@ -156,7 +159,7 @@ class Header extends Component{
 
         if (saveMyInfo === true && this.props.user.isLoggedIn === true) {
             localStorage.setItem('user_name',signInName)
-            localStorage.setItem('password',signInPass)
+            // localStorage.setItem('password',signInPass)
         }
 
         this.toggleLogin()
@@ -257,4 +260,4 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps, {loginUser, logoutUser, updateUser})(Header)
+export default connect(mapStateToProps, {loginUser, logoutUser, updateUser, autoLogin})(Header)
