@@ -21,6 +21,7 @@ const MobileLogin = (props) => {
     const [ last_name, setLastName ] = useState('')
     const [ photo_url, setPhoto ] = useState('')
     const [ is_admin ] = useState(false)
+    const [ is_sudo ] = useState(false)
     const [ iAgree, setIAgree ] = useState(false)
     const [ openIAgree, setOpenIAgree ] = useState(true)
 
@@ -40,7 +41,7 @@ const MobileLogin = (props) => {
 
     const executeRegister = () => {
         if (iAgree === true) {
-        props.registerUser(user_name, password, email, first_name, is_admin)
+        props.registerUser(user_name, password, email, first_name, is_admin, is_sudo)
         // props.history.push('/user')
     } else {
         return (alert('please agree to conditions'))

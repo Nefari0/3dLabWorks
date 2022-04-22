@@ -28,10 +28,10 @@ export function logoutUser(){
     }
 }
 
-export function registerUser(user_name, password, email, first_name, is_admin){
+export function registerUser(user_name, password, email, first_name, is_admin, is_sudo){
     return {
         type: REGISTER_USER,
-        payload: axios.post('/auth/register', { user_name, password, email, first_name, is_admin})
+        payload: axios.post('/auth/register', { user_name, password, email, first_name, is_admin, is_sudo})
     }
 }
 
