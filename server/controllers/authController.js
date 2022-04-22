@@ -79,8 +79,12 @@ module.exports = {
     },
 
     login: async (req,res) => {
+
+        // const hash = bcrypt.hashSync(password,salt);
+        // const from_browser = visited
         const { user_name, password, last_visit, visited } = req.body;
-        const from_browser = visited
+        const browserSalt = bcrypt.genSaltSync(10);
+        const from_browser = bcrypt.hashSync(visited,browserSalt)
         console.log('this is user in authController',user_name,last_visit,visited)
         if(visited !== undefined){req.app.get('db').tracking.track_user_logging([user_name,visited])}
         if (user_name.split('').length < 1) { // --- does user_name from req.body exist
@@ -107,6 +111,42 @@ module.exports = {
              photo: user.photo_url,
              background_url: user.background_url,
              auth: isAuthenticated,
+             is_sudo: user.is_sudo,
+         };
+        //  console.log('this is req.session',req.session)
+        //  userData(req.session.data)
+            return res.status(200).send(req.session.user)
+    },
+    // -- auto login from browser if usersession is saved -- //
+    browserLogin: async (req,res) => {
+        const { user_name, last_visit, visited } = req.body;
+        const from_browser = visited
+        console.log('this is user in authController',user_name,last_visit,visited)
+        if (user_name.split('').length < 1) { // --- does user_name from req.body exist
+            return res.status(401).send('user not found')
+        }
+        const foundUser = await req.app.get('db').get_user([user_name]);
+        const user = foundUser[0];
+        if (!user) {
+            return res.status(401).send("user not found")
+        }
+        const isAuthenticated = bcrypt.compareSync(from_browser, user.from_browser);
+        if (!isAuthenticated) {
+            return res.status(403).send('Incorrect password');
+        }
+        // if(visited !== undefined){req.app.get('db').tracking.track_user_logging([user_name,visited])}
+        // const add_visit = await req.app.get('db').add_login_time_stamp([last_visit,user_name])
+        const user_likes = await req.app.get('db').get_likes([user.user_id]);
+        req.session.user = { 
+            user_likes: user_likes,
+            email: user.email,
+            is_admin: user.is_admin, 
+            user: user.user_name,
+             id: user.user_id,
+             name: user.first_name,
+             photo: user.photo_url,
+             background_url: user.background_url,
+            //  auth: isAuthenticated,
              is_sudo: user.is_sudo,
          };
         //  console.log('this is req.session',req.session)
