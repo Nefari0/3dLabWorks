@@ -11,7 +11,9 @@ import axios from 'axios';
 import ShowUser from './ShowUser';
 import ShowTraffic from './ShowTraffic'
 // import Prototyping from '../Prototyping/Prototyping';
-import MessageBoard from '../UserMessages/MessageBoard';
+// import MessageBoard from '../UserMessages/MessageBoard';
+import Memo from './Memo';
+import './Memo.css'
 // import DemoScene from './Three/DemoScene';
 // import ViewUserV2 from './ViewUserV2';
 import UserAdminMessage from './UserAdminMessage/UserAdminMessage';
@@ -26,7 +28,6 @@ class AdminPage extends Component {
 
         this.state = {
             users:[],
-            traffic:[],
 
             text:'test',
             generalContent:'',
@@ -41,6 +42,12 @@ class AdminPage extends Component {
 
             showMessages:false,
             userMessages:[],
+
+            showMemo:false,
+            memos:[],
+
+            showTraffic:false,
+            traffic:[],
 
         }
         this.handleAddText = this.handleAddText.bind(this)
@@ -63,6 +70,9 @@ class AdminPage extends Component {
         })
         axios.get('/api/messages/user').then(res => {
             this.setState({userMessages:res.data})
+        })
+        axios.get('/api/memos/get/all').then(res => {
+            this.setState({memos:res.data})
         })
     }
 
@@ -126,10 +136,31 @@ class AdminPage extends Component {
         this.setState({editUserInfo:!this.state.editUserInfo})
     }
 
+    resetView() {
+        this.setState({
+            showMemo:false,
+            showTraffic:false,
+        })
+    }
+
+    changeView(param) {
+        this.resetView()
+        switch(param) {
+            case 'showTraffic':
+                this.setState({showTraffic:true})
+                break;
+            case 'showMemo':
+                this.setState({showMemo:true})
+                break;
+            default:
+                break;
+            }
+    }
+
     render(){
 
-        const { test,editAbout,editGeneral,editUserInfo,users,traffic,showMessages,userMessages } = this.state
-        const { photo,auth,name,is_admin } = this.props.user.user
+        const { test,editAbout,editGeneral,editUserInfo,users,traffic,showMessages,userMessages,showTraffic,showMemo,memos } = this.state
+        const { photo,auth,name,is_admin,is_sudo } = this.props.user.user
 
         const mappedUsers = users.map(element => {
             return <ShowUser user_name={element.user_name} first_name={element.first_name} last_name={element.last_name} user_id={element.user_id} />
@@ -145,6 +176,10 @@ class AdminPage extends Component {
             return <UserAdminMessage key={el.dum_id} messagecontent={el.messagecontent} email={el.email} />
         })
 
+        const mappedMemos = memos.map(el => {
+            return <Memo key={el.memo_id} body={el.body} title={el.title} memo_id={el.memo_id} />
+        })
+
         // const mappedTraffic = traffic.map(el => {
         //     return <ShowTraffic key={el.browser_id} id={el.browser_id} date_created={el.date_created} unique_id={el.unique_id} remount={el.remount} last_visit={el.last_visit} />
         // })
@@ -154,6 +189,7 @@ class AdminPage extends Component {
                 {!is_admin ? (<Route path="/" component={Home}/>) : (
                     <div>
                     <ul className="admin-header-ul">
+                    {is_sudo === true ? <li className="add-doc-div-closed" onClick={() => this.changeView('showMemo')}><a>memo</a></li> : null}
                     { editGeneral ?
                     <li className="add-doc-div" >
                         <a onClick={this.openEditGeneral}>edit general info</a>
@@ -188,17 +224,21 @@ class AdminPage extends Component {
                     <li className="add-doc-div-closed"><a onClick={this.openEditUserInfo}>User Details</a></li>}
                     <li className="add-doc-div-closed"><a>terms</a></li>
                     <li className="add-doc-div-closed"><a>user project details</a></li>
-                    <li className="add-doc-div-closed"><a>memo</a></li>
-                    <li className="add-doc-div-closed"><a>show traffic</a></li>
+                   
+                    <li className="add-doc-div-closed" onClick={() => this.changeView('showTraffic')} ><a>show traffic</a></li>
                     </ul>
                     <Link to={'/user'} ><a >mypage</a></Link>
-                    <div className='display-traffic' >
+                    {showTraffic === true ? <div className='display-traffic' >
                         <div className='traffic-display-unit' ><p className='traffic-text' >Date Created</p><p className='traffic-text' >Browser ID</p><p className='traffic-text' >Unique Id</p><p className='traffic-text' >Re-mounts</p><p className='traffic-text' >Last Visit</p></div>
                         {mappedTraffic}
-                    </div>
+                    </div> : null}
+                    
+                    {/* <div className='text-container' ></div> */}
+                    {/* <Memo /> */}
+                    {showMemo === true && is_sudo === true ? mappedMemos : null}
                     {/* <ViewUserV2 /> */}
                     {/* <Prototyping /> */}
-                    <MessageBoard/>
+                    {/* <MessageBoard/> */}
                     </div>
                 )}
             </div>
