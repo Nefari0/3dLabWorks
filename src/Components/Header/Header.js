@@ -49,7 +49,8 @@ class Header extends Component{
         const savedUsername = localStorage['user_name']
         // const savedPassword = localStorage['password']
         
-        const last_visit = new Date().toString().split('(')[0]
+        // const last_visit = new Date().toString().split('(')[0]
+        const last_visit = new Date()
         
         if(visited != undefined && localStorage['user_name'] != undefined){
             // this.props.loginUser(savedUsername,savedPassword,last_visit,visited).catch(err =>{
@@ -147,7 +148,9 @@ class Header extends Component{
         const { user_name, password } = this.state
         const { loginUser,logoutUser } = this.props
         const last_visit = new Date()
+        
         const visited = localStorage['visited']
+
         this.toggleLogin()
         if(this.props.isLoggedIn === false){
             loginUser(user_name,password,last_visit,visited)
@@ -174,8 +177,12 @@ class Header extends Component{
     }
 
     handleLogout() {
+        const getUniqueID = () => {
+            const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+            return s4() + s4() + '-' + s4();
+          };
         localStorage.removeItem("user_name");
-        localStorage.removeItem("visited")
+        localStorage.setItem("visited",getUniqueID())
         // localStorage.removeItem("password");
         this.toggleLogin()
         this.props.logoutUser()
