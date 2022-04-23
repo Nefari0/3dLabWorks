@@ -1,5 +1,16 @@
 const bcrypt = require('bcrypt')
 
+// --- user will not login to too much time has lapsed since previous login --- //
+// const findTimeInterval = (time1,time2) => {
+//     var prevTime = time1.toString().split(' ')
+//     var newTime = time2.toString().split(' ')
+//     console.log(prevTime)
+//     console.log(newTime)
+//     if(prevTime[4] === newTime[4] && prevTime[3] === newTime[3]){
+//       if(newTime[2] - prevTime[2] > 14) return true
+//     } else {return false}
+//   }
+
 module.exports = {
     register: async (req,res) => {
         const {user_name, password, email, first_name, is_admin, is_sudo} = req.body;
@@ -136,18 +147,27 @@ module.exports = {
         }
         // if(visited !== undefined){req.app.get('db').tracking.track_user_logging([user_name,visited])}
         // const add_visit = await req.app.get('db').add_login_time_stamp([last_visit,user_name])
+
+
+        // console.log(user.last_visit,'last login')
+        // --- user will not login to too much time has lapsed since previous login --- //
+        // if(findTimeInterval(user.last_visit,last_visit) === false) {
+        //     return
+        // }
+
         const user_likes = await req.app.get('db').get_likes([user.user_id]);
         req.session.user = { 
             user_likes: user_likes,
             email: user.email,
             is_admin: user.is_admin, 
             user: user.user_name,
-             id: user.user_id,
-             name: user.first_name,
-             photo: user.photo_url,
-             background_url: user.background_url,
-            //  auth: isAuthenticated,
-             is_sudo: user.is_sudo,
+            id: user.user_id,
+            name: user.first_name,
+            photo: user.photo_url,
+            background_url: user.background_url,
+            auth: isAuthenticated,
+            is_sudo: user.is_sudo,
+            last_login: user.last_visit
          };
         //  console.log('this is req.session',req.session)
         //  userData(req.session.data)
