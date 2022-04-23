@@ -1,21 +1,30 @@
+const bcrypt = require('bcrypt')
 
 module.exports = {
     addNewBrowse: async (req,res) => {
         const db = req.app.get('db')
-        const { unique_id } = req.body
-        const newBrowser = await db.tracking.add_new_browser([unique_id])
-        return res.status(200).send(newBrowser[0].unique_id)
+        const { unique_id,assigned_browser } = req.body        
+        const salt = bcrypt.genSaltSync(10);
+        const from_browser = bcrypt.hashSync(unique_id,salt);
+        const newBrowser = await db.tracking.add_new_browser([from_browser,assigned_browser])
+        const browser_id = newBrowser[0].browser_id
+        console.log('new',browser_id)
+        // return res.status(200).send(newBrowser[0].unique_id)
+        return res.status(200).send(browser_id)
     },
     
     addNewMount: async (req,res) => {
         const db = req.app.get('db')
-        const { unique_id,last_visit } = req.body
-        const result = await db.tracking.get_info_by_unique_id([unique_id])
+        const { unique_id,last_visit,browser } = req.body
+        
+
+        // const result = await db.tracking.get_info_by_unique_id([assigned_browser])
+        const result = await db.tracking.get_info_by_assigned_id([browser])
         const existingId = result[0]
         if(!existingId) {
             return res.status(404).send('this unque_id does not exist')
         }
-        const newVisit = await db.tracking.add_new_visit([last_visit,unique_id])
+        const newVisit = await db.tracking.add_new_visit([last_visit,browser])
         return res.status(200).send(newVisit)
     },
 

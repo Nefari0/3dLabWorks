@@ -35,7 +35,7 @@ class Header extends Component{
 
     // --- this function saves user info to browser
         this.sessionToWindow = this.sessionToWindow.bind(this)
-        this.trackingHandler = this.trackingHandler.bind(this)
+        // this.trackingHandler = this.trackingHandler.bind(this)
     }
 
     sessionToWindow(prop,val) {
@@ -45,6 +45,7 @@ class Header extends Component{
     async componentDidMount(prevProps) {
         
         const visited = localStorage['visited']
+        const browser = localStorage['assigned_browser']
         const savedUsername = localStorage['user_name']
         const savedPassword = localStorage['password']
         
@@ -64,17 +65,23 @@ class Header extends Component{
           };
 
         if (visited === undefined) {
-           
             const unique_id = getUniqueID()
-            axios.post('/api/track/new/',{unique_id}).then(res => this.sessionToWindow('visited',res.data))
+            const assigned_browser = getUniqueID()
+            this.sessionToWindow('visited',unique_id)
+            this.sessionToWindow('assigned_browser',assigned_browser)
+            // axios.post('/api/track/new/',{unique_id}).then(res => this.sessionToWindow('visited',res.data))
+            axios.post('/api/track/new/',{unique_id,assigned_browser}).then(res => 
+                this.sessionToWindow('browser_id',res.data)
+                // console.log(res.data,'res data')
+                )
         } else {
             const unique_id = visited
             
-            axios.post('/api/track/increment/',{unique_id,last_visit}).catch(err => {
+            axios.post('/api/track/increment/',{unique_id,last_visit,browser}).catch(err => {
                 console.log('here is the error',err)
                 localStorage.removeItem('visited')
                 const unique_id = getUniqueID()
-                axios.post('/api/track/new/',{unique_id}).then(res => this.sessionToWindow('visited',res.data))
+                axios.post('/api/track/new/',{unique_id,browser}).then(res => this.sessionToWindow('visited',res.data))
             })
             this.setState({unique_id:localStorage['visited']})
         }
@@ -107,20 +114,20 @@ class Header extends Component{
     }
 
     // --- handles tracked info --- //
-    trackingHandler(tag) {
-        const { unique_id } = this.state
-        if(unique_id !== null){
+    // trackingHandler(tag) {
+    //     const { unique_id } = this.state
+    //     if(unique_id !== null){
             
-            switch(tag) {
-                case 'login':
-                    return axios.post('/api/track/login/click/',{unique_id,tag}).catch(err => {console.log(err)})
-                case 'projects':
-                    return axios.post('/api/track/projects/click/',{unique_id,tag}).catch(err => {console.log(err)})
-                case 'about':
-                    return axios.post('/api/track/about/click/',{unique_id,tag}).catch(err => {console.log(err)})
-            }
-        }
-    }
+    //         switch(tag) {
+    //             case 'login':
+    //                 return axios.post('/api/track/login/click/',{unique_id,tag}).catch(err => {console.log(err)})
+    //             case 'projects':
+    //                 return axios.post('/api/track/projects/click/',{unique_id,tag}).catch(err => {console.log(err)})
+    //             case 'about':
+    //                 return axios.post('/api/track/about/click/',{unique_id,tag}).catch(err => {console.log(err)})
+    //         }
+    //     }
+    // }
 
     //  --- this block identifies brower as used during developent --- //
     trackAdminUser = (params) => {
@@ -182,7 +189,7 @@ class Header extends Component{
     }
 
     toggleLogin(){
-        this.trackingHandler('login')
+        // this.trackingHandler('login')
         this.setState({openLogin: !this.state.openLogin})
     }
 
@@ -208,8 +215,8 @@ class Header extends Component{
             <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><h3 className="header-h3">{isLoggedIn ? `Welcome, ${this.props.user.user.user}!` :'MadModels3d'}</h3></Link>
 
             <ul className='link-list'>
-                <Link to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a onClick={() => this.trackingHandler('about')} >About</a></li></Link>
-                <Link to="/explore" style={{ textDecoration: 'none' }}><li className='link-item'><a onClick={() => this.trackingHandler('projects')} >Explore</a></li></Link>
+                <Link to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a >About</a></li></Link>
+                <Link to="/explore" style={{ textDecoration: 'none' }}><li className='link-item'><a>Explore</a></li></Link>
                 {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='link-item'><a>My Page</a></li></Link>)}
             </ul>
 
@@ -234,7 +241,7 @@ class Header extends Component{
                 </svg>
                 <a>Logout</a>
                 </li></Link> : null)}
-                {isMenuOpen === true ? <Link to="/about" style={{ textDecoration: 'none' }}><li className='mobile-link-item' onClick={() => this.trackingHandler('about')} >
+                {isMenuOpen === true ? <Link to="/about" style={{ textDecoration: 'none' }}><li className='mobile-link-item' >
                 <svg xmlns="http://www.w3.org/2000/svg" className="header-menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>

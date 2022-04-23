@@ -1,2 +1,2 @@
 UPDATE d_visitors
-SET remount = remount + 1, last_visit = $1 WHERE unique_id = $2
+SET remount = remount + 1, last_visit = $1 WHERE assigned_browser = $2

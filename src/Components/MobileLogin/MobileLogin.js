@@ -14,7 +14,7 @@ const MobileLogin = (props) => {
     const [ password, setPassword ] = useState('')
     // const [ new_user_name, setNewUserName ] = useState('')
     // const [ new_password, setNewPassword ] = useState('')
-    const [ saveInfo,setSaveInfo ] = useState(false)
+    const [ saveInfo,setSaveInfo ] = useState(true)
     const [ signup,setSignup ] = useState(false)
     const [ email, setEmail ] = useState('')
     const [ first_name, setFirstName] = useState('')
