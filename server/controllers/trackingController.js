@@ -21,6 +21,7 @@ module.exports = {
         // const result = await db.tracking.get_info_by_unique_id([assigned_browser])
         const result = await db.tracking.get_info_by_assigned_id([browser])
         const existingId = result[0]
+        console.log(result,'here is existing')
         if(!existingId) {
             return res.status(404).send('this unque_id does not exist')
         }

@@ -47,7 +47,7 @@ class Header extends Component{
         const visited = localStorage['visited']
         const browser = localStorage['assigned_browser']
         const savedUsername = localStorage['user_name']
-        const savedPassword = localStorage['password']
+        // const savedPassword = localStorage['password']
         
         const last_visit = new Date().toString().split('(')[0]
         
@@ -70,21 +70,21 @@ class Header extends Component{
             this.sessionToWindow('visited',unique_id)
             this.sessionToWindow('assigned_browser',assigned_browser)
             // axios.post('/api/track/new/',{unique_id}).then(res => this.sessionToWindow('visited',res.data))
-            axios.post('/api/track/new/',{unique_id,assigned_browser}).then(res => 
-                this.sessionToWindow('browser_id',res.data)
-                // console.log(res.data,'res data')
-                )
-        } else {
-            const unique_id = visited
-            
-            axios.post('/api/track/increment/',{unique_id,last_visit,browser}).catch(err => {
-                console.log('here is the error',err)
-                localStorage.removeItem('visited')
-                const unique_id = getUniqueID()
-                axios.post('/api/track/new/',{unique_id,browser}).then(res => this.sessionToWindow('visited',res.data))
-            })
-            this.setState({unique_id:localStorage['visited']})
+            // axios.post('/api/track/new/',{unique_id,assigned_browser}).then(res => 
+            //     this.sessionToWindow('browser_id',res.data)
+            //     )
         }
+        //  else {
+            // const unique_id = browser
+            
+            // axios.post('/api/track/increment/',{unique_id,last_visit,browser}).catch(err => {
+            //     console.log('here is the error',err)
+            //     localStorage.removeItem('visited')
+            //     const unique_id = getUniqueID()
+            //     axios.post('/api/track/new/',{unique_id,browser}).then(res => this.sessionToWindow('visited',res.data))
+            // })
+            // this.setState({unique_id:localStorage['visited']})
+        // }
         if(visited !== undefined){
             this.setState({unique_id:visited})
         }
@@ -167,7 +167,7 @@ class Header extends Component{
         if (saveMyInfo === true && this.props.user.isLoggedIn === true) {
             localStorage.setItem('user_name',signInName)
             // localStorage.setItem('password',signInPass)
-        }
+        } else {localStorage.removeItem('visited')}
 
         this.toggleLogin()
         this.setState({user_name:'',password:''})
@@ -175,7 +175,8 @@ class Header extends Component{
 
     handleLogout() {
         localStorage.removeItem("user_name");
-        localStorage.removeItem("password");
+        localStorage.removeItem("visited")
+        // localStorage.removeItem("password");
         this.toggleLogin()
         this.props.logoutUser()
     }
