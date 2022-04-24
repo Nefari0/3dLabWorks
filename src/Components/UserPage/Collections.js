@@ -182,7 +182,7 @@ class Collections extends Component {
     // adds model file to firebase
     getFileUrl = async (input) => {
         const { user } = this.props.user.user
-        const storageRef = app.storage().ref(`${user}/`)
+        const storageRef = app.storage().ref(`${user}/projects`)
         const fileRef = storageRef.child(input.name)
         await fileRef.put(input)
         console.log('file loaded')
