@@ -1,8 +1,9 @@
 .explore-container {
+    /* position: relative; */
     min-height: 70vh;
     /* max-height: 120vh; */
-    min-width: 300px;
-    /* max-width: 100vw; */
+    /* min-width: 300px; */
+    max-width: 100vw;
     background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url(white-backround1.jpg);
     background-size: cover; 
     background-position: center bottom;
@@ -101,9 +102,8 @@ h4 {
       }
   }
 
-  @media (max-width: 600px) {
-      /* .search-menu,
-      .search-menu-closed {
-          left : 30px
-      } */
-  }
+@media (max-width: 350px) {
+    .explore-container {
+        max-width: 100vw;
+    }
+}
