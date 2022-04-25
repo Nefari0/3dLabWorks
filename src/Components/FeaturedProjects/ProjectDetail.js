@@ -36,7 +36,10 @@ class ProjectDetail extends Component {
             allLikes:[],
             modelImages:[],
             isDeleted:false,
+
+            // - image currently selected - // 
             selectedPhoto:null,
+            // selectedPhotoId:null,
         }
         this.changeView = this.changeView.bind(this)
         this.getDetails = this.getDetails.bind(this)
@@ -223,9 +226,10 @@ class ProjectDetail extends Component {
         this.setState({isDeleted:!this.state.isDeleted})
     }
 
-    highLightedPhoto = (url) => {
+    highLightedPhoto = (url,id) => {
         this.setState({
             selectedPhoto:url
+            // selectedPhotoId:id
         })
     }
 
@@ -249,7 +253,7 @@ class ProjectDetail extends Component {
         })
 
         const mappedPhoto = info.map(element => {
-            return <ProjectPhotos data={element} key={element.model_id} userInfo={userInfo} url={selectedPhoto} isLoggedIn={isLoggedIn} id={id} maker_id={maker_id} plsSignIn={this.plsSignIn} />
+            return <ProjectPhotos data={element} key={element.model_id} model_id={element.model_id} userInfo={userInfo} url={selectedPhoto} isLoggedIn={isLoggedIn} id={id} maker_id={maker_id} plsSignIn={this.plsSignIn} />
         })
 
         const mappedUserInfo = userInfo.map(element => {
@@ -260,9 +264,9 @@ class ProjectDetail extends Component {
             return <div key={el.image_id} onClick={() => this.highLightedPhoto(el.photo_url)} ><img className='thumbnail-image' src={el.photo_url}/></div>
         })
 
-        const mappedMainPhoto = info.map(el => {
-            return <div key={el.model_id} onClick={() => this.highLightedPhoto(el.firebase_url01)} ><img className='thumbnail-image' src={el.firebase_url01}/></div>
-        })
+        // const mappedMainPhoto = info.map(el => {
+        //     return <div key={el.model_id} onClick={() => this.highLightedPhoto(el.firebase_url01)} ><img className='thumbnail-image' src={el.firebase_url01}/></div>
+        // })
 
         // console.log('here is the description',description)
 
@@ -274,7 +278,7 @@ class ProjectDetail extends Component {
                 {mappedUserInfo}
 
                 <div className='image-viewer'>
-                    {mappedMainPhoto}
+                    {/* {mappedMainPhoto} */}
                     {mappedThumbNails}
                 </div>
                 <div className="detail-container">
