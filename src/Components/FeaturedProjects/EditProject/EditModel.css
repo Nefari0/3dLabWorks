@@ -301,8 +301,8 @@
     color: #fff;
 }
 
-.delete-project-button {
-    /* position: absolute; */
+.edit-photo-button {
+    position: absolute;
     font-size: small;
     height: 20px;
     width: 20px;
@@ -314,7 +314,20 @@
     background-color: lightcyan;
     opacity: .5;
     margin-top: 5px;
+    margin-left: 10px;
 }
+
+/* .edit-project-photo-menu {
+    position: absolute;
+    min-height: 70px;
+    width: 250px;
+    background-color: #6495ed;
+    border: 1px solid #3c598e;
+    margin-top: 25px;
+    margin-left: 10px;
+    border-radius: 2px;
+    display: flex;
+} */
 
 .select-delete {
     height: 100%;
