@@ -70,14 +70,13 @@
 }
 
 
-.friend-options {
+/* .friend-options {
     position: absolute;
     height: 90px;
     width: 150px;
     right: 0px;
     top: 50px;
     border-radius: 5px;
-    /* background-color: yellow; */
     background-color: #6495ed;
     z-index: 1;
     text-align: left;
@@ -90,7 +89,6 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    /* background-color: yellow; */
 }
 
 .friend-menu-icon {
@@ -102,7 +100,7 @@
 
 .friend-menu-text {
     font-size: smaller;
-}
+} */
 
 .connection-buttons,
 .connection-buttons-full {

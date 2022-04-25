@@ -220,3 +220,39 @@ div.sub-header .a-selected{
       margin-top: 2%;
   }
 } */
+
+/* ---- This section is for global menu styling ---- */
+/* --- no addictions van be  made to any of this code in this file --- */
+.friend-options {
+  position: absolute;
+  height: 90px;
+  width: 150px;
+  right: 0px;
+  top: 50px;
+  border-radius: 5px;
+  background-color: #6495ed;
+  z-index: 1;
+  text-align: left;
+}
+
+.friend-menu-row {
+  height: 40px;
+  width: 140px;
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.friend-menu-icon {
+  height: 25px;
+  width: 25px;
+  color: #fff;
+  margin-right: 10px;
+  /* background-color: yellow; */
+}
+
+.friend-menu-text {
+  font-size: smaller;
+}
+/* -------------------------------- */
