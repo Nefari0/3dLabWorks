@@ -1,0 +1,1 @@
+UPDATE models SET firebase_url01 = $1 WHERE model_id = $2

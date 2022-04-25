@@ -132,6 +132,11 @@ app.get('/api/featured/join', projectsController.getFeatured)
 // --- images end points
 app.get('/api/project/photos/get/:model_id',projectImageController.getImages)
 app.post('/api/project/photos/put',projectImageController.putImage)
+app.post('/api/projects/photos/delete/',projectImageController.deletePhoto)
+app.post('/api/projects/photos/change/main/',projectImageController.changeMainPhoto)
+// temp end point saves main files to project image db if not currently in that location
+// app.post('/api/projects/photos/saveto/main/',projectImageController.sendImToDB)
+// ------------------------------- //
 // --- likes end points
 app.post('/api/project/getLike', projectsController.getLikeById)
 app.post('/api/projects/like', projectsController.addLike) //Get request / req.body / http://localhost:4004/api/project/like / {"user_id":"12","model_id":"5"}
