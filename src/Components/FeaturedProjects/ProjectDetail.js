@@ -36,10 +36,8 @@ class ProjectDetail extends Component {
             allLikes:[],
             modelImages:[],
             isDeleted:false,
-
-            // - image currently selected - // 
+        // - image currently selected - // 
             selectedPhoto:null,
-            // selectedPhotoId:null,
         }
         this.changeView = this.changeView.bind(this)
         this.getDetails = this.getDetails.bind(this)
@@ -226,10 +224,9 @@ class ProjectDetail extends Component {
         this.setState({isDeleted:!this.state.isDeleted})
     }
 
-    highLightedPhoto = (url,id) => {
+    highLightedPhoto = (url) => {
         this.setState({
             selectedPhoto:url
-            // selectedPhotoId:id
         })
     }
 
