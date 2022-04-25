@@ -44,11 +44,11 @@
     font-weight: 600;
 }
 
-.small-text {
+/* .small-text {
     font-size: 12px;
     margin: 2px;
     display: flex;
-}
+} */
 
 .project-text {
     color: #555;
@@ -318,6 +318,7 @@
 }
 
 .left {
+    position: relative;
     width: 360px;
     height: 310px;
     margin: none;
