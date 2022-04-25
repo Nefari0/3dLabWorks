@@ -216,7 +216,7 @@ class EditModel extends Component {
             <div className="edit-project-container" >
                 
                 {isLoading ? <Loading/> : null}
-                <section className='project-selection-title'><h3 className="prodect-selection-h3">{openDeleteConfirm ? "Delete this Project?" : "Edit Project"}</h3>{!openDeleteConfirm ? <p className="delete-project-button" onClick={() => this.confirmDelete()} >X</p>:<div onClick={() => this.confirmDelete()} className='select-delete'><p className='delete-button-txt' onClick={() => this.removeFileFromSpace()} >yes</p><p className='delete-button-txt'>no</p></div>}</section>
+                <section className='project-selection-title'><h3 className="prodect-selection-h3">{openDeleteConfirm ? "Delete this Project?" : "Edit Project"}</h3>{!openDeleteConfirm ? <p className="edit-photo-button" onClick={() => this.confirmDelete()} >X</p>:<div onClick={() => this.confirmDelete()} className='select-delete'><p className='delete-button-txt' onClick={() => this.removeFileFromSpace()} >yes</p><p className='delete-button-txt'>no</p></div>}</section>
                 {/* --- adding a file ----- */}
                 <div className='section-title'><p style={{color:'#555'}}>Add Image / Update File</p></div>
                 {previewImageFile ? <ImagePreview previewImageFile={previewImageFile} passNewPhotoToFB={this.passNewPhotoToFB} /> : null}
