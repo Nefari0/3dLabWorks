@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 const VideoPlayer = (props) => {
 
-    const { video_url,firebase_url,category,tag,photo_url,user_name,name,video_name,id } = props
+    const { video_url,firebase_url,category,tag,photo_url,user_name,name,video_name } = props
     
     return(
         <div className='player-container' >
