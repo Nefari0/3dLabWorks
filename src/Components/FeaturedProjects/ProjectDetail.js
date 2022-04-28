@@ -232,7 +232,7 @@ class ProjectDetail extends Component {
 
     render() {
         const { comments,model_id,maker_id,myLike } = this.state
-        const { firebase_url01,firebase_url,user_id,description } = this.state.info
+        // const { firebase_url01,firebase_url,user_id,description } = this.state.info
         const { info, userInfo, viewComments, viewDetails, viewFiles, viewInfo, dlUrl,viewEditProject,modelImages,isDeleted,selectedPhoto } = this.state
         const { isLoggedIn } = this.props.user
         const { user,id,photo_url,user_likes } = this.props.user.user
@@ -250,7 +250,7 @@ class ProjectDetail extends Component {
         })
 
         const mappedPhoto = info.map(element => {
-            return <ProjectPhotos data={element} key={element.model_id} model_id={element.model_id} userInfo={userInfo} url={selectedPhoto} isLoggedIn={isLoggedIn} id={id} maker_id={maker_id} plsSignIn={this.plsSignIn} />
+            return <ProjectPhotos data={element} key={element.model_id} firebase_url={info[0].firebase_url} model_id={element.model_id} userInfo={userInfo} url={selectedPhoto} isLoggedIn={isLoggedIn} id={id} maker_id={maker_id} plsSignIn={this.plsSignIn} />
         })
 
         const mappedUserInfo = userInfo.map(element => {
@@ -336,7 +336,7 @@ class ProjectDetail extends Component {
                         {viewComments ? mappedComments : null}
                         {viewFiles ? <section className='project-selection-title'><h3 className="prodect-selection-h3">Download File</h3></section> : null}
                         {viewFiles ? mappedUrl : null}
-                        {viewEditProject ? <EditModel key={model_id} info={info} model_id={model_id} user_id={id} user_name={user} getDetails={this.getDetails} setIsDeleted={this.setIsDeleted} getImages={this.getImages} /> : null}
+                        {viewEditProject ? <EditModel key={model_id} info={info} model_id={model_id} user_id={id} user_name={user} modelImages={modelImages} getDetails={this.getDetails} setIsDeleted={this.setIsDeleted} getImages={this.getImages} /> : null}
                         {viewInfo ? <section className='project-selection-title'><h3 className="prodect-selection-h3">Information</h3></section> : null}
                         {/* {viewInfo ? <section className='doc-container'><p style={{color:'#555'}} >{description}</p></section> : null} */}
                         {viewInfo ? mappedDescription : null}
