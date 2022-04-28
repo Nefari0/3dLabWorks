@@ -212,49 +212,6 @@
     height: 5vh;
 }
 
-.add-project {
-    position: absolute;
-    height: 300px;
-    min-width: 300px;
-    display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: stretch;
-	align-content: stretch;
-    padding: 10px;
-    border-radius: 2%;
-    background-color: rgb(240, 240, 240);
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
-    overflow: auto;
-    opacity: 100;
-    transition: all 150ms;
-    z-index: 5;
-}
-
-.add-project-button {
-    display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: space-between;
-	align-items: stretch;
-	align-content: space-around;
-    margin: 20px;
-    z-index: 0;
-}
-
-.add-project-info-section {
-    height: 300px;
-    width: 300px;
-}
-
-.add-project-photo-section {
-    height: 280px;
-    width: 280px;
-}
-
-
-
 @media (max-width: 1075px) {
     .column2 {
         width: 350px;
