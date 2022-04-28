@@ -76,7 +76,7 @@ const Project = (props) => {
 
                 <p className="dark-text">{name}<br/><p className='usr-nm-txt'>by {getUserName()}</p></p></div>
 
-                <div className="image-div" ><Link to={`projectdetails/${model_id}`}><img className="model-photo" src={firebase_url01}/></Link></div>
+                <Link to={`projectdetails/${model_id}`}><div className="image-div" ><img className="model-photo" src={firebase_url01}/></div></Link>
             </div>
             <div>
                 <div className="download-container">
