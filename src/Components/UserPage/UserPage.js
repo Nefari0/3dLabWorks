@@ -60,41 +60,19 @@ class UserPage extends Component {
         this.deleteFromFirebase = this.deleteFromFirebase.bind(this)
         this.getUserID = this.getUserID.bind(this)
         this.receiveInvite = this.receiveInvite.bind(this)
-        // this.stateInput = this.stateInput.bind(this)
-        // this.openCreate = this.openCreate.bind(this)
     }
 
     componentDidMount(){
         this.receiveInvite()
         this.setState({currentGame:this.getUniqueID()})
-        
-        // console.log('is user already here?',this.props.user.user)
-        // axios.get('/api/projects/all').then(res =>
-            // this.setState({ ...this.state,items:res.data}))
-            // axios.get(`/api/friends/${this.props.user.user.id}`).then(res => this.setState({friends:res.data})) 
     }
 
     componentDidUpdate() {
         const { id } = this.props.user.user
         if(this.state.friends.length < 1 && id != undefined){
-            // console.log('here')
             axios.get(`/api/join/friends/${id}`).then(res => this.setState({friends:res.data}))   
         }
-        // if(this.state.setPermission === true){
-        //     this.setState({...this.state,user:this.props.user.user,setPermission:false})
-        // }
-        // if(this.state.setPermission === true && id != undefined) {
-        //     axios.get(`/api/get/pending/friends/${id}`).then(res2 => this.setState({requests:res2.data})).catch(err => {
-        //         this.setState({requests:[]})
-        //     })
-        // }
-        // this.setState({setPermission:false})
     }
-
-    // thisUpdateUser() {
-    //     this.props.updateUser()
-
-    // }
 
     changeGameID = (confirm,val) => {
         if(confirm === true){this.setState({currentGame:val})} else {this.setState({challengeUser:null})}
@@ -108,12 +86,10 @@ class UserPage extends Component {
             const dataFromServer = JSON.parse(message.data)
             const { id } = this.props.user.user
             
-            // console.log('hit,,,data',dataFromServer)
             if(dataFromServer.type === 'gameInvite' && dataFromServer.gameInformation.to === id) {
-                // console.log('connected to invite',id)
-                // alert('should be on both')
+
                 this.setState({challengeUser:dataFromServer})
-            // if(dataFromServer.type === 'gameIvite') {
+
                 console.log('invite send to server',typeof(dataFromServer.to), typeof(id))
             }
         }
@@ -122,11 +98,6 @@ class UserPage extends Component {
     sendInvite = (gameInformation) => {
         console.log('hit send invite')
         const { id } = this.props.user.user
-        
-        // var sendInfo = {
-        //     "id":id,
-        //     "to":to
-        // }
         client.send(JSON.stringify({type: 'gameInvite',gameInformation:gameInformation}))
     }
     
@@ -221,47 +192,10 @@ class UserPage extends Component {
         alert('please log in')
     }
 
-    // openCreate() {
-    //     this.setState({showCreateProject:!this.state.showCreateProject})
-    // }
-
-    // openGames() {
-    //     this.setState({showGames:!this.state.showGames})
-    // }
-
-    // handleDisplayItem(param) {
-    //     switch(param) {
-    //         case 'showCreateProject':
-    //             return(
-    //                 this.setState({showCreateProject:!this.state.showCreateProject})
-    //             )
-    //     }
-    // }
-
     render(){
         const { showCollections,showUserInfo,items,isLoading,showCreateProject,showEditUserInto,showGames,showFriends,friends,requests,challengeUser,currentGame } = this.state
         const { isLoggedIn } = this.props.user
         const { photo,auth,name,is_admin,background_url,user,email,id } = this.props.user.user
-
-        // --- unconfirmed requests from other users ---- //
-        // const pendingRequest = friends.filter(el => {
-        //     return el.is_accepted === false && el.frien_id === id
-        // })
-        // const mappedPending = pendingRequest.map(el => {
-        //     return <div></div>
-        // })
-
-        // --- all accepted requests ---- //
-        // const allFriends = friends.filter(el => {
-        //     return el.is_accepted === true
-        // })
-        // const mappedConnections = friends.map(el => {
-        //     return <MyConnection key={el.user_id} photo_url={el.photo_url} user_id={el.user_id} user_name={el.user_name} />
-        // })
-
-        // const mappedRequests = requests.map(el => {
-        //     return <ConnectRequests key={el.user_id} photo_url={el.photo_url} user_name={el.user_name} user_id={el.user_id} my_id={id} removeConnection={this.removeConnection} acceptRequest={this.acceptRequest} />
-        // })
 
     return(
         <div>
@@ -297,13 +231,9 @@ class UserPage extends Component {
 
                 {showEditUserInto === true ? <EditUserInfo setIsLoading={this.setIsLoading} resetView={this.resetView} /> : null}
 
-                {showCollections === true ? <Collections username={this.props.user} setIsLoading={this.setIsLoading} photo_url={photo} resetView={this.resetView} showCreateProject={showCreateProject}/> : null} 
+                {showCollections === true ? <Collections setIsLoading={this.setIsLoading} photo_url={photo} resetView={this.resetView} showCreateProject={showCreateProject}/> : null} 
 
                 {showFriends === true ? <DisplayFriends id={id} getUserID={this.getUserID} /> : null }
-
-                {/* {showFriends === true ? mappedRequests : null} */}
-                {/* {showFriends === true ? mappedConnections : null} */}
-
             </section>
         </div>
         )}
