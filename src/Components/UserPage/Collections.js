@@ -7,6 +7,7 @@ import {app} from '../../base'
 // import ModelItems from './ModelItems'
 import { connect } from 'react-redux'
 import { getProjects } from '../../ducks/projectsReducer'
+import { addNewModel } from '../../ducks/firebaseReducer'
 import AddProject from './AddProject'
 import EditModel from '../FeaturedProjects/EditProject/EditModel'
 import Project from '../FeaturedProjects/Project'
@@ -24,9 +25,10 @@ class Collections extends Component {
             data:[],
             fileUrl:null,
             file:null,
-            imageFile:null,
             previewImageFile:null,
             previewModelFile:null,
+            imageFile:null,
+            // imageFileDefault:'https://firebasestorage.googleapis.com/v0/b/depot-7bb3e.appspot.com/o/madmodels%2Ffiles%2F12%2Fdeault%20cube.png?alt=media&token=3e81c85c-c3c3-4d50-9542-57fed9cb85db',
             imageUrl:null,
             newItem:{},
             props:null,
@@ -49,6 +51,7 @@ class Collections extends Component {
         this.handleAddText = this.handleAddText.bind(this)
         this.projectIsLiked = this.projectIsLiked.bind(this)
         this.getProjects = this.getProjects.bind(this)
+        this.createNewProject = this.createNewProject.bind(this)
     }
 
     componentDidMount(){
@@ -67,6 +70,34 @@ class Collections extends Component {
           [prop]: val
         })
       }
+
+    //   --- Rebuilding add new projects function to reduce code --- //
+    createNewProject = async () => {
+        // all data needed
+        const { file, imageFile, fileUrl, imageUrl, projectDescription, projectName } = this.state
+        const user_id = this.props.user.user.id
+        const { name } = this.state.file
+        if(name != undefined) {
+            this.props.setIsLoading()
+    
+            // -- add file -- //
+            const cloudFile = await this.props.addNewModel(file,`madmodels/projects/${user_id}/${projectName}/`)
+            const fileUrl = await cloudFile.action.payload.ref.getDownloadURL()
+            // -- add photo if not null-- //
+            var photoUrl = null
+            if(imageFile != null){
+                const cloudPhoto = await this.props.addNewModel(imageFile,`madmodels/projects/${user_id}/${projectName}/`)
+                photoUrl = await cloudPhoto.action.payload.ref.getDownloadURL()
+            }
+            // -- send to DB -- //
+            await this.addToDatabase(fileUrl,photoUrl)
+            await this.getProjects()
+            // -- reset / rerender view -- //
+            this.props.resetView()
+            this.props.setIsLoading()
+        }
+    } 
+    // ------------------------------------------------------------- //
 
     // saves file url to state pending "add to SQL"
     setFileUrl = async (params) => {
@@ -161,8 +192,13 @@ class Collections extends Component {
         this.props.setIsLoading()
         const theFile = await this.getFileUrl(file)
         this.setFileUrl(await theFile.getDownloadURL())
-        const theImage = await this.getImUrl(imageFile)
-        this.setImageUrl(await theImage.getDownloadURL())
+        
+        // -- add image if not null -- //
+        if(imageFile != null){
+            const theImage = await this.getImUrl(imageFile)
+            this.setImageUrl(await theImage.getDownloadURL())
+        }
+
         await this.addToDatabase(this.state.fileUrl,this.state.imageUrl)
         await this.getProjects()
         this.props.setIsLoading()
@@ -172,8 +208,8 @@ class Collections extends Component {
     }
     // adds image to firebase
     getImUrl = async (input) => {
-        const { user } = this.props.user.user
-        const storageRef = app.storage().ref(`${user}/`)
+        const { id } = this.props.user.user
+        const storageRef = app.storage().ref(`madmodels/projects/${id}/`)
         const fileRef = storageRef.child(input.name)
         await fileRef.put(input)
         console.log('image loaded')
@@ -181,8 +217,8 @@ class Collections extends Component {
     }
     // adds model file to firebase
     getFileUrl = async (input) => {
-        const { user } = this.props.user.user
-        const storageRef = app.storage().ref(`${user}/projects`)
+        const { id } = this.props.user.user
+        const storageRef = app.storage().ref(`madmodels/projects/${id}/`)
         const fileRef = storageRef.child(input.name)
         await fileRef.put(input)
         console.log('file loaded')
@@ -217,7 +253,7 @@ class Collections extends Component {
     addToDatabase =  async (fileUrl,imageUrl) => {
         console.log('this is from addToDatabase function')
         const { projectDescription, projectName } = this.state
-        const { id } = this.props.username.user
+        const id = this.props.user.user.id
         const name = projectName
         const description = projectDescription
         const firebase_url = fileUrl
@@ -259,7 +295,7 @@ class Collections extends Component {
 
         return(
             <div className="collections">
-                {showCreateProject ? <CreateProject resetView={this.props.resetView} handleFile={this.handleFile} handleAddText={this.handleAddText} handlePhoto={this.handlePhoto} previewImageFile={previewImageFile} previewModelFile={previewModelFile} file={file} sendIntoSpace={this.sendIntoSpace} /> : null}
+                {showCreateProject ? <CreateProject resetView={this.props.resetView} handleFile={this.handleFile} handleAddText={this.handleAddText} handlePhoto={this.handlePhoto} previewImageFile={previewImageFile} previewModelFile={previewModelFile} file={file} sendIntoSpace={this.sendIntoSpace} createNewProject={this.createNewProject} /> : null}
 
                 {mappedProjects}
   
@@ -272,4 +308,4 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps, {getProjects})(Collections)
+export default connect(mapStateToProps, {getProjects,addNewModel})(Collections)
