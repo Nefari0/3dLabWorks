@@ -1,14 +1,15 @@
 import ReactPlayer from 'react-player'
 import './VideoPlayer.css'
+import { Link } from 'react-router-dom'
 
 const VideoPlayer = (props) => {
 
-    const { video_url,firebase_url,category,tag,photo_url,user_name,name,video_name } = props
+    const { video_url,firebase_url,category,tag,photo_url,user_name,name,video_name,id } = props
     
     return(
         <div className='player-container' >
             <header className='video-title' >
-                <img className='video-user-photo' src={photo_url} />
+                <Link to={`viewuser/${id}`}><img className='video-user-photo' src={photo_url} /></Link>
                 <div className='vidnm-and-usrnm' > <p className="dark-text video-nm-txt" >{name === 'dummy project' ? video_name : name}</p><p className='usr-nm-txt' style={{marginRight:'60px'}} >Video by {user_name}</p> </div>
             </header>
             <div className='' style={{marginTop:'50px'}} >
