@@ -13,7 +13,7 @@ import EditModel from '../FeaturedProjects/EditProject/EditModel'
 import Project from '../FeaturedProjects/Project'
 import CreateProject from './CreateProject'
 
-const db = app.firestore()
+// const db = app.firestore()
 
 class Collections extends Component {
 
@@ -295,6 +295,7 @@ class Collections extends Component {
 
         return(
             <div className="collections">
+                {/* <header ><p>My Designs</p></header> */}
                 {showCreateProject ? <CreateProject resetView={this.props.resetView} handleFile={this.handleFile} handleAddText={this.handleAddText} handlePhoto={this.handlePhoto} previewImageFile={previewImageFile} previewModelFile={previewModelFile} file={file} sendIntoSpace={this.sendIntoSpace} createNewProject={this.createNewProject} /> : null}
 
                 {mappedProjects}
