@@ -18,11 +18,14 @@ const ProjectPhotos = (props) => {
     const deletePhotoFromDB = async (url) => {
         await deleteFile(url)
         const deleted = await axios.post(`/api/projects/photos/delete/`,{url})
+        await props.getImages()
+        setOpenMenu(!openMenu)
         return deleted
     }
 
     // -- Displays selected photo as main photo for this project -- //
     const makeMainPhoto = () => {
+        setOpenMenu(!openMenu)
         axios.post('/api/projects/photos/change/main/',{model_id,url})
     }
 
@@ -56,7 +59,7 @@ const ProjectPhotos = (props) => {
                 </div>
 
             </div> : null}
-            <img src={url} className="detail-photo"/>
+            <div className={`detail-photo-main`}><img src={url} className="detail-photo"/></div>
         </div>
     )
 }
