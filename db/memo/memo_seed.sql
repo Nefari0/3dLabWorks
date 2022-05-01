@@ -2,7 +2,7 @@
 -- CREATE TABLE d_memos (
 --   memo_id SERIAL PRIMARY KEY,
 --   title VARCHAR(250),
---   body VARCHAR(1000)
+--   body text
 -- )
 
 -- INSERT INTO d_memos (title,body)
