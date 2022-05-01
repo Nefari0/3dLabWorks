@@ -8,6 +8,7 @@ import MobileLogin from '../MobileLogin/MobileLogin'
 import UserPage from '../UserPage/UserPage'
 import { withRouter } from 'react-router'
 import Loading from '../Loading/Loading'
+import cdLabs3d from '../../assets/cdLabs-logo-1-alpha.png'
 
 class Header extends Component{
     constructor(props){
@@ -216,8 +217,10 @@ class Header extends Component{
         <div className='header-container'>
             {isLoading === true ? <Loading /> : null}
             <img onClick={this.viewTheWindow}
-                src="https://firebasestorage.googleapis.com/v0/b/depot-7bb3e.appspot.com/o/logo.png?alt=media&token=3d889013-f357-4d66-adc2-286bdb367ce6"
+                // src="https://firebasestorage.googleapis.com/v0/b/depot-7bb3e.appspot.com/o/logo.png?alt=media&token=3d889013-f357-4d66-adc2-286bdb367ce6"
+                src={cdLabs3d}
                 className="cd-logo"
+                style={{height:'120%'}}
                 />
 
             <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><h3 className="header-h3">{isLoggedIn ? `Welcome, ${this.props.user.user.user}!` :'MadModels3d'}</h3></Link>
