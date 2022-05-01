@@ -5,6 +5,7 @@ import Loading from '../../Loading/Loading';
 import ImagePreview from './ImagePreview';
 import { addNewModel,deleteFile,getRefFromUrl } from '../../../ducks/firebaseReducer';
 import { connect } from 'react-redux';
+import Resizer from 'react-image-file-resizer'
 
 const addImageEndpoint = '/api/project/photos/put'
 const deleteProjectEndpoint = '/api/project/delete/'
@@ -27,6 +28,7 @@ class EditModel extends Component {
             isLoading:false,
             previewImageFile:null,
             isDeleted:false,
+            newImage:''
         }
         this.handleInput = this.handleInput.bind(this)
         this.executeChange = this.executeChange.bind(this)
@@ -111,6 +113,41 @@ class EditModel extends Component {
         })
     }
 
+    handlePhoto = async (e) => {
+        // const photo = e.target.files[0]
+        var fileInput = false;
+
+        if (e.target.files[0]) {
+            fileInput = true
+        }
+
+        if (fileInput) {
+            try {
+                Resizer.imageFileResizer(
+                    e.target.files[0],
+                    400,
+                    267,
+                    "JPEG",
+                    100,
+                    0,
+                    (uri) => {
+                        console.log(uri,'uri')
+                        this.setState({
+                            previewImageFile:URL.createObjectURL(uri),
+                            photo_url:uri
+                        })
+                    },
+                    "file",
+                    298,
+                    191
+                );
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+    }
+
     setIsLoading = () => {
         this.setState({isLoading:!this.state.isLoading})
     }
@@ -189,7 +226,8 @@ class EditModel extends Component {
                         style={{marginLeft:'40px'}}
                         type="file"
                         accept="image/png,image/jpeg"
-                        onChange={e => this.fileHandler(e,'previewImageFile','photo_url')} 
+                        // onChange={e => this.fileHandler(e,'previewImageFile','photo_url')} 
+                        onChange={e => this.handlePhoto(e)} 
                         />
                     </div> : null}
 
