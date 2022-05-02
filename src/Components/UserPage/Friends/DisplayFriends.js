@@ -29,20 +29,8 @@ class DisplayFriends extends Component {
     }
 
     componentDidMount(){
-        // const { id } = this.props.user.user
-        // axios.get(`/api/join/friends/${id}`).then(res => this.setState({friends:res.data}))
-
-        // axios.get(`/api/get/pending/friends/${id}`).then(res2 => this.setState({requests:res2.data})).catch(err => {
-        //     this.setState({requests:[]})
-        // })
-        // console.log('is user already here?',this.props.user.user)
-        // axios.get('/api/projects/all').then(res =>
-            // this.setState({ ...this.state,items:res.data}))
-            // axios.get(`/api/friends/${this.props.user.user.id}`).then(res => this.setState({friends:res.data})) 
         this.sockets()
         this.getMyFriends()
-
-            // this.removeConnection = this.removeConnection.bind(this)
     }
 
     componentDidUpdate() {
@@ -51,23 +39,33 @@ class DisplayFriends extends Component {
 
     // --- websocket --- //
     sockets = (input) => {
+        const { id } = this.props
         client.onopen = () => {
-            console.log('connected in Display Friends')
         }
         client.onmessage = (message) => {
             const dataFromServer = JSON.parse(message.data)
-            const { fromUser } = dataFromServer
-            const { newFriends } = this.state
-            if (dataFromServer.type === 'new_friend' && parseInt(fromUser.toUser) === this.props.id) {
+            const { fromUser,friendObj } = dataFromServer
+            const { newFriends,friends } = this.state
+            if (dataFromServer.type === 'new_friend' && parseInt(fromUser.toUser) === id) {
                 newFriends.push(fromUser)
                 this.setState({newFriends:newFriends})
             }
+            if (dataFromServer.type === 'acceptedFriend'){
+                if(parseInt(friendObj.my_id) === id || parseInt(friendObj.user_id) === id){
+                    var updateFriends = [...friends]
+                    updateFriends.push(friendObj)
+                    this.setState({friends:updateFriends})
+                }
+            }
         }
     }
+    newFriendToSocked = (friendObj) => {
+        client.send(JSON.stringify({type:"acceptedFriend",friendObj}))
+    }
+    // ---------------------------------------- //
 
     getMyFriends = async () => {
         const { id } = this.props
-        // console.log('hit user in props',this.props)
         // --- requests this user has sent --- //
         await axios.get(`/api/join/friends/${id}`).then(res => this.setState({friends:res.data})).catch(err => console.log(err))
 
@@ -87,27 +85,18 @@ class DisplayFriends extends Component {
         var friendObj = {
             photo_url:photo_url,
             user_id:from,
+            my_id:to,
             user_name:user_name
         }
         var updateFriends = [...friends]
         updateFriends.push(friendObj)
-        this.setState({friends:updateFriends})
-        console.log('accepting',from,to)
-        // this.startLoading()
+        this.newFriendToSocked(friendObj)
         const newFriend = await axios.post('/api/accept/connection',{from,to,yes})
-        // this.setState({...this.state,testfriend:newFriend})
-        // if(newFriends[0] != undefined) {
-            // friends.push(newFriends[0])
-        // }
-        // await this.getMyFriends()
-        // this.startLoading()
     }
 
     removeConnection = async (from,to) => {
         console.log('hit remove', from,to)
-        // this.startLoading()
         axios.post('/api/remove/connection',{from,to})
-        // this.startLoading()
     }
 
     pleaeLogin(){
