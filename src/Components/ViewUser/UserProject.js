@@ -49,7 +49,7 @@ const UserProject = (props) => {
     }
 
     const checkIfLiked = (params) => {
-        console.log('clicked check if likeds',params)
+        // console.log('clicked check if likeds',params)
         if (props.projectIsLiked(model_id,user_likes) === true){ return(true) } else { return(false) } 
     }
 
@@ -71,19 +71,8 @@ const UserProject = (props) => {
         <div className='project-container'>
             {checkIfLiked()}
             <div>
-            {/* <p className="dark-text-larger">{name}</p> */}
-                {/* <div className="photo-title-border"><img src={photo_url} className="project-user-photo"/><p className="dark-text-larger">{name}<br/><p className='usr-nm-txt'>by {user_name}</p></p></div> */}
-
-
-                {/* <div className="photo-title-border"><img src={photo_url} className="project-user-photo"/> */}
-
-                {/* --------------- */}
                 <div className="photo-title-border"><img src={getPhotoUrl()} className="project-user-photo"/>
-                {/* <div className="photo-title-border"><Link to={`viewuser/${user_id}`} ><img src={getPhotoUrl()} className="project-user-photo"/></Link> */}
-                {/* ------------- */}
-                
-                {/* <p className="dark-text-larger">{name}</p> */}
-                {/* <p className="dark-text">{name}<br/><p className='usr-nm-txt'>by {user_name}</p></p></div> */}
+
                 <p className="dark-text">{name}<br/><p className='usr-nm-txt'>by {getUserName()}</p></p></div>
 
                 <div className="image-div" ><Link to={`/projectdetails/${model_id}`}><img className="model-photo" src={firebase_url01}/></Link></div>
@@ -139,5 +128,3 @@ function mapStateToProps(reduxState) {
 }
 
 export default connect(mapStateToProps, { getModels,updateUser })(UserProject)
-
-// export default UserProject
