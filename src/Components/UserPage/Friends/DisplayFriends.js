@@ -4,6 +4,9 @@ import './DisplayFriends.css'
 import ConnectRequests from "./ConnectRequests";
 import MyConnection from "./MyConnections";
 import Loading from "../../Loading/Loading";
+import { w3cwebsocket as W3CWebSocket } from "websocket";
+// const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
+const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
 
 class DisplayFriends extends Component {
     constructor() {
@@ -13,6 +16,9 @@ class DisplayFriends extends Component {
             requests:[],
             friends:[],
             isLoading:false,
+
+    // - new friend from websocket - //
+            newFriends:[],
         }
         this.getMyFriends = this.getMyFriends.bind(this)
         this.acceptRequest = this.acceptRequest.bind(this)
@@ -31,10 +37,30 @@ class DisplayFriends extends Component {
         // axios.get('/api/projects/all').then(res =>
             // this.setState({ ...this.state,items:res.data}))
             // axios.get(`/api/friends/${this.props.user.user.id}`).then(res => this.setState({friends:res.data})) 
-        
+        this.sockets()
         this.getMyFriends()
 
             // this.removeConnection = this.removeConnection.bind(this)
+    }
+
+    componentDidUpdate() {
+        this.sockets()
+    }
+
+    // --- websocket --- //
+    sockets = (input) => {
+        client.onopen = () => {
+            console.log('connected in Display Friends')
+        }
+        client.onmessage = (message) => {
+            const dataFromServer = JSON.parse(message.data)
+            const { fromUser } = dataFromServer
+            const { newFriends } = this.state
+            if (dataFromServer.type === 'new_friend') {
+                newFriends.push(fromUser)
+                this.setState({newFriends:newFriends})
+            }
+        }
     }
 
     getMyFriends = async () => {
@@ -74,7 +100,7 @@ class DisplayFriends extends Component {
 
     render() {
 
-        const { requests,friends,isLoading } = this.state
+        const { requests,friends,isLoading,newFriends } = this.state
         const { id } = this.props
 
         const mappedConnections = friends.map(el => {
@@ -85,8 +111,13 @@ class DisplayFriends extends Component {
             return <ConnectRequests key={el.user_id} photo_url={el.photo_url} user_name={el.user_name} user_id={el.user_id} my_id={id} removeConnection={this.removeConnection}  acceptRequest={this.acceptRequest} />
         })
 
+        const mappedNewRequestes = newFriends.map(el => {
+            return <ConnectRequests key={el.id} photo_url={el.photo} user_name={el.user} />
+        })
+
         return(<div className="friend-container">
             {isLoading === true ? <Loading /> : null}
+            {mappedNewRequestes}
             {mappedRequests}
             {mappedConnections}
         </div>)
