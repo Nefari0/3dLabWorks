@@ -136,11 +136,12 @@ class ViewUser extends Component {
         const { user_id } = this.props.match.params
         const { id,photo,user} = this.props.user.user
         const fromUser = {
+            toUser:user_id,
             id:id,
             photo:photo,
             user:user
         }
-        console.log('hit socket function',user_id)
+        // console.log('hit socket function',user_id)
         client.send(JSON.stringify({type:"new_friend",fromUser}))
     }
 
