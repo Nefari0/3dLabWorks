@@ -21,6 +21,9 @@ import Loading from '../Loading/Loading';
 import CreateNewMessage from './CreateNewMessage';
 // import AdminPage from '../AdminPage/AdminPage';
 // import EditUserInfo from './EditUserInfo';
+import { w3cwebsocket as W3CWebSocket } from "websocket";
+// const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
+const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
 
 // const db = app.firestore()
 
@@ -64,32 +67,36 @@ class ViewUser extends Component {
                 user:res.data,
                 userName:res.data.user_name
             }))
-        this.checkForExistingMessage()
+            // this.checkForExistingMessage()
+        }
+        
+        componentDidUpdate() {
+            const { currentUserMessage } = this.state
+            const { user_id } = this.props.match.params
+            const { id } = this.props.user.user
+            if(this.state.friendShipInfo === null){this.getConnectionStatus()}
+        // if(currentUserMessage === null && id !== undefined) {
+        //     this.checkForExistingMessage(id,user_id)
+        //     this.getConnectionStatus(id,user_id)
+        // }
     }
 
-    // componentDidUpdate() {
-    //     const { currentUserMessage } = this.state
-    //     const { user_id } = this.props.match.params
-    //     const { id } = this.props.user.user
-    //     if(currentUserMessage === null && id !== undefined) {
-    //         this.checkForExistingMessage(id,user_id)
-    //         this.getConnectionStatus(id,user_id)
-    //     }
-    // }
-
-    getConnectionStatus = () => {
+// -- check if loggedin user is already connected to this user -- /
+    getConnectionStatus = async () => {
         const { id } = this.props.user.user
+        console.log('getting status',id)
         const { isLoggedIn } = this.props.user
         const { user_id } = this.props.match.params
         if(id != undefined && isLoggedIn === true) {
-            axios.post('/api/get/friend/status',{id,user_id}).then(res => this.setState({friendShipInfo:res.data}))
+            await axios.post('/api/get/friend/status',{id,user_id}).then(res => this.setState({friendShipInfo:res.data}))
+            this.checkForExistingMessage()
         }
     }
 
     checkForExistingMessage = async (id,user_id) => {
         // const { id } = this.props.user.user
         // const { user_id } = this.state.user
-        await axios.post('/api/conversation/exists',{id,user_id}).then(res => this.setState({currentUserMessage:res.data})).catch(err => console.log('err'))
+        await axios.post('/api/conversation/exists',{id,user_id}).then(res => this.setState({currentUserMessage:res.data})).catch(err => console.log('err',err))
         // this.setState({currentUserMessage:conversation.data})
         // console.log('id in function',conversation.data)
         // axios.post('/api/conversation/exists',{id,user_id}).then(res => {
@@ -119,9 +126,22 @@ class ViewUser extends Component {
         const friend_id = user_id
         const no = false
         // console.log('hit invite',id,friend_id)
+        this.setState({friendShipInfo:true})
         if(id != undefined && isLoggedIn === true){
             axios.post('/api/friends/add',{id,friend_id,no}).then().catch(err => console.log(err))
+            this.sendToSocket()
         } else {this.pleaseLogin()}
+    }
+    sendToSocket = () => {
+        const { user_id } = this.props.match.params
+        const { id,photo,user} = this.props.user.user
+        const fromUser = {
+            id:id,
+            photo:photo,
+            user:user
+        }
+        console.log('hit socket function',user_id)
+        client.send(JSON.stringify({type:"new_friend",fromUser}))
     }
 
     getUserAndProjects(user_id) {
@@ -134,7 +154,7 @@ class ViewUser extends Component {
         try {
             return(userLike.filter(el => el.model_id === projectId)[0].model_id === projectId)
           } catch (error) {
-            console.log('user does not like this project',error);
+            // console.log('user does not like this project',error);
           }
     }
 
@@ -151,7 +171,7 @@ class ViewUser extends Component {
     }
 
     render(){
-        const { items,isLoading,user,currentUserMessage } = this.state
+        const { items,isLoading,user,currentUserMessage,friendShipInfo } = this.state
         // const { photo_url,auth,name,email,is_admin,background_url,user_name,user_id } = this.state.user
 
         const mappedNewMessage = user.map(el => {
@@ -193,7 +213,7 @@ class ViewUser extends Component {
  
                     <div className='portrait-row'>
                         <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.openMessageBox()} ><p style={{marginTop:'10px'}} >Message</p></div>
-                        {this.props.user.isLoggedIn === true ? <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.sendConnectInvite()} >{this.state.friendShipInfo === null ? <p style={{marginTop:'10px'}} >Connect</p> : <p style={{marginTop:'10px'}} >Connect</p>}</div>
+                        {this.props.user.isLoggedIn === true && this.state.friendShipInfo != true ? <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.sendConnectInvite()} ><p style={{marginTop:'10px'}} >Connect</p></div>
                        : null}
                     </div>
 
