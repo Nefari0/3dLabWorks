@@ -17,8 +17,10 @@ class DisplayFriends extends Component {
             friends:[],
             isLoading:false,
 
-    // - new friend from websocket - //
+    // - new friend from websocket - pending accept - //
             newFriends:[],
+    // - new friend from websocket - confirmed - //
+            justAdded:[],
         }
         this.getMyFriends = this.getMyFriends.bind(this)
         this.acceptRequest = this.acceptRequest.bind(this)
@@ -56,7 +58,7 @@ class DisplayFriends extends Component {
             const dataFromServer = JSON.parse(message.data)
             const { fromUser } = dataFromServer
             const { newFriends } = this.state
-            if (dataFromServer.type === 'new_friend') {
+            if (dataFromServer.type === 'new_friend' && parseInt(fromUser.toUser) === this.props.id) {
                 newFriends.push(fromUser)
                 this.setState({newFriends:newFriends})
             }
@@ -79,11 +81,25 @@ class DisplayFriends extends Component {
         this.setState({isLoading:!this.state.isLoading})
     }
 
-    acceptRequest = async (from,to) => {
+    acceptRequest = async (from,to,photo_url,user_name) => {
+        const { friends } = this.state
         const yes = true
+        var friendObj = {
+            photo_url:photo_url,
+            user_id:from,
+            user_name:user_name
+        }
+        var updateFriends = [...friends]
+        updateFriends.push(friendObj)
+        this.setState({friends:updateFriends})
+        console.log('accepting',from,to)
         // this.startLoading()
-        await axios.post('/api/accept/connection',{from,to,yes})
-        await this.getMyFriends()
+        const newFriend = await axios.post('/api/accept/connection',{from,to,yes})
+        // this.setState({...this.state,testfriend:newFriend})
+        // if(newFriends[0] != undefined) {
+            // friends.push(newFriends[0])
+        // }
+        // await this.getMyFriends()
         // this.startLoading()
     }
 
@@ -112,7 +128,7 @@ class DisplayFriends extends Component {
         })
 
         const mappedNewRequestes = newFriends.map(el => {
-            return <ConnectRequests key={el.id} photo_url={el.photo} user_name={el.user} />
+            return <ConnectRequests key={el.id} photo_url={el.photo} user_name={el.user} user_id={el.id} my_id={id} removeConnection={this.removeConnection}  acceptRequest={this.acceptRequest}/>
         })
 
         return(<div className="friend-container">
