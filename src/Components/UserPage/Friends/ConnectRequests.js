@@ -9,7 +9,7 @@ const ConnectRequests = (props) => {
     const { photo_url,user_name,user_id,my_id } = props 
 
     const handleConfirm = (user_id,my_id) => {
-        props.acceptRequest(user_id,my_id)
+        props.acceptRequest(user_id,my_id,photo_url,user_name)
         setRemove(true)
     }
 
