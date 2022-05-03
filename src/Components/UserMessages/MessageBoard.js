@@ -27,7 +27,8 @@ const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
              gotMessages:false,
              expand:false,
              openContacts:true,
-             challengeUser:null // adding game challenge notifications to messageBoard
+             challengeUser:null, // adding game challenge notifications to messageBoard
+             gotNewMessage:false
             }
             this.getMessages = this.getMessages.bind(this)
             this.openMessage = this.openMessage.bind(this)
@@ -71,9 +72,11 @@ const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
         };
     
           client.onmessage = (message) => {
-        
-          const dataFromServer = JSON.parse(message.data);
-          console.log('got reply',dataFromServer)
+              
+            const dataFromServer = JSON.parse(message.data);
+            if(dataFromServer.to === this.state.loggedInUser){this.setState({gotNewMessage:true})}
+            // console.log('got reply',dataFromServer.to === this.state.loggedInUser)
+            // this.setState({testSockIntfo:dataFromServer.to})
           if (dataFromServer.type === 'message' && input === conversation_id ) {
             this.openMessage(conversation_id)
             this.setState((State) =>
@@ -88,11 +91,11 @@ const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
           }
           }
     }
-    sendToSockets = (text,conversation_id) => {
+    sendToSockets = (text,conversation_id,toUser) => {
         const { messages,loggedInUser } = this.state
         const { user } = this.props.user.user
         // client.send(JSON.stringify({type: "message",msg:text,user:user, conversation_id:conversation_id}))
-        client.send(JSON.stringify({type: "message",conversation_id:conversation_id}))
+        client.send(JSON.stringify({type: "message",conversation_id:conversation_id,msg:text,to:toUser}))
     };
     //     // --------------- //
                 
@@ -122,7 +125,10 @@ const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
      }
 
      expandMessageBoard = () => {
-         this.setState({expand:!this.state.expand})
+         this.setState({
+            expand:!this.state.expand,
+            gotNewMessage:false
+        })
      }
 
      setOpenContacts = () => {
@@ -161,7 +167,7 @@ const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
 
         return(<div>
             {isLoggedIn ?  (!expand ? <div className='message-board-closed' onClick={() => this.expandMessageBoard()} >
-
+            {this.state.gotNewMessage === true ? <p className='new-message'>new!</p> : null}
             <svg xmlns="http://www.w3.org/2000/svg" style={{width:'25px',opacity:'.5'}} className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
             </svg>

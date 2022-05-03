@@ -50,6 +50,31 @@
     /* color: #5077be; */
 }
 
+.new-message {
+    /* position: absolute; */
+    position: fixed;
+    /* color: #e67e22; */
+    color: red;
+    left: 55px;
+    top: 100px;
+    height: 20px;
+    width: 50px;
+    font-weight: bold;
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+
+    box-shadow: 0 4px 3px 0  rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+
+    border-radius: 10px;
+    background: rgba(165, 165, 165, 0.116);
+    backdrop-filter: blur(120px);
+    z-index: 1000;
+}
+
 .message-board-closed {
     /* position: fixed; */
     /* left: 100px; */
