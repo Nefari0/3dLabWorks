@@ -11,6 +11,7 @@
 # production
 # /build
 /src/base.js
+/src/Firebase-message-sw.js
 
 
 # misc
