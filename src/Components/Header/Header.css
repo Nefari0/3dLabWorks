@@ -12,6 +12,11 @@
     align-content: center;
 }
 
+.cd-logo {
+    height: 50px;
+    margin-left: 15px;
+}
+
 .link-list {
     list-style-type: none;
     display: flex;
@@ -150,9 +155,9 @@ ul.link-list li:hover {
     
 }
 
-.cd-logo {
-    height: 96px;
-}
+/* .cd-logo {
+    height: 60px;
+} */
 
 @media (max-width:300px) {
     .header-container {
