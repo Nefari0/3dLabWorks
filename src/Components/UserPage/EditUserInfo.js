@@ -46,8 +46,8 @@ class EditUserInfo extends Component {
         this.launchNewPass = this.launchNewPass.bind(this)
 
         // temp functions for testing//
-        this.handleInfoClick = this.handleInfoClick.bind(this)
-        this.giveMeInfo = this.giveMeInfo.bind(this)
+        // this.handleInfoClick = this.handleInfoClick.bind(this)
+        // this.giveMeInfo = this.giveMeInfo.bind(this)
         // this.addToDeleted = this.addToDeleted.bind(this)
     }
 
@@ -250,14 +250,14 @@ class EditUserInfo extends Component {
 
 
     // ---temp functions for testing--//
-    handleInfoClick(){
-        this.giveMeInfo()
-    }
-    giveMeInfo(){
-        const { photoUrl } = this.state
-        const { id } = this.state.user
-        console.log(id,photoUrl)
-    }
+    // handleInfoClick(){
+        // this.giveMeInfo()
+    // }
+    // giveMeInfo(){
+    //     const { photoUrl } = this.state
+    //     const { id } = this.state.user
+    //     console.log(id,photoUrl)
+    // }
     //  -------------------------//
 
     openChangePass() {
@@ -304,9 +304,15 @@ class EditUserInfo extends Component {
                     </div>
                 </div> : null}
                 {/* <section className="user-photo"><img className="photo-properties" src={file} /> <input id="fileItem" type ="file" className="change-photo" onChange={e => this.handlePhotoChange(e)}/> <button onClick={this.handleCancelClick}>cancel</button> </section> */}
+
+                <section className='edit-user-info-title'>
+                <svg onClick={() => this.props.resetView()} className="close-button" style={{color:'#fff', height:'35px',width:'35px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+                    <h2 >edit user info</h2>
+                </section>
                 <section className="">
                     <div className="input-list">
-                        <section><h2 style={{color:'#555'}}>edit user info</h2></section>
                         <input id="fileItem" type ="file" className="change-photo" accept="image/png,image/jpeg"/> <button onClick={() => this.openChangePass()}>change password</button>
 
                         <div>
