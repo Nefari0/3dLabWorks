@@ -15,6 +15,7 @@ import AdminPage from './Components/AdminPage/AdminPage';
 import MessageBoard from './Components/UserMessages/MessageBoard';
 import Dash from './Components/Dash/Dash'
 import Message from './Components/Messages/Message';
+import { useState,useEffect } from 'react'
 // import BaseBackend from './BaseBackend';
 // import EditModel from './Components/UserPage/EditModel' // for testing. will not be rendered in this component
 // import FirebaseTest from './Components/FirebaseTest';
@@ -23,6 +24,21 @@ import Message from './Components/Messages/Message';
 // import DemoScene from './Components/Three/ThreeView'; // testing react 3
 
 function App() {
+
+  useEffect(() => {
+    // -- testing firebase messaging -- //
+      const messaging = firebase.app().messaging()
+    messaging
+        .requestPermission()
+        .then(() => {
+          return messaging.getToken()
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      
+      // -------------------------------//
+  })
   
   return (
     <HashRouter>

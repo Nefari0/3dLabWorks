@@ -14,12 +14,12 @@
 	align-content: center;
 }
 
-.project -containers {
+.project-containers {
 
     height: 100px;
     width: 125px;
     background-color: rgb(106, 106, 116);
     border-radius: 5%;
-    box-shadow: 1px 1px#d1d1d1;
+    box-shadow: 1px 1px #d1d1d1;
 }
 
