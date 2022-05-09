@@ -14,7 +14,7 @@ import Explore  from './Components/Explore/Explore'
 import AdminPage from './Components/AdminPage/AdminPage';
 import MessageBoard from './Components/UserMessages/MessageBoard';
 import Dash from './Components/Dash/Dash'
-// import Message from './Components/Messages/Message';
+import Message from './Components/Messages/Message';
 import { useState,useEffect } from 'react'
 // import BaseBackend from './BaseBackend';
 // import EditModel from './Components/UserPage/EditModel' // for testing. will not be rendered in this component
@@ -48,7 +48,7 @@ function App() {
         <Header/>
         {/* <Dash/> */}
         <MessageBoard />
-        {/* <Message /> */}
+        <Message />
         {/* <EditModel/> */}
         {/* <DemoScenes /> */}
         {routes}
