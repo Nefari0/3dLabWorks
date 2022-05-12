@@ -12,6 +12,7 @@ import { updateUser } from '../../ducks/userReducer'
 import Collections from './Collections'
 import UserInfo from './UserInfo'
 import {app} from '../../base'
+import { addNewModel } from './../../ducks/firebaseReducer'
 import SecurityTest from './SecurityTest'
 import MobileLogin from '../MobileLogin/MobileLogin'
 import Loading from '../Loading/Loading';
@@ -22,6 +23,7 @@ import MyConnection from './Friends/MyConnections';
 import ConnectRequests from './Friends/ConnectRequests';
 import DisplayFriends from './Friends/DisplayFriends';
 import GameInvite from './Friends/GameInvite'; // notice to indicate invite to play game
+import PhotoAlbum from './PhotoAlbum/PhotoAlbum';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 // const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
 const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
@@ -34,6 +36,10 @@ class UserPage extends Component {
         super(props);
 
         this.state ={
+
+            // -- this will change when new photo is added -- //
+            currentPhoto:null,
+
             items:[],
             user:{},
             friends:[],
@@ -68,7 +74,8 @@ class UserPage extends Component {
     }
 
     componentDidUpdate() {
-        const { id } = this.props.user.user
+        const { id,photo } = this.props.user.user
+        this.props.updateUser()
         if(this.state.friends.length < 1 && id != undefined){
             axios.get(`/api/join/friends/${id}`).then(res => this.setState({friends:res.data}))   
         }
@@ -90,7 +97,7 @@ class UserPage extends Component {
 
                 this.setState({challengeUser:dataFromServer})
 
-                console.log('invite send to server',typeof(dataFromServer.to), typeof(id))
+                // console.log('invite send to server',typeof(dataFromServer.to), typeof(id))
             }
         }
     }
@@ -193,9 +200,9 @@ class UserPage extends Component {
     }
 
     render(){
-        const { showCollections,showUserInfo,items,isLoading,showCreateProject,showEditUserInto,showGames,showFriends,friends,requests,challengeUser,currentGame } = this.state
+        const { showCollections,showUserInfo,items,isLoading,showCreateProject,showEditUserInto,showGames,showFriends,friends,requests,challengeUser,currentGame,currentPhoto  } = this.state
         const { isLoggedIn } = this.props.user
-        const { photo,auth,name,is_admin,background_url,user,email,id } = this.props.user.user
+        const { photo,auth,name,is_admin,background_url,user,email,id} = this.props.user.user
 
     return(
         <div>
@@ -229,11 +236,13 @@ class UserPage extends Component {
 
                 {showGames === true ? <Table hideView={this.hideView} challengeUser={challengeUser} client={client} currentGame={currentGame} /> : null}
 
-                {showEditUserInto === true ? <EditUserInfo setIsLoading={this.setIsLoading} resetView={this.resetView} /> : null}
+                {showEditUserInto === true ? <EditUserInfo setIsLoading={this.setIsLoading} resetView={this.resetView} updateUser={this.props.updateUser} /> : null}
 
                 {showCollections === true ? <Collections setIsLoading={this.setIsLoading} photo_url={photo} resetView={this.resetView} showCreateProject={showCreateProject}/> : null} 
 
                 {showFriends === true ? <DisplayFriends id={id} getUserID={this.getUserID} /> : null }
+                
+                {/* <PhotoAlbum /> */}
             </section>
         </div>
         )}
@@ -244,7 +253,7 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps,{getProjects,updateUser})(UserPage)
+export default connect(mapStateToProps,{getProjects,updateUser,addNewModel})(UserPage)
 
 
 /*
