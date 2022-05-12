@@ -73,7 +73,8 @@
 }
 
 .li-button {
-    margin: 50px;;
+    margin-right: 0px;;
+	width: 50%;
 }
 
 .photo-properties {
@@ -139,4 +140,10 @@
 	justify-content: space-around;
 	/* align-items: center; */
 	align-content: flex-start;
+}
+
+.submit-row {
+	height: 30px;
+	width: 100%;
+	/* background-color: #5077be; */
 }

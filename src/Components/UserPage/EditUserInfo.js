@@ -118,8 +118,11 @@ class EditUserInfo extends Component {
         this.setPhotoUrl(await thePhoto.getDownloadURL())
         console.log('got url')
         this.addToDatabase(this.state.photoUrl)
-        this.props.updateUser()
+        // this.props.updateUser()
         this.props.setIsLoading()
+        this.props.updateUser(id)
+        // this.props.showData(id)
+        this.props.resetView()
     }
 
     getPhotoUrl = async (input) => {
@@ -191,7 +194,7 @@ class EditUserInfo extends Component {
         // axios.post(`/api/users/update/${user_id}`,{ photo_url })
         axios.post(`/api/users/update/${user_id}`,{ photo_url,email,user,first_name })
         // this.props.updateUser(user_id)
-        await this.props.updateUser()
+        // await this.props.updateUser()
         await this.userInfoFromProps()
         
     }
@@ -341,7 +344,7 @@ class EditUserInfo extends Component {
                         </div>
 
                         {/* <li className="user-photo"><img className="photo-properties" src={photo}/><button className="li-button">delete picture</button></li> */}
-                        <div className=""><button onClick={this.launchPic} className="li-button">submit</button><button className="li-button" onClick={() => this.props.resetView()} >cancel</button></div>
+                        <div className="submit-row" ><button onClick={() => this.launchPic()} className="li-button">submit</button><button className="li-button" onClick={() => this.props.resetView()} >cancel</button></div>
                     </div>
                 </section>
             </div>
