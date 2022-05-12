@@ -1,0 +1,1 @@
+DELETE FROM user_photos WHERE photo_id = $1

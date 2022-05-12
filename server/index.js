@@ -15,6 +15,7 @@ const deletedDataController = require('./controllers/deletedDataController')
 const projectImageController = require('./controllers/projectImageController')
 const messageController = require('./controllers/messageController')
 const connectionController = require('./controllers/connectionController')
+const photoController = require('./controllers/photoController')
 // const { projectManagement, auth } = require('firebase-admin');
 const { addProject } = require('./controllers/projectsController');
 const docsController = require('./controllers/docsController')
@@ -108,7 +109,7 @@ app.post('/auth/password', authController.changePassword)
 app.post('/auth/login',authController.login)
 app.get('/auth/logout',authController.logout)
 app.get('/auth/update/session',authController.userData)
-app.post('/auth/getInfo',authController.getInfo)
+// app.post('/auth/getInfo',authController.getInfo)
 app.post('/auth/browser/login',authController.browserLogin)
 // app.post('./auth/login/merge',authController.loginLike)
 
@@ -136,6 +137,10 @@ app.post('/api/projects/photos/delete/',projectImageController.deletePhoto)
 app.post('/api/projects/photos/change/main/',projectImageController.changeMainPhoto)
 // temp end point saves main files to project image db if not currently in that location
 // app.post('/api/projects/photos/saveto/main/',projectImageController.sendImToDB)
+app.get('/api/photos/albums/:user_id', photoController.getAlbums)
+app.get('/api/album/contents/:album_id', photoController.getAlbumPhotos)
+app.post('/api/photos/add/new', photoController.uploadPhoto)
+app.post('/api/photos/delete/:photo_id', photoController.deletePhoto)
 // ------------------------------- //
 // --- likes end points
 app.post('/api/project/getLike', projectsController.getLikeById)
