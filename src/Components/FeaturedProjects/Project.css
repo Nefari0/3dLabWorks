@@ -403,11 +403,11 @@
     border-right:solid 1px rgb(85, 85, 85,.3) ;
 }
 
-.thumbnail-image {
+/* .thumbnail-image {
     height: 50px;
     width: 60px;
     border-radius: 5%;
-}
+} */
 
 .hyperlink {
     color: white;
