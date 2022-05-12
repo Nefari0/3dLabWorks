@@ -74,6 +74,12 @@ h1 {
 
 /* ----- css for Document.js component ----- */
 
+.thumbnail-image {
+  height: 50px;
+  width: 60px;
+  border-radius: 5%;
+}
+
 .about-h4 {
   float: left;
   margin: 10px;
