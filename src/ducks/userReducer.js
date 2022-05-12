@@ -36,13 +36,12 @@ export function registerUser(user_name, password, email, first_name, is_admin, i
     }
 }
 
-export function showData(){
-    const { user } = inititialState
-    return {
-        type: SHOW_DATA,
-        payload:user
-    }
-}
+// export function showData(user){
+//     return {
+//         type: SHOW_DATA,
+//         payload:axios.post('/auth/getInfo', {user})
+//     }
+// }
 
 // --- this block adds edit capabilities to user info --- //
 export function editUserinfo(photo_url){
@@ -60,6 +59,7 @@ export function editUserinfo(photo_url){
 //     }
 // }
 export function updateUser(user){
+    // console.log(user)
     return{
         type: UPDATE_USER,
         payload: user
@@ -77,9 +77,21 @@ export function autoLogin(user_name, last_visit, visited){
 
 export default function userReducer(state = inititialState, action) {
     switch (action.type) {
-        case SHOW_DATA + 'FULFILLED':
+        case SHOW_DATA + '_PENDING':
             return {
-                inititialState
+                ...state,
+                isLoading:true
+            }
+        case SHOW_DATA + '_FULFILLED':
+            return {
+                ...state,
+                user:action.payload.data
+            }
+        case SHOW_DATA + '_REJECTED':
+            return {
+                ...state,
+                isLoading:false,
+                loginError:true
             }
         case LOGIN_USER + '_PENDING':
             return {
