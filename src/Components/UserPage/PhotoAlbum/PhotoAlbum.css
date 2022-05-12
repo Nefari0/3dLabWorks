@@ -1,0 +1,63 @@
+
+.album-container {
+    /* position: absolute; */
+    /* height: 400px; */
+    /* width: 200px; */
+    /* top: 50px; */
+    /* z-index: 10000; */
+    
+    /* position: absolute; */
+    position: fixed;
+    height: 450px;
+    /* width: 350px; */
+    width: 600px;
+    /* padding: 2px; */
+    border-radius: 3%;
+    background-color: #fff;
+    /* background-color: chartreuse; */
+    color: #555;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	/* align-items: center; */
+    align-items: flex-start;
+	align-content: center;
+    /* top: 20vh; */
+    top: 5vh;
+    left: 0;
+    /* padding: 0px; */
+
+    /* display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-content: center; */
+
+    /* position: absolute; */
+    /* position: fixed; */
+    /* right: 50%; */
+    /* left: 30%; */
+    /* margin: auto; */
+    z-index:10;
+    box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
+    margin: none;
+    overflow: hidden;
+}
+
+.album-title {
+    color: #fff;
+    /* position: relative; */
+    text-transform: none;
+    top: -1px;
+    height: 80px;
+    /* width: 355px; */
+    /* width: 300px; */
+    width: 100%;
+    background: linear-gradient(0turn,#5077be,#6495ed);
+    padding-top: 10%;
+    margin: none;
+    transition: all 100ms;
+}
+
