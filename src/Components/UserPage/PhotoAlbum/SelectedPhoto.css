@@ -1,0 +1,11 @@
+.selected-img {
+    position: absolute;
+    left: 25%;
+    top: 50px;
+    background-color: #fff;
+    /* height: 400px; */
+    /* width: 400px; */
+    min-height: 20px;
+    min-width: 20px;
+    box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
+}
