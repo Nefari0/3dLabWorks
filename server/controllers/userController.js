@@ -11,7 +11,7 @@ module.exports = {
         return res.status(200).send(user)
     },
 
-    updateUser: async (req,res) => {
+    updateUserPhoto: async (req,res) => {
         const db = req.app.get('db')
         // console.log('this is req.params',req.params)
         // console.log('this is req.body',req.body)
