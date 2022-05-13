@@ -117,7 +117,7 @@ app.post('/auth/browser/login',authController.browserLogin)
 
 app.get('/api/users/all', userController.getUsers)
 app.get('/api/users/:user_id', userController.getUser) //Post request / body / http://localhost:4000/api/users/update/12 / { "photo_url":"new_url" }
-app.post('/api/users/update/:user_id', userController.updateUser)
+app.post('/api/users/update/:user_id', userController.updateUserPhoto) // update profile picture
 // save session:
 // app.post()
 
@@ -139,8 +139,10 @@ app.post('/api/projects/photos/change/main/',projectImageController.changeMainPh
 // app.post('/api/projects/photos/saveto/main/',projectImageController.sendImToDB)
 app.get('/api/photos/albums/:user_id', photoController.getAlbums)
 app.get('/api/album/contents/:album_id', photoController.getAlbumPhotos)
+app.get('/api/user/photos/get/:user_id', photoController.getAllPhotos)
 app.post('/api/photos/add/new', photoController.uploadPhoto)
-app.post('/api/photos/delete/:photo_id', photoController.deletePhoto)
+// app.post('/api/photos/delete/:photo_id', photoController.deletePhoto)
+app.post('/api/photos/delete/', photoController.deletePhotoByUrl)
 // ------------------------------- //
 // --- likes end points
 app.post('/api/project/getLike', projectsController.getLikeById)
