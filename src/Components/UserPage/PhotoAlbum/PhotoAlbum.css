@@ -1,63 +1,68 @@
 
 .album-container {
-    /* position: absolute; */
-    /* height: 400px; */
-    /* width: 200px; */
-    /* top: 50px; */
-    /* z-index: 10000; */
-    
-    /* position: absolute; */
-    position: fixed;
-    height: 450px;
-    /* width: 350px; */
-    width: 600px;
-    /* padding: 2px; */
-    border-radius: 3%;
-    background-color: #fff;
-    /* background-color: chartreuse; */
-    color: #555;
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	/* align-items: center; */
-    align-items: flex-start;
-	align-content: center;
-    /* top: 20vh; */
-    top: 5vh;
-    left: 0;
-    /* padding: 0px; */
-
-    /* display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-	align-items: flex-start;
-	align-content: center; */
-
-    /* position: absolute; */
-    /* position: fixed; */
-    /* right: 50%; */
-    /* left: 30%; */
-    /* margin: auto; */
-    z-index:10;
-    box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
-    margin: none;
-    overflow: hidden;
+    width: 650px;
+    height: 800px;
+    /* background-color: red; */
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    /* border-radius: 2%; */
+    overflow-y:auto;
 }
 
-.album-title {
-    color: #fff;
-    /* position: relative; */
+.album-title-row-bottom,
+.album-title-row {
+    position: relative;
+    color: #555;
+    
     text-transform: none;
     top: -1px;
-    height: 80px;
-    /* width: 355px; */
-    /* width: 300px; */
+    height: 30px;
     width: 100%;
-    background: linear-gradient(0turn,#5077be,#6495ed);
-    padding-top: 10%;
+    /* background-color: blue; */
+    background-color: #6495ed;
+    /* padding-top: 10%; */
     margin: none;
     transition: all 100ms;
 }
 
+.album-title-row-bottom {
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: baseline;
+	align-content: stretch;
+    margin-top: 10px;
+}
+
+.photo-selector {
+    font-size: 15px;
+    font-weight: 600;
+    margin-left: 30px;
+    margin-top: 8px;
+}
+
+.photo-selector:hover {
+    border-bottom: solid 2px #3c598e;
+}
+
+.photo-selector-selected {
+    border-bottom: solid 2px #3c598e;
+}
+
+.user-photo-file-input {
+    opacity: .01;
+    position: absolute;
+    background-color: crimson;
+    color: #555;
+    z-index: 10000;
+}
+
+@media (max-width:700px) {
+    .album-container {
+        max-width: 350px;
+        margin: auto;
+    }
+}
