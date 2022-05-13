@@ -25,10 +25,15 @@ import DisplayFriends from './Friends/DisplayFriends';
 import GameInvite from './Friends/GameInvite'; // notice to indicate invite to play game
 import PhotoAlbum from './PhotoAlbum/PhotoAlbum';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
+import ImagePreview from '../FeaturedProjects/EditProject/ImagePreview';
+import Resizer from 'react-image-file-resizer'
 // const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
 const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
 
 const db = app.firestore()
+const newPhotoEndpoint = '/api/photos/add/new'
+const deletePhotoEndpoint = '/api/photos/delete/'
+const deletePhotoByUrlEndpoint = '/api/photos/delete/'
 
 
 class UserPage extends Component {
@@ -38,7 +43,11 @@ class UserPage extends Component {
         this.state ={
 
             // -- this will change when new photo is added -- //
-            currentPhoto:null,
+            previewImageFile:null,
+            photo_url:null,
+            photos:[],
+
+            showPhotos:false,
 
             items:[],
             user:{},
@@ -66,20 +75,95 @@ class UserPage extends Component {
         this.deleteFromFirebase = this.deleteFromFirebase.bind(this)
         this.getUserID = this.getUserID.bind(this)
         this.receiveInvite = this.receiveInvite.bind(this)
+        this.handlePhoto = this.handlePhoto.bind(this)
     }
 
     componentDidMount(){
         this.receiveInvite()
+        // this.getPhotos()
         this.setState({currentGame:this.getUniqueID()})
+    }
+
+    // --- get user photos -- //
+    getPhotos = async (user_id) => {
+        await axios.get(`/api/user/photos/get/${user_id}`).then(res => {
+            this.setState({photos:res.data})
+        })
     }
 
     componentDidUpdate() {
         const { id,photo } = this.props.user.user
         this.props.updateUser()
+        // this.getPhotos(id)
         if(this.state.friends.length < 1 && id != undefined){
             axios.get(`/api/join/friends/${id}`).then(res => this.setState({friends:res.data}))   
+            // axios.get(`/api/user/photos/get/${id}`).then(res => this.setState({photos:res.data}))
+            this.getPhotos(id)
         }
     }
+
+    // --- editing / adding / removing user photos with firebase --- //
+    // --- add file to state / resize / show preview --- //
+    handlePhoto = async (e) => {
+        // const photo = e.target.files[0]
+        var fileInput = false;
+
+        if (e.target.files[0]) {
+            fileInput = true
+        }
+
+        if (fileInput) {
+            try {
+                Resizer.imageFileResizer(
+                    e.target.files[0],
+                    400,
+                    267,
+                    "JPEG",
+                    100,
+                    0,
+                    (uri) => {
+                        console.log(uri,'uri')
+                        this.setState({
+                            previewImageFile:URL.createObjectURL(uri),
+                            photo_url:uri
+                        })
+                    },
+                    "file",
+                    298,
+                    191
+                );
+            } catch (err) {
+                console.log(err)
+            }
+        }
+    }
+
+    addingPhoto = async () => {
+        const { photo_url } = this.state
+        const { id,user } = this.props.user.user
+        var album_id = null
+        this.setState({previewImageFile:null})
+        
+        this.setIsLoading()
+        // get firebase ref
+        const cloud = await this.props.addNewModel(photo_url,`${user}/photos`)
+
+        // get dl url
+        const image_url = await cloud.action.payload.ref.getDownloadURL()
+
+        // add to photo db
+        await axios.post(newPhotoEndpoint,{album_id,id,image_url})
+        await this.getPhotos(id)
+        this.setIsLoading()
+    }
+
+    removingPhoto = async (image_url) => {
+        await this.deleteFromFirebase(image_url)
+        // await axios.post(`${deletePhotoEndpoint}${photo_id}`)
+        console.log(' here is url ',image_url)
+        await axios.post(`/api/photos/delete/`,{image_url})
+    }
+    // -------------------------------------------------------------//
 
     changeGameID = (confirm,val) => {
         if(confirm === true){this.setState({currentGame:val})} else {this.setState({challengeUser:null})}
@@ -131,6 +215,11 @@ class UserPage extends Component {
         this.sendInvite(gameInformation)
     }
 
+    handleInput = (prop,val) => {
+        this.setState({
+            [prop]:val
+        })
+    }
 
     setIsLoading = () => {
         this.setState({isLoading:!this.state.isLoading})
@@ -144,6 +233,7 @@ class UserPage extends Component {
             showCreateProject:false,
             showGames:false,
             showFriends:false,
+            showPhotos:false,
         })
     }
 
@@ -177,6 +267,8 @@ class UserPage extends Component {
                 break;
             case 'showFriends':
                 this.setState({ showFriends : true, showCollections:false})
+            case 'showPhotos':
+                this.setState({showPhotos:true,showCollections:false})
             default:
                 break;
         }
@@ -200,7 +292,7 @@ class UserPage extends Component {
     }
 
     render(){
-        const { showCollections,showUserInfo,items,isLoading,showCreateProject,showEditUserInto,showGames,showFriends,friends,requests,challengeUser,currentGame,currentPhoto  } = this.state
+        const { photos,previewImageFile,photoUrl,showCollections,showUserInfo,items,isLoading,showCreateProject,showEditUserInto,showGames,showFriends,friends,requests,challengeUser,currentGame,currentPhoto,showPhotos  } = this.state
         const { isLoggedIn } = this.props.user
         const { photo,auth,name,is_admin,background_url,user,email,id} = this.props.user.user
 
@@ -212,15 +304,44 @@ class UserPage extends Component {
             <section className="column1">
                 <img src={background_url} className='background-photo' />
                    {challengeUser === null ? null: <GameInvite challengeUser={challengeUser} changeGameID={this.changeGameID} hideView={this.hideView} /> }
+
+                    {/* <svg xmlns="http://www.w3.org/2000/svg" className="friend-menu-icon" style={{position:'absolute',color:'#fff'}} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg> */}
+
                 <div className="portrait">
                     <img className="profile-photo" 
                     src={photo}
                     alt="photo"/>
+
+                
+                    {/* <input className='user-photo-file-input '
+                    style={{position:'absolute',top:'0px',left:'0px',width:'20px',height:'20px'}}
+                    type="file"
+                    accept="image/png,image/jpeg"
+                    
+                    onChange={e => this.handlePhoto(e)} 
+                    /> */}
+
+                    {/* <input className='user-photo-file-input '
+                    style={{position:'absolute',top:'190px',right:'55%',width:'20px',height:'20px'}}
+                    type="file"
+                    accept="image/png,image/jpeg"
+                    onChange={e => this.handlePhoto(e)} 
+                    />
+
+                    <svg xmlns="http://www.w3.org/2000/svg" className="friend-menu-icon" style={{position:'absolute',top:'190px',right:'50%'}} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg> */}
+
                     <h2 className="portrait-row" style={{textTransform:'none'}} >{this.props.user.user.user}</h2>
                     <div className='portrait-row' style={{flexWrap:'wrap',justifyContent:'center',width:'300px'}}>
                         <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showEditUserInfo')}><p style={{marginTop:'5px'}}  >Edit Profile</p></div>
                         <div className='user-buttons' style={{marginTop:'10px'}}  onClick={() => this.hideView('showCreateProject')} ><p style={{marginTop:'5px'}} >Create</p></div>
                         <div className='user-buttons' style={{marginTop:'10px'}}  onClick={() => this.hideView('showGames')} ><p style={{marginTop:'5px'}} >Games</p></div>
+
+                        <div className='user-buttons' style={{marginTop:'10px'}}  onClick={() => this.hideView('showPhotos')} ><p style={{marginTop:'5px'}} >Photos</p></div>
+
                         <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showFriends')} ><p style={{marginTop:'5px'}} >Friends</p></div>
                         <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showCollections')} ><p style={{marginTop:'5px'}} >Collections</p></div>
                     </div>
@@ -242,7 +363,9 @@ class UserPage extends Component {
 
                 {showFriends === true ? <DisplayFriends id={id} getUserID={this.getUserID} /> : null }
                 
-                {/* <PhotoAlbum /> */}
+                {showPhotos === true ? <PhotoAlbum id={id} handlePhoto={this.handlePhoto} removingPhoto={this.removingPhoto} photos={photos} getPhotos={this.getPhotos} /> : null }
+
+                {previewImageFile != null ? <ImagePreview previewImageFile={previewImageFile} photo_url={photoUrl} addPhoto={this.addingPhoto} handleInput={this.handleInput} /> : null}
             </section>
         </div>
         )}
