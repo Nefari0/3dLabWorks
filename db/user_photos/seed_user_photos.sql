@@ -17,7 +17,15 @@
 --   photo_id SERIAL PRIMARY KEY,
 --   album_id INTEGER,
 --   FOREIGN KEY(album_id) REFERENCES photo_albums(album_id),
---   image_url text NOT NULL
+--   user_id INTEGER,
+--   FOREIGN KEY (user_id) REFERENCES d_user(user_id)
+--   image_url text NOT NULL,
+--   date_created timestamp DEFAULT CURRENT_TIMESTAMP
 -- )
 
--- INSERT INTO phot
+INSERT INTO user_photos (album_id,user_id,image_url)
+VALUES (
+    1,
+    12,
+    'url place holder'
+)
