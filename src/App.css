@@ -264,9 +264,11 @@ div.sub-header .a-selected{
 /* -------------------------------- */
 
 @media (max-height:375px) {
-  .dark-text {
-    margin: none;
-    font-size: large;
-    font-weight: 400;
-}
+    .dark-text {
+      margin: none;
+      font-size: large;
+      font-weight: 400;
   }
+}
+
+
