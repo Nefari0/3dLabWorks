@@ -9,6 +9,7 @@ import UserPage from '../UserPage/UserPage'
 import { withRouter } from 'react-router'
 import Loading from '../Loading/Loading'
 import cdLabs3d from '../../assets/cdLabs-logo-1-alpha.png'
+import MM3D1 from '../../assets/MM3D2333x50orthofff.png'
 
 class Header extends Component{
     constructor(props){
@@ -212,6 +213,7 @@ class Header extends Component{
     render() {
         const { saveSession, username, unique_id, isMenuOpen, user_name, password, openLogin, isLoggedInState } = this.state
         const { isLoggedIn,isLoading } = this.props.user
+        const { photo } = this.props.user.user
 
     return(
         <div className='header-container'>
@@ -224,6 +226,11 @@ class Header extends Component{
                 />
 
             <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><h3 className="header-h3">{isLoggedIn ? `Welcome, ${this.props.user.user.user}!` :'MadModels3d'}</h3></Link>
+            {/* <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><h3 className="header-h3">{'MadModels3d'}</h3></Link> */}
+            {/* <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><img style={{height:'50px',width:'300px',marginTop:'15px',backgroundColor:'blue'}} className="logo-shadow" src={MM3D1}/></Link> */}
+            
+
+            {isLoggedIn ? <Link to="/user" ><img src={photo} className="loggedin-user-photo" /></Link> : null} 
 
             <ul className='link-list'>
                 <Link to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a >About</a></li></Link>
