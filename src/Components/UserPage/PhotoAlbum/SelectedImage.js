@@ -1,5 +1,6 @@
 import './SelectedPhoto.css'
 import { useState } from 'react'
+import axios from 'axios'
 
 const SelectedImage = (props) => {
 
@@ -14,6 +15,12 @@ const SelectedImage = (props) => {
             case 'delete':
                 await props.removingPhoto(image_url)
                 break;
+            case 'update_photo':
+                await axios.post('/api/users/update/photo/',{image_url,user_id})
+                break;
+            case 'update_background_img':
+                await axios.post('/api/user/update/background',{image_url,user_id})
+                break;
         }
         await props.getPhotos(user_id)
     }
@@ -27,8 +34,8 @@ const SelectedImage = (props) => {
         </svg>
 
         {menuOpen === true ? <ul className='friend-options' style={{width:'200px',height:'130px',left:'0px',top:'30px'}}>
-            <li className='friend-menu-row' style={{width:'200px'}} >Use as Profile Picture</li>
-            <li className='friend-menu-row' style={{width:'200px'}} >Use as Background</li>
+            <li className='friend-menu-row' style={{width:'200px'}} onClick={() => clickHandler('update_photo')} >Use as Profile Picture</li>
+            <li onClick={() => clickHandler('update_background_img')} className='friend-menu-row' style={{width:'200px'}} >Use as Background</li>
             <li onClick={() => clickHandler('delete')} className='friend-menu-row' style={{width:'200px'}} >Delete Photo</li>
         </ul> : null}
 
