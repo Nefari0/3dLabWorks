@@ -15,10 +15,12 @@ export default class CreateComment extends Component {
         this.sendPost = this.sendPost.bind(this)
     }
 
-    sendPost() {
+    sendPost(isLoggedIn) {
         const { text } = this.state
         const { id,model_id,user } = this.props
-        axios.post('/api/comments/create',{id,model_id,user,text}).then(this.props.getComments)
+        if (isLoggedIn === true) {
+            axios.post('/api/comments/create',{id,model_id,user,text}).then(this.props.getComments)
+        } else {this.props.plsSignIn()}
     }
 
     
@@ -36,8 +38,7 @@ export default class CreateComment extends Component {
             <div className="create-post" style={{minHeight:'100px'}}>
 
                 <textarea className='comment-text-input post-input' value={this.state.text} name="text" rows="5" cols="50" wrap="soft" onChange={e => this.handleText('text',e.target.value)} > </textarea>
-
-                {!isLoggedIn ? <div className='add-button file-button' onClick={this.props.plsSignIn} style={{marginLeft:'200px'}} >send</div> : <div className='add-button submit-message-button' onClick={this.sendPost} style={{marginLeft:'200px'}} >send</div>}
+                 <a className='add-button' onClick={() => this.sendPost(isLoggedIn)} style={{marginLeft:'200px'}} >send</a>
 
             </div>
         )
