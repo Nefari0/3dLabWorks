@@ -117,7 +117,9 @@ app.post('/auth/browser/login',authController.browserLogin)
 
 app.get('/api/users/all', userController.getUsers)
 app.get('/api/users/:user_id', userController.getUser) //Post request / body / http://localhost:4000/api/users/update/12 / { "photo_url":"new_url" }
-app.post('/api/users/update/:user_id', userController.updateUserPhoto) // update profile picture
+app.post('/api/users/update/photo/', userController.updateUserPhoto) // update profile picture
+app.post('/api/user/update/background',userController.updateBackgroundPhoto)
+app.post('/api/user/update/info/:user_id', userController.updateInfo)
 // save session:
 // app.post()
 
@@ -155,6 +157,7 @@ app.delete('/api/project/delete/:model_id', projectsController.deleteProject)
 app.get('/api/comments/all', projectsController.getComments)
 app.post('/api/comments/create', projectsController.createComment)
 app.get('/api/comments/id/:model_id', projectsController.getModelComments)
+app.delete('/api/comments/user/delete/:comment_id',projectsController.deleteUserComment)
 // --- view user / user page
 app.get('/api/user/projects/get/:user_id',projectsController.getUserAndProjects)
 
