@@ -51,6 +51,7 @@ module.exports = {
             user: user.user_name,
              id: user.user_id,
              name: user.first_name,
+             last_name:user.last_name,
              photo: user.photo_url,
              is_sudo:user.is_sudo,
             //  auth: isAuthenticated
@@ -96,13 +97,14 @@ module.exports = {
         const { user_name, password, last_visit, visited } = req.body;
         const browserSalt = bcrypt.genSaltSync(10);
         const from_browser = bcrypt.hashSync(visited,browserSalt)
-        console.log('this is user in authController',user_name,last_visit,visited)
+        // console.log('this is user in authController',user_name,last_visit,visited)
         if(visited !== undefined){req.app.get('db').tracking.track_user_logging([user_name,visited])}
         if (user_name.split('').length < 1) { // --- does user_name from req.body exist
             return res.status(401).send('user not found')
         }
         const foundUser = await req.app.get('db').get_user([user_name]);
         const user = foundUser[0];
+        // console.log('user backend',user)
         if (!user) {
             return res.status(401).send("user not found")
         }
@@ -119,12 +121,13 @@ module.exports = {
             user: user.user_name,
              id: user.user_id,
              name: user.first_name,
+             last_name:user.last_name,
              photo: user.photo_url,
              background_url: user.background_url,
              auth: isAuthenticated,
              is_sudo: user.is_sudo,
          };
-        //  console.log('this is req.session',req.session)
+         console.log('this is req.session',req.session.user.last_name)
         //  userData(req.session.data)
             return res.status(200).send(req.session.user)
     },
@@ -132,7 +135,7 @@ module.exports = {
     browserLogin: async (req,res) => {
         const { user_name, last_visit, visited } = req.body;
         const from_browser = visited
-        console.log('this is user in authController',user_name,last_visit,visited)
+        // console.log('this is user in authController',user_name,last_visit,visited)
         if (user_name.split('').length < 1) { // --- does user_name from req.body exist
             return res.status(401).send('user not found')
         }
@@ -158,6 +161,7 @@ module.exports = {
         const user_likes = await req.app.get('db').get_likes([user.user_id]);
         req.session.user = { 
             user_likes: user_likes,
+            last_name:user.last_name,
             email: user.email,
             is_admin: user.is_admin, 
             user: user.user_name,
