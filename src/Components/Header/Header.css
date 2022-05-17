@@ -18,7 +18,7 @@
 .mm3d-logo {
     height: 50px;
     width: 228px;
-    margin-top: 15px;
+    margin-top: 8px;
     /* background-color: blue; */
 }
 
@@ -26,8 +26,8 @@
     display: none;
     position: absolute;
     left: 150px;
-    top:2px;
-    height: 55px;
+    top:10px;
+    height: 40px;
 }
 
 .cd-logo {
@@ -46,15 +46,17 @@
 .loggedin-user-photo {
     position: absolute;
     display: none;
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
     border-radius: 50%;
     right: 75px;
-    top: 15px;
+    top: 10px;
     /* margin-right: 5px; */
     /* margin-left: 10px; */
+    /* margin-bottom: 25px; */
     z-index: 0;
     /* background-color: blue; */
+    /* border: 3px solid #fff;  */
 }
 
 .link-list {
@@ -97,7 +99,8 @@ ul.link-list li:hover {
 .hamburger {
     position: absolute;
     right: 20px;
-    height: 80%;
+    height: 60%;
+    /* background-color: yellow; */
     display: none;
   }
 
@@ -148,10 +151,10 @@ ul.link-list li:hover {
     /* background-color: yellow; */
 }
 
-.hamburger-icon {
+/* .hamburger-icon {
     height: 50%;
     color: #fff;
-}
+} */
 
 .blank-div {
     height: 0px;
@@ -212,6 +215,15 @@ ul.link-list li:hover {
     }
     .mm3d-logo-small {
         display: inline;
+    }
+}
+
+@media (max-width:320px) {
+    .loggedin-user-photo {
+    right: 60px;
+    }
+    .mm3d-logo-small {
+        left: 140px;
     }
 }
 
