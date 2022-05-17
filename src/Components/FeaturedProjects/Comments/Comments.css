@@ -1,5 +1,5 @@
 
-.post-box{
+/* .post-box{
     height: 100px;
     width: 90%;
     display: flex;
@@ -13,9 +13,19 @@
 	align-items: flex-end;
 	align-content: stretch;
     border-bottom: solid 1px #95b3ec;
+  } */
+
+  .comment-menu {
+      position: absolute;
+      height: 40px;
+      width: 40px;
+      /* margin-left: 50%; */
+      right: 0px;
+      /* background-color: blue; */
   }
 
   .container-flex {
+      position: relative;
       height: 120px;
       width: 90%;
       margin: 5px;
@@ -26,6 +36,16 @@
       align-items: flex-start;
       align-content: stretch;
       border-bottom: solid 1px #95b3ec;
+      /* background-color: yellow; */
+  }
+
+  .add-button {
+      height: 30px;
+      width: 50px;
+      color: #fff;
+      /* background-color: #95b3ec; */
+      /* background-color: #3c598e; */
+      background: linear-gradient(0turn,#3c598e,#5077be);
   }
 
   .right-column-flex {
@@ -104,3 +124,4 @@
         margin-bottom: 80px;
     }
 }
+
