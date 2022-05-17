@@ -1,5 +1,6 @@
 
 .header-container {
+    position: relative;
     margin: none;
     height: 60px;
     min-width: 300px;
@@ -14,30 +15,44 @@
 
 
 /* --- testing / sdisplay in header --- */
-/* .logo-shadow { */
-    /* height: 35px; */
-    /* width: 200px; */
-    /* padding-bottom: 20px; */
-    /* background: linear-gradient(0turn,#3c598e,#5077be); */
-    /* box-shadow: 0px 30px 8px -17px #000000; */
-    /* border: solid 1px #3c598e; */
-    /* color: #fff; */
-/* } */
+.mm3d-logo {
+    height: 50px;
+    width: 228px;
+    margin-top: 15px;
+    /* background-color: blue; */
+}
+
+.mm3d-logo-small {
+    display: none;
+    position: absolute;
+    left: 150px;
+    top:2px;
+    height: 55px;
+}
 
 .cd-logo {
     height: 50px;
     margin-left: 15px;
 }
 
+/* ----------- this displays trimmed version of logo for smaller displays ----------------- */
+/* .cd-logo-small {
+    height: 30px;
+    margin-left: 15px;
+    display: none;
+} */
+
 /* --- indicates user session --- */
 .loggedin-user-photo {
+    position: absolute;
     display: none;
-    /* position: absolute; */
     height: 30px;
     width: 30px;
     border-radius: 50%;
-    margin-right: 5px;
-    margin-left: 10px;
+    right: 75px;
+    top: 15px;
+    /* margin-right: 5px; */
+    /* margin-left: 10px; */
     z-index: 0;
     /* background-color: blue; */
 }
@@ -80,6 +95,8 @@ ul.link-list li:hover {
 }
 
 .hamburger {
+    position: absolute;
+    right: 20px;
     height: 80%;
     display: none;
   }
@@ -155,18 +172,6 @@ ul.link-list li:hover {
 }
 
 
-
-@media (max-width: 750px) {
-    .link-item {
-        margin-right: 10px;
-    }
-
-    .header-h3 {
-        margin: 0px;
-    }
-}
-
-
 @media (max-width: 820px) {
     .loggedin-user-photo {
         display:inline;
@@ -179,14 +184,37 @@ ul.link-list li:hover {
     }
 
     .hamburger {
-        display:inline-block;
+        display:inline;
     }
     
+    .cd-logo {
+        /* height: 60px; */
+        /* display: none; */
+    }
+    /* .cd-logo-small {
+        display: inline;
+    } */
 }
 
-/* .cd-logo {
-    height: 60px;
-} */
+@media (max-width: 750px) {
+    .link-item {
+        margin-right: 10px;
+    }
+
+    .header-h3 {
+        margin: 0px;
+    }
+}
+
+@media (max-width:485px) {
+    .mm3d-logo {
+        display: none;
+    }
+    .mm3d-logo-small {
+        display: inline;
+    }
+}
+
 
 @media (max-width:300px) {
     .header-container {

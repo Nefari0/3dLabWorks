@@ -9,7 +9,10 @@ import UserPage from '../UserPage/UserPage'
 import { withRouter } from 'react-router'
 import Loading from '../Loading/Loading'
 import cdLabs3d from '../../assets/cdLabs-logo-1-alpha.png'
+import cdLabs300300 from '../../assets/cdlabs-300x300.png'
 import MM3D1 from '../../assets/MM3D2333x50orthofff.png'
+// import MBox from '../../assets/MBox.png'
+import MBox from '../../assets/MBoxOrtho.png'
 
 class Header extends Component{
     constructor(props){
@@ -225,9 +228,16 @@ class Header extends Component{
                 // style={{height:'120%'}}
                 />
 
-            <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><h3 className="header-h3">{isLoggedIn ? `Welcome, ${this.props.user.user.user}!` :'MadModels3d'}</h3></Link>
+            {/* --- trims logo for smaller displays - might not get used -- */}
+            {/* <img onClick={this.viewTheWindow}
+                src={cdLabs300300}
+                className="cd-logo-small"
+                /> */}
+
+            {/* <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><h3 className="header-h3">{isLoggedIn ? `Welcome, ${this.props.user.user.user}!` :'MadModels3d'}</h3></Link> */}
             {/* <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><h3 className="header-h3">{'MadModels3d'}</h3></Link> */}
-            {/* <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><img style={{height:'50px',width:'300px',marginTop:'15px',backgroundColor:'blue'}} className="logo-shadow" src={MM3D1}/></Link> */}
+            <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><img className="mm3d-logo" src={MM3D1}/></Link>
+            <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><img className="mm3d-logo-small" src={MBox}/></Link>
             
 
             {isLoggedIn ? <Link to="/user" ><img src={photo} className="loggedin-user-photo" /></Link> : null} 
