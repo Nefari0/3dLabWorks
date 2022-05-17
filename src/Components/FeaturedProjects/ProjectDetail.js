@@ -246,7 +246,7 @@ class ProjectDetail extends Component {
         })
         
         const mappedComments = comments.map(element => {
-            return <Comments content={element.text} key={element.comment_id} model_id={element.model_id} date_created={element.date_created} photo_url={element.photo_url} comment_id={element.comment_id} user_id={element.user_id} user_name={element.user_name}  />
+            return <Comments content={element.text} key={element.comment_id} model_id={element.model_id} date_created={element.date_created} photo_url={element.photo_url} comment_id={element.comment_id} user_id={element.user_id} user_name={element.user_name} getComments={this.getComments} />
         })
 
         const mappedPhoto = info.map(element => {
