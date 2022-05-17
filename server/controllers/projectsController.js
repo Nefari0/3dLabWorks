@@ -128,6 +128,14 @@ module.exports = {
         return res.status(200).send(comment)
     },
 
+    deleteUserComment: async (req,res) => {
+        
+        const { comment_id } = req.params
+        console.log('hit delete comment backend',comment_id)
+        const comment = await req.app.get('db').comments.delete_user_comment([comment_id])
+        return res.status(200).send(comment)
+    },
+
     editProjectName: async (req,res) => {
         const { model_id, name, description } = req.body
         const model = await req.app.get('db').projects.change_name([name,description,model_id])
