@@ -53,3 +53,9 @@ div.about-header .a-selected{
 
     }
 }
+
+@media (max-width:300px) {
+    .about-container {
+        min-width: 300px;
+    }
+}
