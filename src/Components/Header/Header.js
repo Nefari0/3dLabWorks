@@ -9,10 +9,12 @@ import UserPage from '../UserPage/UserPage'
 import { withRouter } from 'react-router'
 import Loading from '../Loading/Loading'
 import cdLabs3d from '../../assets/cdLabs-logo-1-alpha.png'
-import cdLabs300300 from '../../assets/cdlabs-300x300.png'
+// import cdLabs300300 from '../../assets/cdlabs-300x300.png'
 import MM3D1 from '../../assets/MM3D2333x50orthofff.png'
 // import MBox from '../../assets/MBox.png'
-import MBox from '../../assets/MBoxOrtho.png'
+// import MBox from '../../assets/MBoxOrtho.png'
+import CDinits from '../../assets/CDinits.png'
+
 
 class Header extends Component{
     constructor(props){
@@ -229,15 +231,15 @@ class Header extends Component{
                 />
 
             {/* --- trims logo for smaller displays - might not get used -- */}
-            {/* <img onClick={this.viewTheWindow}
-                src={cdLabs300300}
+            <img onClick={this.viewTheWindow}
+                src={CDinits}
                 className="cd-logo-small"
-                /> */}
+                />
 
             {/* <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><h3 className="header-h3">{isLoggedIn ? `Welcome, ${this.props.user.user.user}!` :'MadModels3d'}</h3></Link> */}
             {/* <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><h3 className="header-h3">{'MadModels3d'}</h3></Link> */}
             <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><img className="mm3d-logo" src={MM3D1}/></Link>
-            <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><img className="mm3d-logo-small" src={MBox}/></Link>
+            {/* <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><img className="mm3d-logo-small" src={MBox}/></Link> */}
             
 
             {isLoggedIn ? <Link to="/user" ><img src={photo} className="loggedin-user-photo" /></Link> : null} 
@@ -252,12 +254,9 @@ class Header extends Component{
 
 
             <svg className="hamburger" onClick={this.toggleMenu} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                <path className='lines' stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                <path className='dots' strokeLinecap="round" strokeLinejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
             </svg>
-
-            {/* <svg xmlns="http://www.w3.org/2000/svg" onClick={this.toggleMenu} className="hamburger" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-            </svg> */}
 
             <ul className={`mobile-nav ${isMenuOpen ? false : 'mobile-nav-hide'}`} onClick={this.toggleMenu}>
                 {!isLoggedIn ? (isMenuOpen === true ? <Link style={{ textDecoration: 'none',marginTop:'10px'  }}><li className='mobile-link-item' onClick={this.toggleLogin}>
