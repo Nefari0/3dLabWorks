@@ -271,4 +271,8 @@ div.sub-header .a-selected{
   }
 }
 
-
+@media (max-width:300px) {
+  .sub-header {
+    min-width: 300px;
+  }
+}
