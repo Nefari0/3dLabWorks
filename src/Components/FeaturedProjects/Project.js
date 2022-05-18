@@ -74,7 +74,8 @@ const Project = (props) => {
             <div>
                 <div className="photo-title-border"><Link to={`viewuser/${user_id}`} ><img src={getPhotoUrl()} className="project-user-photo"/></Link>
 
-                <p className="dark-text">{name}<br/><p className='usr-nm-txt'>by {getUserName()}</p></p></div>
+                <p className="dark-text">{name}<br/><p className='usr-nm-txt'>by {getUserName()}</p></p>
+            </div>
 
                 <Link to={`projectdetails/${model_id}`}><div className="image-div" ><img className="model-photo" src={firebase_url01}/></div></Link>
             </div>
