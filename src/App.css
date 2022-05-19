@@ -21,9 +21,23 @@ html {
   font-family: 'Lato', 'Arial',sans-serif;
   font-weight: 300;
   font-size: 20px;
+  /* line-height: 1.5; */
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
+
+.long-text {
+  /* font-weight: 600; */
+  font-size: 15px;
+  line-height: 1.5;
+  font-family: 'Inter';
+}
+/* p { */
+  /* font-weight: 300; */
+  /* font-size: 20px; */
+  /* line-height: 1.5; */
+  /* font-family: 'Inter'; */
+/* } */
 
 .clearfix {zoom: 1;}
 .clearfix:after {
