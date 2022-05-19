@@ -84,12 +84,12 @@ class ViewUser extends Component {
 // -- check if loggedin user is already connected to this user -- /
     getConnectionStatus = async () => {
         const { id } = this.props.user.user
-        console.log('getting status',id)
+        // console.log('getting status',id)
         const { isLoggedIn } = this.props.user
         const { user_id } = this.props.match.params
         if(id != undefined && isLoggedIn === true) {
             await axios.post('/api/get/friend/status',{id,user_id}).then(res => this.setState({friendShipInfo:res.data}))
-            this.checkForExistingMessage()
+            this.checkForExistingMessage(id,user_id)
         }
     }
 
@@ -141,7 +141,6 @@ class ViewUser extends Component {
             photo:photo,
             user:user
         }
-        // console.log('hit socket function',user_id)
         client.send(JSON.stringify({type:"new_friend",fromUser}))
     }
 
@@ -176,7 +175,7 @@ class ViewUser extends Component {
         // const { photo_url,auth,name,email,is_admin,background_url,user_name,user_id } = this.state.user
 
         const mappedNewMessage = user.map(el => {
-            return <CreateNewMessage key={el.user_id} user_id={el.user_id} user_name={el.user_name} currentUserMessage={currentUserMessage} pleaeLogin={this.pleaseLogin} openMessageBox={this.openMessageBox} />
+            return <CreateNewMessage key={el.user_id} user_id={el.user_id} user_name={el.user_name} currentUserMessage={currentUserMessage} pleaeLogin={this.pleaseLogin} openMessageBox={this.openMessageBox} sendToSocket={this.sendToSocket} />
         })
 
         const mappedUserName = user.map(el => {
@@ -213,7 +212,9 @@ class ViewUser extends Component {
                     {mappedUserName}
  
                     <div className='portrait-row'>
-                        <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.openMessageBox()} ><p style={{marginTop:'10px'}} >Message</p></div>
+                        <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.openMessageBox()} >
+                            <p style={{marginTop:'3px'}} >Message</p>
+                        </div>
                         {this.props.user.isLoggedIn === true && this.state.friendShipInfo != true ? <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.sendConnectInvite()} ><p style={{marginTop:'10px'}} >Connect</p></div>
                        : null}
                     </div>
