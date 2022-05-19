@@ -1,5 +1,5 @@
 
-/* .edit-user-info {
+.edit-user-info {
 
 	position: absolute;
 	margin-left: auto;
@@ -17,7 +17,7 @@
 	box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
 	z-index: 10;
 	overflow: hidden;
-} */
+}
 
 .edit-user-info-title {
 	color: #fff;
