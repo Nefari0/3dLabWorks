@@ -15,7 +15,7 @@ const MyMessage = (props) => {
         alert('does it work')
     }
     var months = [ "January","February","March","April","May","June","July","August","September","October","November","December"];
-    const { item,content,loggedInUser,user_id,photo_url,date_created } = props
+    const { content,loggedInUser,user_id,photo_url,date_created } = props
     const time = date_created.split("T")
     // find date
     const dateVal = time[0].split('-')
