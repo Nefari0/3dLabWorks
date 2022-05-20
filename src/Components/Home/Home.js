@@ -51,10 +51,19 @@ class Home extends Component {
         //     console.log('res',res.data)
         //     this.setState({projects:res.data})
         // })
-        this.props.getFeatured()
+        this.setLoading()
+        await this.props.getFeatured()
         await axios.get('/api/videos/featured').then(res2 => {
-            this.setState({videos:res2.data})
+            this.setState({
+                videos:res2.data,
+                loading:false
+            })
+            // this.setLoading()
         })
+    }
+
+    setLoading() {
+        this.setState({loading:!this.state.loading})
     }
 
     componentDidUpdate() {
@@ -114,33 +123,14 @@ class Home extends Component {
         return(
             <div>
                 <div className="hero">
+                    {!loading ? true : <Loading />}
                     <h2 className="hero-h2">IMAGINE IT - BUILD IT.</h2>
                     {/* <h2 className="hero-h2">JOIN THE MAKER REVOLUTION</h2> */}
-                    {/* <Prototyping /> */}
-                    {/* {loading === true ? <Loading/> : null} */}
-                    
-                    {/* <VideoPlayer /> */}
-                    {/* <VideoPlayer /> */}
                     <div className="deploy-projects">
-                    {/* <VideoPlayer /> */}
-                    {/* <VideoPlayer /> */}
-                    {/* <VideoPlayer /> */}
                         {mappedVideos}
                         {mappedModels}
                     </div>
                     {/* <Footer /> */}
-                    {/* <video autoPlay loop muted
-                    style={{
-                        position:"relavtive",
-                        width:"100%",
-                        left:"50%",
-                        top:"50%",
-                        height:"100%"
-
-                    }}
-                    >
-                        <source src={Vid} type="video/mp4"/>
-                    </video> */}
                 </div>
             </div>
         )
