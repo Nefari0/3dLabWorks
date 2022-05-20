@@ -258,20 +258,23 @@ class Header extends Component{
                 <path className='dots' strokeLinecap="round" strokeLinejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
             </svg>
 
-            <ul className={`mobile-nav ${isMenuOpen ? false : 'mobile-nav-hide'}`} onClick={this.toggleMenu}>
-                {!isLoggedIn ? (isMenuOpen === true ? <Link style={{ textDecoration: 'none',marginTop:'10px'  }}><li className='mobile-link-item' onClick={this.toggleLogin}>
+            {/* ---------- MOBILE NAV ---------------------------- */}
+            <ul className={`mobile-nav ${isMenuOpen ? false : 'mobile-nav-hide'}`} style={{paddingTop:'10px'}} onClick={() => this.toggleMenu()} >
+
+                {!isLoggedIn ? (isMenuOpen === true ? <li className='mobile-link-item' onClick={this.toggleLogin}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="header-menu-icon" style={{color:'#fff',marginLeft:'20[x'}} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                 </svg>
                     <a>Login</a>
-                    </li></Link> : null)
+                    </li> : null)
                     :
-                    (isMenuOpen === true ? <Link to="" style={{ textDecoration: 'none',marginTop:'10px' }}><li className='mobile-link-item' onClick={this.toggleLogin}>
+                    (isMenuOpen === true ?  <li className='mobile-link-item' onClick={this.toggleLogin}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="header-menu-icon" style={{color:'#fff',marginLeft:'20[x'}} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                 </svg>
                 <a>Logout</a>
-                </li></Link> : null)}
+                </li> : null)}
+
                 {isMenuOpen === true ? <Link to="/about" style={{ textDecoration: 'none' }}><li className='mobile-link-item' >
                 <svg xmlns="http://www.w3.org/2000/svg" className="header-menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -288,6 +291,7 @@ class Header extends Component{
                 </svg>
                 <a>My page</a></li></Link> : null)}
             </ul>
+            {/* ----------------------------------------------------------------- */}
 
             {!openLogin ? (<MobileLogin current_user={user_name} setSaveSession={this.setSaveSession} logout={this.handleLogout} execute={this.handleClick} name={this.handleUserName} pass={this.handlePassword} hide={this.state.openLogin} exit={this.toggleLogin} isLoggedIn={this.props.user.isLoggedIn} saveSession={saveSession} />):(<div className="blank-div"></div>)}
         </div>
