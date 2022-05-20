@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './Explore.css'
 import Project from '../FeaturedProjects/Project'
 import VideoPlayer from '../VideoPlayer/VideoPlayer'
+import Loading from '../Loading/Loading'
 import { loginUser,updateUser } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
 import axios from 'axios'
@@ -18,6 +19,7 @@ class Explore extends Component {
             likes:[],
             projectSearch:"",
             openSearchBar:false,
+            isLoading:false,
 
     // --- select items to view --- //
             viewModels:true,
@@ -29,6 +31,7 @@ class Explore extends Component {
         this.projectIsLiked = this.projectIsLiked.bind(this)
         this.handleText = this.handleText.bind(this)
         this.openSearch = this.openSearch.bind(this)
+        this.setIsLoading = this.setIsLoading.bind(this)
     }
 
     componentDidMount(){
@@ -39,13 +42,19 @@ class Explore extends Component {
         this.props.updateUser()
     }
 
-    updateState(){
-        axios.get('/api/project/join').then(res =>
+    setIsLoading() {
+        this.setState({isLoading:!this.state.isLoading})
+    }
+
+    async updateState(){
+        await this.setIsLoading()
+        await axios.get('/api/project/join').then(res =>
             this.setState({ ...this.state,data:res.data}))
 
-        axios.get('/api/videos/get').then(res2 => {
+        await axios.get('/api/videos/get').then(res2 => {
             this.setState({videos:res2.data})
         })
+        await this.setIsLoading()
     }
 
     addLike(params_id){
@@ -109,7 +118,7 @@ class Explore extends Component {
     }
     
     render(){
-        const { data,projectSearch,openSearchBar,videos } = this.state
+        const { data,projectSearch,openSearchBar,videos,isLoading } = this.state
         const { isLoggedIn } = this.props.user
         const { user_likes,model_likes,id } = this.props.user.user
 
@@ -129,7 +138,7 @@ class Explore extends Component {
 
         return(
             <div >
-
+            {isLoading === true ? <Loading /> : null}
             <div className="sub-header" style={{position:'absolute'}}>
                 <a onClick={() => this.changeView('3D Models')} className={`null ${!this.state.viewModels ? true : 'a-selected'}`} >3D Models</a>
                 <a onClick={() => this.changeView("Videos")} className={`null ${!this.state.viewVideos ? true : 'a-selected'}`} >Videos</a>
