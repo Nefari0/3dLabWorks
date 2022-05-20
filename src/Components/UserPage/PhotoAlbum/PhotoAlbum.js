@@ -2,26 +2,128 @@ import './PhotoAlbum.css'
 import axios from 'axios'
 import { useState,useEffect } from 'react'
 import SelectedImage from './SelectedImage'
+import Resizer from 'react-image-file-resizer'
+// import { get } from 'http'
+import { addNewModel } from '../../../ducks/firebaseReducer'
+import { connect } from 'react-redux'
+import ImagePreview from '../../FeaturedProjects/EditProject/ImagePreview';
+import {app} from '../../../base'
+const db = app.firestore()
+
 
 const PhotoAlbum = (props) => {
-
+    
+    const newPhotoEndpoint = '/api/photos/add/new'
     const [albums, setAlbums] = useState([])
+    const [photos,setPhotos] = useState([])
     const [view,setView] = useState('photos')
     const [create,setCreate] = useState(false)
     const [currentImg,setCurrentImg] = useState(null)
+    // const [previewImageFile,setPreviewImage] = useState(null)
+    const [photoUrl,setPhotoUrl] = useState(null)
+    const [state,setState] = useState({
+        previewImageFile:null
+    })
 
-    const { id,photos } = props
+    const { id } = props
     const user_id = id
 
     useEffect(() => {
         axios.get(`/api/photos/albums/${user_id}`).then(res => {
             setAlbums(res.data)
         })
+        getPhotos(user_id)
     },[])
 
-    const addAndUpdate = async (e) => {
-        await props.handlePhoto(e)
+    const handleInput = (prop,val) => {
+        setState({[prop]:val})
     }
+
+    // --- editing / adding / removing user photos with firebase --- //
+// --- add file to state / resize / show preview --- //
+    const addAndUpdate = async (e) => {
+        await handlePhoto(e)
+        await getPhotos(user_id)
+    }
+
+        // --- get user photos -- //
+    const getPhotos = async (user_id) => {
+        await axios.get(`/api/user/photos/get/${user_id}`).then(res => {
+            setPhotos(res.data)
+        })
+    }
+
+    const handlePhoto = async (e) => {
+        // const photo = e.target.files[0]
+        var fileInput = false;
+
+        if (e.target.files[0]) {
+            fileInput = true
+        }
+
+        if (fileInput) {
+            try {
+                Resizer.imageFileResizer(
+                    e.target.files[0],
+                    400,
+                    267,
+                    "JPEG",
+                    100,
+                    0,
+                    (uri) => {
+                        console.log(uri,'uri')
+                        const objUrl = URL.createObjectURL(uri)
+                        // setPreviewImage(URL.createObjectURL(uri))
+                        setState({previewImageFile:objUrl})
+                        setPhotoUrl(uri)
+                    },
+                    "file",
+                    298,
+                    191
+                );
+            } catch (err) {
+                console.log(err)
+            }
+        }
+    }
+
+    const addingPhoto = async () => {
+        const photo_url = photoUrl
+        const { id,user } = props.user.user
+        var album_id = null
+        // this.setState({previewImageFile:null})
+        // setPreviewImage(null)
+        
+        props.setIsLoading()
+        // get firebase ref
+        const cloud = await props.addNewModel(photo_url,`${user}/photos`)
+
+        // get dl url
+        const image_url = await cloud.action.payload.ref.getDownloadURL()
+
+        // add to photo db
+        await axios.post(newPhotoEndpoint,{album_id,id,image_url})
+        await getPhotos(id)
+        await props.setIsLoading()
+    }
+
+    const removingPhoto = async (image_url) => {
+
+        await deletePhotoFromFirebase(image_url)
+        // await axios.post(`${deletePhotoEndpoint}${photo_id}`)
+        // console.log(' here is url ',image_url)
+        await axios.post(`/api/photos/delete/`,{image_url})
+    }
+
+    const deletePhotoFromFirebase = async (url) => {
+        const storageRef = app.storage().refFromURL(url)
+        storageRef.delete().then(function deleted(params) {
+            console.log('image deleted')
+        }).catch(function (error) {
+            console.log('there was an error')
+        })
+    }
+    // -------------------------------------------------------------//
 
         const mappedAlbums = albums.map(el => {
             return <p key={el.album_id} >{el.title}</p>
@@ -65,13 +167,19 @@ const PhotoAlbum = (props) => {
             <p className={`photo-selector`} onClick={() => setView('photos')} >Photos</p>
         </header>
 
-        {currentImg ? <SelectedImage image_url={currentImg} setCurrentImg={setCurrentImg} removingPhoto={props.removingPhoto} getPhotos={props.getPhotos} user_id={id} /> : null}
+        {currentImg ? <SelectedImage image_url={currentImg} setCurrentImg={setCurrentImg} removingPhoto={props.removingPhoto} getPhotos={getPhotos} user_id={user_id} /> : null}
         {view === 'albums' ? mappedAlbums : null}
         {view === 'photos' ? mappedPhotos : null}
+        {state.previewImageFile != null ? <ImagePreview previewImageFile={state.previewImageFile} photo_url={photoUrl} addPhoto={addingPhoto} handleInput={handleInput} /> : null}
     </div>)
 }
 
-export default PhotoAlbum
+// export default PhotoAlbum
+function mapStateToProps(reduxState){
+    return reduxState
+}
+
+export default connect(mapStateToProps,{addNewModel})(PhotoAlbum)
 
 {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
   <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
