@@ -14,6 +14,7 @@ const SelectedImage = (props) => {
         switch (params) {
             case 'delete':
                 await props.removingPhoto(image_url)
+                await props.getPhotos(user_id)
                 break;
             case 'update_photo':
                 await axios.post('/api/users/update/photo/',{image_url,user_id})
@@ -22,12 +23,12 @@ const SelectedImage = (props) => {
                 await axios.post('/api/user/update/background',{image_url,user_id})
                 break;
         }
-        await props.getPhotos(user_id)
+        // await props.getPhotos(user_id)
     }
 
     return(<div className="selected-img">
         {/* <p>X</p> */}
-
+        <header className='selected-img-head'>
         <svg onClick={() => setMenuOpen(!menuOpen)} xmlns="http://www.w3.org/2000/svg" className='friend-menu-icon' style={{position:'absolute',left:'0px'}}  fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
             {menuOpen === false ? <path strokeLinecap="round" strokeLinejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />:
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />}
@@ -42,7 +43,8 @@ const SelectedImage = (props) => {
         <svg xmlns="http://www.w3.org/2000/svg" className="friend-menu-icon" style={{position:'absolute',right:'0px'}} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} onClick={() => props.setCurrentImg(null)} >
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
-        <img  src={image_url} />
+        </header>
+        <img  src={image_url} className="prev-im-size" />
     </div>)
 }
 
