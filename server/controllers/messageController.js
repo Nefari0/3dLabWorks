@@ -13,7 +13,6 @@ module.exports = {
         const { messageContent,email,visited } = req.body
         const db = req.app.get('db')
         const message = await db.messaging.to_admin.add_message([messageContent,email,visited])
-        console.log('hit message backend',message)
         return res.status(200).send(message)
     },
 
@@ -28,7 +27,6 @@ module.exports = {
     // ---- site messaging system below ---- //
     getConversationByUserId: async (req,res) => {
         const { user_id } = req.params
-        console.log('hit backend',user_id)
         const db = req.app.get('db')
         const conversations = await db.messaging.get_conversations_by_user_id([user_id])
         return res.status(200).send(conversations)
@@ -46,7 +44,6 @@ module.exports = {
         const content = text
         const conversation_name = 'new conversation'
         const db = req.app.get('db')
-        console.log('here is id',user_id)
         const newConversation = await db.messaging.create_new_conversation([conversation_name])
         const conversation = newConversation[0]
         const { conversation_id } = conversation
@@ -73,7 +70,6 @@ module.exports = {
     checkExisting: async (req,res) => {
         const db = req.app.get('db')
         const { id,user_id } = req.body
-        // console.log('hit "checkExisting"',req.body)
         const existingMessages = await db.messaging.check_for_existing_message([id,user_id])
         const existing = existingMessages[0]
 
@@ -84,17 +80,13 @@ module.exports = {
         const messages = await db.messaging.get_conversation_messages_by_id_desc([conversation_id])
 
     
-        // console.log('here is user',messages)
         return res.status(200).send(messages)
-        // return res.status(200).send(existingMessages[0] != undefined)
         
     },
 
     markAsRead: async (req,res) => {
         const db = req.app.get('db')
         const {conversation_id,to_user} = req.body
-        // const value = null
-        // console.log('marked as read here',conversation_id)
         const gotRead = await db.messaging.mark_as_read([to_user,conversation_id])
         return res.status(200).send(gotRead)
     }
