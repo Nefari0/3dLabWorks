@@ -1,32 +1,15 @@
 import axios from 'axios';
-// import Home from '../Home/Home'
-// import CreateProject from './CreateProject';
-// import { Switch, Route } from 'react-router-dom'
 import UserProject from './UserProject'
 import { Component } from 'react'
-// import { Link } from 'react-router-dom';
-// import './UserPage.css'
 import '../UserPage/UserPage.css'
 import { connect } from 'react-redux'
-// import { getProjects } from '../../ducks/projectsReducer';
 import { updateUser } from '../../ducks/userReducer'
-// import Collections from '../../Collections'
-// import UserCollections from './UserCollections';
-// import UserInfo from './UserInfo'
 import UserInfo from '../UserPage/UserInfo';
-// import {app} from '../../base'
-// import SecurityTest from './SecurityTest'
-// import MobileLogin from '../MobileLogin/MobileLogin'
 import Loading from '../Loading/Loading';
 import CreateNewMessage from './CreateNewMessage';
-// import AdminPage from '../AdminPage/AdminPage';
-// import EditUserInfo from './EditUserInfo';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 // const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
 const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
-
-// const db = app.firestore()
-
 
 class ViewUser extends Component {
     constructor(props) {
@@ -43,17 +26,14 @@ class ViewUser extends Component {
             showEditUserInto:false,
             profilePic:null,
             userName:null,
+            user_id:null,
             isLoading:false,
             setPermission:true,
             openMessageBox:false,
             friendShipInfo:null,
         }
-        // this.handleCollections = this.handleCollections.bind(this)
-        // this.hideView = this.hideView.bind(this)
-        // this.resetView = this.resetView.bind(this)
         this.pleaseLogin = this.pleaseLogin.bind(this)
         this.setIsLoading = this.setIsLoading.bind(this)
-        // this.deleteFromFirebase = this.deleteFromFirebase.bind(this)
         this.openMessageBox = this.openMessageBox.bind(this)
         this.checkForExistingMessage = this.checkForExistingMessage.bind(this)
         this.getUserAndProjects = this.getUserAndProjects.bind(this)
@@ -61,24 +41,17 @@ class ViewUser extends Component {
 
     componentDidMount(){
         const { user_id } = this.props.match.params
+        this.props.updateUser()
         this.getUserAndProjects(user_id)
         axios.get(`/api/users/${user_id}`).then(res => 
             this.setState({
                 user:res.data,
-                userName:res.data.user_name
             }))
             // this.checkForExistingMessage()
         }
         
         componentDidUpdate() {
-            const { currentUserMessage } = this.state
-            const { user_id } = this.props.match.params
-            const { id } = this.props.user.user
             if(this.state.friendShipInfo === null){this.getConnectionStatus()}
-        // if(currentUserMessage === null && id !== undefined) {
-        //     this.checkForExistingMessage(id,user_id)
-        //     this.getConnectionStatus(id,user_id)
-        // }
     }
 
 // -- check if loggedin user is already connected to this user -- /
@@ -94,18 +67,7 @@ class ViewUser extends Component {
     }
 
     checkForExistingMessage = async (id,user_id) => {
-        // const { id } = this.props.user.user
-        // const { user_id } = this.state.user
         await axios.post('/api/conversation/exists',{id,user_id}).then(res => this.setState({currentUserMessage:res.data})).catch(err => console.log('err',err))
-        // this.setState({currentUserMessage:conversation.data})
-        // console.log('id in function',conversation.data)
-        // axios.post('/api/conversation/exists',{id,user_id}).then(res => {
-        //     this.setState({currentUserMessage:res.data})
-        // })
-
-        // await axios.get(`/api/conversation/messages/get/${conversation_id}`).then(res2 => {
-        //     this.setState({currentUserMessage:res2.data})
-        // })
     }
 
     openMessageBox = () => {
@@ -172,20 +134,21 @@ class ViewUser extends Component {
 
     render(){
         const { items,isLoading,user,currentUserMessage,friendShipInfo } = this.state
-        // const { photo_url,auth,name,email,is_admin,background_url,user_name,user_id } = this.state.user
+        const { id } = this.props.user.user
+        const { user_id } = this.props.match.params
 
         const mappedNewMessage = user.map(el => {
             return <CreateNewMessage key={el.user_id} user_id={el.user_id} user_name={el.user_name} currentUserMessage={currentUserMessage} pleaeLogin={this.pleaseLogin} openMessageBox={this.openMessageBox} sendToSocket={this.sendToSocket} />
         })
 
         const mappedUserName = user.map(el => {
-            return <h2 className="portrait-row" style={{textTransform:'none'}} key={el.user_id} >{el.user_name}</h2>
+            return <h4 className="portrait-row" style={{textTransform:'none'}} key={el.user_id} >{el.user_name}</h4>
         })
 
-        const mappedUserInfo = user.map(el => {
-            // return <UserInfo  key={el.user_id} user={el.user_name} name={el.first_name} email={el.email} />
-            return <UserInfo  key={el.user_id} user={el.user_name} name={el.first_name} email={null} />
-        })
+        // const mappedUserInfo = user.map(el => {
+        //     // return <UserInfo  key={el.user_id} user={el.user_name} name={el.first_name} email={el.email} />
+        //     return <UserInfo  key={el.user_id} user={el.user_name} name={el.first_name} email={null} />
+        // })
 
         const mappedBackground = user.map(el => {
            return <img src={el.background_url} key={el.user_id} className='background-photo' />
@@ -212,17 +175,21 @@ class ViewUser extends Component {
                     {mappedUserName}
  
                     <div className='portrait-row'>
-                        <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.openMessageBox()} >
+                        {parseInt(user_id) === id ? true : <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.openMessageBox()} >
                             <p style={{marginTop:'3px'}} >Message</p>
+                        </div>}
+
+                        {this.props.user.isLoggedIn === true && this.state.friendShipInfo != true ? 
+                        <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.sendConnectInvite()} >
+                            <p style={{marginTop:'3px'}} >Connect</p>
                         </div>
-                        {this.props.user.isLoggedIn === true && this.state.friendShipInfo != true ? <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.sendConnectInvite()} ><p style={{marginTop:'10px'}} >Connect</p></div>
                        : null}
                     </div>
 
 
                 </div>
 
-                {mappedUserInfo}
+                {/* {mappedUserInfo} */}
 
             </section>
 
