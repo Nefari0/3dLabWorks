@@ -16,9 +16,9 @@ const ImagePreview = (props) => {
 
     return(
         <div className='im-prev-container'>
-            <img src={previewImageFile} />
-            <div className='edit-file-button' onClick={() => addNewHandler()} ><p>Submit</p></div>
-            <div className='edit-file-button' style={{right:'0px'}} onClick={() => clearState(['string'])} ><p>Cancel</p></div>
+            <img src={previewImageFile} className="prev-im-size" />
+            <div className='edit-file-button' style={{width:'50%'}} onClick={() => addNewHandler()} ><p>Submit</p></div>
+            <div className='edit-file-button' style={{right:'0px',width:'50%'}} onClick={() => clearState(['string'])} ><p>Cancel</p></div>
         </div>
     )
 }

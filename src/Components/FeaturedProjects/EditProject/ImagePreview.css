@@ -2,16 +2,18 @@
 .im-prev-container {
     position: fixed;
     top: 100px;
-    height: 267px;
+    height: 350px;
     width: 400px;
-    background-color: #fff;
     z-index: 1000;
-    box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
 }
 
 @media(max-width:700px){
     .im-prev-container {
         width: 298px;
-        height: 191px;
+        left: 0px;
+    }
+    .prev-im-size {
+        width: 100%;
+        box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
     }
 }
