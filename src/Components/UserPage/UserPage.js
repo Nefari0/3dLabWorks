@@ -25,7 +25,7 @@ import DisplayFriends from './Friends/DisplayFriends';
 import GameInvite from './Friends/GameInvite'; // notice to indicate invite to play game
 import PhotoAlbum from './PhotoAlbum/PhotoAlbum';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-import ImagePreview from '../FeaturedProjects/EditProject/ImagePreview';
+// import ImagePreview from '../FeaturedProjects/EditProject/ImagePreview';
 import Resizer from 'react-image-file-resizer'
 // const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
 const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
@@ -51,7 +51,9 @@ class UserPage extends Component {
 
             items:[],
             user:{},
+
             friends:[],
+            
             requests:[],
             showUserInfo:true,
             showCollections:true,
@@ -75,7 +77,7 @@ class UserPage extends Component {
         this.deleteFromFirebase = this.deleteFromFirebase.bind(this)
         this.getUserID = this.getUserID.bind(this)
         this.receiveInvite = this.receiveInvite.bind(this)
-        this.handlePhoto = this.handlePhoto.bind(this)
+        // this.handlePhoto = this.handlePhoto.bind(this)
     }
 
     componentDidMount(){
@@ -85,77 +87,79 @@ class UserPage extends Component {
     }
 
     // --- get user photos -- //
-    getPhotos = async (user_id) => {
-        await axios.get(`/api/user/photos/get/${user_id}`).then(res => {
-            this.setState({photos:res.data})
-        })
-    }
+    // getPhotos = async (user_id) => {
+    //     await axios.get(`/api/user/photos/get/${user_id}`).then(res => {
+    //         this.setState({photos:res.data})
+    //     })
+    // }
 
     componentDidUpdate() {
         const { id,photo } = this.props.user.user
-        this.props.updateUser()
+        // this.props.updateUser()
         // this.getPhotos(id)
         if(this.state.friends.length < 1 && id != undefined){
             axios.get(`/api/join/friends/${id}`).then(res => this.setState({friends:res.data}))   
             // axios.get(`/api/user/photos/get/${id}`).then(res => this.setState({photos:res.data}))
-            this.getPhotos(id)
+            // this.getPhotos(id)
         }
     }
 
-    // --- editing / adding / removing user photos with firebase --- //
-    // --- add file to state / resize / show preview --- //
-    handlePhoto = async (e) => {
-        // const photo = e.target.files[0]
-        var fileInput = false;
+    // // --- editing / adding / removing user photos with firebase --- //
+    // // --- add file to state / resize / show preview --- //
 
-        if (e.target.files[0]) {
-            fileInput = true
-        }
 
-        if (fileInput) {
-            try {
-                Resizer.imageFileResizer(
-                    e.target.files[0],
-                    400,
-                    267,
-                    "JPEG",
-                    100,
-                    0,
-                    (uri) => {
-                        console.log(uri,'uri')
-                        this.setState({
-                            previewImageFile:URL.createObjectURL(uri),
-                            photo_url:uri
-                        })
-                    },
-                    "file",
-                    298,
-                    191
-                );
-            } catch (err) {
-                console.log(err)
-            }
-        }
-    }
+    // handlePhoto = async (e) => {
+    //     var fileInput = false;
 
-    addingPhoto = async () => {
-        const { photo_url } = this.state
-        const { id,user } = this.props.user.user
-        var album_id = null
-        this.setState({previewImageFile:null})
+    //     if (e.target.files[0]) {
+    //         fileInput = true
+    //     }
+
+    //     if (fileInput) {
+    //         try {
+    //             Resizer.imageFileResizer(
+    //                 e.target.files[0],
+    //                 400,
+    //                 267,
+    //                 "JPEG",
+    //                 100,
+    //                 0,
+    //                 (uri) => {
+    //                     console.log(uri,'uri')
+    //                     this.setState({
+    //                         previewImageFile:URL.createObjectURL(uri),
+    //                         photo_url:uri
+    //                     })
+    //                 },
+    //                 "file",
+    //                 298,
+    //                 191
+    //             );
+    //         } catch (err) {
+    //             console.log(err)
+    //         }
+    //     }
+    //     return
+    // }
+
+    // addingPhoto = async () => {
+    //     const { photo_url } = this.state
+    //     const { id,user } = this.props.user.user
+    //     var album_id = null
+    //     this.setState({previewImageFile:null})
         
-        this.setIsLoading()
-        // get firebase ref
-        const cloud = await this.props.addNewModel(photo_url,`${user}/photos`)
+    //     this.setIsLoading()
+    //     // get firebase ref
+    //     const cloud = await this.props.addNewModel(photo_url,`${user}/photos`)
 
-        // get dl url
-        const image_url = await cloud.action.payload.ref.getDownloadURL()
+    //     // get dl url
+    //     const image_url = await cloud.action.payload.ref.getDownloadURL()
 
-        // add to photo db
-        await axios.post(newPhotoEndpoint,{album_id,id,image_url})
-        await this.getPhotos(id)
-        this.setIsLoading()
-    }
+    //     // add to photo db
+    //     await axios.post(newPhotoEndpoint,{album_id,id,image_url})
+    //     // await this.getPhotos(id)
+    //     this.setIsLoading()
+    // }
 
     removingPhoto = async (image_url) => {
         await this.deleteFromFirebase(image_url)
@@ -163,7 +167,7 @@ class UserPage extends Component {
         console.log(' here is url ',image_url)
         await axios.post(`/api/photos/delete/`,{image_url})
     }
-    // -------------------------------------------------------------//
+    // // -------------------------------------------------------------//
 
     changeGameID = (confirm,val) => {
         if(confirm === true){this.setState({currentGame:val})} else {this.setState({challengeUser:null})}
@@ -334,7 +338,7 @@ class UserPage extends Component {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg> */}
 
-                    <h2 className="portrait-row" style={{textTransform:'none'}} >{this.props.user.user.user}</h2>
+                    <h4 className="portrait-row" style={{textTransform:'none'}} >{this.props.user.user.user}</h4>
                     <div className='portrait-row' style={{flexWrap:'wrap',justifyContent:'center',width:'300px'}}>
                         <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showEditUserInfo')}><p style={{marginTop:'5px'}}  >My Info</p></div>
                         <div className='user-buttons' style={{marginTop:'10px'}}  onClick={() => this.hideView('showCreateProject')} ><p style={{marginTop:'5px'}} >Create</p></div>
@@ -363,9 +367,9 @@ class UserPage extends Component {
 
                 {showFriends === true ? <DisplayFriends id={id} getUserID={this.getUserID} /> : null }
                 
-                {showPhotos === true ? <PhotoAlbum id={id} handlePhoto={this.handlePhoto} removingPhoto={this.removingPhoto} photos={photos} getPhotos={this.getPhotos} /> : null }
+                {showPhotos === true ? <PhotoAlbum id={id} handlePhoto={this.handlePhoto} removingPhoto={this.removingPhoto} setIsLoading={this.setIsLoading} /> : null }
 
-                {previewImageFile != null ? <ImagePreview previewImageFile={previewImageFile} photo_url={photoUrl} addPhoto={this.addingPhoto} handleInput={this.handleInput} /> : null}
+                {/* {previewImageFile != null ? <ImagePreview previewImageFile={previewImageFile} photo_url={photoUrl} addPhoto={this.addingPhoto} handleInput={this.handleInput} /> : null} */}
             </section>
         </div>
         )}
