@@ -17,7 +17,8 @@ class CreateNewMessage extends Component {
         super()
 
         this.state = {
-            currentConversationId:null
+            currentConversationId:null,
+            newMessages:[],
         }
         this.handleText = this.handleText.bind(this)
         this.executeSendMessage = this.executeSendMessage.bind(this)
@@ -25,40 +26,37 @@ class CreateNewMessage extends Component {
 
     componentDidMount() {
         const { currentUserMessage } = this.props
-        if (currentUserMessage != null) {
-            this.setState({currentConversationId:currentUserMessage[0].conversation_id})
-        }
+
         this.getConnected()
     }
 
         // --- sockets --- //
-    getConnected = (input) => {
-        const { currentConversationId } = this.state
-        // const conversation_id = this.props.currentUserMessage[0].conversation_id
-        // console.log(`got connected to`,input,'in createNew')
-       // const contentDefaultMessage = "default message as string"
+    getConnected = async (input) => {
+
+        const { conversation_id } = this.props
+
        client.onopen = () => {
-       //  console.log('WebSocket Client Connected');
+        console.log('WebSocket Client Connected');
        };
    
          client.onmessage = (message) => {
              
            const dataFromServer = JSON.parse(message.data);
-        //    if(dataFromServer.to === this.state.loggedInUser){this.setState({gotNewMessage:true})}
-           // console.log('got reply',dataFromServer.to === this.state.loggedInUser)
-           // this.setState({testSockIntfo:dataFromServer.to})
-         if (input != undefined && currentConversationId != null) {if (dataFromServer.type === 'message' && input === currentConversationId ) {
-        //    this.openMessage(conversation_id)
-        //    this.setState((State) =>
-        //    ({newMessages:[...this.state.newMessages,
-        //    {
-        //      msg: dataFromServer.msg,
-        //      user:dataFromServer.user
-        //    }]
+
+        //    console.log('got reply',dataFromServer.conversation_id, conversation_id)
+
+         if (dataFromServer.type === 'message' && dataFromServer.conversation_id === conversation_id ) {
+
+           this.setState((State) =>
+           ({newMessages:[...this.state.newMessages,
+           {
+             msg: dataFromServer.msg,
+             user:dataFromServer.user
+           }]
    
-        //  }))
-           console.log('is messaged',currentConversationId)
-         }}
+         }))
+        //    console.log('is messaged',conversation_id)
+         }
          }
    }
 
@@ -96,12 +94,16 @@ class CreateNewMessage extends Component {
             return(mappedMessages)
         }
     }
-
     
     render() {
         
         const { user_id,user_name } = this.props
         const { loggedInUser,currentUserMessage } = this.props
+        const { newMessages } = this.state
+
+        // const mappedNewMessage = newMessages.map(el => {
+        //     return <OneMessage key={el.} />
+        // })
         
         // const mappedMessage = currentUserMessage.map(el => {
         //     return <OneMessage key={el.message_id} loggedInUser={user_id} content={el.content} user_id={el.user_id} photo_url={el.photo_url} user_name={el.user_name} date_created={el.date_created} />

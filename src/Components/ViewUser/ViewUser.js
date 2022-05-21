@@ -17,6 +17,7 @@ class ViewUser extends Component {
 
         this.state ={
             currentUserMessage:null,
+            conversation_id:null,
             items:[],
             user:[],
             showUserInfo:true,
@@ -67,7 +68,15 @@ class ViewUser extends Component {
     }
 
     checkForExistingMessage = async (id,user_id) => {
-        await axios.post('/api/conversation/exists',{id,user_id}).then(res => this.setState({currentUserMessage:res.data})).catch(err => console.log('err',err))
+        // await axios.post('/api/conversation/exists',{id,user_id}).then(res => this.setState({currentUserMessage:res.data})).catch(err => console.log('err',err))
+        await axios.post('/api/conversation/exists',{id,user_id}).then(res => {
+            // console.log(res.data)
+            const { messages, conversation_id } = res.data
+            this.setState({
+                currentUserMessage:messages,
+                conversation_id:conversation_id
+            })
+        })
     }
 
     openMessageBox = () => {
@@ -133,12 +142,12 @@ class ViewUser extends Component {
     }
 
     render(){
-        const { items,isLoading,user,currentUserMessage,friendShipInfo } = this.state
+        const { items,isLoading,user,currentUserMessage,friendShipInfo,conversation_id } = this.state
         const { id } = this.props.user.user
         const { user_id } = this.props.match.params
 
         const mappedNewMessage = user.map(el => {
-            return <CreateNewMessage key={el.user_id} user_id={el.user_id} user_name={el.user_name} currentUserMessage={currentUserMessage} pleaeLogin={this.pleaseLogin} openMessageBox={this.openMessageBox} sendToSocket={this.sendToSocket} />
+            return <CreateNewMessage key={el.user_id} user_id={el.user_id} user_name={el.user_name} conversation_id={conversation_id} currentUserMessage={currentUserMessage} pleaeLogin={this.pleaseLogin} openMessageBox={this.openMessageBox} sendToSocket={this.sendToSocket} checkForExistingMessage={this.checkForExistingMessage} />
         })
 
         const mappedUserName = user.map(el => {

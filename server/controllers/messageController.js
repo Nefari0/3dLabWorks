@@ -80,7 +80,7 @@ module.exports = {
         const messages = await db.messaging.get_conversation_messages_by_id_desc([conversation_id])
 
     
-        return res.status(200).send(messages)
+        return res.status(200).send({messages,conversation_id})
         
     },
 
