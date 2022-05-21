@@ -71,15 +71,16 @@ class CreateNewMessage extends Component {
     executeSendMessage = async () => {
         const { text } = this.state
         const { id,photo } = this.props.user.user
+        const user_id = id
         const { isLoggedIn } = this.props.user
-        const { user_id,currentUserMessage } =  this.props
+        const { currentUserMessage } =  this.props
         // console.log('here is id',conversation_id)
         if (isLoggedIn != false && id != undefined) {
         if (currentUserMessage === null ){
             await axios.post('/api/conversation/new',{user_id,id,text})
         } else if (id != undefined && isLoggedIn != false){
             const conversation_id = currentUserMessage[0].conversation_id
-            await axios.post('/api/conversation/user/new',{conversation_id,id,text,user_id})
+            await axios.post('/api/conversation/user/new',{conversation_id,user_id,text,id})
             return client.send(JSON.stringify({type: "message",conversation_id:conversation_id,msg:text,to:user_id,photo:photo}))
         }
     }
