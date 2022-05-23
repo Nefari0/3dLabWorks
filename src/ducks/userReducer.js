@@ -124,9 +124,11 @@ export default function userReducer(state = inititialState, action) {
                 user: action.payload.data, isLoggedIn: true, isLoading:false
             }
         case REGISTER_USER + '_REJECTED':
+            alert('Either the username you have chosen is already being used or consists of more than 12 characters. Please choose a defferent username')
             return { 
                 ...state,
-                isLoggedIn: false
+                isLoggedIn: false,
+                isLoading:false
             }
         case UPDATE_USER + '_FULFILLED':
             return {
