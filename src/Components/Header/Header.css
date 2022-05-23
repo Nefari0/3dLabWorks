@@ -227,10 +227,12 @@ ul.link-list li:hover {
     }
     .lines {display: none;}
     .dots {
-        display: inline; padding-left: 10px;
+        display: inline;
+        padding-left: 10px;
     }
     .hamburger {
-        right: 0px;
+        right: 15px;
+        height: 25px;
     }
 }
 
