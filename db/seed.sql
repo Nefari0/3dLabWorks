@@ -4,17 +4,6 @@
 -- id:12,
 -- pass:pass
 
--- CREATE TABLE comments (
---   comment_id SERIAL PRIMARY KEY,
---   user_id INTEGER,
---   FOREIGN KEY(user_id) REFERENCES d_user(user_id),
---   model_id INTEGER,
---   FOREIGN KEY(model_id) REFERENCES models(model_id),
---   user_name VARCHAR(250),
---   text VARCHAR(500),
---   date_created timestamp DEFAULT CURRENT_TIMESTAMP
--- );
-
 -- INSERT INTO d_user (user_name,email,first_name,last_name)
 -- VALUES(
 --   'madmax',
@@ -73,12 +62,14 @@
 -- )
 
 -- ------ comments ------- --
+
 -- CREATE TABLE comments (
 --   comment_id SERIAL PRIMARY KEY,
 --   user_id INTEGER,
 --   FOREIGN KEY(user_id) REFERENCES d_user(user_id),
 --   model_id INTEGER,
 --   FOREIGN KEY(model_id) REFERENCES models(model_id),
+--   user_name VARCHAR(250),
 --   text VARCHAR(500),
 --   date_created timestamp DEFAULT CURRENT_TIMESTAMP
 -- );
