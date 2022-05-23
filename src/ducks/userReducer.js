@@ -1,10 +1,14 @@
 import axios from 'axios'
+import { OPEN } from 'ws'
 
 const inititialState = {
     user: {},
     isLoggedIn:false,
     isLoading:false,
     loginError:false,
+    
+    //  testing use of boolean data types in redux
+    loginOpen:false,
 }
 
 const LOGIN_USER = 'LOGIN_USER'
@@ -14,6 +18,14 @@ const EDIT_USERINFO = 'EDIT_USERINFO'
 const UPDATE_USER = 'UPDATE_USER'
 const SHOW_DATA = 'SHOW_DATA'
 const AUTO_LOGIN = 'AUTO_LOGIN'
+const OPEN_LOGIN = 'OPEN_LOGIN'
+
+export function remoteLogin(val) {
+    return {
+        type: OPEN_LOGIN,
+        payload: val
+    }
+}
 
 export function loginUser(user_name, password, last_visit, visited) {
     return {
@@ -59,7 +71,6 @@ export function editUserinfo(photo_url){
 //     }
 // }
 export function updateUser(user){
-    // console.log(user)
     return{
         type: UPDATE_USER,
         payload: user
@@ -77,6 +88,13 @@ export function autoLogin(user_name, last_visit, visited){
 
 export default function userReducer(state = inititialState, action) {
     switch (action.type) {
+        // ---- this allows the login menu to be opened from any component ---- //
+        case OPEN_LOGIN:
+            return {
+                ...state,
+                loginOpen:action.payload
+            }
+        // -------------------------------------------------------------------- //
         case SHOW_DATA + '_PENDING':
             return {
                 ...state,
@@ -101,7 +119,7 @@ export default function userReducer(state = inititialState, action) {
         case LOGIN_USER + '_FULFILLED':
             return {
                 ...state,
-                user: action.payload.data, isLoggedIn: true, isLoading:false
+                user: action.payload.data, isLoggedIn: true, isLoading:false,
             }
         case LOGIN_USER + '_REJECTED':
             alert('Your username or password is incorrect')
