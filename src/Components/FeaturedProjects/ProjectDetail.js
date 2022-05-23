@@ -4,7 +4,7 @@ import axios from 'axios'
 import './Project.css'
 import ProjectPhotos from './ProjectPhotos'
 import Comments from './Comments/Comments'
-import { loginUser, updateUser } from '../../ducks/userReducer'
+import { loginUser, updateUser, remoteLogin } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
 import CreateComment from './Comments/CreateComment'
 import DlUrl from './DlUrl'
@@ -57,7 +57,6 @@ class ProjectDetail extends Component {
         this.getDetails().then((val) => console.log(val)) // original/working function
         // --- get project images by model_is --- //
         this.getImages()
-
         // ---get project comments by model_id --- //
         this.getComments()
     }
@@ -199,7 +198,8 @@ class ProjectDetail extends Component {
     }
 
     plsSignIn = () => {
-        alert('please sign in')
+        window.scrollTo(0, 0)
+        this.props.remoteLogin(true)
     }
 
     likeFunc = async () => {
@@ -212,11 +212,12 @@ class ProjectDetail extends Component {
     }
 
     clickLike = () => {
-        const { isLoggedIn } = this.props.user
+        const { isLoggedIn,loginOpen } = this.props.user
         if (isLoggedIn === true) {
             this.likeFunc()
         } else {
-            alert("please sign in")
+            window.scrollTo(0, 0)
+            this.props.remoteLogin(!loginOpen)
         }
     }
 
@@ -234,7 +235,7 @@ class ProjectDetail extends Component {
         const { comments,model_id,maker_id,myLike } = this.state
         // const { firebase_url01,firebase_url,user_id,description } = this.state.info
         const { info, userInfo, viewComments, viewDetails, viewFiles, viewInfo, dlUrl,viewEditProject,modelImages,isDeleted,selectedPhoto } = this.state
-        const { isLoggedIn } = this.props.user
+        const { isLoggedIn,loginOpen } = this.props.user
         const { user,id,photo_url,user_likes } = this.props.user.user
 
         const mappedDescription = info.map(el => {
@@ -261,12 +262,6 @@ class ProjectDetail extends Component {
             return <div key={el.image_id} onClick={() => this.highLightedPhoto(el.photo_url)} ><img className='thumbnail-image' src={el.photo_url}/></div>
         })
 
-        // const mappedMainPhoto = info.map(el => {
-        //     return <div key={el.model_id} onClick={() => this.highLightedPhoto(el.firebase_url01)} ><img className='thumbnail-image' src={el.firebase_url01}/></div>
-        // })
-
-        // console.log('here is the description',description)
-
         return(
             <div>
             {isDeleted ? (<Route path="/" component={Home}/>) :
@@ -275,7 +270,6 @@ class ProjectDetail extends Component {
                 {mappedUserInfo}
 
                 <div className='image-viewer'>
-                    {/* {mappedMainPhoto} */}
                     {mappedThumbNails}
                 </div>
                 <div className="detail-container">
@@ -350,4 +344,4 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps, { loginUser,updateUser })(ProjectDetail)
+export default connect(mapStateToProps, { loginUser,updateUser,remoteLogin })(ProjectDetail)
