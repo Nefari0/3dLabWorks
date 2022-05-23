@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import { loginUser,logoutUser,updateUser,autoLogin } from '../../ducks/userReducer'
+import { loginUser,logoutUser,updateUser,autoLogin,remoteLogin } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
 import './Header.css'
 import { Link } from 'react-router-dom'
@@ -25,7 +25,6 @@ class Header extends Component{
             user_name:'',
             password:'',
             setPermission:true,
-            openLogin:true,
             isLoggedInState:null,
             saveSession:false,
             unique_id:null,
@@ -169,6 +168,8 @@ class Header extends Component{
     }
 
     async handleClick(signInName,signInPass,saveMyInfo) {
+        const { menuOpen } = this.props.user 
+        const { user_name, password } = this.state
         const visited = localStorage['visited']
         const last_visit = new Date()
         // console.log('is visited defined',localStorage)
@@ -178,19 +179,19 @@ class Header extends Component{
             localStorage.setItem('user_name',signInName)
             // localStorage.setItem('password',signInPass)
         } else {localStorage.removeItem('visited')}
-
+        // this.props.remoteLogin(!menuOpen)
         this.toggleLogin()
         this.setState({user_name:'',password:''})
     }
 
     handleLogout() {
+        const { menuOpen } = this.props.user
         const getUniqueID = () => {
             const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
             return s4() + s4() + '-' + s4();
           };
         localStorage.removeItem("user_name");
         localStorage.setItem("visited",getUniqueID())
-        // localStorage.removeItem("password");
         this.toggleLogin()
         this.props.logoutUser()
     }
@@ -204,8 +205,10 @@ class Header extends Component{
     }
 
     toggleLogin(){
+        const { loginOpen } = this.props.user
+        this.props.remoteLogin(!loginOpen)
         // this.trackingHandler('login')
-        this.setState({openLogin: !this.state.openLogin})
+        // this.setState({openLogin: !this.state.openLogin})
     }
 
     setSaveSession() {
@@ -216,11 +219,12 @@ class Header extends Component{
     
 
     render() {
-        const { saveSession, username, unique_id, isMenuOpen, user_name, password, openLogin, isLoggedInState } = this.state
-        const { isLoggedIn,isLoading } = this.props.user
-        const { photo } = this.props.user.user
+        const { saveSession, username, unique_id, isMenuOpen, user_name, password, isLoggedInState } = this.state
+        const { isLoggedIn,isLoading,loginOpen } = this.props.user
+        const { photo,user } = this.props.user.user
 
     return(
+        
         <div className='header-container'>
             {isLoading === true ? <Loading /> : null}
             <img onClick={this.viewTheWindow}
@@ -241,17 +245,15 @@ class Header extends Component{
             <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><img className="mm3d-logo" src={MM3D1}/></Link>
             {/* <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><img className="mm3d-logo-small" src={MBox}/></Link> */}
             
-
-            {isLoggedIn ? <Link to="/user" ><img src={photo} className="loggedin-user-photo" /></Link> : null} 
-
             <ul className='link-list'>
                 <Link to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a >About</a></li></Link>
                 <Link to="/explore" style={{ textDecoration: 'none' }}><li className='link-item'><a>Explore</a></li></Link>
-                {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='link-item'><a>My Page</a></li></Link>)}
+                {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='link-item'><a>{user}</a></li></Link>)}
             </ul>
 
             {!isLoggedIn ? (<h4 className="login-link" onClick={this.toggleLogin} >Login</h4>):(<h4 className="login-link" onClick={this.toggleLogin} >Log Out</h4>)}
 
+            {isLoggedIn ? <Link to="/user" ><img src={photo} className="loggedin-user-photo" /></Link> : null} 
 
             <svg className="hamburger" onClick={this.toggleMenu} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path className='lines' stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -293,8 +295,9 @@ class Header extends Component{
             </ul>
             {/* ----------------------------------------------------------------- */}
 
-            {!openLogin ? (<MobileLogin current_user={user_name} setSaveSession={this.setSaveSession} logout={this.handleLogout} execute={this.handleClick} name={this.handleUserName} pass={this.handlePassword} hide={this.state.openLogin} exit={this.toggleLogin} isLoggedIn={this.props.user.isLoggedIn} saveSession={saveSession} />):(<div className="blank-div"></div>)}
+                {loginOpen ? (<MobileLogin current_user={user_name} setSaveSession={this.setSaveSession} logout={this.handleLogout} execute={this.handleClick} name={this.handleUserName} pass={this.handlePassword} hide={this.state.openLogin} exit={this.toggleLogin} isLoggedIn={this.props.user.isLoggedIn} saveSession={saveSession} />):(<div className="blank-div"></div>)}
         </div>
+          
     )}
 } 
 
@@ -302,4 +305,4 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps, {loginUser, logoutUser, updateUser, autoLogin})(Header)
+export default connect(mapStateToProps, {loginUser, logoutUser, updateUser, autoLogin, remoteLogin})(Header)
