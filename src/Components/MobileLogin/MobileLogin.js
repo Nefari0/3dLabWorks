@@ -65,6 +65,7 @@ const MobileLogin = (props) => {
     }
     // console.log('current user',user)
     return(
+   
         <div className={`plogin-container ${!signup ? true : `plogin-Container r-selected ${openIAgree ? true : `plogin-container r-selected agree-view`}`}`}>
         {/* <section className="login-title"> */}
         <section className={`login-title ${!signup ? true : `rlogin-title ${openIAgree ? true : `rlogin-title rlogin-title-agreement`}`}`}>
@@ -86,18 +87,12 @@ const MobileLogin = (props) => {
         {!isLoggedIn ? <ul className="keep-session log-form-length">
 
             <div className="keep-session-check">
-                {!saveInfo ?
-                // <svg onClick={() => props.setSaveSession()} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+             
                 <svg onClick={() => setSaveInfo(!saveInfo)} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    {saveInfo === false ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />:
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />}
                 </svg>
-                :
-                // <svg onClick={() => props.setSaveSession()} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <svg onClick={() => setSaveInfo(!saveInfo)} style={{ color:'#3c598e',marginLeft:'0px',marginRight:'2px', height:'20px',width:'20px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                }
+                
                 <p style={{fontSize:'10px',marginBottom:'0px',marginLeft:'0px'}} >stay logged in?</p>
             </div>
             <p style={{fontSize:'10px',marginBottom:'0px',marginLeft:'0px', color:'blue' }} >Forgot password?</p>
@@ -138,9 +133,11 @@ const MobileLogin = (props) => {
                 {/* {openIAgree ? <a className="login-button" style={{marginTop:'10px'}} onClick={executeRegister} >Sign Up</a> : null} */}
                 {openIAgree ? <a className="login-button" style={{marginTop:'10px'}} onClick={executeRegister} >Sign Up</a> : null}
                 <div className="build-account" ><a style={{fontWeight:'400',color:"blue"}} onClick={selectSignUp}>Cancel</a></div>
+                <div className='r-form-fake-bottom' ></div>
             </section>
         }
     </div>
+
     )
     
 }
