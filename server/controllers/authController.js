@@ -15,14 +15,21 @@ module.exports = {
     register: async (req,res) => {
         const {user_name, password, email, first_name, is_admin, is_sudo} = req.body;
         if (is_admin != false){
-            return(alert('this operation cannot be completed because of a security breach'))
+            return 
         }
         const db = req.app.get('db')
         const result = await db.get_user([user_name])
         const existingUser = result[0];
         if (existingUser) {
+            // alert('This username is already being used')
             return res.status(409).send('this username is already being used');
         }
+
+        if(user_name.split('').length > 12) {
+            // alert('The usename you have chosen is too long')
+            return res.status(400).send('this username is too long')
+        }
+
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password,salt);
         const registeredUser= await db.register_site_user([user_name, hash, email, first_name, is_admin, is_sudo])
