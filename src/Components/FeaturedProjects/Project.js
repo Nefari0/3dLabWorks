@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { connect } from 'react-redux'
 import { getModels } from '../../ducks/modelsReducer'
-import { updateUser } from '../../ducks/userReducer'
+import { updateUser,remoteLogin } from '../../ducks/userReducer'
+// import SVG from '../SVG'
 // import { addLike } from '../../../server/controllers/projectsController'
 
 const Project = (props) => {
@@ -26,7 +27,8 @@ const Project = (props) => {
     },[])
 
     const plsSignIn = () => {
-        alert('please sign in')
+        window.scrollTo(0, 0)
+        props.remoteLogin(true)
     }
 
     const likeFunc = async (id,m_id) => {
@@ -42,7 +44,6 @@ const Project = (props) => {
         console.log('params',params)
         axios.get(`/api/like/update/${params}`).then(res => {
             const { likes } = res.data[0]
-            console.log(likes)
             setNumOfLikes(likes)
         })
     }
@@ -89,13 +90,14 @@ const Project = (props) => {
                         </svg>
                     </a> 
                     : 
-                    <a onClick={plsSignIn} >
+                    <a onClick={() => plsSignIn()} >
+                        {/* <SVG params={'dowload-icon'} /> */}
                         <svg className="small-icon" style={{marginLeft:'10px',marginRight:'5px', height:'50px',width:'50px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                         </svg>
                     </a>}
                     
-                    { isLoggedIn ? <a className="project-text" href={`${firebase_url}`} target="_blank" rel="noopener noreferrer">download</a> : <a className="project-text" onClick={plsSignIn}>download</a>}
+                    { isLoggedIn ? <a className="project-text" href={`${firebase_url}`} target="_blank" rel="noopener noreferrer">download</a> : <a className="project-text" onClick={() => plsSignIn()}>download</a>}
 
                     <div className="like-share">
                         <div>
@@ -138,4 +140,4 @@ function mapStateToProps(reduxState) {
     return reduxState
 }
 
-export default connect(mapStateToProps, { getModels,updateUser })(Project)
+export default connect(mapStateToProps, { getModels,updateUser,remoteLogin })(Project)
