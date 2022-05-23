@@ -1,6 +1,6 @@
+
 .plogin-container {
-    /* position: absolute; */
-    /* position: sticky; */
+    position: absolute;
     height: 400px;
     width: 350px;
     padding: 2px;
@@ -13,18 +13,15 @@
 	justify-content: flex-start;
 	align-items: center;
 	align-content: stretch;
-    /* top: 20vh; */
-    top: 10vh;
-    padding: 0px;
-    position: absolute;
+    top: 10px;
     z-index:10;
     box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
-    margin: none;
     overflow: hidden;
 }
+
 .r-selected {
     height: 500px;
-    top: 50px;
+    top: 10px;
     transition: all 100ms;
 }
 
@@ -96,9 +93,9 @@
 	justify-content: flex-start;
 	align-items: center;
 	align-content: flex-start;
-
     transition: all 200ms;
 }
+
 .agree-form {
     width: 90vw;
 }
@@ -167,4 +164,18 @@
     .close-button {
         right: 30px;
     }
+}
+
+@media (max-height:530px) {
+
+    .r-selected {
+        height: 450px;
+        /* position: absolute; */
+    }
+
+    .rlogin-title {
+        height: 50px;
+        padding-top: 3%;
+    }
+
 }
