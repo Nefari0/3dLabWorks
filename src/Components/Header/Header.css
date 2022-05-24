@@ -90,6 +90,11 @@ ul.link-list li:hover {
     box-shadow: 0px 5px 8px -17px #000000;
     text-transform: none;
 }
+.login-link:hover {
+    background: linear-gradient(0turn,#5077be,#6495ed);
+    border:solid 1px #3c598e;
+    transition: all 500ms;
+}
 
 .hamburger {
     position: absolute;
