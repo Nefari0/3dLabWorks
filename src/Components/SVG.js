@@ -2,16 +2,6 @@ import { useState } from "react"
 import './../App.css'
 
 const SVG = (params) => {
-    console.log('hit SVG',params.link)
-    
-
-    // const downloadIcon = () => {
-    //     return (<div>                           
-    //         <svg className="small-icon" style={{marginLeft:'10px',marginRight:'5px', height:'50px',width:'50px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    //             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-    //         </svg>
-    //     </div>)
-    // }
 
     const downloadIcon = () => {return <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />}
 
@@ -28,7 +18,6 @@ const SVG = (params) => {
     const icon = (param) => {
         switch (param) {
             case "download_icon":
-                // console.log(param,'here is param')
                 return (downloadIcon())
             case "large_heart":
                 return (largeHeart())
@@ -47,18 +36,10 @@ const SVG = (params) => {
         }
     }
 
-//     const param =                         <svg className="small-icon" style={{marginLeft:'10px',marginRight:'5px', height:'50px',width:'50px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-//     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-// </svg>
-
     return <div>
-        {/* {downloadIcon} */}
-        {/* <svg className="small-icon" style={{marginLeft:'10px',marginRight:'5px', height:'50px',width:'50px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg"  fill="none" viewBox="0 0 24 24" stroke="currentColor"> */}
         <svg className="small-icon" style={{margin:'auto',marginLeft:'10px',marginRight:'10px', height:'45px',width:'45px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
             {icon(params.params)}
-            {/* {downloadIconPath} */}
         </svg>
-        {/* {downloadIcon()} */}
     </div>
 
 }
