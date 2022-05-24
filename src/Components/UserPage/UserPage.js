@@ -306,7 +306,7 @@ class UserPage extends Component {
             <div className="user-page">
             {isLoading ? <Loading/> : null}
             <section className="column1">
-                <img src={background_url} className='background-photo' />
+                <img src={background_url} className='background-photo' onClick={() => this.hideView('showPhotos')} />
                    {challengeUser === null ? null: <GameInvite challengeUser={challengeUser} changeGameID={this.changeGameID} hideView={this.hideView} /> }
 
                     {/* <svg xmlns="http://www.w3.org/2000/svg" className="friend-menu-icon" style={{position:'absolute',color:'#fff'}} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -316,7 +316,9 @@ class UserPage extends Component {
                 <div className="portrait">
                     <img className="profile-photo" 
                     src={photo}
-                    alt="photo"/>
+                    alt="photo"
+                    onClick={() => this.hideView('showPhotos')}
+                    />
 
                 
                     {/* <input className='user-photo-file-input '
@@ -341,10 +343,10 @@ class UserPage extends Component {
                     <h4 className="portrait-row" style={{textTransform:'none'}} >{this.props.user.user.user}</h4>
                     <div className='portrait-row' style={{flexWrap:'wrap',justifyContent:'center',width:'300px'}}>
                         <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showEditUserInfo')}><p style={{marginTop:'5px'}}  >My Info</p></div>
-                        <div className='user-buttons' style={{marginTop:'10px'}}  onClick={() => this.hideView('showCreateProject')} ><p style={{marginTop:'5px'}} >Create</p></div>
-                        <div className='user-buttons' style={{marginTop:'10px'}}  onClick={() => this.hideView('showGames')} ><p style={{marginTop:'5px'}} >Games</p></div>
+                        <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showCreateProject')} ><p style={{marginTop:'5px'}} >Create</p></div>
+                        <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showGames')} ><p style={{marginTop:'5px'}} >Games</p></div>
 
-                        <div className='user-buttons' style={{marginTop:'10px'}}  onClick={() => this.hideView('showPhotos')} ><p style={{marginTop:'5px'}} >Photos</p></div>
+                        <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showPhotos')} ><p style={{marginTop:'5px'}} >Photos</p></div>
 
                         <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showFriends')} ><p style={{marginTop:'5px'}} >Friends</p></div>
                         <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showCollections')} ><p style={{marginTop:'5px'}} >Collections</p></div>
