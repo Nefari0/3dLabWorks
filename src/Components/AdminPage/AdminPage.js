@@ -10,6 +10,7 @@ import Home from '../Home/Home';
 import axios from 'axios';
 import ShowUser from './ShowUser';
 import ShowTraffic from './ShowTraffic'
+import SVG from '../SVG';
 // import Prototyping from '../Prototyping/Prototyping';
 // import MessageBoard from '../UserMessages/MessageBoard';
 import Memo from './Memo';
@@ -239,6 +240,10 @@ class AdminPage extends Component {
                     {/* <ViewUserV2 /> */}
                     {/* <Prototyping /> */}
                     {/* <MessageBoard/> */}
+                    <section style={{height:'400px',width:'400px',backgroundColor:'#fff'}} >
+                        <SVG params={'large_heart'} />
+                        <button>click</button>
+                    </section>
                     </div>
                 )}
             </div>
