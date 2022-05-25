@@ -277,12 +277,11 @@
     border-left:solid 1px rgb(85, 85, 85,.3)  ;
     border-right:solid 1px rgb(85, 85, 85,.3) ;
 }
-
 .selected {
     background-color: #3c598e;
 }
 
-.down-load { /* also part of detail box*/
+.dark-blue { /* also part of detail box*/
     background-color: #3c598e
 }
 
