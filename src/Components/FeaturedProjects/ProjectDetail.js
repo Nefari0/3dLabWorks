@@ -280,7 +280,11 @@ class ProjectDetail extends Component {
                     <div className="detail-container">
                         {mappedPhoto}
                         <section className="right">
-                            <div className={`detail-box small down-load ${viewFiles ? true : 'detail-box small down-load-selected'}`} onClick={() => this.changeView('viewFiles')}><p className={`down-load-text ${viewFiles ? true : 'down-load-text-selected'}`}><a>Download Files</a></p></div>
+                            <div className={`detail-box small dark-blue ${viewFiles ? true : 'detail-box small down-load-selected'}`} onClick={() => this.changeView('viewFiles')}>
+                                <p className={`down-load-text ${viewFiles ? true : 'down-load-text-selected'}`}>
+                                    <a>Download Files</a>
+                                </p>
+                            </div>
 
                                 {/* -------------- LIKE -------------- */}
                             <div className="detail-box small" onClick={this.clickLike} >
@@ -304,18 +308,20 @@ class ProjectDetail extends Component {
                             {/* -------------- EDIT / ADD TO FAVORITES -------------- */}
                             {isLoggedIn === true && this.props.user.user.id === maker_id ?
                             <div className={`detail-box small ${!viewEditProject ? true : 'detail-box small selected'}`} onClick={() => this.changeView('viewEditProject')}>
-                                {<SVG params={'edit_project'} /> }
+                                <SVG params={'edit_project'} />
                                 <p className={`dark-text ${!viewEditProject ? true : 'light-text'}`}>Edit Project</p>
                             </div>
                             :
                             <div className="detail-box small">
-                                <SVG params={'folder'} /><p className="dark-text">Add To Favorites</p>
+                                <SVG params={'folder'} />
+                                <p className="dark-text">Add To Favorites</p>
                             </div>
                             }
 
                             {/* -------------- INFORMATION ABOUT PROJECT -------------- */}
                             <div className={`detail-box small ${!viewInfo ? true : 'detail-box small selected'}`} onClick={() => this.changeView('viewInfo')} >
-                                <SVG params={'info'} /><p className={`dark-text ${!viewInfo ? true : 'light-text'}`} >Info</p>
+                                <SVG params={'info'} />
+                                <p className={`dark-text ${!viewInfo ? true : 'light-text'}`} >Info</p>
                             </div>
 
                         </section>
