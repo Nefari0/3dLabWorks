@@ -19,6 +19,7 @@ class CreateNewMessage extends Component {
         this.state = {
             currentConversationId:null,
             newMessages:[],
+            text:''
         }
         this.handleText = this.handleText.bind(this)
         this.executeSendMessage = this.executeSendMessage.bind(this)
@@ -111,7 +112,7 @@ class CreateNewMessage extends Component {
 
         return(<div className='create-message-container'>
                     <h4 className='message-board-title' style={{width:'105%',left:'-5px',textTransform:'none'}} >
-                        Send message to {user_name}
+                        {user_name}
                         <svg className="close-message-box" onClick={() => this.props.openMessageBox()} style={{color:'#fff', height:'35px',width:'35px',opacity:'60%',marginTop:'2px',marginBottom:'2px',right:'20px'}} xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20" fill="currentColor">
                             <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
                         </svg>
