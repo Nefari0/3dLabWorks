@@ -51,6 +51,7 @@ html {
 
 .App {
   text-align: center;
+  max-height: 100vh;
 }
 
 .App-logo {
@@ -132,8 +133,11 @@ h1 {
   padding-left: 25px;
   margin: 15px;
   margin-top: auto;
+  /* margin-top: 10px; */
   margin-bottom: auto;
-  height: 500px;
+  /* height: 500px; */
+
+  height: 60vh;
   width: 400px;
   background-color: white;
   border-radius: 1%;
@@ -146,6 +150,7 @@ h1 {
 
 .sub-header {
   /* margin: auto; */
+  /* position: fixed; */
   margin-top: 2px;
   margin-bottom: 2px;
   height: 30px;
@@ -157,6 +162,7 @@ h1 {
   justify-content: space-around;
   align-items: baseline;
   align-content: stretch;
+  /* opacity: 1; */
 }
 
 .about-header-closed {
