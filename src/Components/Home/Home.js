@@ -29,10 +29,12 @@ class Home extends Component {
         this.handlePassword = this.handlePassword.bind(this)
         this.handleClick = this.handleClick.bind(this)
         this.projectIsLiked = this.projectIsLiked.bind(this)
+
+        // --- this will be used for side scroll --- //
+        // this.testRef = React.createRef();
     }
 
     componentDidMount() {
-        
         // this.props.getModels()
         // axios.get('/api/videos/get').then(res => {
         //     this.setState({videos:res.data})
@@ -67,7 +69,7 @@ class Home extends Component {
     }
 
     componentDidUpdate() {
-        this.props.updateUser()
+        // this.props.updateUser()
         // if (this.state.userLikes === null) {this.setState({...this.state,userLikes:this.props.user.user.user_likes})}
     }
 
@@ -101,6 +103,21 @@ class Home extends Component {
           }
     }
 
+
+    //  --- SIDE SCROLL --- //
+    // scroll = (params) => {
+    //     console.log('hit scroll')
+    //     params.current.scrollIntoView({behavior: "smooth", block: "center"})
+    //     // console.log('test',this.testRef)
+    //     // window.scrollTo(
+    //     //     {
+    //     //     top: 0,
+    //     //     left: 10,
+    //     //     behavior: 'smooth'
+    //     //   }
+    //     //   );
+    // }
+
     render() {
         const { user_name, password, projects, loading, videos } = this.state
         const { loginUser } = this.props
@@ -123,7 +140,7 @@ class Home extends Component {
                     {!loading ? true : <Loading />}
                     <h2 className="hero-h2">IMAGINE IT - BUILD IT.</h2>
                     {/* <h2 className="hero-h2">JOIN THE MAKER REVOLUTION</h2> */}
-                    <div className="deploy-projects">
+                    <div className="deploy-projects" >
                         {mappedVideos}
                         {mappedModels}
                     </div>
