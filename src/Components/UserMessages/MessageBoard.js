@@ -150,10 +150,11 @@ const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
             return <MyMessage key={el.message_id} loggedInUser={user_id} content={el.content} user_id={el.user_id} photo_url={el.photo_url} user_name={el.user_name} date_created={el.date_created} />
         })
 
-        const mappedNewMessages = newMessages.map(el => {
-            const { counter } = this.state
-            return <p style={{color:'#555'}}>{el.msg} </p>
-        })
+        // ---- load new message view socket for performance ---- //
+        // const mappedNewMessages = newMessages.map(el => {
+        //     const { counter } = this.state
+        //     return <p style={{color:'#555'}}>{el.msg} </p>
+        // })
 
         // if(isLoggedIn === false && gotMessages === true){
         //     this.setState({
