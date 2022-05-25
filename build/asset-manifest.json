@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.8508d948.chunk.css",
-    "main.js": "/static/js/main.57eb6fad.chunk.js",
-    "main.js.map": "/static/js/main.57eb6fad.chunk.js.map",
+    "main.css": "/static/css/main.fb081843.chunk.css",
+    "main.js": "/static/js/main.0cf7b40d.chunk.js",
+    "main.js.map": "/static/js/main.0cf7b40d.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.d223f5cc.js",
     "runtime-main.js.map": "/static/js/runtime-main.d223f5cc.js.map",
     "static/js/2.4f520e2b.chunk.js": "/static/js/2.4f520e2b.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.deba906c.chunk.js": "/static/js/3.deba906c.chunk.js",
     "static/js/3.deba906c.chunk.js.map": "/static/js/3.deba906c.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.8508d948.chunk.css.map": "/static/css/main.8508d948.chunk.css.map",
+    "static/css/main.fb081843.chunk.css.map": "/static/css/main.fb081843.chunk.css.map",
     "static/js/2.4f520e2b.chunk.js.LICENSE.txt": "/static/js/2.4f520e2b.chunk.js.LICENSE.txt",
     "static/media/CheckerBoard.css": "/static/media/American_walnut_pxr128_jpg.745df99b.jpg",
     "static/media/CDinits.d5585836.png": "/static/media/CDinits.d5585836.png",
@@ -23,7 +23,7 @@
   "entrypoints": [
     "static/js/runtime-main.d223f5cc.js",
     "static/js/2.4f520e2b.chunk.js",
-    "static/css/main.8508d948.chunk.css",
-    "static/js/main.57eb6fad.chunk.js"
+    "static/css/main.fb081843.chunk.css",
+    "static/js/main.0cf7b40d.chunk.js"
   ]
 }
