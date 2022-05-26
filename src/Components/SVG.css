@@ -1,0 +1,21 @@
+.small-icon {
+    padding-top: 10px;
+    height: 25px;
+    color: #6495ed;
+}
+  
+.small-icon-tweaks {
+    padding-left: 40px;
+    margin-bottom: 10px;
+}
+
+.large-icon {
+    margin:auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-top: 10px;
+    height: 45px;
+    width: 45px;
+    opacity: 60%;
+    color: #6495ed;
+}

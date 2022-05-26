@@ -1,5 +1,6 @@
 import { useState } from "react"
 import './../App.css'
+import './SVG.css'
 
 const SVG = (params) => {
 
@@ -37,7 +38,7 @@ const SVG = (params) => {
     }
 
     return <div>
-        <svg className="small-icon" style={{margin:'auto',marginLeft:'10px',marginRight:'10px', height:'45px',width:'45px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+        <svg className="large-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
             {icon(params.params)}
         </svg>
     </div>
