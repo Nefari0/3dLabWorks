@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import { getModels } from '../../ducks/modelsReducer'
 import { updateUser,remoteLogin } from '../../ducks/userReducer'
 import SVG from '../SVG'
+import '../SVG.css'
 // import { addLike } from '../../../server/controllers/projectsController'
 
 const Project = (props) => {
