@@ -7,8 +7,8 @@ import Tile from './Tile/Tile'
 import pieces from './pieces'
 import CurrentPlayer from './CurrentPlayer'
 // import Notice from '../Notice/Notice'
-// import { w3cwebsocket as W3CWebSocket } from "websocket";
-// const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
+import { w3cwebsocket as W3CWebSocket } from "websocket";
+const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
 // const client = new W3CWebSocket(`ws://165.227.102.189:8002`); // build
 
 class CheckerBoard extends Component {
@@ -61,7 +61,7 @@ class CheckerBoard extends Component {
     }
 
     getConnected = (input) => {
-        const { client } = this.props
+        // const { client } = this.props
         client.onopen = () => {
             console.log('client connected')
         }
@@ -95,7 +95,7 @@ class CheckerBoard extends Component {
         }
     }
 
-        // --- this function makes all pieces king - it's purpose is strictly for testing moves in all direction --- //
+    // --- this function makes all pieces king - it's purpose is strictly for testing moves in all direction --- //
     kingAll = () => {
         const { pieces } = this.state
         var updatePieces = []
@@ -104,31 +104,31 @@ class CheckerBoard extends Component {
             updatePieces.push(el)
         })
         this.setState({pieces:updatePieces})
-        
     }
 
     sendToSocketsSwitch = (input) => {
-        const { client,currentGame } = this.props
+        const { currentGame } = this.props
         const { id } = this.props.user.user // this is for playing a game with another user.
         // console.log('hit sockets')
+        // client.onopen()
         client.send(JSON.stringify({type: "checkerTurn",input, gameID:currentGame}))
     };
 
     // --- this function is for testing -- //
-    sendToSocketsUpdate = (input) => {
-        const { client } = this.props
+    // sendToSocketsUpdate = (input) => {
+        // const { client } = this.props
 
         // client.send(JSON.stringify({type: "checkerTurn",input, sender:id}))
-    }
+    // }
 
     boardFactory = () => {
-    var matrix = []
-    var numOfTiles = 8
-    var M = Array.from(Array(numOfTiles)) // rows
-    for(let i = 0; i < numOfTiles; i++){ // columns
-    matrix.push(M)
-        }
-        this.setState({matrix:matrix})
+        var matrix = []
+        var numOfTiles = 8
+        var M = Array.from(Array(numOfTiles)) // rows
+        for(let i = 0; i < numOfTiles; i++){ // columns
+        matrix.push(M)
+            }
+            this.setState({matrix:matrix})
     }
 
     // checks for available attacks of current play at biginning of each turn
