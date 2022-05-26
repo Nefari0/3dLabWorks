@@ -67,7 +67,7 @@ const MobileLogin = (props) => {
     return(
    
         <div className={`plogin-container ${!signup ? true : `plogin-Container r-selected ${openIAgree ? true : `plogin-container r-selected agree-view`}`}`}>
-        {/* <section className="login-title"> */}
+        
         <section className={`login-title ${!signup ? true : `rlogin-title ${openIAgree ? true : `rlogin-title rlogin-title-agreement`}`}`}>
 
             <svg className="close-button" style={{color:'#fff', height:'35px',width:'35px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} onClick={props.exit} xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20" fill="currentColor">
@@ -76,10 +76,9 @@ const MobileLogin = (props) => {
             
             {!signup ? (!isLoggedIn ? <h2 style={{textTransform:'none'}} >Log In to Your Accout</h2> : <h2 style={{textTransform:'none'}} >Log Out</h2>) : <h2 style={{textTransform:'none'}} >Create Account</h2>}</section>
         {!signup ? <section className="form">
-        {/* <input value={user_name} onChange={e => props.name(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'20px'}}/> */}
+
         <input value={user_name} onChange={e => setUsername(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'21px'}}/>
 
-        {/* <input value={password} onChange={e => props.pass(e.target.value)} placeholder="Password" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'17px'}} type="password" /> */}
         <input value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'17px'}} type="password" />
 
 
@@ -98,23 +97,21 @@ const MobileLogin = (props) => {
             <p style={{fontSize:'10px',marginBottom:'0px',marginLeft:'0px', color:'blue' }} >Forgot password?</p>
         </ul> : <div className="keep-session log-form-length"></div>}
 
-        {/* {!isLoggedIn ? <a className="login-button" onClick={props.execute} >Log In</a> : <a className="login-button" onClick={props.logout} >Log Out</a>} */}
         {!isLoggedIn ? <a className="login-button" onClick={getLoggedIn} >Log In</a> : <a className="login-button" onClick={props.logout} >Log Out</a>}
 
         {!isLoggedIn ? <div className="build-account" ><p>Need an account?</p><a style={{fontWeight:'400',color:"blue"}} onClick={selectSignUp}>Sign up</a></div> : <div className="build-account" ><p>Logged in as:</p><a style={{fontWeight:'400',color:"blue"}}>{user}</a></div>}
         </section>
         :
-        // <section className="rform">
         <section className={`rform`}>
 
             {!openIAgree ? <Agreement/> :
-            <div style={{height:'450px'}}>
+            <form style={{height:'450px'}}>
                 <input value={user_name} onChange={e => setUsername(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" style={{marginLeft:'2px'}}/>
                 <input value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" className="log-input log-form-length disabled" style={{marginLeft:'2px',marginTop:'17px',marginBottom:'2px'}} type="password" />
                 <input value={email} onChange={e => setEmail(e.target.value)} placeholder="Email" className="log-input log-form-length disabled" style={{marginLeft:'2px',marginTop:'18px',marginBottom:'2px'}} />
                 <input value={first_name} onChange={e => setFirstName(e.target.value)} placeholder="First Name" className="log-input log-form-length disabled" style={{marginLeft:'2px',marginTop:'17px',marginBottom:'2px'}} />
                 <input value={last_name} onChange={e => setLastName(e.target.value)} placeholder="Last Name" className="log-input log-form-length disabled" style={{marginLeft:'2px',marginBottom:'20px',marginTop:'17px'}} />
-            </div>}
+            </form>}
             <div className="keep-session-check">
 
             {!iAgree ?
@@ -129,8 +126,6 @@ const MobileLogin = (props) => {
 
             <p style={{fontSize:'10px',marginBottom:'0px',marginLeft:'0px'}} onClick={openAgreement} >I agree to terms and conditions</p>
             </div>
-
-                {/* {openIAgree ? <a className="login-button" style={{marginTop:'10px'}} onClick={executeRegister} >Sign Up</a> : null} */}
                 {openIAgree ? <a className="login-button" style={{marginTop:'10px'}} onClick={executeRegister} >Sign Up</a> : null}
                 <div className="build-account" ><a style={{fontWeight:'400',color:"blue"}} onClick={selectSignUp}>Cancel</a></div>
                 <div className='r-form-fake-bottom' ></div>
@@ -141,7 +136,6 @@ const MobileLogin = (props) => {
     )
     
 }
-// export default Prototyping
 
 function mapStateToProps(reduxState){
     return reduxState
