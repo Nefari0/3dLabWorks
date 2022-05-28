@@ -190,24 +190,10 @@
     opacity: none;
 }
 
-/* .small-icon {
-    padding-top: 10px;
-    height: 25px;
-    color: #6495ed;
-}
-
-.small-icon-tweaks {
-    padding-left: 40px;
-    margin-bottom: 10px;
-} */
-
 .view {
     margin: none;
-    /* margin-top: 10px; */
     min-height: 90vh;
-    /* height: 90vh; */
-    background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url(white-backround1.jpg);
-    /* background-color: red; */
+    background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url(/src/assets/white-backround1.jpg);
     background-size: cover; 
     background-position: center bottom;
     background-attachment: fixed;
