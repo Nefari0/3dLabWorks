@@ -14,6 +14,7 @@ import MM3D1 from '../../assets/MM3D2333x50orthofff.png'
 // import MBox from '../../assets/MBox.png'
 // import MBox from '../../assets/MBoxOrtho.png'
 import CDinits from '../../assets/CDinits.png'
+import profilePicPlaceHolder from '../../assets/profile-pic-placeholder.png'
 
 
 class Header extends Component{
