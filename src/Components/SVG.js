@@ -25,6 +25,7 @@ const SVG = (params) => {
             // --- ICON BELOW NOT FULLY FUNCTIONAL --- //
             case "large_heart_dark":
                 return (largeHeart('dark'))
+            // --------------------------------------- //
             case 'edit_project':
                 return (editProject())
             case 'comments':
