@@ -1,6 +1,5 @@
 import { Switch, Route } from 'react-router-dom'
 import Home from './Components/Home/Home'
-// import FeaturedProjects from './Components/FeaturedProjects/FeaturedProjects'
 import GroupPage from './Components/GroupPage/GroupPage'
 import UserPage from './Components/UserPage/UserPage'
 import Header from './Components/Header/Header'
@@ -15,15 +14,10 @@ import AdminPage from './Components/AdminPage/AdminPage'
 import Messages from './Components/Messages/Messages'
 import ViewUser from './Components/ViewUser/ViewUser'
 import MessageBoard from './Components/UserMessages/MessageBoard'
-// import ViewUserV2 from './Components/AdminPage/ViewUserV2'
-
 
 export default (
     <Switch>
         <Route exact path="/" component={Home} />
-        {/* <Route exact path="/" component={Header} /> */}
-        {/* <Route path="/home" component={Home} /> */}
-        {/* <Route path="/viewuser/:user_id" component={ViewUser} /> */}
         <Route path="/viewuser/:user_id" component={ViewUser} />
         <Route path="/explore" component={Explore} />
         <Route path="/group" component={GroupPage} />
