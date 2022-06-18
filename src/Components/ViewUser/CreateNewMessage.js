@@ -122,14 +122,6 @@ class CreateNewMessage extends Component {
         const { loggedInUser,currentUserMessage } = this.props
         const { newMessages } = this.state
 
-        // const mappedNewMessage = newMessages.map(el => {
-        //     return <OneMessage key={el.} />
-        // })
-        
-        // const mappedMessage = currentUserMessage.map(el => {
-        //     return <OneMessage key={el.message_id} loggedInUser={user_id} content={el.content} user_id={el.user_id} photo_url={el.photo_url} user_name={el.user_name} date_created={el.date_created} />
-        // })
-
         return(<div className='create-message-container'>
                     <h4 className='message-board-title' style={{width:'105%',left:'-5px',textTransform:'none'}} >
                         {user_name}
@@ -140,18 +132,13 @@ class CreateNewMessage extends Component {
                  
                     <section className="create-message-input" >
                         <textarea className='message-input' style={{width:'250px',marginLeft:'10px',maxHeight:'50px'}} value={this.state.text} name="text" rows="5" cols="50" wrap="soft" onChange={e => this.handleText('text',e.target.value)} > </textarea>
-                    {/* <div className='portrait-row'> */}
-                        {/* <div className='user-buttons' style={{marginTop:'30px'}}  ><p style={{marginTop:'10px'}} onClick={() => this.props.openMessageBox()} >Cancel</p></div> */}
-                        {/* <div className='send-message-button' style={{marginTop:'30px'}}  ><p style={{marginTop:'10px'}} onClick={() => this.executeSendMessage()} >Send</p></div> */}
                         <svg onClick={() => this.executeSendMessage()} xmlns="http://www.w3.org/2000/svg" className="send-message-button" style={{marginRight:'10px',marginLeft:'5px'}} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                         </svg>
-                    {/* </div> */}
                     </section>
-                    {/* {this.processMessages()} */}
+
                     <section className='thread-layout'>
                         <div>{this.processMessages()}</div>
-                    {/* <section > */}
                     </section>
         </div>)
     }
