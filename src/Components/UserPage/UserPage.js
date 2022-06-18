@@ -309,36 +309,12 @@ class UserPage extends Component {
                 <img src={background_url} className='background-photo' onClick={() => this.hideView('showPhotos')} />
                    {challengeUser === null ? null: <GameInvite challengeUser={challengeUser} changeGameID={this.changeGameID} hideView={this.hideView} /> }
 
-                    {/* <svg xmlns="http://www.w3.org/2000/svg" className="friend-menu-icon" style={{position:'absolute',color:'#fff'}} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg> */}
-
                 <div className="portrait">
                     <img className="profile-photo" 
                     src={photo}
                     alt="photo"
                     onClick={() => this.hideView('showPhotos')}
                     />
-
-                
-                    {/* <input className='user-photo-file-input '
-                    style={{position:'absolute',top:'0px',left:'0px',width:'20px',height:'20px'}}
-                    type="file"
-                    accept="image/png,image/jpeg"
-                    
-                    onChange={e => this.handlePhoto(e)} 
-                    /> */}
-
-                    {/* <input className='user-photo-file-input '
-                    style={{position:'absolute',top:'190px',right:'55%',width:'20px',height:'20px'}}
-                    type="file"
-                    accept="image/png,image/jpeg"
-                    onChange={e => this.handlePhoto(e)} 
-                    />
-
-                    <svg xmlns="http://www.w3.org/2000/svg" className="friend-menu-icon" style={{position:'absolute',top:'190px',right:'50%'}} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg> */}
 
                     <h4 className="portrait-row" style={{textTransform:'none'}} >{this.props.user.user.user}</h4>
                     <div className='portrait-row' style={{flexWrap:'wrap',justifyContent:'center',width:'300px'}}>

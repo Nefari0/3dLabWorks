@@ -154,11 +154,6 @@ class ViewUser extends Component {
             return <h4 className="portrait-row" style={{textTransform:'none'}} key={el.user_id} >{el.user_name}</h4>
         })
 
-        // const mappedUserInfo = user.map(el => {
-        //     // return <UserInfo  key={el.user_id} user={el.user_name} name={el.first_name} email={el.email} />
-        //     return <UserInfo  key={el.user_id} user={el.user_name} name={el.first_name} email={null} />
-        // })
-
         const mappedBackground = user.map(el => {
            return <img src={el.background_url} key={el.user_id} className='background-photo' />
         })
@@ -172,7 +167,7 @@ class ViewUser extends Component {
         })
 
     return(
-        <div>
+        
             <div className="user-page">
             {this.state.openMessageBox ? mappedNewMessage : null}
             {isLoading ? <Loading/> : null}
@@ -184,8 +179,10 @@ class ViewUser extends Component {
                     {mappedUserName}
  
                     <div className='portrait-row'>
-                        {parseInt(user_id) === id ? true : <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.openMessageBox()} >
+                        {parseInt(user_id) === id ? true :
+                        <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.openMessageBox()} >
                             <p style={{marginTop:'3px'}} >Message</p>
+                            {/* Message */}
                         </div>}
 
                         {this.props.user.isLoggedIn === true && this.state.friendShipInfo != true ? 
@@ -198,8 +195,6 @@ class ViewUser extends Component {
 
                 </div>
 
-                {/* {mappedUserInfo} */}
-
             </section>
 
             <section className="column2" >
@@ -210,8 +205,7 @@ class ViewUser extends Component {
 
             </section>
         </div>
-        {/* )} */}
-        </div>
+        
         )}
 }
 function mapStateToProps(reduxState){
