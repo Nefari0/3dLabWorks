@@ -135,15 +135,12 @@ module.exports = {
              auth: isAuthenticated,
              is_sudo: user.is_sudo,
          };
-         console.log('this is req.session',req.session.user.last_name)
-        //  userData(req.session.data)
             return res.status(200).send(req.session.user)
     },
     // -- auto login from browser if usersession is saved -- //
     browserLogin: async (req,res) => {
         const { user_name, last_visit, visited } = req.body;
         const from_browser = visited
-        // console.log('this is user in authController',user_name,last_visit,visited)
         if (user_name.split('').length < 1) { // --- does user_name from req.body exist
             return res.status(401).send('user not found')
         }
