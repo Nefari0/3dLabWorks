@@ -73,36 +73,25 @@ const Project = (props) => {
 
     return(
         <div className='project-container'>
-            <div>
-                <div className="photo-title-border"><Link to={`viewuser/${user_id}`} ><img src={getPhotoUrl()} className="project-user-photo"/></Link>
 
-                <p className="dark-text">{name}<br/><p className='usr-nm-txt'>by {getUserName()}</p></p>
-            </div>
+            <header>
+                <Link to={`viewuser/${user_id}`} ><img src={getPhotoUrl()} className="project-user-photo"/></Link>
+                <h4 style={{backgroundColor:'',paddingBottom:'5px',paddingTop:'15px'}}>{name}<br/><i>by {getUserName()}</i></h4>
+            </header>
 
-                <Link to={`projectdetails/${model_id}`}><div className="image-div" ><img className="model-photo" src={firebase_url01}/></div></Link>
-            </div>
-            <div>
-                <div className="download-container">
+            <Link to={`projectdetails/${model_id}`}><div className="image-div" ><img className="model-photo" src={firebase_url01}/></div></Link>
+
+            <section>
+     
 
                 <a onClick={() => isLoggedIn === true ? window.open(firebase_url) : plsSignIn()} ><SVG params={'download_icon'} /></a> 
-
-                {/* <a onClick={() => isLoggedIn === true ? window.open(firebase_url) : plsSignIn()} ><SVG params={'download-icon'} /></a> 
-                    { isLoggedIn ? 
-                    <a href={`${firebase_url}`} ><SVG params={'download-icon'} /></a> 
-                    : 
-                    <a onClick={() => plsSignIn()} ><SVG params={'download-icon'} /></a>
-                    } */}
-                        
-                    
                     
                     { isLoggedIn ? <a className="project-text" href={`${firebase_url}`} target="_blank" rel="noopener noreferrer">download</a> : <a className="project-text" onClick={() => plsSignIn()}>download</a>}
 
                     <div className="like-share">
-                        <div>
-
-                            <div className="like-share-box" style={{borderBottom:'1px solid #555'}}>
+               
+                            <aside style={{borderBottom:'1px solid #555'}}>
                                 {
-
                                 heart === false ?
                         
                                 
@@ -113,23 +102,21 @@ const Project = (props) => {
                                 <svg className="small-icon small-icon-tweaks" onClick={clickedLike} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                     <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                                 </svg>
-
-
+                                
                                 }
-                                <p className="like-share-text" style={{marginLeft:'10px'}}>{numOfLikes}</p>
-                            </div>
+                                <p style={{marginLeft:'10px'}}>{numOfLikes}</p>
+                            </aside>
 
-                            <div className="like-share-box">
+                            <aside>
                                 <svg className="small-icon small-icon-tweaks" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
                                 </svg>
-                                <p className="like-share-text" style={{marginLeft:'10px'}}>share</p>
-                            </div>
-                        </div>
+                                <p style={{marginLeft:'10px'}}>share</p>
+                            </aside>
 
                     </div>
-                </div>
-            </div>
+            
+            </section>
         </div>
     )
 }
