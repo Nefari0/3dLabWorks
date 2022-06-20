@@ -15,16 +15,10 @@ class About extends Component {
         super();
 
         this.state = {
+            currentView:'main',
             about:[],
-            showAbout:true,
             general:[],
-            showGeneral:true,
-
-            mainSelected:true,
-            linksSelected:false
         }
-        this.changeView = this.changeView.bind(this)
-        this.resetView = this.resetView.bind(this)
     }
 
     componentDidMount(){
@@ -38,30 +32,13 @@ class About extends Component {
         })
     }
 
-    resetView = () => {
-        this.setState({
-            mainSelected:false,
-            linksSelected:false
-        })
-    }
-
     changeView = (params) => {
-        this.resetView()
-        switch(params) {
-            case 'main':
-                this.setState({mainSelected:true})
-                break;
-            case 'links':
-                this.setState({linksSelected:true})
-                break;
-            default:
-                break;
-        }
+        this.setState({currentView:params})
     }
 
         render(){
 
-            const { about,general,mainSelected,linksSelected } = this.state
+            const { about,general,currentView } = this.state
 
             const mappedAbout = about.map(element => {
                 return <Document data={element} key={element.doc_id} />
@@ -72,17 +49,19 @@ class About extends Component {
             })
 
             return(
-                <div>
-                    <header className="sub-header">
-                        <a onClick={() => this.changeView('main')} className={`${!mainSelected ? true : 'selected'}`} >main</a>
-                        <a onClick={() => this.changeView('links')} className={`${!linksSelected ? true : 'selected'}`}>links</a>
+                <div className='about-container' >
+                    <header className="sub-header" style={{position:'relative'}} >
+                        <a onClick={() => this.changeView('main')} className={`${currentView === 'main' ? 'selected' : null}`} >main</a>
+                        <a onClick={() => this.changeView('links')} className={`${currentView === 'links' ? 'selected' : null}`}>links</a>
                         {/* <Notice item={'about-links'} content={'Resources'} /> */}
                     </header>
-                    <div className="about-container">   
-                        {mainSelected ? <div>{mappedAbout}</div> : null}
-                        {mainSelected ? <div>{mappedGeneral}</div> : null}
-                        {linksSelected ? <Links /> : null}
-                    </div>
+                    <section>   
+
+                        {currentView === 'main' ? <div>{mappedAbout}</div> : null}
+                        {currentView === 'main' ? <div>{mappedGeneral}</div> : null}
+                        {currentView === 'links' ? <Links /> : null}
+
+                    </section>
                 </div>
             )
         }
