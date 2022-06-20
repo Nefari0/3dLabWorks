@@ -73,10 +73,11 @@ class About extends Component {
 
             return(
                 <div>
-                    <div className="sub-header">
-                        {!mainSelected ? (<a onClick={() => this.changeView('main')}>main</a>) : (<a className="a-selected" >main</a>)}
-                        {!linksSelected ? (<div className='about-header-item'><Notice item={'about-links'} content={'Resources'} /><a onClick={() => this.changeView('links')}>links</a></div>) : (<a className="a-selected">links</a>)}
-                    </div>
+                    <header className="sub-header">
+                        <a onClick={() => this.changeView('main')} className={`${!mainSelected ? true : 'selected'}`} >main</a>
+                        <a onClick={() => this.changeView('links')} className={`${!linksSelected ? true : 'selected'}`}>links</a>
+                        {/* <Notice item={'about-links'} content={'Resources'} /> */}
+                    </header>
                     <div className="about-container">   
                         {mainSelected ? <div>{mappedAbout}</div> : null}
                         {mainSelected ? <div>{mappedGeneral}</div> : null}
