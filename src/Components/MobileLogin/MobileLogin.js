@@ -8,12 +8,10 @@ import Agreement from '../Register/Agreement'
 const MobileLogin = (props) => {
 
     const { isLoggedIn,saveSession,current_user } = props
-    const { user } = props.user.user
+    const { user,photo } = props.user.user
     
     const [ user_name, setUsername ] = useState('')
     const [ password, setPassword ] = useState('')
-    // const [ new_user_name, setNewUserName ] = useState('')
-    // const [ new_password, setNewPassword ] = useState('')
     const [ saveInfo,setSaveInfo ] = useState(true)
     const [ signup,setSignup ] = useState(false)
     const [ email, setEmail ] = useState('')
@@ -26,23 +24,16 @@ const MobileLogin = (props) => {
     const [ openIAgree, setOpenIAgree ] = useState(true)
 
     const selectSignUp = () => {
-        // console.log('lign up',signup)
         setSignup(!signup)
     }
 
     const executeIAgree = () => {
         setIAgree(!iAgree)
-        // console.log(iAgree)
     }
-
-    // const sessionInfo = () => {
-    //     setSaveInfo(!saveInfo)
-    // }
 
     const executeRegister = () => {
         if (iAgree === true) {
         props.registerUser(user_name, password, email, first_name, is_admin, is_sudo)
-        // props.history.push('/user')
     } else {
         return (alert('please agree to conditions'))
     }
@@ -51,22 +42,15 @@ const MobileLogin = (props) => {
 
     const openAgreement = () => {
         setOpenIAgree(!openIAgree)
-        // console.log('open agreement',openIAgree)
     }
-
-    // const waitForLogin = () => {
-    //     if (props.user.isLoggedIn === true) {
-    //         return (true)
-    //     }
-    // }
 
     const getLoggedIn = async () => {
         props.execute(user_name,password,saveInfo)
     }
-    // console.log('current user',user)
+    
     return(
    
-        <div className={`plogin-container ${!signup ? true : `plogin-Container r-selected ${openIAgree ? true : `plogin-container r-selected agree-view`}`}`}>
+        <div className={`plogin-container ${!signup ? true : `plogin-Container r-selected ${openIAgree ? true : `plogin-container r-selected agree-view`}`}`} >
         
         <section className={`login-title ${!signup ? true : `rlogin-title ${openIAgree ? true : `rlogin-title rlogin-title-agreement`}`}`}>
 
@@ -77,9 +61,11 @@ const MobileLogin = (props) => {
             {!signup ? (!isLoggedIn ? <h2 style={{textTransform:'none'}} >Log In to Your Accout</h2> : <h2 style={{textTransform:'none'}} >Log Out</h2>) : <h2 style={{textTransform:'none'}} >Create Account</h2>}</section>
         {!signup ? <section className="form">
 
-        <input value={user_name} onChange={e => setUsername(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'21px'}}/>
+        {isLoggedIn ? <img style={{height:'100px',borderRadius:'50%',marginTop:'20px'}} src={photo} /> : null}
 
-        <input value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'17px'}} type="password" />
+        {!isLoggedIn ? <input value={user_name} onChange={e => setUsername(e.target.value)} placeholder="Username" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'21px'}}/> : null}
+
+        {! isLoggedIn ? <input value={password} onChange={e => setPassword(e.target.value)} placeholder="Password" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'17px'}} type="password" /> : null}
 
 
 
