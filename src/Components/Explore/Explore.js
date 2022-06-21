@@ -131,33 +131,27 @@ class Explore extends Component {
         const mappedVideos = videos.map(el => {
             return <VideoPlayer key={el.video_id} video_url={el.video_url} category={el.category} tag={el.tag} firebase_url={el.firebase_url} photo_url={el.photo_url} user_name={el.user_name} name={el.name} video_name={el.video_name}  />
         })
-    
-        // const mappedData = data.map(element => {
-        //     return <Project data={element} key={element.model_id} projectIsLiked={this.projectIsLiked} handleClick={this.handleClick} isLoggedIn={isLoggedIn} likes={element.likes} id={id} user_likes={user_likes} />
-        // })
 
         return(
             <div >
-            {isLoading === true ? <Loading /> : null}
-            <div className="sub-header" style={{position:'absolute'}}>
-                <a onClick={() => this.changeView('3D Models')} className={`null ${!this.state.viewModels ? true : 'a-selected'}`} >3D Models</a>
-                <a onClick={() => this.changeView("Videos")} className={`null ${!this.state.viewVideos ? true : 'a-selected'}`} >Videos</a>
-            </div>
-            <div className="explore-container" style={{paddingTop:'25px'}}>
-                {/* className for "about header" is in About.css and App.css */}
-                {/* <div className="about-header-closed project-search" style={{marginLeft:'0px',width:'100%'}}>  */}
-                <div className={`search-menu ${!isLoggedIn ? true : 'slide-over'} ${openSearchBar ? true : `search-menu-closed ${!isLoggedIn ? true : 'slide-over'}`}`} >
+                {isLoading === true ? <Loading /> : null}
+                <header className="sub-header">
+                    <a onClick={() => this.changeView('3D Models')} className={`null ${!this.state.viewModels ? true : 'selected'}`} >3D Models</a>
+                    <a onClick={() => this.changeView("Videos")} className={`null ${!this.state.viewVideos ? true : 'selected'}`} >Videos</a>
+                </header>
+                <div className="explore-container" style={{paddingTop:'25px'}}>
+                    <div className={`search-menu ${!isLoggedIn ? true : 'slide-over'} ${openSearchBar ? true : `search-menu-closed ${!isLoggedIn ? true : 'slide-over'}`}`} >
 
-                    <svg onClick={() => this.openSearch()} style={{width:'25px',opacity:'.5'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    <div className={`show-bar ${openSearchBar ? false : `dont-show-bar`}`}>
-                    <input placeholder="search" type="text" style={{height:'25px',width:'100px',borderRadius:'10px',color:'#fff',marginLeft:'10px'}} onChange={e => this.handleText("projectSearch",e.target.value)} ></input>
+                        <svg onClick={() => this.openSearch()} style={{width:'25px',opacity:'.5'}} xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                        <div className={`show-bar ${openSearchBar ? false : `dont-show-bar`}`}>
+                            <input placeholder="search" type="text" style={{height:'25px',width:'100px',borderRadius:'10px',color:'#fff',marginLeft:'10px'}} onChange={e => this.handleText("projectSearch",e.target.value)} ></input>
+                        </div>
                     </div>
+                    {this.state.viewModels === true ? mappedData : null}
+                    {this.state.viewVideos === true ? mappedVideos : null}
                 </div>
-                {this.state.viewModels === true ? mappedData : null}
-                {this.state.viewVideos === true ? mappedVideos : null}
-            </div>
             </div>
 
         )
