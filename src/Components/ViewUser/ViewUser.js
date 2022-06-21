@@ -140,6 +140,7 @@ class ViewUser extends Component {
     render(){
         const { items,isLoading,user,currentUserMessage,friendShipInfo,conversation_id } = this.state
         const { id } = this.props.user.user
+        const { isLoggedIn } = this.props.user
         const { user_id } = this.props.match.params
 
         const mappedNewMessage = user.map(el => {
@@ -165,7 +166,7 @@ class ViewUser extends Component {
     return(
         
             <div className="user-page">
-            {this.state.openMessageBox ? mappedNewMessage : null}
+            {this.state.openMessageBox && isLoggedIn ? mappedNewMessage : null}
             {isLoading ? <Loading/> : null}
             <section className="column1">
                 {mappedBackground}
