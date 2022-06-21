@@ -4,12 +4,11 @@ import Project from '../FeaturedProjects/Project';
 import { Component } from 'react'
 import '../UserPage/UserPage.css'
 import { connect } from 'react-redux'
-import { updateUser } from '../../ducks/userReducer'
+import { updateUser,remoteLogin } from '../../ducks/userReducer'
 import UserInfo from '../UserPage/UserInfo';
 import Loading from '../Loading/Loading';
 import CreateNewMessage from './CreateNewMessage';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-// const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
 const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
 
 class ViewUser extends Component {
@@ -34,7 +33,6 @@ class ViewUser extends Component {
             openMessageBox:false,
             friendShipInfo:null,
         }
-        this.pleaseLogin = this.pleaseLogin.bind(this)
         this.setIsLoading = this.setIsLoading.bind(this)
         this.openMessageBox = this.openMessageBox.bind(this)
         this.checkForExistingMessage = this.checkForExistingMessage.bind(this)
@@ -46,17 +44,24 @@ class ViewUser extends Component {
         this.props.updateUser()
         this.getUserAndProjects(user_id)
         axios.get(`/api/users/${user_id}`).then(res => 
-            this.setState({
-                user:res.data,
-            }))
-            // this.checkForExistingMessage()
-        }
+            this.setState({user:res.data})
+        )
+    }
         
-        componentDidUpdate() {
-            if(this.state.friendShipInfo === null){this.getConnectionStatus()}
+    componentDidUpdate() {
+        // --- Clear all logged in user info upon logout --- //
+        if(this.props.user.isLoggedIn === false && this.state.conversation_id != null){
+            this.setState({
+                currentUserMessage:null,
+                conversation_id:null,
+                friendShipInfo:null,
+            })
+        }
+        // --- Fetch friendship info and messages upon login/mount --- //
+        if(this.state.friendShipInfo === null){this.getConnectionStatus()}
     }
 
-// -- check if loggedin user is already connected to this user -- /
+    // -- check if loggedin user is already connected to this user -- /
     getConnectionStatus = async () => {
         const { id } = this.props.user.user
         const { isLoggedIn } = this.props.user
@@ -67,6 +72,7 @@ class ViewUser extends Component {
         }
     }
 
+    // --- Check for messages - Fetch if they exist --- //
     checkForExistingMessage = async (id,user_id) => {
         await axios.post('/api/conversation/exists',{id,user_id}).then(res => {
             const { messages, conversation_id } = res.data
@@ -77,18 +83,18 @@ class ViewUser extends Component {
         }).catch(err => console.log('there are no conversations yet',err))
     }
 
+    // --- Logged in users can send/recieve messages from this voew --- //
     openMessageBox = () => {
-            const { isLoggedIn } = this.props.user
-            const { id } = this.props.user.user
-            const { currentUserMessage } = this.state
+        const { isLoggedIn } = this.props.user
+        const { id } = this.props.user.user
         
-            if(id != undefined && isLoggedIn === true){
+        if(id != undefined && isLoggedIn === true){
             this.setState({openMessageBox:!this.state.openMessageBox})
-        } else {this.pleaseLogin()}
+        } else {this.props.remoteLogin(true)}
     }
 
+    // --- This is for sending connection requests --- //
     sendConnectInvite = () => {
-        // --- this is for sending connection requests --- //
         const { id } = this.props.user.user
         const { isLoggedIn } = this.props.user
         const { user_id } = this.state.user[0]
@@ -98,8 +104,10 @@ class ViewUser extends Component {
         if(id != undefined && isLoggedIn === true){
             axios.post('/api/friends/add',{id,friend_id,no}).then().catch(err => console.log(err))
             this.sendToSocket()
-        } else {this.pleaseLogin()}
+        } else {this.props.remoteLogin()}
     }
+
+    // --- Realtime connection request updates --- // 
     sendToSocket = () => {
         const { user_id } = this.props.match.params
         const { id,photo,user} = this.props.user.user
@@ -117,12 +125,11 @@ class ViewUser extends Component {
             this.setState({...this.state,items:res.data})
         })
     }
+
     projectIsLiked(projectId,userLike) {
         try {
             return(userLike.filter(el => el.model_id === projectId)[0].model_id === projectId)
-          } catch (error) {
-        
-          }
+        } catch (error) {}
     }
 
     setIsLoading = () => {
@@ -133,12 +140,8 @@ class ViewUser extends Component {
         this.setState({isView:'isFriends'})
     }
 
-    pleaseLogin(){
-        alert('please log in')
-    }
-
     render(){
-        const { items,isLoading,user,currentUserMessage,friendShipInfo,conversation_id } = this.state
+        const { items,isLoading,user,currentUserMessage,conversation_id } = this.state
         const { id } = this.props.user.user
         const { isLoggedIn } = this.props.user
         const { user_id } = this.props.match.params
@@ -165,26 +168,29 @@ class ViewUser extends Component {
 
     return(
         
-            <div className="user-page">
+        <div className="user-page">
+
             {this.state.openMessageBox && isLoggedIn ? mappedNewMessage : null}
+
             {isLoading ? <Loading/> : null}
+
             <section className="column1">
                 {mappedBackground}
+                
                 <div className="portrait">
 
                     {mappedProfilePhoto}
                     {mappedUserName}
  
                     <div className='portrait-row'>
-                        {parseInt(user_id) === id ? true :
-                        <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.openMessageBox()} >
-                            <p style={{marginTop:'3px'}} >Message</p>
-                        </div>}
 
+                        {/* --- Users cannot message themselves --- */}
+                        {parseInt(user_id) === id ? true : <p className='user-buttons' style={{marginTop:'30px',paddingTop:'3px'}} onClick={() => this.openMessageBox()} >Message</p>}
+                        
+                        
+                        {/* --- Connection requests can only be send by logged in users who are not currently connected --- */}
                         {this.props.user.isLoggedIn === true && this.state.friendShipInfo != true ? 
-                        <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.sendConnectInvite()} >
-                            <p style={{marginTop:'3px'}} >Connect</p>
-                        </div>
+                            <p className='user-buttons' style={{marginTop:'30px',paddingTop:'3px'}} onClick={() => this.sendConnectInvite()} >Connect</p>
                        : null}
                     </div>
 
@@ -208,4 +214,4 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps,{updateUser})(ViewUser)
+export default connect(mapStateToProps,{updateUser,remoteLogin})(ViewUser)
