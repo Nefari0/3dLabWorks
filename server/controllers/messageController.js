@@ -40,20 +40,30 @@ module.exports = {
     },
 
     createNewConversation: async (req,res) => {
-        const { text,id,user_id } = req.body
+        const { text,to_user,user_id } = req.body
         const content = text
-        const conversation_name = 'new conversation'
+        // console.log('create conversation','to user = ',to_user,'   and user_id = ',user_id)
+        const conversation_name = 'testing'
         const db = req.app.get('db')
         const newConversation = await db.messaging.create_new_conversation([conversation_name])
         const conversation = newConversation[0]
-        const { conversation_id } = conversation
+        // const { conversation_id } = conversation
+        // console.log('messaging backend',user_id,to_user,conversation_id)
         
-        const userConversationFrom = await db.messaging.create_user_conversation([id,conversation['conversation_id'],user_id])
+        const userConversationFrom = await db.messaging.create_user_conversation([to_user,conversation['conversation_id'],user_id])
         const fromUser = userConversationFrom[0]
-        const userConversationTo = await db.messaging.create_user_conversation([user_id,conversation['conversation_id'],id])
+        const userConversationTo = await db.messaging.create_user_conversation([user_id,conversation['conversation_id'],to_user])
         const toUser = userConversationTo[0]
         
-        const message = await db.messaging.create_conversation_message([id,conversation['conversation_id'],text])
+        const data = await db.messaging.create_conversation_message([user_id,conversation['conversation_id'],text])
+        console.log('message in backend',data[0])
+        
+        const message = {
+            conversation_id:data[0].conversation_id,
+            user_id:user_id,
+            to_user:to_user,
+            content:content    
+        }
         return res.status(200).send(message)
 
     },
@@ -61,6 +71,7 @@ module.exports = {
     sendMessage: async (req,res) => {
         const db = req.app.get('db')
         const { user_id,conversation_id,text,to_user } = req.body
+        console.log('sending message backend',user_id,to_user)
         const conversation = await db.messaging.create_conversation_message([user_id,conversation_id,text])
         const stampId = await db.messaging.mark_as_read([to_user,conversation_id])
         const info = conversation[0]
@@ -72,8 +83,9 @@ module.exports = {
         const { id,user_id } = req.body
         const existingMessages = await db.messaging.check_for_existing_message([id,user_id])
         const existing = existingMessages[0]
-
-        if(!existing){
+        
+        if(existing === undefined){
+            console.log('does not exist',id,user_id)
             return res.status(404).send('there are not messages yet')
         }
         const { conversation_id } = existing
