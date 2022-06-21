@@ -1,5 +1,6 @@
 import axios from 'axios';
 import UserProject from './UserProject'
+import Project from '../FeaturedProjects/Project';
 import { Component } from 'react'
 import '../UserPage/UserPage.css'
 import { connect } from 'react-redux'
@@ -58,25 +59,22 @@ class ViewUser extends Component {
 // -- check if loggedin user is already connected to this user -- /
     getConnectionStatus = async () => {
         const { id } = this.props.user.user
-        // console.log('getting status',id)
         const { isLoggedIn } = this.props.user
         const { user_id } = this.props.match.params
         if(id != undefined && isLoggedIn === true) {
-            await axios.post('/api/get/friend/status',{id,user_id}).then(res => this.setState({friendShipInfo:res.data}))
+            await axios.post('/api/get/friend/status',{id,user_id}).then(res => this.setState({friendShipInfo:res.data})).catch(err => {console.log('no connection yet',err)})
             this.checkForExistingMessage(id,user_id)
         }
     }
 
     checkForExistingMessage = async (id,user_id) => {
-        // await axios.post('/api/conversation/exists',{id,user_id}).then(res => this.setState({currentUserMessage:res.data})).catch(err => console.log('err',err))
         await axios.post('/api/conversation/exists',{id,user_id}).then(res => {
-            // console.log(res.data)
             const { messages, conversation_id } = res.data
             this.setState({
                 currentUserMessage:messages,
                 conversation_id:conversation_id
             })
-        })
+        }).catch(err => console.log('there are no conversations yet',err))
     }
 
     openMessageBox = () => {
@@ -96,7 +94,6 @@ class ViewUser extends Component {
         const { user_id } = this.state.user[0]
         const friend_id = user_id
         const no = false
-        // console.log('hit invite',id,friend_id)
         this.setState({friendShipInfo:true})
         if(id != undefined && isLoggedIn === true){
             axios.post('/api/friends/add',{id,friend_id,no}).then().catch(err => console.log(err))
@@ -116,7 +113,6 @@ class ViewUser extends Component {
     }
 
     getUserAndProjects(user_id) {
-        // const { user_id } = this.props.match.params
         axios.get(`/api/user/projects/get/${user_id}`).then(res => {
             this.setState({...this.state,items:res.data})
         })
@@ -125,7 +121,7 @@ class ViewUser extends Component {
         try {
             return(userLike.filter(el => el.model_id === projectId)[0].model_id === projectId)
           } catch (error) {
-            // console.log('user does not like this project',error);
+        
           }
     }
 
@@ -163,7 +159,7 @@ class ViewUser extends Component {
         })
 
         const mappedProjects = items.map(el => {
-            return <UserProject key={el.model_id} model_id={el.model_id} data={el} projectIsLiked={this.projectIsLiked} />
+            return <Project key={el.model_id} model_id={el.model_id} data={el} projectIsLiked={this.projectIsLiked} />
         })
 
     return(
@@ -182,7 +178,6 @@ class ViewUser extends Component {
                         {parseInt(user_id) === id ? true :
                         <div className='user-buttons' style={{marginTop:'30px'}} onClick={() => this.openMessageBox()} >
                             <p style={{marginTop:'3px'}} >Message</p>
-                            {/* Message */}
                         </div>}
 
                         {this.props.user.isLoggedIn === true && this.state.friendShipInfo != true ? 

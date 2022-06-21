@@ -19,7 +19,8 @@ class CreateNewMessage extends Component {
         this.state = {
             currentConversationId:null,
             newMessages:[],
-            text:''
+            text:'',
+           
         }
         this.handleText = this.handleText.bind(this)
         this.executeSendMessage = this.executeSendMessage.bind(this)
@@ -27,14 +28,13 @@ class CreateNewMessage extends Component {
 
     componentDidMount() {
         const { currentUserMessage } = this.props
-
         this.getConnected()
     }
 
         // --- sockets --- //
     getConnected = async (input) => {
 
-        const { conversation_id,user_id } = this.props
+        const { user_id,conversation_id } = this.props
         const { id } = this.props.user.user
 
        client.onopen = () => {
@@ -43,37 +43,25 @@ class CreateNewMessage extends Component {
    
          client.onmessage = (message) => {
              
-           const dataFromServer = JSON.parse(message.data);
-
-        //    console.log('got reply',dataFromServer.conversation_id, conversation_id)
-
-        if (dataFromServer.type === 'message' && dataFromServer.conversation_id === conversation_id ) {
-            this.props.checkForExistingMessage(id,user_id)
-
-        //    this.setState((State) =>
-        //    ({newMessages:[...this.state.newMessages,
-        //    {
-        //      msg: dataFromServer.msg,
-        //      user:dataFromServer.user
-        //    }]
-   
-        //  }))
-        //    console.log('is messaged',conversation_id)
-         }
+            const dataFromServer = JSON.parse(message.data);
+            const { from,to } = dataFromServer
+        
+            if (dataFromServer.type === 'message' && dataFromServer.conversation_id === conversation_id ) {
+                this.props.checkForExistingMessage(id,user_id)
+            }
          }
    }
 
    sendToSockets = (text,conversation_id,toUser) => {
         const { messages,loggedInUser } = this.state
-        const { user,photo } = this.props.user.user
-        // console.log('hit sendToSockets',conversation_id)
-        // client.send(JSON.stringify({type: "message",msg:text,user:user, conversation_id:conversation_id}))
+        const { user,photo,id } = this.props.user.user
         client.send(JSON.stringify({
             type:"message",
             conversation_id:conversation_id,
             msg:text,
             to:toUser,
             user:user,
+            from:id,
             photo:photo
         }))
     }; 
@@ -91,19 +79,21 @@ class CreateNewMessage extends Component {
         const user_id = id
         const { isLoggedIn } = this.props.user
         const { currentUserMessage } =  this.props
-        // console.log('here is id',conversation_id)
         if (isLoggedIn != false && id != undefined) {
-        if (currentUserMessage === null ){
-            await axios.post('/api/conversation/new',{user_id,id,text})
-        } else if (id != undefined && isLoggedIn != false){
-            const conversation_id = currentUserMessage[0].conversation_id
-            await axios.post('/api/conversation/user/new',{conversation_id,user_id,text,to_user})
-            // return client.send(JSON.stringify({type: "message",conversation_id:conversation_id,msg:text,to:user_id,photo:photo}))
-            this.sendToSockets(text,conversation_id,to_user)
-            this.setState({text:''})
+            console.log('hit execute send',isLoggedIn != false && id != undefined)
+            if (currentUserMessage === null ){
+                await axios.post('/api/conversation/new',{user_id,to_user,text}).then(res => {
+                    // console.log('new convo',res.data)
+                this.sendToSockets(text,res.data.conversation_id,to_user,user_id)
+                })
+            } else {
+                const conversation_id = currentUserMessage[0].conversation_id
+                await axios.post('/api/conversation/user/new',{conversation_id,user_id,text,to_user})
+                // return client.send(JSON.stringify({type: "message",conversation_id:conversation_id,msg:text,to:user_id,photo:photo}))
+                this.sendToSockets(text,conversation_id,to_user,user_id)
+                this.setState({text:''})
+            }
         }
-    }
-        // const conversation = await axios.post('/api/conversation/new',{user_id,id,text})
     }
 
     processMessages = () => {
