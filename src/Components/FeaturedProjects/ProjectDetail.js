@@ -305,7 +305,7 @@ class ProjectDetail extends Component {
 
                             {/* -------------- COMMENTS -------------- */}
                             <div className={`detail-box small ${!viewComments ? true : 'detail-box small selected'}`} onClick={() => this.changeView('viewComments')}>
-                                <SVG params={'comments'} />
+                                <SVG params={'comments'} fill={'none'} stroke={'currentColor'}/>
                                 {/* <svg className="large-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" > */}
                                     {/* <path stroke-linecap="round" stroke-linejoin="round" stroke-width={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /> */}
                                 {/* </svg> */}
@@ -315,19 +315,19 @@ class ProjectDetail extends Component {
                             {/* -------------- EDIT / ADD TO FAVORITES -------------- */}
                             {isLoggedIn === true && this.props.user.user.id === maker_id ?
                             <div className={`detail-box small ${!viewEditProject ? true : 'detail-box small selected'}`} onClick={() => this.changeView('viewEditProject')}>
-                                <SVG params={'edit_project'} />
+                                <SVG params={'edit_project'} fill={'none'} stroke={'currentColor'}/>
                                 <p className={`dark-text ${!viewEditProject ? true : 'light-text'}`}>Edit Project</p>
                             </div>
                             :
                             <div className="detail-box small">
-                                <SVG params={'folder'} />
+                                <SVG params={'folder'} fill={'none'} stroke={'currentColor'} />
                                 <p className="dark-text">Add To Favorites</p>
                             </div>
                             }
 
                             {/* -------------- INFORMATION ABOUT PROJECT -------------- */}
                             <div className={`detail-box small ${!viewInfo ? true : 'detail-box small selected'}`} onClick={() => this.changeView('viewInfo')} >
-                                <SVG params={'info'} />
+                                <SVG params={'info'} fill={'none'} stroke={'currentColor'}/>
                                 <p className={`dark-text ${!viewInfo ? true : 'light-text'}`} >Info</p>
                             </div>
 
