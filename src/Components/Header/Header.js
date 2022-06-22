@@ -5,14 +5,9 @@ import { connect } from 'react-redux'
 import './Header.css'
 import { Link } from 'react-router-dom'
 import MobileLogin from '../MobileLogin/MobileLogin'
-import UserPage from '../UserPage/UserPage'
-import { withRouter } from 'react-router'
 import Loading from '../Loading/Loading'
 import cdLabs3d from '../../assets/cdLabs-logo-1-alpha.png'
-// import cdLabs300300 from '../../assets/cdlabs-300x300.png'
 import MM3D1 from '../../assets/MM3D2333x50orthofff.png'
-// import MBox from '../../assets/MBox.png'
-// import MBox from '../../assets/MBoxOrtho.png'
 import CDinits from '../../assets/CDinits.png'
 import profilePicPlaceHolder from '../../assets/profile-pic-placeholder.png'
 
@@ -60,7 +55,6 @@ class Header extends Component{
         const last_visit = new Date()
         
         if(visited != undefined && localStorage['user_name'] != undefined){
-            // this.props.loginUser(savedUsername,savedPassword,last_visit,visited).catch(err =>{
             this.props.autoLogin(savedUsername,last_visit,visited).catch(err => {
                 return console.log('there was an error',err)
             })
@@ -77,22 +71,8 @@ class Header extends Component{
             const assigned_browser = getUniqueID()
             this.sessionToWindow('visited',unique_id)
             this.sessionToWindow('assigned_browser',assigned_browser)
-            // axios.post('/api/track/new/',{unique_id}).then(res => this.sessionToWindow('visited',res.data))
-            // axios.post('/api/track/new/',{unique_id,assigned_browser}).then(res => 
-            //     this.sessionToWindow('browser_id',res.data)
-            //     )
         }
-        //  else {
-            // const unique_id = browser
-            
-            // axios.post('/api/track/increment/',{unique_id,last_visit,browser}).catch(err => {
-            //     console.log('here is the error',err)
-            //     localStorage.removeItem('visited')
-            //     const unique_id = getUniqueID()
-            //     axios.post('/api/track/new/',{unique_id,browser}).then(res => this.sessionToWindow('visited',res.data))
-            // })
-            // this.setState({unique_id:localStorage['visited']})
-        // }
+    
         if(visited !== undefined){
             this.setState({unique_id:visited})
         }
@@ -252,7 +232,7 @@ class Header extends Component{
                 {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='link-item'><a>{user}</a></li></Link>)}
             </ul>
 
-            {!isLoggedIn ? (<h4 className="login-link" onClick={this.toggleLogin} >Login</h4>):(<h4 className="login-link" onClick={this.toggleLogin} >Log Out</h4>)}
+            <h4 className="login-link" onClick={this.toggleLogin} >{!isLoggedIn ? 'Login' : 'logout'}</h4>
 
             {isLoggedIn ? <Link to="/user" ><img src={photo} className="loggedin-user-photo" /></Link> : null} 
 
