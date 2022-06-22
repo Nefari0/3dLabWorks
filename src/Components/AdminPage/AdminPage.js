@@ -50,6 +50,8 @@ class AdminPage extends Component {
             showTraffic:false,
             traffic:[],
 
+            pototypeBool:false, // this is for prototyping only
+
         }
         this.handleAddText = this.handleAddText.bind(this)
         this.addGeneral = this.addGeneral.bind(this)
@@ -160,7 +162,7 @@ class AdminPage extends Component {
 
     render(){
 
-        const { test,editAbout,editGeneral,editUserInfo,users,traffic,showMessages,userMessages,showTraffic,showMemo,memos } = this.state
+        const { test,editAbout,editGeneral,editUserInfo,users,traffic,showMessages,userMessages,showTraffic,showMemo,memos,pototypeBool } = this.state
         const { photo,auth,name,is_admin,is_sudo } = this.props.user.user
 
         const mappedUsers = users.map(element => {
@@ -242,7 +244,7 @@ class AdminPage extends Component {
                     {/* <MessageBoard/> */}
                     <section style={{height:'400px',width:'400px',backgroundColor:'#fff'}} >
                         <SVG params={'large_heart'} />
-                        <button>click</button>
+                        {/* <button onClick={() => this.setState({proto})} >click</button> */}
                     </section>
                     </div>
                 )}
