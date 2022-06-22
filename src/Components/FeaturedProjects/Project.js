@@ -84,7 +84,9 @@ const Project = (props) => {
             <section>
      
 
-                <a onClick={() => isLoggedIn === true ? window.open(firebase_url) : plsSignIn()} ><SVG params={'download_icon'} /></a> 
+                <a onClick={() => isLoggedIn === true ? window.open(firebase_url) : plsSignIn()} >
+                    <SVG params={'download_icon'} fill={'none'} stroke={'currentColor'}/>
+                </a> 
                     
                     { isLoggedIn ? <a className="project-text" href={`${firebase_url}`} target="_blank" rel="noopener noreferrer">download</a> : <a className="project-text" onClick={() => plsSignIn()}>download</a>}
 
