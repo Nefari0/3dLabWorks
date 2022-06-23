@@ -20,10 +20,8 @@ module.exports = {
         const db = req.app.get('db')
         const friends = await db.friends.get_pending_friends([user_id])
         if(friends.length < 1){
-            console.log('not a friend')
             return res.status(404).send('no pending request')
         }
-        console.log('from pending',friends)
         return res.status(200).send(friends)
     },
 
