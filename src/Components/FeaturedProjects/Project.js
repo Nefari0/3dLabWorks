@@ -75,11 +75,17 @@ const Project = (props) => {
         <div className='project-container'>
 
             <header>
-                <Link to={`viewuser/${user_id}`} ><img src={getPhotoUrl()} className="project-user-photo"/></Link>
-                <h4 style={{backgroundColor:'',paddingBottom:'5px',paddingTop:'15px'}}>{name}<br/><i>by {getUserName()}</i></h4>
+                <Link to={`/viewuser/${user_id}`} ><img src={getPhotoUrl()} className="project-user-photo"/></Link>
+                <h4 style={{backgroundColor:'',paddingBottom:'5px',paddingTop:'15px'}}>{name}
+                    <br/><i>by {getUserName()}</i>
+                </h4>
             </header>
 
-            <Link to={`projectdetails/${model_id}`}><div className="image-div" ><img className="model-photo" src={firebase_url01}/></div></Link>
+            <Link to={`/projectdetails/${model_id}`}>
+                <div className="image-div" >
+                    <img className="model-photo" src={firebase_url01}/>
+                </div>
+            </Link>
 
             <section>
      
