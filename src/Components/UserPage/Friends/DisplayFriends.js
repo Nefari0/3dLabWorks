@@ -70,7 +70,7 @@ class DisplayFriends extends Component {
         await axios.get(`/api/join/friends/${id}`).then(res => this.setState({friends:res.data})).catch(err => console.log(err))
 
         // --- unconfirmed request this user has recieved --- //
-        await axios.get(`/api/get/pending/friends/${id}`).then(res2 => this.setState({requests:res2.data})).catch(err2 => console.log(err2))
+        await axios.get(`/api/get/pending/friends/${id}`).then(res2 => this.setState({requests:res2.data})).catch((err2 )=> console.log('No pending requests',err2)).
 
         return
     }
