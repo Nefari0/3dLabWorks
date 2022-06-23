@@ -273,18 +273,15 @@ class ProjectDetail extends Component {
             {isDeleted ? (<Route path="/" component={Home}/>) :
                 (<div className="view">
                     
-                    {mappedUserInfo}
+                    <section onClick={() => this.props.history.push(`/viewuser/${maker_id}`)} >{mappedUserInfo}</section>
 
-                    <div className='image-viewer'>
-                        {mappedThumbNails}
-                    </div>
+                    <section className='image-viewer'>{mappedThumbNails}</section>
+
                     <div className="detail-container">
                         {mappedPhoto}
                         <section className="right">
                             <div className={`detail-box small dark-blue ${viewFiles ? true : 'detail-box small down-load-selected'}`} onClick={() => this.changeView('viewFiles')}>
-                                <p className={`down-load-text ${viewFiles ? true : 'down-load-text-selected'}`}>
-                                    <a>Download Files</a>
-                                </p>
+                                <a className={`down-load-text ${viewFiles ? true : 'down-load-text-selected'}`} >Download Files</a>
                             </div>
 
                                 {/* -------------- LIKE -------------- */}
