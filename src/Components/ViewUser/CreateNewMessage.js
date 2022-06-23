@@ -5,6 +5,7 @@ import '../UserMessages/MessageBoard.css'
 // import CreateMessage from '../UserMessages/CreateMessage'
 // import MyMessage from '../UserMessages/MyMessage'
 import OneMessage from './OneMessage'
+import SVG from '../SVG'
 import { connect } from 'react-redux'
 import { loginUser,registerUser,updateUser } from '../../ducks/userReducer'
 import axios from 'axios'
@@ -80,16 +81,13 @@ class CreateNewMessage extends Component {
         const { isLoggedIn } = this.props.user
         const { currentUserMessage } =  this.props
         if (isLoggedIn != false && id != undefined) {
-            console.log('hit execute send',isLoggedIn != false && id != undefined)
             if (currentUserMessage === null ){
                 await axios.post('/api/conversation/new',{user_id,to_user,text}).then(res => {
-                    // console.log('new convo',res.data)
-                this.sendToSockets(text,res.data.conversation_id,to_user,user_id)
+                this.sendToSockets(text,res.data.conversation_id,to_user)
                 })
             } else {
                 const conversation_id = currentUserMessage[0].conversation_id
                 await axios.post('/api/conversation/user/new',{conversation_id,user_id,text,to_user})
-                // return client.send(JSON.stringify({type: "message",conversation_id:conversation_id,msg:text,to:user_id,photo:photo}))
                 this.sendToSockets(text,conversation_id,to_user,user_id)
                 this.setState({text:''})
             }
@@ -108,23 +106,24 @@ class CreateNewMessage extends Component {
     
     render() {
         
-        const { user_id,user_name } = this.props
-        const { loggedInUser,currentUserMessage } = this.props
-        const { newMessages } = this.state
+        const { user_name } = this.props
 
         return(<div className='create-message-container'>
                     <h4 className='message-board-title' style={{width:'105%',left:'-5px',textTransform:'none'}} >
                         {user_name}
-                        <svg className="close-message-box" onClick={() => this.props.openMessageBox()} style={{color:'#fff', height:'35px',width:'35px',opacity:'60%',marginTop:'2px',marginBottom:'2px',right:'20px'}} xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                        </svg>
+                        <div style={{position:'absolute',right:'0px',top:'0px'}} onClick={() => this.props.openMessageBox()} >
+                            <SVG params={'largeX'} fill={'#fff'} />
+                        </div>
                     </h4>
                  
                     <section className="create-message-input" >
                         <textarea className='message-input' style={{width:'250px',marginLeft:'10px',maxHeight:'50px'}} value={this.state.text} name="text" rows="5" cols="50" wrap="soft" onChange={e => this.handleText('text',e.target.value)} > </textarea>
-                        <svg onClick={() => this.executeSendMessage()} xmlns="http://www.w3.org/2000/svg" className="send-message-button" style={{marginRight:'10px',marginLeft:'5px'}} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <button style={{position:'relative',width:'50px'}} onClick={() => this.executeSendMessage()} >
+                            <div><SVG params={'send'} fill={'none'} stroke={'#fff'} style={{position:'absolute',top:'-10',left:'-10'}} /></div>
+                        </button>
+                        {/* <svg onClick={() => this.executeSendMessage()} xmlns="http://www.w3.org/2000/svg" className="send-message-button" style={{marginRight:'10px',marginLeft:'5px'}} fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                        </svg>
+                        </svg> */}
                     </section>
 
                     <section className='thread-layout'>
