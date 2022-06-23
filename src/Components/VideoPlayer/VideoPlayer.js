@@ -10,7 +10,7 @@ const VideoPlayer = (props) => {
         <div className='player-container' >
             <header className='video-title' >
                 <img className='video-user-photo' src={photo_url} />
-                <div className='vidnm-and-usrnm' > <p className="dark-text video-nm-txt" >{name === 'dummy project' ? video_name : name}</p><p className='usr-nm-txt' style={{marginRight:'60px'}} >Video by {user_name}</p> </div>
+                <div className='vidnm-and-usrnm' > <h4 className="dark-text video-nm-txt" >{name === 'dummy project' ? video_name : name}</h4><i style={{marginRight:'60px'}} >Video by {user_name}</i> </div>
             </header>
             <div className='' style={{marginTop:'50px'}} >
 
