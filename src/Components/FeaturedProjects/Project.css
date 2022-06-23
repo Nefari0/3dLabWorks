@@ -261,6 +261,7 @@
     width: 645px;
     background-color: #fff;
     display: flex;
+    justify-content: flex-start;
 }
 
 .small { /* part of detail box class above */
