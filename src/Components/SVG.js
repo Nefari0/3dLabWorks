@@ -4,6 +4,17 @@ import './SVG.css'
 
 const SVG = (params) => {
 
+    // const styling ={
+    //     margin: 'auto',
+    //     marginLeft: '10px',
+    //     marginRight: '10px',
+    //     height: '40px',
+    //     width: '40px',
+    //     opacity: '60%',
+    //     color: '#6495ed',
+    //     paddingTop: '10px',
+    // }
+
     const xButton = () => {return <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />}
 
     const downloadIcon = () => {return <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />}
@@ -47,8 +58,13 @@ const SVG = (params) => {
     }
 
     return (<div>
-        {/* <svg className="large-icon" xmlns="http://www.w3.org/2000/svg" fill={params.fill} viewBox="0 0 24 24" stroke={params.stroke} style={params.style}> */}
-        <svg className="large-icon" style={{margin:'auto',marginLeft:'10px',marginRight:'10px', height:'45px',width:'45px',opacity:'60%'}}  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
+        <svg 
+        className="large-icon" 
+        xmlns="http://www.w3.org/2000/svg" 
+        fill="none" 
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+        >
             {icon(params.params)}
         </svg>
     </div>)
