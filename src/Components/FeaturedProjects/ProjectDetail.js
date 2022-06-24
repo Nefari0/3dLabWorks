@@ -2,6 +2,7 @@ import { Component } from 'react'
 import { Switch,Route,Link } from 'react-router-dom'
 import axios from 'axios'
 import './Project.css'
+import './ProjectDetail.css'
 import ProjectPhotos from './ProjectPhotos'
 import Comments from './Comments/Comments'
 import { loginUser, updateUser, remoteLogin } from '../../ducks/userReducer'
@@ -16,6 +17,10 @@ import Home from '../Home/Home'
 import SVG from '../SVG'
 import '../SVG.css'
 
+const selected = {backgroundColor:'#3c598e'}
+const cfff = {color:'#fff'}
+const c555 = {color:'#555'}
+
 class ProjectDetail extends Component {
 
     constructor(){
@@ -29,16 +34,19 @@ class ProjectDetail extends Component {
             userInfo:[],
             comments:[],
             files:[],
+            // -- views -- //
             viewFiles:true,
             viewComments:false,
             viewDetails:false,
             viewEditProject:false,
             viewInfo:false,
+            addedToFavorites:false,
+            // -- likes -- //
             myLike:false,
             allLikes:[],
+            // -- images -- //
             modelImages:[],
             isDeleted:false,
-        // - image currently selected - // 
             selectedPhoto:null,
         }
         this.changeView = this.changeView.bind(this)
@@ -96,7 +104,7 @@ class ProjectDetail extends Component {
                     axios
                     .get(`/api/project/photos/get/${model_id}`)
                     .then((res3) => {
-                        console.log('function')
+                        // console.log('function')
                         this.setState({
                             maker_id:user_id,
                             model_id:model_id,
@@ -137,67 +145,36 @@ class ProjectDetail extends Component {
 
     resetView() {
         this.setState({
-            viewFiles:true,
+            viewFiles:false,
             viewComments:false,
-            
+            viewDetails:false,
+            viewEditProject:false,
+            viewInfo:false,
+            addedToFavorites:false,            
         })
     }
 
     changeView(params) {
+        this.resetView()
         window.scrollTo({
             top: 1200,
             behavior: 'smooth'
           });
         switch (params) {
             case 'viewComments':
-                if( this.state.viewComments === false){
-                this.setState({ 
-                    viewComments : true,
-                    viewDetails : false,
-                    viewFiles : false,
-                    viewInfo : false,
-                    viewEditProject : false
-                })
-                }
+                    this.setState({viewComments:true})
                 break;
             case 'viewDetails':
-                if ( this.state.viewDetails === true){
                     this.setState({ viewDetails : !this.state.viewDetails})
-                }
                 break;
             case 'viewFiles':
-                if ( this.state.viewFiles === false){
-                    this.setState({
-                        // viewFiles : !this.state.viewFiles
-                        viewFiles : true,
-                        viewComments : false,
-                        viewDetails : false,
-                        viewInfo : false,
-                        viewEditProject : false
-                    })
-                }
+                    this.setState({viewFiles:true})
                 break;
             case 'viewEditProject':
-                if (this.state.viewEditProject === false){
-                    this.setState({
-                        viewFiles : false,
-                        viewComments :false,
-                        viewDetails : false,
-                        viewInfo : false,
-                        viewEditProject : true
-                    })
-                }
+                    this.setState({viewEditProject:true})
                 break;
             case 'viewInfo':
-                if (this.state.viewInfo === false){
-                    this.setState({
-                        viewFiles : false,
-                        viewComments :false,
-                        viewDetails : false,
-                        viewEditProject : false,
-                        viewInfo : true,
-                    })
-                }
+                this.setState({viewInfo:true})
             default:
                 break;
         }
@@ -213,7 +190,6 @@ class ProjectDetail extends Component {
         const { model_id } = this.state
         const user_id = id
         await axios.post('/api/projects/like', { user_id,model_id })
-        // await updateLikes(model_id)
         this.setState({myLike:!this.state.myLike})
     }
 
@@ -239,10 +215,18 @@ class ProjectDetail extends Component {
 
     render() {
         const { comments,model_id,maker_id,myLike } = this.state
-        // const { firebase_url01,firebase_url,user_id,description } = this.state.info
-        const { info, userInfo, viewComments, viewDetails, viewFiles, viewInfo, dlUrl,viewEditProject,modelImages,isDeleted,selectedPhoto } = this.state
-        const { isLoggedIn,loginOpen } = this.props.user
-        const { user,id,photo_url,user_likes } = this.props.user.user
+        const { info, userInfo,viewComments,viewFiles,viewInfo,viewEditProject,modelImages,isDeleted,selectedPhoto,addedToFavorites } = this.state
+        const { isLoggedIn } = this.props.user
+        const { user,id } = this.props.user.user
+
+        // -- If logged in user is also the owner of this project - authorize privileges -- //
+        const authorized = () => {
+            if(isLoggedIn) {
+                if(id === maker_id) {
+                    return true
+                }
+            }
+        }
 
         const mappedDescription = info.map(el => {
             return <Description key={el.model_id} description={el.description} />
@@ -278,72 +262,67 @@ class ProjectDetail extends Component {
                     <section className='image-viewer'>{mappedThumbNails}</section>
 
                     <div className="detail-container">
-                        {mappedPhoto}
-                        <section className="right">
-                            <div className={`detail-box small dark-blue ${viewFiles ? true : 'detail-box small down-load-selected'}`} onClick={() => this.changeView('viewFiles')}>
-                                <a className={`down-load-text ${viewFiles ? true : 'down-load-text-selected'}`} >Download Files</a>
-                            </div>
 
-                                {/* -------------- LIKE -------------- */}
-                            <div className="detail-box small" onClick={this.clickLike} >
+                        {mappedPhoto}
+
+                            <ul>
+                                <li style={viewFiles ? selected : null} onClick={() => this.changeView('viewFiles')} >
+                                    <p style={viewFiles ? {color:'#fff'} : null} >Download Files</p>
+                                </li>
+
+                                <li onClick={this.clickLike}>
                                 {isLoggedIn === true && myLike === true ? 
                                 <svg  className="small-icon" style={{margin:'auto',marginLeft:'10px',marginRight:'10px', height:'45px',width:'45px',opacity:'60%'}} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                     <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
                                 </svg>
                                 :
-                                // <SVG params={'large_heart'} />
                                 <svg className="small-icon" style={{margin:'auto',marginLeft:'10px',marginRight:'10px', height:'45px',width:'45px',opacity:'60%'}}  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                 </svg>
                                 }
-
                                 <p className="dark-text">Like</p>
-                            </div>
+                                </li>
 
-                            {/* -------------- COMMENTS -------------- */}
-                            <div className={`detail-box small ${!viewComments ? true : 'detail-box small selected'}`} onClick={() => this.changeView('viewComments')}>
-                                <SVG params={'comments'} fill={'none'} stroke={'currentColor'}/>
-                                {/* <svg className="large-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" > */}
-                                    {/* <path stroke-linecap="round" stroke-linejoin="round" stroke-width={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /> */}
-                                {/* </svg> */}
-                                <p className={`dark-text ${!viewComments ? true : 'light-text'}`}>Comment</p>
-                            </div>
+                                <li style={viewComments ? selected : null} onClick={() => this.changeView('viewComments')} >
+                                    <SVG params={'comments'} fill={'none'} stroke={'currentColor'}/>
+                                    <p style={viewComments ? cfff : null}>Comments</p>
+                                </li>
+                       
+                                <li style={viewEditProject || addedToFavorites ? selected : null} onClick={() => this.changeView(authorized() === true ? 'viewEditProject' : 'viewInfo')}>
 
-                            {/* -------------- EDIT / ADD TO FAVORITES -------------- */}
-                            {isLoggedIn === true && this.props.user.user.id === maker_id ?
-                            <div className={`detail-box small ${!viewEditProject ? true : 'detail-box small selected'}`} onClick={() => this.changeView('viewEditProject')}>
-                                <SVG params={'edit_project'} fill={'none'} stroke={'currentColor'}/>
-                                <p className={`dark-text ${!viewEditProject ? true : 'light-text'}`}>Edit Project</p>
-                            </div>
-                            :
-                            <div className="detail-box small">
-                                <SVG params={'folder'} fill={'none'} stroke={'currentColor'} />
-                                <p className="dark-text">Add To Favorites</p>
-                            </div>
-                            }
+                                    {authorized() === true ? 
+                                    <SVG params={'edit_project'} fill={'none'} stroke={'currentColor'}/> : 
+                                    <SVG params={'folder'} fill={'none'} stroke={'currentColor'} />}
 
-                            {/* -------------- INFORMATION ABOUT PROJECT -------------- */}
-                            <div className={`detail-box small ${!viewInfo ? true : 'detail-box small selected'}`} onClick={() => this.changeView('viewInfo')} >
-                                <SVG params={'info'} fill={'none'} stroke={'currentColor'}/>
-                                <p className={`dark-text ${!viewInfo ? true : 'light-text'}`} >Info</p>
-                            </div>
+                                    <p style={viewEditProject ? cfff : null}>{authorized() ? 'Edit Project' : 'Add to Favorites'}</p>
+                                </li>
 
-                        </section>
-                    
+                                <li style={viewInfo ? selected : null} onClick={() => this.changeView('viewInfo')}>
+                                    <SVG params={'info'} fill={'none'} stroke={'currentColor'}/>
+                                    <p style={viewInfo ? cfff : null} >Info</p>
+                                </li>
+                            </ul>
                     </div>
-                    <div className="comment-box">
-                        {viewComments ? <section className='project-selection-title'><h3 className="prodect-selection-h3">Comments</h3></section> : null}
+                    
+                    <section className="comment-box">
+
+                        <header >
+                            <h3>
+                                {viewComments ? 'Comments' : null}
+                                {viewFiles ? 'Download File' : null}
+                                {viewInfo ? 'Information' : null}
+                            </h3>
+                        </header>
+
                         {viewComments ? <CreateComment user={user} key={id} id={id} isLoggedIn={isLoggedIn} model_id={model_id} plsSignIn={this.plsSignIn} getComments={this.getComments} /> : null}
                         {viewComments ? mappedComments : null}
 
-                        {viewFiles ? <section className='project-selection-title'><h3 className="prodect-selection-h3">Download File</h3></section> : null}
                         {viewFiles ? mappedUrl : null}
 
-                        {viewEditProject ? <EditModel key={model_id} info={info} model_id={model_id} user_id={id} user_name={user} modelImages={modelImages} getDetails={this.getDetails} setIsDeleted={this.setIsDeleted} getImages={this.getImages} /> : null}
+                        {viewEditProject && authorized() ? <EditModel key={model_id} info={info} model_id={model_id} user_id={id} user_name={user} modelImages={modelImages} getDetails={this.getDetails} setIsDeleted={this.setIsDeleted} getImages={this.getImages} /> : null}
 
-                        {viewInfo ? <section className='project-selection-title'><h3 className="prodect-selection-h3">Information</h3></section> : null}
                         {viewInfo ? mappedDescription : null}
-                    </div>
+                    </section>
                 </div>)}
             </div>
         )}
