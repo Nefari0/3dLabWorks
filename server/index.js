@@ -1,10 +1,9 @@
 
-// --- from hosting video --- //
-require('dotenv').config({ path: __dirname + '/../.env'}); // for production?
+require('dotenv').config({ path: __dirname + '/../.env'});
 const express = require('express')
 const path = require('path')
 
-require('dotenv').config(); // original
+// require('dotenv').config(); // original
 const axios = require('axios')
 const session = require('express-session')
 const massive = require('massive')
@@ -25,56 +24,6 @@ const videoController = require('./controllers/videoController');
 // const trackingController = require('./controllers/trackingController')
 const webSocketServer = require('websocket').server;
 const http = require('http');
-// const baseBackend = require('./../src/baseBackend')
-// const path = require('path');
-// const { default: reducer } = require('../src/ducks/modelsReducer'); // auto added
-// const cors = require('cors');
-// const { base } = require('./serviceAccounts/base')
-
-//-------- firedtore / firebase -------//
-//  i am attempting to move all these code blocks to a seperate module/controller
-// const fireApp = require('./serviceAccounts/base') // will probably need to create controller for this
-
-
-// import firebase from 'firebase/app'
-const firebase = require('firebase/app')
-// import "firebase/storage"
-// const admin = require('firebase-admin');
-// import baseBackend from './baseBackend'
-
-const firebaseConfig = {
-    apiKey: "AIzaSyB6ImzEUWfnyXD6bcpNEN8ktaMSfos8Js0",
-    authDomain: "depot-7bb3e.firebaseapp.com",
-    projectId: "depot-7bb3e",
-    storageBucket: "depot-7bb3e.appspot.com",
-    messagingSenderId: "38861699624",
-    appId: "1:38861699624:web:b1d9abfce822f3a4d2531d",
-    // appId: "1:38861699624:web:88599df2268262afd2531d",
-    measurementId: "G-DSTFFPFHLD"
-  };
-  const fireApp = firebase.initializeApp(firebaseConfig);
-  fireFile = async (input) => {
-    const storageRef = fireApp.storage().ref()
-    const fileRef = storageRef.child(input.name)
-    await fileRef.put(input)
-    console.log('image loaded')
-    return (fileRef)
-}
-
-// const admin = require('firebase-admin');
-// const firebase = require('firebase/app');
-// const { applyMiddleware } = require('redux');
-// const firebaseConfig = {
-//     apiKey: "AIzaSyB6ImzEUWfnyXD6bcpNEN8ktaMSfos8Js0",
-//     authDomain: "depot-7bb3e.firebaseapp.com",
-//     projectId: "depot-7bb3e",
-//     storageBucket: "depot-7bb3e.appspot.com",
-//     messagingSenderId: "38861699624",
-//     appId: "1:38861699624:web:b1d9abfce822f3a4d2531d",
-//     measurementId: "G-DSTFFPFHLD"
-//   };
-// -------------------------------------------- // 
-//   const fireApp = firebase.initializeApp(firebaseConfig);
 
 const { SESSION_SECRET, CONNECTION_STRING, SERVER_PORT } = process.env;
 
@@ -89,7 +38,7 @@ app.use(
             resave: true,
             saveUninitialized: true,
             secret: SESSION_SECRET,
-            cookie: { maxAge: 1000 * 60 * 5 },
+            cookie: { maxAge: 1000 * 60 * 60 * 24 },
         }),
     )
 
@@ -99,29 +48,20 @@ app.post('/api/firedata', deletedDataController.addUrl) //Post request / body / 
 app.get('/api/firedata/test', fireController.fireTestHere) // tests fireController
 app.post('/api/firedata/add', fireController.addFile) // add file to firebase via backend controller
 
-
-// thingiverse endpoints
-app.get('/users')
-
-// // auth end points //
+// -- auth end points -- //
 app.post('/auth/register',authController.register)
 app.post('/auth/password', authController.changePassword)
 app.post('/auth/login',authController.login)
 app.get('/auth/logout',authController.logout)
 app.get('/auth/update/session',authController.userData)
-// app.post('/auth/getInfo',authController.getInfo)
 app.post('/auth/browser/login',authController.browserLogin)
-// app.post('./auth/login/merge',authController.loginLike)
 
 // // user end points //
-
 app.get('/api/users/all', userController.getUsers)
 app.get('/api/users/:user_id', userController.getUser) //Post request / body / http://localhost:4000/api/users/update/12 / { "photo_url":"new_url" }
 app.post('/api/users/update/photo/', userController.updateUserPhoto) // update profile picture
 app.post('/api/user/update/background',userController.updateBackgroundPhoto)
 app.post('/api/user/update/info/:user_id', userController.updateInfo)
-// save session:
-// app.post()
 
 // projects endpoints
 app.get('/api/projects/all', projectsController.getAllProjects)
@@ -137,13 +77,10 @@ app.get('/api/project/photos/get/:model_id',projectImageController.getImages)
 app.post('/api/project/photos/put',projectImageController.putImage)
 app.post('/api/projects/photos/delete/',projectImageController.deletePhoto)
 app.post('/api/projects/photos/change/main/',projectImageController.changeMainPhoto)
-// temp end point saves main files to project image db if not currently in that location
-// app.post('/api/projects/photos/saveto/main/',projectImageController.sendImToDB)
 app.get('/api/photos/albums/:user_id', photoController.getAlbums)
 app.get('/api/album/contents/:album_id', photoController.getAlbumPhotos)
 app.get('/api/user/photos/get/:user_id', photoController.getAllPhotos)
 app.post('/api/photos/add/new', photoController.uploadPhoto)
-// app.post('/api/photos/delete/:photo_id', photoController.deletePhoto)
 app.post('/api/photos/delete/', photoController.deletePhotoByUrl)
 // ------------------------------- //
 // --- likes end points
@@ -165,15 +102,12 @@ app.get('/api/user/projects/get/:user_id',projectsController.getUserAndProjects)
 app.get('/api/documents/all', docsController.getAll)
 app.get('/api/documents/about', docsController.getAbout)
 app.get('/api/documents/general', docsController.getGeneral)
-// app.post('/api/general/post', docsController.editGeneral)
 app.post('/api/docs/post', docsController.editGeneral)
 app.post('/api/docs/hide', docsController.hideDoc)
-// app.post('/api/about/post', docsController.editAbout)
 app.get('/api/links/get', docsController.getAllLinks)
 
 // contact admin endpoints
 app.get('/api/messages/user', messageController.getUserMessages)
-// app.get('/api/messages/user/:user_id', messageController.getUserMessages)
 app.post('/api/messages/user/add', messageController.createMessage)
 app.post('/api/messages/user/delete',messageController.deleteMessage)
 
@@ -184,17 +118,6 @@ app.post('/api/conversation/new',messageController.createNewConversation)
 app.post('/api/conversation/user/new', messageController.sendMessage)
 app.post('/api/conversation/exists',messageController.checkExisting)
 app.post('/api/messages/read',messageController.markAsRead)
-
-
-// // storage access end points //
-// app.get('/api/assets/getall')
-app.post('api/asset/upload/add',fireFile)
-// app.delete('/api/asset/delete/item/:item_id')
-
-// // messaging end points //
-// app.get('/api/messages/getall')
-// app.post('/api/messages/send')
-// app.delete('/api/messages/delete')
 
 //  ---- user connection endpoints ---- //
 app.post('/api/friends/add',connectionController.addFriend)
@@ -222,17 +145,6 @@ app.get('/api/videos/featured',videoController.getFeaturedVids)
 app.get('/api/memos/get/all',docsController.getAllMemos)
 app.post('/api/memo/update',docsController.updateMemo)
 
-    // test api for clients
-    // module.exports = {
-    //     apiFunc: async (req,res) => {
-    //     theData = await app.get(clients)
-    //     return res.status(200).send(newData)
-    //     // console.log(theData,'clients')
-    //     // return clients
-    // }}
-    // app.get('/api/test/text',apiFunc)
-    // ---------------------------------------------------- //
-
 // -----server ------
 app.use( express.static( __dirname + '/../build'));
 app.get('*', (req,res) => {
@@ -251,11 +163,9 @@ const wsServer = new webSocketServer({
   httpServer: server
 });
 
-// console.log(wsServer,'wsServer')
-
 const clients = {};
 
-// // This code generates unique userid for everyuser.
+// -- This code generates unique userid for everyuser. -- //
 const getUniqueID = () => {
   const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
   return s4() + s4() + '-' + s4();
@@ -274,9 +184,6 @@ wsServer.on('request', function(request) {
             clients[key].sendUTF(message.utf8Data);
         }
     })
-    // connection.on('admin',function(admin){
-    //     if (admin.type === u)
-    // })
 
     });
 
