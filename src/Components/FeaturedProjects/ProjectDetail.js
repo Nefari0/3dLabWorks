@@ -82,7 +82,6 @@ class ProjectDetail extends Component {
 
     async getImages() {
         const { model_id } = this.props.match.params
-        console.log('hit getImages function')
         axios.get(`/api/project/photos/get/${model_id}`).then((res) => {
             this.setState({modelImages:res.data})
         })
@@ -104,7 +103,6 @@ class ProjectDetail extends Component {
                     axios
                     .get(`/api/project/photos/get/${model_id}`)
                     .then((res3) => {
-                        // console.log('function')
                         this.setState({
                             maker_id:user_id,
                             model_id:model_id,
@@ -154,30 +152,15 @@ class ProjectDetail extends Component {
         })
     }
 
-    changeView(params) {
-        this.resetView()
+    changeView = (prop) => {
         window.scrollTo({
             top: 1200,
             behavior: 'smooth'
-          });
-        switch (params) {
-            case 'viewComments':
-                    this.setState({viewComments:true})
-                break;
-            case 'viewDetails':
-                    this.setState({ viewDetails : !this.state.viewDetails})
-                break;
-            case 'viewFiles':
-                    this.setState({viewFiles:true})
-                break;
-            case 'viewEditProject':
-                    this.setState({viewEditProject:true})
-                break;
-            case 'viewInfo':
-                this.setState({viewInfo:true})
-            default:
-                break;
-        }
+        });
+        this.resetView()
+        this.setState({
+            [prop]:true
+        })
     }
 
     plsSignIn = () => {
