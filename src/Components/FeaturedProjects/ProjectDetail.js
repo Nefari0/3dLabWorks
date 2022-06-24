@@ -267,7 +267,7 @@ class ProjectDetail extends Component {
                                 </li>
 
                                 <li style={viewComments ? selected : null} onClick={() => this.changeView('viewComments')} >
-                                    <SVG params={'comments'} fill={'none'} stroke={'currentColor'}/>
+                                    <SVG params={'comments'} />
                                     <p style={viewComments ? cfff : null}>Comments</p>
                                 </li>
                        
