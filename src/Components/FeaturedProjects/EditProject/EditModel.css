@@ -152,6 +152,7 @@
 .select-delete {
     height: 100%;
     width: 100px;
+    margin: 0px;
     border: solid 3px #3c598e;
     display: flex;
 	flex-direction: row;
@@ -159,6 +160,7 @@
 	justify-content: space-around;
 	align-items: flex-start;
 	align-content: center;
+    color: #555;
 }
 
 .delete-button-txt {

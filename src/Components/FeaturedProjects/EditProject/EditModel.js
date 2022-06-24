@@ -197,10 +197,20 @@ class EditModel extends Component {
             <div className="edit-project-container" >
                 
                 {isLoading ? <Loading/> : null}
-                <section className='project-selection-title'>
-                    <h3 className="prodect-selection-h3">{openDeleteConfirm ? "Delete this Project?" : "Edit Project"}</h3>
-                    {!openDeleteConfirm ? <p className="edit-photo-button" onClick={() => this.confirmDelete()} >X</p>:<div onClick={() => this.confirmDelete()} className='select-delete'><p className='delete-button-txt' onClick={() => this.removeFileFromSpace()} >yes</p><p className='delete-button-txt'>no</p></div>}
-                </section>
+
+                    {/* ---- Delete Project ---- */}
+                    <button
+                        style={{width:'30px',height:'20px',fontSize:'10px',marginLeft:'85%',marginTop:'10px'}}
+                        onClick={() => this.confirmDelete()}
+                        >delete
+                    </button>
+
+                    {!openDeleteConfirm ? null :
+                    <div  className='select-delete'>
+                        <p onClick={() => this.removeFileFromSpace()} >yes</p>
+                        <p onClick={() => this.confirmDelete()}>no</p>
+                    </div>}
+                    {/* ------------------------- */}
                 
                 <div className='section-title'><p style={{color:'#555'}}>Add Image / Update File</p></div>
 
@@ -255,8 +265,9 @@ class EditModel extends Component {
                     </div>
 
                 </section> 
-                <div className='section-title'><p style={{color:'#555'}}>Submit Changes</p></div>
+                <div className='section-title'><p style={{color:'#555'}}>Submit Changes / Delete</p></div>
                     {previewImageFile === null && file_url ===null ? <div className='edit-file-button' style={{position:'relative',marginTop:'10px',height:'30px',width:'80px'}} onClick={() => this.executeChange()} ><p>Submit</p></div> : null}
+
             </div>
         )
     }
