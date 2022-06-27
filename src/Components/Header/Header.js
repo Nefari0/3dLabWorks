@@ -123,7 +123,7 @@ class Header extends Component{
         
         const unique_id = localStorage['visited']
         const isAdmin = params
-        // console.log('hit in header',unique_id,params)
+
         if(params === true && unique_id !== undefined){
             axios.post('/api/tracking/setIsAdmin',{unique_id,isAdmin}).then().catch(err => console.log(err))
         }
@@ -153,14 +153,11 @@ class Header extends Component{
         const { user_name, password } = this.state
         const visited = localStorage['visited']
         const last_visit = new Date()
-        // console.log('is visited defined',localStorage)
         await this.props.loginUser(signInName,signInPass,last_visit,visited)
 
         if (saveMyInfo === true && this.props.user.isLoggedIn === true) {
             localStorage.setItem('user_name',signInName)
-            // localStorage.setItem('password',signInPass)
         } else {localStorage.removeItem('visited')}
-        // this.props.remoteLogin(!menuOpen)
         this.toggleLogin()
         this.setState({user_name:'',password:''})
     }
@@ -188,91 +185,117 @@ class Header extends Component{
     toggleLogin(){
         const { loginOpen } = this.props.user
         this.props.remoteLogin(!loginOpen)
-        // this.trackingHandler('login')
-        // this.setState({openLogin: !this.state.openLogin})
     }
 
     setSaveSession() {
         this.setState({saveSession:!this.state.saveSession})
     }
 
-            
-    
-
     render() {
         const { saveSession, username, unique_id, isMenuOpen, user_name, password, isLoggedInState } = this.state
         const { isLoggedIn,isLoading,loginOpen } = this.props.user
         const { photo,user } = this.props.user.user
 
+        const hamburger = () => {
+            return(
+            <svg
+            className={`hamburger ${!isLoggedIn ? true : 'user-hamburger'}`} 
+            onClick={this.toggleMenu} xmlns="http://www.w3.org/2000/svg" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor"
+            >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            )
+        }
+
     return(
         
         <div className='header-container'>
+
+            {/* -- "Loading" display -- */}
             {isLoading === true ? <Loading /> : null}
+
+            {/* ----- CD Logo ----- */}
             <img onClick={this.viewTheWindow}
-                // src="https://firebasestorage.googleapis.com/v0/b/depot-7bb3e.appspot.com/o/logo.png?alt=media&token=3d889013-f357-4d66-adc2-286bdb367ce6"
                 src={cdLabs3d}
                 className="cd-logo"
-                // style={{height:'120%'}}
-                />
-
-            {/* --- trims logo for smaller displays - might not get used -- */}
+            />
             <img onClick={this.viewTheWindow}
                 src={CDinits}
                 className="cd-logo-small"
-                />
+            />
+            {/* -------------------- */}
 
-            {/* <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><h3 className="header-h3">{isLoggedIn ? `Welcome, ${this.props.user.user.user}!` :'MadModels3d'}</h3></Link> */}
-            {/* <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><h3 className="header-h3">{'MadModels3d'}</h3></Link> */}
             <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><img className="mm3d-logo" src={MM3D1}/></Link>
-            {/* <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><img className="mm3d-logo-small" src={MBox}/></Link> */}
             
-            <ul className='link-list'>
+            {/* ---------- DESTOP NAV ---------------------------- */}
+            <ul className='desktop-nav'>
                 <Link to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a >About</a></li></Link>
                 <Link to="/explore" style={{ textDecoration: 'none' }}><li className='link-item'><a>Explore</a></li></Link>
                 {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='link-item'><a>{user}</a></li></Link>)}
+                <a className='link-button' onClick={this.toggleLogin}>{!isLoggedIn ? 'Login' : 'logout'}</a>
             </ul>
+            {/* -------------------------------------------------- */}
 
-            <h4 className="login-link" onClick={this.toggleLogin} >{!isLoggedIn ? 'Login' : 'logout'}</h4>
 
-            {isLoggedIn ? <Link to="/user" ><img src={photo} className="loggedin-user-photo" /></Link> : null} 
+            {/* ---------- MOBILE NAV / ITEMS ---------------------------- */}
+            {isLoggedIn ? <img src={photo} className="loggedin-user-photo" /> : null}
+           
+            {hamburger()}
 
-            <svg className="hamburger" onClick={this.toggleMenu} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path className='lines' stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                <path className='dots' strokeLinecap="round" strokeLinejoin="round" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
-            </svg>
-
-            {/* ---------- MOBILE NAV ---------------------------- */}
             <ul className={`mobile-nav ${isMenuOpen ? false : 'mobile-nav-hide'}`} style={{paddingTop:'10px'}} onClick={() => this.toggleMenu()} >
 
-                {!isLoggedIn ? (isMenuOpen === true ? <li className='mobile-link-item' onClick={this.toggleLogin}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="header-menu-icon" style={{color:'#fff',marginLeft:'20[x'}} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
-                </svg>
-                    <a>Login</a>
-                    </li> : null)
-                    :
-                    (isMenuOpen === true ?  <li className='mobile-link-item' onClick={this.toggleLogin}>
-                <svg xmlns="http://www.w3.org/2000/svg" className="header-menu-icon" style={{color:'#fff',marginLeft:'20[x'}} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-                </svg>
-                <a>Logout</a>
+                {!isLoggedIn ? (isMenuOpen === true ? 
+                <li onClick={this.toggleLogin}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="header-menu-icon" style={{color:'#fff',marginLeft:'20[x'}} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                    </svg>
+                        <a>Login</a>
+                </li> : null)
+
+                :
+
+                (isMenuOpen === true ?  
+                <li onClick={this.toggleLogin}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="header-menu-icon" style={{color:'#fff',marginLeft:'20[x'}} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    <a>Logout</a>
                 </li> : null)}
 
-                {isMenuOpen === true ? <Link to="/about" style={{ textDecoration: 'none' }}><li className='mobile-link-item' >
-                <svg xmlns="http://www.w3.org/2000/svg" className="header-menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                    <a>About</a></li></Link> : null}
-                {isMenuOpen === true ? <Link to="/explore" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>
-                <svg xmlns="http://www.w3.org/2000/svg" className="header-menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                </svg>
-                    <a>Explore</a></li></Link> : null}
-                {!isLoggedIn === true && isMenuOpen === true ? (<div></div>) : (isMenuOpen === true ? <Link to="/user" style={{ textDecoration: 'none' }}><li className='mobile-link-item'>
-                <svg xmlns="http://www.w3.org/2000/svg" className="header-menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
-                </svg>
-                <a>My page</a></li></Link> : null)}
+                {isMenuOpen === true ? 
+                <Link to="/about" style={{ textDecoration: 'none' }}>
+                    <li >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="header-menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <a>About</a>
+                    </li>
+                </Link> : null}
+
+                {isMenuOpen === true ?
+                <Link to="/explore" style={{ textDecoration: 'none' }}>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="header-menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                        </svg>
+                        <a>Explore</a>
+                    </li>
+                </Link> : null}
+
+                {!isLoggedIn === true && isMenuOpen === true ? (<div></div>)
+                : 
+                (isMenuOpen === true ?
+                <Link to="/user" style={{ textDecoration: 'none' }}>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="header-menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2" />
+                        </svg>
+                        <a>My page</a>
+                    </li>
+                </Link> : null)}
             </ul>
             {/* ----------------------------------------------------------------- */}
 
