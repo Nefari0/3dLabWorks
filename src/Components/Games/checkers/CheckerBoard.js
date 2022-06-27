@@ -8,8 +8,8 @@ import pieces from './pieces'
 import CurrentPlayer from './CurrentPlayer'
 // import Notice from '../Notice/Notice'
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
-// const client = new W3CWebSocket(`ws://165.227.102.189:8002`); // build
+// const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
+const client = new W3CWebSocket(`ws://165.227.102.189:8002`); // build
 
 class CheckerBoard extends Component {
     constructor(props) {
