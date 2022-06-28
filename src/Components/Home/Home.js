@@ -68,12 +68,6 @@ class Home extends Component {
         this.setState({loading:!this.state.loading})
     }
 
-    componentDidUpdate() {
-        // this.props.updateUser()
-        // if (this.state.userLikes === null) {this.setState({...this.state,userLikes:this.props.user.user.user_likes})}
-    }
-
-
     handleUserName(value){
         this.setState({...this.state,user_name:value})
     }
@@ -87,11 +81,6 @@ class Home extends Component {
         this.props.loginUser(user_name,password)
         this.setState({user_name:'',password:''})
     }
-
-    // remindWhoUser(){
-    //     const { user_name, password } = this.state
-    //     console.log(this.props.user.user.data)
-    // }
 
     projectIsLiked(projectId,userLike) {
         try {
@@ -140,11 +129,10 @@ class Home extends Component {
                     {!loading ? true : <Loading />}
                     <h2 className="hero-h2">IMAGINE IT - BUILD IT.</h2>
                     {/* <h2 className="hero-h2">JOIN THE MAKER REVOLUTION</h2> */}
-                    <div className="deploy-projects" >
+                    <div className="deploy-projects invisible-scrollbar" >
                         {mappedVideos}
                         {mappedModels}
                     </div>
-                    {/* <Footer /> */}
                 </div>
             </div>
         )
