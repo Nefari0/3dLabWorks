@@ -19,7 +19,6 @@ import '../SVG.css'
 
 const selected = {backgroundColor:'#3c598e'}
 const cfff = {color:'#fff'} // -- light
-const c555 = {color:'#555'} // -- dark
 const icon ={
     margin: 'auto',
     marginLeft: '10px',
