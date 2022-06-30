@@ -154,7 +154,7 @@ res.send(path.join(__dirname, '../build/index.html'))
 
 
 // --- websocket for messanger ------------------------ //
-const webSocketsServerPort = 8000;
+const webSocketsServerPort = 8002;
 
 // Spinning the http server and the websocket server.
 const server = http.createServer();
