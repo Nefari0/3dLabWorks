@@ -1,8 +1,7 @@
 
 .hero {
      height: 90vh;
-     min-width: 100vw;
-
+     width: 100vw;
      background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url(blender_background.png);
      background-size: cover; 
      background-position: center bottom;
@@ -10,15 +9,21 @@
      display: flex;
      flex-direction: column;
      flex-wrap: wrap;
+     align-items: center;
+     justify-content: space-around;
+     align-items: baseline;
      overflow-x: scroll;
      border-bottom: solid 20px #6495ed;
 }
 
+.hero h2 {
+    width: 100vw;
+}
+
 .deploy-projects {
     height: 70vh;
-    min-width: 100vw;
+    width: 100vw;
 	display: flex;
-    justify-content: space-between;
 	align-items: center;
     overflow: scroll;
     z-index: 0;
@@ -27,128 +32,11 @@
 
 .invisible-scrollbar::-webkit-scrollbar {
     display: none;
-  }
-
-
-
-
-.icon-container {
-    min-height: 55vh;
-    width: 60vw;
-    display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: flex-start;
-    align-content: flex-end;
 }
-
-.icon {
-    margin-top: 50px;
-    margin-left: 25px;
-    margin-right: 100vw;
-    height: 4vh;
-    color:  #6495ed;
-}
-
-.intro-text {
-    text-align: left;
-    margin: auto;
-    margin-top: 50px;
-    height: 15vh;
-    width: 80vw;
-    color: #555;
-    background-color: #fff;
-}
-
-.light-background-text {
-    color: #555;
-}
-
-.dark-background-text {
-    color: #fff;
-}
-
-.title-border {
-    margin-top: 20px;
-    margin-left: 45vw;
-    width: 10vw;
-    border-bottom: 2px solid #6495ed;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-}
-
-.icon-h4 {
-    float: left;
-    margin-left: 35px;
-    margin-top: 15px;
-}
-
-.icon-h3 {
-    margin: auto;
-    text-align: center;
-}
-
-.icon-text {
-    margin-top: 60px;
-    margin-left: 30px;
-    height: 100px;
-    width: 80vw;
-    font-size: 12px;
-    font-weight: 300;
-    color: #555;
-    text-align: left;
-}
-
-@media (max-width: 540px) {
-
-    .icon {
-        height: 3vh;
-        justify-content: center;
-        float: left;
-        margin:auto;
-        margin-top: 20px;
-        margin-left: 10px;
-    }
-
-    .icon-h4 {
-        padding-bottom: 10px;
-        width: 80vw;
-        height: 4vh;
-        text-align: center;
-    }
-
-    .icon-text {
-        text-align: center;
-        height: 300px;
-        width: 80vw;
-    }
-}
-
 @media (max-width:400px) {
-    .hero-h2 {
+    .hero h2 {
         display: none;
     }
-}
-
-@media (max-width: 370px) {
-    .icon-h3 {
-        font-size: 20px;
-    }
-
-    .icon-h4{
-        margin-bottom: 20px;
-    }
-
-    .icon {
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 20px;
-        height: 3vh;
-        width: 100%;
-    }
-
 }
 
 @media (max-width:300px) {
@@ -170,10 +58,10 @@
 }
 
 @media (max-height:525px) {
-    .hero-h2 {
+     .hero h2 {
         display: none;
     }
-    .deploy-projects {
+    .hero section {
         height: 490px;
     }
 }

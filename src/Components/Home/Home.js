@@ -4,14 +4,9 @@ import './Home.css'
 import { connect } from 'react-redux'
 import { loginUser,updateUser } from '../../ducks/userReducer'
 import { getModels,getFeatured } from './../../ducks/modelsReducer'
-import { Icon } from './Icons/Icon'
-import Footer from '../Footer/Footer'
-// import FeaturedProjects from '../FeaturedProjects/FeaturedProjects'
 import Loading from '../Loading/Loading'
 import Project from '../FeaturedProjects/Project'
 import VideoPlayer from '../VideoPlayer/VideoPlayer'
-// import Prototyping from '../Prototyping/Prototyping'
-// import Vid from './Video/EC.NC gear train0001-0500.mp4'
 
 class Home extends Component {
     constructor() {
@@ -35,24 +30,10 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        // this.props.getModels()
-        // axios.get('/api/videos/get').then(res => {
-        //     this.setState({videos:res.data})
-        // })
-        // axios.get('/api/videos/featured').then(res => {
-        //     this.setState({videos:res.data})
-        // })
-        // this.props.getFeatured()
         this.getFeaturedVideos()
-        
-        
     }
 
     getFeaturedVideos = async () => {
-        // await axios.get('/api/featured/join').then(res => {
-        //     console.log('res',res.data)
-        //     this.setState({projects:res.data})
-        // })
         this.setLoading()
         await this.props.getFeatured()
         await axios.get('/api/videos/featured').then(res2 => {
@@ -60,7 +41,6 @@ class Home extends Component {
                 videos:res2.data,
                 loading:false
             })
-            // this.setLoading()
         })
     }
 
@@ -108,12 +88,10 @@ class Home extends Component {
     // }
 
     render() {
-        const { user_name, password, projects, loading, videos } = this.state
-        const { loginUser } = this.props
+        const { loading, videos } = this.state
         const { isLoggedIn } = this.props.user
-        const { user_likes,model_likes,id } = this.props.user.user
-        // const { models } = this.props.models
-        const { models,featured } = this.props.models
+        const { user_likes,model_likes } = this.props.user.user
+        const { featured } = this.props.models
 
         const mappedModels = featured.map(element => {
             return <Project data={element} key={element.model_id} projectIsLiked={this.projectIsLiked} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={element.user_id} user_likes={user_likes} />
@@ -124,17 +102,16 @@ class Home extends Component {
         })
 
         return(
-            <div>
                 <div className="hero">
                     {!loading ? true : <Loading />}
-                    <h2 className="hero-h2">IMAGINE IT - BUILD IT.</h2>
-                    {/* <h2 className="hero-h2">JOIN THE MAKER REVOLUTION</h2> */}
-                    <div className="deploy-projects invisible-scrollbar" >
+
+                    <h2 className="">IMAGINE IT - BUILD IT.</h2>
+
+                    <section className="deploy-projects invisible-scrollbar" >
                         {mappedVideos}
                         {mappedModels}
-                    </div>
+                    </section>
                 </div>
-            </div>
         )
     }
 }
