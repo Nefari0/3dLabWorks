@@ -10,6 +10,30 @@
 	flex-direction: column;
 }
 
+.image-viewer {
+    height: 75px;
+    width: 645px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin: auto;
+    margin-bottom: 4px;
+    margin-top: 4px;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+    overflow: hidden;
+    border: solid 1px rgb(85, 85, 85,.3);
+}
+
+.thumbnail-image {
+    height: 50px;
+    width: 60px;
+    border-radius: 5px;
+}
+
+/* -- Main image and all menu items -- */
 .detail-container {
     margin: auto;
     margin-bottom: 0px;
@@ -19,20 +43,15 @@
     display: flex;
 	justify-content: center;
 }
-
 .detail-container section {
-    position: relative;
     width: 440px;
     min-height: 100px;
     margin: 2px;
     display: flex;
-    flex-direction: row;
 }
 .detail-container ul {
     width: 220px;
 }
-
-
 .detail-container li {
     background-color: #fff;
     display: flex;
@@ -45,7 +64,6 @@
     border-left:solid 1px rgb(85, 85, 85,.3)  ;
     border-right:solid 1px rgb(85, 85, 85,.3) ;
 }
-
 .detail-container p {
     color: #555;
     padding-top: 15px;
@@ -53,6 +71,7 @@
     margin-left: 10px;
 }
 
+/* -- Comments and other content at bottom of page -- */
 .comment-box {
     margin: auto;
     margin-top: 10px;
@@ -63,14 +82,12 @@
 	flex-direction: column;
 	align-items: center;
 }
-
 .comment-box h3 {
     margin: auto;
     color: #3c598e;
     text-transform: none;
     font-weight: 600;
 }
-
 .comment-box header {
     background-color: #6495ed;
     opacity: .8;
@@ -81,11 +98,12 @@
 @media (max-width:680px) {
 
     .detail-container {
-        min-height: 510px;
+        min-height: 500px;
         flex-direction: column;
         align-items: center;
     }
-    
+
+    .image-viewer,
     .view,
     .detail-container,
     .comment-box,

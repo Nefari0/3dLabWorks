@@ -70,8 +70,6 @@ class ProjectDetail extends Component {
     }
 
     componentDidMount(){
-        const { model_id } = this.props.match.params
-        const { user_likes,isLoggedIn } = this.props.user.user
         // ---get project info by model_id --- //
         this.getDetails().then((val) => console.log(val)) // original/working function
         // --- get project images by model_is --- //
