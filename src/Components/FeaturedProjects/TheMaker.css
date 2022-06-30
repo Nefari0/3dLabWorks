@@ -1,0 +1,19 @@
+.maker {
+    height: 70px;
+    width: 645px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    border: solid 1px rgb(85, 85, 85,.3);
+    border-radius: 5px;
+}
+
+.maker h4 {
+    margin-bottom: 10px;
+}
+
+@media (max-width:680px) {
+    .maker {
+        width: 300px;
+    }
+}
