@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react"
 import CheckerBoard from "./checkers/CheckerBoard"
+// import CheckerBoard from "./checkers/CheckerBoard/CheckerBoard"
 import GameInvite from "../UserPage/Friends/GameInvite"
 import './Table.css'
 // import { loginUser,registerUser,updateUser } from '../../../ducks/userReducer'

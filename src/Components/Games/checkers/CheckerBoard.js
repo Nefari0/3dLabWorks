@@ -70,7 +70,6 @@ class CheckerBoard extends Component {
             const dataFromServer = JSON.parse(message.data);
             // const { id } = this.props.user.user
             
-            
             if (dataFromServer.type === 'checkerTurn' && dataFromServer.gameID === this.props.currentGame ) {
                 // console.log('data from server',dataFromServer.sender === id)
                 // console.log(dataFromServer.input)

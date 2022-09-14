@@ -30,6 +30,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-promise-middleware": "^6.1.2",
     "redux-thunk": "^2.3.0",
+    "sass": "^1.54.9",
+    "styled-components": "^5.3.5",
     "three": "^0.126.1",
     "web-vitals": "^0.2.4",
     "websocket": "^1.0.34",
