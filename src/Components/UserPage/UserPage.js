@@ -182,17 +182,12 @@ class UserPage extends Component {
             const { id } = this.props.user.user
             
             if(dataFromServer.type === 'gameInvite' && dataFromServer.gameInformation.to === id) {
-
                 this.setState({challengeUser:dataFromServer})
-
-                // console.log('invite send to server',typeof(dataFromServer.to), typeof(id))
             }
         }
     }
 
     sendInvite = (gameInformation) => {
-        console.log('hit send invite')
-        const { id } = this.props.user.user
         client.send(JSON.stringify({type: 'gameInvite',gameInformation:gameInformation}))
     }
     
@@ -200,9 +195,9 @@ class UserPage extends Component {
     getUniqueID = () => {
         const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
         return s4() + s4() + '-' + s4();
-      };
+    };
+    
     getUserID = (to) => {
-        console.log('hit "sendUserId')
         const { id,photo } = this.props.user.user
         var { currentGame } = this.state
         // var newChallenge = [...challengeUser]
@@ -241,9 +236,8 @@ class UserPage extends Component {
         })
     }
 
-    handleCollections(params){
+    handleCollections(){
         this.setState({isView:'isCollections'})
-        console.log(this.state.isView)
     }
     
     
@@ -296,9 +290,38 @@ class UserPage extends Component {
     }
 
     render(){
-        const { photos,previewImageFile,photoUrl,showCollections,showUserInfo,items,isLoading,showCreateProject,showEditUserInto,showGames,showFriends,friends,requests,challengeUser,currentGame,currentPhoto,showPhotos  } = this.state
+        const {
+            photos,
+            previewImageFile,
+            photoUrl,
+            showCollections,
+            showUserInfo,
+            items,
+            isLoading,
+            showCreateProject,
+            showEditUserInto,
+            showGames,
+            showFriends,
+            friends,
+            requests,
+            challengeUser,
+            currentGame,
+            currentPhoto,
+            showPhotos
+        } = this.state
+
         const { isLoggedIn } = this.props.user
-        const { photo,auth,name,is_admin,background_url,user,email,id} = this.props.user.user
+
+        const {
+            photo,
+            auth,
+            name,
+            is_admin,
+            background_url,
+            user,
+            email,
+            id
+        } = this.props.user.user
 
     return(
         <div>
@@ -337,15 +360,42 @@ class UserPage extends Component {
 
             <section className="column2">
 
-                {showGames === true ? <Table hideView={this.hideView} challengeUser={challengeUser} client={client} currentGame={currentGame} /> : null}
+                {showGames &&
+                    <Table
+                        hideView={this.hideView}
+                        challengeUser={challengeUser}
+                        client={client}
+                        currentGame={currentGame}
+                />}
 
-                {showEditUserInto === true ? <EditUserInfo setIsLoading={this.setIsLoading} resetView={this.resetView} updateUser={this.props.updateUser} /> : null}
+                {showEditUserInto &&
+                    <EditUserInfo
+                        setIsLoading={this.setIsLoading}
+                        resetView={this.resetView}
+                        updateUser={this.props.updateUser}
+                />}
 
-                {showCollections === true ? <Collections setIsLoading={this.setIsLoading} photo_url={photo} resetView={this.resetView} showCreateProject={showCreateProject}/> : null} 
+                {showCollections &&
+                    <Collections 
+                        setIsLoading={this.setIsLoading}
+                        photo_url={photo}
+                        resetView={this.resetView}
+                        showCreateProject={showCreateProject}
+                />} 
 
-                {showFriends === true ? <DisplayFriends id={id} getUserID={this.getUserID} /> : null }
+                {showFriends && 
+                    <DisplayFriends
+                        id={id}
+                        getUserID={this.getUserID}
+                />}
                 
-                {showPhotos === true ? <PhotoAlbum id={id} handlePhoto={this.handlePhoto} removingPhoto={this.removingPhoto} setIsLoading={this.setIsLoading} /> : null }
+                {showPhotos &&
+                    <PhotoAlbum
+                        id={id}
+                        handlePhoto={this.handlePhoto}
+                        removingPhoto={this.removingPhoto}
+                        setIsLoading={this.setIsLoading}
+                    />}
 
                 {/* {previewImageFile != null ? <ImagePreview previewImageFile={previewImageFile} photo_url={photoUrl} addPhoto={this.addingPhoto} handleInput={this.handleInput} /> : null} */}
             </section>
