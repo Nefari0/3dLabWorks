@@ -1,18 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.7c32bcfd.chunk.css",
-    "main.js": "/static/js/main.ab25f93f.chunk.js",
-    "main.js.map": "/static/js/main.ab25f93f.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.4819aa37.js",
-    "runtime-main.js.map": "/static/js/runtime-main.4819aa37.js.map",
-    "static/js/2.df3859bb.chunk.js": "/static/js/2.df3859bb.chunk.js",
-    "static/js/2.df3859bb.chunk.js.map": "/static/js/2.df3859bb.chunk.js.map",
-    "static/js/3.116c7043.chunk.js": "/static/js/3.116c7043.chunk.js",
-    "static/js/3.116c7043.chunk.js.map": "/static/js/3.116c7043.chunk.js.map",
+    "main.css": "/static/css/main.5a75e678.chunk.css",
+    "main.js": "/static/js/main.cb6e039a.chunk.js",
+    "main.js.map": "/static/js/main.cb6e039a.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.19eb1431.js",
+    "runtime-main.js.map": "/static/js/runtime-main.19eb1431.js.map",
+    "static/js/2.275e5611.chunk.js": "/static/js/2.275e5611.chunk.js",
+    "static/js/2.275e5611.chunk.js.map": "/static/js/2.275e5611.chunk.js.map",
+    "static/js/3.01e01085.chunk.js": "/static/js/3.01e01085.chunk.js",
+    "static/js/3.01e01085.chunk.js.map": "/static/js/3.01e01085.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.7c32bcfd.chunk.css.map": "/static/css/main.7c32bcfd.chunk.css.map",
-    "static/js/2.df3859bb.chunk.js.LICENSE.txt": "/static/js/2.df3859bb.chunk.js.LICENSE.txt",
-    "static/media/CheckerBoard.css": "/static/media/American_walnut_pxr128_jpg.745df99b.jpg",
+    "static/css/main.5a75e678.chunk.css.map": "/static/css/main.5a75e678.chunk.css.map",
+    "static/js/2.275e5611.chunk.js.LICENSE.txt": "/static/js/2.275e5611.chunk.js.LICENSE.txt",
     "static/media/CDinits.d5585836.png": "/static/media/CDinits.d5585836.png",
     "static/media/MM3D2333x50orthofff.66b36e66.png": "/static/media/MM3D2333x50orthofff.66b36e66.png",
     "static/media/admin_photo1.c412f89d.jpg": "/static/media/admin_photo1.c412f89d.jpg",
@@ -22,9 +21,9 @@
     "static/media/ProjectDetail.css": "/static/media/white-backround1.eea08e12.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.4819aa37.js",
-    "static/js/2.df3859bb.chunk.js",
-    "static/css/main.7c32bcfd.chunk.css",
-    "static/js/main.ab25f93f.chunk.js"
+    "static/js/runtime-main.19eb1431.js",
+    "static/js/2.275e5611.chunk.js",
+    "static/css/main.5a75e678.chunk.css",
+    "static/js/main.cb6e039a.chunk.js"
   ]
 }
