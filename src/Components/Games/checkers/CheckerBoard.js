@@ -60,7 +60,7 @@ class CheckerBoard extends Component {
         // localStorage.setItem('testing',pieces)
     }
 
-    getConnected = (input) => {
+    getConnected = () => {
         // const { client } = this.props
         client.onopen = () => {
             console.log('client connected')
