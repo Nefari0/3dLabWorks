@@ -28,7 +28,8 @@ import { w3cwebsocket as W3CWebSocket } from "websocket";
 // import ImagePreview from '../FeaturedProjects/EditProject/ImagePreview';
 import Resizer from 'react-image-file-resizer'
 // const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
-const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
+// const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
+const client = new W3CWebSocket(`wss://madmodels3d.com`); // production
 
 const db = app.firestore()
 const newPhotoEndpoint = '/api/photos/add/new'

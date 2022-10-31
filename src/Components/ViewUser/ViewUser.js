@@ -9,7 +9,8 @@ import UserInfo from '../UserPage/UserInfo';
 import Loading from '../Loading/Loading';
 import CreateNewMessage from './CreateNewMessage';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
+// const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
+const client = new W3CWebSocket(`wss://madmodels3d.com`); // production
 
 class ViewUser extends Component {
     constructor(props) {
