@@ -23,7 +23,8 @@ const fireController = require('./controllers/fireController');
 const videoController = require('./controllers/videoController');
 // const trackingController = require('./controllers/trackingController')
 const webSocketServer = require('websocket').server;
-const http = require('http');
+// const webSocketServer = require('ws').Server;
+const https = require('https');
 
 const { SESSION_SECRET, CONNECTION_STRING, SERVER_PORT } = process.env;
 
@@ -157,7 +158,7 @@ res.send(path.join(__dirname, '../build/index.html'))
 const webSocketsServerPort = 8000;
 
 // Spinning the http server and the websocket server.
-const server = http.createServer();
+const server = https.createServer();
 server.listen(webSocketsServerPort, () => console.log(`sockets connected on ${webSocketsServerPort}`));
 const wsServer = new webSocketServer({
   httpServer: server
