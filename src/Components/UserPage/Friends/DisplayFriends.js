@@ -5,9 +5,10 @@ import ConnectRequests from "./ConnectRequests";
 import MyConnection from "./MyConnections";
 import Loading from "../../Loading/Loading";
 import { w3cwebsocket as W3CWebSocket } from "websocket";
+import { socketString } from "../../WS";
 // const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
 // const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
-const client = new W3CWebSocket(`wss://madmodels3d.com`); // production
+const client = new W3CWebSocket(socketString); // production
 
 class DisplayFriends extends Component {
     constructor() {
