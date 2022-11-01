@@ -24,7 +24,7 @@ const videoController = require('./controllers/videoController');
 // const trackingController = require('./controllers/trackingController')
 const webSocketServer = require('websocket').server;
 // const webSocketServer = require('ws').Server;
-const https = require('https');
+const http = require('http');
 
 const { SESSION_SECRET, CONNECTION_STRING, SERVER_PORT } = process.env;
 
@@ -158,7 +158,7 @@ res.send(path.join(__dirname, '../build/index.html'))
 const webSocketsServerPort = 8000;
 
 // Spinning the http server and the websocket server.
-const server = https.createServer();
+const server = http.createServer();
 server.listen(webSocketsServerPort, () => console.log(`sockets connected on ${webSocketsServerPort}`));
 const wsServer = new webSocketServer({
   httpServer: server
