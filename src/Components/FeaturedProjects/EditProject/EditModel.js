@@ -80,14 +80,18 @@ class EditModel extends Component {
 
     // -- Replace Existing Model File -- //
     replaceModelFile = async () => {
-        const { photo_url } = this.state
+        const { photo_url,file_url } = this.state
         const { model_id,firebase_url } = this.props.info[0]
         const { user_id } = this.props
         this.setIsLoading()
 
         const refFromURL = await this.props.getRefFromUrl(firebase_url).payload // project url
-        await this.props.deleteFile(firebase_url) // delete current file
-        const newModel = await this.props.addNewModel(photo_url,refFromURL) // add new file
+        try {
+            await this.props.deleteFile(firebase_url)
+        } catch(err) {
+            console.log('this file doesnt exist')
+        } // delete current file
+        const newModel = await this.props.addNewModel(file_url,refFromURL) // add new file
         const modelUrl = await newModel.action.payload.ref.getDownloadURL() // url to DB
         await this.newModelToDB(model_id,modelUrl)
 
