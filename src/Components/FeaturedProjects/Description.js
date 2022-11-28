@@ -5,7 +5,7 @@ const Description = (props) => {
 
     return (
         <div>
-            <p className="doc-containers" style={{color:'#555',maxHeight:'200px'}} >{description}</p>
+            <p className="doc-containers" style={{color:'#555',minHeight:'200px',overflow:'scroll'}} >{description}</p>
         </div>        
     )
 }
