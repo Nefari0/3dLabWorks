@@ -14,19 +14,25 @@ const VideoPlayer = (props) => {
             </header>
             <div className='' style={{marginTop:'50px'}} >
 
-                <div className='reg-size' ><ReactPlayer
-                className='react-player'
-                url={video_url}
-                width='298px'
-                height='191px'
-                /></div>
+                <div className='reg-size' >
+                    <ReactPlayer
+                        className='react-player'
+                        url={video_url}
+                        width='298px'
+                        height='191px'
+                        controls={true}
+                    />
+                </div>
 
-                <div className='small-size' ><ReactPlayer
-                className='react-player'
-                url={video_url}
-                width='240px'
-                height='150px'
-                /></div>
+                <div className='small-size' >
+                    <ReactPlayer
+                        className='react-player'
+                        url={video_url}
+                        width='240px'
+                        height='150px'
+                        controls={true}
+                    />
+                </div>
 
             <div className='video-info-container' >
                 <header className='video-header' >
