@@ -48,7 +48,10 @@ function App() {
         <Header/>
         {/* <Dash/> */}
         <MessageBoard />
-        <Message />
+
+        {/* MOVED TO SAVE REAL ESTATE */}
+        {/* <Message /> */}
+
         {/* <EditModel/> */}
         {/* <DemoScenes /> */}
         {routes}
