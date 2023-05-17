@@ -1,7 +1,7 @@
 
 import './App.css';
 import firebase from 'firebase'
-import Home from './Components/Home/Home'
+// import Home from './Components/Home/Home'
 import Header from './Components/Header/Header'
 import FeaturedProjects from './Components/FeaturedProjects/FeaturedProjects'
 import UserPage from './Components/UserPage/UserPage'

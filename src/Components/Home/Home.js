@@ -1,12 +1,20 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import './Home.css'
+// import './Home.css'
 import { connect } from 'react-redux'
 import { loginUser,updateUser } from '../../ducks/userReducer'
-import { getModels,getFeatured } from './../../ducks/modelsReducer'
+import { getModels,getFeatured } from '../../ducks/modelsReducer'
 import Loading from '../Loading/Loading'
 import Project from '../FeaturedProjects/Project'
 import VideoPlayer from '../VideoPlayer/VideoPlayer'
+import { 
+    Hero,
+    HeroH2,
+    CarouselRail,
+    Carousel,
+    RightSlideButton, 
+    LeftSlideButton
+} from './home.styles'
 
 class Home extends Component {
     constructor() {
@@ -19,14 +27,10 @@ class Home extends Component {
             password:'',
             userLikes:null,
             loading:false,
+            positionCounter:0
         }
-        this.handleUserName = this.handleUserName.bind(this)
-        this.handlePassword = this.handlePassword.bind(this)
-        this.handleClick = this.handleClick.bind(this)
+        this.stateHandler = this.stateHandler.bind(this)
         this.projectIsLiked = this.projectIsLiked.bind(this)
-
-        // --- this will be used for side scroll --- //
-        // this.testRef = React.createRef();
     }
 
     componentDidMount() {
@@ -48,18 +52,10 @@ class Home extends Component {
         this.setState({loading:!this.state.loading})
     }
 
-    handleUserName(value){
-        this.setState({...this.state,user_name:value})
-    }
-
-    handlePassword(value){
-        this.setState({...this.state,password:value})
-    }
-
-    handleClick() {
-        const { user_name, password } = this.state
-        this.props.loginUser(user_name,password)
-        this.setState({user_name:'',password:''})
+    stateHandler(prop,val) {
+        this.setState({
+            [prop]:val
+        })
     }
 
     projectIsLiked(projectId,userLike) {
@@ -67,28 +63,12 @@ class Home extends Component {
             return(userLike.filter(el => el.model_id === projectId)[0].model_id === projectId)
           } catch (error) {
             console.log('user does not like this project',error);
-            // expected output: ReferenceError: nonExistentFunction is not defined
-            // Note - error messages will vary depending on browser
           }
     }
 
-
-    //  --- SIDE SCROLL --- //
-    // scroll = (params) => {
-    //     console.log('hit scroll')
-    //     params.current.scrollIntoView({behavior: "smooth", block: "center"})
-    //     // console.log('test',this.testRef)
-    //     // window.scrollTo(
-    //     //     {
-    //     //     top: 0,
-    //     //     left: 10,
-    //     //     behavior: 'smooth'
-    //     //   }
-    //     //   );
-    // }
-
     render() {
-        const { loading, videos } = this.state
+
+        const { loading, videos, positionCounter } = this.state
         const { isLoggedIn } = this.props.user
         const { user_likes,model_likes } = this.props.user.user
         const { featured } = this.props.models
@@ -102,16 +82,28 @@ class Home extends Component {
         })
 
         return(
-                <div className="hero">
+                <Hero>
                     {!loading ? true : <Loading />}
 
-                    <h2 className="">IMAGINE IT - BUILD IT.</h2>
+                    <HeroH2 className="">IMAGINE IT - BUILD IT.</HeroH2>
 
-                    <section className="deploy-projects invisible-scrollbar" >
-                        {mappedVideos}
-                        {mappedModels}
-                    </section>
-                </div>
+                    <CarouselRail>
+                        <Carousel positionCounter={positionCounter}>
+                            {mappedVideos}
+                            {mappedModels}
+                            {/* {mappedTestArr} */}
+                        </Carousel>
+
+                        {positionCounter < 0 && <LeftSlideButton onClick={() => this.stateHandler('positionCounter',positionCounter+300)}>
+                            left
+                        </LeftSlideButton>}
+
+                        <RightSlideButton onClick={() => this.stateHandler('positionCounter',positionCounter-300)}>
+                            right
+                        </RightSlideButton>
+
+                    </CarouselRail>
+                </Hero>
         )
     }
 }
