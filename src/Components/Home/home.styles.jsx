@@ -50,7 +50,7 @@ export const CarouselRail = styled.section`
     // background-color:blue;
 
     @media (max-height:525px) {
-        height: 490px;
+        // height: 490px;
     }
 `
 
@@ -67,12 +67,22 @@ export const Carousel = styled.section`
 `
 
 const button = css`
-    height:50px;
-    width:50px;
     border-radius:50%;
     position:absolute;
     z-index:1000000000000000000000;
-    top:75%;
+    top:80%;
+    border:solid #fff 1px;
+    box-shadow:10px 5px 60px 10px rgba(36, 36, 36, .5);
+
+    @media (max-width:400px) {
+        top:90%;
+    }
+
+    @media (max-height:420px) {
+        top:80%;
+    }
+    height:50px;
+    width:50px;
 `
 
 export const LeftSlideButton = styled.button`
@@ -80,7 +90,14 @@ export const LeftSlideButton = styled.button`
     left:50px;
 `
 
+const largRightBTN = css`
+    height:75px;
+    width:75px;
+    
+    @media (max-height:500px) {top:70%;}
+`
 export const RightSlideButton = styled.button`
     ${button}
-    right:70px;
+    ${({positionCounter}) => positionCounter === 0 ? largRightBTN : button}
+    right:50px;
 `

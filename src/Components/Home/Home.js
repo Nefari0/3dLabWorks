@@ -7,6 +7,7 @@ import { getModels,getFeatured } from '../../ducks/modelsReducer'
 import Loading from '../Loading/Loading'
 import Project from '../FeaturedProjects/Project'
 import VideoPlayer from '../VideoPlayer/VideoPlayer'
+import { RightArrow,LeftArrow } from '../SVG2'
 import { 
     Hero,
     HeroH2,
@@ -94,12 +95,16 @@ class Home extends Component {
                             {/* {mappedTestArr} */}
                         </Carousel>
 
-                        {positionCounter < 0 && <LeftSlideButton onClick={() => this.stateHandler('positionCounter',positionCounter+300)}>
-                            left
+                        {positionCounter < 0 && 
+                        <LeftSlideButton onClick={() => this.stateHandler('positionCounter',positionCounter+300)}>
+                            {LeftArrow()}
                         </LeftSlideButton>}
 
-                        <RightSlideButton onClick={() => this.stateHandler('positionCounter',positionCounter-300)}>
-                            right
+                        <RightSlideButton 
+                            positionCounter={positionCounter}
+                            onClick={() => this.stateHandler('positionCounter',positionCounter-300)}
+                        >
+                            {RightArrow()}
                         </RightSlideButton>
 
                     </CarouselRail>

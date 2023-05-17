@@ -234,6 +234,7 @@ class Header extends Component{
             <ul className='desktop-nav'>
                 <Link to="/about" style={{ textDecoration: 'none' }}><li className='link-item'><a >About</a></li></Link>
                 <Link to="/explore" style={{ textDecoration: 'none' }}><li className='link-item'><a>Explore</a></li></Link>
+                {/* <li className='link-item'><a>Contact</a></li> */}
                 {!isLoggedIn ? (<div></div>) : (<Link to="/user" style={{ textDecoration: 'none' }}><li className='link-item'><a>{user}</a></li></Link>)}
                 <a className='link-button' onClick={this.toggleLogin}>{!isLoggedIn ? 'Login' : 'logout'}</a>
             </ul>
