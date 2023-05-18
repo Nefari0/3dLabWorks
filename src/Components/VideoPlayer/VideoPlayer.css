@@ -126,6 +126,8 @@
 @media (max-width:350px) {
     .player-container {
         width: 240px;
+        margin-left:0px;
+        margin-right:20px;
     }
     .video-title {
         width: 241px;

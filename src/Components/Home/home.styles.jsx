@@ -47,10 +47,12 @@ export const CarouselRail = styled.section`
     // align-items: center;
     overflow: none;
     z-index: 0;
-    // background-color:blue;
 
-    @media (max-height:525px) {
-        // height: 490px;
+    @media (max-width:350px) {
+        width:240px;
+        height:370px;
+        overflow:hidden;
+        margin:auto;
     }
 `
 
@@ -70,34 +72,19 @@ const button = css`
     border-radius:50%;
     position:absolute;
     z-index:1000000000000000000000;
-    top:80%;
+    // top:80%;
     border:solid #fff 1px;
     box-shadow:10px 5px 60px 10px rgba(36, 36, 36, .7);
-
-    @media (max-width:400px) {
-        top:90%;
-    }
-
-    @media (max-height:420px) {
-        top:80%;
-    }
     height:50px;
     width:50px;
 `
 
 export const LeftSlideButton = styled.button`
     ${button}
-    left:50px;
+    left:3px;
 `
 
-const largRightBTN = css`
-    height:75px;
-    width:75px;
-    
-    @media (max-height:500px) {top:70%;}
-`
 export const RightSlideButton = styled.button`
     ${button}
-    ${({positionCounter}) => positionCounter === 0 ? largRightBTN : button}
-    right:50px;
-`
+    right:3px;
+    `

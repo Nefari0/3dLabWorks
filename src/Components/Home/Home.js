@@ -84,6 +84,7 @@ class Home extends Component {
 
         return(
                 <Hero>
+                    
                     {!loading ? true : <Loading />}
 
                     <HeroH2 className="">IMAGINE IT - BUILD IT.</HeroH2>
@@ -92,22 +93,20 @@ class Home extends Component {
                         <Carousel positionCounter={positionCounter}>
                             {mappedVideos}
                             {mappedModels}
-                            {/* {mappedTestArr} */}
                         </Carousel>
-
-                        {positionCounter < 0 && 
-                        <LeftSlideButton onClick={() => this.stateHandler('positionCounter',positionCounter+260)}>
-                            {LeftArrow()}
-                        </LeftSlideButton>}
-
-                        <RightSlideButton 
-                            positionCounter={positionCounter}
-                            onClick={() => this.stateHandler('positionCounter',positionCounter-260)}
-                        >
-                            {RightArrow()}
-                        </RightSlideButton>
-
                     </CarouselRail>
+
+                    {positionCounter < 0 && 
+                    <LeftSlideButton onClick={() => this.stateHandler('positionCounter',positionCounter+260)}>
+                        {LeftArrow()}
+                    </LeftSlideButton>}
+
+                    <RightSlideButton 
+                        onClick={() => this.stateHandler('positionCounter',positionCounter-260)}
+                    >
+                        {RightArrow()}
+                    </RightSlideButton>
+
                 </Hero>
         )
     }

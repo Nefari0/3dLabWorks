@@ -90,6 +90,8 @@
 @media (max-width:350px) {
     .project-container {
         width: 240px;
+        margin-left:0px;
+        margin-right:20px;
     }
     .project-container footer a {
         font-size: 12px;
