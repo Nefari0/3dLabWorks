@@ -3,18 +3,18 @@ import './App.css';
 import firebase from 'firebase'
 // import Home from './Components/Home/Home'
 import Header from './Components/Header/Header'
-import FeaturedProjects from './Components/FeaturedProjects/FeaturedProjects'
-import UserPage from './Components/UserPage/UserPage'
-import GroupPage from './Components/GroupPage/GroupPage'
-import About from './Components/About/About'
+// import FeaturedProjects from './Components/ProjectDetails/FeaturedProjects'
+// import UserPage from './Components/UserPage/UserPage'
+// import GroupPage from './Components/GroupPage/GroupPage'
+// import About from './Components/About/About'
 import routes from './routes'
 import { HashRouter } from 'react-router-dom'
-import Footer from './Components/Footer/Footer'
-import Explore  from './Components/Explore/Explore'
-import AdminPage from './Components/AdminPage/AdminPage';
+// import Footer from './Components/Footer/Footer'
+// import Explore  from './Components/Explore/Explore'
+// import AdminPage from './Components/AdminPage/AdminPage';
 import MessageBoard from './Components/UserMessages/MessageBoard';
-import Dash from './Components/Dash/Dash'
-import Message from './Components/Messages/Message';
+// import Dash from './Components/Dash/Dash'
+// import Message from './Components/Messages/Message';
 import { useState,useEffect } from 'react'
 // import BaseBackend from './BaseBackend';
 // import EditModel from './Components/UserPage/EditModel' // for testing. will not be rendered in this component

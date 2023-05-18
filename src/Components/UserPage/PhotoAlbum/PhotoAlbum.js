@@ -6,7 +6,7 @@ import Resizer from 'react-image-file-resizer'
 // import { get } from 'http'
 import { addNewModel } from '../../../ducks/firebaseReducer'
 import { connect } from 'react-redux'
-import ImagePreview from '../../FeaturedProjects/EditProject/ImagePreview';
+import ImagePreview from '../../ProjectDetails/EditProject/ImagePreview';
 import {app} from '../../../base'
 const db = app.firestore()
 

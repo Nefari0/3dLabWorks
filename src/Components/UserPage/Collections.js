@@ -9,7 +9,7 @@ import { connect } from 'react-redux'
 import { getProjects } from '../../ducks/projectsReducer'
 import { addNewModel } from '../../ducks/firebaseReducer'
 import AddProject from './AddProject'
-import EditModel from '../FeaturedProjects/EditProject/EditModel'
+import EditModel from '../ProjectDetails/EditProject/EditModel'
 import Project from '../Project/Project'
 import CreateProject from './CreateProject'
 
