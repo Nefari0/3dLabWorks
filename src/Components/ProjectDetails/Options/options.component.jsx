@@ -1,5 +1,10 @@
 import SVG from "../../SVG"
 
+import { 
+    OptionsH4,
+    OptionsText
+ } from "./options.styles"
+
 const selected = {backgroundColor:'#3c598e'}
 const cfff = {color:'#fff'} // -- light
 const icon ={
@@ -34,7 +39,11 @@ const OptionsMenu = (props) => {
     return (
     <ul>
         <li style={viewFiles ? selected : null} onClick={() => changeView('viewFiles')} >
-            <h4 className='dark-text' style={viewFiles ? cfff : null} >Download Files</h4>
+            <OptionsH4
+                viewFiles={viewFiles}
+            >
+                Download Files
+            </OptionsH4>
         </li>
 
         <li onClick={clickLike}>
@@ -47,24 +56,24 @@ const OptionsMenu = (props) => {
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
             }
-            <p className="dark-text">Like</p>
+            <OptionsText>Like</OptionsText>
         </li>
 
         <li style={viewComments ? selected : null} onClick={() => changeView('viewComments')} >
             <SVG params={'comments'} />
-            <p style={viewComments ? cfff : null}>Comments</p>
+            <OptionsText condition={viewComments} >Comments</OptionsText>
         </li>
 
         <li style={viewEditProject || addedToFavorites ? selected : null} onClick={() => changeView(authorized() === true ? 'viewEditProject' : 'viewInfo')}>
             {authorized() === true ? 
             <SVG params={'edit_project'} fill={'none'} stroke={'currentColor'}/> : 
             <SVG params={'folder'} fill={'none'} stroke={'currentColor'} />}
-            <p style={viewEditProject ? cfff : null}>{authorized() ? 'Edit Project' : 'Add to Favorites'}</p>
+            <OptionsText condition={viewEditProject || addedToFavorites}>{authorized() ? 'Edit Project' : 'Add to Favorites'}</OptionsText>
         </li>
 
         <li style={viewInfo ? selected : null} onClick={() => changeView('viewInfo')}>
             <SVG params={'info'} fill={'none'} stroke={'currentColor'}/>
-            <p style={viewInfo ? cfff : null} >Info</p>
+            <OptionsText condition={viewInfo} >Info</OptionsText>
         </li>
     </ul>
     )
