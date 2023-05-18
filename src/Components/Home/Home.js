@@ -96,13 +96,13 @@ class Home extends Component {
                         </Carousel>
 
                         {positionCounter < 0 && 
-                        <LeftSlideButton onClick={() => this.stateHandler('positionCounter',positionCounter+300)}>
+                        <LeftSlideButton onClick={() => this.stateHandler('positionCounter',positionCounter+260)}>
                             {LeftArrow()}
                         </LeftSlideButton>}
 
                         <RightSlideButton 
                             positionCounter={positionCounter}
-                            onClick={() => this.stateHandler('positionCounter',positionCounter-300)}
+                            onClick={() => this.stateHandler('positionCounter',positionCounter-260)}
                         >
                             {RightArrow()}
                         </RightSlideButton>

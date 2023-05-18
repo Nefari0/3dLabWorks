@@ -2,7 +2,7 @@
 
 .player-container {
     position: relative;
-    min-width: 297px;
+    width: 297px;
     height: 350px;
     background-color: #fff;
     margin: 10px;
@@ -125,7 +125,7 @@
 
 @media (max-width:350px) {
     .player-container {
-        min-width: 240px;
+        width: 240px;
     }
     .video-title {
         width: 241px;
