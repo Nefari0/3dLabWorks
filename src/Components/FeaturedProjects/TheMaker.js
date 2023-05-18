@@ -1,4 +1,4 @@
-import './Project.css'
+import '../Project/Project.css'
 import './TheMaker.css'
 
 const TheMaker = (props) => {

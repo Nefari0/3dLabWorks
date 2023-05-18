@@ -2,7 +2,7 @@ import axios from 'axios';
 import Home from '../Home/Home'
 // import CreateProject from './CreateProject';
 import { Switch, Route } from 'react-router-dom'
-import Project from '../FeaturedProjects/Project'
+import Project from '../Project/Project'
 import { Component, lazy } from 'react'
 import { Link } from 'react-router-dom';
 import './UserPage.css'

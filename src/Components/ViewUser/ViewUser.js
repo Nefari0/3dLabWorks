@@ -1,6 +1,6 @@
 import axios from 'axios';
 import UserProject from './UserProject'
-import Project from '../FeaturedProjects/Project';
+import Project from '../Project/Project';
 import { Component } from 'react'
 import '../UserPage/UserPage.css'
 import { connect } from 'react-redux'

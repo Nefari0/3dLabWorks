@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
-import './Project.css'
+import '../Project/Project.css'
 import { connect } from 'react-redux'
 import { deleteFile } from '../../ducks/firebaseReducer'
 // import {app} from '../../base'
