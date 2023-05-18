@@ -16,21 +16,28 @@ import UserPage from '../UserPage/UserPage'
 import Home from '../Home/Home'
 import SVG from '../SVG'
 import '../SVG.css'
+import OptionsMenu from './Options/options.component'
 
-import { DetailsView } from './projectdetail.styles'
+import { 
+    DetailsView,
+    DetailContainer,
+    ThumbnailViewer,
+    CommentBox,
+    CommentBoxHeader,
+} from './projectdetail.styles'
 
-const selected = {backgroundColor:'#3c598e'}
-const cfff = {color:'#fff'} // -- light
-const icon ={
-    margin: 'auto',
-    marginLeft: '10px',
-    marginRight: '10px',
-    height: '40px',
-    width: '40px',
-    opacity: '60%',
-    color: '#6495ed',
-    paddingTop: '10px',
-}
+// const selected = {backgroundColor:'#3c598e'}
+// const cfff = {color:'#fff'} // -- light
+// const icon ={
+//     margin: 'auto',
+//     marginLeft: '10px',
+//     marginRight: '10px',
+//     height: '40px',
+//     width: '40px',
+//     opacity: '60%',
+//     color: '#6495ed',
+//     paddingTop: '10px',
+// }
 
 class ProjectDetail extends Component {
 
@@ -207,7 +214,20 @@ class ProjectDetail extends Component {
 
     render() {
         const { comments,model_id,maker_id,myLike } = this.state
-        const { info, userInfo,viewComments,viewFiles,viewInfo,viewEditProject,modelImages,isDeleted,selectedPhoto,addedToFavorites } = this.state
+
+        const { 
+            info,
+            userInfo,
+            viewComments,
+            viewFiles,
+            viewInfo,
+            viewEditProject,
+            modelImages,
+            isDeleted,
+            selectedPhoto,
+            addedToFavorites
+         } = this.state
+
         const { isLoggedIn } = this.props.user
         const { user,id } = this.props.user.user
 
@@ -263,9 +283,9 @@ class ProjectDetail extends Component {
                         {mappedUserInfo}
                     </section>
 
-                    <section className='image-viewer'>{mappedThumbNails}</section>
+                    <ThumbnailViewer>{mappedThumbNails}</ThumbnailViewer>
 
-                    <div className="detail-container">
+                    <DetailContainer>
 
                         <ProjectPhotos
                             model_id={info.model_id} 
@@ -274,63 +294,62 @@ class ProjectDetail extends Component {
                             id={id}
                         />
 
-                        <ul>
-                            <li style={viewFiles ? selected : null} onClick={() => this.changeView('viewFiles')} >
-                                <h4 className='dark-text' style={viewFiles ? cfff : null} >Download Files</h4>
-                            </li>
-
-                            <li onClick={this.clickLike}>
-                                {isLoggedIn === true && myLike === true ? 
-                                <svg  style={icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-                                </svg>
-                                :
-                                <svg style={icon} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                </svg>
-                                }
-                                <p className="">Like</p>
-                            </li>
-
-                            <li style={viewComments ? selected : null} onClick={() => this.changeView('viewComments')} >
-                                <SVG params={'comments'} />
-                                <p style={viewComments ? cfff : null}>Comments</p>
-                            </li>
+                        <OptionsMenu
+                            state={this.state}
+                            authorized={authorized}
+                            isLoggedIn={isLoggedIn}
+                            clickLike={this.clickLike}
+                            changeView={this.changeView}
+                        />
+                        
+                    </DetailContainer>
                     
-                            <li style={viewEditProject || addedToFavorites ? selected : null} onClick={() => this.changeView(authorized() === true ? 'viewEditProject' : 'viewInfo')}>
-                                {authorized() === true ? 
-                                <SVG params={'edit_project'} fill={'none'} stroke={'currentColor'}/> : 
-                                <SVG params={'folder'} fill={'none'} stroke={'currentColor'} />}
-                                <p style={viewEditProject ? cfff : null}>{authorized() ? 'Edit Project' : 'Add to Favorites'}</p>
-                            </li>
+                    <CommentBox>
 
-                            <li style={viewInfo ? selected : null} onClick={() => this.changeView('viewInfo')}>
-                                <SVG params={'info'} fill={'none'} stroke={'currentColor'}/>
-                                <p style={viewInfo ? cfff : null} >Info</p>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <section className="comment-box">
-
-                        <header >
+                        <CommentBoxHeader >
                             <h3>
-                                {viewComments ? 'Comments' : null}
-                                {viewFiles ? 'Download File' : null}
-                                {viewInfo ? 'Information' : null}
-                                {viewEditProject ? 'Edit Project' : null}
+                                {viewComments && 'Comments'}
+                                {viewFiles && 'Download File'}
+                                {viewInfo && 'Information'}
+                                {viewEditProject && 'Edit Project'}
                             </h3>
-                        </header>
+                        </CommentBoxHeader>
 
-                        {viewComments ? <CreateComment user={user} key={id} id={id} isLoggedIn={isLoggedIn} model_id={model_id} plsSignIn={this.plsSignIn} getComments={this.getComments} /> : null}
-                        {viewComments ? mappedComments : null}
+                        {/* ---------- */}
+                        {/* COMMENTS */}
+                        {/* ---------- */}
+                        {viewComments &&
+                            <CreateComment 
+                                user={user} 
+                                key={id} 
+                                id={id} 
+                                isLoggedIn={isLoggedIn} 
+                                model_id={model_id} 
+                                plsSignIn={this.plsSignIn} 
+                                getComments={this.getComments} 
+                            />
+                        }
 
-                        {viewFiles ? mappedUrl : null}
+                        {viewComments && mappedComments}
+                        {/* -------------- */}
 
-                        {viewEditProject && authorized() ? <EditModel key={model_id} info={info} model_id={model_id} user_id={id} user_name={user} modelImages={modelImages} getDetails={this.getDetails} setIsDeleted={this.setIsDeleted} getImages={this.getImages} /> : null}
+                        {viewFiles && mappedUrl}
 
-                        {viewInfo ? mappedDescription : null}
-                    </section>
+                        {viewEditProject && authorized() && 
+                            <EditModel 
+                                key={model_id} 
+                                info={info} 
+                                model_id={model_id} 
+                                user_id={id} 
+                                user_name={user} 
+                                modelImages={modelImages} 
+                                getDetails={this.getDetails} 
+                                setIsDeleted={this.setIsDeleted} 
+                                getImages={this.getImages} 
+                            />}
+
+                        {viewInfo && mappedDescription}
+                    </CommentBox>
                 </DetailsView>)}
             </>
         )}
