@@ -1,4 +1,3 @@
-import '../Project/Project.css'
 import React, { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
@@ -7,12 +6,33 @@ import { getModels } from '../../ducks/modelsReducer'
 import { updateUser,remoteLogin } from '../../ducks/userReducer'
 import SVG from '../SVG'
 import '../SVG.css'
-// import { addLike } from '../../../server/controllers/projectsController'
+
+import { 
+    ProjectContainer,
+    ProjectUserPhoto,
+    ProjectImageContainer,
+    LikeShareContainer,
+    ProjectContainerFooter
+ } from './project.styles'
 
 const Project = (props) => {
 
-    const { category, img, firebase_url,firebase_url01, name, description, user_name, model_likes, model_id,photo_url, user_id, likes } = props.data
-    const { handleClick,isLoggedIn,id,user_likes } = props
+    const { 
+        firebase_url,
+        firebase_url01, 
+        name, 
+        user_name, 
+        model_id,
+        photo_url, 
+        user_id, 
+        likes 
+    } = props.data
+
+    const { 
+        isLoggedIn,
+        id,
+        user_likes 
+    } = props
 
     const [numOfLikes, setNumOfLikes] = useState(0)
     const [heart,setHeart] = useState(false) // for highlighting hearts if current user has already like this project
@@ -72,34 +92,46 @@ const Project = (props) => {
     }
 
     return(
-        <div className='project-container' style={{overflow:'hidden'}}>
+        <ProjectContainer>
 
             <header style={{backgroundColor:''}}>
-                <Link to={`/viewuser/${user_id}`} ><img src={getPhotoUrl()} className="project-user-photo"/></Link>
+                <Link to={`/viewuser/${user_id}`} ><ProjectUserPhoto src={getPhotoUrl()}/></Link>
                 <h5 className='dark-text' style={{color:'#555',paddingBottom:'15px',paddingTop:'',fontWeight:'400'}}>{name}
                     <br/><i>by {getUserName()}</i>
                 </h5>
             </header>
 
             <Link to={`/projectdetails/${model_id}`}>
-                <section className="project-image">
+                <ProjectImageContainer>
                     <img src={firebase_url01}/>
-                </section>
+                </ProjectImageContainer>
             </Link>
 
-            <footer>
+            <ProjectContainerFooter>
 
                 <div onClick={() => isLoggedIn === true ? window.open(firebase_url) : plsSignIn()} >
                     <SVG params={'download_icon'} fill={'none'} stroke={'currentColor'}/>
                 </div>
                     
                 { isLoggedIn ? 
-                <a style={{marginRight:'10px',textDecoration:'none'}} href={`${firebase_url}`} target="_blank" rel="noopener noreferrer">download</a>
+                <a 
+                    style={{marginRight:'10px',textDecoration:'none'}} 
+                    href={`${firebase_url}`} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                >
+                    download
+                </a>
                     : 
-                <a style={{marginRight:'10px',color:'#555'}} onClick={() => plsSignIn()}>download</a>
+                <a 
+                    style={{marginRight:'10px',color:'#555'}} 
+                    onClick={() => plsSignIn()}
+                >
+                    download
+                </a>
                 }
 
-                <div className="like-share">
+                <LikeShareContainer>
             
                     <aside style={{borderBottom:'1px solid #555'}}>
                         {
@@ -125,10 +157,10 @@ const Project = (props) => {
                         <p style={{marginLeft:'10px'}}>share</p>
                     </aside>
 
-                </div>
+                </LikeShareContainer>
             
-            </footer>
-        </div>
+            </ProjectContainerFooter>
+        </ProjectContainer>
     )
 }
 
