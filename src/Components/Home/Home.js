@@ -97,15 +97,18 @@ class Home extends Component {
                     </CarouselRail>
 
                     {positionCounter < 0 && 
-                    <LeftSlideButton onClick={() => this.stateHandler('positionCounter',positionCounter+260)}>
-                        {LeftArrow()}
-                    </LeftSlideButton>}
+                        <LeftSlideButton onClick={() => this.stateHandler('positionCounter',positionCounter+260)}>
+                            {LeftArrow()}
+                        </LeftSlideButton>
+                    }
 
-                    <RightSlideButton 
-                        onClick={() => this.stateHandler('positionCounter',positionCounter-260)}
-                    >
-                        {RightArrow()}
-                    </RightSlideButton>
+                    {positionCounter >= (mappedVideos.length+mappedModels.length*-400)+400 && 
+                        <RightSlideButton 
+                            onClick={() => this.stateHandler('positionCounter',positionCounter-260)}
+                        >
+                            {RightArrow()}
+                        </RightSlideButton>
+                    }
 
                 </Hero>
         )
