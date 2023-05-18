@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { Switch,Route,Link } from 'react-router-dom'
 import axios from 'axios'
-import './Project.css'
+import '../Project/Project.css'
 import './ProjectDetail.css'
 import ProjectPhotos from './ProjectPhotos'
 import Comments from './Comments/Comments'

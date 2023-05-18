@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { loginUser,updateUser } from '../../ducks/userReducer'
 import { getModels,getFeatured } from '../../ducks/modelsReducer'
 import Loading from '../Loading/Loading'
-import Project from '../FeaturedProjects/Project'
+import Project from '../Project/Project'
 import VideoPlayer from '../VideoPlayer/VideoPlayer'
 import { RightArrow,LeftArrow } from '../SVG2'
 import { 
