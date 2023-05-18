@@ -1,4 +1,4 @@
-.view {
+/* .view {
     margin: none;
     min-height: 90vh;
     min-width: 100vw;
@@ -8,7 +8,7 @@
     background-attachment: fixed;
     display: flex;
 	flex-direction: column;
-}
+} */
 
 /* .image-viewer {
     height: 75px;
@@ -27,11 +27,11 @@
     border: solid 1px rgb(85, 85, 85,.3);
 } */
 
-.thumbnail-image {
+/* .thumbnail-image {
     height: 50px;
     width: 60px;
     border-radius: 5px;
-}
+} */
 
 /* -- Main image and all menu items -- */
 /* .detail-container {
@@ -43,16 +43,16 @@
     display: flex;
 	justify-content: center;
 } */
-.detail-container section {
+/* .detail-container section {
     width: 440px;
     min-height: 100px;
     margin: 2px;
     display: flex;
-}
-.detail-container ul {
+} */
+/* .detail-container ul {
     width: 220px;
-}
-.detail-container li {
+} */
+/* .detail-container li {
     background-color: #fff;
     display: flex;
     height: 59px;
@@ -63,13 +63,13 @@
     border-bottom: solid 1px rgb(85, 85, 85,.3) ;
     border-left:solid 1px rgb(85, 85, 85,.3)  ;
     border-right:solid 1px rgb(85, 85, 85,.3) ;
-}
-.detail-container p {
+} */
+/* .detail-container p {
     color: #555;
     padding-top: 15px;
     padding-bottom: 5px;
     margin-left: 10px;
-}
+} */
 
 /* -- Comments and other content at bottom of page -- */
 /* .comment-box {
@@ -95,18 +95,18 @@
     width: 100%;
 } */
 
-@media (max-width:680px) {
+/* @media (max-width:680px) { */
 
-    .detail-container {
+    /* .detail-container {
         min-height: 500px;
         flex-direction: column;
         align-items: center;
-    }
+    } */
 
     /* .image-viewer, */
-    .view,
+    /* .view,
     .detail-container,
     .comment-box,
     .detail-container section,
-    .detail-container ul {width: 300px;}
-}
+    .detail-container ul {width: 300px;} */
+/* } */
