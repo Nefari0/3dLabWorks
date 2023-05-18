@@ -3,7 +3,7 @@ import { Switch,Route,Link } from 'react-router-dom'
 import axios from 'axios'
 // import '../Project/Project.css'
 import './ProjectDetail.css'
-import ProjectPhotos from './ProjectPhotos'
+import ProjectPhotos from './ProjectPhotos/ProjectPhotos'
 import Comments from './Comments/Comments'
 import { loginUser, updateUser, remoteLogin } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
@@ -301,7 +301,7 @@ class ProjectDetail extends Component {
                             clickLike={this.clickLike}
                             changeView={this.changeView}
                         />
-                        
+
                     </DetailContainer>
                     
                     <CommentBox>
