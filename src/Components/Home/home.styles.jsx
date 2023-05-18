@@ -72,7 +72,7 @@ const button = css`
     z-index:1000000000000000000000;
     top:80%;
     border:solid #fff 1px;
-    box-shadow:10px 5px 60px 10px rgba(36, 36, 36, .5);
+    box-shadow:10px 5px 60px 10px rgba(36, 36, 36, .7);
 
     @media (max-width:400px) {
         top:90%;
