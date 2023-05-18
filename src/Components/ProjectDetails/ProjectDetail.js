@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { Switch,Route,Link } from 'react-router-dom'
 import axios from 'axios'
-import '../Project/Project.css'
+// import '../Project/Project.css'
 import './ProjectDetail.css'
 import ProjectPhotos from './ProjectPhotos'
 import Comments from './Comments/Comments'
@@ -16,6 +16,8 @@ import UserPage from '../UserPage/UserPage'
 import Home from '../Home/Home'
 import SVG from '../SVG'
 import '../SVG.css'
+
+import { DetailsView } from './projectdetail.styles'
 
 const selected = {backgroundColor:'#3c598e'}
 const cfff = {color:'#fff'} // -- light
@@ -227,11 +229,19 @@ class ProjectDetail extends Component {
         })
         
         const mappedComments = comments.map(element => {
-            return <Comments content={element.text} key={element.comment_id} model_id={element.model_id} date_created={element.date_created} photo_url={element.photo_url} comment_id={element.comment_id} user_id={element.user_id} user_name={element.user_name} getComments={this.getComments} />
-        })
-
-        const mappedPhoto = info.map(element => {
-            return <ProjectPhotos data={element} key={element.model_id} firebase_url={info[0].firebase_url} model_id={element.model_id} userInfo={userInfo} url={selectedPhoto} isLoggedIn={isLoggedIn} id={id} maker_id={maker_id} plsSignIn={this.plsSignIn} getImages={this.getImages} />
+            return (
+                <Comments 
+                    content={element.text} 
+                    key={element.comment_id} 
+                    model_id={element.model_id} 
+                    date_created={element.date_created} 
+                    photo_url={element.photo_url} 
+                    comment_id={element.comment_id} 
+                    user_id={element.user_id} 
+                    user_name={element.user_name} 
+                    getComments={this.getComments} 
+                />
+            )
         })
 
         const mappedUserInfo = userInfo.map(element => {
@@ -243,17 +253,26 @@ class ProjectDetail extends Component {
         })
 
         return(
-            <div>
+            <>
             {isDeleted ? (<Route path="/" component={Home}/>) :
-                (<div className="view">
+                (<DetailsView>
                     
-                    <section onClick={() => this.props.history.push(`/viewuser/${maker_id}`)} >{mappedUserInfo}</section>
+                    <section 
+                       onClick={() => this.props.history.push(`/viewuser/${maker_id}`)} 
+                    >
+                        {mappedUserInfo}
+                    </section>
 
                     <section className='image-viewer'>{mappedThumbNails}</section>
 
                     <div className="detail-container">
 
-                        {mappedPhoto}
+                        <ProjectPhotos
+                            model_id={info.model_id} 
+                            url={selectedPhoto} 
+                            maker_id={maker_id} 
+                            id={id}
+                        />
 
                         <ul>
                             <li style={viewFiles ? selected : null} onClick={() => this.changeView('viewFiles')} >
@@ -312,8 +331,8 @@ class ProjectDetail extends Component {
 
                         {viewInfo ? mappedDescription : null}
                     </section>
-                </div>)}
-            </div>
+                </DetailsView>)}
+            </>
         )}
 }
 

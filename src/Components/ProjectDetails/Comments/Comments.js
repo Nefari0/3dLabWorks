@@ -7,13 +7,13 @@ import { useState } from 'react'
 
 const Comments = (props) => {
 
-    const { content,date_created,user_name,photo_url,user_id,comment_id } = props
+    const { content,photo_url,user_id,comment_id } = props
     const { id } = props.user.user
     const [menuOpen,setMenuOpen] = useState(false)
 
     const deletePost = async () => {
         // match logged in user id with comment author id
-        console.log('hit delete post front end')
+        // console.log('hit delete post front end')
         if(user_id === id) {
             await axios.delete(`/api/comments/user/delete/${comment_id}`).then(() => {props.getComments()})
         }

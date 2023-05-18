@@ -8,10 +8,7 @@ import { deleteFile } from '../../ducks/firebaseReducer'
 
 const ProjectPhotos = (props) => {
 
-    
-    const { firebase_url01, firebase_url, name, model_id } = props.data
-    const { first_name, photo_url, user_name } = props.userInfo[0]
-    const { isLoggedIn,url,maker_id,id } = props
+    const { url,maker_id,id,model_id} = props
     
     // -- Delete individual / selected photo from FB and DB -- //
     const deletePhotoFromDB = async (url) => {
