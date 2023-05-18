@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './Explore.css'
-import Project from '../FeaturedProjects/Project'
+import Project from '../Project/Project'
 import VideoPlayer from '../VideoPlayer/VideoPlayer'
 import Loading from '../Loading/Loading'
 import { loginUser,updateUser } from '../../ducks/userReducer'
