@@ -47,6 +47,7 @@ export const CarouselRail = styled.section`
     // align-items: center;
     overflow: none;
     z-index: 0;
+    margin-left:10px;
 
     @media (max-width:350px) {
         width:240px;

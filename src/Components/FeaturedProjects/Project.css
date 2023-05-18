@@ -87,7 +87,7 @@
     }
 }
 
-@media (max-width:350px) {
+@media (max-width:1000px) {
     .project-container {
         width: 240px;
         margin-left:0px;
