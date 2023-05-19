@@ -11,6 +11,9 @@ export const DetailsView = styled.section`
     background-attachment: fixed;
     display: flex;
     flex-direction: column;
+    background-image: linear-gradient(120deg,#ffffff 20%,rgba(150, 150, 150, .6));
+    background-repeat: no-repeat;
+    background-position: right top;
 `
 
 export const ThumbnailViewer = styled.section`

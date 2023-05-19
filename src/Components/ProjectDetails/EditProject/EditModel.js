@@ -53,7 +53,7 @@ class EditModel extends Component {
 
     //  ----- Permanently Delete Selected Project ---- //
     removeFileFromSpace = async () => {
-        const { firebase_url,model_id } = this.props.info[0] 
+        const { firebase_url,model_id } = this.props.info
         this.setIsLoading()
         // -- delete main file -- //
         if(firebase_url != null){
@@ -81,7 +81,7 @@ class EditModel extends Component {
     // -- Replace Existing Model File -- //
     replaceModelFile = async () => {
         const { photo_url,file_url } = this.state
-        const { model_id,firebase_url } = this.props.info[0]
+        const { model_id,firebase_url } = this.props.info
         const { user_id } = this.props
         this.setIsLoading()
 
@@ -168,7 +168,7 @@ class EditModel extends Component {
         const name = null
         this.setIsLoading() // -- init loading screen
         
-        const refFromURL = await this.props.getRefFromUrl(info[0].firebase_url).payload // -- path of stored project -- //
+        const refFromURL = await this.props.getRefFromUrl(info.firebase_url).payload // -- path of stored project -- //
          
         const cloud = await this.props.addNewModel(url,refFromURL) // -- add new photo -- //
 
