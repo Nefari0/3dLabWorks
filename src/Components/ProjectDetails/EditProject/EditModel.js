@@ -18,8 +18,8 @@ class EditModel extends Component {
         super(props);
 
         this.state = {
-            name:this.props.info[0].name,
-            description:this.props.info[0].description,
+            name:this.props.info.name,
+            description:this.props.info.description,
             photo_url:null,
             file_url:null,
             isLoading:false,
@@ -183,7 +183,7 @@ class EditModel extends Component {
     }
 
     executeChange = async () => {
-        const { model_id } = this.props.info[0]
+        const { model_id } = this.props.info
         const { name, description } = this.state
         this.setIsLoading()
         await axios.post(updateProjectTextEndpoint, {name,description,model_id})

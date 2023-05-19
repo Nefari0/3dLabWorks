@@ -123,8 +123,8 @@ class ProjectDetail extends Component {
                             maker_id:user_id,
                             model_id:model_id,
                             dlUrl:res.data.firebase_url,
-                            info:res.data,
-                            userInfo:res2.data,
+                            info:res.data[0],
+                            userInfo:res2.data[0],
                             modelImages:res3.data,
                             selectedPhoto:res.data[0].firebase_url01,
                         })
@@ -225,7 +225,7 @@ class ProjectDetail extends Component {
             modelImages,
             isDeleted,
             selectedPhoto,
-            addedToFavorites
+            addedToFavorites,
          } = this.state
 
         const { isLoggedIn } = this.props.user
@@ -239,10 +239,6 @@ class ProjectDetail extends Component {
                 }
             }
         }
-
-        const mappedUrl = info.map(element => {
-            return <DlUrl data={element} key={element.model_id} url={element.firebase_url} isLoggedIn={isLoggedIn} plsSignIn={this.plsSignIn} />
-        })
         
         const mappedComments = comments.map(element => {
             return (
@@ -260,10 +256,6 @@ class ProjectDetail extends Component {
             )
         })
 
-        const mappedUserInfo = userInfo.map(element => {
-            return <TheMaker data={element} key={element.user_id} photo_url={element.photo_url} user_name={element.user_name} info={info} maker_id={maker_id} />
-        })
-
         const mappedThumbNails = modelImages.map((el) => {
             return <div key={el.image_id} onClick={() => this.highLightedPhoto(el.photo_url)} ><img className='thumbnail-image' src={el.photo_url}/></div>
         })
@@ -276,7 +268,11 @@ class ProjectDetail extends Component {
                     <section 
                        onClick={() => this.props.history.push(`/viewuser/${maker_id}`)} 
                     >
-                        {mappedUserInfo}
+                        <TheMaker
+                            userInfo={userInfo} 
+                            info={info} 
+                            maker_id={maker_id}
+                        />
                     </section>
 
                     <ThumbnailViewer>{mappedThumbNails}</ThumbnailViewer>
@@ -331,13 +327,12 @@ class ProjectDetail extends Component {
                         {/* -------------- */}
 
                         {viewFiles && 
-                            mappedUrl
-                            // <DlUrl
-                            //     info={info} 
-                            //     isLoggedIn={isLoggedIn} 
-                            //     plsSignIn={this.plsSignIn}
-                            // />
-                            }
+                            <DlUrl 
+                                url={info.firebase_url}
+                                isLoggedIn={isLoggedIn}
+                                plsSignIn={this.plsSignIn}
+                            />
+                        }   
 
                         {viewEditProject && authorized() && 
                             <EditModel 
@@ -354,7 +349,7 @@ class ProjectDetail extends Component {
 
                         {viewInfo && 
                             <DescriptionText>
-                                    {info[0].description}
+                                    {info.description}
                             </DescriptionText>}
 
                     </CommentBox>
