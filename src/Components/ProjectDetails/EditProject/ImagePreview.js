@@ -5,6 +5,7 @@ const ImagePreview = (props) => {
     const { previewImageFile,photo_url }= props
 
     const addNewHandler = async () => {
+        console.log('HITTING IMAGE PREVIEW ADD PHOTO')
         await props.addPhoto(photo_url)
         await clearState()
     }

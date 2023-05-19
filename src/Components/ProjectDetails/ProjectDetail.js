@@ -292,6 +292,7 @@ class ProjectDetail extends Component {
                             url={selectedPhoto} 
                             maker_id={maker_id} 
                             id={id}
+                            getImages={this.getImages}
                         />
 
                         <OptionsMenu

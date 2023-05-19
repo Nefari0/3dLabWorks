@@ -16,13 +16,19 @@ import {
 
 const ProjectPhotos = (props) => {
 
-    const { url,maker_id,id,model_id} = props
+    const { 
+        url,
+        maker_id,
+        id,
+        model_id,
+        getImages
+    } = props
     
     // -- Delete individual / selected photo from FB and DB -- //
     const deletePhotoFromDB = async (url) => {
         await deleteFile(url)
         const deleted = await axios.post(`/api/projects/photos/delete/`,{url})
-        await props.getImages()
+        await getImages()
         setOpenMenu(!openMenu)
         return deleted
     }
