@@ -288,7 +288,7 @@ class ProjectDetail extends Component {
                     <DetailContainer>
 
                         <ProjectPhotos
-                            model_id={info.model_id} 
+                            model_id={model_id} 
                             url={selectedPhoto} 
                             maker_id={maker_id} 
                             id={id}
