@@ -48,6 +48,10 @@ export const DetailContainer = styled.section`
         min-height: 100px;
         margin: 2px;
         display: flex;
+
+        @media (max-width:680px) {
+            width:300px;
+        }
     }
 
     ul {
@@ -98,13 +102,6 @@ export const CommentBoxHeader = styled.header`
     opacity: .8;
     height: 32px;
     width: 100%;
-
-    h3 {
-        margin: auto;
-        color: #3c598e;
-        text-transform: none;
-        font-weight: 600;
-    }
 
     @media (max-width:680px) {
         width:300px;

@@ -12,7 +12,6 @@ export const CommentContainer = styled.div`
     align-items: flex-start;
     align-content: stretch;
     border-bottom: solid 1px #95b3ec;
-    // background-color: yellow;
 `
 
 export const AuthorPic = styled.img`
