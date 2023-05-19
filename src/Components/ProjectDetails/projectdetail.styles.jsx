@@ -107,3 +107,22 @@ export const CommentBoxHeader = styled.header`
         width:300px;
     }
 `
+
+export const DescriptionText = styled.p`
+padding: 10px;
+padding-left: 25px;
+margin: 15px;
+min-height: 30px;
+width: 400px;
+background-color: white;
+border-radius: 5px;
+box-shadow: 1px #d1d1d1;
+color: #555;
+text-align: left;
+display: flex;
+flex-direction: column;
+
+@media (max-width: 700px) {
+    width: 300px;
+}
+`

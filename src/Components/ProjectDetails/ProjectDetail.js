@@ -9,7 +9,6 @@ import { loginUser, updateUser, remoteLogin } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
 import CreateComment from './Comments/CreateComment'
 import DlUrl from './DlUrl'
-import Description from './Description'
 import TheMaker from './TheMaker'
 import EditModel from './EditProject/EditModel'
 import UserPage from '../UserPage/UserPage'
@@ -24,6 +23,7 @@ import {
     ThumbnailViewer,
     CommentBox,
     CommentBoxHeader,
+    DescriptionText
 } from './projectdetail.styles'
 
 // const selected = {backgroundColor:'#3c598e'}
@@ -240,10 +240,6 @@ class ProjectDetail extends Component {
             }
         }
 
-        const mappedDescription = info.map(el => {
-            return <Description key={el.model_id} description={el.description} />
-        })
-
         const mappedUrl = info.map(element => {
             return <DlUrl data={element} key={element.model_id} url={element.firebase_url} isLoggedIn={isLoggedIn} plsSignIn={this.plsSignIn} />
         })
@@ -334,7 +330,14 @@ class ProjectDetail extends Component {
                         {viewComments && mappedComments}
                         {/* -------------- */}
 
-                        {viewFiles && mappedUrl}
+                        {viewFiles && 
+                            mappedUrl
+                            // <DlUrl
+                            //     info={info} 
+                            //     isLoggedIn={isLoggedIn} 
+                            //     plsSignIn={this.plsSignIn}
+                            // />
+                            }
 
                         {viewEditProject && authorized() && 
                             <EditModel 
@@ -349,7 +352,11 @@ class ProjectDetail extends Component {
                                 getImages={this.getImages} 
                             />}
 
-                        {viewInfo && mappedDescription}
+                        {viewInfo && 
+                            <DescriptionText>
+                                    {info[0].description}
+                            </DescriptionText>}
+
                     </CommentBox>
                 </DetailsView>)}
             </>
