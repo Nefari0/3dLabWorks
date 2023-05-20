@@ -26,7 +26,11 @@ const ProjectPhotos = (props) => {
     
     // -- Delete individual / selected photo from FB and DB -- //
     const deletePhotoFromDB = async (url) => {
-        await deleteFile(url)
+        try {
+            await deleteFile(url)
+        } catch (err) {
+            console.log('ERROR DELETING PHOTO',err)
+        }
         const deleted = await axios.post(`/api/projects/photos/delete/`,{url})
         await getImages()
         setOpenMenu(!openMenu)
