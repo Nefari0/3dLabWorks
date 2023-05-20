@@ -1,34 +1,43 @@
 import { Component } from 'react'
 import { Switch,Route,Link } from 'react-router-dom'
 import axios from 'axios'
-import '../Project/Project.css'
+// import '../Project/Project.css'
 import './ProjectDetail.css'
-import ProjectPhotos from './ProjectPhotos'
+import ProjectPhotos from './ProjectPhotos/ProjectPhotos'
 import Comments from './Comments/Comments'
 import { loginUser, updateUser, remoteLogin } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
 import CreateComment from './Comments/CreateComment'
 import DlUrl from './DlUrl'
-import Description from './Description'
 import TheMaker from './TheMaker'
 import EditModel from './EditProject/EditModel'
 import UserPage from '../UserPage/UserPage'
 import Home from '../Home/Home'
 import SVG from '../SVG'
 import '../SVG.css'
+import OptionsMenu from './Options/options.component'
 
-const selected = {backgroundColor:'#3c598e'}
-const cfff = {color:'#fff'} // -- light
-const icon ={
-    margin: 'auto',
-    marginLeft: '10px',
-    marginRight: '10px',
-    height: '40px',
-    width: '40px',
-    opacity: '60%',
-    color: '#6495ed',
-    paddingTop: '10px',
-}
+import { 
+    DetailsView,
+    DetailContainer,
+    ThumbnailViewer,
+    CommentBox,
+    CommentBoxHeader,
+    DescriptionText
+} from './projectdetail.styles'
+
+// const selected = {backgroundColor:'#3c598e'}
+// const cfff = {color:'#fff'} // -- light
+// const icon ={
+//     margin: 'auto',
+//     marginLeft: '10px',
+//     marginRight: '10px',
+//     height: '40px',
+//     width: '40px',
+//     opacity: '60%',
+//     color: '#6495ed',
+//     paddingTop: '10px',
+// }
 
 class ProjectDetail extends Component {
 
@@ -114,8 +123,8 @@ class ProjectDetail extends Component {
                             maker_id:user_id,
                             model_id:model_id,
                             dlUrl:res.data.firebase_url,
-                            info:res.data,
-                            userInfo:res2.data,
+                            info:res.data[0],
+                            userInfo:res2.data[0],
                             modelImages:res3.data,
                             selectedPhoto:res.data[0].firebase_url01,
                         })
@@ -205,7 +214,20 @@ class ProjectDetail extends Component {
 
     render() {
         const { comments,model_id,maker_id,myLike } = this.state
-        const { info, userInfo,viewComments,viewFiles,viewInfo,viewEditProject,modelImages,isDeleted,selectedPhoto,addedToFavorites } = this.state
+
+        const { 
+            info,
+            userInfo,
+            viewComments,
+            viewFiles,
+            viewInfo,
+            viewEditProject,
+            modelImages,
+            isDeleted,
+            selectedPhoto,
+            addedToFavorites,
+         } = this.state
+
         const { isLoggedIn } = this.props.user
         const { user,id } = this.props.user.user
 
@@ -217,25 +239,21 @@ class ProjectDetail extends Component {
                 }
             }
         }
-
-        const mappedDescription = info.map(el => {
-            return <Description key={el.model_id} description={el.description} />
-        })
-
-        const mappedUrl = info.map(element => {
-            return <DlUrl data={element} key={element.model_id} url={element.firebase_url} isLoggedIn={isLoggedIn} plsSignIn={this.plsSignIn} />
-        })
         
         const mappedComments = comments.map(element => {
-            return <Comments content={element.text} key={element.comment_id} model_id={element.model_id} date_created={element.date_created} photo_url={element.photo_url} comment_id={element.comment_id} user_id={element.user_id} user_name={element.user_name} getComments={this.getComments} />
-        })
-
-        const mappedPhoto = info.map(element => {
-            return <ProjectPhotos data={element} key={element.model_id} firebase_url={info[0].firebase_url} model_id={element.model_id} userInfo={userInfo} url={selectedPhoto} isLoggedIn={isLoggedIn} id={id} maker_id={maker_id} plsSignIn={this.plsSignIn} getImages={this.getImages} />
-        })
-
-        const mappedUserInfo = userInfo.map(element => {
-            return <TheMaker data={element} key={element.user_id} photo_url={element.photo_url} user_name={element.user_name} info={info} maker_id={maker_id} />
+            return (
+                <Comments 
+                    content={element.text} 
+                    key={element.comment_id} 
+                    model_id={element.model_id} 
+                    date_created={element.date_created} 
+                    photo_url={element.photo_url} 
+                    comment_id={element.comment_id} 
+                    user_id={element.user_id} 
+                    user_name={element.user_name} 
+                    getComments={this.getComments} 
+                />
+            )
         })
 
         const mappedThumbNails = modelImages.map((el) => {
@@ -243,77 +261,100 @@ class ProjectDetail extends Component {
         })
 
         return(
-            <div>
+            <>
             {isDeleted ? (<Route path="/" component={Home}/>) :
-                (<div className="view">
+                (<DetailsView>
                     
-                    <section onClick={() => this.props.history.push(`/viewuser/${maker_id}`)} >{mappedUserInfo}</section>
-
-                    <section className='image-viewer'>{mappedThumbNails}</section>
-
-                    <div className="detail-container">
-
-                        {mappedPhoto}
-
-                        <ul>
-                            <li style={viewFiles ? selected : null} onClick={() => this.changeView('viewFiles')} >
-                                <h4 className='dark-text' style={viewFiles ? cfff : null} >Download Files</h4>
-                            </li>
-
-                            <li onClick={this.clickLike}>
-                                {isLoggedIn === true && myLike === true ? 
-                                <svg  style={icon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
-                                </svg>
-                                :
-                                <svg style={icon} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" >
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                </svg>
-                                }
-                                <p className="">Like</p>
-                            </li>
-
-                            <li style={viewComments ? selected : null} onClick={() => this.changeView('viewComments')} >
-                                <SVG params={'comments'} />
-                                <p style={viewComments ? cfff : null}>Comments</p>
-                            </li>
-                    
-                            <li style={viewEditProject || addedToFavorites ? selected : null} onClick={() => this.changeView(authorized() === true ? 'viewEditProject' : 'viewInfo')}>
-                                {authorized() === true ? 
-                                <SVG params={'edit_project'} fill={'none'} stroke={'currentColor'}/> : 
-                                <SVG params={'folder'} fill={'none'} stroke={'currentColor'} />}
-                                <p style={viewEditProject ? cfff : null}>{authorized() ? 'Edit Project' : 'Add to Favorites'}</p>
-                            </li>
-
-                            <li style={viewInfo ? selected : null} onClick={() => this.changeView('viewInfo')}>
-                                <SVG params={'info'} fill={'none'} stroke={'currentColor'}/>
-                                <p style={viewInfo ? cfff : null} >Info</p>
-                            </li>
-                        </ul>
-                    </div>
-                    
-                    <section className="comment-box">
-
-                        <header >
-                            <h3>
-                                {viewComments ? 'Comments' : null}
-                                {viewFiles ? 'Download File' : null}
-                                {viewInfo ? 'Information' : null}
-                                {viewEditProject ? 'Edit Project' : null}
-                            </h3>
-                        </header>
-
-                        {viewComments ? <CreateComment user={user} key={id} id={id} isLoggedIn={isLoggedIn} model_id={model_id} plsSignIn={this.plsSignIn} getComments={this.getComments} /> : null}
-                        {viewComments ? mappedComments : null}
-
-                        {viewFiles ? mappedUrl : null}
-
-                        {viewEditProject && authorized() ? <EditModel key={model_id} info={info} model_id={model_id} user_id={id} user_name={user} modelImages={modelImages} getDetails={this.getDetails} setIsDeleted={this.setIsDeleted} getImages={this.getImages} /> : null}
-
-                        {viewInfo ? mappedDescription : null}
+                    <section 
+                       onClick={() => this.props.history.push(`/viewuser/${maker_id}`)} 
+                    >
+                        <TheMaker
+                            userInfo={userInfo} 
+                            info={info} 
+                            maker_id={maker_id}
+                        />
                     </section>
-                </div>)}
-            </div>
+
+                    <ThumbnailViewer>{mappedThumbNails}</ThumbnailViewer>
+
+                    <DetailContainer>
+
+                        <ProjectPhotos
+                            model_id={model_id} 
+                            url={selectedPhoto} 
+                            maker_id={maker_id} 
+                            id={id}
+                            getImages={this.getImages}
+                        />
+
+                        <OptionsMenu
+                            state={this.state}
+                            authorized={authorized}
+                            isLoggedIn={isLoggedIn}
+                            clickLike={this.clickLike}
+                            changeView={this.changeView}
+                        />
+
+                    </DetailContainer>
+                    
+                    <CommentBox>
+
+                        <CommentBoxHeader >
+                            <h3>
+                                {viewComments && 'Comments'}
+                                {viewFiles && 'Download File'}
+                                {viewInfo && 'Information'}
+                                {viewEditProject && 'Edit Project'}
+                            </h3>
+                        </CommentBoxHeader>
+
+                        {/* ---------- */}
+                        {/* COMMENTS */}
+                        {/* ---------- */}
+                        {viewComments &&
+                            <CreateComment 
+                                user={user} 
+                                key={id} 
+                                id={id} 
+                                isLoggedIn={isLoggedIn} 
+                                model_id={model_id} 
+                                plsSignIn={this.plsSignIn} 
+                                getComments={this.getComments} 
+                            />
+                        }
+
+                        {viewComments && mappedComments}
+                        {/* -------------- */}
+
+                        {viewFiles && 
+                            <DlUrl 
+                                url={info.firebase_url}
+                                isLoggedIn={isLoggedIn}
+                                plsSignIn={this.plsSignIn}
+                            />
+                        }   
+
+                        {viewEditProject && authorized() && 
+                            <EditModel 
+                                key={model_id} 
+                                info={info} 
+                                model_id={model_id} 
+                                user_id={id} 
+                                user_name={user} 
+                                modelImages={modelImages} 
+                                getDetails={this.getDetails} 
+                                setIsDeleted={this.setIsDeleted} 
+                                getImages={this.getImages} 
+                            />}
+
+                        {viewInfo && 
+                            <DescriptionText>
+                                    {info.description}
+                            </DescriptionText>}
+
+                    </CommentBox>
+                </DetailsView>)}
+            </>
         )}
 }
 

@@ -1,5 +1,4 @@
 import './ViewUser.css'
-import '../Project/Project.css'
 import React, { useState,useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'

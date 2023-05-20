@@ -1,4 +1,3 @@
-import '../Project/Project.css'
 
 const DlUrl = (props) => {
 

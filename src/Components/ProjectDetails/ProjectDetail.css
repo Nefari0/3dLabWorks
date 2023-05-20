@@ -1,4 +1,4 @@
-.view {
+/* .view {
     margin: none;
     min-height: 90vh;
     min-width: 100vw;
@@ -8,9 +8,9 @@
     background-attachment: fixed;
     display: flex;
 	flex-direction: column;
-}
+} */
 
-.image-viewer {
+/* .image-viewer {
     height: 75px;
     width: 645px;
     background-color: #fff;
@@ -25,16 +25,16 @@
 	align-items: center;
     overflow: hidden;
     border: solid 1px rgb(85, 85, 85,.3);
-}
+} */
 
-.thumbnail-image {
+/* .thumbnail-image {
     height: 50px;
     width: 60px;
     border-radius: 5px;
-}
+} */
 
 /* -- Main image and all menu items -- */
-.detail-container {
+/* .detail-container {
     margin: auto;
     margin-bottom: 0px;
     margin-top: 5px;
@@ -42,17 +42,17 @@
     width: 660px;
     display: flex;
 	justify-content: center;
-}
-.detail-container section {
+} */
+/* .detail-container section {
     width: 440px;
     min-height: 100px;
     margin: 2px;
     display: flex;
-}
-.detail-container ul {
+} */
+/* .detail-container ul {
     width: 220px;
-}
-.detail-container li {
+} */
+/* .detail-container li {
     background-color: #fff;
     display: flex;
     height: 59px;
@@ -63,16 +63,16 @@
     border-bottom: solid 1px rgb(85, 85, 85,.3) ;
     border-left:solid 1px rgb(85, 85, 85,.3)  ;
     border-right:solid 1px rgb(85, 85, 85,.3) ;
-}
-.detail-container p {
+} */
+/* .detail-container p {
     color: #555;
     padding-top: 15px;
     padding-bottom: 5px;
     margin-left: 10px;
-}
+} */
 
 /* -- Comments and other content at bottom of page -- */
-.comment-box {
+/* .comment-box {
     margin: auto;
     margin-top: 10px;
     min-height: 300px;
@@ -81,32 +81,32 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-}
-.comment-box h3 {
+} */
+/* .comment-box h3 {
     margin: auto;
     color: #3c598e;
     text-transform: none;
     font-weight: 600;
-}
-.comment-box header {
+} */
+/* .comment-box header {
     background-color: #6495ed;
     opacity: .8;
     height: 32px;
     width: 100%;
-}
+} */
 
-@media (max-width:680px) {
+/* @media (max-width:680px) { */
 
-    .detail-container {
+    /* .detail-container {
         min-height: 500px;
         flex-direction: column;
         align-items: center;
-    }
+    } */
 
-    .image-viewer,
-    .view,
+    /* .image-viewer, */
+    /* .view,
     .detail-container,
     .comment-box,
     .detail-container section,
-    .detail-container ul {width: 300px;}
-}
+    .detail-container ul {width: 300px;} */
+/* } */
