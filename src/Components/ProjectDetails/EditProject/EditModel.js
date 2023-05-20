@@ -2,7 +2,7 @@ import axios from 'axios';
 import React, { Component } from 'react'
 import './EditModel.css'
 import Loading from '../../Loading/Loading';
-import ImagePreview from '../ProjectPhotos/ImagePreview/ImagePreview';
+import ImagePreview from '../ProjectPhotos/ImagePreview/preview.component';
 import { addNewModel,deleteFile,getRefFromUrl } from '../../../ducks/firebaseReducer';
 import { connect } from 'react-redux';
 import Resizer from 'react-image-file-resizer'
