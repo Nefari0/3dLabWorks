@@ -19,6 +19,7 @@ class EditModel extends Component {
 
         this.state = {
             name:this.props.info.name,
+            user_id:this.props.info.user_id,
             description:this.props.info.description,
             photo_url:null,
             file_url:null,
@@ -165,15 +166,15 @@ class EditModel extends Component {
 
     addPhoto =  async (url) => {
         const { model_id,info } = this.props
-        const name = null
+        const { user_id,name } = info
+        // const name = null
         this.setIsLoading() // -- init loading screen
         
-        const refFromURL = await this.props.getRefFromUrl(info.firebase_url).payload // -- path of stored project -- //
+        const cloudFile = await this.props.addNewModel(url,`madmodels/projects/${user_id}/${name}/`)
+        const photo_url = await cloudFile.action.payload.ref.getDownloadURL()
          
-        const cloud = await this.props.addNewModel(url,refFromURL) // -- add new photo -- //
 
         // -- fetch and store photo url -- //
-        const photo_url = await cloud.action.payload.ref.getDownloadURL()
         await axios.post(addImageEndpoint,{model_id,name,photo_url})
 
         // -- render new images -- //
@@ -196,7 +197,16 @@ class EditModel extends Component {
     }
 
     render() {
-        const { previewImageFile,isLoading,openDeleteConfirm,photo_url,description,name,file_url,hideButtons } = this.state
+        const { 
+            previewImageFile,
+            isLoading,
+            openDeleteConfirm,
+            photo_url,
+            description,
+            name,
+            file_url,
+        } = this.state
+
         return(            
             <div className="edit-project-container" >
                 
@@ -218,7 +228,13 @@ class EditModel extends Component {
                 
                 <div className='section-title'><p style={{color:'#555'}}>Add Image / Update File</p></div>
 
-                {previewImageFile ? <ImagePreview previewImageFile={previewImageFile} photo_url={photo_url} addPhoto={this.addPhoto} handleInput={this.handleInput} /> : null}
+                {previewImageFile &&
+                <ImagePreview 
+                    previewImageFile={previewImageFile} 
+                    photo_url={photo_url} 
+                    addPhoto={this.addPhoto} 
+                    handleInput={this.handleInput} 
+                />}
 
                  {file_url ?
                 <section className={`replace-file-warning`}>
