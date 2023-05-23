@@ -66,9 +66,29 @@ class CreateProject extends Component {
                 </section>
 
                     <div className='create-section-title' style={{marginTop:'10px'}}><p style={{color:'#555'}}>Name and description</p></div>
-                    <input placeholder="Name" className="log-input log-form-length disabled" style={{marginBottom:'5px',marginTop:'21px'}} onChange={e => this.props.handleAddText('projectName',e.target.value)} />
-                    <textarea placeholder='description' name="text" rows="5" cols="50" wrap="soft" className="text-input input-description" onChange={e => this.props.handleAddText('projectDescription',e.target.value)} > </textarea>
-                    <div className='send-file send-file-button' onClick={() => this.props.createNewProject()}>Submit</div>
+                    <input placeholder="Name" 
+                        className="log-input log-form-length disabled" 
+                        style={{marginBottom:'5px',marginTop:'21px'}} 
+                        onChange={e => this.props.handleAddText('projectName',e.target.value)} 
+                    />
+
+                    <textarea
+                        placeholder='description' 
+                        name="text" 
+                        rows="5" 
+                        cols="50" 
+                        wrap="soft" 
+                        className="text-input input-description" 
+                        onChange={e => this.props.handleAddText('projectDescription',e.target.value)} 
+                        >
+                    </textarea>
+                    
+                    <div 
+                        className='send-file send-file-button' 
+                        onClick={() => this.props.createNewProject()}   
+                        >
+                            Submit
+                    </div>
                 </section>
 
 
