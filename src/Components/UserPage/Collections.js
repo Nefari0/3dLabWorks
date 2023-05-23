@@ -11,7 +11,7 @@ import { addNewModel } from '../../ducks/firebaseReducer'
 import AddProject from './AddProject'
 import EditModel from '../ProjectDetails/EditProject/EditModel'
 import Project from '../Project/Project'
-import CreateProject from './CreateProject'
+import CreateProject from './Create/CreateProject'
 
 // const db = app.firestore()
 
