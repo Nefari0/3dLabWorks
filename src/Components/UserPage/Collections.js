@@ -290,13 +290,40 @@ class Collections extends Component {
         const { photo_url,user,showCreateProject } = this.props
 
         const mappedProjects = data.map(element => {
-            return <Project key={element.model_id} data={element} name={element.name} img={element.firebase_url01} file={element.firebase_url} id={element.model_id} delete={this.deleteModel} removeFileFromSpace={this.removeFileFromSpace} openEdidModel={this.openEditModel} projectIsLiked={this.projectIsLiked} user_photo_url={photo_url} current_user_name={user.user.user} />
+            return (
+            <Project 
+                key={element.model_id} 
+                data={element} 
+                name={element.name} 
+                img={element.firebase_url01} 
+                file={element.firebase_url} 
+                id={element.model_id} 
+                delete={this.deleteModel} 
+                removeFileFromSpace={this.removeFileFromSpace} 
+                openEdidModel={this.openEditModel} 
+                projectIsLiked={this.projectIsLiked} 
+                user_photo_url={photo_url} 
+                current_user_name={user.user.user} 
+            />
+            )
         })
 
         return(
             <div className="collections">
                 {/* <header ><p>My Designs</p></header> */}
-                {showCreateProject ? <CreateProject resetView={this.props.resetView} handleFile={this.handleFile} handleAddText={this.handleAddText} handlePhoto={this.handlePhoto} previewImageFile={previewImageFile} previewModelFile={previewModelFile} file={file} sendIntoSpace={this.sendIntoSpace} createNewProject={this.createNewProject} /> : null}
+                {showCreateProject &&
+                <CreateProject 
+                    resetView={this.props.resetView} 
+                    handleFile={this.handleFile} 
+                    handleAddText={this.handleAddText} 
+                    handlePhoto={this.handlePhoto} 
+                    previewImageFile={previewImageFile} 
+                    previewModelFile={previewModelFile} 
+                    file={file} 
+                    sendIntoSpace={this.sendIntoSpace} 
+                    createNewProject={this.createNewProject} 
+                    /> 
+                }
 
                 {mappedProjects}
   
