@@ -19,20 +19,18 @@
     overflow: hidden;
 } */
 
-.create-title {
+/* .create-title {
     color: #fff;
     position: absolute;
     text-transform: none;
     top: -1px;
     height: 80px;
-    /* width: 355px; */
-    /* width: 300px; */
     width: 100%;
     background: linear-gradient(0turn,#5077be,#6495ed);
     padding-top: 10%;
     margin: none;
     transition: all 100ms;
-}
+} */
 
 .upload-div {
 
@@ -59,7 +57,7 @@
     width: 75%;
 }
 
-.create-form {
+/* .create-form {
     position: absolute;
     height: 300px;
     width: 100%;
@@ -71,9 +69,9 @@
 	align-items: center;
 	align-content: flex-start;
     transition: all 100ms;
-}
+} */
 
-.create-section-title {
+/* .create-section-title {
     opacity: .5;
     height: 20px;
     width: 100%;
@@ -83,17 +81,17 @@
     margin-left: 5px;
     font-size: x-small;
     font-weight: 600
-}
+} */
 
-.create-upload-div {
+/* .create-upload-div {
     height: 100px;
     background-color: blue;
-}
+} */
 
 
 /* --------- upload section components --------------- */
 
-.create-project-row {
+/* .create-project-row {
     width: 100%;
     height: 300px;
     display: flex;
@@ -102,9 +100,9 @@
 	justify-content: flex-end;
 	align-items: center;
 	align-content: stretch;
-}
+} */
 
-.add-file-button {
+/* .add-file-button {
     background: linear-gradient(0turn,#5077be,#6495ed);
     margin: auto;
     margin-bottom: 50px;
@@ -122,13 +120,13 @@
 	align-items: center;
 	align-content: stretch;
 
-}
+} */
 
-.add-file-button-text {
+/* .add-file-button-text {
     color: #fff;
-}
+} */
 
-.file-add {
+/* .file-add {
     position: absolute;
     height: 80px;
     width: 100%;
@@ -140,30 +138,31 @@
 	align-content: stretch;
     overflow: none;
     
-}
+} */
 
-.input-file {
+/* .input-file {
     position: absolute;
     top: 10px;
     height: 40px;
     width: 300px;
     color: #555;
     z-index: 10000;
-}
+    background-color: blue;
+} */
 
-.select-file-1 {
+/* .select-file-1 {
     opacity: .01;
     left: 5px;
     bottom: 5px;
     width: 150%;
     height: 27%;
     z-index: 1;
-}
+} */
 
 
 /* --------- add photo ------------- */
 
-.create-input-box {
+/* .create-input-box {
     position: relative;
     height: 90px;
     width: 100%;
@@ -174,9 +173,9 @@
 	align-items: flex-start;
 	align-content: center;
     
-}
+} */
 
-.input[type='file']
+/* .input[type='file']
 {
     text-indent: -999em;
     outline: none;
@@ -186,7 +185,7 @@
     height: 80px;
     width: 80px;
     z-index: 10000;
-}
+} */
 /* --------------------------------- */
 
 /* -------------- send file ----------- */

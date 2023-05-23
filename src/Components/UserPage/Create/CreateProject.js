@@ -1,8 +1,18 @@
 import './CreateProject.css'
 import React, { Component } from 'react'
+
 import { 
-    CreateContainer
+    CreateContainer,
+    CreateHead,
+    CreateForm,
+    CreateRow,
+    CreateSectionTitle
  } from './create.styles';
+
+ import AddFile from './AddFile/add.component';
+ import AddPhoto from './AddPhoto/add-photo.component';
+
+ import { CloseX } from '../../SVG2';
 
 class CreateProject extends Component {
     constructor() {
@@ -24,51 +34,43 @@ class CreateProject extends Component {
 
     render() {
 
-        const { previewImageFile,previewModelFile,name } = this.state
+        // const { previewImageFile,previewModelFile,name } = this.state
 
         return(
-            <CreateContainer className='create-container'>
-                <section className='create-title'>
-                <svg className="close-button" style={{color:'#fff', height:'35px',width:'35px',opacity:'60%',marginTop:'2px',marginBottom:'2px'}} xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 20 20" fill="currentColor" onClick={() => this.props.resetView()} >
-                    <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
-                </svg>
-                <h2 style={{textTransform:'none'}} >Create a project</h2>
-                </section>
+            <CreateContainer>
 
-                <section className='create-form'>
+                <CreateHead>
+                    <CloseX onClick={() => this.props.resetView()} />
+                    <h2 >Create a project</h2>
+                </CreateHead>
 
-                <section className='create-project-row'>
-                    <div className='file-add'>
+                <CreateForm>
 
-                    <div className='photo-input-box '>
-                        <div className='add-file-button add-file-button-text' >{this.getFileName()}</div>
-                        <input className='input-file select-file-1'
-                        style={{marginLeft:'40px'}}
-                        type="file"
-                        accept=".blend,.stl"
-                        onChange={e => this.props.handleFile(e)} 
+                    <CreateRow>
+                        <AddFile
+                            getFileName={this.getFileName}
+                            handleFile={this.props.handleFile}
                         />
-                    </div>
+                    </CreateRow>
 
-                    </div>
-                </section>
+                    <CreateRow>
+                        <CreateSectionTitle>
+                            <p>Add Photo</p>
+                        </CreateSectionTitle>
 
-                    <section className='create-project-row'>
-                    <div className='create-section-title'><p style={{color:'#555'}}>Add Photo</p></div>
-              
-                    <div className='create-input-box' >
-                        <img style={{width:'80px',height:'80px',borderRadius:'10px',marginLeft:'35%',marginBottom:'0px'}} src={this.props.previewImageFile} />
-                        <input className='input select-file-1'
-                        style={{marginLeft:'40px'}}
-                        type="file"
-                        accept="image/png,image/jpeg"
-                        onChange={e => this.props.handlePhoto(e)}
+                        <AddPhoto
+                            handlePhoto={this.props.handlePhoto}
+                            previewImageFile={this.props.previewImageFile}
                         />
-                    </div>
 
-                </section>
+                    </CreateRow>
 
-                    <div className='create-section-title' style={{marginTop:'10px'}}><p style={{color:'#555'}}>Name and description</p></div>
+                    <CreateSectionTitle>
+                        <p>Name and description</p>
+                    </CreateSectionTitle>
+
+
+
                     <input placeholder="Name" 
                         className="log-input log-form-length disabled" 
                         style={{marginBottom:'5px',marginTop:'21px'}} 
@@ -92,7 +94,7 @@ class CreateProject extends Component {
                         >
                             Submit
                     </div>
-                </section>
+                </CreateForm>
 
 
             </CreateContainer>
