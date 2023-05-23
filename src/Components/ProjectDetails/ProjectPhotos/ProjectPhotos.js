@@ -29,6 +29,8 @@ const ProjectPhotos = (props) => {
         try {
             await deleteFile(url)
         } catch (err) {
+            const gone = null
+            axios.post('/api/projects/photos/change/main/',{model_id,gone})
             console.log('ERROR DELETING PHOTO',err)
         }
         const deleted = await axios.post(`/api/projects/photos/delete/`,{url})
