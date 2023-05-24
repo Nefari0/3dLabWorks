@@ -102,7 +102,7 @@ class Home extends Component {
                         </LeftSlideButton>
                     }
 
-                    {positionCounter >= ((mappedVideos.length+mappedModels.length-2)*-400)+600 && 
+                    {positionCounter >= ((mappedVideos.length+mappedModels.length-2)*-260) && 
                         <RightSlideButton 
                             onClick={() => this.stateHandler('positionCounter',positionCounter-260)}
                         >
