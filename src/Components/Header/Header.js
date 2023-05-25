@@ -229,14 +229,16 @@ class Header extends Component{
             <img onClick={this.viewTheWindow}
                 src={cdLabs3d}
                 className="cd-logo"
+                alt=""
             />
             <img onClick={this.viewTheWindow}
                 src={CDinits}
                 className="cd-logo-small"
+                alt=""
             />
             {/* -------------------- */}
 
-            <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><img className="mm3d-logo" src={MM3D1}/></Link>
+            <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><img className="mm3d-logo" src={MM3D1} alt="" /></Link>
             
             {/* ---------- DESTOP NAV ---------------------------- */}
             <ul className='desktop-nav'>
@@ -250,7 +252,7 @@ class Header extends Component{
 
 
             {/* ---------- MOBILE NAV / ITEMS ---------------------------- */}
-            {isLoggedIn && <img src={photo} className="loggedin-user-photo" />}
+            {isLoggedIn && <img src={photo} className="loggedin-user-photo" alt="" />}
            
             {hamburger()}
 
