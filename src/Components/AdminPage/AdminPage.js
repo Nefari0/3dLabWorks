@@ -2,7 +2,7 @@
 import { Component } from 'react'
 import './AdminPage.css'
 // import { Link } from 'react-router-dom';
-import { Link, Switch, Route } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { updateUser } from '../../ducks/userReducer';
 import { getProjects } from '../../ducks/projectsReducer';
@@ -18,11 +18,11 @@ import './Memo.css'
 // import DemoScene from './Three/DemoScene';
 // import ViewUserV2 from './ViewUserV2';
 import UserAdminMessage from './UserAdminMessage/UserAdminMessage';
-import { w3cwebsocket as W3CWebSocket } from "websocket";
-import { socketString } from '../WS';
+// import { w3cwebsocket as W3CWebSocket } from "websocket";
+// import { socketString } from '../WS';
 // const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
 // const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
-const client = new W3CWebSocket(socketString); // production
+// const client = new W3CWebSocket(socketString); // production
 
 class AdminPage extends Component {
 
@@ -164,8 +164,8 @@ class AdminPage extends Component {
 
     render(){
 
-        const { test,editAbout,editGeneral,editUserInfo,users,traffic,showMessages,userMessages,showTraffic,showMemo,memos,pototypeBool } = this.state
-        const { photo,auth,name,is_admin,is_sudo } = this.props.user.user
+        const { editAbout,editGeneral,editUserInfo,users,traffic,showMessages,userMessages,showTraffic,showMemo,memos } = this.state
+        const { is_admin,is_sudo } = this.props.user.user
 
         const mappedUsers = users.map(element => {
             return <ShowUser user_name={element.user_name} first_name={element.first_name} last_name={element.last_name} user_id={element.user_id} />

@@ -1,6 +1,6 @@
 const OneLink = (props) => {
 
-    const { link_text, link_to, description } = props
+    const { link_text, link_to } = props
 
     return(
         <div>

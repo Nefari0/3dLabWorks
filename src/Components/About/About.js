@@ -2,12 +2,9 @@ import { Component } from 'react'
 import './About.css'
 import Document from './../Document'
 import axios from 'axios'
-import data from '../../data';
 import { connect } from 'react-redux'
 import { updateUser } from '../../ducks/userReducer';
-import UserPage from '../UserPage/UserPage';
 import Links from './Links/Links';
-import Notice from '../Notice/Notice';
 
 class About extends Component {
 
@@ -53,7 +50,6 @@ class About extends Component {
                     <header className="sub-header" style={{position:'relative'}} >
                         <a onClick={() => this.changeView('main')} className={`${currentView === 'main' ? 'selected' : null}`} >main</a>
                         <a onClick={() => this.changeView('links')} className={`${currentView === 'links' ? 'selected' : null}`}>links</a>
-                        {/* <Notice item={'about-links'} content={'Resources'} /> */}
                     </header>
                     <section>   
 
