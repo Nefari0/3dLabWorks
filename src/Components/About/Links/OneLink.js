@@ -1,5 +1,3 @@
-import { Color } from "three"
-
 const OneLink = (props) => {
 
     const { link_text, link_to, description } = props
