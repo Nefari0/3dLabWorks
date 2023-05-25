@@ -149,8 +149,8 @@ class Header extends Component{
     }
 
     async handleClick(signInName,signInPass,saveMyInfo) {
-        const { menuOpen } = this.props.user 
-        const { user_name, password } = this.state
+        // const { menuOpen } = this.props.user 
+        // const { user_name, password } = this.state
         const visited = localStorage['visited']
         const last_visit = new Date()
         await this.props.loginUser(signInName,signInPass,last_visit,visited)
@@ -163,7 +163,7 @@ class Header extends Component{
     }
 
     handleLogout() {
-        const { menuOpen } = this.props.user
+        // const { menuOpen } = this.props.user
         const getUniqueID = () => {
             const s4 = () => Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
             return s4() + s4() + '-' + s4();
@@ -192,7 +192,15 @@ class Header extends Component{
     }
 
     render() {
-        const { saveSession, username, unique_id, isMenuOpen, user_name, password, isLoggedInState } = this.state
+        const { 
+            saveSession, 
+            // username, 
+            // unique_id, 
+            isMenuOpen, 
+            user_name, 
+            // password, 
+            // isLoggedInState 
+        } = this.state
         const { isLoggedIn,isLoading,loginOpen } = this.props.user
         const { photo,user } = this.props.user.user
 

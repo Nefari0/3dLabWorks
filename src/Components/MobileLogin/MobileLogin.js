@@ -1,13 +1,12 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './MobileLogin.css'
-import { Link } from 'react-router-dom'
 import { loginUser,registerUser } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
 import Agreement from '../Register/Agreement'
 
 const MobileLogin = (props) => {
 
-    const { isLoggedIn,saveSession,current_user } = props
+    const { isLoggedIn } = props
     const { user,photo } = props.user.user
     
     const [ user_name, setUsername ] = useState('')
