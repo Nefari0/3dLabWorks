@@ -76,6 +76,7 @@ class ProjectDetail extends Component {
         this.setIsDeleted = this.setIsDeleted.bind(this)
         this.getImages = this.getImages.bind(this)
         this.highLightedPhoto = this.highLightedPhoto.bind(this)
+        this.stateHandler = this.stateHandler.bind(this)
     }
 
     componentDidMount(){
@@ -99,7 +100,9 @@ class ProjectDetail extends Component {
     async getImages() {
         const { model_id } = this.props.match.params
         axios.get(`/api/project/photos/get/${model_id}`).then((res) => {
-            this.setState({modelImages:res.data})
+            this.setState({
+                modelImages:res.data
+            })
         })
     }
 
@@ -206,6 +209,12 @@ class ProjectDetail extends Component {
         this.setState({isDeleted:!this.state.isDeleted})
     }
 
+    stateHandler = (prop,val) => {
+        this.setState({
+            [prop]:val
+        })
+    } 
+
     highLightedPhoto = (url) => {
         this.setState({
             selectedPhoto:url
@@ -285,6 +294,8 @@ class ProjectDetail extends Component {
                             maker_id={maker_id} 
                             id={id}
                             getImages={this.getImages}
+                            main_image_url={this.state.info.firebase_url01}
+                            stateHandler={this.stateHandler}
                         />
 
                         <OptionsMenu

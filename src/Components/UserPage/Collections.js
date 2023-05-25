@@ -72,8 +72,9 @@ class Collections extends Component {
       }
 
     //   --- Rebuilding add new projects function to reduce code --- //
-    createNewProject = async () => {
+    createNewProject = async (e) => {
         // all data needed
+        e.preventDefault()
         const { file, imageFile, fileUrl, imageUrl, projectDescription, projectName } = this.state
         const user_id = this.props.user.user.id
         const { name } = this.state.file

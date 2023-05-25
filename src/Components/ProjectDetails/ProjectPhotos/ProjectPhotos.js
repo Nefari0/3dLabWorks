@@ -21,7 +21,9 @@ const ProjectPhotos = (props) => {
         maker_id,
         id,
         model_id,
-        getImages
+        getImages,
+        main_image_url,
+        stateHandler,
     } = props
     
     // -- Delete individual / selected photo from FB and DB -- //
@@ -31,9 +33,10 @@ const ProjectPhotos = (props) => {
         } catch (err) {
             const gone = null
             axios.post('/api/projects/photos/change/main/',{model_id,gone})
-            console.log('ERROR DELETING PHOTO',err)
         }
-        const deleted = await axios.post(`/api/projects/photos/delete/`,{url})
+        const deleted = await axios.post(`/api/projects/photos/delete/`,{url,main_image_url,model_id}).then(res => {
+            stateHandler('selectedPhoto',null)
+        })
         await getImages()
         setOpenMenu(!openMenu)
         return deleted
@@ -51,7 +54,11 @@ const ProjectPhotos = (props) => {
         <MainPhotoContainer>
 
             {/* Open photo options menu */}
-            {maker_id === id &&<MenuSVG openMenu={openMenu} setOpenMenu={setOpenMenu} />}
+            {maker_id === id && url != null &&
+            <MenuSVG 
+                openMenu={openMenu} 
+                setOpenMenu={setOpenMenu} 
+            />}
 
             {/*  Photo options menu */}
             {openMenu === true && maker_id === id ? 
