@@ -5,6 +5,8 @@ import VideoPlayer from '../VideoPlayer/VideoPlayer'
 import Loading from '../Loading/Loading'
 import { loginUser,updateUser } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
+import { TextLink } from '../../Global/global.styles'
+
 import axios from 'axios'
 
 class Explore extends Component {
@@ -136,8 +138,8 @@ class Explore extends Component {
             <div >
                 {isLoading === true ? <Loading /> : null}
                 <header className="sub-header">
-                    <a onClick={() => this.changeView('3D Models')} className={`null ${!this.state.viewModels ? true : 'selected'}`} >3D Models</a>
-                    <a onClick={() => this.changeView("Videos")} className={`null ${!this.state.viewVideos ? true : 'selected'}`} >Videos</a>
+                    <TextLink onClick={() => this.changeView('3D Models')} className={`null ${!this.state.viewModels ? true : 'selected'}`} >3D Models</TextLink>
+                    <TextLink onClick={() => this.changeView("Videos")} className={`null ${!this.state.viewVideos ? true : 'selected'}`} >Videos</TextLink>
                 </header>
                 <div className="explore-container" style={{paddingTop:'25px'}}>
                     <div className={`search-menu ${!isLoggedIn ? true : 'slide-over'} ${openSearchBar ? true : `search-menu-closed ${!isLoggedIn ? true : 'slide-over'}`}`} >

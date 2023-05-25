@@ -6,6 +6,15 @@ import { connect } from 'react-redux'
 import { updateUser } from '../../ducks/userReducer';
 import Links from './Links/Links';
 
+import { 
+    AboutContainer,
+} from './about.styles'
+
+import { 
+    SubHeader,
+    TextLink
+ } from '../../Global/global.styles'
+
 class About extends Component {
 
     constructor(){
@@ -21,11 +30,11 @@ class About extends Component {
     componentDidMount(){
         axios.get('/api/documents/about').then(res => {
             this.setState({
-                about:res.data
+                about:res.data[0]
             })
         })
         axios.get('/api/documents/general').then(res => {
-            this.setState({general:res.data})
+            this.setState({general:res.data[0]})
         })
     }
 
@@ -37,28 +46,33 @@ class About extends Component {
 
             const { about,general,currentView } = this.state
 
-            const mappedAbout = about.map(element => {
-                return <Document data={element} key={element.doc_id} />
-            })
+            // const mappedAbout = about.map(element => {
+            //     return <Document data={element} key={element.doc_id} />
+            // })
 
-            const mappedGeneral = general.map(element => {
-                return <Document data={element} key={element.doc_id} />
-            })
+            // const mappedGeneral = general.map(element => {
+            //     return <Document data={element} key={element.doc_id} />
+            // })
 
             return(
-                <div className='about-container' >
-                    <header className="sub-header" style={{position:'relative'}} >
-                        <a onClick={() => this.changeView('main')} className={`${currentView === 'main' ? 'selected' : null}`} >main</a>
-                        <a onClick={() => this.changeView('links')} className={`${currentView === 'links' ? 'selected' : null}`}>links</a>
-                    </header>
+                <AboutContainer >
+                    <SubHeader  >
+                        <TextLink onClick={() => this.changeView('main')} className={`${currentView === 'main' ? 'selected' : null}`} >main</TextLink>
+                        <TextLink onClick={() => this.changeView('links')} className={`${currentView === 'links' ? 'selected' : null}`}>links</TextLink>
+
+                    </SubHeader>
                     <section>   
 
-                        {currentView === 'main' ? <div>{mappedAbout}</div> : null}
-                        {currentView === 'main' ? <div>{mappedGeneral}</div> : null}
+                        {currentView === 'main' && 
+                        <>
+                            <Document data={about}/>
+                            <Document data={general}/>
+                        </>}
+
                         {currentView === 'links' ? <Links /> : null}
 
                     </section>
-                </div>
+                </AboutContainer>
             )
         }
 }

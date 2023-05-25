@@ -18,6 +18,7 @@ import './Memo.css'
 // import DemoScene from './Three/DemoScene';
 // import ViewUserV2 from './ViewUserV2';
 import UserAdminMessage from './UserAdminMessage/UserAdminMessage';
+import { TextLink } from '../../Global/global.styles';
 // import { w3cwebsocket as W3CWebSocket } from "websocket";
 // import { socketString } from '../WS';
 // const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
@@ -194,45 +195,45 @@ class AdminPage extends Component {
                 {!is_admin ? (<Route path="/" component={Home}/>) : (
                     <div>
                     <ul className="admin-header-ul">
-                    {is_sudo === true ? <li className="add-doc-div-closed" onClick={() => this.changeView('showMemo')}><a>memo</a></li> : null}
+                    {is_sudo === true ? <li className="add-doc-div-closed" onClick={() => this.changeView('showMemo')}><TextLink>memo</TextLink></li> : null}
                     { editGeneral ?
                     <li className="add-doc-div" >
-                        <a onClick={this.openEditGeneral}>edit general info</a>
+                        <TextLink onClick={this.openEditGeneral}>edit general info</TextLink>
                         <textarea onChange={e => this.handleAddText('generalContent', e.target.value)} className="input" name="text" rows="14" cols="100" wrap="soft"> </textarea>
                         <button className="text" onClick={this.addGeneral}>add to general content</button>
                         <div className="checkbox" style={{marginTop:'20px'}}><input type="checkbox" onChange={e => this.handleAddText('displayGeneral',!this.state.displayGeneral)} /><p style={{color:'#555'}}>display this document?</p><button onClick={this.hideDocGeneral}>change</button></div>
                     </li>
                     :
-                    <li className="add-doc-div-closed" onClick={this.openEditGeneral}><a>edit general info</a></li>}
+                    <li className="add-doc-div-closed" onClick={this.openEditGeneral}><TextLink>edit general info</TextLink></li>}
 
                     { editAbout ?
                     <li className="add-doc-div">
-                        <a  onClick={this.openEditAbout} className="admin-a">edit about info</a>
+                        <TextLink  onClick={this.openEditAbout} className="admin-a">edit about info</TextLink>
                         <textarea onChange={e => this.handleAddText('aboutContent', e.target.value)} className="input" name="text" rows="14" cols="100" wrap="soft"> </textarea>
                         <button className="text" onClick={this.addAbout}>add to about content</button>
                         <div className="checkbox" style={{marginTop:'20px'}}><input type="checkbox" onChange={e => this.handleAddText('displayAbout',!this.state.displayAbout)} /><p style={{color:'#555'}}>display this document?</p><button onClick={this.hideDocAbout}>change</button></div>
                     </li>
                     :
-                    <li className="add-doc-div-closed"><a onClick={this.openEditAbout}>edit about info</a></li>}
-                    <li className="add-doc-div-closed"><a>notifications</a></li>
-                    {!showMessages ? <li className="add-doc-div-closed" onClick={() => this.hideMessages()} ><a>messages</a></li>
+                    <li className="add-doc-div-closed"><TextLink onClick={this.openEditAbout}>edit about info</TextLink></li>}
+                    <li className="add-doc-div-closed"><TextLink>notifications</TextLink></li>
+                    {!showMessages ? <li className="add-doc-div-closed" onClick={() => this.hideMessages()} ><TextLink>messages</TextLink></li>
                     :
-                    <li className="add-doc-div" onClick={() => this.hideMessages()} ><a>messages</a>
+                    <li className="add-doc-div" onClick={() => this.hideMessages()} ><TextLink>messages</TextLink>
                         {mappedMessages}
                     </li>}
                     { editUserInfo ?
                     <li className="add-doc-div">
-                        <a  onClick={this.openEditUserInfo} className="admin-a">User Details</a>
+                        <TextLink onClick={this.openEditUserInfo} className="admin-a">User Details</TextLink>
                         {mappedUsers}
                     </li>
                     :
-                    <li className="add-doc-div-closed"><a onClick={this.openEditUserInfo}>User Details</a></li>}
-                    <li className="add-doc-div-closed"><a>terms</a></li>
-                    <li className="add-doc-div-closed"><a>user project details</a></li>
+                    <li className="add-doc-div-closed"><TextLink onClick={this.openEditUserInfo}>User Details</TextLink></li>}
+                    <li className="add-doc-div-closed"><TextLink>terms</TextLink></li>
+                    <li className="add-doc-div-closed"><TextLink>user project details</TextLink></li>
                    
-                    <li className="add-doc-div-closed" onClick={() => this.changeView('showTraffic')} ><a>show traffic</a></li>
+                    <li className="add-doc-div-closed" onClick={() => this.changeView('showTraffic')} ><TextLink>show traffic</TextLink></li>
                     </ul>
-                    <Link to={'/user'} ><a >mypage</a></Link>
+                    <Link to={'/user'} ><TextLink >mypage</TextLink></Link>
                     {showTraffic === true ? <div className='display-traffic' >
                         <div className='traffic-display-unit' ><p className='traffic-text' >Date Created</p><p className='traffic-text' >Browser ID</p><p className='traffic-text' >Unique Id</p><p className='traffic-text' >Re-mounts</p><p className='traffic-text' >Last Visit</p></div>
                         {mappedTraffic}
