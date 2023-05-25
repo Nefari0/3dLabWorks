@@ -44,7 +44,7 @@ class CreateProject extends Component {
                     <h2 >Create a project</h2>
                 </CreateHead>
 
-                <CreateForm>
+                <CreateForm onSubmit={(e) => this.props.createNewProject(e)}>
 
                     <CreateRow>
                         <AddFile
@@ -75,6 +75,7 @@ class CreateProject extends Component {
                     <input placeholder="Name" 
                         className="log-input log-form-length disabled" 
                         style={{marginBottom:'5px',marginTop:'21px'}} 
+                        required
                         onChange={e => this.props.handleAddText('projectName',e.target.value)} 
                     />
 
@@ -90,12 +91,12 @@ class CreateProject extends Component {
                     </textarea>
                     
                     {this.props.file && 
-                    <div 
-                        className='send-file send-file-button' 
-                        onClick={() => this.props.createNewProject()}   
-                        >
+                    <button 
+                        style={{marginTop:'10px'}}
+                        type="submit"
+                    >
                             Submit
-                    </div>}
+                    </button>}
                 </CreateForm>
 
 
