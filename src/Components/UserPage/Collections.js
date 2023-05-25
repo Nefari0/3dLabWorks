@@ -281,7 +281,7 @@ class Collections extends Component {
         try {
             return(userLike.filter(el => el.model_id === projectId)[0].model_id === projectId)
           } catch (error) {
-            console.log('user does not like this project',error);
+            // console.log('user does not like this project',error);
           }
     }
 
