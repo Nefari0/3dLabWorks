@@ -13,7 +13,7 @@ import {
 import { 
     SubHeader,
     TextLink
- } from '../../Global/global.styles'
+ } from '../../GlobalStyles/global.styles'
 
 class About extends Component {
 

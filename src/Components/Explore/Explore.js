@@ -5,7 +5,7 @@ import VideoPlayer from '../VideoPlayer/VideoPlayer'
 import Loading from '../Loading/Loading'
 import { loginUser,updateUser } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
-import { TextLink } from '../../Global/global.styles'
+import { TextLink } from '../../GlobalStyles/global.styles'
 
 import axios from 'axios'
 

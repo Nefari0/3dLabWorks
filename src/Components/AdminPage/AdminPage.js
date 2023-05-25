@@ -18,7 +18,7 @@ import './Memo.css'
 // import DemoScene from './Three/DemoScene';
 // import ViewUserV2 from './ViewUserV2';
 import UserAdminMessage from './UserAdminMessage/UserAdminMessage';
-import { TextLink } from '../../Global/global.styles';
+import { TextLink } from '../../GlobalStyles/global.styles';
 // import { w3cwebsocket as W3CWebSocket } from "websocket";
 // import { socketString } from '../WS';
 // const client = new W3CWebSocket(`ws://127.0.0.1:8000`); // production
