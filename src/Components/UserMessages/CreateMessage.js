@@ -45,7 +45,7 @@ export default class CreateMessage extends Component {
                 <textarea className=' message-input' style={{minHeight:'45px'}} value={this.state.text} name="text" rows="5" cols="50" wrap="soft" onChange={e => this.handleText('text',e.target.value)} > </textarea>
                 <div className='send-message-button' onClick={() => this.executeSendMessage()} style={{position:'absolute',height:'30px',width:'30px'}} >
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                     </svg>
                 </div> 
             </div> : null}

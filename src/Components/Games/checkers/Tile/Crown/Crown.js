@@ -5,11 +5,11 @@ const Crown = () => {
 
     return(
         <div class="crown">
-            <div class="point"></div>
-            <div class="point"></div>
-            <div class="point"></div>
-            <div class="point"></div>
-            <div class="point"></div>
+            <div className="point"></div>
+            <div className="point"></div>
+            <div className="point"></div>
+            <div className="point"></div>
+            <div className="point"></div>
         </div>
     )
 }
