@@ -9,7 +9,7 @@ import Loading from '../Loading/Loading'
 import cdLabs3d from '../../assets/cdLabs-logo-1-alpha.png'
 import MM3D1 from '../../assets/MM3D2333x50orthofff.png'
 import CDinits from '../../assets/CDinits.png'
-import profilePicPlaceHolder from '../../assets/profile-pic-placeholder.png'
+// import profilePicPlaceHolder from '../../assets/profile-pic-placeholder.png'
 
 
 class Header extends Component{

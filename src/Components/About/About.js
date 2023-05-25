@@ -59,7 +59,6 @@ class About extends Component {
                     <SubHeader  >
                         <TextLink onClick={() => this.changeView('main')} className={`${currentView === 'main' ? 'selected' : null}`} >main</TextLink>
                         <TextLink onClick={() => this.changeView('links')} className={`${currentView === 'links' ? 'selected' : null}`}>links</TextLink>
-
                     </SubHeader>
                     <section>   
 

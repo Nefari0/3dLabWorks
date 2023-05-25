@@ -1,5 +1,4 @@
 import './../AdminPage.css'
-import { Link } from 'react-router-dom'
 
 const UserAdminMessage = (props) => {
 

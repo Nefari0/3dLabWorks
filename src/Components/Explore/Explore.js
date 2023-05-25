@@ -65,8 +65,7 @@ class Explore extends Component {
         const user_id = id
         console.log('this is add like()',user_id)
         
-        const { userId } = this.state
-        if(user_id != undefined){
+        if(user_id !== undefined){
             axios.post('/api/projects/like', { user_id, params_id }).then(res => {
             })
                 for(let key in data){
@@ -110,6 +109,8 @@ class Explore extends Component {
             case 'Videos':
                 this.setState({viewVideos:true})
                 break;
+            default:
+                return
         }
     }
     resetView = () => {
@@ -122,7 +123,7 @@ class Explore extends Component {
     render(){
         const { data,projectSearch,openSearchBar,videos,isLoading } = this.state
         const { isLoggedIn } = this.props.user
-        const { user_likes,model_likes,id } = this.props.user.user
+        const { user_likes,id } = this.props.user.user
 
         const filterProjects = data.filter(element => element.name.toString().includes(projectSearch))
 
