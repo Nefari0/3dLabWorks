@@ -47,7 +47,7 @@ class Header extends Component{
     async componentDidMount(prevProps) {
         
         const visited = localStorage['visited']
-        const browser = localStorage['assigned_browser']
+        // const browser = localStorage['assigned_browser']
         const savedUsername = localStorage['user_name']
         // const savedPassword = localStorage['password']
         
