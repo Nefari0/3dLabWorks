@@ -51,7 +51,11 @@ const ProjectPhotos = (props) => {
         <MainPhotoContainer>
 
             {/* Open photo options menu */}
-            {maker_id === id &&<MenuSVG openMenu={openMenu} setOpenMenu={setOpenMenu} />}
+            {maker_id === id && url != null &&
+            <MenuSVG 
+                openMenu={openMenu} 
+                setOpenMenu={setOpenMenu} 
+            />}
 
             {/*  Photo options menu */}
             {openMenu === true && maker_id === id ? 
