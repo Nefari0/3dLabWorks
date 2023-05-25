@@ -53,6 +53,7 @@ class CreateProject extends Component {
                         />
                     </CreateRow>
 
+                    {this.props.file  && 
                     <CreateRow>
                         <CreateSectionTitle>
                             <p>Add Photo</p>
@@ -63,7 +64,7 @@ class CreateProject extends Component {
                             previewImageFile={this.props.previewImageFile}
                         />
 
-                    </CreateRow>
+                    </CreateRow>}
 
                     <CreateSectionTitle>
                         <p>Name and description</p>
@@ -88,12 +89,13 @@ class CreateProject extends Component {
                         >
                     </textarea>
                     
+                    {this.props.file && 
                     <div 
                         className='send-file send-file-button' 
                         onClick={() => this.props.createNewProject()}   
                         >
                             Submit
-                    </div>
+                    </div>}
                 </CreateForm>
 
 
