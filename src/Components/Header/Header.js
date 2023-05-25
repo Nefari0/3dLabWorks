@@ -54,7 +54,7 @@ class Header extends Component{
         // const last_visit = new Date().toString().split('(')[0]
         const last_visit = new Date()
         
-        if(visited != undefined && localStorage['user_name'] != undefined){
+        if(visited !== undefined && localStorage['user_name'] !== undefined){
             this.props.autoLogin(savedUsername,last_visit,visited).catch(err => {
                 return console.log('there was an error',err)
             })
