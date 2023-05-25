@@ -13,7 +13,14 @@ module.exports = {
     },
 
     deletePhoto: async (req,res) => {
-        const { url } = req.body
+        const { url,main_image_url,model_id } = req.body
+        // -- Check if is the main project image. If it is, change to null
+        const gone = null
+        if (main_image_url === url) {
+            await req.app.get('db').projects.update_project_main_photo(gone,model_id)
+        }
+
+        // -- Remove from database
         const deletePhoto = await req.app.get('db').projects.delete_project_photo([url])
         return res.status(200).send(deletePhoto)
     },

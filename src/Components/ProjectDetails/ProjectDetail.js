@@ -285,6 +285,7 @@ class ProjectDetail extends Component {
                             maker_id={maker_id} 
                             id={id}
                             getImages={this.getImages}
+                            main_image_url={this.state.info.firebase_url01}
                         />
 
                         <OptionsMenu
