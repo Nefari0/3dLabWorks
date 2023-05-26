@@ -11,9 +11,9 @@ import {
 } from './about.styles'
 
 import { 
-    SubHeader,
-    TextLink
+    SubHeader
  } from '../../GlobalStyles/global.styles'
+ import Button from '../../GlobalStyles/BaseButton/button.component'
 
 class About extends Component {
 
@@ -46,20 +46,24 @@ class About extends Component {
 
             const { about,general,currentView } = this.state
 
-            // const mappedAbout = about.map(element => {
-            //     return <Document data={element} key={element.doc_id} />
-            // })
-
-            // const mappedGeneral = general.map(element => {
-            //     return <Document data={element} key={element.doc_id} />
-            // })
-
             return(
                 <AboutContainer >
                     <SubHeader  >
-                        <TextLink onClick={() => this.changeView('main')} className={`${currentView === 'main' ? 'selected' : null}`} >main</TextLink>
-                        <TextLink onClick={() => this.changeView('links')} className={`${currentView === 'links' ? 'selected' : null}`}>links</TextLink>
+                        <Button 
+                            onClick={() => this.changeView('main')} 
+                            selected={currentView === 'main'}
+                            text={'main'}
+                            buttonClass={'tiny'}
+                        />
+
+                        <Button
+                            onClick={() => this.changeView('links')}
+                            selected={currentView === 'links'}
+                            text={'link'}
+                            buttonClass={'tiny'}
+                        />
                     </SubHeader>
+
                     <section>   
 
                         {currentView === 'main' && 
@@ -68,9 +72,10 @@ class About extends Component {
                             <Document data={general}/>
                         </>}
 
-                        {currentView === 'links' ? <Links /> : null}
+                        {currentView === 'links' && <Links />}
 
                     </section>
+
                 </AboutContainer>
             )
         }

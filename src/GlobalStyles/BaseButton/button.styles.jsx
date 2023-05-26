@@ -1,9 +1,15 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const BaseButton = styled.button`
+const baseBackground = css`
     background: linear-gradient(0turn,#5077be,#6495ed);
-    color: #fff;
+   
+`
 
+const invertedBackground = css`
+    background: linear-gradient(0turn,#3c598e,#5077be);
+`
+
+const baseButtonStyle = css`
     height: 35px;
     width: 90px;
     border-radius: 2px;
@@ -12,11 +18,36 @@ export const BaseButton = styled.button`
     margin-right: 2px;
     transition: all 500ms;
     margin-top:10px;
+    color: #fff;
+`
 
-    &:hover {background: linear-gradient(0turn,#3c598e,#5077be);}
+export const BaseButton = styled.button`
+    ${baseBackground}
+    ${baseButtonStyle}
+    ${({selected}) => selected && invertedBackground}
+    &:hover {${invertedBackground};}
 
     p {
         opacity:.8;
         font-weight:200;
     }
+`
+
+export const InvertedButton = styled.button`
+    ${invertedBackground}
+
+    ${({selected}) => selected && baseBackground}
+`
+
+export const Tiny = styled.button`
+    ${baseButtonStyle}
+    ${invertedBackground}
+    width:100px;
+    height:20px;
+    
+    &:hover {
+        ${baseBackground}
+    }
+
+    ${({selected}) => selected && baseBackground}
 `

@@ -5,7 +5,7 @@ import VideoPlayer from '../VideoPlayer/VideoPlayer'
 import Loading from '../Loading/Loading'
 import { loginUser,updateUser } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
-import { TextLink } from '../../GlobalStyles/global.styles'
+import Button from '../../GlobalStyles/BaseButton/button.component'
 
 import axios from 'axios'
 
@@ -86,7 +86,7 @@ class Explore extends Component {
         try {
             return(userLike.filter(el => el.model_id === projectId)[0].model_id === projectId)
           } catch (error) {
-            console.log('user does not like this project',error);
+            // console.log('user does not like this project',error);
           }
     }
 
@@ -139,8 +139,20 @@ class Explore extends Component {
             <div >
                 {isLoading === true ? <Loading /> : null}
                 <header className="sub-header">
-                    <TextLink onClick={() => this.changeView('3D Models')} className={`null ${!this.state.viewModels ? true : 'selected'}`} >3D Models</TextLink>
-                    <TextLink onClick={() => this.changeView("Videos")} className={`null ${!this.state.viewVideos ? true : 'selected'}`} >Videos</TextLink>
+                    <Button
+                        onClick={() => this.changeView('3D Models')} 
+                        text={'3D Models'}
+                        selected={this.state.viewModels}     
+                        buttonClass={'tiny'}
+                    />
+
+                    <Button 
+                        onClick={() => this.changeView("Videos")}
+                        text={'Videos'} 
+                        buttonClass={'tiny'}
+                        selected={this.state.viewVideos}
+                    />
+
                 </header>
                 <div className="explore-container" style={{paddingTop:'25px'}}>
                     <div className={`search-menu ${!isLoggedIn ? true : 'slide-over'} ${openSearchBar ? true : `search-menu-closed ${!isLoggedIn ? true : 'slide-over'}`}`} >

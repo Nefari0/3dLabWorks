@@ -16,5 +16,5 @@ export const SubHeader = styled.header`
 `
 
 export const TextLink = styled.button`
-    background-color:blue;
+    // background-color:blue;
 `

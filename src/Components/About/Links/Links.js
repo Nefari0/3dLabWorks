@@ -27,8 +27,16 @@ export default class Links extends Component {
         
         const { links } = this.state
 
-        const mappedLinks = links.map(element => {
-            return <OneLink link_to={element.link_to} link_id={element.link_id} link_text={element.link_text} description={element.description} />
+        const mappedLinks = links.map((element,index) => {
+            return (
+                <OneLink 
+                    key={index}
+                    link_to={element.link_to} 
+                    link_id={element.link_id} 
+                    link_text={element.link_text} 
+                    description={element.description} 
+                />
+            )
         })
  
         return(
