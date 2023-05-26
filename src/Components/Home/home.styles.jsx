@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import BlenderImage from './blender_background.png'
+import { baseButtonBackground } from "../../GlobalStyles/BaseButton/button.styles";
 
 export const Hero = styled.section`
     position:relative;
@@ -69,23 +70,25 @@ export const Carousel = styled.section`
     transition:all 1000ms;
 `
 
-const button = css`
+const slideButton = css`
     border-radius:50%;
     position:absolute;
-    z-index:1000000000000000000000;
+    z-index:1;
     // top:80%;
     border:solid #fff 1px;
     box-shadow:10px 5px 60px 10px rgba(36, 36, 36, .7);
     height:50px;
     width:50px;
+    color:#fff;
+    ${baseButtonBackground}
 `
 
 export const LeftSlideButton = styled.button`
-    ${button}
+    ${slideButton}
     left:3px;
 `
 
 export const RightSlideButton = styled.button`
-    ${button}
+    ${slideButton}
     right:3px;
-    `
+`
