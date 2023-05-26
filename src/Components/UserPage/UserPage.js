@@ -22,6 +22,7 @@ import Table from './../Games/Table'
 import MyConnection from './Friends/MyConnections';
 import ConnectRequests from './Friends/ConnectRequests';
 import DisplayFriends from './Friends/DisplayFriends';
+import Button from '../../GlobalStyles/BaseButton/button.component';
 import GameInvite from './Friends/GameInvite'; // notice to indicate invite to play game
 import PhotoAlbum from './PhotoAlbum/PhotoAlbum';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
@@ -342,15 +343,40 @@ class UserPage extends Component {
                     />
 
                     <h4 className="portrait-row" style={{textTransform:'none'}} >{this.props.user.user.user}</h4>
+                    
                     <div className='portrait-row' style={{flexWrap:'wrap',justifyContent:'center',width:'300px'}}>
-                        <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showEditUserInfo')}><p style={{marginTop:'5px'}}  >My Info</p></div>
-                        <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showCreateProject')} ><p style={{marginTop:'5px'}} >Create</p></div>
-                        <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showGames')} ><p style={{marginTop:'5px'}} >Games</p></div>
 
-                        <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showPhotos')} ><p style={{marginTop:'5px'}} >Photos</p></div>
+                        <Button
+                            onClick={() => this.hideView('showEditUserInfo')}
+                            text={'My Info'}
+                        />
 
-                        <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showFriends')} ><p style={{marginTop:'5px'}} >Friends</p></div>
-                        <div className='user-buttons' style={{marginTop:'10px'}} onClick={() => this.hideView('showCollections')} ><p style={{marginTop:'5px'}} >Collections</p></div>
+                        <Button
+            
+                            onClick={() => this.hideView('showCreateProject')}
+                            text={'Create'}
+                        />
+
+                        <Button
+                            onClick={() => this.hideView('showGames')}
+                            text={'Games'}
+                        />
+
+                        <Button
+                            onClick={() => this.hideView('showPhotos')}
+                            text={'Photos'}
+                        />
+
+                        <Button
+                            onClick={() => this.hideView('showFriends')}
+                            text={'Friends'}
+                        />
+
+                        <Button
+                            onClick={() => this.hideView('showCollections')}
+                            text={'Collections'}
+                        />
+
                     </div>
  
                     <div className='portrait-row' >{is_admin ? (<Link to={'/admin'} style={{ textDecoration:'none' }}><p className='go-to-admin'>admin</p></Link>) : null}  </div>
