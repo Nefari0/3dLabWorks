@@ -50,26 +50,26 @@
     top: 5px;
 }
 
-.desktop-nav {
+/* .desktop-nav {
     list-style-type: none;
     display: flex;
     justify-content: space-between;
 	align-items: center;
-	align-content: center;
-}
+	align-content: center; */
+/* } */
 
-.desktop-nav li {
+/* .desktop-nav li {
     margin-right: 30px;
     color: #3c598e;
     font-weight: 400;
-}
+} */
 
-.desktop-nav li:hover {
+/* .desktop-nav li:hover {
     background-color: #3c598e;
     border-radius: 2px;
     color: #fff;
     transition: all 500ms;
-}
+} */
 
 .hamburger {
     position: absolute;

@@ -11,6 +11,13 @@ import MM3D1 from '../../assets/MM3D2333x50orthofff.png'
 import CDinits from '../../assets/CDinits.png'
 // import profilePicPlaceHolder from '../../assets/profile-pic-placeholder.png'
 
+import { 
+    HeaderContainer,
+    DesktopNav
+ } from './header.styles'
+
+import DesktopNavComponent from './desktop-nav.component'
+import Button from '../../GlobalStyles/BaseButton/button.component'
 
 class Header extends Component{
     constructor(props){
@@ -220,7 +227,7 @@ class Header extends Component{
 
     return(
         
-        <div className='header-container'>
+        <HeaderContainer>
 
             {/* -- "Loading" display -- */}
             {isLoading === true ? <Loading /> : null}
@@ -241,13 +248,11 @@ class Header extends Component{
             <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><img className="mm3d-logo" src={MM3D1} alt="" /></Link>
             
             {/* ---------- DESTOP NAV ---------------------------- */}
-            <ul className='desktop-nav'>
-                <li className='link-item'><Link to="/about" style={{ textDecoration: 'none' }}><p>About</p></Link></li>
-                <li className='link-item'><Link to="/explore" style={{ textDecoration: 'none' }}><p>Explore</p></Link></li>
-                {/* <li className='link-item'><a>Contact</a></li> */}
-                {isLoggedIn && (<li className='link-item'><Link to="/user" style={{ textDecoration: 'none' }}><p>{user}</p></Link></li>)}
-                <a className='link-button' onClick={this.toggleLogin}>{!isLoggedIn ? 'Login' : 'logout'}</a>
-            </ul>
+            <DesktopNavComponent 
+                user={user}
+                isLoggedIn={isLoggedIn}
+                toggleLogin={this.toggleLogin}
+            />
             {/* -------------------------------------------------- */}
 
 
@@ -311,7 +316,7 @@ class Header extends Component{
             {/* ----------------------------------------------------------------- */}
 
                 {loginOpen ? (<MobileLogin current_user={user_name} setSaveSession={this.setSaveSession} logout={this.handleLogout} execute={this.handleClick} name={this.handleUserName} pass={this.handlePassword} hide={this.state.openLogin} exit={this.toggleLogin} isLoggedIn={this.props.user.isLoggedIn} saveSession={saveSession} />):(<div className="blank-div"></div>)}
-        </div>
+        </HeaderContainer>
           
     )}
 } 
