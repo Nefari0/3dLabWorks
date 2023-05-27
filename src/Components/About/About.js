@@ -59,7 +59,7 @@ class About extends Component {
                         <Button
                             onClick={() => this.changeView('links')}
                             selected={currentView === 'links'}
-                            text={'link'}
+                            text={'links'}
                             buttonClass={'tiny'}
                         />
                     </SubHeader>
