@@ -1,4 +1,3 @@
-import connect from 'react-redux'
 import { Link } from 'react-router-dom'
 import Button from '../../GlobalStyles/BaseButton/button.component'
 import { 
