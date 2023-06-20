@@ -18,6 +18,8 @@ import {
     IdIcon
  } from '../SVG2'
 
+import HamburgerComponent from './Hamburger/hamburger.component'
+
 import { 
     HeaderContainer
  } from './header.styles'
@@ -265,7 +267,11 @@ class Header extends Component{
             {/* ---------- MOBILE NAV / ITEMS ---------------------------- */}
             {isLoggedIn && <img src={photo} className="loggedin-user-photo" alt="" />}
            
-            {hamburger()}
+            {/* {hamburger()} */}
+            <HamburgerComponent 
+                toggleMenu={this.toggleMenu}
+                isLoggedIn={isLoggedIn}
+            />
 
             <ul className={`mobile-nav ${isMenuOpen ? false : 'mobile-nav-hide'}`} style={{paddingTop:'10px'}} onClick={() => this.toggleMenu()} >
 
