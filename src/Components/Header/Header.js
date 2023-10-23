@@ -4,6 +4,7 @@ import { loginUser,logoutUser,updateUser,autoLogin,remoteLogin } from '../../duc
 import { connect } from 'react-redux'
 import './Header.css'
 import { HeaderContainer } from './header.styles'
+import Hamburgers from './Hamburger/hamburger.component'
 import { Link } from 'react-router-dom'
 import MobileLogin from '../MobileLogin/MobileLogin'
 import Loading from '../Loading/Loading'
@@ -243,9 +244,13 @@ class Header extends Component{
 
 
             {/* ---------- MOBILE NAV / ITEMS ---------------------------- */}
-            {isLoggedIn ? <img src={photo} className="loggedin-user-photo" /> : null}
+            {/* {isLoggedIn ? <img src={photo} className="loggedin-user-photo" /> : null} */}
            
             {hamburger()}
+            <Hamburgers
+                isLoggedIn={isLoggedIn}
+                photo={photo}
+            />
 
             <ul className={`mobile-nav ${isMenuOpen ? false : 'mobile-nav-hide'}`} style={{paddingTop:'10px'}} onClick={() => this.toggleMenu()} >
 
