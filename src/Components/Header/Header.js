@@ -194,23 +194,9 @@ class Header extends Component{
     }
 
     render() {
-        const { saveSession, username, unique_id, isMenuOpen, user_name, password, isLoggedInState } = this.state
+        const { saveSession, isMenuOpen, user_name } = this.state
         const { isLoggedIn,isLoading,loginOpen } = this.props.user
         const { photo,user } = this.props.user.user
-
-        const hamburger = () => {
-            return(
-            <svg
-            className={`hamburger ${!isLoggedIn ? true : 'user-hamburger'}`} 
-            onClick={this.toggleMenu} xmlns="http://www.w3.org/2000/svg" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor"
-            >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            )
-        }
 
     return(
         
@@ -244,10 +230,8 @@ class Header extends Component{
 
 
             {/* ---------- MOBILE NAV / ITEMS ---------------------------- */}
-            {/* {isLoggedIn ? <img src={photo} className="loggedin-user-photo" /> : null} */}
-           
-            {hamburger()}
             <Hamburgers
+                onClick={this.toggleMenu}
                 isLoggedIn={isLoggedIn}
                 photo={photo}
             />

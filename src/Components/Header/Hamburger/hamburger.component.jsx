@@ -1,9 +1,10 @@
 import { BurgerIcon } from "../../SVG2";
 import { HamburgersContainer } from "./hamburger.styles";
 
-const Hamburgers = ({photo,isLoggedIn}) => {
+const Hamburgers = ({photo,isLoggedIn,...props}) => {
     return (
-        <HamburgersContainer isLoggedIn={isLoggedIn}>
+        <HamburgersContainer isLoggedIn={isLoggedIn}{...props}>
+            <img src={photo}/>
             <BurgerIcon />
         </HamburgersContainer>
     )
