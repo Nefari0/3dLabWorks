@@ -3,6 +3,7 @@ import axios from 'axios'
 import { loginUser,logoutUser,updateUser,autoLogin,remoteLogin } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
 import './Header.css'
+import { HeaderContainer } from './header.styles'
 import { Link } from 'react-router-dom'
 import MobileLogin from '../MobileLogin/MobileLogin'
 import Loading from '../Loading/Loading'
@@ -212,7 +213,7 @@ class Header extends Component{
 
     return(
         
-        <div className='header-container'>
+        <HeaderContainer>
 
             {/* -- "Loading" display -- */}
             {isLoading === true ? <Loading /> : null}
@@ -301,7 +302,7 @@ class Header extends Component{
             {/* ----------------------------------------------------------------- */}
 
                 {loginOpen ? (<MobileLogin current_user={user_name} setSaveSession={this.setSaveSession} logout={this.handleLogout} execute={this.handleClick} name={this.handleUserName} pass={this.handlePassword} hide={this.state.openLogin} exit={this.toggleLogin} isLoggedIn={this.props.user.isLoggedIn} saveSession={saveSession} />):(<div className="blank-div"></div>)}
-        </div>
+        </HeaderContainer>
           
     )}
 } 
