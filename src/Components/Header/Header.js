@@ -11,7 +11,8 @@ import Loading from '../Loading/Loading'
 import cdLabs3d from '../../assets/cdLabs-logo-1-alpha.png'
 import MM3D1 from '../../assets/MM3D2333x50orthofff.png'
 import CDinits from '../../assets/CDinits.png'
-import profilePicPlaceHolder from '../../assets/profile-pic-placeholder.png'
+// import profilePicPlaceHolder from '../../assets/profile-pic-placeholder.png'
+import MobileNav from './MobileMenu/menu.component'
 
 
 class Header extends Component{
@@ -236,7 +237,14 @@ class Header extends Component{
                 photo={photo}
             />
 
-            <ul className={`mobile-nav ${isMenuOpen ? false : 'mobile-nav-hide'}`} style={{paddingTop:'10px'}} onClick={() => this.toggleMenu()} >
+            <MobileNav
+                isMenuOpen={isMenuOpen}
+                isLoggedIn={isLoggedIn}
+                toggleLogin={this.toggleLogin}
+                toggleMenu={this.toggleMenu}
+             />
+
+            {/* <ul className={`mobile-nav ${isMenuOpen ? false : 'mobile-nav-hide'}`} style={{paddingTop:'10px'}} onClick={() => this.toggleMenu()} >
 
                 {!isLoggedIn ? (isMenuOpen === true ? 
                 <li onClick={this.toggleLogin}>
@@ -287,7 +295,7 @@ class Header extends Component{
                         <a>My page</a>
                     </li>
                 </Link> : null)}
-            </ul>
+            </ul> */}
             {/* ----------------------------------------------------------------- */}
 
                 {loginOpen ? (<MobileLogin current_user={user_name} setSaveSession={this.setSaveSession} logout={this.handleLogout} execute={this.handleClick} name={this.handleUserName} pass={this.handlePassword} hide={this.state.openLogin} exit={this.toggleLogin} isLoggedIn={this.props.user.isLoggedIn} saveSession={saveSession} />):(<div className="blank-div"></div>)}
