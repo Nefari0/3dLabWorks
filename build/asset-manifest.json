@@ -1,28 +1,27 @@
 {
   "files": {
-    "main.css": "/static/css/main.644bb452.chunk.css",
-    "main.js": "/static/js/main.2425b0fb.chunk.js",
-    "main.js.map": "/static/js/main.2425b0fb.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.4819aa37.js",
-    "runtime-main.js.map": "/static/js/runtime-main.4819aa37.js.map",
-    "static/js/2.527e568d.chunk.js": "/static/js/2.527e568d.chunk.js",
-    "static/js/2.527e568d.chunk.js.map": "/static/js/2.527e568d.chunk.js.map",
-    "static/js/3.116c7043.chunk.js": "/static/js/3.116c7043.chunk.js",
-    "static/js/3.116c7043.chunk.js.map": "/static/js/3.116c7043.chunk.js.map",
+    "main.css": "/static/css/main.35460068.chunk.css",
+    "main.js": "/static/js/main.d822928b.chunk.js",
+    "main.js.map": "/static/js/main.d822928b.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.9bacbfca.js",
+    "runtime-main.js.map": "/static/js/runtime-main.9bacbfca.js.map",
+    "static/js/2.18c8b8b1.chunk.js": "/static/js/2.18c8b8b1.chunk.js",
+    "static/js/2.18c8b8b1.chunk.js.map": "/static/js/2.18c8b8b1.chunk.js.map",
+    "static/js/3.07dce687.chunk.js": "/static/js/3.07dce687.chunk.js",
+    "static/js/3.07dce687.chunk.js.map": "/static/js/3.07dce687.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.644bb452.chunk.css.map": "/static/css/main.644bb452.chunk.css.map",
-    "static/js/2.527e568d.chunk.js.LICENSE.txt": "/static/js/2.527e568d.chunk.js.LICENSE.txt",
+    "static/css/main.35460068.chunk.css.map": "/static/css/main.35460068.chunk.css.map",
+    "static/js/2.18c8b8b1.chunk.js.LICENSE.txt": "/static/js/2.18c8b8b1.chunk.js.LICENSE.txt",
     "static/media/CDinits.d5585836.png": "/static/media/CDinits.d5585836.png",
     "static/media/MM3D2333x50orthofff.66b36e66.png": "/static/media/MM3D2333x50orthofff.66b36e66.png",
     "static/media/blender_background.a862b66c.png": "/static/media/blender_background.a862b66c.png",
     "static/media/cdLabs-logo-1-alpha.8a76484b.png": "/static/media/cdLabs-logo-1-alpha.8a76484b.png",
-    "static/media/profile-pic-placeholder.de21a80b.png": "/static/media/profile-pic-placeholder.de21a80b.png",
     "static/media/About.css": "/static/media/white-backround1.eea08e12.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.4819aa37.js",
-    "static/js/2.527e568d.chunk.js",
-    "static/css/main.644bb452.chunk.css",
-    "static/js/main.2425b0fb.chunk.js"
+    "static/js/runtime-main.9bacbfca.js",
+    "static/js/2.18c8b8b1.chunk.js",
+    "static/css/main.35460068.chunk.css",
+    "static/js/main.d822928b.chunk.js"
   ]
 }
