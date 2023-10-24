@@ -3,13 +3,16 @@ import axios from 'axios'
 import { loginUser,logoutUser,updateUser,autoLogin,remoteLogin } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
 import './Header.css'
+import { HeaderContainer } from './header.styles'
+import Hamburgers from './Hamburger/hamburger.component'
 import { Link } from 'react-router-dom'
 import MobileLogin from '../MobileLogin/MobileLogin'
 import Loading from '../Loading/Loading'
 import cdLabs3d from '../../assets/cdLabs-logo-1-alpha.png'
 import MM3D1 from '../../assets/MM3D2333x50orthofff.png'
 import CDinits from '../../assets/CDinits.png'
-import profilePicPlaceHolder from '../../assets/profile-pic-placeholder.png'
+// import profilePicPlaceHolder from '../../assets/profile-pic-placeholder.png'
+import MobileNav from './MobileMenu/menu.component'
 
 
 class Header extends Component{
@@ -192,27 +195,13 @@ class Header extends Component{
     }
 
     render() {
-        const { saveSession, username, unique_id, isMenuOpen, user_name, password, isLoggedInState } = this.state
+        const { saveSession, isMenuOpen, user_name } = this.state
         const { isLoggedIn,isLoading,loginOpen } = this.props.user
         const { photo,user } = this.props.user.user
 
-        const hamburger = () => {
-            return(
-            <svg
-            className={`hamburger ${!isLoggedIn ? true : 'user-hamburger'}`} 
-            onClick={this.toggleMenu} xmlns="http://www.w3.org/2000/svg" 
-            fill="none" 
-            viewBox="0 0 24 24" 
-            stroke="currentColor"
-            >
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-            )
-        }
-
     return(
         
-        <div className='header-container'>
+        <HeaderContainer>
 
             {/* -- "Loading" display -- */}
             {isLoading === true ? <Loading /> : null}
@@ -242,11 +231,20 @@ class Header extends Component{
 
 
             {/* ---------- MOBILE NAV / ITEMS ---------------------------- */}
-            {isLoggedIn ? <img src={photo} className="loggedin-user-photo" /> : null}
-           
-            {hamburger()}
+            <Hamburgers
+                onClick={this.toggleMenu}
+                isLoggedIn={isLoggedIn}
+                photo={photo}
+            />
 
-            <ul className={`mobile-nav ${isMenuOpen ? false : 'mobile-nav-hide'}`} style={{paddingTop:'10px'}} onClick={() => this.toggleMenu()} >
+            <MobileNav
+                isMenuOpen={isMenuOpen}
+                isLoggedIn={isLoggedIn}
+                toggleLogin={this.toggleLogin}
+                toggleMenu={this.toggleMenu}
+             />
+
+            {/* <ul className={`mobile-nav ${isMenuOpen ? false : 'mobile-nav-hide'}`} style={{paddingTop:'10px'}} onClick={() => this.toggleMenu()} >
 
                 {!isLoggedIn ? (isMenuOpen === true ? 
                 <li onClick={this.toggleLogin}>
@@ -297,11 +295,11 @@ class Header extends Component{
                         <a>My page</a>
                     </li>
                 </Link> : null)}
-            </ul>
+            </ul> */}
             {/* ----------------------------------------------------------------- */}
 
                 {loginOpen ? (<MobileLogin current_user={user_name} setSaveSession={this.setSaveSession} logout={this.handleLogout} execute={this.handleClick} name={this.handleUserName} pass={this.handlePassword} hide={this.state.openLogin} exit={this.toggleLogin} isLoggedIn={this.props.user.isLoggedIn} saveSession={saveSession} />):(<div className="blank-div"></div>)}
-        </div>
+        </HeaderContainer>
           
     )}
 } 
