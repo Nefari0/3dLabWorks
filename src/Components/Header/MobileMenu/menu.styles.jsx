@@ -58,5 +58,7 @@ export const MobileNavContainer = styled.nav`
         margin-right:10px;
     }
 
+    a {text-decoration:none;}
+
     ${({isMenuOpen}) => !isMenuOpen && close}
 `
