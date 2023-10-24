@@ -1,16 +1,4 @@
 
-/* .header-container {
-    position: relative;
-    margin: none;
-    height: 60px;
-    min-width: 300px;
-    background: linear-gradient(0deg,#5077be,#6495ed);
-    display: flex;
-	justify-content: space-around;
-	align-items: center;
-    align-content: center;
-} */
-
 .mm3d-logo {
     position: relative;
     height: 50px;
@@ -36,20 +24,6 @@
     display: none;
 }
 
-/* --- indicates user session --- */
-.loggedin-user-photo {
-    position: absolute;
-    display: none;
-    height: 45px;
-    width: 45px;
-    border-radius: 50%;
-    z-index: 0;
-    border: .1px solid #3c598e;
-    box-shadow: 0 4px 3px 0  rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-    right: 20px;
-    top: 5px;
-}
-
 .desktop-nav {
     list-style-type: none;
     display: flex;
@@ -69,70 +43,6 @@
     border-radius: 2px;
     color: #fff;
     transition: all 500ms;
-}
-
-.hamburger {
-    position: absolute;
-    right: 20px;
-    height: 35px;
-    display: none;
-}
-
-.user-hamburger {
-    position: absolute;
-    height: 25px;
-    border-radius: 50%;
-    color: #fff;
-    bottom: 5px;
-    right: 20px;
-}
-
-.mobile-nav {
-    border-radius: 5px;
-    list-style-type: none;
-    color: white;
-    background-color: #6495ed;
-    box-shadow: 0px 5px 20px -7px #000000;
-    border: solid 1px #3c598e;
-    margin-top: 60px;
-    margin-right: 40px;
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    min-height: 80px;
-    align-items: baseline;
-    overflow: hidden;
-    transition: all 500ms;
-    z-index: 15;
-}
-
-.mobile-nav-hide {
-    height: 0;
-    padding: 0;
-    opacity: 0;
-    margin: 0px;
-}
-
-.mobile-nav li {
-    color: white;
-    font-size: 15px;
-    height: 40px;
-    width: 140px;
-    margin-left: 5px;
-    display: flex;
-}
-
-/* .header-h3 { */
-    /* text-transform: none; */
-/* } */
-
-.header-menu-icon {
-    height: 25px;
-    width: 25px;
-    margin-right: 10px;
 }
 
 @media (max-width:1140px) {
@@ -165,24 +75,9 @@
     .mm3d-logo {left: 20px;}
 
     .cd-logo-small,
-    .mm3d-logo,
-    .user-hamburger,
-    .loggedin-user-photo {
+    .mm3d-logo {
         -webkit-transform: scale(.75);
         -ms-transform: scale(.75);
         transform: scale(.75);
-    }
-}
-
-@media (max-width:325px) {
-    .user-hamburger,
-    .loggedin-user-photo {
-        right: 10px;
-    }
-}
-
-@media (max-width:300px) {
-    .header-container {
-        max-width: 300px;
     }
 }
