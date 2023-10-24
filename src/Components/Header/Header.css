@@ -143,9 +143,6 @@
 
 
 @media (max-width: 820px) {
-    .loggedin-user-photo,
-    .hamburger {display:inline;}
-
     .desktop-nav {display: none;}
 }
 
