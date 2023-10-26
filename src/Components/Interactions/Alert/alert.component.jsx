@@ -1,3 +1,6 @@
+import { connect } from "react-redux";
+import { setAlert } from "../../../ducks/interactionsReducer";
+
 import { 
     AlertContainer,
     AlertOverlay 
@@ -5,24 +8,23 @@ import {
 import Button from "../../Home/Button/button.component";
 
 const Alert = (props) => {
-
-    const {
-        alert,
-        setAlert
-    } = props
+    const { setAlert,alert } = props
 
     return (
         <AlertOverlay>
             <AlertContainer>
-                {/* <p>{alert}</p> */}
-                <p>dummy text</p>
+                <p>{alert}</p>
                 <Button 
                     text={'close'}
-                    onClick={() => setAlert(null)}
+                    onClick={() => setAlert('')}
                 />
             </AlertContainer>
         </AlertOverlay>
     )
 }
 
-export default Alert
+function mapStateToProps(reduxState) {
+    return reduxState
+}
+
+export default connect(mapStateToProps, {setAlert})(Alert)

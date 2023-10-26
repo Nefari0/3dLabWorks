@@ -7,6 +7,7 @@ export const AlertContainer = styled.div`
     display:flex;   
     flex-direction:column;
     align-items:center;
+    border-radius:5px;
 
     p {
         color:black;
