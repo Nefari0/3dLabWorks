@@ -7,7 +7,9 @@ const Button = (props) => {
     } = props
 
     return (
-        <BaseButton>
+        <BaseButton
+            {...props}
+        >
             {text}
         </BaseButton>
     )

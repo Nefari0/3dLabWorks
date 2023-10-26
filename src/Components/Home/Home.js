@@ -3,6 +3,7 @@ import axios from 'axios'
 // import './Home.css'
 import { connect } from 'react-redux'
 import { loginUser,updateUser } from '../../ducks/userReducer'
+import { setAlert } from '../../ducks/interactionsReducer'
 import { getModels,getFeatured } from '../../ducks/modelsReducer'
 import Loading from '../Loading/Loading'
 import Project from '../Project/Project'
@@ -49,8 +50,8 @@ class Home extends Component {
                 })
             })
         } catch (err) {
-            alert('Content not available')
             this.setLoading()
+            this.props.setAlert('Content not available')
         }
     }
 
@@ -67,9 +68,7 @@ class Home extends Component {
     projectIsLiked(projectId,userLike) {
         try {
             return(userLike.filter(el => el.model_id === projectId)[0].model_id === projectId)
-          } catch (error) {
-            console.log('user does not like this project',error);
-          }
+          } catch (error) {console.log('!liked')}
     }
 
     render() {
@@ -123,4 +122,4 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps, { loginUser,updateUser,getModels,getFeatured })(Home)
+export default connect(mapStateToProps, { loginUser,updateUser,getModels,getFeatured,setAlert })(Home)
