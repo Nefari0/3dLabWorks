@@ -40,13 +40,18 @@ class Home extends Component {
 
     getFeaturedVideos = async () => {
         this.setLoading()
-        await this.props.getFeatured()
-        await axios.get('/api/videos/featured').then(res2 => {
-            this.setState({
-                videos:res2.data,
-                loading:false
+        try {
+            await this.props.getFeatured()
+            await axios.get('/api/videos/featured').then(res2 => {
+                this.setState({
+                    videos:res2.data,
+                    loading:false
+                })
             })
-        })
+        } catch (err) {
+            alert('Content not available')
+            this.setLoading()
+        }
     }
 
     setLoading() {
