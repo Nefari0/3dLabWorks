@@ -5,7 +5,6 @@ const initialState = {
 const SET_ALERT = 'SET_ALERT'
 
 export function setAlert(text) {
-    console.log('hittin set alert in reducer',text)
     return {
         type:SET_ALERT,
         payload:text
