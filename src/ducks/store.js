@@ -3,6 +3,7 @@ import reduxPromiseMiddleware from 'redux-promise-middleware'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import userReducer from './userReducer'
 import modelsReducer from './modelsReducer'
+import interactionsReducer from './interactionsReducer'
 import firebaseReducer from './firebaseReducer'
 import thunk from 'redux-thunk'
 
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   user: userReducer,
   // projects: projectsReducer,
   models: modelsReducer,
-  firebase: firebaseReducer
+  firebase: firebaseReducer,
+  userInteractions:interactionsReducer
 
 })
 
