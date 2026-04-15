@@ -106,7 +106,7 @@ module.exports = {
         const browserSalt = bcrypt.genSaltSync(10);
         const from_browser = bcrypt.hashSync(visited,browserSalt)
         // console.log('this is user in authController',user_name,last_visit,visited)
-        if(visited !== undefined){req.app.get('db').tracking.track_user_logging([user_name,visited])}
+        // if(visited !== undefined){req.app.get('db').tracking.track_user_logging([user_name,visited])}
         if (user_name.split('').length < 1) { // --- does user_name from req.body exist
             return res.status(401).send('user not found')
         }
