@@ -18,7 +18,7 @@ import MobileLogin from '../MobileLogin/MobileLogin'
 import Loading from '../Loading/Loading';
 import AdminPage from '../AdminPage/AdminPage';
 import EditUserInfo from './EditUserInfo';
-import Table from './../Games/Table'
+// import Table from './../Games/Table'
 import MyConnection from './Friends/MyConnections';
 import ConnectRequests from './Friends/ConnectRequests';
 import DisplayFriends from './Friends/DisplayFriends';
@@ -362,13 +362,13 @@ class UserPage extends Component {
 
             <section className="column2">
 
-                {showGames &&
+                {/* {showGames &&
                     <Table
                         hideView={this.hideView}
                         challengeUser={challengeUser}
                         client={client}
                         currentGame={currentGame}
-                />}
+                />} */}
 
                 {showEditUserInto &&
                     <EditUserInfo
