@@ -6,6 +6,7 @@ import Header from './Components/Header/Header'
 import routes from './routes'
 import { HashRouter } from 'react-router-dom'
 import MessageBoard from './Components/UserMessages/MessageBoard';
+import Message from './Components/Messages/Message'
 
 function App() {
 
@@ -13,10 +14,10 @@ function App() {
     <HashRouter>
     <div className="App">
         <Header/>
-        <MessageBoard />
+        {/* <MessageBoard /> */}
 
         {/* MOVED TO SAVE REAL ESTATE */}
-        {/* <Message /> */}
+        <Message />
 
         {routes}
     </div>
