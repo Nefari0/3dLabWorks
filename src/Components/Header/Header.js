@@ -88,7 +88,7 @@ class Header extends Component{
         // console.log('hit update')
         // this.trackAdminUser()
         if(user.isLoggedIn === true && setPermission===true){
-            if(user.user.is_admin === true) {this.trackAdminUser(true)}
+            // if(user.user.is_admin === true) {this.trackAdminUser(true)}
             this.setState({username:user.user.user.user,isLoggedInState:user.isLoggedIn,setPermission:false})
         }   
     }
@@ -121,16 +121,16 @@ class Header extends Component{
     // }
 
     //  --- this block identifies brower as used during developent --- //
-    trackAdminUser = (params) => {
-        // const { is_admin } = this.props.user.user
+    // trackAdminUser = (params) => {
+    //     // const { is_admin } = this.props.user.user
         
-        const unique_id = localStorage['visited']
-        const isAdmin = params
+    //     const unique_id = localStorage['visited']
+    //     const isAdmin = params
 
-        if(params === true && unique_id !== undefined){
-            axios.post('/api/tracking/setIsAdmin',{unique_id,isAdmin}).then().catch(err => console.log(err))
-        }
-    }
+    //     if(params === true && unique_id !== undefined){
+    //         axios.post('/api/tracking/setIsAdmin',{unique_id,isAdmin}).then().catch(err => console.log(err))
+    //     }
+    // }
 
     // --- ----------------------- --- //
 

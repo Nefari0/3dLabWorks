@@ -70,9 +70,9 @@ class AdminPage extends Component {
         axios.get('/api/users/all').then(res => {
             this.setState({users:res.data})
         })
-        axios.get('/api/track/getall').then(res => {
-            this.setState({traffic:res.data})
-        })
+        // axios.get('/api/track/getall').then(res => {
+        //     this.setState({traffic:res.data})
+        // })
         axios.get('/api/messages/user').then(res => {
             this.setState({userMessages:res.data})
         })

@@ -25,7 +25,8 @@ const Project = (props) => {
         model_id,
         photo_url, 
         user_id, 
-        likes 
+        likes,
+        catagory,
     } = props.data
 
     const { 
@@ -109,18 +110,18 @@ const Project = (props) => {
 
             <ProjectContainerFooter>
 
-                <div onClick={() => isLoggedIn === true ? window.open(firebase_url) : plsSignIn()} >
+                <div onClick={() => isLoggedIn === true || catagory === "hyperlink" ? window.open(firebase_url) : plsSignIn()} >
                     <SVG params={'download_icon'} fill={'none'} stroke={'currentColor'}/>
                 </div>
                     
-                { isLoggedIn ? 
+                { isLoggedIn || catagory === "hyperlink" ? 
                 <a 
                     style={{marginRight:'10px',textDecoration:'none'}} 
                     href={`${firebase_url}`} 
                     target="_blank" 
                     rel="noopener noreferrer"
                 >
-                    download
+                    {catagory === "hyperlink" ? "visit" : "download"}
                 </a>
                     : 
                 <a 

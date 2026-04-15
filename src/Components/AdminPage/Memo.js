@@ -8,7 +8,7 @@ const Memo = (props) => {
     const { body,title,memo_id } = props
     var [ text,setText ] = useState(body)
     var [ sending,setSending ] = useState(false)
-    const notDefault = true
+    // const notDefault = true
     
     const sendUpdate = () => {
         setSending(true)
