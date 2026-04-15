@@ -3,11 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.3",
-    "@testing-library/user-event": "^12.6.2",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
+    "cross-env": "^10.1.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
@@ -16,7 +14,7 @@
     "https": "^1.0.0",
     "massive": "^6.6.4",
     "nodemon": "^2.0.15",
-    "react": "^17.0.1",
+    "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.1.0",
     "react-image-file-resizer": "^0.4.7",
@@ -24,8 +22,6 @@
     "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
-    "react-three-renderer": "^3.2.4",
-    "react-three-renderer-objects": "^0.0.6",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-promise-middleware": "^6.1.2",
@@ -39,7 +35,7 @@
     "yarn": "^1.22.10"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -62,6 +58,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:4001",
+  "proxy": "http://localhost:4000",
   "main": "server/index.js"
 }
