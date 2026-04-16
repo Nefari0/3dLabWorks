@@ -29,10 +29,10 @@ export const PhotoMenuRow = styled.div`
 
 export const MainImage = styled.img`
     width:100%;
+    height:auto;
+    margin:0px;
     
     @media (max-width:680px) {
-        margin-left:auto;
-        margin-right:auto;
-        width:280px;
+        width:100%;
     }
 `

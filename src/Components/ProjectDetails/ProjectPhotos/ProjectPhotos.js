@@ -62,7 +62,9 @@ const ProjectPhotos = (props) => {
 
             {/*  Photo options menu */}
             {openMenu === true && maker_id === id ? 
-            <PhotoMenu style={{top:'30px',left:'15px',height:'85px',width:'210px'}}>
+            <PhotoMenu 
+                style={{top:'3  0px',left:'15px',height:'85px',width:'210px'}}
+            >
 
                 <PhotoMenuRow onClick={() => makeMainPhoto()} >
                     <ImageIcon />

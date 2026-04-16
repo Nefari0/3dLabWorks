@@ -1,8 +1,6 @@
 import { Component } from 'react'
 import { Switch,Route,Link } from 'react-router-dom'
 import axios from 'axios'
-// import '../Project/Project.css'
-import './ProjectDetail.css'
 import ProjectPhotos from './ProjectPhotos/ProjectPhotos'
 import Comments from './Comments/Comments'
 import { loginUser, updateUser, remoteLogin } from '../../ducks/userReducer'
@@ -11,9 +9,9 @@ import CreateComment from './Comments/CreateComment'
 import DlUrl from './DlUrl'
 import TheMaker from './TheMaker'
 import EditModel from './EditProject/EditModel'
-import UserPage from '../UserPage/UserPage'
+// import UserPage from '../UserPage/UserPage'
 import Home from '../Home/Home'
-import SVG from '../SVG'
+// import SVG from '../SVG'
 import '../SVG.css'
 import OptionsMenu from './Options/options.component'
 
@@ -266,25 +264,24 @@ class ProjectDetail extends Component {
         })
 
         const mappedThumbNails = modelImages.map((el,i) => {
-            return <div key={i} onClick={() => this.highLightedPhoto(el.photo_url)} ><img className='thumbnail-image' src={el.photo_url}/></div>
+            return <div key={i} onClick={() => this.highLightedPhoto(el.photo_url)}><img src={el.photo_url}/></div>
         })
 
         return(
             <>
             {isDeleted ? (<Route path="/" component={Home}/>) :
                 (<DetailsView>
-                    
-                    <section 
-                       onClick={() => this.props.history.push(`/viewuser/${maker_id}`)} 
-                    >
+                    <section>
                         <TheMaker
                             userInfo={userInfo} 
                             info={info} 
                             maker_id={maker_id}
                         />
                     </section>
+                    <section>
+                        <ThumbnailViewer>{mappedThumbNails}</ThumbnailViewer>
+                    </section>
 
-                    <ThumbnailViewer>{mappedThumbNails}</ThumbnailViewer>
 
                     <DetailContainer>
 
