@@ -63,7 +63,7 @@ class Message extends Component {
                 onClick={this.hideGreeting}
                 className={`actual-message ${showActualMessage ? true : 'hidden'}`}  >
                     <p className='contact-admin-text' >{welcomeGreeting}</p>
-                    <img src={photo} className='admin-message-photo' />
+                    <img src='https://firebasestorage.googleapis.com/v0/b/bcwb-879fa.appspot.com/o/data%2Fimages%2Fc_demontigny?alt=media&token=782d914e-3cda-4402-bd68-aa30ed57b6bd' className='admin-message-photo' />
                 </div> : null}
 
                 {contactAdmin === false ? <svg onClick={() => this.setContactAdmin()} xmlns="http://www.w3.org/2000/svg" class={`admin-message-icon`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
