@@ -18,7 +18,7 @@
 --   user_id INTEGER,
 --   FOREIGN KEY(user_id) REFERENCES d_user(user_id),
 --   name VARCHAR(250) NOT NULL, 
---   description VARCHAR(500),
+--   description VARCHAR(1000),
 --   firebase_url text,
 --   is_hidden BOOLEAN
 -- );

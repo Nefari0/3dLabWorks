@@ -265,8 +265,8 @@ class ProjectDetail extends Component {
             )
         })
 
-        const mappedThumbNails = modelImages.map((el) => {
-            return <div key={el.image_id} onClick={() => this.highLightedPhoto(el.photo_url)} ><img className='thumbnail-image' src={el.photo_url}/></div>
+        const mappedThumbNails = modelImages.map((el,i) => {
+            return <div key={i} onClick={() => this.highLightedPhoto(el.photo_url)} ><img className='thumbnail-image' src={el.photo_url}/></div>
         })
 
         return(
