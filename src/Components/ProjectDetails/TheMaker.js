@@ -1,4 +1,5 @@
 import { MakerContainer } from './TheMaker.styles'
+import { Link } from 'react-router-dom'
 
 const TheMaker = (props) => {
 
@@ -8,7 +9,7 @@ const TheMaker = (props) => {
     return(
         <MakerContainer>
                 <img src={photo_url}  />
-                <h4>{info.name}<br style={{paddingBottom:'10px'}}/><i  >by {user_name}</i></h4>          
+                <h4>{info.name}<br style={{paddingBottom:'10px'}}/><Link to={`/viewuser/${userInfo.user_id}`}  >by {user_name}</Link></h4>          
         </MakerContainer>
     )
 }
