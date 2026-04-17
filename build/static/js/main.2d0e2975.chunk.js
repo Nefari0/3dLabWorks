@@ -1,0 +1,688 @@
+(this.webpackJsonp3depot=this.webpackJsonp3depot||[]).push([[0],Array(30).concat([function(e,t,s){},function(e,t,s){},function(e,t,s){},,,,,,function(e,t,s){},,,,,function(e,t,s){},,,,,,,,,function(e,t,s){},,,,function(e,t,s){},function(e,t,s){},function(e,t,s){},function(e,t,s){},,,,,,function(e,t){},,,,,,,,function(e,t,s){},,,,,,,,,,,,,,,,,,,,,,,,,,,function(e,t,s){},,,function(e,t,s){},function(e,t,s){},,,,,,function(e,t,s){},,,,,,function(e,t,s){},function(e,t){},function(e,t,s){},function(e,t,s){},function(e,t,s){},function(e,t,s){},,,,function(e,t,s){},function(e,t,s){},function(e,t,s){},function(e,t,s){},function(e,t,s){},function(e,t,s){},function(e,t,s){},function(e,t,s){},function(e,t,s){},function(e,t,s){},function(e,t,s){},function(e,t,s){},function(e,t,s){"use strict";s.r(t);var i=s(3),n=s.n(i),o=s(33),a=s.n(o),r=(s(73),s(43),s(138),s(4)),l=s.n(r);s(96);const c={user:{},isLoggedIn:!1,isLoading:!1,loginError:!1,loginOpen:!1},d="LOGIN_USER",h="LOGOUT_USER",p="REGISTER_USER",m="UPDATE_USER",u="SHOW_DATA",g="AUTO_LOGIN",j="OPEN_LOGIN";function x(e){return{type:j,payload:e}}function b(e,t,s,i){return{type:d,payload:l.a.post("/auth/login",{user_name:e,password:t,last_visit:s,visited:i})}}function w(e,t,s,i,n,o){return{type:p,payload:l.a.post("/auth/register",{user_name:e,password:t,email:s,first_name:i,is_admin:n,is_sudo:o})}}function f(e){return{type:m,payload:e}}var O=s(7),v=(s(100),s(6));const k=v.b.header`
+    position: relative;
+    margin: none;
+    height: 60px;
+    min-width: 300px;
+    background: linear-gradient(0deg,#5077be,#6495ed);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+`;var y=s(0);const _={margin:"auto",marginLeft:"10px",marginRight:"10px",height:"40px",width:"40px",opacity:"60%",color:"#6495ed",paddingTop:"10px"},L=e=>{let{...t}=e;return Object(y.jsx)("svg",{...t,xmlns:"http://www.w3.org/2000/svg",className:"comment-menu small-icon",style:{marginBottom:"10px",marginRight:"0px",height:"40px",width:"40px",opacity:"60%"},fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:2,children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"})})},N=()=>Object(y.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",className:"friend-menu-icon",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:2,children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"})}),C=()=>Object(y.jsx)("svg",{style:_,xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 20 20",fill:"currentColor",children:Object(y.jsx)("path",{fillRule:"evenodd",d:"M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z",clipRule:"evenodd"})}),I=()=>Object(y.jsx)("svg",{style:_,xmlns:"http://www.w3.org/2000/svg",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:Object(y.jsx)("path",{"stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"2",d:"M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"})}),S=()=>Object(y.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",className:"friend-menu-icon",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:2,children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"})}),M=e=>{let{...t}=e;return Object(y.jsx)("svg",{className:"close-button",style:{color:"#fff",height:"35px",width:"35px",opacity:"60%",marginTop:"2px",marginBottom:"2px"},xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 20 20",fill:"currentColor",...t,children:Object(y.jsx)("path",{fillRule:"evenodd",d:"M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z",clipRule:"evenodd"})})},U=()=>Object(y.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:"2",d:"M4 6h16M4 12h16M4 18h16"})}),F=()=>Object(y.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",style:{color:"#fff",marginLeft:"20[x"},fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:2,children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"})}),T=()=>Object(y.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:2,children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"})}),P=()=>Object(y.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:2,children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"})}),D=()=>Object(y.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:2,children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"})}),E=()=>Object(y.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",className:"header-menu-icon",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:2,children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"})}),R=v.a`
+
+    svg {
+        position: absolute;
+        height: 25px;
+        border-radius: 50%;
+        color: #fff;
+        bottom: -5px;
+        right: 0px;
+    }
+
+    img {display:block;}
+`,A=v.b.div`
+    width:50px;
+    height:50px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position: absolute;
+    right: 20px;
+    
+    img {
+        position: absolute;
+        height: 45px;
+        width: 45px;
+        border-radius: 50%;
+        z-index: 0;
+        border: 1px solid #3c598e;
+        box-shadow: 0 4px 3px 0  rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+        top: 5px;
+        display:none;
+    }
+    
+    svg {
+        height: 35px;
+        position:relative;
+    }
+
+    ${e=>{let{isLoggedIn:t}=e;return t&&R}}
+
+    @media (min-width:820px) {
+        display:none;
+    }
+
+    @media (max-width:400px) {
+        -webkit-transform: scale(.75);
+        -ms-transform: scale(.75);
+        transform: scale(.75);
+
+        right:0px;
+    }
+`;var B=e=>{let{photo:t,isLoggedIn:s,...i}=e;return Object(y.jsxs)(A,{isLoggedIn:s,...i,children:[Object(y.jsx)("img",{src:t||"https://firebasestorage.googleapis.com/v0/b/depot-7bb3e.appspot.com/o/Chris%20deMontigny%2Fphotos%2Fprofile-pic-placeholder.JPEG?alt=media&token=0f93dc94-dd77-4072-82bd-925a3b19acf3"}),Object(y.jsx)(U,{})]})},z=s(8);s(103),s(52);class V extends i.Component{render(){return Object(y.jsx)("div",{className:"agreement-container",children:Object(y.jsx)("p",{className:"agreement-text",children:"Any and all information and content that a User submits to, or uses with, the Sites or Services (e.g., content in the User\u2019s profile or postings, user-created designs), including any modifications, improvements, or alterations (\u201cModification\u201d) made to products available by Company or its authorized suppliers through MadModels3d (all such products collectively referred to herein as the \u201cMadModels3d Experimental Product\u201d) or to any print profiles, modes, or settings created by you using Company products (\u201cPrint Profile\u201d). You retain all your intellectual property rights in your User Content. Company does not claim ownership in any User Content. You are solely responsible for your User Content, and you assume all risks associated with use of your User Content, including any reliance on its accuracy, completeness, or usefulness by others, or any disclosure of your User Content by you that makes you or any third party personally identifiable. Unless Company states otherwise in a writing to you, you may not state or imply that your User Content is in any way provided, sponsored, or endorsed by the Company. The Company is not obligated to backup any User Content and User Content may be deleted at any time. You are solely responsible for creating backup copies of your User Content if you desire."})})}}var G=V;var $=Object(O.b)(function(e){return e},{registerUser:w,loginUser:b})(e=>{const{isLoggedIn:t,saveSession:s,current_user:n}=e,{user:o,photo:a}=e.user.user,[r,l]=Object(i.useState)(""),[c,d]=Object(i.useState)(""),[h,p]=Object(i.useState)(!0),[m,u]=Object(i.useState)(!1),[g,j]=Object(i.useState)(""),[x,b]=Object(i.useState)(""),[w,f]=Object(i.useState)(""),[O,v]=Object(i.useState)(""),[k]=Object(i.useState)(!1),[_]=Object(i.useState)(!1),[L,N]=Object(i.useState)(!1),[C,I]=Object(i.useState)(!0),S=()=>{u(!m)},M=()=>{N(!L)};return Object(y.jsxs)("div",{className:`plogin-container ${!m||`plogin-Container r-selected ${!!C||"plogin-container r-selected agree-view"}`}`,children:[Object(y.jsxs)("section",{className:`login-title ${!m||`rlogin-title ${!!C||"rlogin-title rlogin-title-agreement"}`}`,children:[Object(y.jsx)("svg",{className:"close-button",style:{color:"#fff",height:"35px",width:"35px",opacity:"60%",marginTop:"2px",marginBottom:"2px"},onClick:e.exit,xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 20 20",fill:"currentColor",children:Object(y.jsx)("path",{fillRule:"evenodd",d:"M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z",clipRule:"evenodd"})}),m?Object(y.jsx)("h2",{style:{textTransform:"none"},children:"Create Account"}):t?Object(y.jsx)("h2",{style:{textTransform:"none"},children:"Log Out"}):Object(y.jsx)("h2",{style:{textTransform:"none"},children:"Log In to Your Accout"})]}),m?Object(y.jsxs)("section",{className:"rform",children:[C?Object(y.jsxs)("form",{style:{height:"450px"},children:[Object(y.jsx)("input",{value:r,onChange:e=>l(e.target.value),placeholder:"Username",className:"log-input log-form-length disabled",style:{marginLeft:"2px"}}),Object(y.jsx)("input",{value:c,onChange:e=>d(e.target.value),placeholder:"Password",className:"log-input log-form-length disabled",style:{marginLeft:"2px",marginTop:"17px",marginBottom:"2px"},type:"password"}),Object(y.jsx)("input",{value:g,onChange:e=>j(e.target.value),placeholder:"Email",className:"log-input log-form-length disabled",style:{marginLeft:"2px",marginTop:"18px",marginBottom:"2px"}}),Object(y.jsx)("input",{value:x,onChange:e=>b(e.target.value),placeholder:"First Name",className:"log-input log-form-length disabled",style:{marginLeft:"2px",marginTop:"17px",marginBottom:"2px"}}),Object(y.jsx)("input",{value:w,onChange:e=>f(e.target.value),placeholder:"Last Name",className:"log-input log-form-length disabled",style:{marginLeft:"2px",marginBottom:"20px",marginTop:"17px"}})]}):Object(y.jsx)(G,{}),Object(y.jsxs)("div",{className:"keep-session-check",children:[L?Object(y.jsx)("svg",{onClick:M,style:{color:"#3c598e",marginLeft:"0px",marginRight:"2px",height:"20px",width:"20px",opacity:"60%",marginTop:"2px",marginBottom:"2px"},xmlns:"http://www.w3.org/2000/svg",className:"h-6 w-6",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:2,d:"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"})}):Object(y.jsx)("svg",{onClick:M,style:{color:"#3c598e",marginLeft:"0px",marginRight:"2px",height:"20px",width:"20px",opacity:"60%",marginTop:"2px",marginBottom:"2px"},xmlns:"http://www.w3.org/2000/svg",className:"h-6 w-6",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:2,d:"M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"})}),Object(y.jsx)("p",{style:{fontSize:"10px",marginBottom:"0px",marginLeft:"0px"},onClick:()=>{I(!C)},children:"I agree to terms and conditions"})]}),C?Object(y.jsx)("a",{className:"login-button",style:{marginTop:"10px"},onClick:()=>{if(!0!==L)return alert("please agree to conditions");e.registerUser(r,c,g,x,k,_),e.exit()},children:"Sign Up"}):null,Object(y.jsx)("div",{className:"build-account",children:Object(y.jsx)("a",{style:{fontWeight:"400",color:"blue"},onClick:S,children:"Cancel"})}),Object(y.jsx)("div",{className:"r-form-fake-bottom"})]}):Object(y.jsxs)("section",{className:"form",children:[t?Object(y.jsx)("img",{style:{height:"100px",borderRadius:"50%",marginTop:"20px"},src:a}):null,t?null:Object(y.jsx)("input",{value:r,onChange:e=>l(e.target.value),placeholder:"Username",className:"log-input log-form-length disabled",style:{marginBottom:"5px",marginTop:"21px"}}),t?null:Object(y.jsx)("input",{value:c,onChange:e=>d(e.target.value),placeholder:"Password",className:"log-input log-form-length disabled",style:{marginBottom:"5px",marginTop:"17px"},type:"password"}),t?Object(y.jsx)("div",{className:"keep-session log-form-length"}):Object(y.jsxs)("ul",{className:"keep-session log-form-length",children:[Object(y.jsxs)("div",{className:"keep-session-check",children:[Object(y.jsx)("svg",{onClick:()=>p(!h),style:{color:"#3c598e",marginLeft:"0px",marginRight:"2px",height:"20px",width:"20px",opacity:"60%",marginTop:"2px",marginBottom:"2px"},xmlns:"http://www.w3.org/2000/svg",className:"h-6 w-6",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:!1===h?Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:2,d:"M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"}):Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:2,d:"M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"})}),Object(y.jsx)("p",{style:{fontSize:"10px",marginBottom:"0px",marginLeft:"0px"},children:"stay logged in?"})]}),Object(y.jsx)("p",{style:{fontSize:"10px",marginBottom:"0px",marginLeft:"0px",color:"blue"},children:"Forgot password?"})]}),t?Object(y.jsx)("a",{className:"login-button",onClick:e.logout,children:"Log Out"}):Object(y.jsx)("a",{className:"login-button",onClick:async()=>{e.execute(r,c,h)},children:"Log In"}),t?Object(y.jsxs)("div",{className:"build-account",children:[Object(y.jsx)("p",{children:"Logged in as:"}),Object(y.jsx)("a",{style:{fontWeight:"400",color:"blue"},children:o})]}):Object(y.jsxs)("div",{className:"build-account",children:[Object(y.jsx)("p",{children:"Need an account?"}),Object(y.jsx)("a",{style:{fontWeight:"400",color:"blue"},onClick:S,children:"Sign up"})]})]})]})});s(104);class W extends i.Component{render(){return Object(y.jsxs)("div",{className:"load-box",children:[Object(y.jsx)("div",{className:"load-background"}),Object(y.jsx)("div",{className:"load"})]})}}var H=W,J=s.p+"static/media/cdLabs-logo-1-alpha.8a76484b.png",q=s.p+"static/media/MM3D2333x50orthofff.66b36e66.png",Y=s.p+"static/media/CDinits.d5585836.png";const X=v.a`
+    height:0px;
+    width:0px;
+    transition: all 500ms;
+    
+    ul {
+        display:none;
+    }
+`,K=v.b.nav`
+
+        
+    @media (min-width:820px) {
+        display:none;
+    }
+
+    border-radius: 5px;
+    list-style-type: none;
+    background-color: #6495ed;
+    box-shadow: 0px 5px 20px -7px #000000;
+    border: solid 1px #3c598e;
+    margin-top: 60px;
+    margin-right: 40px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    align-items: baseline;
+    overflow: hidden;
+    z-index: 15;
+    width:${125}px;
+    height:${e=>{let{isLoggedIn:t}=e;return t?"150":"110"}}px;
+    transition: all 500ms;
+
+    ul {
+        width:250px;
+    }
+    
+    li {
+        text-align:left;
+        color:#fff;
+        margin-left:5px;
+        display:flex;
+    }
+
+    svg {
+        height: 25px;
+        width: 25px;
+        padding:0px;
+        margin-top:2px;
+        margin-right:10px;
+    }
+
+    a {text-decoration:none;}
+
+    ${e=>{let{isMenuOpen:t}=e;return!t&&X}}
+`;var Q=s(34);var Z=e=>{const{isLoggedIn:t,isMenuOpen:s,toggleLogin:i,toggleMenu:n}=e;return Object(y.jsx)(K,{isMenuOpen:s,isLoggedIn:t,children:Object(y.jsxs)("ul",{style:{paddingTop:"10px"},onClick:()=>n(),children:[Object(y.jsxs)("li",{onClick:i,children:[t?Object(y.jsx)(T,{}):Object(y.jsx)(F,{}),t?"Logout":"Login"]}),Object(y.jsx)(Q.Link,{to:"/about",children:Object(y.jsxs)("li",{children:[Object(y.jsx)(P,{}),"About"]})}),Object(y.jsx)(Q.Link,{to:"/explore",children:Object(y.jsxs)("li",{children:[Object(y.jsx)(D,{}),"Explore"]})}),t&&Object(y.jsx)(Q.Link,{to:"/user",children:Object(y.jsxs)("li",{children:[Object(y.jsx)(E,{}),"My page"]})})]})})};class ee extends i.Component{constructor(e){super(),this.state={username:{},user_name:"",password:"",setPermission:!0,isLoggedInState:null,saveSession:!1,unique_id:null},this.handleLogging=this.handleLogging.bind(this),this.resetState=this.resetState.bind(this),this.toggleMenu=this.toggleMenu.bind(this),this.handleClick=this.handleClick.bind(this),this.handlePassword=this.handlePassword.bind(this),this.handleUserName=this.handleUserName.bind(this),this.toggleLogin=this.toggleLogin.bind(this),this.handleLogout=this.handleLogout.bind(this),this.setSaveSession=this.setSaveSession.bind(this),this.sessionToWindow=this.sessionToWindow.bind(this)}sessionToWindow(e,t){localStorage.setItem(e,t)}async componentDidMount(e){const t=localStorage.visited,s=(localStorage.assigned_browser,localStorage.user_name),i=new Date;void 0!=t&&void 0!=localStorage.user_name&&this.props.autoLogin(s,i,t).catch(e=>console.log("there was an error",e));const n=()=>{const e=()=>Math.floor(65536*(1+Math.random())).toString(16).substring(1);return e()+e()+"-"+e()};if(void 0===t){const e=n(),t=n();this.sessionToWindow("visited",e),this.sessionToWindow("assigned_browser",t)}void 0!==t&&this.setState({unique_id:t})}componentWillUpdate(){const{setPermission:e}=this.state,{user:t}=this.props;!0===t.isLoggedIn&&!0===e&&this.setState({username:t.user.user.user,isLoggedInState:t.isLoggedIn,setPermission:!1})}resetState(){this.setState({setPermission:!1,username:{},user_name:"",password:"",isMenuOpen:!1,toggleHideLoggin:!0})}handleLogging(){const{user_name:e,password:t}=this.state,{loginUser:s,logoutUser:i}=this.props,n=new Date,o=localStorage.visited;this.toggleLogin(),!1===this.props.isLoggedIn?s(e,t,n,o):i()}toggleMenu(){this.setState({isMenuOpen:!this.state.isMenuOpen})}async handleClick(e,t,s){const{menuOpen:i}=this.props.user,{user_name:n,password:o}=this.state,a=localStorage.visited,r=new Date;await this.props.loginUser(e,t,r,a),!0===s&&!0===this.props.user.isLoggedIn?localStorage.setItem("user_name",e):localStorage.removeItem("visited"),this.toggleLogin(),this.setState({user_name:"",password:""})}handleLogout(){const{menuOpen:e}=this.props.user;localStorage.removeItem("user_name"),localStorage.setItem("visited",(()=>{const e=()=>Math.floor(65536*(1+Math.random())).toString(16).substring(1);return e()+e()+"-"+e()})()),this.toggleLogin(),this.props.logoutUser()}handleUserName(e){this.setState({...this.state,user_name:e})}handlePassword(e){this.setState({...this.state,password:e})}toggleLogin(){const{loginOpen:e}=this.props.user;this.props.remoteLogin(!e)}setSaveSession(){this.setState({saveSession:!this.state.saveSession})}render(){const{saveSession:e,isMenuOpen:t,user_name:s}=this.state,{isLoggedIn:i,isLoading:n,loginOpen:o}=this.props.user,{photo:a,user:r}=this.props.user.user;return Object(y.jsxs)(k,{children:[!0===n?Object(y.jsx)(H,{}):null,Object(y.jsx)("img",{onClick:this.viewTheWindow,src:J,className:"cd-logo"}),Object(y.jsx)("img",{onClick:this.viewTheWindow,src:Y,className:"cd-logo-small"}),Object(y.jsx)(z.c,{to:"/",style:{textDecoration:"none",color:"#fff"},children:Object(y.jsx)("img",{className:"mm3d-logo",src:q})}),Object(y.jsxs)("ul",{className:"desktop-nav",children:[Object(y.jsx)(z.c,{to:"/about",style:{textDecoration:"none"},children:Object(y.jsx)("li",{className:"link-item",children:Object(y.jsx)("a",{children:"About"})})}),Object(y.jsx)(z.c,{to:"/explore",style:{textDecoration:"none"},children:Object(y.jsx)("li",{className:"link-item",children:Object(y.jsx)("a",{children:"Explore"})})}),i?Object(y.jsx)(z.c,{to:"/user",style:{textDecoration:"none"},children:Object(y.jsx)("li",{className:"link-item",children:Object(y.jsx)("a",{children:r})})}):Object(y.jsx)("div",{}),Object(y.jsx)("a",{className:"link-button",onClick:this.toggleLogin,children:i?"logout":"Login"})]}),Object(y.jsx)(B,{onClick:this.toggleMenu,isLoggedIn:i,photo:a}),Object(y.jsx)(Z,{isMenuOpen:t,isLoggedIn:i,toggleLogin:this.toggleLogin,toggleMenu:this.toggleMenu}),o?Object(y.jsx)($,{current_user:s,setSaveSession:this.setSaveSession,logout:this.handleLogout,execute:this.handleClick,name:this.handleUserName,pass:this.handlePassword,hide:this.state.openLogin,exit:this.toggleLogin,isLoggedIn:this.props.user.isLoggedIn,saveSession:e}):Object(y.jsx)("div",{className:"blank-div"})]})}}var te=Object(O.b)(function(e){return e},{loginUser:b,logoutUser:function(){return{type:h,payload:l.a.get("/auth/logout")}},updateUser:f,autoLogin:function(e,t,s){return{type:g,payload:l.a.post("/auth/browser/login",{user_name:e,last_visit:t,visited:s})}},remoteLogin:x})(ee),se=s(13);const ie={models:[],featured:[],isloading:!1},ne="GET_MODELS",oe="GET_FEATURED";function ae(){return{type:ne,payload:l.a.get("/api/project/join")}}s(38);var re=e=>{const t=e=>Object(y.jsx)("path",{"stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"2",d:"M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"});return Object(y.jsx)("div",{children:Object(y.jsx)("svg",{style:{margin:"auto",marginLeft:"10px",marginRight:"10px",height:"40px",width:"40px",opacity:"60%",color:"#6495ed",paddingTop:"10px"},xmlns:"http://www.w3.org/2000/svg",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:(e=>{switch(e){case"download_icon":return Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:2,d:"M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"});case"large_heart":case"large_heart_dark":return t();case"edit_project":return Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:2,d:"M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"});case"comments":return Object(y.jsx)("path",{"stroke-linecap":"round","stroke-linejoin":"round","stroke-width":2,d:"M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"});case"folder":return Object(y.jsx)("path",{"stroke-linecap":"round","stroke-linejoin":"round","stroke-width":2,d:"M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"});case"info":return Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:2,d:"M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"});case"largeX":return Object(y.jsx)("path",{fillRule:"evenodd",d:"M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z",clipRule:"evenodd"});case"send":return Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:"2",d:"M9 5l7 7-7 7"})}})(e.params)})})};const le=v.b.section`
+    border-radius: 5px;
+    margin: 10px;
+    height: 350px;
+    width: 280px;
+    box-shadow: 0px 5px 20px -7px #000000;
+    background-color: #fff;
+    text-align: left;
+    display: flex;
+	flex-direction: column;
+    justify-content: space-between;
+    overflow:hidden;
+
+    header {
+        display: flex;
+        align-items: center;
+        margin-top: 5px;
+        margin: 0px;
+        opacity: .8;
+    }
+
+    @media (max-height:520px) {
+        height: 330px;
+    }
+
+    @media (max-width:1000px) {
+        width: 240px;
+        margin-left:0px;
+        margin-right:20px;
+
+        footer {a{
+            font-size: 12px;
+            font-weight: 400;
+        }}
+
+        h5 {font-size: 14px;}
+    }
+`,ce=v.b.img`
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+    margin-left: 10px;
+`,de=v.b.section`
+    background-color: #000;
+    overflow: hidden;
+    margin-bottom: auto;
+    max-height: 160px;
+
+    img {
+        opacity: 0.7;
+        width: 280px;
+        max-height: 188px;
+        -webkit-transform: scale(2.15);
+        -ms-transform: scale(2.15);
+        transform: scale(1.15);
+        -webkit-transition: -webkit-transform 0.5s, opacity 0.5s;
+        transition: transform 0.5s, opacity 0.5s;
+        overflow: hidden;
+
+        &:hover {
+            opacity: 1;
+            -webkit-transform: scale(1.03);
+            -ms-transform: scale(1.03);
+            transform: scale(1.03);
+        }
+    }
+
+`,he=v.b.footer`
+    border-top:1px solid #555;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    // background-color:blue;
+`,pe=v.b.div`
+    margin-right: 15px;
+    padding-right: 1px;
+
+    aside {
+        border-left:1px solid #555555;
+        height: 40px;
+        width: 131px;
+        margin: none;
+        display: flex;
+        align-items: center;
+        color: #555;
+        font-size: 15px;
+
+        svg {
+            margin-left: 10px;
+            margin-bottom: 7px;
+        }
+    }
+
+    @media (max-width:1000px) {
+        margin-right: 15px;
+        padding-right: 1px;
+    }
+`;var me=Object(O.b)(function(e){return e},{getModels:ae,updateUser:f,remoteLogin:x})(e=>{const{firebase_url:t,firebase_url01:s,name:n,user_name:o,model_id:a,photo_url:r,user_id:c,likes:d,catagory:h}=e.data,{isLoggedIn:p,id:m,user_likes:u}=e,[g,j]=Object(i.useState)(0),[x,b]=Object(i.useState)(!1);Object(i.useEffect)(()=>{j(d),!0===v()&&!1===x&&b(!0)},[]);const w=()=>{window.scrollTo(0,0),e.remoteLogin(!0)},f=async e=>{console.log("params",e),l.a.get(`/api/like/update/${e}`).then(e=>{const{likes:t}=e.data[0];j(t)})},O=()=>{!0===p&&void 0!=m?(async(e,t)=>{const s=e,i=t;await l.a.post("/api/projects/like",{user_id:s,model_id:i}),await f(i),await b(!x),await v(x)})(m,a):w()},v=t=>!0===e.projectIsLiked(a,u);return Object(y.jsxs)(le,{children:[Object(y.jsxs)("header",{style:{backgroundColor:""},children:[Object(y.jsx)(z.c,{to:`/viewuser/${c}`,children:Object(y.jsx)(ce,{src:(()=>{const{user_photo_url:t}=e;return void 0!=r?r:t})()})}),Object(y.jsxs)("h5",{className:"dark-text",style:{color:"#555",paddingBottom:"15px",paddingTop:"",fontWeight:"400"},children:[n,Object(y.jsx)("br",{}),Object(y.jsxs)("i",{children:["by ",(()=>{const{current_user_name:t}=e;return void 0!=o?o:t})()]})]})]}),Object(y.jsx)(z.c,{to:`/projectdetails/${a}`,children:Object(y.jsx)(de,{children:Object(y.jsx)("img",{src:s})})}),Object(y.jsxs)(he,{children:[Object(y.jsx)("div",{onClick:()=>!0===p||"hyperlink"===h?window.open(t):w(),children:Object(y.jsx)(re,{params:"download_icon",fill:"none",stroke:"currentColor"})}),p||"hyperlink"===h?Object(y.jsx)("a",{style:{marginRight:"10px",textDecoration:"none"},href:`${t}`,target:"_blank",rel:"noopener noreferrer",children:"hyperlink"===h?"visit":"download"}):Object(y.jsx)("a",{style:{marginRight:"10px",color:"#555"},onClick:()=>w(),children:"download"}),Object(y.jsxs)(pe,{children:[Object(y.jsxs)("aside",{style:{borderBottom:"1px solid #555"},children:[!1===x?Object(y.jsx)("svg",{className:"small-icon",onClick:O,xmlns:"http://www.w3.org/2000/svg",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:"2",d:"M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"})}):Object(y.jsx)("svg",{className:"small-icon",onClick:O,xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 20 20",fill:"currentColor",children:Object(y.jsx)("path",{fillRule:"evenodd",d:"M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z",clipRule:"evenodd"})}),Object(y.jsx)("p",{style:{marginLeft:"10px"},children:g})]}),Object(y.jsxs)("aside",{children:[Object(y.jsx)("svg",{className:"small-icon",xmlns:"http://www.w3.org/2000/svg",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:Object(y.jsx)("path",{"stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"2",d:"M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"})}),Object(y.jsx)("p",{style:{marginLeft:"10px"},children:"share"})]})]})]})]})}),ue=s(41),ge=s.n(ue);s(110);var je=e=>{const{video_url:t,firebase_url:s,category:i,tag:n,photo_url:o,user_name:a,name:r,video_name:l}=e;return Object(y.jsxs)("div",{className:"player-container",children:[Object(y.jsxs)("header",{className:"video-title",children:[Object(y.jsx)("img",{className:"video-user-photo",src:o}),Object(y.jsxs)("div",{className:"vidnm-and-usrnm",children:[" ",Object(y.jsx)("h4",{className:"dark-text video-nm-txt",children:"dummy project"===r?l:r}),Object(y.jsxs)("i",{style:{marginRight:"60px"},children:["Video by ",a]})," "]})]}),Object(y.jsxs)("div",{className:"",style:{marginTop:"50px"},children:[Object(y.jsx)("div",{className:"reg-size",children:Object(y.jsx)(ge.a,{className:"react-player",url:t,width:"298px",height:"191px",controls:!0})}),Object(y.jsx)("div",{className:"small-size",children:Object(y.jsx)(ge.a,{className:"react-player",url:t,width:"240px",height:"150px",controls:!0})}),Object(y.jsxs)("div",{className:"video-info-container",children:[Object(y.jsx)("header",{className:"video-header",children:Object(y.jsxs)("p",{className:"video-header-text",children:[i,": ",n]})}),null===s?Object(y.jsx)("p",{className:"video-container-text",children:"There are no files associated with this video"}):Object(y.jsxs)("p",{className:"video-container-text",children:["Click ",Object(y.jsx)("a",{href:s,children:"here"})," to download the files used in this video"]})]})]})]})},xe=s.p+"static/media/blender_background.a862b66c.png";const be=v.b.section`
+    position:relative;
+    height: 90vh;
+    width: 100vw;
+    background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url(${xe});
+    background-size: cover; 
+    background-position: center bottom;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    align-items: baseline;
+    // overflow-x: scroll;
+    overflow:hidden;
+    border-bottom: solid 20px #6495ed;
+
+    @media (max-width:300px) {
+        min-width: 300px;
+    }
+
+    @media (min-height:700px) {
+        height: 92vh;
+    }
+
+    @media (min-height:850px) {
+        height: 94vh;   
+    }
+`,we=v.b.h2`
+    width: 100vw;
+
+    @media (max-width:400px) {display:none;}
+    @media (max-height:525px) {display:none;}
+`,fe=v.b.section`
+    position:relative;
+    height: 70vh;
+    width: 100vw;
+    // display: flex;
+    // align-items: center;
+    overflow: none;
+    z-index: 0;
+    margin-left:10px;
+
+    @media (max-width:350px) {
+        width:240px;
+        height:370px;
+        overflow:hidden;
+        margin:auto;
+    }
+`,Oe=v.b.section`
+    position:absolute;
+    min-width:100vw;
+    height:100%;
+    // background-color:green;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    left:${e=>{let{positionCounter:t}=e;return t}}px;
+    transition:all 1000ms;
+`,ve=v.a`
+    border-radius:50%;
+    position:absolute;
+    z-index:1000000000000000000000;
+    // top:80%;
+    border:solid #fff 1px;
+    box-shadow:10px 5px 60px 10px rgba(36, 36, 36, .7);
+    height:50px;
+    width:50px;
+`,ke=v.b.button`
+    ${ve}
+    left:3px;
+`,ye=v.b.button`
+    ${ve}
+    right:3px;
+    `;class _e extends i.Component{constructor(){super(),this.getFeaturedVideos=async()=>{this.setLoading();try{await this.props.getFeatured(),await l.a.get("/api/videos/featured").then(e=>{this.setState({videos:e.data,loading:!1})})}catch(e){alert("Content not available"),this.setLoading()}},this.state={projects:[],videos:[],user_name:"",password:"",userLikes:null,loading:!1,positionCounter:0},this.stateHandler=this.stateHandler.bind(this),this.projectIsLiked=this.projectIsLiked.bind(this)}componentDidMount(){this.getFeaturedVideos()}setLoading(){this.setState({loading:!this.state.loading})}stateHandler(e,t){this.setState({[e]:t})}projectIsLiked(e,t){try{return t.filter(t=>t.model_id===e)[0].model_id===e}catch(s){console.log("user does not like this project",s)}}render(){const{loading:e,videos:t,positionCounter:s}=this.state,{isLoggedIn:i}=this.props.user,{user_likes:n,model_likes:o}=this.props.user.user,{featured:a}=this.props.models,r=a.map(e=>Object(y.jsx)(me,{data:e,projectIsLiked:this.projectIsLiked,isLoggedIn:i,model_likes:o,likes:e.likes,id:e.user_id,user_likes:n},e.model_id)),l=t.map(e=>Object(y.jsx)(je,{video_url:e.video_url,category:e.category,tag:e.tag,firebase_url:e.firebase_url,photo_url:e.photo_url,user_name:e.user_name,name:e.name,video_name:e.video_name},e.video_id));return Object(y.jsxs)(be,{children:[!e||Object(y.jsx)(H,{}),Object(y.jsx)(we,{className:"",children:"IMAGINE IT - BUILD IT."}),Object(y.jsx)(fe,{children:Object(y.jsxs)(Oe,{positionCounter:s,children:[l,r]})}),s<0&&Object(y.jsx)(ke,{onClick:()=>this.stateHandler("positionCounter",s+260),children:Object(y.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",fill:"none",viewBox:"0 0 24 24","stroke-width":"1.5",stroke:"currentColor",class:"w-6 h-6",children:Object(y.jsx)("path",{"stroke-linecap":"round","stroke-linejoin":"round",d:"M15.75 19.5L8.25 12l7.5-7.5"})})}),s>=-260*(l.length+r.length-2)&&Object(y.jsx)(ye,{onClick:()=>this.stateHandler("positionCounter",s-260),children:Object(y.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",fill:"none",viewBox:"0 0 24 24","stroke-width":"1.5",stroke:"currentColor",class:"w-6 h-6",children:Object(y.jsx)("path",{"stroke-linecap":"round","stroke-linejoin":"round",d:"M8.25 4.5l7.5 7.5-7.5 7.5"})})})]})}}var Le=Object(O.b)(function(e){return e},{loginUser:b,updateUser:f,getModels:ae,getFeatured:function(){return{type:oe,payload:l.a.get("api/featured/join")}}})(_e);s(116);var Ne=e=>Object(y.jsxs)("div",{className:"group-page",children:[Object(y.jsx)("ul",{}),Object(y.jsx)("h3",{children:"group page"})]});s(30);const Ce="GET_PROJECTS";function Ie(){return{type:Ce,payload:l.a.get("/api/projects/all")}}var Se=s(24),Me=s.n(Se);const Ue=s(64).a.initializeApp({apiKey:"AIzaSyB6ImzEUWfnyXD6bcpNEN8ktaMSfos8Js0",authDomain:"depot-7bb3e.firebaseapp.com",projectId:"depot-7bb3e",storageBucket:"depot-7bb3e.appspot.com",messagingSenderId:"38861699624",appId:"1:38861699624:web:b1d9abfce822f3a4d2531d",measurementId:"G-DSTFFPFHLD"}),Fe=(Ue.firestore(),{isLoading:!1,url:{},error:!1}),Te="DELETE_FILE",Pe="ADD_TO_FIREBASE",De="REF_FROM_URL",Ee=e=>{const t=Ue.storage().refFromURL(e);return{type:Te,payload:t.delete().then(function(e){})}},Re=(e,t)=>{const s=Ue.storage().ref(t).child(e.name).put(e);return{type:Pe,payload:s}};s(117),s(118);const Ae=v.b.section`
+    position: fixed;
+    top: 100px;
+    height: 350px;
+    width: 400px;
+    z-index: 1000;
+
+    @media(max-width:700px){
+        width: 298px;
+
+        img {
+            width: 100%;
+            box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
+        }
+    }
+`,Be=v.b.button`
+    position: absolute;
+    background: linear-gradient(0turn,#5077be,#6495ed);
+    height: 50px;
+    width: 200px;
+    border-radius: 2px;
+    font-size: 14px;
+    border:solid 1px #3c598e;
+    z-index: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+    color: #fff;
+
+    @media (max-width:700px) {
+        height: 25px;
+        width: 80px;
+        
+`;var ze=e=>{const{previewImageFile:t,photo_url:s}=e,i=()=>{e.handleInput("previewImageFile",null),e.handleInput("photo_url",null)};return Object(y.jsxs)(Ae,{children:[Object(y.jsx)("img",{src:t}),Object(y.jsx)(Be,{style:{width:"50%"},onClick:()=>(async()=>{await e.addPhoto(s),await i()})(),children:"Submit"}),Object(y.jsx)(Be,{style:{right:"0px",width:"50%"},onClick:()=>i(["string"]),children:"Cancel"})]})};class Ve extends i.Component{constructor(e){super(e),this.removeFileFromSpace=async()=>{const{firebase_url:e,model_id:t}=this.props.info;this.setIsLoading(),null!=e&&await this.props.deleteFile(e),await this.deleteAllImages(!0),await l.a.delete(`/api/project/delete/${t}`),this.setIsLoading(),this.props.setIsDeleted()},this.deleteAllImages=e=>{const{modelImages:t}=this.props;var s=[...t];!0===e&&s.map(e=>{this.props.deleteFile(e.photo_url)})},this.replaceModelFile=async()=>{const{photo_url:e,file_url:t}=this.state,{model_id:s,firebase_url:i}=this.props.info,{user_id:n}=this.props;this.setIsLoading();const o=await this.props.getRefFromUrl(i).payload;try{await this.props.deleteFile(i)}catch(l){console.log("this file doesnt exist")}const a=await this.props.addNewModel(t,o),r=await a.action.payload.ref.getDownloadURL();await this.newModelToDB(s,r),this.setIsLoading()},this.newModelToDB=(e,t)=>{l.a.post("/api/project/update/file",{url:t,model_id:e})},this.fileHandler=async(e,t,s)=>{const i=e.target.files[0];this.setState({[s]:i,[t]:URL.createObjectURL(i)})},this.handlePhoto=async e=>{var t=!1;if(e.target.files[0]&&(t=!0),t)try{Me.a.imageFileResizer(e.target.files[0],400,267,"JPEG",100,0,e=>{console.log(e,"uri"),this.setState({previewImageFile:URL.createObjectURL(e),photo_url:e})},"file",298,191)}catch(s){console.log(s)}},this.setIsLoading=()=>{this.setState({isLoading:!this.state.isLoading})},this.passNewPhotoToFB=async()=>{const{photo_url:e}=this.state;this.addPhoto(e),this.setState({previewImageFile:null}),await this.props.getImages()},this.addPhoto=async e=>{const{model_id:t,info:s}=this.props,{user_id:i,name:n}=s;this.setIsLoading();const o=await this.props.addNewModel(e,`madmodels/projects/${i}/${n}/`),a=await o.action.payload.ref.getDownloadURL();await l.a.post("/api/project/photos/put",{model_id:t,name:n,photo_url:a}),await this.props.getImages(),this.setState({previewImageFile:null}),this.setIsLoading()},this.executeChange=async()=>{const{model_id:e}=this.props.info,{name:t,description:s}=this.state;this.setIsLoading(),await l.a.post("/api/project/edit/name",{name:t,description:s,model_id:e}),this.setIsLoading(),this.props.getDetails()},this.confirmDelete=()=>{this.setState({openDeleteConfirm:!this.state.openDeleteConfirm})},this.state={name:this.props.info.name,user_id:this.props.info.user_id,description:this.props.info.description,photo_url:null,file_url:null,isLoading:!1,imageUr1:null,openDeleteConfirm:!1,isLoading:!1,previewImageFile:null,isDeleted:!1,newImage:""},this.handleInput=this.handleInput.bind(this),this.executeChange=this.executeChange.bind(this),this.fileHandler=this.fileHandler.bind(this),this.addPhoto=this.addPhoto.bind(this),this.setIsLoading=this.setIsLoading.bind(this),this.removeFileFromSpace=this.removeFileFromSpace.bind(this),this.confirmDelete=this.confirmDelete.bind(this),this.newModelToDB=this.newModelToDB.bind(this),this.replaceModelFile=this.replaceModelFile.bind(this)}componentDidUpdate(){}handleInput(e,t){this.setState({[e]:t})}render(){const{previewImageFile:e,isLoading:t,openDeleteConfirm:s,photo_url:i,description:n,name:o,file_url:a}=this.state;return Object(y.jsxs)("div",{className:"edit-project-container",children:[t?Object(y.jsx)(H,{}):null,Object(y.jsx)("button",{style:{width:"30px",height:"20px",fontSize:"10px",marginLeft:"85%",marginTop:"10px"},onClick:()=>this.confirmDelete(),children:"delete"}),s?Object(y.jsxs)("div",{className:"select-delete",children:[Object(y.jsx)("p",{onClick:()=>this.removeFileFromSpace(),children:"yes"}),Object(y.jsx)("p",{onClick:()=>this.confirmDelete(),children:"no"})]}):null,Object(y.jsx)("div",{className:"section-title",children:Object(y.jsx)("p",{style:{color:"#555"},children:"Add Image / Update File"})}),e&&Object(y.jsx)(ze,{previewImageFile:e,photo_url:i,addPhoto:this.addPhoto,handleInput:this.handleInput}),a?Object(y.jsxs)("section",{className:"replace-file-warning",children:[Object(y.jsx)("h4",{children:"replace file?"}),Object(y.jsxs)("span",{className:"select-delete",style:{height:"50px",backgroundColor:"#5077be"},children:[Object(y.jsx)("p",{className:"delete-button-txt",onClick:()=>this.replaceModelFile(),children:"yes"}),Object(y.jsx)("p",{className:"delete-button-txt",onClick:()=>this.handleInput("file_url",null),children:"no"})]})]}):null,Object(y.jsxs)("section",{className:"edit-project-row row-x",style:{height:"30px",color:"#555"},children:[null===e&&null===a?Object(y.jsxs)("div",{className:"edit-file-input-box ",children:[Object(y.jsx)("div",{className:"edit-file-button ",children:Object(y.jsx)("p",{children:"Add Image"})}),Object(y.jsx)("input",{className:"fake-input-file ",style:{marginLeft:"40px"},type:"file",accept:"image/png,image/jpeg",onChange:e=>this.handlePhoto(e)})]}):null,null===e&&null===a?Object(y.jsxs)("div",{className:"edit-photo-input-box",children:[Object(y.jsx)("div",{className:"edit-file-button",children:Object(y.jsx)("p",{children:"New File"})}),Object(y.jsx)("input",{className:"fake-input-file",style:{marginLeft:"40px"},type:"file",accept:".blend,.stl",onChange:e=>this.fileHandler(e,null,"file_url")})]}):null]}),Object(y.jsx)("section",{className:"edit-project-row text-input-row",children:Object(y.jsxs)("div",{className:"input-left-column",children:[Object(y.jsx)("div",{className:"section-title",children:Object(y.jsx)("p",{style:{color:"#555"},children:"Name"})}),Object(y.jsx)("input",{value:o,className:"text-input",onChange:e=>this.handleInput("name",e.target.value)}),Object(y.jsx)("div",{className:"section-title",children:Object(y.jsx)("p",{style:{color:"#555"},children:"Description"})}),Object(y.jsx)("textarea",{name:"text",rows:"5",cols:"50",wrap:"soft",placeholder:"text",value:n,className:"text-input input-description",onChange:e=>this.handleInput("description",e.target.value),children:" "})]})}),Object(y.jsx)("div",{className:"section-title",children:Object(y.jsx)("p",{style:{color:"#555"},children:"Submit Changes / Delete"})}),null===e&&null===a?Object(y.jsx)("div",{className:"edit-file-button",style:{position:"relative",marginTop:"10px",height:"30px",width:"80px"},onClick:()=>this.executeChange(),children:Object(y.jsx)("p",{children:"Submit"})}):null]})}}var Ge=Object(O.b)(e=>e,{addNewModel:Re,deleteFile:Ee,getRefFromUrl:e=>{const t=Ue.storage().refFromURL(e).fullPath.split("/").slice(0,-1).join("/");return{type:De,payload:t}}})(Ve);s(119);const $e=v.b.section`
+
+    height: 450px;
+    width: 300px;
+    border-radius: 3%;
+    background-color: #fff;
+    color: #555;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+    align-items: flex-start;
+	align-content: center;
+    top: 5vh;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+    position: fixed;
+    z-index:10;
+    box-shadow:10px 5px 60px 10px rgba(36, 36, 36, 1);
+    margin: none;
+    overflow: hidden;
+`,We=v.b.header`
+    color: #fff;
+    position: absolute;
+    text-transform: none;
+    top: -1px;
+    height: 80px;
+    width: 100%;
+    background: linear-gradient(0turn,#5077be,#6495ed);
+    padding-top: 10%;
+    margin: none;
+    transition: all 100ms;
+
+    h2 {text-transform:none;}
+`,He=v.b.form`
+    position: absolute;
+    height: 300px;
+    width: 100%;
+    bottom: 40px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+    transition: all 100ms;
+`,Je=v.b.div`
+    width: 100%;
+    height: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+`,qe=v.b.header`
+    opacity: .5;
+    height: 20px;
+    width: 100%;
+    border-top: solid 1px #6495ed;
+    margin-top: 10px;
+    text-align: left;
+    margin-left: 5px;
+    font-size: x-small;
+    font-weight: 600;
+`,Ye=v.a`
+    opacity: .01;
+    left: 5px;
+    bottom: 5px;
+    width: 150%;
+    height: 27%;
+    z-index: 1;
+`,Xe=v.b.div`
+    position: absolute;
+    height: 80px;
+    width: 100%;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: stretch;
+    overflow: none;
+`,Ke=v.b.button`
+    margin-bottom: 50px;
+    margin-left: 45px;
+    height: 25px;
+    width: 200px;
+    border-radius: 2px;
+    font-size: 18px;
+    border:solid 1px #3c598e;
+    z-index: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`,Qe=v.b.input`
+    position: absolute;
+    top: 10px;
+    height: 40px;
+    width: 300px;
+    color: #555;
+    z-index: 10000;
+    ${Ye}
+`;var Ze=e=>{let{handleFile:t,getFileName:s}=e;return Object(y.jsx)(Xe,{children:Object(y.jsxs)("div",{children:[Object(y.jsx)(Ke,{children:s()}),Object(y.jsx)(Qe,{style:{marginLeft:"40px"},type:"file",accept:".blend,.stl",onChange:e=>t(e)})]})})};const et=v.b.div`
+    position: relative;
+    height: 90px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: center;
+
+    img {
+        width:80px;
+        height:80px;
+        border-radius:10px;
+        margin-left:35%;
+        margin-bottom:0px;
+        // background-color:yellow;
+    }
+
+    input[type='file']
+    {
+        text-indent: -999em;
+        outline: none;
+        position: absolute;
+        left: 20%;
+        opacity: .1;
+        height: 80px;
+        width: 80px;
+        z-index: 10000;
+    }
+    `;var tt=e=>{let{previewImageFile:t,handlePhoto:s}=e;return Object(y.jsxs)(et,{children:[Object(y.jsx)("img",{src:t}),Object(y.jsx)("input",{style:{marginLeft:"40px"},type:"file",accept:"image/png,image/jpeg",onChange:e=>s(e)})]})};class st extends i.Component{constructor(){super(),this.getFileName=()=>null!=this.props.file?this.props.file.name:"Add File",this.state={description:"",name:"",previewImageFile:null},this.getFileName=this.getFileName.bind(this)}render(){return Object(y.jsxs)($e,{children:[Object(y.jsxs)(We,{children:[Object(y.jsx)(M,{onClick:()=>this.props.resetView()}),Object(y.jsx)("h2",{children:"Create a project"})]}),Object(y.jsxs)(He,{onSubmit:e=>this.props.createNewProject(e),children:[Object(y.jsx)(Je,{children:Object(y.jsx)(Ze,{getFileName:this.getFileName,handleFile:this.props.handleFile})}),this.props.file&&Object(y.jsxs)(Je,{children:[Object(y.jsx)(qe,{children:Object(y.jsx)("p",{children:"Add Photo"})}),Object(y.jsx)(tt,{handlePhoto:this.props.handlePhoto,previewImageFile:this.props.previewImageFile})]}),Object(y.jsx)(qe,{children:Object(y.jsx)("p",{children:"Name and description"})}),Object(y.jsx)("input",{placeholder:"Name",className:"log-input log-form-length disabled",style:{marginBottom:"5px",marginTop:"21px"},required:!0,onChange:e=>this.props.handleAddText("projectName",e.target.value)}),Object(y.jsx)("textarea",{placeholder:"description",name:"text",rows:"5",cols:"50",wrap:"soft",className:"text-input input-description",onChange:e=>this.props.handleAddText("projectDescription",e.target.value)}),this.props.file&&Object(y.jsx)("button",{style:{marginTop:"10px"},type:"submit",children:"Submit"})]})]})}}var it=st;class nt extends i.Component{constructor(){super(),this.getProjects=()=>{const{id:e}=this.props.user.user;l.a.get(`/api/projects/${e}`).then(e=>this.setState({...this.state,data:e.data}))},this.createNewProject=async e=>{e.preventDefault();const{file:t,imageFile:s,fileUrl:i,imageUrl:n,projectDescription:o,projectName:a}=this.state,r=this.props.user.user.id,{name:l}=this.state.file;if(void 0!=l){this.props.setIsLoading();const e=await this.props.addNewModel(t,`madmodels/projects/${r}/${a}/`),i=await e.action.payload.ref.getDownloadURL();var c=null;if(null!=s){const e=await this.props.addNewModel(s,`madmodels/projects/${r}/${a}/`);c=await e.action.payload.ref.getDownloadURL()}await this.addToDatabase(i,c),await this.getProjects(),this.props.resetView(),this.props.setIsLoading()}},this.setFileUrl=async e=>{this.setState({fileUrl:e})},this.setImageUrl=async e=>{this.setState({imageUrl:e})},this.handleFile=async e=>{const t=e.target.files[0];this.addFile(await t)},this.handlePhoto=async e=>{const t=e.target.files[0];this.addPhoto(await t)},this.fileHandler=async e=>{const{file:t,fileUrl:s,imageFile:i,imageUrl:n}=this.state;this.sendIntoSpace()},this.fileHandlerRemove=e=>{this.setState({file:null})},this.handleDelete=e=>{this.setState({imageFile:null})},this.sendIntoSpace=async()=>{const{file:e,imageFile:t,fileUrl:s,imageUrl:i,projectDescription:n,projectName:o}=this.state,{id:a}=this.props.username.user;this.state.fileUrl;this.props.setIsLoading();const r=await this.getFileUrl(e);if(this.setFileUrl(await r.getDownloadURL()),null!=t){const e=await this.getImUrl(t);this.setImageUrl(await e.getDownloadURL())}await this.addToDatabase(this.state.fileUrl,this.state.imageUrl),await this.getProjects(),this.props.setIsLoading(),this.props.resetView()},this.getImUrl=async e=>{const{id:t}=this.props.user.user,s=Ue.storage().ref(`madmodels/projects/${t}/`).child(e.name);return await s.put(e),console.log("image loaded"),s},this.getFileUrl=async e=>{const{id:t}=this.props.user.user,s=Ue.storage().ref(`madmodels/projects/${t}/`).child(e.name);return await s.put(e),console.log("file loaded"),s},this.removeFileFromSpace=async(e,t,s)=>{if(this.props.setIsLoading(),null!=e){const t=await Ue.storage().refFromURL(e);await t.delete().then(function(e){console.log("image deleted")}).catch(function(e){console.log("there was an error",e)})}if(null!=s){const e=await Ue.storage().refFromURL(s);await e.delete().then(function(e){console.log("image deleted")}).catch(function(e){console.log("there was an error",e)})}await l.a.delete(`/api/project/delete/${t}`),this.props.setIsLoading()},this.addToDatabase=async(e,t)=>{console.log("this is from addToDatabase function");const{projectDescription:s,projectName:i}=this.state,n=this.props.user.user.id,o=i,a=s,r=e,c=t;await l.a.post("/api/project/post",{id:n,name:o,description:a,firebase_url:r,firebase_url01:c,is_hidden:!1}).then(e=>e.status),await this.props.getProjects()},this.state={openEditModel:!1,data:[],fileUrl:null,file:null,previewImageFile:null,previewModelFile:null,imageFile:null,imageUrl:null,newItem:{},props:null,openAddProject:!1,projectName:"",projectDescription:""},this.setFileUrl=this.setFileUrl.bind(this),this.handleFile=this.handleFile.bind(this),this.addFile=this.addFile.bind(this),this.addPhoto=this.addPhoto.bind(this),this.handlePhoto=this.handlePhoto.bind(this),this.fileHandler=this.fileHandler.bind(this),this.addToDatabase=this.addToDatabase.bind(this),this.fileHandlerRemove=this.fileHandlerRemove.bind(this),this.removeFileFromSpace=this.removeFileFromSpace.bind(this),this.addNewProject=this.addNewProject.bind(this),this.getImUrl=this.getImUrl.bind(this),this.getFileUrl=this.getFileUrl.bind(this),this.handleAddText=this.handleAddText.bind(this),this.projectIsLiked=this.projectIsLiked.bind(this),this.getProjects=this.getProjects.bind(this),this.createNewProject=this.createNewProject.bind(this)}componentDidMount(){this.getProjects()}handleAddText(e,t){this.setState({[e]:t})}addFile(e){this.setState({file:e,previewModelFile:URL.createObjectURL(e)})}addPhoto(e){this.setState({imageFile:e,previewImageFile:URL.createObjectURL(e)})}handleChange(e){this.setState({file:e})}addNewProject(e){this.setState({openAddProject:!this.state.openAddProject})}projectIsLiked(e,t){try{return t.filter(t=>t.model_id===e)[0].model_id===e}catch(s){console.log("user does not like this project",s)}}render(){const{openAddProject:e,openEditModel:t,previewImageFile:s,previewModelFile:i,data:n,file:o}=this.state,{photo_url:a,user:r,showCreateProject:l}=this.props,c=n.map(e=>Object(y.jsx)(me,{data:e,name:e.name,img:e.firebase_url01,file:e.firebase_url,id:e.model_id,delete:this.deleteModel,removeFileFromSpace:this.removeFileFromSpace,openEdidModel:this.openEditModel,projectIsLiked:this.projectIsLiked,user_photo_url:a,current_user_name:r.user.user},e.model_id));return Object(y.jsxs)("div",{className:"collections",children:[l&&Object(y.jsx)(it,{resetView:this.props.resetView,handleFile:this.handleFile,handleAddText:this.handleAddText,handlePhoto:this.handlePhoto,previewImageFile:s,previewModelFile:i,file:o,sendIntoSpace:this.sendIntoSpace,createNewProject:this.createNewProject}),c]})}}var ot=Object(O.b)(function(e){return e},{getProjects:Ie,addNewModel:Re})(nt);s(120),s(121);Ue.firestore();class at extends i.Component{constructor(e){super(e),this.userInfoFromProps=()=>{const{email:e,photo:t,user:s,background_url:i,name:n,id:o,last_name:a}=this.props.user.user;this.setState({first_name:n,last_name:a,user_name:s,photoUrl:t,background_url:i,email:e,user_id:o})},this.launchNewPass=async()=>{this.setState({setPermission:!0});const{newPassword1:e,newPassword2:t,oldPassword:s}=this.state,{user:i}=this.props.user.user,n=i;e===t&&l.a.post("/auth/password",{newPassword1:e,newPassword2:t,oldPassword:s,user_name:n}).then(e=>{this.openChangePass(),this.props.hideView("showEditUserInfo")})},this.state={user_id:null,user_name:"",last_name:"",first_name:"",user:{},setPermission:!0,openNewPass:!1,oldPassword:"",newPassword1:"",newPassword2:""},this.addToDatabase=this.addToDatabase.bind(this),this.launchNewPass=this.launchNewPass.bind(this)}componentDidMount(){const{email:e,photo:t,user:s,background_url:i,name:n,id:o,last_name:a}=this.props.user.user;this.setState({first_name:n,last_name:a,user_name:s,photoUrl:t,background_url:i,email:e,user_id:o}),this.userInfoFromProps()}componentDidUpdate(){const{setPermission:e}=this.state;!0===e&&(this.props.updateUser(),this.userInfoFromProps(),this.setState({setPermission:!1}))}async addToDatabase(){const{first_name:e,last_name:t,email:s,user_id:i}=this.state;console.log("hit add to db func"),l.a.post(`/api/user/update/info/${i}`,{email:s,last_name:t,first_name:e,user_id:i}),await this.userInfoFromProps()}handleAddText(e,t){this.setState({[e]:t})}openChangePass(){this.setState({openNewPass:!this.state.openNewPass})}render(){const{email:e,name:t,user:s,photo:i}=this.props.user.user,{staticPhoto:n,file:o,openNewPass:a,last_name:r}=this.state;return Object(y.jsxs)("div",{className:"edit-user-info",children:[a?Object(y.jsxs)("div",{className:"change-pass-container",children:[Object(y.jsx)("input",{placeholder:"Old Password",onChange:e=>this.handleAddText("oldPassword",e.target.value)}),Object(y.jsx)("input",{placeholder:"New Password",onChange:e=>this.handleAddText("newPassword1",e.target.value)}),Object(y.jsx)("input",{placeholder:"Verify New Password",onChange:e=>this.handleAddText("newPassword2",e.target.value)}),Object(y.jsxs)("div",{className:"change-pass-button-flex",children:[Object(y.jsx)("button",{onClick:()=>{this.launchNewPass()},children:"submit"}),Object(y.jsx)("button",{onClick:()=>this.setState({openNewPass:!1}),children:"cancel"})]})]}):null,Object(y.jsxs)("section",{className:"edit-user-info-title",children:[Object(y.jsx)("svg",{onClick:()=>this.props.resetView(),className:"close-button",style:{color:"#fff",height:"35px",width:"35px",opacity:"60%",marginTop:"2px",marginBottom:"2px"},xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 20 20",fill:"currentColor",children:Object(y.jsx)("path",{fillRule:"evenodd",d:"M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z",clipRule:"evenodd"})}),Object(y.jsx)("h2",{children:"edit user info"})]}),Object(y.jsx)("section",{className:"",children:Object(y.jsxs)("div",{className:"input-list",children:[Object(y.jsx)("button",{onClick:()=>this.openChangePass(),children:"change password"}),Object(y.jsxs)("div",{className:"",children:[Object(y.jsx)("p",{className:"list-text",children:"First Name"}),Object(y.jsx)("input",{placeholder:t,onChange:e=>this.handleAddText("first_name",e.target.value)})]}),Object(y.jsxs)("div",{className:"",children:[Object(y.jsx)("p",{className:"list-text",children:"Last Name"}),Object(y.jsx)("input",{placeholder:r,onChange:e=>this.handleAddText("last_name",e.target.value)})]}),Object(y.jsxs)("div",{className:"",children:[Object(y.jsx)("p",{className:"list-text",children:"Email Address"}),Object(y.jsx)("input",{placeholder:e,onChange:e=>this.handleAddText("email",e.target.value)})]}),Object(y.jsx)("div",{className:"submit-row",children:Object(y.jsx)("button",{onClick:()=>this.addToDatabase(),className:"li-button",children:"submit"})})]})})]})}}var rt=Object(O.b)(function(e){return e},{updateUser:f,loginUser:b})(at);var lt=e=>{const{user:t,name:s,email:n}=e,[o,a]=Object(i.useState)(!1);return Object(y.jsxs)("div",{className:"user-info",children:[Object(y.jsxs)("div",{className:"user-info-title",children:[Object(y.jsx)("p",{}),Object(y.jsx)("h2",{className:"user-info-title-text",children:"My Info"})]}),Object(y.jsxs)("div",{className:"user-info-h2",children:[Object(y.jsx)("p",{className:"user-info-p",children:"name:"}),Object(y.jsx)("h2",{className:"text-element",children:s})]}),null!=n?Object(y.jsxs)("div",{className:"user-info-h2",children:[Object(y.jsx)("p",{className:"user-info-p",children:"email:"}),Object(y.jsx)("h2",{className:"text-element",children:n})]}):null,Object(y.jsxs)("div",{className:"user-info-h2",children:[Object(y.jsx)("p",{className:"user-info-p",children:"username:"}),Object(y.jsx)("h2",{className:"text-element",children:t})]})]})};class ct extends i.Component{constructor(e){super(e),this.state={}}render(){return Object(y.jsx)("div",{className:"sec-test-container"})}}var dt=ct;s(31);var ht=e=>{const{user_name:t,first_name:s,last_name:i,user_id:n}=e;return Object(y.jsx)(z.c,{to:`/viewuser/${n}`,children:Object(y.jsxs)("div",{className:"show-user",children:[Object(y.jsx)("p",{className:"admin-a",children:s+" "+i}),Object(y.jsx)("p",{className:"admin-a",children:t})]})})};var pt=e=>{const{unique_id:t,remount:s,date_created:i,id:n,last_visit:o}=e;return Object(y.jsxs)("div",{className:"traffic-display-unit",children:[Object(y.jsx)("p",{className:"traffic-text",children:i})," ",Object(y.jsx)("p",{className:"traffic-text",children:n}),"  ",Object(y.jsx)("p",{className:"traffic-text",children:t}),Object(y.jsx)("p",{className:"traffic-text",children:s}),Object(y.jsx)("p",{className:"traffic-text",children:o})]})};s(56);var mt=e=>{const{body:t,title:s,memo_id:n}=e;var[o,a]=Object(i.useState)(t),[r,c]=Object(i.useState)(!1);return Object(y.jsxs)("div",{className:"text-container",children:[Object(y.jsx)("input",{value:s,style:{width:"95%",marginBottom:"5px"}}),Object(y.jsx)("textarea",{name:"text",rows:"23",cols:"50",wrap:"soft",placeholder:"text",onChange:e=>a(e.target.value),value:o,className:"admin-memo-body",children:" "}),Object(y.jsx)("div",{className:"is-saving",children:!0===r?Object(y.jsx)("p",{style:{color:"#fff",fontWeight:"600"},children:"sending..."}):Object(y.jsx)("p",{style:{color:"#fff",fontWeight:"600"},onClick:()=>(c(!0),void l.a.post("/api/memo/update",{text:o,memo_id:n}).then(e=>{c(!1)})),children:"save"})})]})};var ut=e=>{const{messagecontent:t,email:s}=e;return Object(y.jsxs)("div",{className:"show-user",children:[Object(y.jsxs)("p",{children:["email",s]}),Object(y.jsx)("p",{className:"admin-a",children:t})]})},gt=s(19);const jt="ws://165.227.102.189:8000";new gt.w3cwebsocket(jt);class xt extends i.Component{constructor(){super(),this.addGeneral=()=>{const{generalContent:e}=this.state,t=e;l.a.post("/api/docs/post",{content:t,tag:"general"}).then(alert("new content has been added to General Information element")).catch(e=>{console.log("error",e)})},this.addAbout=()=>{const{aboutContent:e}=this.state,t=e;l.a.post("/api/docs/post",{content:t,tag:"about"}).then(alert("new content has been added to About Information element")).catch(e=>{console.log(e)})},this.hideDocGeneral=()=>{const{displayGeneral:e}=this.state,t=e;l.a.post("/api/docs/hide",{content:t,tag:"general"}).then(alert("display changed")).catch(e=>console.log(e))},this.hideMessages=()=>{this.setState({showMessages:!this.state.showMessages})},this.hideDocAbout=()=>{const{displayAbout:e}=this.state,t=e;l.a.post("/api/docs/hide",{content:t,tag:"about"}).then(alert("display changed")).catch(e=>console.log(e))},this.state={users:[],text:"test",generalContent:"",displayGeneral:!0,editGeneral:!1,aboutContent:"",displayAbout:!0,editAbout:!1,editUserInfo:!1,showMessages:!1,userMessages:[],showMemo:!1,memos:[],showTraffic:!1,traffic:[],pototypeBool:!1},this.handleAddText=this.handleAddText.bind(this),this.addGeneral=this.addGeneral.bind(this),this.addAbout=this.addAbout.bind(this),this.hideDocAbout=this.hideDocAbout.bind(this),this.hideDocGeneral=this.hideDocGeneral.bind(this),this.openEditAbout=this.openEditAbout.bind(this),this.openEditGeneral=this.openEditGeneral.bind(this),this.openEditUserInfo=this.openEditUserInfo.bind(this),this.hideMessages=this.hideMessages.bind(this)}componentDidMount(){l.a.get("/api/users/all").then(e=>{this.setState({users:e.data})}),l.a.get("/api/messages/user").then(e=>{this.setState({userMessages:e.data})}),l.a.get("/api/memos/get/all").then(e=>{this.setState({memos:e.data})})}handleAddText(e,t){this.setState({[e]:t})}openEditAbout(){this.setState({editAbout:!this.state.editAbout})}openEditGeneral(){this.setState({editGeneral:!this.state.editGeneral})}openEditUserInfo(){this.setState({editUserInfo:!this.state.editUserInfo})}resetView(){this.setState({showMemo:!1,showTraffic:!1})}changeView(e){switch(this.resetView(),e){case"showTraffic":this.setState({showTraffic:!0});break;case"showMemo":this.setState({showMemo:!0})}}render(){const{test:e,editAbout:t,editGeneral:s,editUserInfo:i,users:n,traffic:o,showMessages:a,userMessages:r,showTraffic:l,showMemo:c,memos:d,pototypeBool:h}=this.state,{photo:p,auth:m,name:u,is_admin:g,is_sudo:j}=this.props.user.user,x=n.map(e=>Object(y.jsx)(ht,{user_name:e.user_name,first_name:e.first_name,last_name:e.last_name,user_id:e.user_id})),b=o.filter(e=>null!=e.last_visit).map(e=>Object(y.jsx)(pt,{id:e.browser_id,date_created:e.date_created,unique_id:e.unique_id,remount:e.remount,last_visit:e.last_visit},e.browser_id)),w=r.map(e=>Object(y.jsx)(ut,{messagecontent:e.messagecontent,email:e.email},e.dum_id)),f=d.map(e=>Object(y.jsx)(mt,{body:e.body,title:e.title,memo_id:e.memo_id},e.memo_id));return Object(y.jsx)("div",{className:"admin-container",children:g?Object(y.jsxs)("div",{children:[Object(y.jsxs)("ul",{className:"admin-header-ul",children:[!0===j?Object(y.jsx)("li",{className:"add-doc-div-closed",onClick:()=>this.changeView("showMemo"),children:Object(y.jsx)("a",{children:"memo"})}):null,s?Object(y.jsxs)("li",{className:"add-doc-div",children:[Object(y.jsx)("a",{onClick:this.openEditGeneral,children:"edit general info"}),Object(y.jsx)("textarea",{onChange:e=>this.handleAddText("generalContent",e.target.value),className:"input",name:"text",rows:"14",cols:"100",wrap:"soft",children:" "}),Object(y.jsx)("button",{className:"text",onClick:this.addGeneral,children:"add to general content"}),Object(y.jsxs)("div",{className:"checkbox",style:{marginTop:"20px"},children:[Object(y.jsx)("input",{type:"checkbox",onChange:e=>this.handleAddText("displayGeneral",!this.state.displayGeneral)}),Object(y.jsx)("p",{style:{color:"#555"},children:"display this document?"}),Object(y.jsx)("button",{onClick:this.hideDocGeneral,children:"change"})]})]}):Object(y.jsx)("li",{className:"add-doc-div-closed",onClick:this.openEditGeneral,children:Object(y.jsx)("a",{children:"edit general info"})}),t?Object(y.jsxs)("li",{className:"add-doc-div",children:[Object(y.jsx)("a",{onClick:this.openEditAbout,className:"admin-a",children:"edit about info"}),Object(y.jsx)("textarea",{onChange:e=>this.handleAddText("aboutContent",e.target.value),className:"input",name:"text",rows:"14",cols:"100",wrap:"soft",children:" "}),Object(y.jsx)("button",{className:"text",onClick:this.addAbout,children:"add to about content"}),Object(y.jsxs)("div",{className:"checkbox",style:{marginTop:"20px"},children:[Object(y.jsx)("input",{type:"checkbox",onChange:e=>this.handleAddText("displayAbout",!this.state.displayAbout)}),Object(y.jsx)("p",{style:{color:"#555"},children:"display this document?"}),Object(y.jsx)("button",{onClick:this.hideDocAbout,children:"change"})]})]}):Object(y.jsx)("li",{className:"add-doc-div-closed",children:Object(y.jsx)("a",{onClick:this.openEditAbout,children:"edit about info"})}),Object(y.jsx)("li",{className:"add-doc-div-closed",children:Object(y.jsx)("a",{children:"notifications"})}),a?Object(y.jsxs)("li",{className:"add-doc-div",onClick:()=>this.hideMessages(),children:[Object(y.jsx)("a",{children:"messages"}),w]}):Object(y.jsx)("li",{className:"add-doc-div-closed",onClick:()=>this.hideMessages(),children:Object(y.jsx)("a",{children:"messages"})}),i?Object(y.jsxs)("li",{className:"add-doc-div",children:[Object(y.jsx)("a",{onClick:this.openEditUserInfo,className:"admin-a",children:"User Details"}),x]}):Object(y.jsx)("li",{className:"add-doc-div-closed",children:Object(y.jsx)("a",{onClick:this.openEditUserInfo,children:"User Details"})}),Object(y.jsx)("li",{className:"add-doc-div-closed",children:Object(y.jsx)("a",{children:"terms"})}),Object(y.jsx)("li",{className:"add-doc-div-closed",children:Object(y.jsx)("a",{children:"user project details"})}),Object(y.jsx)("li",{className:"add-doc-div-closed",onClick:()=>this.changeView("showTraffic"),children:Object(y.jsx)("a",{children:"show traffic"})})]}),Object(y.jsx)(z.c,{to:"/user",children:Object(y.jsx)("a",{children:"mypage"})}),!0===l?Object(y.jsxs)("div",{className:"display-traffic",children:[Object(y.jsxs)("div",{className:"traffic-display-unit",children:[Object(y.jsx)("p",{className:"traffic-text",children:"Date Created"}),Object(y.jsx)("p",{className:"traffic-text",children:"Browser ID"}),Object(y.jsx)("p",{className:"traffic-text",children:"Unique Id"}),Object(y.jsx)("p",{className:"traffic-text",children:"Re-mounts"}),Object(y.jsx)("p",{className:"traffic-text",children:"Last Visit"})]}),b]}):null,!0===c&&!0===j?f:null,Object(y.jsx)("section",{style:{height:"400px",width:"400px",backgroundColor:"#fff"},children:Object(y.jsx)(re,{params:"large_heart"})})]}):Object(y.jsx)(se.Route,{path:"/",component:Le})})}}var bt=Object(O.b)(function(e){return e},{updateUser:f,getProjects:Ie})(xt);s(57);var wt=e=>{const{photo_url:t,user_name:s,user_id:n,my_id:o}=e,[a,r]=Object(i.useState)(!1),[l,c]=Object(i.useState)(!1);Object(i.useEffect)(()=>{},[]);return Object(y.jsx)("div",{children:!1===l?Object(y.jsxs)("div",{className:"connection-container",children:[Object(y.jsxs)("div",{className:"photo-name-flex",children:[Object(y.jsx)(z.c,{to:`viewuser/${n}`,children:Object(y.jsx)("img",{src:t,className:"connection-photo"})}),Object(y.jsx)("p",{className:"connection-name",children:s})]}),!0===a?Object(y.jsxs)("ul",{className:"friend-options",children:[Object(y.jsxs)("div",{className:"friend-menu-row",onClick:()=>e.getUserID(n),children:[Object(y.jsxs)("svg",{xmlns:"http://www.w3.org/2000/svg",className:"friend-menu-icon",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:2,children:[Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"}),Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M21 12a9 9 0 11-18 0 9 9 0 0118 0z"})]}),Object(y.jsx)("p",{className:"friend-menu-text",children:"Game invite"})]}),Object(y.jsxs)("div",{className:"friend-menu-row",children:[Object(y.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",className:"friend-menu-icon",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:2,children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"})}),Object(y.jsx)("p",{className:"friend-menu-text",onClick:()=>((t,s)=>{e.removeConnection(t,s),c(!0)})(n,o),children:"remove friend"})]})]}):null,Object(y.jsx)("svg",{onClick:()=>r(!a),xmlns:"http://www.w3.org/2000/svg",className:"small-icon",style:{marginBottom:"10px",marginRight:"0px",height:"40px",width:"40px",opacity:"60%"},fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:2,children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"})})]}):null})};var ft=e=>{const[t,s]=Object(i.useState)(!1),{photo_url:n,user_name:o,user_id:a,my_id:r}=e;return Object(y.jsx)("div",{children:!1===t?Object(y.jsxs)("div",{className:"connection-container",children:[Object(y.jsxs)("div",{className:"photo-name-flex",children:[Object(y.jsx)(z.c,{to:`viewuser/${a}`,children:Object(y.jsx)("img",{src:n,className:"connection-photo"})}),Object(y.jsx)("p",{className:"connection-name",children:o})]}),Object(y.jsxs)("div",{className:"button-row",children:[Object(y.jsx)("p",{className:"connection-buttons",style:{marginBottom:"10px"},onClick:()=>((t,i)=>{e.removeConnection(t,i),s(!0)})(a,r),children:"Remove"}),Object(y.jsx)("p",{className:"connection-buttons-full",style:{marginBottom:"10px",marginRight:"10px"},onClick:()=>((t,i)=>{e.acceptRequest(t,i,n,o),s(!0)})(a,r),children:"Confirm"})]})]}):null})};s(125);const Ot=new gt.w3cwebsocket(jt);class vt extends i.Component{constructor(){super(),this.sockets=e=>{const{id:t}=this.props;Ot.onopen=()=>{},Ot.onmessage=e=>{const s=JSON.parse(e.data),{fromUser:i,friendObj:n}=s,{newFriends:o,friends:a}=this.state;if("new_friend"===s.type&&parseInt(i.toUser)===t&&(o.push(i),this.setState({newFriends:o})),"acceptedFriend"===s.type&&(parseInt(n.my_id)===t||parseInt(n.user_id)===t)){var r=[...a];r.push(n),this.setState({friends:r})}}},this.newFriendToSocked=e=>{Ot.send(JSON.stringify({type:"acceptedFriend",friendObj:e}))},this.getMyFriends=async()=>{const{id:e}=this.props;await l.a.get(`/api/join/friends/${e}`).then(e=>this.setState({friends:e.data})).catch(e=>console.log(e)),await l.a.get(`/api/get/pending/friends/${e}`).then(e=>this.setState({requests:e.data})).catch(e=>console.log("No pending requests",e)).return},this.startLoading=()=>{this.setState({isLoading:!this.state.isLoading})},this.acceptRequest=async(e,t,s,i)=>{const{friends:n}=this.state;var o={photo_url:s,user_id:e,my_id:t,user_name:i};[...n].push(o),this.newFriendToSocked(o);await l.a.post("/api/accept/connection",{from:e,to:t,yes:!0})},this.removeConnection=async(e,t)=>{console.log("hit remove",e,t),l.a.post("/api/remove/connection",{from:e,to:t})},this.state={requests:[],friends:[],isLoading:!1,newFriends:[],justAdded:[]},this.getMyFriends=this.getMyFriends.bind(this),this.acceptRequest=this.acceptRequest.bind(this),this.startLoading=this.startLoading.bind(this),this.removeConnection=this.removeConnection.bind(this)}componentDidMount(){this.sockets(),this.getMyFriends()}componentDidUpdate(){this.sockets()}pleaeLogin(){alert("please log in")}render(){const{requests:e,friends:t,isLoading:s,newFriends:i}=this.state,{id:n}=this.props,o=t.map(e=>Object(y.jsx)(wt,{photo_url:e.photo_url,user_id:e.user_id,user_name:e.user_name,my_id:n,removeConnection:this.removeConnection,getUserID:this.props.getUserID},e.user_id)),a=e.map(e=>Object(y.jsx)(ft,{photo_url:e.photo_url,user_name:e.user_name,user_id:e.user_id,my_id:n,removeConnection:this.removeConnection,acceptRequest:this.acceptRequest},e.user_id)),r=i.map(e=>Object(y.jsx)(ft,{photo_url:e.photo,user_name:e.user,user_id:e.id,my_id:n,removeConnection:this.removeConnection,acceptRequest:this.acceptRequest},e.id));return Object(y.jsxs)("div",{className:"friend-container",children:[!0===s?Object(y.jsx)(H,{}):null,r,a,o]})}}var kt=vt;s(126);var yt=e=>{const{isAccepted:t,photo:s,gameID:n}=e.challengeUser.gameInformation,[o,a]=Object(i.useState)(!1),[r,l]=Object(i.useState)(!1),c=(t,s)=>{e.changeGameID(t,s),l(!r),!0===t&&a(!0)};return Object(y.jsx)("div",{children:!1===r?Object(y.jsxs)("div",{className:"invite",children:[Object(y.jsx)("img",{src:s,className:"invite-photo",onClick:()=>{!1===o?l(!r):e.hideView("showGames")}}),!1===t&&!1===o?Object(y.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",className:"game-invite-icon",viewBox:"0 0 20 20",fill:"currentColor",children:Object(y.jsx)("path",{fillRule:"evenodd",d:"M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z",clipRule:"evenodd"})}):null]}):Object(y.jsxs)("div",{className:"invite choose-accept",children:[Object(y.jsx)("div",{className:"game-invite-title",children:Object(y.jsx)("p",{className:"game-invite-title-text",children:"Accept Challenge?"})}),Object(y.jsxs)("div",{className:"invite-yes-no",children:[Object(y.jsx)("p",{className:"choose-accept-text",onClick:()=>c(!0,n),children:"yes"}),Object(y.jsx)("p",{className:"choose-accept-text",onClick:()=>c(!1),children:"no"})]})]})})};s(127),s(128);var _t=e=>{const{image_url:t,user_id:s}=e,[n,o]=Object(i.useState)(!1),a=async i=>{switch(await o(!n),await e.setCurrentImg(null),i){case"delete":await e.removingPhoto(t),await e.getPhotos(s);break;case"update_photo":await l.a.post("/api/users/update/photo/",{image_url:t,user_id:s});break;case"update_background_img":await l.a.post("/api/user/update/background",{image_url:t,user_id:s})}};return Object(y.jsxs)("div",{className:"selected-img",children:[Object(y.jsxs)("header",{className:"selected-img-head",children:[Object(y.jsx)("svg",{onClick:()=>o(!n),xmlns:"http://www.w3.org/2000/svg",className:"friend-menu-icon",style:{position:"absolute",left:"0px"},fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:2,children:!1===n?Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"}):Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M6 18L18 6M6 6l12 12"})}),!0===n?Object(y.jsxs)("ul",{className:"friend-options",style:{width:"200px",height:"130px",left:"0px",top:"30px"},children:[Object(y.jsx)("li",{className:"friend-menu-row",style:{width:"200px"},onClick:()=>a("update_photo"),children:"Use as Profile Picture"}),Object(y.jsx)("li",{onClick:()=>a("update_background_img"),className:"friend-menu-row",style:{width:"200px"},children:"Use as Background"}),Object(y.jsx)("li",{onClick:()=>a("delete"),className:"friend-menu-row",style:{width:"200px"},children:"Delete Photo"})]}):null,Object(y.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",className:"friend-menu-icon",style:{position:"absolute",right:"0px"},fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:2,onClick:()=>e.setCurrentImg(null),children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M6 18L18 6M6 6l12 12"})})]}),Object(y.jsx)("img",{src:t,className:"prev-im-size"})]})};Ue.firestore();var Lt=Object(O.b)(function(e){return e},{addNewModel:Re})(e=>{const[t,s]=Object(i.useState)([]),[n,o]=Object(i.useState)([]),[a,r]=Object(i.useState)("photos"),[c,d]=Object(i.useState)(!1),[h,p]=Object(i.useState)(null),[m,u]=Object(i.useState)(null),[g,j]=Object(i.useState)({previewImageFile:null}),{id:x}=e,b=x;Object(i.useEffect)(()=>{l.a.get(`/api/photos/albums/${b}`).then(e=>{s(e.data)}),w(b)},[]);const w=async e=>{await l.a.get(`/api/user/photos/get/${e}`).then(e=>{o(e.data)})},f=async e=>{var t=!1;if(e.target.files[0]&&(t=!0),t)try{Me.a.imageFileResizer(e.target.files[0],400,267,"JPEG",100,0,e=>{console.log(e,"uri");const t=URL.createObjectURL(e);j({previewImageFile:t}),u(e)},"file",298,191)}catch(s){console.log(s)}},O=t.map(e=>Object(y.jsx)("p",{children:e.title},e.album_id)),v=n.map(e=>Object(y.jsx)("img",{src:e.image_url,style:{height:"75px",width:"75px"},onClick:()=>p(e.image_url)},e.photo_id));return Object(y.jsxs)("div",{className:"album-container",children:["photos"===a?Object(y.jsxs)("header",{className:"album-title-row",children:[Object(y.jsx)("p",{style:{float:"left",fontWeight:"700"},children:"Photos"}),Object(y.jsx)("input",{className:"user-photo-file-input",style:{position:"absolute",top:"5px",right:"10px",width:"20px",height:"20px"},type:"file",accept:"image/png,image/jpeg",onChange:e=>(async e=>{await f(e),await w(b)})(e)}),Object(y.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",className:"friend-menu-icon",style:{position:"absolute",top:"4px",right:"0px"},fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:2,children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"})})]}):Object(y.jsxs)("header",{className:"album-title-row",children:[Object(y.jsx)("p",{style:{float:"left",fontWeight:"700"},children:"Albums"}),Object(y.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",className:"friend-menu-icon",style:{float:"right",marginTop:"5px"},fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:2,onClick:()=>d(!c),children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M9 13h6m-3-3v6m-9 1V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"})})]}),Object(y.jsx)("header",{className:"album-title-row-bottom",children:Object(y.jsx)("p",{className:"photo-selector",onClick:()=>r("photos"),children:"Photos"})}),h?Object(y.jsx)(_t,{image_url:h,setCurrentImg:p,removingPhoto:e.removingPhoto,getPhotos:w,user_id:b}):null,"albums"===a?O:null,"photos"===a?v:null,null!=g.previewImageFile?Object(y.jsx)(ze,{previewImageFile:g.previewImageFile,photo_url:m,addPhoto:async()=>{const t=m,{id:s,user:i}=e.user.user;e.setIsLoading();const n=await e.addNewModel(t,`${i}/photos`),o=await n.action.payload.ref.getDownloadURL();await l.a.post("/api/photos/add/new",{album_id:null,id:s,image_url:o}),await w(s),await e.setIsLoading()},handleInput:(e,t)=>{j({[e]:t})}}):null]})});const Nt=new gt.w3cwebsocket(jt);Ue.firestore();class Ct extends i.Component{constructor(e){super(e),this.removingPhoto=async e=>{await this.deleteFromFirebase(e),console.log(" here is url ",e),await l.a.post("/api/photos/delete/",{image_url:e})},this.changeGameID=(e,t)=>{!0===e?this.setState({currentGame:t}):this.setState({challengeUser:null})},this.receiveInvite=()=>{Nt.onopen=()=>{},Nt.onmessage=e=>{const t=JSON.parse(e.data),{id:s}=this.props.user.user;"gameInvite"===t.type&&t.gameInformation.to===s&&this.setState({challengeUser:t})}},this.sendInvite=e=>{Nt.send(JSON.stringify({type:"gameInvite",gameInformation:e}))},this.getUniqueID=()=>{const e=()=>Math.floor(65536*(1+Math.random())).toString(16).substring(1);return e()+e()+"-"+e()},this.getUserID=e=>{const{id:t,photo:s}=this.props.user.user;var{currentGame:i}=this.state,n={to:e,from:t,isAccepted:!1,photo:s,gameID:i};this.sendInvite(n)},this.handleInput=(e,t)=>{this.setState({[e]:t})},this.setIsLoading=()=>{this.setState({isLoading:!this.state.isLoading})},this.state={previewImageFile:null,photo_url:null,photos:[],showPhotos:!1,items:[],user:{},friends:[],requests:[],showUserInfo:!0,showCollections:!0,showAdminPage:!1,showCreateProject:!1,showEditUserInto:!1,showGames:!1,showFriends:!1,profilePic:null,userName:null,isLoading:!1,setPermission:!0,challengeUser:null,currentGame:null},this.handleCollections=this.handleCollections.bind(this),this.hideView=this.hideView.bind(this),this.resetView=this.resetView.bind(this),this.pleaseLogin=this.pleaeLogin.bind(this),this.setIsLoading=this.setIsLoading.bind(this),this.deleteFromFirebase=this.deleteFromFirebase.bind(this),this.getUserID=this.getUserID.bind(this),this.receiveInvite=this.receiveInvite.bind(this)}componentDidMount(){this.receiveInvite(),this.setState({currentGame:this.getUniqueID()})}componentDidUpdate(){const{id:e,photo:t}=this.props.user.user;this.state.friends.length<1&&void 0!=e&&l.a.get(`/api/join/friends/${e}`).then(e=>this.setState({friends:e.data}))}resetView(){this.setState({showCollections:!0,showUserInfo:!1,showEditUserInto:!1,showCreateProject:!1,showGames:!1,showFriends:!1,showPhotos:!1})}handleCollections(){this.setState({isView:"isCollections"})}hideView(e){switch(this.receiveInvite(),this.resetView(),e){case"showUserInfo":this.setState({showUserInfo:!this.state.showUserInfo});break;case"showCollections":this.setState({showCollections:!0});break;case"showAdminPage":this.setState({showAdminPage:!this.state.showAdminPage});break;case"showEditUserInfo":this.setState({showEditUserInto:!0});break;case"showCreateProject":this.setState({showCreateProject:!0});break;case"showGames":this.setState({showGames:!0});break;case"showFriends":this.setState({showFriends:!0,showCollections:!1});case"showPhotos":this.setState({showPhotos:!0,showCollections:!1})}}deleteFromFirebase(e){Ue.storage().refFromURL(e).delete().then(function(e){console.log("image deleted")}).catch(function(e){console.log("there was an error")})}handleFriends(){this.setState({isView:"isFriends"})}pleaeLogin(){alert("please log in")}render(){const{photos:e,previewImageFile:t,photoUrl:s,showCollections:i,showUserInfo:n,items:o,isLoading:a,showCreateProject:r,showEditUserInto:l,showGames:c,showFriends:d,friends:h,requests:p,challengeUser:m,currentGame:u,currentPhoto:g,showPhotos:j}=this.state,{isLoggedIn:x}=this.props.user,{photo:b,auth:w,name:f,is_admin:O,background_url:v,user:k,email:_,id:L}=this.props.user.user;return Object(y.jsx)("div",{children:x?Object(y.jsxs)("div",{className:"user-page",children:[a?Object(y.jsx)(H,{}):null,Object(y.jsxs)("section",{className:"column1",children:[Object(y.jsx)("img",{src:v,className:"background-photo",onClick:()=>this.hideView("showPhotos")}),null===m?null:Object(y.jsx)(yt,{challengeUser:m,changeGameID:this.changeGameID,hideView:this.hideView}),Object(y.jsxs)("div",{className:"portrait",children:[Object(y.jsx)("img",{className:"profile-photo",src:b,alt:"photo",onClick:()=>this.hideView("showPhotos")}),Object(y.jsx)("h4",{className:"portrait-row",style:{textTransform:"none"},children:this.props.user.user.user}),Object(y.jsxs)("div",{className:"portrait-row",style:{flexWrap:"wrap",justifyContent:"center",width:"300px"},children:[Object(y.jsx)("div",{className:"user-buttons",style:{marginTop:"10px"},onClick:()=>this.hideView("showEditUserInfo"),children:Object(y.jsx)("p",{style:{marginTop:"5px"},children:"My Info"})}),Object(y.jsx)("div",{className:"user-buttons",style:{marginTop:"10px"},onClick:()=>this.hideView("showCreateProject"),children:Object(y.jsx)("p",{style:{marginTop:"5px"},children:"Create"})}),Object(y.jsx)("div",{className:"user-buttons",style:{marginTop:"10px"},onClick:()=>this.hideView("showGames"),children:Object(y.jsx)("p",{style:{marginTop:"5px"},children:"Games"})}),Object(y.jsx)("div",{className:"user-buttons",style:{marginTop:"10px"},onClick:()=>this.hideView("showPhotos"),children:Object(y.jsx)("p",{style:{marginTop:"5px"},children:"Photos"})}),Object(y.jsx)("div",{className:"user-buttons",style:{marginTop:"10px"},onClick:()=>this.hideView("showFriends"),children:Object(y.jsx)("p",{style:{marginTop:"5px"},children:"Friends"})}),Object(y.jsx)("div",{className:"user-buttons",style:{marginTop:"10px"},onClick:()=>this.hideView("showCollections"),children:Object(y.jsx)("p",{style:{marginTop:"5px"},children:"Collections"})})]}),Object(y.jsxs)("div",{className:"portrait-row",children:[O?Object(y.jsx)(z.c,{to:"/admin",style:{textDecoration:"none"},children:Object(y.jsx)("p",{className:"go-to-admin",children:"admin"})}):null,"  "]})]}),Object(y.jsx)(lt,{user:k,name:f,email:_,id:L,setIsLoading:this.setIsLoading,deleteFromFirebase:this.deleteFromFirebase})]}),Object(y.jsxs)("section",{className:"column2",children:[l&&Object(y.jsx)(rt,{setIsLoading:this.setIsLoading,resetView:this.resetView,updateUser:this.props.updateUser}),i&&Object(y.jsx)(ot,{setIsLoading:this.setIsLoading,photo_url:b,resetView:this.resetView,showCreateProject:r}),d&&Object(y.jsx)(kt,{id:L,getUserID:this.getUserID}),j&&Object(y.jsx)(Lt,{id:L,handlePhoto:this.handlePhoto,removingPhoto:this.removingPhoto,setIsLoading:this.setIsLoading})]})]}):Object(y.jsx)(se.Route,{path:"/",component:Le})})}}var It=Object(O.b)(function(e){return e},{getProjects:Ie,updateUser:f,addNewModel:Re})(Ct);s(129);class St extends i.Component{constructor(e){super(e),this.handleText=(e,t)=>{this.setState({[e]:t})},this.openSearch=()=>{this.setState({openSearchBar:!this.state.openSearchBar})},this.changeView=e=>{switch(this.resetView(),e){case"3D Models":this.setState({viewModels:!0});break;case"Videos":this.setState({viewVideos:!0})}},this.resetView=()=>{this.setState({viewModels:!1,viewVideos:!1})},this.state={data:[],names:[],videos:[],userId:null,likes:[],projectSearch:"",openSearchBar:!1,isLoading:!1,viewModels:!0,viewVideos:!1},this.addLike=this.addLike.bind(this),this.handleClick=this.handleClick.bind(this),this.updateState=this.updateState.bind(this),this.projectIsLiked=this.projectIsLiked.bind(this),this.handleText=this.handleText.bind(this),this.openSearch=this.openSearch.bind(this),this.setIsLoading=this.setIsLoading.bind(this)}componentDidMount(){this.updateState()}componentDidUpdate(){this.props.updateUser()}setIsLoading(){this.setState({isLoading:!this.state.isLoading})}async updateState(){await this.setIsLoading(),await l.a.get("/api/project/join").then(e=>this.setState({...this.state,data:e.data})),await l.a.get("/api/videos/get").then(e=>{this.setState({videos:e.data})}),await this.setIsLoading()}addLike(e){const{data:t}=this.state,{id:s}=this.props.user.user,i=s;console.log("this is add like()",i);const{userId:n}=this.state;if(void 0!=i){l.a.post("/api/projects/like",{user_id:i,params_id:e}).then(e=>{});for(let s in t)t[s].model_id===e&&console.log(s,t[s],t[s].likes)}else alert("please sign in")}handleClick(){this.addLike()}projectIsLiked(e,t){try{return t.filter(t=>t.model_id===e)[0].model_id===e}catch(s){console.log("user does not like this project",s)}}render(){const{data:e,projectSearch:t,openSearchBar:s,videos:i,isLoading:n}=this.state,{isLoggedIn:o}=this.props.user,{user_likes:a,model_likes:r,id:l}=this.props.user.user,c=e.filter(e=>e.name.toString().includes(t)).map(e=>Object(y.jsx)(me,{data:e,projectIsLiked:this.projectIsLiked,handleClick:this.handleClick,isLoggedIn:o,likes:e.likes,id:l,user_likes:a},e.model_id)),d=i.map(e=>Object(y.jsx)(je,{video_url:e.video_url,category:e.category,tag:e.tag,firebase_url:e.firebase_url,photo_url:e.photo_url,user_name:e.user_name,name:e.name,video_name:e.video_name},e.video_id));return Object(y.jsxs)("div",{children:[!0===n?Object(y.jsx)(H,{}):null,Object(y.jsxs)("header",{className:"sub-header",children:[Object(y.jsx)("a",{onClick:()=>this.changeView("3D Models"),className:`null ${!this.state.viewModels||"selected"}`,children:"3D Models"}),Object(y.jsx)("a",{onClick:()=>this.changeView("Videos"),className:`null ${!this.state.viewVideos||"selected"}`,children:"Videos"})]}),Object(y.jsxs)("div",{className:"explore-container",style:{paddingTop:"25px"},children:[Object(y.jsxs)("div",{className:`search-menu ${!o||"slide-over"} ${!!s||`search-menu-closed ${!o||"slide-over"}`}`,children:[Object(y.jsx)("svg",{onClick:()=>this.openSearch(),style:{width:"25px",opacity:".5"},xmlns:"http://www.w3.org/2000/svg",className:"h-6 w-6",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:2,d:"M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"})}),Object(y.jsx)("div",{className:`show-bar ${!s&&"dont-show-bar"}`,children:Object(y.jsx)("input",{placeholder:"search",type:"text",style:{height:"25px",width:"100px",borderRadius:"10px",color:"#fff",marginLeft:"10px"},onChange:e=>this.handleText("projectSearch",e.target.value)})})]}),!0===this.state.viewModels?c:null,!0===this.state.viewVideos?d:null]})]})}}var Mt=Object(O.b)(function(e){return e},{loginUser:b,updateUser:f})(St);s(130);var Ut=e=>{const{content:t,tag:s,display:i}=e.data;return Object(y.jsx)("div",{children:i?Object(y.jsxs)("div",{className:"doc-containers",children:[Object(y.jsx)("h4",{className:"about-h4",children:s}),Object(y.jsx)("span",{className:"h4-border"}),Object(y.jsx)("p",{className:"long-text",children:t})]}):null})};var Ft=e=>{const{link_text:t,link_to:s,description:i}=e;return Object(y.jsx)("div",{children:Object(y.jsx)("a",{href:`${s}`,style:{textDecoration:"none"},children:Object(y.jsx)("h4",{style:{textDecoration:"none",color:"blue"},children:t})})})};class Tt extends i.Component{constructor(){super(),this.state={link:"blender.org",linkText:"Blender",links:[]}}componentDidMount(){l.a.get("/api/links/get").then(e=>{this.setState({links:e.data})})}render(){const{links:e}=this.state,t=e.map(e=>Object(y.jsx)(Ft,{link_to:e.link_to,link_id:e.link_id,link_text:e.link_text,description:e.description}));return Object(y.jsx)("div",{className:"doc-containers",children:t})}}s(131);class Pt extends i.Component{constructor(){super(),this.changeView=e=>{this.setState({currentView:e})},this.state={currentView:"main",about:[],general:[]}}componentDidMount(){l.a.get("/api/documents/about").then(e=>{this.setState({about:e.data})}),l.a.get("/api/documents/general").then(e=>{this.setState({general:e.data})})}render(){const{about:e,general:t,currentView:s}=this.state,i=e.map(e=>Object(y.jsx)(Ut,{data:e},e.doc_id)),n=t.map(e=>Object(y.jsx)(Ut,{data:e},e.doc_id));return Object(y.jsxs)("div",{className:"about-container",children:[Object(y.jsxs)("header",{className:"sub-header",style:{position:"relative"},children:[Object(y.jsx)("a",{onClick:()=>this.changeView("main"),className:`${"main"===s?"selected":null}`,children:"main"}),Object(y.jsx)("a",{onClick:()=>this.changeView("links"),className:`${"links"===s?"selected":null}`,children:"links"})]}),Object(y.jsxs)("section",{children:["main"===s?Object(y.jsx)("div",{children:i}):null,"main"===s?Object(y.jsx)("div",{children:n}):null,"links"===s?Object(y.jsx)(Tt,{}):null]})]})}}var Dt=Object(O.b)(function(e){return e},{updateUser:f})(Pt);var Et=e=>Object(y.jsx)("div",{children:Object(y.jsx)("h3",{})});var Rt=Object(O.b)(function(e){return e},{registerUser:w})(e=>{const[t,s]=Object(i.useState)(""),[n,o]=Object(i.useState)(""),[a,r]=Object(i.useState)(""),[l,c]=Object(i.useState)(""),[d,h]=Object(i.useState)(""),[p,m]=Object(i.useState)(""),[u]=Object(i.useState)(!1),[g]=Object(i.useState)(!1),[j,x]=Object(i.useState)(!1),[b,w]=Object(i.useState)(!1);function f(){w(!b)}return Object(i.useEffect)(()=>{console.log("props from Register",e)},[]),Object(y.jsx)("div",{className:"signup-menu",children:b?Object(y.jsx)(G,{handleOpenIAgree:f}):Object(y.jsxs)("div",{children:[Object(y.jsx)("h2",{style:{color:"#555"},children:"Register"}),Object(y.jsxs)("div",{className:"one-line",children:[Object(y.jsx)("p",{className:"text",children:"Username"}),Object(y.jsx)("input",{value:t,onChange:e=>s(e.target.value)})]}),Object(y.jsxs)("div",{className:"one-line",children:[Object(y.jsx)("p",{className:"text",children:"Password"}),Object(y.jsx)("input",{className:"text-bar",value:n,onChange:e=>o(e.target.value)})]}),Object(y.jsxs)("div",{className:"one-line",children:[Object(y.jsx)("p",{className:"text",children:"Email"}),Object(y.jsx)("input",{value:a,onChange:e=>r(e.target.value)})]}),Object(y.jsxs)("div",{className:"one-line",children:[Object(y.jsx)("p",{className:"text",children:"First Name"}),Object(y.jsx)("input",{value:l,onChange:e=>c(e.target.value)})]}),Object(y.jsxs)("div",{className:"one-line",children:[Object(y.jsx)("p",{className:"text",children:"Last Name"}),Object(y.jsx)("input",{value:l,onChange:e=>c(e.target.value)})]}),Object(y.jsxs)("div",{className:"agreement-check",children:[Object(y.jsx)("input",{type:"checkbox",style:{marginRight:"20px",marginTop:"5px"},onChange:e=>x(!j)}),Object(y.jsx)("h5",{style:{color:"blue",fontWeight:"200"},onClick:f,children:"terms of use"})]}),j?Object(y.jsx)("div",{className:"register-link",onClick:function(){e.registerUser(t,n,a,l,u,g)},children:Object(y.jsx)("h4",{children:"signup now"})}):Object(y.jsx)("div",{className:"register-link",onClick:function(){alert("please agree to conditions")},children:Object(y.jsx)("h4",{children:"signup now"})})]})})});const At=()=>Object(y.jsx)("path",{fillRule:"evenodd",d:"M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z",clipRule:"evenodd"}),Bt=()=>Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"}),zt=e=>{let{openMenu:t,setOpenMenu:s}=e;return Object(y.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",className:"edit-photo-button",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",strokeWidth:2,onClick:()=>s(!t),children:!1===t?Object(y.jsx)(Bt,{}):Object(y.jsx)(At,{})})},Vt=v.b.section`
+    position:relative;
+`,Gt=v.b.div`
+    position: absolute;
+    height: 90px;
+    width: 150px;
+    right: 0px;
+    top: 50px;
+    border-radius: 5px;
+    background-color: #6495ed;
+    z-index: 1;
+    text-align: left;
+`,$t=v.b.div`
+    height: 40px;
+    width: 250px;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+
+    p {font-size:16px;}
+`,Wt=v.b.img`
+    width:100%;
+    height:auto;
+    margin:0px;
+    
+    @media (max-width:680px) {
+        width:100%;
+    }
+`;var Ht=Object(O.b)(e=>e)(e=>{const{url:t,maker_id:s,id:n,model_id:o,getImages:a,main_image_url:r,stateHandler:c}=e,[d,h]=Object(i.useState)(!1);return Object(y.jsxs)(Vt,{children:[s===n&&null!=t&&Object(y.jsx)(zt,{openMenu:d,setOpenMenu:h}),!0===d&&s===n?Object(y.jsxs)(Gt,{style:{top:"3  0px",left:"15px",height:"85px",width:"210px"},children:[Object(y.jsxs)($t,{onClick:()=>(h(!d),void l.a.post("/api/projects/photos/change/main/",{model_id:o,url:t})),children:[Object(y.jsx)(S,{}),Object(y.jsx)("p",{children:"Display As Main Photo"})]}),Object(y.jsxs)($t,{onClick:()=>(async e=>{try{await Ee(e)}catch(s){const e=null;l.a.post("/api/projects/photos/change/main/",{model_id:o,gone:e})}const t=await l.a.post("/api/projects/photos/delete/",{url:e,main_image_url:r,model_id:o}).then(e=>{c("selectedPhoto",null)});return await a(),h(!d),t})(t),children:[Object(y.jsx)(N,{}),Object(y.jsx)("p",{children:"Delete This Photo"})]})]}):null,Object(y.jsx)(Wt,{src:t})]})});s(58);const Jt=v.b.div`
+    position: relative;
+    height: 120px;
+    width: 90%;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+    align-content: stretch;
+    border-bottom: solid 1px #95b3ec;
+`,qt=v.b.img`
+    height: 50px;
+    width: 50px;
+    margin-bottom: 50px;
+    margin-left: 10px;
+    border-radius: 5px;
+`,Yt=v.b.section`
+    width: 500px;
+    height: 100%;
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: baseline;
+    overflow: scroll;
+`,Xt=v.b.div`
+    height: 85%;
+    width: 100%;
+    text-align: left;
+    color: #555;
+    font-size: 18px;
+    font-weight: 200;
+    letter-spacing: 1px;
+    line-height: calc(1ex / 0.32);
+    text-shadow:0 0 0 #000, 0 0 1px transparent;
+`;var Kt=Object(O.b)(function(e){return e},{updateUser:f})(e=>{const{content:t,photo_url:s,user_id:n,comment_id:o}=e,{id:a}=e.user.user,[r,c]=Object(i.useState)(!1);return Object(y.jsxs)(Jt,{children:[Object(y.jsx)(qt,{src:s}),Object(y.jsxs)(Yt,{children:[Object(y.jsx)(Xt,{children:Object(y.jsx)("p",{children:t})}),void 0!=a&&a===n&&Object(y.jsx)(L,{onClick:()=>c(!r)}),r&&Object(y.jsx)("ul",{className:"friend-options",style:{width:"130px",height:"40px"},children:Object(y.jsxs)("li",{className:"friend-menu-row",onClick:()=>(async()=>{n===a&&await l.a.delete(`/api/comments/user/delete/${o}`).then(()=>{e.getComments()})})(),children:[Object(y.jsx)(N,{}),Object(y.jsx)("p",{className:"friend-menu-text",children:"Delete post"})]})})]})]})});class Qt extends i.Component{constructor(){super(),this.state={text:""},this.handleText=this.handleText.bind(this),this.sendPost=this.sendPost.bind(this)}sendPost(e){const{text:t}=this.state,{id:s,model_id:i,user:n}=this.props;!0===e?l.a.post("/api/comments/create",{id:s,model_id:i,user:n,text:t}).then(this.props.getComments):this.props.plsSignIn()}handleText(e,t){this.setState({[e]:t})}render(){const{isLoggedIn:e}=this.props;return Object(y.jsxs)("div",{className:"create-post",style:{minHeight:"100px"},children:[Object(y.jsx)("textarea",{className:"comment-text-input post-input",value:this.state.text,name:"text",rows:"5",cols:"50",wrap:"soft",onChange:e=>this.handleText("text",e.target.value),children:" "}),Object(y.jsx)("a",{className:"add-button",onClick:()=>this.sendPost(e),style:{marginLeft:"200px"},children:"send"})]})}}var Zt=e=>{const{url:t,isLoggedIn:s}=e;return Object(y.jsx)("div",{children:s?Object(y.jsx)("a",{className:"dark-text",href:t,target:"_blank",rel:"noopener noreferrer",children:"Download"}):Object(y.jsx)("a",{className:"dark-text",onClick:e.plsSignIn,children:"Download"})})};const es=v.b.div`
+    height: 70px;
+    width: 680px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+
+    h4 {
+        width:100%;
+        font-size:12px;
+    }
+
+    a{
+        font-style: italic;
+        text-decoration:none;
+        font-size:10px;
+    }
+    
+    img {
+        height: 95%;
+        with:auto;
+        border-radius: 50%;
+        margin:10px;
+    }
+
+    @media (max-width:680px) {
+        width: 100%;
+`;var ts=e=>{const{info:t,userInfo:s}=e,{user_name:i,photo_url:n}=s;return Object(y.jsxs)(es,{children:[Object(y.jsx)("img",{src:n}),Object(y.jsxs)("h4",{children:[t.name,Object(y.jsx)("br",{style:{paddingBottom:"10px"}}),Object(y.jsxs)(z.c,{to:`/viewuser/${s.user_id}`,children:["by ",i]})]})]})};const ss=v.b.h4`
+    padding-top: 15px;
+    padding-bottom: 5px;
+    color: ${e=>{let{viewFiles:t}=e;return t?"#fff":"#555"}};
+    margin-left: 10px;
+`,is=v.b.p`
+    margin:auto;
+    margin-left:0px;
+    color:${e=>{let{condition:t}=e;return t?"#fff":"#555"}};
+`,ns={backgroundColor:"#3c598e"};var os=e=>{const{state:t,isLoggedIn:s,authorized:i,clickLike:n,changeView:o}=e,{viewFiles:a,myLike:r,viewComments:l,viewEditProject:c,addedToFavorites:d,viewInfo:h}=t;return Object(y.jsxs)("ul",{children:[Object(y.jsx)("li",{style:a?ns:null,onClick:()=>o("viewFiles"),children:Object(y.jsx)(ss,{viewFiles:a,children:"Download Files"})}),Object(y.jsxs)("li",{onClick:n,children:[!0===s&&!0===r?Object(y.jsx)(C,{}):Object(y.jsx)(I,{}),Object(y.jsx)(is,{children:"Like"})]}),Object(y.jsxs)("li",{style:l?ns:null,onClick:()=>o("viewComments"),children:[Object(y.jsx)(re,{params:"comments"}),Object(y.jsx)(is,{condition:l,children:"Comments"})]}),Object(y.jsxs)("li",{style:c||d?ns:null,onClick:()=>o(!0===i()?"viewEditProject":"viewInfo"),children:[!0===i()?Object(y.jsx)(re,{params:"edit_project",fill:"none",stroke:"currentColor"}):Object(y.jsx)(re,{params:"folder",fill:"none",stroke:"currentColor"}),Object(y.jsx)(is,{condition:c||d,children:i()?"Edit Project":"Add to Favorites"})]}),Object(y.jsxs)("li",{style:h?ns:null,onClick:()=>o("viewInfo"),children:[Object(y.jsx)(re,{params:"info",fill:"none",stroke:"currentColor"}),Object(y.jsx)(is,{condition:h,children:"Info"})]})]})};const as=v.b.section`
+    margin: none;
+    min-height: 90vh;
+    min-width: 100vw;
+    // min-width:100px;
+    background-size: cover; 
+    background-position: center bottom;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    background-repeat: no-repeat;
+    background-position: right top;
+
+        section {
+            margin: auto;
+            margin-bottom: 0px;
+            margin-top: 0px;
+            width: 660px;
+            display: flex;
+            justify-content: center;
+
+            @media (max-width:680px) {
+                width:300px;
+            }
+    }
+`,rs=v.b.div`
+    min-height:45px;
+    width:100%;
+    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+
+    div {
+        height: 50px;
+        width:50px;
+        overflow:hidden;
+
+        img {
+            height: 50px;
+            width:auto;
+        }
+    }
+
+    @media (max-width:680px) {
+        width: 100%;
+    }
+`,ls=v.b.section`
+    margin: 0px;
+    width: 660px;
+    display: flex;
+    justify-content: center;
+
+    section {
+        width: 440px;
+        min-height: 100px;
+        margin: 0px;
+        display: flex;
+
+        @media (max-width:680px) {
+            width:300px;
+        }
+    }
+
+    ul {
+        width: 220px;
+
+        li {
+            background-color: #fff;
+            display: flex;
+            height: 59px;
+            width: 100%;
+            border:solid 1px rgb(85, 85, 85,.3) ;
+        }
+        
+        @media (max-width:680px) {
+            width:100%;
+        }
+    }
+
+    @media (max-width:680px) {
+        min-height: 200px;
+        flex-direction: column;
+        width: 300px;
+        
+        img {
+        }
+    }
+`,cs=v.b.div`
+    margin: auto;
+    margin-top: 0px;
+    min-height: 300px;
+    width: 660px;
+    border-radius: .1%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @media (max-width:680px) {
+        width:300px;
+    }
+`,ds=v.b.header`
+    background-color: #6495ed;
+    opacity: .8;
+    height: 32px;
+    width: 100%;
+
+    @media (max-width:680px) {
+        width:300px;
+    }
+`,hs=v.b.p`
+    padding: 5px;
+    color: #222; 
+    background: #fff;
+    text-align: left;
+    line-height: 1.5;
+    font-size: 16px;
+    margin-bottom: 1em to 1.5em;
+    font-family: 'Inter', sans-serif;
+
+    @media (max-width: 680px) {
+        width: 100%;
+    }
+`;class ps extends i.Component{constructor(){super(),this.changeView=e=>{window.scrollTo({top:1200,behavior:"smooth"}),this.resetView(),this.setState({[e]:!0})},this.plsSignIn=()=>{window.scrollTo(0,0),this.props.remoteLogin(!0)},this.likeFunc=async()=>{const{id:e}=this.props.user.user,{model_id:t}=this.state,s=e;await l.a.post("/api/projects/like",{user_id:s,model_id:t}),this.setState({myLike:!this.state.myLike})},this.clickLike=()=>{const{isLoggedIn:e,loginOpen:t}=this.props.user;!0===e?this.likeFunc():(window.scrollTo(0,0),this.props.remoteLogin(!t))},this.setIsDeleted=()=>{this.setState({isDeleted:!this.state.isDeleted})},this.stateHandler=(e,t)=>{this.setState({[e]:t})},this.highLightedPhoto=e=>{this.setState({selectedPhoto:e})},this.state={maker_id:null,model_id:null,dlUrl:"",info:[],userInfo:[],comments:[],files:[],viewFiles:!0,viewComments:!1,viewDetails:!1,viewEditProject:!1,viewInfo:!1,addedToFavorites:!1,myLike:!1,allLikes:[],modelImages:[],isDeleted:!1,selectedPhoto:null},this.changeView=this.changeView.bind(this),this.getDetails=this.getDetails.bind(this),this.plsSignIn=this.plsSignIn.bind(this),this.getComments=this.getComments.bind(this),this.likeFunc=this.likeFunc.bind(this),this.clickLike=this.clickLike.bind(this),this.setIsDeleted=this.setIsDeleted.bind(this),this.getImages=this.getImages.bind(this),this.highLightedPhoto=this.highLightedPhoto.bind(this),this.stateHandler=this.stateHandler.bind(this)}componentDidMount(){this.getDetails().then(e=>console.log(e)),this.getImages(),this.getComments()}componentDidUpdate(e){const{model_id:t}=this.props.match.params;e.match.params.model_id!==t&&(this.getDetails(),this.getImages())}async getImages(){const{model_id:e}=this.props.match.params;l.a.get(`/api/project/photos/get/${e}`).then(e=>{this.setState({modelImages:e.data})})}async getDetails(){const{model_id:e}=this.props.match.params;await l.a.get(`/api/projects/id/${e}`).then(t=>{const{user_id:s}=t.data[0];l.a.get(`/api/users/${s}`).then(i=>{const{id:n}=this.props.user.user,{isLoggedIn:o}=this.props.user;l.a.get(`/api/project/photos/get/${e}`).then(n=>{this.setState({maker_id:s,model_id:e,dlUrl:t.data.firebase_url,info:t.data[0],userInfo:i.data[0],modelImages:n.data,selectedPhoto:t.data[0].firebase_url01})}),!0===o&&l.a.post("/api/project/getLike",{id:n,model_id:e}).then(e=>{null!=e.data.user_id&&this.setState({myLike:!0})})})}).catch(e=>{this.props.history.push("/404")}),await l.a.get("")}async getComments(){const{model_id:e}=this.props.match.params;l.a.get(`/api/comments/id/${e}`).then(e=>{this.setState({comments:e.data})})}resetView(){this.setState({viewFiles:!1,viewComments:!1,viewDetails:!1,viewEditProject:!1,viewInfo:!1,addedToFavorites:!1})}render(){const{comments:e,model_id:t,maker_id:s,myLike:i}=this.state,{info:n,userInfo:o,viewComments:a,viewFiles:r,viewInfo:l,viewEditProject:c,modelImages:d,isDeleted:h,selectedPhoto:p,addedToFavorites:m}=this.state,{isLoggedIn:u}=this.props.user,{user:g,id:j}=this.props.user.user,x=()=>{if(u&&j===s)return!0},b=e.map(e=>Object(y.jsx)(Kt,{content:e.text,model_id:e.model_id,date_created:e.date_created,photo_url:e.photo_url,comment_id:e.comment_id,user_id:e.user_id,user_name:e.user_name,getComments:this.getComments},e.comment_id)),w=d.map((e,t)=>Object(y.jsx)("div",{onClick:()=>this.highLightedPhoto(e.photo_url),children:Object(y.jsx)("img",{src:e.photo_url})},t));return Object(y.jsx)(y.Fragment,{children:h?Object(y.jsx)(se.Route,{path:"/",component:Le}):Object(y.jsxs)(as,{children:[Object(y.jsx)("section",{children:Object(y.jsx)(ts,{userInfo:o,info:n,maker_id:s})}),Object(y.jsx)("section",{children:Object(y.jsx)(rs,{children:w})}),Object(y.jsxs)(ls,{children:[Object(y.jsx)(Ht,{model_id:t,url:p,maker_id:s,id:j,getImages:this.getImages,main_image_url:this.state.info.firebase_url01,stateHandler:this.stateHandler}),Object(y.jsx)(os,{state:this.state,authorized:x,isLoggedIn:u,clickLike:this.clickLike,changeView:this.changeView})]}),Object(y.jsxs)(cs,{children:[Object(y.jsx)(ds,{children:Object(y.jsxs)("h3",{children:[a&&"Comments",r&&"Download File",l&&"Information",c&&"Edit Project"]})}),a&&Object(y.jsx)(Qt,{user:g,id:j,isLoggedIn:u,model_id:t,plsSignIn:this.plsSignIn,getComments:this.getComments},j),a&&b,r&&Object(y.jsx)(Zt,{url:n.firebase_url,isLoggedIn:u,plsSignIn:this.plsSignIn}),c&&x()&&Object(y.jsx)(Ge,{info:n,model_id:t,user_id:j,user_name:g,modelImages:d,getDetails:this.getDetails,setIsDeleted:this.setIsDeleted,getImages:this.getImages},t),l&&Object(y.jsx)(hs,{children:n.description})]})]})})}}var ms=Object(O.b)(function(e){return e},{loginUser:b,updateUser:f,remoteLogin:x})(ps),us=s(65),gs=s.n(us);s(132);Object(O.b)(function(e){return e},{getModels:ae,updateUser:f})(e=>{const{category:t,img:s,firebase_url:n,firebase_url01:o,name:a,description:r,user_name:c,model_likes:d,model_id:h,photo_url:p,user_id:m,likes:u}=e.data,{handleClick:g,id:j,user_likes:x}=e.user.user,{isLoggedIn:b}=e.user,[w,f]=Object(i.useState)(0),[O,v]=Object(i.useState)(!1);Object(i.useEffect)(()=>{f(u),e.updateUser()},[]);const k=()=>{alert("please sign in")},_=async e=>{console.log("params",e),l.a.get(`/api/like/update/${e}`).then(e=>{const{likes:t}=e.data[0];console.log(t),f(t)})},L=()=>{!0===b&&void 0!=j?(async(e,t)=>{const s=e,i=t;await l.a.post("/api/projects/like",{user_id:s,model_id:i}),await _(i),await v(!O),await N(O)})(j,h):k()},N=t=>!0===e.projectIsLiked(h,x);return Object(y.jsxs)("div",{className:"project-container",children:[N(),Object(y.jsxs)("div",{children:[Object(y.jsxs)("div",{className:"photo-title-border",children:[Object(y.jsx)("img",{src:(()=>{const{user_photo_url:t}=e;return void 0!=p?p:t})(),className:"project-user-photo"}),Object(y.jsxs)("p",{className:"dark-text",children:[a,Object(y.jsx)("br",{}),Object(y.jsxs)("p",{className:"usr-nm-txt",children:["by ",(()=>{const{current_user_name:t}=e;return void 0!=c?c:t})()]})]})]}),Object(y.jsx)("div",{className:"image-div",children:Object(y.jsx)(z.c,{to:`/projectdetails/${h}`,children:Object(y.jsx)("img",{className:"model-photo",src:o})})})]}),Object(y.jsx)("div",{children:Object(y.jsxs)("div",{className:"download-container",children:[b?Object(y.jsx)("a",{href:`${n}`,children:Object(y.jsx)("svg",{className:"small-icon",style:{marginLeft:"10px",marginRight:"5px",height:"50px",width:"50px",opacity:"60%"},xmlns:"http://www.w3.org/2000/svg",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:2,d:"M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"})})}):Object(y.jsx)("a",{onClick:k,children:Object(y.jsx)("svg",{className:"small-icon",style:{marginLeft:"10px",marginRight:"5px",height:"50px",width:"50px",opacity:"60%"},xmlns:"http://www.w3.org/2000/svg",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:2,d:"M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"})})}),b?Object(y.jsx)("a",{className:"project-text",href:`${n}`,children:"download"}):Object(y.jsx)("a",{className:"project-text",onClick:k,children:"download"}),Object(y.jsx)("div",{className:"like-share",children:Object(y.jsxs)("div",{children:[Object(y.jsxs)("div",{className:"like-share-box",style:{borderBottom:"1px solid #555"},children:[!1===N()?Object(y.jsx)("svg",{className:"small-icon small-icon-tweaks",onClick:()=>L(),xmlns:"http://www.w3.org/2000/svg",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:"2",d:"M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"})}):Object(y.jsx)("svg",{className:"small-icon small-icon-tweaks",onClick:L,xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 20 20",fill:"currentColor",children:Object(y.jsx)("path",{fillRule:"evenodd",d:"M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z",clipRule:"evenodd"})}),Object(y.jsx)("p",{className:"like-share-text",style:{marginLeft:"10px"},children:w})]}),Object(y.jsxs)("div",{className:"like-share-box",children:[Object(y.jsx)("svg",{className:"small-icon small-icon-tweaks",xmlns:"http://www.w3.org/2000/svg",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:"2",d:"M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"})}),Object(y.jsx)("p",{className:"like-share-text",style:{marginLeft:"10px"},children:"share"})]})]})})]})})]})}),s(133),s(59),s(32),s(134);var js=e=>{Object(i.useEffect)(()=>{o===a&&s(!0)},[]);const[t,s]=Object(i.useState)(!1);const{content:n,loggedInUser:o,user_id:a,photo_url:r,date_created:l}=e,c=l.split("T"),d=c[0].split("-"),h=c[1].split(":");return Object(y.jsxs)("div",{className:`over-flow ${o===a||"user-over-flow"}`,style:{},children:[Object(y.jsxs)("div",{className:`my-message-container ${o===a||"user-message-container"}`,children:[Object(y.jsx)("p",{className:"time-stamp",style:{textTransform:"none",fontSize:"xx-small"},children:["January","February","March","April","May","June","July","August","September","October","November","December"][parseInt(d[1])-1]+" "+d[2]+" "+d[0]}),Object(y.jsx)("p",{style:{textTransform:"none"},children:n}),Object(y.jsx)("p",{style:{textTransform:"none",fontSize:"xx-small"},children:(p=h,p[0]>12?p[0]-12+":"+p[1]+" pm":p[0]+":"+p[1]+" am")})]}),Object(y.jsx)("div",{children:Object(y.jsx)("img",{src:r,className:`my-message-photo ${!!t||"my-message-photo"}`})})]});var p};const xs=new gt.w3cwebsocket(jt);class bs extends i.Component{constructor(){super(),this.getConnected=async e=>{const{user_id:t,conversation_id:s}=this.props,{id:i}=this.props.user.user;xs.onopen=()=>{console.log("WebSocket Client Connected")},xs.onmessage=e=>{const n=JSON.parse(e.data),{from:o,to:a}=n;"message"===n.type&&n.conversation_id===s&&this.props.checkForExistingMessage(i,t)}},this.sendToSockets=(e,t,s)=>{const{messages:i,loggedInUser:n}=this.state,{user:o,photo:a,id:r}=this.props.user.user;xs.send(JSON.stringify({type:"message",conversation_id:t,msg:e,to:s,user:o,from:r,photo:a}))},this.executeSendMessage=async()=>{const{text:e}=this.state,{id:t,photo:s}=this.props.user.user,i=this.props.user_id,n=t,{isLoggedIn:o}=this.props.user,{currentUserMessage:a}=this.props;if(0!=o&&void 0!=t)if(null===a)await l.a.post("/api/conversation/new",{user_id:n,to_user:i,text:e}).then(t=>{this.sendToSockets(e,t.data.conversation_id,i)});else{const t=a[0].conversation_id;await l.a.post("/api/conversation/user/new",{conversation_id:t,user_id:n,text:e,to_user:i}),this.sendToSockets(e,t,i,n),this.setState({text:""})}},this.processMessages=()=>{const{currentUserMessage:e,user_id:t}=this.props;if(null!=e){return e.map(e=>Object(y.jsx)(js,{loggedInUser:t,content:e.content,user_id:e.user_id,photo_url:e.photo_url,user_name:e.user_name,date_created:e.date_created},e.message_id))}},this.state={currentConversationId:null,newMessages:[],text:""},this.handleText=this.handleText.bind(this),this.executeSendMessage=this.executeSendMessage.bind(this)}componentDidMount(){const{currentUserMessage:e}=this.props;this.getConnected()}handleText(e,t){this.setState({[e]:t})}render(){const{user_name:e}=this.props;return Object(y.jsxs)("div",{className:"create-message-container",children:[Object(y.jsxs)("h4",{className:"message-board-title",style:{width:"105%",left:"-5px",textTransform:"none"},children:[e,Object(y.jsx)("div",{style:{position:"absolute",right:"0px",top:"0px"},onClick:()=>this.props.openMessageBox(),children:Object(y.jsx)(re,{params:"largeX",fill:"#fff"})})]}),Object(y.jsxs)("section",{className:"create-message-input",children:[Object(y.jsx)("textarea",{className:"message-input",style:{width:"250px",marginLeft:"10px",maxHeight:"50px"},value:this.state.text,name:"text",rows:"5",cols:"50",wrap:"soft",onChange:e=>this.handleText("text",e.target.value),children:" "}),Object(y.jsx)("button",{style:{position:"relative",width:"50px"},onClick:()=>this.executeSendMessage(),children:Object(y.jsx)("div",{children:Object(y.jsx)(re,{params:"send",fill:"none",stroke:"#fff",style:{position:"absolute",top:"-10",left:"-10"}})})})]}),Object(y.jsx)("section",{className:"thread-layout",children:Object(y.jsx)("div",{children:this.processMessages()})})]})}}var ws=Object(O.b)(function(e){return e},{updateUser:f})(bs);const fs=new gt.w3cwebsocket(jt);class Os extends i.Component{constructor(e){super(e),this.getConnectionStatus=async()=>{const{id:e}=this.props.user.user,{isLoggedIn:t}=this.props.user,{user_id:s}=this.props.match.params;void 0!=e&&!0===t&&(await l.a.post("/api/get/friend/status",{id:e,user_id:s}).then(e=>this.setState({friendShipInfo:e.data})).catch(e=>{console.log("no connection yet",e)}),this.checkForExistingMessage(e,s))},this.checkForExistingMessage=async(e,t)=>{await l.a.post("/api/conversation/exists",{id:e,user_id:t}).then(e=>{const{messages:t,conversation_id:s}=e.data;this.setState({currentUserMessage:t,conversation_id:s})}).catch(e=>console.log("there are no conversations yet",e))},this.openMessageBox=()=>{const{isLoggedIn:e}=this.props.user,{id:t}=this.props.user.user;void 0!=t&&!0===e?this.setState({openMessageBox:!this.state.openMessageBox}):this.props.remoteLogin(!0)},this.sendConnectInvite=()=>{const{id:e}=this.props.user.user,{isLoggedIn:t}=this.props.user,{user_id:s}=this.state.user[0],i=s;this.setState({friendShipInfo:!0}),void 0!=e&&!0===t?(l.a.post("/api/friends/add",{id:e,friend_id:i,no:false}).then().catch(e=>console.log(e)),this.sendToSocket()):this.props.remoteLogin()},this.sendToSocket=()=>{const{user_id:e}=this.props.match.params,{id:t,photo:s,user:i}=this.props.user.user,n={toUser:e,id:t,photo:s,user:i};fs.send(JSON.stringify({type:"new_friend",fromUser:n}))},this.setIsLoading=()=>{this.setState({isLoading:!this.state.isLoading})},this.state={currentUserMessage:null,conversation_id:null,items:[],user:[],showUserInfo:!0,showCollections:!1,showAdminPage:!1,showCreateProject:!1,showEditUserInto:!1,profilePic:null,userName:null,user_id:null,isLoading:!1,setPermission:!0,openMessageBox:!1,friendShipInfo:null},this.setIsLoading=this.setIsLoading.bind(this),this.openMessageBox=this.openMessageBox.bind(this),this.checkForExistingMessage=this.checkForExistingMessage.bind(this),this.getUserAndProjects=this.getUserAndProjects.bind(this)}componentDidMount(){const{user_id:e}=this.props.match.params;this.props.updateUser(),this.getUserAndProjects(e),l.a.get(`/api/users/${e}`).then(e=>this.setState({user:e.data}))}componentDidUpdate(){!1===this.props.user.isLoggedIn&&null!=this.state.conversation_id&&this.setState({currentUserMessage:null,conversation_id:null,friendShipInfo:null}),null===this.state.friendShipInfo&&this.getConnectionStatus()}getUserAndProjects(e){l.a.get(`/api/user/projects/get/${e}`).then(e=>{this.setState({...this.state,items:e.data})})}projectIsLiked(e,t){try{return t.filter(t=>t.model_id===e)[0].model_id===e}catch(s){}}handleFriends(){this.setState({isView:"isFriends"})}render(){const{items:e,isLoading:t,user:s,currentUserMessage:i,conversation_id:n}=this.state,{id:o}=this.props.user.user,{isLoggedIn:a}=this.props.user,{user_id:r}=this.props.match.params,l=s.map(e=>Object(y.jsx)(ws,{user_id:e.user_id,user_name:e.user_name,conversation_id:n,currentUserMessage:i,pleaeLogin:this.pleaseLogin,openMessageBox:this.openMessageBox,sendToSocket:this.sendToSocket,checkForExistingMessage:this.checkForExistingMessage},e.user_id)),c=s.map(e=>Object(y.jsx)("h4",{className:"portrait-row",style:{textTransform:"none"},children:e.user_name},e.user_id)),d=s.map(e=>Object(y.jsx)("img",{src:e.background_url,className:"background-photo"},e.user_id)),h=s.map(e=>Object(y.jsx)("img",{className:"profile-photo",src:e.photo_url,alt:"photo"},e.user_id)),p=e.map(e=>Object(y.jsx)(me,{model_id:e.model_id,data:e,projectIsLiked:this.projectIsLiked},e.model_id));return Object(y.jsxs)("div",{className:"user-page",children:[this.state.openMessageBox&&a?l:null,t?Object(y.jsx)(H,{}):null,Object(y.jsxs)("section",{className:"column1",children:[d,Object(y.jsxs)("div",{className:"portrait",children:[h,c,Object(y.jsxs)("div",{className:"portrait-row",children:[parseInt(r)===o||Object(y.jsx)("p",{className:"user-buttons",style:{marginTop:"30px",paddingTop:"3px"},onClick:()=>this.openMessageBox(),children:"Message"}),!0===this.props.user.isLoggedIn&&1!=this.state.friendShipInfo?Object(y.jsx)("p",{className:"user-buttons",style:{marginTop:"30px",paddingTop:"3px"},onClick:()=>this.sendConnectInvite(),children:"Connect"}):null]})]})]}),Object(y.jsx)("section",{className:"column2",children:Object(y.jsx)("div",{className:"collections",children:p})})]})}}var vs=Object(O.b)(function(e){return e},{updateUser:f,remoteLogin:x})(Os);var ks=e=>{Object(i.useEffect)(()=>{o===a&&s(!0)},[]);const[t,s]=Object(i.useState)(!1);const{content:n,loggedInUser:o,user_id:a,photo_url:r,date_created:l}=e,c=l.split("T"),d=c[0].split("-"),h=c[1].split(":");return Object(y.jsxs)("div",{className:`over-flow ${o===a||"user-over-flow"}`,children:[Object(y.jsxs)("div",{className:`my-message-container ${o===a||"user-message-container"}`,children:[Object(y.jsx)("p",{className:"time-stamp",style:{textTransform:"none",fontSize:"xx-small"},children:["January","February","March","April","May","June","July","August","September","October","November","December"][parseInt(d[1])-1]+" "+d[2]+" "+d[0]}),Object(y.jsx)("p",{style:{textTransform:"none"},children:n}),Object(y.jsx)("p",{style:{textTransform:"none",fontSize:"xx-small"},children:(p=h,p[0]>12?p[0]-12+":"+p[1]+" pm":p[0]+":"+p[1]+" am")})]}),Object(y.jsx)("div",{children:Object(y.jsx)("img",{src:r,className:`my-message-photo ${!!t||"my-message-photo"}`})})]});var p};class ys extends i.Component{constructor(e){super(e),this.executeSendMessage=async()=>{const{text:e}=this.state,{user_id:t,conversation_id:s,to_user:i}=this.props;await l.a.post("/api/conversation/user/new",{conversation_id:s,user_id:t,text:e,to_user:i}),await this.props.sendToSockets(e,s,i),this.setState({text:""})},this.state={text:""},this.handleText=this.handleText.bind(this),this.executeSendMessage=this.executeSendMessage.bind(this)}handleText(e,t){this.setState({[e]:t})}render(){const{isLoggedIn:e,conversation_id:t}=this.props;return Object(y.jsx)("div",{children:null!=t?Object(y.jsxs)("div",{className:"input-background",style:{maxHeight:"50px"},children:[Object(y.jsx)("textarea",{className:" message-input",style:{minHeight:"45px"},value:this.state.text,name:"text",rows:"5",cols:"50",wrap:"soft",onChange:e=>this.handleText("text",e.target.value),children:" "}),Object(y.jsx)("div",{className:"send-message-button",onClick:()=>this.executeSendMessage(),style:{position:"absolute",height:"30px",width:"30px"},children:Object(y.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",className:"h-6 w-6",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:Object(y.jsx)("path",{"stroke-linecap":"round","stroke-linejoin":"round","stroke-width":"2",d:"M9 5l7 7-7 7"})})})]}):null})}}s(135);var _s=e=>{const{photo_url:t,conversation_id:s,selectedMessage:n,user_name:o,read_by:a,id:r,to_user:c}=e,[d,h]=Object(i.useState)(!1);Object(i.useEffect)(()=>{},[]);return Object(y.jsxs)("div",{className:`selected-message-container ${n!=s||"selected-message-selected"}`,onClick:()=>(t=>{e.openMessage(t,c),l.a.post("api/messages/read/",{cancel:null,conversation_id:s}),h(!0)})(s),children:[Object(y.jsx)("img",{className:"senders-photo",src:t}),a===r&&!1===d?Object(y.jsx)("p",{className:"new-message",children:"new!"}):null,Object(y.jsx)("p",{className:"display-name-message",children:o})]})};const Ls=new gt.w3cwebsocket(jt);class Ns extends i.Component{constructor(){super(),this.getConnected=e=>{const{conversation_id:t}=this.state;Ls.onopen=()=>{},Ls.onmessage=s=>{const i=JSON.parse(s.data);i.to===this.state.loggedInUser&&this.setState({gotNewMessage:!0}),"message"===i.type&&e===t&&(this.openMessage(t),this.setState(e=>({newMessages:[...this.state.newMessages,{msg:i.msg,user:i.user}]})))}},this.sendToSockets=(e,t,s)=>{const{messages:i,loggedInUser:n}=this.state,{user:o}=this.props.user.user;Ls.send(JSON.stringify({type:"message",conversation_id:t,msg:e,to:s}))},this.getMessages=()=>{const{id:e}=this.props.user.user,t=e;l.a.get(`/api/conversations/${t}`).then(t=>{this.setState({messages:t.data,loggedInUser:e})})},this.openMessage=async(e,t)=>{await l.a.get(`/api/conversation/messages/get/${e}`).then(s=>{this.setState({thread:s.data,conversation_id:e,openContacts:!1,to_user:t})}),await this.getConnected(e)},this.expandMessageBoard=()=>{this.setState({expand:!this.state.expand,gotNewMessage:!1})},this.setOpenContacts=()=>{this.setState({openContacts:!this.state.openContacts})},this.state={messages:[],newMessages:[],thread:[],conversation_id:null,gotMessages:!1,expand:!1,openContacts:!0,challengeUser:null,gotNewMessage:!1},this.getMessages=this.getMessages.bind(this),this.openMessage=this.openMessage.bind(this),this.expandMessageBoard=this.expandMessageBoard.bind(this),this.setOpenContacts=this.setOpenContacts.bind(this),this.sendToSockets=this.sendToSockets.bind(this),this.getConnected=this.getConnected.bind(this)}componentDidMount(){this.props.updateUser(),this.getConnected()}componentDidUpdate(e,t){const{gotMessages:s}=this.state,{id:i}=this.props.user.user,{isLoggedIn:n}=this.props.user;!1===s&&void 0!=i&&(this.setState({gotMessages:!0}),this.getMessages()),!1===n&&!0===s&&this.setState({messages:[],thread:[],conversation_id:null,gotMessages:!1,expand:!1})}render(){const{messages:e,thread:t,selectedMessage:s,conversation_id:i,expand:n,gotMessages:o,openContacts:a,newMessages:r,to_user:l}=this.state,{id:c}=this.props.user.user,{isLoggedIn:d}=this.props.user,h=c,p=e.map(e=>Object(y.jsx)(_s,{selectedMessage:i,conversation_name:e.conversation_name,conversation_id:e.conversation_id,to_user:e.to_user,openMessage:this.openMessage,photo_url:e.photo_url,user_name:e.user_name,read_by:e.read_by,id:c,getConnected:this.getConnected},e.conversation_id)),m=t.map(e=>Object(y.jsx)(ks,{loggedInUser:h,content:e.content,user_id:e.user_id,photo_url:e.photo_url,user_name:e.user_name,date_created:e.date_created},e.message_id));return Object(y.jsx)("div",{children:d?n?Object(y.jsxs)("div",{className:"message-board ",children:[Object(y.jsxs)("div",{className:"message-board-title",children:[Object(y.jsx)("svg",{className:"close-message-box",onClick:()=>this.expandMessageBoard(),style:{color:"#fff",height:"35px",width:"35px",opacity:"60%",marginTop:"2px",marginBottom:"2px"},xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 20 20",fill:"currentColor",children:Object(y.jsx)("path",{fillRule:"evenodd",d:"M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z",clipRule:"evenodd"})}),Object(y.jsx)("h2",{className:"hide-message-h2",style:{textTransform:"none"},children:"Messages"}),Object(y.jsx)("svg",{className:`toggle-contacts ${!!a||"toggle-contacts-rotated"}`,style:{height:"35px",width:"35px",opacity:"60%",marginTop:"2px",marginBottom:"2px"},xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 20 20",fill:"currentColor",onClick:()=>this.setOpenContacts(),children:Object(y.jsx)("path",{d:"M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z"})})]}),Object(y.jsx)("section",{children:Object(y.jsx)("div",{className:"dash",children:p})}),Object(y.jsx)("section",{className:`mobile-dash ${!a&&"mobile-dash-closed"}`,children:Object(y.jsx)("div",{children:!0===a?p:null})}),Object(y.jsx)("section",{className:" board",children:Object(y.jsx)("div",{children:m})}),Object(y.jsx)("section",{children:Object(y.jsx)("div",{className:"text-input-container",children:Object(y.jsx)(ys,{id:"EndOfMessages",conversation_id:this.state.conversation_id,user_id:h,to_user:l,openMessage:this.openMessage,sendToSockets:this.sendToSockets})})})]}):Object(y.jsxs)("div",{className:"message-board-closed",onClick:()=>this.expandMessageBoard(),children:[!0===this.state.gotNewMessage?Object(y.jsx)("p",{className:"new-message",children:"new!"}):null,Object(y.jsx)("svg",{xmlns:"http://www.w3.org/2000/svg",style:{width:"25px",opacity:".5"},className:"h-6 w-6",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor",children:Object(y.jsx)("path",{strokeLinecap:"round",strokeLinejoin:"round",strokeWidth:2,d:"M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"})})]}):null})}}var Cs=Object(O.b)(function(e){return e},{updateUser:f})(Ns),Is=Object(y.jsxs)(se.Switch,{children:[Object(y.jsx)(se.Route,{exact:!0,path:"/",component:Le}),Object(y.jsx)(se.Route,{path:"/viewuser/:user_id",component:vs}),Object(y.jsx)(se.Route,{path:"/explore",component:Mt}),Object(y.jsx)(se.Route,{path:"/group",component:Ne}),Object(y.jsx)(se.Route,{path:"/user",component:It}),Object(y.jsx)(se.Route,{path:"/about",component:Dt}),Object(y.jsx)(se.Route,{path:"/sites",component:Et}),Object(y.jsx)(se.Route,{path:"/register",component:Rt}),Object(y.jsx)(se.Route,{path:"/projectdetails/:model_id",component:ms}),Object(y.jsx)(se.Route,{path:"/securitytest",component:dt}),Object(y.jsx)(se.Route,{path:"/header",component:te}),Object(y.jsx)(se.Route,{path:"/agreement",component:G}),Object(y.jsx)(se.Route,{path:"/admin",component:bt}),Object(y.jsx)(se.Route,{path:"/messages/:user_id",component:gs.a}),Object(y.jsx)(se.Route,{path:"/usermessages",component:Cs})]});s(136),s.p;class Ss extends i.Component{constructor(){super(),this.inputHandler=(e,t)=>{this.setState({[e]:t})},this.sendMessageToAdmin=()=>{const{messageContent:e,email:t,visited:s}=this.state;l.a.post("/api/messages/user/add",{messageContent:e,email:t,visited:s}),this.setContactAdmin(),this.showGreeting()},this.state={showActualMessage:!0,contactAdmin:!1,messageContent:"Enter Message",email:"email address",name:"your name",welcomeGreeting:"Welcome to MadModels3d. Click here if you have questions or comments",responseGreeting:"Your message has been sent. I'll get back to you asap"},this.hideGreeting=this.hideGreeting.bind(this)}componentDidMount(){void 0!==localStorage.visited&&this.setState({visited:localStorage.visited})}showGreeting(){const{responseGreeting:e}=this.state;this.setState({showActualMessage:!0,welcomeGreeting:e})}hideGreeting(){this.setState({showActualMessage:!1})}setContactAdmin(){this.setState({contactAdmin:!this.state.contactAdmin})}render(){const{showActualMessage:e,contactAdmin:t,messageContent:s,email:i,welcomeGreeting:n,responseGreeting:o,name:a}=this.state;return Object(y.jsxs)("div",{children:[Object(y.jsxs)("div",{className:"messages-container",children:[!1===t?Object(y.jsxs)("div",{onMouseEnter:this.hideGreeting,onClick:this.hideGreeting,className:`actual-message ${!!e||"hidden"}`,children:[Object(y.jsx)("p",{className:"contact-admin-text",children:n}),Object(y.jsx)("img",{src:"https://firebasestorage.googleapis.com/v0/b/bcwb-879fa.appspot.com/o/data%2Fimages%2Fc_demontigny?alt=media&token=782d914e-3cda-4402-bd68-aa30ed57b6bd",className:"admin-message-photo"})]}):null,!1===t?Object(y.jsx)("svg",{onClick:()=>this.setContactAdmin(),xmlns:"http://www.w3.org/2000/svg",class:"admin-message-icon",fill:"none",viewBox:"0 0 24 24",stroke:"currentColor","stroke-width":"2",children:Object(y.jsx)("path",{"stroke-linecap":"round","stroke-linejoin":"round",d:"M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"})}):null]}),!0===t?Object(y.jsx)("div",{className:"send-message",children:Object(y.jsxs)("div",{className:"send-message-title",children:[Object(y.jsx)("h2",{style:{textTransform:"none"},children:"Contact"}),Object(y.jsx)("svg",{onClick:()=>this.setContactAdmin(),className:"contact-admin-close-button",xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 20 20",fill:"currentColor",children:Object(y.jsx)("path",{fillRule:"evenodd",d:"M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z",clipRule:"evenodd"})}),Object(y.jsx)("textarea",{onChange:e=>this.inputHandler("name",e.target.value),style:{minHeight:"25px",marginTop:"40px"},name:"text",rows:"0",cols:"35",wrap:"soft",placeholder:a}),Object(y.jsx)("textarea",{onChange:e=>this.inputHandler("email",e.target.value),style:{minHeight:"25px",marginTop:"10px"},name:"text",rows:"0",cols:"35",wrap:"soft",placeholder:i}),Object(y.jsx)("textarea",{onChange:e=>this.inputHandler("messageContent",e.target.value),style:{minHeight:"45px",marginTop:"10px"},name:"text",rows:"5",cols:"35",wrap:"soft",placeholder:s}),Object(y.jsx)("div",{className:"contact-admin-send-button",children:Object(y.jsx)("p",{style:{color:"#fff"},onClick:()=>this.sendMessageToAdmin(),children:"send"})})]})}):null]})}}var Ms=Ss;var Us=function(){return Object(y.jsx)(z.b,{children:Object(y.jsxs)("div",{className:"App",children:[Object(y.jsx)(te,{}),Object(y.jsx)(Ms,{}),Is]})})};var Fs=e=>{e&&e instanceof Function&&s.e(17).then(s.bind(null,155)).then(t=>{let{getCLS:s,getFID:i,getFCP:n,getLCP:o,getTTFB:a}=t;s(e),i(e),n(e),o(e),a(e)})},Ts=s(27),Ps=s(66),Ds=s(67);const Es=Object(Ts.combineReducers)({user:function(){let e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:c,t=arguments.length>1?arguments[1]:void 0;switch(t.type){case j:return{...e,loginOpen:t.payload};case u+"_PENDING":return{...e,isLoading:!0};case u+"_FULFILLED":return{...e,user:t.payload.data};case u+"_REJECTED":return{...e,isLoading:!1,loginError:!0};case d+"_PENDING":return{...e,isLoading:!0};case d+"_FULFILLED":return{...e,user:t.payload.data,isLoggedIn:!0,isLoading:!1};case d+"_REJECTED":return alert("Your username or password is incorrect"),{...e,loginError:!0,isLoading:!1};case h+"_FULFILLED":return{...e,user:t.payload.data,isLoggedIn:!1};case p+"_PENDING":return{...e,isLoading:!0};case p+"_FULFILLED":return{...e,user:t.payload.data,isLoggedIn:!0,isLoading:!1};case p+"_REJECTED":return alert("Either the username you have chosen is already being used or consists of more than 12 characters. Please choose a defferent username"),{...e,isLoggedIn:!1,isLoading:!1};case m+"_FULFILLED":return{...e,user:t.payload.data,isLoggedIn:!0};case m+"_REJECTED":return{...e,isLoggedIn:!1};case g+"_PENDING":return{...e,isLoading:!0};case g+"_FULFILLED":return{...e,user:t.payload.data,isLoggedIn:!0,isLoading:!1};case g+"_REJECTED":return{...e,loginError:!0,isLoading:!1};default:return e}},models:function(){let e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:ie,t=arguments.length>1?arguments[1]:void 0;switch(t.type){case ne+"_PENDING":return{...e,isloading:!0};case ne+"_FULFILLED":return{...e,isloading:!1,models:t.payload.data};case ne+"_REJECTED":return{...e,isloading:!1};case oe+"_PENDING":return{...e,isloading:!0};case oe+"_FULFILLED":return{...e,isloading:!1,featured:t.payload.data};case oe+"_REJECTED":return{...e,isloading:!1};default:return e}},firebase:function(){let e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:Fe,t=arguments.length>1?arguments[1]:void 0;switch(t.type){case De+"_PENDING":return{...e,isLoading:!0};case De+"_FULFILLED":return{...e,isLoading:!1,url:t.payload};case De+"_REJECTED":return{...e,isLoading:!1,error:!0};case Te+"_PENDING":return{...e,isLoading:!0};case Te+"_FULFILLED":return{...e,isLoading:!1};case Te+"_REJECTED":return{...e,isLoading:!1,error:!0};case Pe+"_PENDING":return{...e,isLoading:!0};case Pe+"_FULFILLED":return{...e,isLoading:!1,url:t.payload};case Pe+"_REJECTED":return{...e,isLoading:!1,error:!0};default:return e}}});var Rs=Object(Ts.createStore)(Es,Object(Ds.composeWithDevTools)(Object(Ts.applyMiddleware)(Ps.a)));const As=z.a;a.a.render(Object(y.jsx)(n.a.StrictMode,{children:Object(y.jsx)(As,{children:Object(y.jsx)(O.a,{store:Rs,children:Object(y.jsx)(Us,{})})})}),document.getElementById("root")),Fs()}]),[[137,15,16]]]);
+//# sourceMappingURL=main.2d0e2975.chunk.js.map
