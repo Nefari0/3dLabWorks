@@ -22,7 +22,6 @@ export const DetailsView = styled.section`
             width: 660px;
             display: flex;
             justify-content: center;
-            background-color:pink;
 
             @media (max-width:680px) {
                 width:300px;
@@ -38,10 +37,10 @@ export const ThumbnailViewer = styled.div`
     flex-wrap: wrap;
 
     div {
-        // min-height:100%;
         height: 50px;
         width:50px;
         overflow:hidden;
+
         img {
             height: 50px;
             width:auto;
@@ -55,14 +54,9 @@ export const ThumbnailViewer = styled.div`
 
 export const DetailContainer = styled.section`
     margin: 0px;
-    // margin-bottom: 0px;
-    // margin-top: 5px;
-    // height: 312px;
     width: 660px;
-    // width:95%;
     display: flex;
     justify-content: center;
-            background-color:yellow;
 
     section {
         width: 440px;
@@ -76,9 +70,7 @@ export const DetailContainer = styled.section`
     }
 
     ul {
-        // width: 95%;
         width: 220px;
-        background-color:purple;
 
         li {
             background-color: #fff;
@@ -132,12 +124,12 @@ export const CommentBoxHeader = styled.header`
 export const DescriptionText = styled.p`
     padding: 5px;
     color: #222; 
-background: #fff;
+    background: #fff;
     text-align: left;
     line-height: 1.5;
     font-size: 16px;
     margin-bottom: 1em to 1.5em;
-      font-family: 'Inter', sans-serif;
+    font-family: 'Inter', sans-serif;
 
     @media (max-width: 680px) {
         width: 100%;
