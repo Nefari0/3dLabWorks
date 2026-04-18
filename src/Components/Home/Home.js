@@ -7,12 +7,12 @@ import { getModels,getFeatured } from '../../ducks/modelsReducer'
 import Loading from '../Loading/Loading'
 import Project from '../Project/Project'
 import VideoPlayer from '../VideoPlayer/VideoPlayer'
+import TextCube from './DisplayWheel/wheel.component'
 import { RightArrow,LeftArrow } from '../SVG2'
 import { 
     Hero,
-    HeroH2,
     CarouselRail,
-    Carousel,
+    // Carousel,
     RightSlideButton, 
     LeftSlideButton
 } from './home.styles'
@@ -28,7 +28,7 @@ class Home extends Component {
             password:'',
             userLikes:null,
             loading:false,
-            positionCounter:0
+            yRotation:0
         }
         this.stateHandler = this.stateHandler.bind(this)
         this.projectIsLiked = this.projectIsLiked.bind(this)
@@ -74,10 +74,12 @@ class Home extends Component {
 
     render() {
 
-        const { loading, videos, positionCounter } = this.state
+        const { loading, videos } = this.state
         const { isLoggedIn } = this.props.user
         const { user_likes,model_likes } = this.props.user.user
         const { featured } = this.props.models
+        const mergedItems = [...videos, ...featured];
+        const cubeRotations = 360 / mergedItems.length;
 
         const mappedModels = featured.map(element => {
             return <Project data={element} key={element.model_id} projectIsLiked={this.projectIsLiked} isLoggedIn={isLoggedIn} model_likes={model_likes} likes={element.likes} id={element.user_id} user_likes={user_likes} />
@@ -92,29 +94,33 @@ class Home extends Component {
                     
                     {!loading ? true : <Loading />}
 
-                    <HeroH2 className="">IMAGINE IT - BUILD IT.</HeroH2>
+                    {/* <HeroH2 className="">IMAGINE IT - BUILD IT.</HeroH2> */}
 
                     <CarouselRail>
-                        <Carousel positionCounter={positionCounter}>
-                            {mappedVideos}
-                            {mappedModels}
-                        </Carousel>
+                        <TextCube 
+                            state={this.state} props={this.props}
+                            setState={this.setState}
+                            projectIsLiked={this.projectIsLiked}
+                            mappedModels={mappedModels}
+                            mappedVideos={mappedVideos}
+                            cubeRotations={cubeRotations}
+                        />
                     </CarouselRail>
+                 
+                    <LeftSlideButton
+                    onClick={() => this.stateHandler('yRotation',this.state.yRotation+cubeRotations)}
+                    >
+                        {LeftArrow()}
+                    </LeftSlideButton>
+                
 
-                    {positionCounter < 0 && 
-                        <LeftSlideButton onClick={() => this.stateHandler('positionCounter',positionCounter+260)}>
-                            {LeftArrow()}
-                        </LeftSlideButton>
-                    }
-
-                    {positionCounter >= ((mappedVideos.length+mappedModels.length-2)*-260) && 
-                        <RightSlideButton 
-                            onClick={() => this.stateHandler('positionCounter',positionCounter-260)}
-                        >
-                            {RightArrow()}
-                        </RightSlideButton>
-                    }
-
+                
+                    <RightSlideButton 
+                        onClick={() => this.stateHandler('yRotation',this.state.yRotation-cubeRotations)}
+                    >
+                        {RightArrow()}
+                    </RightSlideButton>
+                    
                 </Hero>
         )
     }

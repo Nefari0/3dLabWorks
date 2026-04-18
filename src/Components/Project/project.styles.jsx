@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const ProjectContainer = styled.section`
+export const ProjectContainer = styled.div`
     border-radius: 5px;
     margin: 10px;
     height: 350px;
