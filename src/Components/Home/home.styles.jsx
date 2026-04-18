@@ -32,42 +32,26 @@ export const Hero = styled.section`
     }
 `
 
-export const HeroH2 = styled.h2`
-    width: 100vw;
-
-    @media (max-width:400px) {display:none;}
-    @media (max-height:525px) {display:none;}
-`
-
 export const CarouselRail = styled.section`
     position:relative;
     height: 70vh;
     width: 100vw;
-    // display: flex;
-    // align-items: center;
+    display: flex;
     overflow: none;
     z-index: 0;
-    margin-left:10px;
-
-    @media (max-width:350px) {
-        width:240px;
-        height:370px;
-        overflow:hidden;
-        margin:auto;
-    }
 `
 
-export const Carousel = styled.section`
-    position:absolute;
-    min-width:100vw;
-    height:100%;
-    // background-color:green;
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    left:${({positionCounter}) => positionCounter}px;
-    transition:all 1000ms;
-`
+// export const Carousel = styled.section`
+//     position:absolute;
+//     min-width:100vw;
+//     height:100%;
+//     // background-color:green;
+//     display:flex;
+//     flex-direction:row;
+//     align-items:center;
+//     left:${({positionCounter}) => positionCounter}px;
+//     transition:all 1000ms;
+// `
 
 const button = css`
     border-radius:50%;
