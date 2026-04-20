@@ -32,6 +32,20 @@ export const Hero = styled.section`
     }
 `
 
+// EXPERIMENTAL
+// export const HeroH2 = styled.h2`
+//         // width: 100%;
+//         // height:200px;
+//         // background-color:yellow;
+//         position:absolute;
+//         transform-origin: left;
+//         font-size:64px;
+//         font-weight:1000;
+
+//     @media (max-width:400px) {display:none;}
+//     @media (max-height:525px) {display:none;}
+// `
+
 export const CarouselRail = styled.section`
     position:relative;
     height: 70vh;
