@@ -3,7 +3,14 @@ import axios from 'axios'
 import { loginUser,logoutUser,updateUser,autoLogin,remoteLogin } from '../../ducks/userReducer'
 import { connect } from 'react-redux'
 import './Header.css'
-import { HeaderContainer } from './header.styles'
+
+import { HeaderContainer,
+    PortFolioLink,
+    SmallCDLimage,
+    LargeCDLimage,
+    MM3dImage
+} from './header.styles'
+
 import Hamburgers from './Hamburger/hamburger.component'
 import { Link } from 'react-router-dom'
 import MobileLogin from '../MobileLogin/MobileLogin'
@@ -207,17 +214,13 @@ class Header extends Component{
             {isLoading === true ? <Loading /> : null}
 
             {/* ----- CD Logo ----- */}
-            <img onClick={this.viewTheWindow}
-                src={cdLabs3d}
-                className="cd-logo"
-            />
-            <img onClick={this.viewTheWindow}
-                src={CDinits}
-                className="cd-logo-small"
-            />
+            <PortFolioLink href={'https://chris.madmodels3d.com/'} target="_blank">
+                <LargeCDLimage src={cdLabs3d}/>
+                <SmallCDLimage src={CDinits}/>
+            </PortFolioLink>
             {/* -------------------- */}
 
-            <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><img className="mm3d-logo" src={MM3D1}/></Link>
+            <Link to="/" style={{textDecoration: 'none', color:'#fff' }}><MM3dImage className="mm3d-logo" src={MM3D1}/></Link>
             
             {/* ---------- DESTOP NAV ---------------------------- */}
             <ul className='desktop-nav'>

@@ -37,6 +37,7 @@ export const HamburgersContainer = styled.div`
     
     svg {
         height: 35px;
+        width:35px;
         position:relative;
     }
 

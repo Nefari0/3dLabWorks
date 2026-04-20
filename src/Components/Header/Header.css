@@ -1,28 +1,11 @@
 
-.mm3d-logo {
-    position: relative;
+/* .mm3d-logo { */
+    /* position: relative;
     height: 50px;
     width: 228px;
     margin-top: 8px;
-}
-
-.cd-logo {
-    position: relative;
-    height: 50px;
-    margin-left: 15px;
-}
-
-/* ----------- this displays trimmed version of logo for smaller displays ----------------- */
-.cd-logo-small {
-    position: absolute;
-    left: 14px;
-    height: 45px;
-    width: 45px;
-    border-radius: 50%;
-    border: 1px solid #2D0E94;
-    box-shadow: 0 4px 3px 0  rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.2);
-    display: none;
-}
+    background-color:green; */
+/* } */
 
 .desktop-nav {
     list-style-type: none;
@@ -56,22 +39,16 @@
     .desktop-nav {display: none;}
 }
 
-@media (max-width:485px) {
+/* @media (max-width:485px) {
     .mm3d-logo {
         position: relative;
         margin: auto;
         top: 5px;
         left: 40px;
     }
-    .cd-logo {
-        display: none;
-    }
-    .cd-logo-small {
-        display: inline;
-    }
-}
+} */
 
-@media (max-width:400px) {
+/* @media (max-width:400px) {
     .mm3d-logo {left: 20px;}
 
     .cd-logo-small,
@@ -80,4 +57,4 @@
         -ms-transform: scale(.75);
         transform: scale(.75);
     }
-}
+} */
