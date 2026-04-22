@@ -12,7 +12,7 @@ export const CubeContainer = styled.div`
     -webkit-perspective: 1000px;
     -webkit-perspective-origin: 0px -100px;
 
-    @media (max-width:1350px) {
+    @media (max-width:2000px) {
       transform: scale(0.8);
     }
     
@@ -48,6 +48,7 @@ export const FaceMapItem = styled.figure`
     height: ${({ cubeParams }) => cubeParams}px;
     -webkit-transform: rotateY(${({ cubeRotations, i }) => cubeRotations * i + 1}deg) translateZ(${({ cubeParams }) => (cubeParams / 2) * 3.14}px);
     transition: all 1000ms;
+    pointer-events: none;
 `;
 
 export const ProjectCard = styled.div`
@@ -55,6 +56,7 @@ export const ProjectCard = styled.div`
     position: absolute;
     width: ${({cubeParams}) => cubeParams}px;
     height:400px;
+    pointer-events: auto;
 
     -webkit-transform: rotateY(${({ rotationIters, cubeRotations, i }) => rotationIters}deg) translateZ(${0}px);
     
