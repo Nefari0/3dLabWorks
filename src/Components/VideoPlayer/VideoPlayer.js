@@ -4,13 +4,16 @@ import { Link } from 'react-router-dom'
 
 const VideoPlayer = (props) => {
 
-    const { video_url,firebase_url,category,tag,photo_url,user_name,name,video_name } = props
+    const { video_url,firebase_url,category,tag,photo_url,user_name,name,video_name,model_id } = props
     
     return(
         <div className='player-container' >
             <header className='video-title' >
                 <img className='video-user-photo' src={photo_url} />
-                <div className='vidnm-and-usrnm' > <h4 className="dark-text video-nm-txt" >{name === 'dummy project' ? video_name : name}</h4><i style={{marginRight:'60px'}} >Video by {user_name}</i> </div>
+                <div className='vidnm-and-usrnm' >
+                    <h4 className="dark-text video-nm-txt" >{name === 'dummy project' ? video_name : name}</h4>
+                    <i style={{marginRight:'60px'}} >Video by {user_name}</i> 
+                </div>
             </header>
             <div className='' style={{marginTop:'50px'}} >
 
@@ -44,7 +47,7 @@ const VideoPlayer = (props) => {
 
                 </p> : <p className='video-container-text' >
 
-                Click <a href={firebase_url} >here</a> to download the files used in this video 
+                <Link to={`/projectdetails/${model_id}`}>view details</Link>
 
                 </p>}
             </div>

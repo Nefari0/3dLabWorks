@@ -86,7 +86,7 @@ class Home extends Component {
         })
 
         const mappedVideos = videos.map(el => {
-            return <VideoPlayer key={el.video_id} video_url={el.video_url} category={el.category} tag={el.tag} firebase_url={el.firebase_url} photo_url={el.photo_url} user_name={el.user_name} name={el.name} video_name={el.video_name} />
+            return <VideoPlayer key={el.video_id} video_url={el.video_url} category={el.category} tag={el.tag} firebase_url={el.firebase_url} photo_url={el.photo_url} user_name={el.user_name} name={el.name} video_name={el.video_name} model_id={el.model_id} />
         })
 
         return(
