@@ -98,7 +98,8 @@ class Home extends Component {
 
                     <CarouselRail>
                         <TextCube 
-                            state={this.state} props={this.props}
+                            state={this.state}
+                            props={this.props}
                             setState={this.setState}
                             projectIsLiked={this.projectIsLiked}
                             mappedModels={mappedModels}

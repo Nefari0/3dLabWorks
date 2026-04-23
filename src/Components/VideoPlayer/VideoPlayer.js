@@ -1,20 +1,27 @@
 import ReactPlayer from 'react-player'
 import './VideoPlayer.css'
 import { Link } from 'react-router-dom'
+import { SITE_OWNER_ID } from '../../ducks/global'
+import { 
+    PlayerContainer,
+    VideoTitle,
+    VideoMakerTextLink
+ } from './videoplayer.styles'
 
 const VideoPlayer = (props) => {
 
     const { video_url,firebase_url,category,tag,photo_url,user_name,name,video_name,model_id } = props
-    
+
     return(
-        <div className='player-container' >
-            <header className='video-title' >
-                <img className='video-user-photo' src={photo_url} />
-                <div className='vidnm-and-usrnm' >
+        <PlayerContainer className='player-container' >
+            <VideoTitle className='video-title' >
+                <Link to={`/viewuser/${SITE_OWNER_ID}`} ><img className='video-user-photo' src={photo_url}/></Link>
+                {/* <img className='video-user-photo' src={photo_url} /> */}
+                <div>
                     <h4 className="dark-text video-nm-txt" >{name === 'dummy project' ? video_name : name}</h4>
-                    <i style={{marginRight:'60px'}} >Video by {user_name}</i> 
+                    <VideoMakerTextLink to={`/viewuser/${SITE_OWNER_ID}`}><i>Video by {user_name}</i></VideoMakerTextLink>
                 </div>
-            </header>
+            </VideoTitle>
             <div className='' style={{marginTop:'50px'}} >
 
                 <div className='reg-size' >
@@ -52,7 +59,7 @@ const VideoPlayer = (props) => {
                 </p>}
             </div>
             </div>
-        </div>
+        </PlayerContainer>
     )
 }
 

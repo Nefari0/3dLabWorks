@@ -12,11 +12,14 @@
     flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-
     overflow: hidden;
+
+    /* a {
+    text-decoration:none;
+    } */
 }
 
-.video-title {
+/* .video-title {
     color: #fff;
     position: absolute;
     text-transform: none;
@@ -28,7 +31,7 @@
     display: flex;
     align-items: center;
     align-content: stretch;
-}
+} */
 
 .video-header {
     position: relative;
@@ -124,13 +127,13 @@
 }
 
 @media (max-width:1000px) {
-    .player-container {
+    /* .player-container {
         width: 240px;
         margin-left:0px;
         margin-right:20px;
-    }
+    } */
     .video-title {
-        width: 241px;
+        /* width: 241px; */
     }
     .video-header {
         width: 230px;

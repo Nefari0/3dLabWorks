@@ -1,0 +1,1 @@
+export const SITE_OWNER_ID = 12
