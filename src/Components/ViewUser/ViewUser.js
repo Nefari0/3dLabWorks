@@ -1,5 +1,5 @@
 import axios from 'axios';
-import UserProject from './UserProject'
+// import UserProject from './UserProject'
 import Project from '../Project/Project';
 import { Component } from 'react'
 import '../UserPage/UserPage.css'
@@ -10,6 +10,16 @@ import Loading from '../Loading/Loading';
 import CreateNewMessage from './CreateNewMessage';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
 import { socketString } from '../WS';
+import { 
+    UserPageContainer,
+    UserRow1,
+    Portrait,
+    BackgroundPhoto,
+    ProfilePhoto,
+    PortraitTextContainer,
+    Collections
+} from '../UserPage/userpage.styles';
+
 // const client = new W3CWebSocket(`ws://165.227.102.189:8000`); // build
 const client = new W3CWebSocket(socketString); // production
 
@@ -46,7 +56,10 @@ class ViewUser extends Component {
         this.props.updateUser()
         this.getUserAndProjects(user_id)
         axios.get(`/api/users/${user_id}`).then(res => 
-            this.setState({user:res.data})
+            this.setState({
+                user:res.data,
+                userBio:res.data[0].bio
+            })
         )
     }
         
@@ -157,11 +170,11 @@ class ViewUser extends Component {
         })
 
         const mappedBackground = user.map(el => {
-           return <img src={el.background_url} key={el.user_id} className='background-photo' />
+           return <BackgroundPhoto src={el.background_url} key={el.user_id} className='background-photo' />
         })
 
         const mappedProfilePhoto = user.map(el => {
-            return <img className="profile-photo" src={el.photo_url} key={el.user_id} alt="photo"/>
+            return <ProfilePhoto src={el.photo_url} key={el.user_id} alt="photo"/>
         })
 
         const mappedProjects = items.map(el => {
@@ -170,21 +183,21 @@ class ViewUser extends Component {
 
     return(
         
-        <div className="user-page">
+        <UserPageContainer>
 
             {this.state.openMessageBox && isLoggedIn ? mappedNewMessage : null}
 
             {isLoading ? <Loading/> : null}
 
-            <section className="column1">
+            <UserRow1>
                 {mappedBackground}
                 
-                <div className="portrait">
+                <Portrait>
 
                     {mappedProfilePhoto}
                     {mappedUserName}
  
-                    <div className='portrait-row'>
+                    <PortraitTextContainer>
 
                         {/* --- Users cannot message themselves --- */}
                         {parseInt(user_id) === id ? true : <p className='user-buttons' style={{marginTop:'30px',paddingTop:'3px'}} onClick={() => this.openMessageBox()} >Message</p>}
@@ -194,21 +207,17 @@ class ViewUser extends Component {
                         {this.props.user.isLoggedIn === true && this.state.friendShipInfo != true ? 
                             <p className='user-buttons' style={{marginTop:'30px',paddingTop:'3px'}} onClick={() => this.sendConnectInvite()} >Connect</p>
                        : null}
-                    </div>
+                    </PortraitTextContainer>
 
+                </Portrait>
 
-                </div>
-
-            </section>
-
-            <section className="column2" >
-
-                <div className='collections'>
+                <UserInfo state={this.state}/>
+                <Collections>
                     {mappedProjects}
-                </div>
+                </Collections>
+            </UserRow1>
 
-            </section>
-        </div>
+        </UserPageContainer>
         
         )}
 }

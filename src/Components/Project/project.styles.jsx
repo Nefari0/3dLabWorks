@@ -1,8 +1,8 @@
 import styled from "styled-components";
-
 export const ProjectContainer = styled.div`
     border-radius: 5px;
     margin: 10px;
+    margin-left:15px;
     height: 350px;
     width: 280px;
     box-shadow: 0px 5px 20px -7px #000000;
@@ -21,21 +21,22 @@ export const ProjectContainer = styled.div`
         opacity: .8;
     }
 
-    @media (max-height:520px) {
-        height: 330px;
+    @media (max-height:520px) {height: 330px;}
+
+    @media (max-width:1100px) {
+    width: 240px;
+    footer {
+            a{
+                font-size: 12px;
+                font-weight: 400;
+            }
+        }
+    h5 {font-size: 14px;}
     }
-
-    @media (max-width:1000px) {
-        width: 240px;
-        margin-left:0px;
-        margin-right:20px;
-
-        footer {a{
-            font-size: 12px;
-            font-weight: 400;
-        }}
-
-        h5 {font-size: 14px;}
+    
+        @media (max-width:650px) {
+        width: 290px;
+        margin-left:10px;
     }
 `
 
@@ -79,7 +80,6 @@ export const ProjectContainerFooter = styled.footer`
     height: 200px;
     display: flex;
     align-items: center;
-    // background-color:blue;
 `
 
 export const LikeShareContainer = styled.div`
