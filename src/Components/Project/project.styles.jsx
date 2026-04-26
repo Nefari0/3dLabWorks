@@ -1,6 +1,12 @@
 import styled from "styled-components";
+import { 
+    BaseDocHead,
+    BaseDocFoot 
+} from "../../ducks/global.styles";
+
+// background: ${({ theme }) => theme.colors.primary};
 export const ProjectContainer = styled.div`
-    border-radius: 5px;
+    border-radius: 10px;
     margin: 10px;
     margin-left:15px;
     height: 350px;
@@ -12,18 +18,19 @@ export const ProjectContainer = styled.div`
 	flex-direction: column;
     justify-content: space-between;
     overflow:hidden;
+    // border: 4px solid #6495ed;
 
     header {
-        display: flex;
-        align-items: center;
-        margin-top: 5px;
-        margin: 0px;
-        opacity: .8;
+        // display: flex;
+        // align-items: center;
+        // margin-top: 5px;
+        // margin: 0px;
+        // opacity: .8;
     }
 
     @media (max-height:520px) {height: 330px;}
 
-    @media (max-width:1100px) {
+    @media (max-width:1000px) {
     width: 240px;
     footer {
             a{
@@ -31,12 +38,38 @@ export const ProjectContainer = styled.div`
                 font-weight: 400;
             }
         }
-    h5 {font-size: 14px;}
+    // h5 {font-size: 14px;}
     }
     
         @media (max-width:650px) {
         width: 290px;
         margin-left:10px;
+    }
+`
+
+export const ProjectHeader = styled(BaseDocHead)`
+    min-height: 60px;
+    width: 298px;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+
+    h5 {
+        color:#fff;
+        margin:0px;
+        width:190px;
+        min-height: 10px;
+        font-size: 14px;
+        position:relative;
+        margin: 0;
+    }
+    
+    i {
+        margin:auto;
+        position:relative;
+        color:#283c5f;
+        // color:#0a0f18;
+        font-weight:500;
     }
 `
 
@@ -75,7 +108,7 @@ export const ProjectImageContainer = styled.section`
 
 `
 
-export const ProjectContainerFooter = styled.footer`
+export const ProjectContainerBottom = styled.section`
     border-top:1px solid #555;
     height: 200px;
     display: flex;
@@ -106,4 +139,9 @@ export const LikeShareContainer = styled.div`
         margin-right: 15px;
         padding-right: 1px;
     }
+`
+
+export const ProjectFooter = styled(BaseDocFoot)`
+    height:60px;
+    width:100%;
 `

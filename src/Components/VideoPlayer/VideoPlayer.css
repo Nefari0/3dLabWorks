@@ -38,7 +38,7 @@
     height: 30px;
     width: 280px;
     background: linear-gradient(0turn,#5077be,#6495ed);
-    box-shadow: 0px 5px 20px -7px #000000;
+    /* box-shadow: 0px 5px 20px -7px #000000; */
     border-radius: 2px;
     margin: auto;
     margin-top: 11px;
@@ -66,8 +66,8 @@
   .react-player {
     position: relative;
     margin: auto;
-    margin-top: 10px;
-    box-shadow: 0px 5px 20px -7px #000000;
+    margin-top: 2px;
+    /* box-shadow: 0px 5px 20px -7px #000000; */
     border-radius: 5px;
   }
 
@@ -110,9 +110,9 @@
 	align-content: flex-end;
 }
 
-.small-size {
+/* .small-size {
     display: none;
-}
+} */
 
 @media (max-height:520px) {
     .player-container {
@@ -149,10 +149,10 @@
     .reg-size {
         display: none;
     }
-    .small-size {
+    /* .small-size {
         display: inline;
         margin: auto;
-    }
+    } */
     .video-nm-txt {
         font-size: 15px;
         font-weight: 400;

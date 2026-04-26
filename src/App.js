@@ -12,12 +12,12 @@ function App() {
 
   return (
     <HashRouter>
-    <div className="App">
+      <div className="App">
         <Header/>
         {/* <MessageBoard /> */}
         <Message />
         {routes}
-    </div>
+      </div>
     </HashRouter>
   );
 }

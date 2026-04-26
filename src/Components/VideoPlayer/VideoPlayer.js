@@ -5,26 +5,31 @@ import { SITE_OWNER_ID } from '../../ducks/global'
 import { 
     PlayerContainer,
     VideoTitle,
-    VideoMakerTextLink
- } from './videoplayer.styles'
+    VideoMakerTextLink,
+    SmallVideoViewPort,
+    LargeVideoViewPort,
+    VideoFooter
+} from './videoplayer.styles'
+
+import { BaseDocHead } from '../../ducks/global.styles'
 
 const VideoPlayer = (props) => {
 
     const { video_url,firebase_url,category,tag,photo_url,user_name,name,video_name,model_id } = props
 
     return(
-        <PlayerContainer className='player-container' >
-            <VideoTitle className='video-title' >
+        <PlayerContainer>
+            <VideoTitle  >
                 <Link to={`/viewuser/${SITE_OWNER_ID}`} ><img className='video-user-photo' src={photo_url}/></Link>
                 {/* <img className='video-user-photo' src={photo_url} /> */}
                 <div>
-                    <h4 className="dark-text video-nm-txt" >{name === 'dummy project' ? video_name : name}</h4>
+                    <h5>{name === 'dummy project' ? video_name : name}</h5>
                     <VideoMakerTextLink to={`/viewuser/${SITE_OWNER_ID}`}><i>Video by {user_name}</i></VideoMakerTextLink>
                 </div>
             </VideoTitle>
-            <div className='' style={{marginTop:'50px'}} >
+            <div className='' style={{marginTop:'40px',xIndex:'0'}} >
 
-                <div className='reg-size' >
+                <LargeVideoViewPort>
                     <ReactPlayer
                         className='react-player'
                         url={video_url}
@@ -32,9 +37,9 @@ const VideoPlayer = (props) => {
                         height='191px'
                         controls={true}
                     />
-                </div>
+                </LargeVideoViewPort>
 
-                <div className='small-size' >
+                <SmallVideoViewPort>
                     <ReactPlayer
                         className='react-player'
                         url={video_url}
@@ -42,7 +47,7 @@ const VideoPlayer = (props) => {
                         height='150px'
                         controls={true}
                     />
-                </div>
+                </SmallVideoViewPort>
 
             <div className='video-info-container' >
                 <header className='video-header' >
@@ -59,6 +64,7 @@ const VideoPlayer = (props) => {
                 </p>}
             </div>
             </div>
+            <VideoFooter></VideoFooter>
         </PlayerContainer>
     )
 }

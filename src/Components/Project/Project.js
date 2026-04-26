@@ -12,7 +12,9 @@ import {
     ProjectUserPhoto,
     ProjectImageContainer,
     LikeShareContainer,
-    ProjectContainerFooter
+    ProjectContainerBottom,
+    ProjectHeader,
+    ProjectFooter
  } from './project.styles'
 
 const Project = (props) => {
@@ -95,12 +97,12 @@ const Project = (props) => {
     return(
         <ProjectContainer>
 
-            <header style={{backgroundColor:''}}>
+            <ProjectHeader>
                 <Link to={`/viewuser/${user_id}`} ><ProjectUserPhoto src={getPhotoUrl()}/></Link>
-                <h5 className='dark-text' style={{color:'#555',paddingBottom:'15px',paddingTop:'',fontWeight:'400'}}>{name}
+                <h5 style={{paddingBottom:'',paddingTop:'',fontWeight:'40'}}>{name}
                     <br/><i>by {getUserName()}</i>
                 </h5>
-            </header>
+            </ProjectHeader>
 
             <Link to={`/projectdetails/${model_id}`}>
                 <ProjectImageContainer>
@@ -108,7 +110,7 @@ const Project = (props) => {
                 </ProjectImageContainer>
             </Link>
 
-            <ProjectContainerFooter>
+            <ProjectContainerBottom>
 
                 <div onClick={() => isLoggedIn === true || catagory === "hyperlink" ? window.open(firebase_url) : plsSignIn()} >
                     <SVG params={'download_icon'} fill={'none'} stroke={'currentColor'}/>
@@ -160,7 +162,8 @@ const Project = (props) => {
 
                 </LikeShareContainer>
             
-            </ProjectContainerFooter>
+            </ProjectContainerBottom>
+            <ProjectFooter></ProjectFooter>
         </ProjectContainer>
     )
 }
