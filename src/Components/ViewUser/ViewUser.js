@@ -156,7 +156,7 @@ class ViewUser extends Component {
     }
 
     render(){
-        const { items,isLoading,user,currentUserMessage,conversation_id } = this.state
+        const { items,isLoading,user,currentUserMessage,conversation_id,userBio } = this.state
         const { id } = this.props.user.user
         const { isLoggedIn } = this.props.user
         const { user_id } = this.props.match.params
@@ -189,7 +189,6 @@ class ViewUser extends Component {
 
             {isLoading ? <Loading/> : null}
 
-            <UserRow1>
                 {mappedBackground}
                 
                 <Portrait>
@@ -212,10 +211,11 @@ class ViewUser extends Component {
                 </Portrait>
 
                 <UserInfo state={this.state}/>
+            {/* <UserRow1> */}
                 <Collections>
                     {mappedProjects}
                 </Collections>
-            </UserRow1>
+            {/* </UserRow1> */}
 
         </UserPageContainer>
         

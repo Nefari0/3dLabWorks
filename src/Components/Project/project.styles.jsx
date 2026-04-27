@@ -30,21 +30,14 @@ export const ProjectContainer = styled.div`
 
     @media (max-height:520px) {height: 330px;}
 
-    @media (max-width:1000px) {
-    width: 240px;
-    footer {
-            a{
-                font-size: 12px;
-                font-weight: 400;
-            }
-        }
-    // h5 {font-size: 14px;}
-    }
-    
-        @media (max-width:650px) {
+    @media (max-width:650px) {
         width: 290px;
         margin-left:10px;
     }
+
+    // @media (max-width:530px) {
+    //     width
+    // }
 `
 
 export const ProjectHeader = styled(BaseDocHead)`

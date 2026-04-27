@@ -21,6 +21,7 @@ const containerWidthQuery2 = css`
 `
 
 export const UserPageContainer = styled.section`
+    // position:relative;
     min-height: 87vh;
     /* min-width: 300px; */
     min-width:100vw;
@@ -33,7 +34,6 @@ export const UserPageContainer = styled.section`
 	justify-content: center;
 	align-items: flex-start;
 	align-content: center;
-    padding-top: 5px;
 
     ${containerWidthQuery1}
     ${containerWidthQuery2}
@@ -52,12 +52,14 @@ export const UserRow1 = styled.section`
     justify-content: flex-start;
     align-items: flex-start;
     margin:auto;
+        overflow: visible;
 
     ${containerWidthQuery1}
     ${containerWidthQuery2}
-`
+    `
 
 export const Portrait = styled.div`
+    // position:absolute;
     height: 200px;
     width: 100%;
     color: black;
@@ -76,6 +78,7 @@ export const Portrait = styled.div`
 
 export const BackgroundPhoto = styled.img`
     width:100%;
+    // margin-top:0px;
 `
 
 export const ProfilePhoto = styled.img`
@@ -105,6 +108,7 @@ export const PortraitTextContainer = styled.div`
 `
 
 export const UserRow2 = styled.section`
+    position:relative;
     border-radius: 5px;
     min-height: 70vh;
     width: ${largeWidth}px;
@@ -131,7 +135,11 @@ export const Collections = styled.section`
     flex-wrap: wrap;
     justify-content: space-around;
     overflow-y:auto;
-    
-    ${containerWidthQuery1}
-    ${containerWidthQuery2}
-`
+    // background-color:blue;
+
+    // @media(max-width:1100px) {
+    width:100%;
+    }
+    `
+    // ${containerWidthQuery1}
+    // ${containerWidthQuery2}

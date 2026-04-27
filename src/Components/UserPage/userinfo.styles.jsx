@@ -32,9 +32,9 @@ export const UserInfoContainer = styled.section`
     border-radius: 2px;
     margin:auto; 
 
-    ${containerWidthQuery1}
-    ${containerWidthQuery2}
     `
+    // ${containerWidthQuery1}
+    // ${containerWidthQuery2}
 
 export const UserInfoTitle = styled.div`
     background: linear-gradient(0turn,#5077be,#6495ed);
@@ -58,7 +58,6 @@ export const UserInfoRow = styled.div`
     border-radius: 5px;
     padding:10px;
     text-align:left;
-
-    ${containerWidthQuery1}
-    ${containerWidthQuery2}
-    `
+`
+    // ${containerWidthQuery1}
+    // ${containerWidthQuery2}
