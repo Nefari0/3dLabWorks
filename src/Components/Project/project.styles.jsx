@@ -18,7 +18,6 @@ export const ProjectContainer = styled.div`
 	flex-direction: column;
     justify-content: space-between;
     overflow:hidden;
-    // border: 4px solid #6495ed;
 
     header {
         // display: flex;
@@ -55,6 +54,7 @@ export const ProjectHeader = styled(BaseDocHead)`
         font-size: 14px;
         position:relative;
         margin: 0;
+        font-weight:400;
     }
     
     i {

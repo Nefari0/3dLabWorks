@@ -99,7 +99,8 @@ const Project = (props) => {
 
             <ProjectHeader>
                 <Link to={`/viewuser/${user_id}`} ><ProjectUserPhoto src={getPhotoUrl()}/></Link>
-                <h5 style={{paddingBottom:'',paddingTop:'',fontWeight:'40'}}>{name}
+                <h5>
+                    {name}
                     <br/><i>by {getUserName()}</i>
                 </h5>
             </ProjectHeader>

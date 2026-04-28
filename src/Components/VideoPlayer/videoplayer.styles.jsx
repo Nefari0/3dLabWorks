@@ -6,7 +6,6 @@ import {
 } from "../../ducks/global.styles";
 
 export const PlayerContainer = styled.section`
-    position: relative;
     border-radius: 10px;
     width: 297px;
     height: 350px;
@@ -16,7 +15,7 @@ export const PlayerContainer = styled.section`
     display: flex;
     flex-direction: column;
 	justify-content: space-between;
-	align-items: center;
+    overflow:hidden;
 
     @media (max-width:1000px) {
         width: 240px;
@@ -27,17 +26,12 @@ export const PlayerContainer = styled.section`
 `
 
 export const VideoTitle = styled(BaseDocHead)`
-    color: #fff;
-    position: absolute;
-    text-transform: none;
-    height: 60px;
+    min-height: 60px;
     width: 298px;
-    transition: all 100ms;
-    margin: 0px;
+    min-width: 0;
     display: flex;
     align-items: center;
-    z-index:1;
-    // background: linear-gradient(0turn,#5077be,#6495ed);
+    text-align: left;
 
     h5 {
         color:#fff;
@@ -46,26 +40,11 @@ export const VideoTitle = styled(BaseDocHead)`
         min-height: 10px;
         font-size: 14px;
         position:relative;
-        margin: 10px;
-        font-weight:40;
+        font-weight:400;
     }
 
-    i,
     a {
         text-decoration:none;
-        color:#283c5f;
-        font-weight:500;
-    }
-
-    div {
-        margin-bottom: 5px;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        justify-content: center;
-        align-items: baseline;
-        align-content: flex-end;
     }
 
     @media (max-width:1000px) {
@@ -77,33 +56,43 @@ export const VideoMakerTextLink = styled(Link)`
     height:15px;
 
     i {
+        color:#283c5f;
         position:relative;
-        margin:auto;
-        bottom:12px;
+        margin:0px;
     }
 `
 
+export const VideoUserPhoto = styled.img`
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+    margin-left: 10px;
+`
+
 export const SmallVideoViewPort = styled.div`
-    width:298px;
-    height:191px;
+    width:100%;
+    min-height:0px;
     display: none;
+
+    iframe {
+        margin-top:-8px;
+    }
 
     @media (max-width:1000px) {
         display: inline;
-        margin: auto;
     }
 `
 
 export const LargeVideoViewPort = styled(SmallVideoViewPort)`
     display: inline;
-    margin: auto;
+    width:100%;
+    min-height:0px;
+    margin-left:-1px;
 
-    // background-color:pink;
-
-    // iframe {
-    //     display:none;
-    // }
-
+    iframe {
+        margin-top:-12px;
+    }
 
     @media (max-width:1000px) {
         display:none;
