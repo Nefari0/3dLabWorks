@@ -1,8 +1,9 @@
 import styled from "styled-components"
 
 export const MakerContainer = styled.div`
+    position:relative;
     height: 70px;
-    width: 680px;
+    width:100%;
     background-color: #fff;
     display: flex;
     align-items: center;
@@ -20,11 +21,16 @@ export const MakerContainer = styled.div`
     
     img {
         height: 95%;
-        with:auto;
+        width:auto;
         border-radius: 50%;
         margin:10px;
     }
 
+    width: 660px;
+
+
     @media (max-width:680px) {
-        width: 100%;
+        margin:0;
+        width:100%;
+    }
 `

@@ -1,6 +1,10 @@
 import styled from "styled-components";
 
+const photoContainerHeight = 295
+const photoContainerWidth = 440
+
 export const MainPhotoContainer = styled.section`
+    width:${photoContainerWidth}px;
     position:relative;
 `
 
@@ -29,10 +33,13 @@ export const PhotoMenuRow = styled.div`
 
 export const MainImage = styled.img`
     width:100%;
-    height:auto;
     margin:0px;
+    min-height:${photoContainerHeight-10}px;
+
+    
     
     @media (max-width:680px) {
-        width:100%;
+        left:0px;
+        min-height:auto;
     }
 `

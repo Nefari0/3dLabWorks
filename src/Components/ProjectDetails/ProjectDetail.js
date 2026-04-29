@@ -271,17 +271,12 @@ class ProjectDetail extends Component {
             <>
             {isDeleted ? (<Route path="/" component={Home}/>) :
                 (<DetailsView>
-                    <section>
-                        <TheMaker
-                            userInfo={userInfo} 
-                            info={info} 
-                            maker_id={maker_id}
-                        />
-                    </section>
-                    <section>
-                        <ThumbnailViewer>{mappedThumbNails}</ThumbnailViewer>
-                    </section>
-
+                    <TheMaker
+                        userInfo={userInfo} 
+                        info={info} 
+                        maker_id={maker_id}
+                    />
+                    <ThumbnailViewer>{mappedThumbNails}</ThumbnailViewer>
 
                     <DetailContainer>
 

@@ -6,26 +6,25 @@ export const DetailsView = styled.section`
     margin: none;
     min-height: 90vh;
     min-width: 100vw;
-    // min-width:100px;
     background-size: cover; 
     background-position: center bottom;
     background-attachment: fixed;
     display: flex;
-    flex-direction: column;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
     background-repeat: no-repeat;
     background-position: right top;
 
-        section {
-            margin: auto;
-            margin-bottom: 0px;
-            margin-top: 0px;
-            width: 660px;
-            display: flex;
-            justify-content: center;
+    @media (max-width:300px) {
+        width:300px;
+    }
 
-            @media (max-width:680px) {
-                width:300px;
-            }
+    section {
+
+        @media (max-width:680px) {
+            width:100%;
+        }
     }
 `
 
@@ -46,10 +45,12 @@ export const ThumbnailViewer = styled.div`
             width:auto;
         }
     }
+        width: 660px;
 
-    @media (max-width:680px) {
-        width: 100%;
-    }
+        @media (max-width:680px) {
+            margin:0;
+            width:100%;
+        }
 `
 
 export const DetailContainer = styled.section`
@@ -58,15 +59,8 @@ export const DetailContainer = styled.section`
     display: flex;
     justify-content: center;
 
-    section {
-        width: 440px;
-        min-height: 100px;
-        margin: 0px;
-        display: flex;
-
-        @media (max-width:680px) {
-            width:300px;
-        }
+    @media (max-width:680px) {
+        width:100%;
     }
 
     ul {
@@ -88,7 +82,6 @@ export const DetailContainer = styled.section`
     @media (max-width:680px) {
         min-height: 200px;
         flex-direction: column;
-        width: 300px;
         
         img {
         }
