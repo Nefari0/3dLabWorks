@@ -6,7 +6,8 @@ import {
 
 import { 
     OptionsH4,
-    OptionsText
+    OptionsText,
+    TheListContainer
  } from "./options.styles"
 
 const selected = {backgroundColor:'#3c598e'}
@@ -40,7 +41,7 @@ const OptionsMenu = (props) => {
     } = state
 
     return (
-    <ul>
+    <TheListContainer>
         <li style={viewFiles ? selected : null} onClick={() => changeView('viewFiles')} >
             <OptionsH4
                 viewFiles={viewFiles}
@@ -70,7 +71,7 @@ const OptionsMenu = (props) => {
             <SVG params={'info'} fill={'none'} stroke={'currentColor'}/>
             <OptionsText condition={viewInfo} >Info</OptionsText>
         </li>
-    </ul>
+    </TheListContainer>
     )
 }
 

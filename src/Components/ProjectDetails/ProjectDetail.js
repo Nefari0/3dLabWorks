@@ -21,7 +21,7 @@ import {
     ThumbnailViewer,
     CommentBox,
     CommentBoxHeader,
-    DescriptionText
+    DescriptionText,
 } from './projectdetail.styles'
 
 // const selected = {backgroundColor:'#3c598e'}

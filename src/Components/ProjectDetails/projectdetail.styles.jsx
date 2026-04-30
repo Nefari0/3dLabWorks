@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { BaseDocHead } from "../../ducks/global.styles";
 // import background from './src/assets/white-backround1.jpg'
 
 // background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url(${background});
@@ -63,25 +64,26 @@ export const DetailContainer = styled.section`
         width:100%;
     }
 
-    ul {
-        width: 220px;
+    // ul {
+    //     width: 220px;
 
-        li {
-            background-color: #fff;
-            display: flex;
-            height: 59px;
-            width: 100%;
-            border:solid 1px rgb(85, 85, 85,.3) ;
-        }
+    //     li {
+    //         background-color: #fff;
+    //         display: flex;
+    //         height: 59px;
+    //         width: 100%;
+    //         border:solid 1px rgb(85, 85, 85,.3) ;
+    //     }
         
-        @media (max-width:680px) {
-            width:100%;
-        }
-    }
+    //     @media (max-width:680px) {
+    //         width:100%;
+    //     }
+    // }
 
     @media (max-width:680px) {
         min-height: 200px;
         flex-direction: column;
+        justify-content: flex-start;
         
         img {
         }
@@ -99,18 +101,22 @@ export const CommentBox = styled.div`
     align-items: center;
 
     @media (max-width:680px) {
-        width:300px;
+        // width:300px;
+        width:100%;
     }
 `
 
-export const CommentBoxHeader = styled.header`
+// export const CommentBoxHeader = styled.header`
+export const CommentBoxHeader = styled(BaseDocHead)`
     background-color: #6495ed;
     opacity: .8;
     height: 32px;
     width: 100%;
+    border-radius:0px;
 
     @media (max-width:680px) {
-        width:300px;
+        // width:300px;
+        width:100%;
     }
 `
 
@@ -126,5 +132,7 @@ export const DescriptionText = styled.p`
 
     @media (max-width: 680px) {
         width: 100%;
+        // padding:50px;
+        padding: 10px 10px 10px 20px;
     }
 `
