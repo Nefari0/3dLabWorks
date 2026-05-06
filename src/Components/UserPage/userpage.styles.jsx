@@ -20,10 +20,9 @@ const containerWidthQuery2 = css`
     }
 `
 
+const containerPadding = 300
 export const UserPageContainer = styled.section`
-    // position:relative;
     min-height: 87vh;
-    /* min-width: 300px; */
     min-width:100vw;
     background-image: linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0)),url(white-backround1.jpg);
     background-size: cover; 
@@ -37,6 +36,13 @@ export const UserPageContainer = styled.section`
 
     ${containerWidthQuery1}
     ${containerWidthQuery2}
+
+    @media (min-width:1100px) {
+        padding-left:${containerPadding}px;
+        padding-right:${containerPadding}px;
+    }
+
+
 `
 
 export const UserRow1 = styled.section`
