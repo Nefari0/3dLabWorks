@@ -4,6 +4,7 @@ import { composeWithDevTools } from 'redux-devtools-extension'
 import userReducer from './userReducer'
 import modelsReducer from './modelsReducer'
 import firebaseReducer from './firebaseReducer'
+import uiReducer from './uiReducer'
 import thunk from 'redux-thunk'
 
 
@@ -12,8 +13,8 @@ const rootReducer = combineReducers({
   user: userReducer,
   // projects: projectsReducer,
   models: modelsReducer,
-  firebase: firebaseReducer
-
+  firebase: firebaseReducer,
+  ui:uiReducer
 })
 
 export default createStore(

@@ -180,14 +180,11 @@ class ViewUser extends Component {
         const mappedProjects = items.map(el => {
             return <Project key={el.model_id} model_id={el.model_id} data={el} projectIsLiked={this.projectIsLiked} />
         })
-
     return(
         
         <UserPageContainer>
 
             {this.state.openMessageBox && isLoggedIn ? mappedNewMessage : null}
-
-            {isLoading ? <Loading/> : null}
 
                 {mappedBackground}
                 

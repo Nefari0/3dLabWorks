@@ -211,7 +211,7 @@ class Header extends Component{
         <HeaderContainer>
 
             {/* -- "Loading" display -- */}
-            {isLoading === true ? <Loading /> : null}
+            {/* {isLoading === true ? <Loading /> : null} */}
 
             {/* ----- CD Logo ----- */}
             <PortFolioLink href={'https://chris.madmodels3d.com/'} target="_blank">

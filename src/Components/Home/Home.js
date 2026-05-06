@@ -4,6 +4,7 @@ import axios from 'axios'
 import { connect } from 'react-redux'
 import { loginUser,updateUser } from '../../ducks/userReducer'
 import { getModels,getFeatured } from '../../ducks/modelsReducer'
+import { isLoading } from '../../ducks/uiReducer'
 import Loading from '../Loading/Loading'
 import Project from '../Project/Project'
 import VideoPlayer from '../VideoPlayer/VideoPlayer'
@@ -39,10 +40,11 @@ class Home extends Component {
     }
 
     getFeaturedVideos = async () => {
-        this.setLoading()
+        this.props.isLoading(true)
         try {
             await this.props.getFeatured()
             await axios.get('/api/videos/featured').then(res2 => {
+                this.props.isLoading(false)
                 this.setState({
                     videos:res2.data,
                     loading:false
@@ -50,7 +52,7 @@ class Home extends Component {
             })
         } catch (err) {
             alert('Content not available')
-            this.setLoading()
+            this.props.isLoading(false)
         }
     }
 
@@ -91,8 +93,6 @@ class Home extends Component {
 
         return(
                 <Hero>
-                    
-                    {!loading ? true : <Loading />}
 
                     {/* <HeroH2 className="">IMAGINE IT - BUILD IT.</HeroH2> */}
 
@@ -130,4 +130,4 @@ function mapStateToProps(reduxState){
     return reduxState
 }
 
-export default connect(mapStateToProps, { loginUser,updateUser,getModels,getFeatured })(Home)
+export default connect(mapStateToProps, { loginUser,updateUser,getModels,getFeatured,isLoading })(Home)

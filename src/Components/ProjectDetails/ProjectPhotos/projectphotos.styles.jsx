@@ -6,6 +6,7 @@ const photoContainerWidth = 440
 export const MainPhotoContainer = styled.section`
     width:${photoContainerWidth}px;
     position:relative;
+    z-index:1;
 `
 
 export const PhotoMenu = styled.div`
