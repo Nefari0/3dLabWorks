@@ -127,12 +127,13 @@ const Project = (props) => {
                     {catagory === "hyperlink" ? "visit" : "download"}
                 </a>
                     : 
-                <a 
-                    style={{marginRight:'10px',color:'#555'}} 
-                    onClick={() => plsSignIn()}
+                <Link 
+                    style={{marginRight:'10px',color:'#555',textDecoration:'none'}} 
+                    // onClick={() => plsSignIn()}
+                    to={`/projectdetails/${model_id}`}
                 >
-                    download
-                </a>
+                    details
+                </Link>
                 }
 
                 <LikeShareContainer>
