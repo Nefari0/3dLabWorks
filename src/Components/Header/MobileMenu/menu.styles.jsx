@@ -6,6 +6,7 @@ const close = css`
     height:0px;
     width:0px;
     transition: all 500ms;
+    opacity:0;
     
     ul {
         display:none;
@@ -36,7 +37,8 @@ export const MobileNavContainer = styled.nav`
     overflow: hidden;
     z-index: 15;
     width:${width}px;
-    height:${({isLoggedIn}) => isLoggedIn ? '150' : '110'}px;
+    min-height:0px;
+    // height:${({isLoggedIn}) => isLoggedIn ? '150' : '110'}px;
     transition: all 500ms;
 
     ul {

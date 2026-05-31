@@ -238,6 +238,7 @@ class Header extends Component{
                 onClick={this.toggleMenu}
                 isLoggedIn={isLoggedIn}
                 photo={photo}
+                isMenuOpen={isMenuOpen}
             />
 
             <MobileNav

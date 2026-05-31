@@ -85,7 +85,8 @@ const MobileLogin = (props) => {
 
         {!isLoggedIn ? <a className="login-button" onClick={getLoggedIn} >Log In</a> : <a className="login-button" onClick={props.logout} >Log Out</a>}
 
-        {!isLoggedIn ? <div className="build-account" ><p>Need an account?</p><a style={{fontWeight:'400',color:"blue"}} onClick={selectSignUp}>Sign up</a></div> : <div className="build-account" ><p>Logged in as:</p><a style={{fontWeight:'400',color:"blue"}}>{user}</a></div>}
+        {/* THIS HAS BEEN TEMPORARILY REMOVED UNTIL USER FEATURES HAVE BEEN REPAIRED */}
+        {/* {!isLoggedIn ? <div className="build-account" ><p>Need an account?</p><a style={{fontWeight:'400',color:"blue"}} onClick={selectSignUp}>Sign up</a></div> : <div className="build-account" ><p>Logged in as:</p><a style={{fontWeight:'400',color:"blue"}}>{user}</a></div>} */}
         </section>
         :
         <section className={`rform`}>

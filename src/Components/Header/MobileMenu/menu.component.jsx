@@ -23,23 +23,23 @@ const MobileNav = (props) => {
             isLoggedIn={isLoggedIn}
         >
             <ul style={{paddingTop:'10px'}} onClick={() => toggleMenu()} >
-                  
-                <li onClick={toggleLogin}>
+                {/* TEMPORARILY REMOVED UNTIL USER FEATURES HAVE BEEN RESTORED */}
+                {/* <li onClick={toggleLogin}>
                     {isLoggedIn ? <LogoutIcon /> : <LoginIcon />}
                     {isLoggedIn ? "Logout" : "Login"}
-                </li>
+                </li> */}
+
+                <Link to="/explore">
+                    <li>
+                        <CubeIcon />
+                        Explore
+                    </li>
+                </Link>
 
                 <Link to="/about">
                     <li >
                         <InformationIcon />
                         About
-                    </li>
-                </Link>
-                
-                <Link to="/explore">
-                    <li>
-                        <CubeIcon />
-                        Explore
                     </li>
                 </Link>
 
