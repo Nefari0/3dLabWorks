@@ -1,3 +1,5 @@
+// MESSAGE ADMIN
+
 import './Messages.css'
 import React from 'react'
 import  { Component } from 'react'
@@ -21,7 +23,8 @@ class Message extends Component {
     }
 
     componentDidMount() {
-        if(localStorage['visited'] !== undefined){this.setState({visited:localStorage['visited']})}
+        // if(localStorage['visited'] !== undefined){this.setState({visited:localStorage['visited']})}
+        this.hideGreeting()
     }
 
     showGreeting() {
@@ -32,8 +35,9 @@ class Message extends Component {
     }
 
     hideGreeting() {
-        // console.log('hit hover')
-        this.setState({showActualMessage:false})
+          const timer = setTimeout(() => {
+              this.setState({showActualMessage:false})
+          },7000)
     }
 
     setContactAdmin() {
