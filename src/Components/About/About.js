@@ -50,11 +50,12 @@ class About extends Component {
 
             return(
                 <div className='about-container' >
-                    <header className="sub-header" style={{position:'relative'}} >
+                    {/* REMOVED UNTIL LINKS ARE RESTORED */}
+                    {/* <header className="sub-header" style={{position:'relative'}} >
                         <a onClick={() => this.changeView('main')} className={`${currentView === 'main' ? 'selected' : null}`} >main</a>
                         <a onClick={() => this.changeView('links')} className={`${currentView === 'links' ? 'selected' : null}`}>links</a>
-                        {/* <Notice item={'about-links'} content={'Resources'} /> */}
-                    </header>
+                        <Notice item={'about-links'} content={'Resources'} />
+                    </header> */}
                     <section>   
 
                         {currentView === 'main' ? <div>{mappedAbout}</div> : null}
