@@ -1,7 +1,8 @@
 import SVG from "../../SVG"
 import { 
     LargeLightHeart,
-    LargeDarkHeart
+    LargeDarkHeart,
+    IDIcon
  } from "../../SVG2"
 
 import { 
@@ -42,12 +43,10 @@ const OptionsMenu = (props) => {
 
     return (
     <TheListContainer>
-        <li style={viewFiles ? selected : null} onClick={() => changeView('viewFiles')} >
-            <OptionsH4
-                viewFiles={viewFiles}
-            >
-                Download Files
-            </OptionsH4>
+
+        <li style={viewInfo ? selected : null} onClick={() => changeView('viewInfo')}>
+            <SVG params={'info'} fill={'none'} stroke={'currentColor'}/>
+            <OptionsText condition={viewInfo} >Info</OptionsText>
         </li>
 
         <li onClick={clickLike}>
@@ -67,9 +66,9 @@ const OptionsMenu = (props) => {
             <OptionsText condition={viewEditProject || addedToFavorites}>{authorized() ? 'Edit Project' : 'Add to Favorites'}</OptionsText>
         </li>
 
-        <li style={viewInfo ? selected : null} onClick={() => changeView('viewInfo')}>
-            <SVG params={'info'} fill={'none'} stroke={'currentColor'}/>
-            <OptionsText condition={viewInfo} >Info</OptionsText>
+        <li onClick={() => changeView('viewFiles')}>
+            <SVG params={"download_icon"}/>
+            <OptionsText>Download</OptionsText>
         </li>
     </TheListContainer>
     )

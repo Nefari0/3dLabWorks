@@ -51,11 +51,11 @@ class ProjectDetail extends Component {
             comments:[],
             files:[],
             // -- views -- //
-            viewFiles:true,
+            viewFiles:false,
             viewComments:false,
             viewDetails:false,
             viewEditProject:false,
-            viewInfo:false,
+            viewInfo:true,
             addedToFavorites:false,
             // -- likes -- //
             myLike:false,
